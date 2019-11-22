@@ -133,15 +133,16 @@ MustInherit Public Class clsPermisos
         Dim rel As New clsRelacio
         Dim relbuida As New clsRelacio
 
-        If HttpContext.Current.User.Identity.Name.Length > 0 Then
-            If (Session("nif") Is Nothing) Then
-                Session("nif") = GAIA2.nifUsuari(objconn, HttpContext.Current.User.Identity.Name).Trim()
-            End If
-            If Session("codiOrg") Is Nothing Then
-                Session("CodiOrg") = GAIA2.trobaNodeUsuari(objconn, Session("nif")).ToString().Trim()
-            End If
-        End If
-        idUsuari = Session("CodiOrg")
+        'If HttpContext.Current.User.Identity.Name.Length > 0 Then
+        '    If (Session("nif") Is Nothing) Then
+        '        Session("nif") = GAIA2.nifUsuari(objconn, HttpContext.Current.User.Identity.Name).Trim()
+        '    End If
+        '    If Session("codiOrg") Is Nothing Then
+        '        Session("CodiOrg") = GAIA2.trobaNodeUsuari(objconn, Session("nif")).ToString().Trim()
+        '    End If
+        'End If
+        idUsuari = 346231
+        'Session("CodiOrg")
         nropersones = 0
         ' Carrego la llista de tipus de nodes
         lblNode.Text = GAIA2.descNode(objconn, Request("nodes"))
