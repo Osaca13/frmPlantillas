@@ -1,0 +1,4121 @@
+/* CSS Document */
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic);
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:300italic,400italic,700italic,400,300,700);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300i,700|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i);
+@import url(https://fonts.googleapis.com/css?family=BenchNine:300,400,700);
+@import url(https://fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700);
+
+
+html {
+   width: 100%;
+   heigth: 100%;
+}
+
+em {font-style:italic !important;}
+
+body {
+   width: 100%;
+   heigth: 100%;
+	 
+}
+html,body {font-family:Arial, Helvetica, sans-serif; margin: 0;  padding: 0;  border: 0;  outline: 0;  font-size: 100%; vertical-align: baseline;}
+
+
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+:focus {
+  outline: 0;
+}
+ins {
+  text-decoration: none;
+}
+del {
+  text-decoration: line-through;
+}
+/* reset d'estils navegadors */
+
+
+
+/* menu pestanyes */
+.menuPestanyes { font-size:0.75em; padding:0; margin:20px 0 0 0; float:left; width:100%; font-family:Arial, Helvetica, sans-serif;}
+.menuPestanyes ul{
+	margin: 0;
+	padding:0;
+	width:100%;
+	float:left;
+}
+
+.menuPestanyes ul li{
+	float:left;
+	position:relative;
+	padding:0;
+	background:transparent;
+	margin:0 4px 0 0;
+	
+	
+}
+
+.menuPestanyes ul li.dreta{
+	float:right;
+}
+
+.menuPestanyes ul li.dreta a { text-decoration:underline; margin:0; padding:0; background:transparent}
+
+
+.menuPestanyes ul li a {color:#ccc; text-decoration:none; background-color:#eee; padding:10px; margin:0; float:left;}
+
+
+.menuPestanyes ul li.actiu a {color:#000; background-color:#ccc;  font-weight:bold}
+
+
+.menuPestanyes ul li:after{
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+.menuPestanyes ul li{display:block;}
+* html .menuPestanyes ul li{height: 1%;}
+#pnlLlistaNoticies { padding:10px; display:block; overflow:hidden; background-color:#ccc}
+
+
+/* fi menu pestanyes */
+/* paginador 
+.paginador { text-decoration:underline; color:#2E2E2E;}
+a.paginador:active {text-decoration:none; color:#D8001D; font-weight:bold;}*/
+.paginador a {color:#2E2E2E; font-size:0.75em; font-weight:normal}
+.paginador span { font-weight:bold}
+.paginador a:active {text-decoration:none; font-size:0.75em;}
+.paginador a:hover {text-decoration:underline; font-size:0.75em;}
+.paginador {background-color:#FDFAC2; font-family:Arial, Helvetica, sans-serif; position:relative; float:left; width:100%; margin:10px 0 10px 0; color:#000000;}
+.paginador .anterior { font-weight:bold; color:#AA122B;}
+.paginador .seguent { font-weight:bold; color:#AA122B;}
+.paginador a { color:#000000;}
+.paginador a.seleccionat { color:#000; font-weight:bold; text-decoration:none; vertical-align:middle}
+.paginador .paginadorCont{ padding:5px 10px 5px 10px; float:right; text-align:right; }
+.paginador .paginadorText { font-weight:bold; color:#000000; font-size:0.75em}
+
+
+.iconaDocument { vertical-align:middle; display:inline-block; border:0;}
+
+.centrarPantalla {
+top: 0; 
+left: 0; 
+width: 100%; 
+height: 100%;
+position: fixed; 
+display: table;
+}
+.centrarPantalla span {
+display: table-cell; 
+vertical-align: middle
+}
+.centrarPantalla object {display: block; margin: 1em auto}
+
+.cuadreScrollLH {
+	overflow:auto;
+	position: relative;
+	float:none;
+	margin-left:10px;
+	height:335px;
+}
+.cuadreScrollLH div {position:relative; float:left;}
+
+/* scrolls */
+.scrollgeneric {
+font-size: 0.6em;
+position: absolute;
+top: 0; left: 0;
+}
+
+.vscrollerbase {
+width:14px;
+background: url(https://www.l-h.cat/webs/impulsalh/img/fons_barra.gif) 0px 0px repeat-y;
+
+}
+
+.vscrollerbar {
+background: #000 url(https://www.l-h.cat/img/scrollbar.png) 0px 0px no-repeat;
+width: 14px;
+height: 40px !important;
+}
+
+.hscrollerbase {height: 14px;}
+.hscrollerbar {height: 14px;}
+
+.vscrollerbar, .hscrollerbar {z-index: 1;}
+
+.scrollerjogbox {
+width: 14px;
+height: 14px;
+top: auto; 
+left: auto;
+bottom: 0px; 
+right: 0px;
+background: #000000;
+}
+/* imatges */
+.imatgeBorde img { padding:5px; border:1px solid #c2c2c2;}
+.imatgeMaxhVisor{ max-height:550px; border: 0; width:100%; float:left;}
+.imatgeMaxh120 { max-height:120px; border: 0; width:100%; float:left;}
+.imatgeMaxh155 { max-height:155px; border: 0; width:100%; float:left;}
+.imatgeh170 { height:170px; border: 0; width:100%; float:left;}
+.imatgetamanylliure {border:0; float:left; width:100%;}
+.imatgetamanymaxim {float:left; width:100%; border:0;}
+.imatgetamanymaximdisponible {border: 0; width:100%; float:left;}
+.imatgetamanymaximdisponible2 {border: 0; width:100%; float:left;}
+.imatgetamanyreal {border: 0; float:left;}
+.imatge100x100 {height:100px; width:100px; border:0; float:left;}
+.imatge80x80 {height:80px; width:80px; border:0; float:left;}
+.imatge35x35 {height:35px; width:35px; border:0; float:left;}
+.imatge80 {height:80px; border:0; float:left;}
+.imatgelliurex100 {height: 100px; width:auto; border:0; float:left;}
+.imatgelliurex150 {height: 150px; width:auto; border:0; float:left;}
+.imatge100xlliure {width:100px; border:0;}
+.imatge350xlliure {width: 350px; border:0; float:left;}
+.imatge145x145 {width:145px; height:145px; border:0; float:left;}
+.imatgew145 {width:145px; border:0; float:left;}
+.imatge {border:0;}
+.imatge40mailing {width:60px; height:60px; float:left;}
+.imatgeCampanya145x145 {width:145px; height:145px; border:0; float:left; }
+.imatgeCampanya145xdisponible {width:145px; border:0; float:left;}
+
+/* bordes */
+.border3DretasolidE9E6E5 { border-right:3px solid #E9E6E5;}
+.border1BottomDotted846540 {border-bottom:1px dotted #846540;}
+.border1BottomDashedCCCCCC {border-bottom:1px dashed #CCC;}
+.bordermarroinf { border-bottom-color:#E7E7E7; border-bottom-style:solid; border-bottom-width:1px;}
+.border1DretaEsquerra0097A7 { border-left:1px solid #0097A7; border-right:1px solid #0097A7;}
+.borderVerd10DreEsq {border-left:10px #89AD27 solid; border-right:10px #89AD27 solid;}
+.borderVerd10DreEsqBottom { border-bottom:10px #89AD27 solid; border-left:10px #89AD27 solid; border-right:10px #89AD27 solid;}
+.borderelleu {border:2px groove #ffffff}
+.border0solid{border:0 solid #ffffff;}
+.border1solidVermellB01C24 {border:1px solid #B01C24;}
+.border1solidblanc {border:1px solid #ffffff;}
+.border1DreSolidBlanc {border-right:1px solid #ffffff;}
+.border1EsqSolidGrisCCCCCC {border-left:1px solid #CCCCCC;}
+.border1DreSolidGrisCCCCCC {border-right:1px solid #CCCCCC;}
+.border1solidverd {border:1px solid #748d21;}
+.border1solidE65100 { border:1px solid #E65100;}
+.border1solidgFFC47F {border:1px solid #FFC47F;}
+.borderTop4solidNegre { border-top: 4px solid #000000;}
+.borderTop1solid000000 {border-top-width:1px; border-top-style: solid; border-top-color: #000000;}
+.borderTop1solidFFFFFF {border-top-width:1px; border-top-style: solid; border-top-color: #FFFFFF;}
+.borderTop1solidFFAB00 {border-top-width:1px; border-top-style: solid; border-top-color: #FFAB00;}
+.borderTop1solid9CA628 {border-top-width:1px; border-top-style: solid; border-top-color: #9CA628;}
+.borderTop1solidD3E17C {border-top-width:1px; border-top-style: solid; border-top-color: #D3E17C;}
+.borderTop1solid7C8B1D {border-top-width:1px; border-top-style: solid; border-top-color: #7C8B1D;}
+.borderTop1solid626F0F {border-top-width:1px; border-top-style: solid; border-top-color: #626F0F;}
+.borderTop1solid909B26 {border-top-width:1px; border-top-style: solid; border-top-color: #909B26;}
+.borderTop1solid9C5A39 {border-top-width:1px; border-top-style: solid; border-top-color: #9C5A39;}
+.borderTop0Bottom0 { border-bottom:0; border-top:0;}
+.border1solidVermell{border:1px solid #D8001D;}
+.border1solidD56262 {border:1px solid #D56262;}
+.border1solid599A35 {border:1px solid #599A35;}
+.border1Gris828282 { border:1px solid #828282;}
+.border2solidgrana { border:2px solid #B32525;}
+.borderBot1DottedGrana {border-bottom:1px; border-bottom-style: dotted; border-bottom-color:#B32525;}
+.borderBot1DottedNegre {border-bottom:1px; border-bottom-style: dotted; border-bottom-color:#000;}
+.borderBot1DottedGris {border-bottom:1px; border-bottom-style: dotted; border-bottom-color:#7a7a7a;}
+.borderBot2DottedGris {border-bottom:2px; border-bottom-style: dotted; border-bottom-color:#7a7a7a;}
+.borderBot1SolidGrana {border-bottom:1px; border-bottom-style: solid; border-bottom-color:#B32525;}
+.border2solidVermell { border:2px solid #D8001D;}
+.borderBottom1Negre  { border-bottom: 1px solid #000000;}
+.borderBottom1Blau51C8C8 {border-bottom: 1px solid #51C8C8;}
+.borderBottom1GrocF4BE64 {border-bottom: 1px solid #F4BE64;}
+.borderDreta10Gris { border-right:10px solid #C8C8C8;}
+.borderBottom10Gris { border-bottom:10px solid #C8C8C8;}
+.borderDreta1Negre { border-right:1px solid #000000;}
+.borderDre12Esq12Negre { border-right:12px solid #000; border-left:12px solid #000;}
+.borderBottom1Verd6d6a15 { border-bottom:1px dotted #6d6a15;}
+.borderTop1Verd6d6a15 { border-top:1px dotted #6d6a15;}
+.borderBottomGrana {  border-bottom-width: 1px; border-bottom-style:solid; border-bottom-color:#800000;}
+.borderBottomTaronja {  border-bottom-width: 1px; border-bottom-style:solid; border-bottom-color:#F16C00;}
+.borderBottomMarro996633 { border-bottom-width: 1px; border-bottom-style:solid; border-bottom-color:#996633;}
+.border1solidverda21 {border:1px solid #204A00;}
+.border1solidverdcel {border:1px solid #33B3A6;}
+.border1 {border:1px solid #000000;}
+.border2select { border:2px solid #FD2F12;}
+.borderTop1Blanc { border-top-width: 1px; border-top-style:solid; border-top-color:#FFFFFF;}
+.borderTop1Gris { border-top-width: 1px; border-top-style:solid; border-top-color:#CCCCCC;}
+.borderBottom1Gris { border-bottom-width: 1px; border-bottom-style:solid; border-bottom-color:#CCCCCC;}
+.borderDreta1Gris{ border-right-width: 1px; border-right-style:solid; border-right-color:#CCCCCC;}
+.borderBottom1Blanc { border-bottom-width: 1px; border-bottom-style:solid; border-bottom-color:#FFFFFF;}
+.borderBottomVerd { border-bottom-width: 1px; border-bottom-style:solid; border-bottom-color:#224B0C;}
+.borderBottomGris { border-bottom-width: 1px; border-bottom-style:solid; border-bottom-color:#D0D0D0; border-left:0; border-right:0; border-top:0;}
+.borderBottomGrisDotted { border-bottom-width: 1px; border-bottom-style:dotted; border-bottom-color:#B2B2B2;}
+.border616161Gris {border:1px solid #616161;}
+.border1grisfluix {border:1px solid #DEDEDE;}
+.border1gris9E9E9E { border:1px solid #9E9E9E;}
+.border2BlauDretaBottomACDBFF { border-bottom:2px solid #ACDBFF; border-right:2px solid #ACDBFF;}
+.border1Blanc { border:1px solid #FFFFFF;}
+.border1BlancDreta {border-right-color:#ffffff; border-right-style:solid; border-right-width:1px;}
+.border2Blanc { border:2px solid #FFFFFF;}
+.bordetopleftright1 {border-top-color:#000000; border-top-style:solid; border-top-width:1px;border-left-color:#000000; border-left-style:solid;border-left-width:1px;border-right-color:#000000; border-right-style:solid; border-right-width:1px;}
+.bordeleftright1 {border-left-color:#000000; border-left-style:solid;border-left-width:1px;	border-right-color:#000000;	border-right-style:solid;border-right-width:1px;}
+.borderLeftRight3Gris {border-right-style:solid; border-right-color:#C9C9C9; border-right-width:3px; border-left-style:solid; border-left-color:#C9C9C9; border-left-width:3px;}
+.borderLeft3Gris {border-left-style:solid; border-left-color:#C9C9C9; border-left-width:3px;}
+.borderRight3Gris {border-right-style:solid; border-right-color:#C9C9C9; border-right-width:3px;}
+.bordedret1 {border-right-color:#000000; border-right-style:solid; border-right-width:1px;}
+.bordetop1 {border-top-color:#000000; border-top-style:solid; border-top-width:1px;}
+.border1pestanya { border-left:1px; border-left-color:#E0E0E0; border-left-style:solid; border-top:1px; border-top-color:#E0E0E0; border-top-style:solid; border-right:1px; border-right-color:#E0E0E0; border-right-style:solid;}
+.border1supinf017D7F {border-top:1px; border-top-color:#017D7F; border-top-style:solid; border-bottom:1px; border-bottom-style:solid; border-bottom-color:#017D7F;}
+.borderBottom1Punts {border-bottom:1px; border-bottom-style: dotted; border-bottom-color: #2E2E2E;}
+.borderBottom1PuntsTaronja {border-bottom:1px; border-bottom-style: dotted; border-bottom-color: #FF6C00;}
+.borderTop1Punts {border-top:1px; border-top-style: dotted; border-top-color: #2E2E2E;}
+.border1BottomEEF6F8 {border-bottom:1px; border-bottom-style: solid; border-bottom-color: #EEF6F8;}
+.brdAlerta { border-style:solid;border-color: #000000; border-width:2px;}
+.brdSupInfNegre2px {border-top-style:solid; border-top-color: #000000; border-top-width:2px; border-bottom-style:solid; border-bottom-color: #000000; border-bottom-width:2px;}
+.brdNegre2px {border-style:solid; border-color: #000000; border-width:2px;}
+.brdNegre1px {border-style:solid; border-color: #000000; border-width:1px;}
+.brdDreEsqNegre1px {border-left-style:solid; border-left-color: #000000; border-left-width:1px; border-right-style:solid; border-right-color: #000000; border-right-width:1px;}
+.brdInfGris { border-bottom-style:solid; border-bottom-color: #CCCCCC; border-bottom-width:1px;}
+.brdInfBlanc { border-bottom-style:solid; border-bottom-color: #ffffff; border-bottom-width:1px;}
+.brdSupGris { border-top-style:solid; border-top-color: #CCCCCC; border-top-width:1px;}
+.brdInf2Blanc{ border-bottom-style:solid; border-bottom-color: #ffffff; border-bottom-width:2px;}
+.brdinfvermell { border-bottom-style:solid; border-bottom-color: #990000; border-bottom-width:1px;}
+.brdInfGrisDotted { border-bottom-style:dotted; border-bottom-color: #CCCCCC; border-bottom-width:1px;}
+.border2BottomDotted73A9A9 { border-bottom-style:dotted; border-bottom-color:#73A9A9; border-bottom-width:2px;}
+.brdInfGrisDashed { border-bottom-style:dashed; border-bottom-color: #CCCCCC; border-bottom-width:1px;}
+.brdInfGrisDottedTamany0 { border-bottom-style:dotted; border-bottom-color: #CCCCCC; border-bottom-width:1px;height:1px;}
+.brdinftaronja { border-bottom-style: solid; border-bottom-color: #BA3C00; border-bottom-width:1px;}
+.brdInfBlau { border-bottom-color:#B0C4DE; border-bottom-width: 1px; border-bottom-style:solid;}
+.brdBlau {border-style:solid; border-color: #B0C4DE; border-width: 1px;}
+.brdGrisfluix { border-style: solid; border-color: #E4E4E4; border-width:1px 1px 1px 1px; border-collapse:collapse}
+.brdGrisfluixTL { border-style: solid; border-color: #999999; border-width:1px 1px 0px 0px; border-collapse:collapse; vertical-align:top}
+.brdGrisfluixBR { border-style: solid; border-color: #999999; border-width:0px 0px 1px 1px; border-collapse:collapse; margin-bottom:10px; margin-top:10px;}
+.brdGrisfluixBR tr{ padding:0; margin:0;}
+.brdGrisfluixBR th{ padding:5px; background-color:#666666; color:#FFFFFF; border-style: solid; border-color: #999999; border-width:1px 1px 0px 0px; border-collapse:collapse}
+.brdGrisfluixBR td{ border-style:solid; border-color:#999999; border-width:1px 1px 0px 0px; border-collapse:collapse; padding:5px;}
+.GridViewClass th { border:0px; padding:0px;}
+.GridViewClass td { border-bottom:1px solid #C6E4E8; padding:4px;}
+.brd1GrocFCE490solid { border:1px solid #FCE490;}
+.border0 {border:0; border-collapse:collapse;}
+.border1taronjaFFD54D { border:1px solid #FFD54D;}
+.border1Gris7D7D7D { border:1px solid #7D7D7D;}
+.border1GrisCCCCCC { border:1px solid #CCCCCC;}
+.border1GrisBDBDBD { border:1px solid #BDBDBD;}
+.brdGris { border-style:solid; border-color: #999999;border-width:0px 1px 1px 1px; border-collapse:collapse}
+.border1GrisB0AFAF { border:1px solid #B0AFAF;}
+
+.border1GrisDashed { border-style:dashed; border-color:#9BA3A5; border-width:1px;}
+.border1TopGrisDashed { border-top-style:dashed; border-top-color:#9BA3A5; border-top-width:1px;}
+.border1TopGrisc1c1c1 { border-top-style:solid; border-top-color:#c1c1c1; border-top-width:1px;}
+.border1TopBottomGrisc1c1c1 { border-top-style:solid; border-top-color:#c1c1c1; border-top-width:1px; border-bottom-style:solid; border-bottom-color:#c1c1c1; border-bottom-width:1px;}
+.border1BottomBlanc{ border-bottom-style:solid; border-bottom-color:#fff; border-bottom-width:1px; }
+.border1GrisDashedMarginBottom10 { border-style:dashed; border-color:#9BA3A5; border-width:1px; margin-bottom:10px;}
+.brdBot1VerdDashMargBot10 { border-bottom-style:dashed; border-bottom-color:#697b00; border-bottom-width:1px; margin-bottom:10px;}
+.brdBot1TaronjaDashMargBot10 { border-bottom-style:dashed; border-bottom-color:#c13600; border-bottom-width:1px; margin-bottom:10px;}
+
+/* TAULES */
+.brdGrisfluixBR { border-style: solid; border-color: #999999; border-width:0px 0px 1px 1px; border-collapse:collapse; margin-bottom:10px; margin-top:10px;}
+.brdGrisfluixBR tr{ padding:0; margin:0;}
+.brdGrisfluixBR th{ padding:5px; background-color:#666666; color:#FFFFFF; border-style: solid; border-color: #999999; border-width:1px 1px 0px 0px; border-collapse:collapse}
+.brdGrisfluixBR td{ border-style:solid; border-color:#999999; border-width:1px 1px 0px 0px; border-collapse:collapse; padding:5px;}
+.GridViewClass th { border:0px; padding:0px;}
+.GridViewClass td { border-bottom:1px solid #C6E4E8; padding:4px;}
+
+.taulaVerdFluix {border-style:solid; border-color:#E0E8E8; border-width:0px 0px 1px 1px; border-collapse:collapse; margin-bottom:10px; margin-top:10px; width:100%}
+.taulaVerdFluix tr {padding:0; margin:0;}
+.taulaVerdFluix th {padding:5px; background-color:#8AA3A3; color:#FFFFFF; border-style: solid; border-color: #E0E8E8; border-width:1px 1px 0px 0px; border-collapse:collapse; font-size:1em; font-weight:bold;}
+.taulaVerdFluix td{ border-style:solid; border-color:#E0E8E8; background-color:#F9F9F9; border-width:1px 1px 0px 0px; border-collapse:collapse; padding:5px;}
+
+.taulaBordeSolid {border-style:solid; border-color:#E0E8E8; border-width:0px 0px 1px 1px; border-collapse:collapse; margin-bottom:10px; margin-top:10px; width:100%;}
+.taulaBordeSolid tr {padding:0; margin:0;}
+.taulaBordeSolid th {padding:5px; border-style:solid; border-color:#E0E8E8; border-width:1px 1px 0px 0px; border-collapse:collapse;}
+.taulaBordeSolid td{ border-style:solid; border-color:#E0E8E8; border-width:1px 1px 0px 0px; border-collapse:collapse; padding:5px;}
+
+
+/* vores */
+.topEsquerraBlancPunts {background:url(https://www.l-h.cat/img/lh12/common/topEsquerraBlancPunts.png) top left no-repeat; top:0px; left:0px; width:14px; height:14px; position:absolute; padding:0 !important; margin:0 !important; z-index:1}
+.topDretaBlancPunts {background:url(https://www.l-h.cat/img/lh12/common/TopDretaBlancPunts.png) top right no-repeat; top:0px; right:0px; width:14px; height:14px; position:absolute; padding:0 !important; margin:0 !important; z-index:1}
+.bottomEsquerraBlancPunts {background:url(https://www.l-h.cat/img/lh12/common/bottomEsquerraBlancPunts.png) bottom left no-repeat; bottom:0px; left:0px; width:14px; height:14px; position:absolute; padding:0 !important; margin:0 !important; z-index:1}
+.bottomDretaBlancPunts {background:url(https://www.l-h.cat/img/lh12/common/bottomDretaBlancPunts.png) bottom right no-repeat; bottom:0px; right:0px; width:14px; height:14px; position:absolute; padding:0 !important; margin:0 !important; z-index:1}
+
+.topEsquerraBlanc {background:url(https://www.l-h.cat/img/lh12/common/topEsquerraBlanc.png) top left no-repeat; top:0px; left:0px; width:14px; height:14px; position:absolute; padding:0 !important; margin:0 !important; z-index:1}
+.topDretaBlanc {background:url(https://www.l-h.cat/img/lh12/common/TopDretaBlanc.png) top right no-repeat; top:0px; right:0px; width:14px; height:14px; position:absolute; padding:0 !important; margin:0 !important; z-index:1}
+.bottomEsquerraBlanc {background:url(https://www.l-h.cat/img/lh12/common/bottomEsquerraBlanc.png) bottom left no-repeat; bottom:0px; left:0px; width:14px; height:14px; position:absolute; padding:0 !important; margin:0 !important; z-index:1}
+.bottomDretaBlanc {background:url(https://www.l-h.cat/img/lh12/common/bottomDretaBlanc.png) bottom right no-repeat; bottom:0px; right:0px; width:14px; height:14px; position:absolute; padding:0 !important; margin:0 !important; z-index:1}
+
+.topEsquerraBlancPuntsBorde {background:url(https://www.l-h.cat/img/lh12/common/topEsquerraBlancPuntsBorde.png) top left no-repeat; top:-1px; left:-1px; width:14px; height:14px; position:absolute; padding:0 !important; margin:0 !important; z-index:1}
+.topDretaBlancPuntsBorde {background:url(https://www.l-h.cat/img/lh12/common/TopDretaBlancPuntsBorde.png) top right no-repeat; top:-1px; right:-1px; width:14px; height:14px; position:absolute; padding:0 !important; margin:0 !important; z-index:1}
+.bottomEsquerraBlancPuntsBorde {background:url(https://www.l-h.cat/img/lh12/common/bottomEsquerraBlancPuntsBorde.png) bottom left no-repeat; bottom:-1px; left:-1px; width:14px; height:14px; position:absolute; padding:0 !important; margin:0 !important; z-index:1}
+.bottomDretaBlancPuntsBorde {background:url(https://www.l-h.cat/img/lh12/common/bottomDretaBlancPuntsBorde.png) bottom right no-repeat; bottom:-1px; right:-1px; width:14px; height:14px; position:absolute; padding:0 !important; margin:0 !important; z-index:1}
+
+.topEsquerraBlancBorde {background:url(https://www.l-h.cat/img/lh12/common/topEsquerraBlancPuntsBorde.png) top left no-repeat; top:-1px; left:-1px; width:14px; height:14px; position:absolute; padding:0 !important; margin:0 !important; z-index:1}
+.topDretaBlancBorde {background:url(https://www.l-h.cat/img/lh12/common/TopDretaBlancPuntsBorde.png) top right no-repeat; top:-1px; right:-1px; width:14px; height:14px; position:absolute; padding:0 !important; margin:0 !important;}
+.bottomEsquerraBlancBorde {background:url(https://www.l-h.cat/img/lh12/common/bottomEsquerraBlancPuntsBorde.png) bottom left no-repeat; bottom:-1px; left:-1px; width:14px; height:14px; position:absolute; padding:0 !important; margin:0 !important; z-index:1}
+.bottomDretaBlancBorde {background:url(https://www.l-h.cat/img/lh12/common/bottomDretaBlancPuntsBorde.png) bottom right no-repeat; bottom:-1px; right:-1px; width:14px; height:14px; position:absolute; padding:0 !important; margin:0 !important; z-index:1}
+
+
+.topEsquerraBlau {background:url(https://www.l-h.cat/img/lh12/common/topEsquerraBlau.png) top left no-repeat; top:0px; left:0px; width:14px; height:14px; position:absolute; padding:0 !important; margin:0 !important; z-index:1}
+.topDretaBlau {background:url(https://www.l-h.cat/img/lh12/common/TopDretaBlau.png) top right no-repeat; top:0px; right:0px; width:14px; height:14px; position:absolute; padding:0 !important; margin:0 !important; z-index:1}
+.bottomEsquerraBlau {background:url(https://www.l-h.cat/img/lh12/common/bottomEsquerraBlau.png) bottom left no-repeat; bottom:0px; left:0px; width:14px; height:14px; position:absolute; padding:0 !important; margin:0 !important; z-index:1}
+.bottomDretaBlau {background:url(https://www.l-h.cat/img/lh12/common/bottomDretaBlau.png) bottom right no-repeat; bottom:0px; right:0px; width:14px; height:14px; position:absolute; padding:0 !important; margin:0 !important; z-index:1}
+
+
+.topEsquerraBlauPunts {background:url(https://www.l-h.cat/img/lh12/common/topEsquerraBlauPunts.png) top left no-repeat; top:0px; left:0px; width:14px; height:14px; position:absolute; padding:0 !important; margin:0 !important; z-index:1}
+.topDretaBlauPunts {background:url(https://www.l-h.cat/img/lh12/common/TopDretaBlauPunts.png) top right no-repeat; top:0px; right:0px; width:14px; height:14px; position:absolute; padding:0 !important; margin:0 !important; z-index:1}
+.bottomEsquerraBlauPunts {background:url(https://www.l-h.cat/img/lh12/common/bottomEsquerraBlauPunts.png) bottom left no-repeat; bottom:0px; left:0px; width:14px; height:14px; position:absolute; padding:0 !important; margin:0 !important; z-index:1}
+.bottomDretaBlauPunts {background:url(https://www.l-h.cat/img/lh12/common/bottomDretaBlauPunts.png) bottom right no-repeat; bottom:0px; right:0px; width:14px; height:14px; position:absolute; padding:0 !important; margin:0 !important; z-index:1}
+
+.topEsquerraGris {background:url(https://www.l-h.cat/img/lh12/common/topEsquerraGris.png) top left no-repeat; top:0px; left:0px; width:14px; height:14px; position:absolute; padding:0 !important; margin:0 !important; z-index:1}
+.topDretaGris {background:url(https://www.l-h.cat/img/lh12/common/TopDretaGris.png) top right no-repeat; top:0px; right:0px; width:14px; height:14px; position:absolute; padding:0 !important; margin:0 !important; z-index:1}
+.bottomEsquerraGris {background:url(https://www.l-h.cat/img/lh12/common/bottomEsquerraGris.png) bottom left no-repeat; bottom:0px; left:0px; width:14px; height:14px; position:absolute; padding:0 !important; margin:0 !important; z-index:1}
+.bottomDretaGris {background:url(https://www.l-h.cat/img/lh12/common/bottomDretaGris.png) bottom right no-repeat; bottom:0px; right:0px; width:14px; height:14px; position:absolute; padding:0 !important; margin:0 !important; z-index:1}
+
+.topEsquerraGris2 {background:url(https://www.l-h.cat/img/lh12/common/topEsquerraGris2.png) top left no-repeat; top:0px; left:0px; width:14px; height:14px; position:absolute; padding:0 !important; margin:0 !important; z-index:1}
+.topDretaGris2 {background:url(https://www.l-h.cat/img/lh12/common/TopDretaGris2.png) top right no-repeat; top:0px; right:0px; width:14px; height:14px; float:left; position:absolute; padding:0 !important; margin:0 !important; z-index:1}
+.bottomEsquerraGris2 {background:url(https://www.l-h.cat/img/lh12/common/bottomEsquerraGris2.png) bottom left no-repeat; bottom:0px; left:0px; width:14px; height:14px; position:absolute; padding:0 !important; margin:0 !important; z-index:1}
+.bottomDretaGris2 {background:url(https://www.l-h.cat/img/lh12/common/bottomDretaGris2.png) bottom right no-repeat; bottom:0px; right:0px; width:14px; height:14px; position:absolute; padding:0 !important; margin:0 !important; z-index:1}
+
+
+/* missatges */
+div.missatgeInfo{
+   position:relative;
+   float:left;
+   margin-bottom:10px;
+   margin-top:10px;
+   width:100%;
+   background-color:#E7EBFC; 
+   color:#000;
+}
+div.missatgeInfoCont {margin:15px; float:left;}
+
+div.missatgeAvisLegal{
+   position:relative;
+   float:left;
+   margin-bottom:10px;
+   margin-top:10px;
+   width:100%;
+   background-color:#F5F8F8; 
+   color:#8CACB0;  
+}
+div.missatgeAvisLegalCont {margin:15px; float:left; font-size:0.7em;}
+
+
+div.missatgeOk {
+   position:relative;
+   float:left;
+   padding-top:8px;
+   padding-bottom:5px;
+   width:100%;
+   text-align:center;
+   background: url(https://www.l-h.cat/img/lh12/common/fons_notificacions.gif) top left repeat;
+   height:auto;
+   color:#fff;
+   margin-bottom:10px;
+   font-size:0.75em;
+}
+div.missatgeOk .icona {background:url(https://www.l-h.cat/img/lh12/common/ico_ok_p.png) no-repeat 0 0; padding:5px 0 7px 30px;  margin-left:10px; position:relative; text-align:left; float:left;}
+div.missatgeOk .icona ul { margin:0; padding:0;}
+div.missatgeOk .icona ul li { margin:0; padding:0; color:#fff !important; list-style:none;}
+
+
+
+div.missatgeError{
+   position:relative;
+   float:left;
+   padding-top:8px;
+   padding-bottom:5px;
+   width:100%;
+   text-align:center;
+   background: url(https://www.l-h.cat/img/lh12/common/fons_notificacions.gif) top left repeat;
+   height:auto;
+   color:#fff !important;
+   margin-bottom:10px;
+}
+div.missatgeError .icona {background:url(https://www.l-h.cat/img/lh12/common/ico_error_p.png) no-repeat 0 0; padding:5px 0 7px 30px; margin-left:10px; position:relative; text-align:left; float:left; color:#fff !important;}
+div.missatgeError .icona ul { margin:0; padding:0;}
+div.missatgeError .icona ul li { margin:0; padding:0; color:#fff !important; list-style:none;}
+
+
+
+div.missatgeAvis{
+   position:relative;
+   float:left;
+   padding-top:8px;
+   padding-bottom:5px;
+   width:100%;
+   background: url(https://www.l-h.cat/img/lh12/common/fons_notificacions.gif) top left repeat;
+   height:auto;
+   color:#fff;
+   margin-bottom:10px;
+}
+div.missatgeAvis .icona {background:url(https://www.l-h.cat/img/lh12/common/ico_avis_p.png) no-repeat 0 0; padding:5px 0 7px 30px;  margin-left:10px; position:relative; text-align:left; float:left;}
+div.missatgeAvis .icona ul { margin:0; padding:0;}
+div.missatgeAvis .icona ul li { margin:0; padding:0; color:#fff !important; list-style:none;}
+
+
+
+
+div.missatgeFinalitzat{
+   position:relative;
+   float:left;	
+   padding-top:8px;
+   padding-bottom:5px;
+   width:100%;
+   background: url(https://www.l-h.cat/img/lh12/common/fons_notificacions.gif) top left repeat;
+   height:auto;
+   color:#fff;
+   margin-bottom:10px;
+}
+div.missatgeFinalitzat .icona { background:url(https://www.l-h.cat/img/lh12/common/ico_avis_p.png) no-repeat 0 0; padding:5px 0 7px 30px;  margin-left:10px; position:relative; text-align:left; float:left;}
+
+
+div.missatgeSuspes{
+   position:relative;
+   float:left;
+   padding-top:8px;
+   padding-bottom:5px;
+   width:100%;
+   background: url(https://www.l-h.cat/img/lh12/common/fons_notificacions.gif) top left repeat;
+   height:auto;
+   color:#9A1218;
+   margin-bottom:10px;
+}
+div.missatgeSuspes .icona { background:url(https://www.l-h.cat/img/lh12/common/ico_error_p.png) no-repeat 0 0; padding:5px 0 7px 30px;  margin-left:10px; position:relative; text-align:left; float:left;}
+
+
+
+
+
+
+/* fi missatges */
+
+/*tipus fonts*/
+.georgia {font-family:Georgia, "Times New Roman", Times, serif}
+.Roboto {font-family: 'Roboto', sans-serif;}
+.RobotoCondensed {font-family: 'Roboto Condensed', sans-serif;}
+.arial {font-family: Arial, Helvetica, sans-serif; text-decoration:none;}
+a.arial:hover {text-decoration:underline;}
+.arialItalic {font-family: Arial, Helvetica, sans-serif; text-decoration:none; font-style:italic}
+.arialBold {font-family: Arial, Helvetica, sans-serif; font-weight:bold; text-decoration:none;}
+a.arialBold:hover {text-decoration:underline; font-weight:bold;}
+.arialBlanc {font-family: Arial, Helvetica, sans-serif; color:#ffffff; text-decoration:none;}
+.arialBlanc a:hover {text-decoration:underline; color:#ffffff;}
+.arialBlancBold {font-family: Arial, Helvetica, sans-serif; font-weight:bold; color:#ffffff; text-decoration:none;}
+a.arialBlancBold:hover {font-weight:bold; color:#ffffff; text-decoration:underline}
+
+.gtxt {font-family: Arial, Helvetica, sans-serif; text-decoration:none;}
+a.gtxt:hover {text-decoration:underline;}
+.gtxtItalic {font-family: Arial, Helvetica, sans-serif; text-decoration:none; font-style:italic}
+.gtxtBold {font-family: Arial, Helvetica, sans-serif; font-weight:bold; text-decoration:none;}
+a.gtxtBold:hover {text-decoration:underline; font-weight:bold;}
+.gtxtBlanc {font-family: Arial, Helvetica, sans-serif; color:#ffffff; text-decoration:none;}
+.gtxtBlanc a:hover {text-decoration:underline; color:#ffffff;}
+.gtxtBlancBold {font-family: Arial, Helvetica, sans-serif; font-weight:bold; color:#ffffff; text-decoration:none;}
+a.gtxtBlancBold:hover {font-weight:bold; color:#ffffff; text-decoration:underline}
+
+.gtxtVermell {font-family: Arial, Helvetica, sans-serif; color:#D8001D;}
+a.gtxtVermell:hover {text-decoration:underline; color:#D8001D;}
+.gtxtVermellBold {font-family: Arial, Helvetica, sans-serif; font-weight:bold; color:#D8001D;}
+a.gtxtVermellBold:hover {text-decoration:underline; font-weight:bold; color:#D8001D;}
+
+.text06 {font-family:Verdana, Helvetica, sans-serif; text-decoration:none;}
+a.text06:hover {text-decoration:underline;}
+.text06italic {font-family: Verdana, Helvetica, sans-serif; font-style:italic;}
+.text06negre {font-family:Verdana, Helvetica, sans-serif; text-decoration:none; color:#000000;}
+a.text06negre:hover {text-decoration:underline; color:#000000;}
+.text06negreBold {font-family: Verdana, Helvetica, sans-serif; text-decoration:none; color:#000000; font-weight:bold;}
+a.text06negreBold:hover {text-decoration:underline; color:#000000; font-weight:bold;}
+.text06BlancBold {font-family: Verdana, Helvetica, sans-serif; text-decoration:underline; color:#FFFFFF; font-weight:bold;}
+a.text06BlancBold:hover {text-decoration:none; color:#FFFFFF; font-weight:bold;}
+.text06VermellBold {font-family: Verdana, Helvetica, sans-serif; text-decoration:none; color:#D8001D; font-weight:bold;}
+a.text06VermellBold:hover {text-decoration:underline; color:#D8001D; font-weight:bold;}
+.text06Bold {font-family: Verdana, Helvetica, sans-serif;text-decoration:none; font-weight:bold;}
+a.text06Bold:hover {text-decoration:underline; color:#D8001D; font-weight:bold;}
+
+.verdana {font-family:Verdana, Helvetica, sans-serif; text-decoration:none;}
+.verdanaitalic {font-family: Verdana, Helvetica, sans-serif; font-style:italic;}
+a.verdana:hover {text-decoration:underline;}
+.verdananegre {font-family:Verdana, Helvetica, sans-serif; text-decoration:none; color:#000000;}
+a.verdananegre:hover {text-decoration:underline; color:#000000;}
+.verdananegreBold {font-family: Verdana, Helvetica, sans-serif; text-decoration:none; color:#000000; font-weight:bold;}
+a.verdananegreBold:hover {text-decoration:underline; color:#000000; font-weight:bold;}
+.verdanaBlancBold {font-family: Verdana, Helvetica, sans-serif; text-decoration:underline; color:#FFFFFF; font-weight:bold;}
+a.verdanaBlancBold:hover {text-decoration:none; color:#FFFFFF; font-weight:bold;}
+.verdanaVermellBold {font-family: Verdana, Helvetica, sans-serif; text-decoration:none; color:#D8001D; font-weight:bold;}
+a.verdanaVermellBold:hover {text-decoration:underline; color:#D8001D; font-weight:bold;}
+.verdanaBold {font-family: Verdana, Helvetica, sans-serif;text-decoration:none; font-weight:bold;}
+a.verdanaBold:hover {text-decoration:underline; color:#D8001D; font-weight:bold;}
+
+
+
+.text {font-family:Arial, Helvetica, sans-serif; text-decoration:none;}
+a.text:hover {text-decoration:underline; color:#D8001D;}
+.textneg {font-family: Arial, Helvetica, sans-serif;text-decoration:none; color:#000000;}
+a.textneg:hover {text-decoration:underline; color:#000000;}
+.textblanc {font-family: Arial, Helvetica, sans-serif;text-decoration:none; color:#ffffff;}
+a.textblanc:hover {text-decoration:underline; color:#ffffff;}
+.text06bolditalic {font-family: Verdana, Helvetica, sans-serif; font-weight:bold; font-style:italic;}
+
+
+.gtxtneg100padding{ font-family: Arial, Helvetica, sans-serif; font-size: 75%; color: #000000; font-weight: normal; text-decoration: none;  padding:2px 8px 2px 4px; text-align:left;}
+.gtxtrojo100 { font-family: Arial, Helvetica, sans-serif; font-size: 75%; color: #990000; font-weight: normal; text-decoration: none ;text-align:left;}
+.gtxtrojo120 { font-family: Arial, Helvetica, sans-serif; font-size: 90%; color: #990000; font-weight: normal; text-decoration: none ;text-align:left;}
+.gTxtRojo140 { font-family: Arial, Helvetica, sans-serif; font-size: 105%; color: #990000; font-weight: normal; text-decoration: none ;text-align:left;}
+.gTxtRojo160 { font-family: Arial, Helvetica, sans-serif; font-size: 123%; color: #990000; font-weight: normal; text-decoration: none ; text-align:left;}
+.gTxtRojo180 { font-family: Arial, Helvetica, sans-serif; font-size: 135%; color: #990000; font-weight: normal; text-decoration: none ;text-align:left;}
+.gTxtNeg100 { font-family: Arial, Helvetica, sans-serif; font-size: 75%; color: #000000; font-weight: normal; text-decoration: none ; text-align:left;}
+.gTxtNeg120 { font-family: Arial, Helvetica, sans-serif; font-size: 90%; color: #000000; font-weight: normal; text-decoration: none ;text-align:left;}
+.gTxtNeg140 { font-family: Arial, Helvetica, sans-serif; font-size: 105%; color: #000000; font-weight: normal; text-decoration: none ;text-align:left;}
+.gTxtNeg160 { font-family: Arial, Helvetica, sans-serif; font-size: 123%; color: #000000; font-weight: normal; text-decoration: none ; text-align:left;}
+.gTxtNeg180 { font-family: Arial, Helvetica, sans-serif; font-size:  135%; color: #000000; font-weight: normal; text-decoration: none ; text-align:left;}
+.gTxtBlanc120 { font-family: Arial, Helvetica, sans-serif; font-size: 90%; color: #FFFFFF; font-weight: normal; text-decoration: none ; text-align:left;}
+
+/*colors fonts*/
+.taronjafa6d15, .taronjafa6d15 a, a.taronjafa6d15 { color:#fa6d15;}
+.taronjaCC5800, .taronjaCC5800 a, a.taronjaCC5800:hover {color:#CC5800;}
+.taronjaff7007, .taronjaff7007 a, a.taronjaff7007:hover {color:#ff7007;}
+.taronjaDF6E13, .taronjaDF6E13 a, a.taronjaDF6E13:hover {color:#DF6E13;}
+.taronjaE36200, .taronjaE36200 a, a.taronjaE36200:hover {color:#C53500;}
+.negre, .negre a, a.negre:hover {color: #000000;} 
+.blau31b0da, .blau31b0da a, a.blau31b0da:hover {color:#31b0da;} 
+.blauTurquesa, .blauTurquesa a, a.blauTurquesa, a.blauTurquesa:hover { color:#0093a8;}
+.blau0088c1, .blau0088c1 a, a.blau0088c1:hover { color:#0088c1;}
+.blau008cba, .blau008cba a, a.blau008cba:hover {color:#008cba;}
+.blau105c75, .blau105c75 a, a.blau105c75:hover {color:#105c75;}
+.blau003474, .blau003474 a, a.blau003474:hover {color:#003474;}
+.blau0097A7, .blau0097A7 a, a.blau0097A7:hover {color:#0097A7;}
+.verd697b00, .verd697b00 a, a.verd697b00:hover {color:#697b00;}
+.verd00ab64, .verd00ab64 a, a.verd00ab64:hover {color:#00ab64;}
+.verd6d7123, .verd6d7123 a, a.verd6d7123:hover {color:#6d7123;}
+.verd7b9100, .verd7b9100 a, a.verd7b9100:hover {color:#7b9100;}
+.verda19f56, .verda19f56 a, a.verda19f56:hover {color:#a19f56;}
+.verd95D10F, .verd95D10F a, a.verd95D10F:hover {color:#95D10F;}
+.verdDDDA8C, .verdDDDA8C a, a.verdDDDA8C:hover {color:#DDDA8C;}
+.verd4f4e38, .verd4f4e38 a, a.verd4f4e38:hover {color:#4f4e38;}
+.verd6B6800, .verd6B6800 a, a.verd6B6800:hover {color:#6B6800;}
+.verdCel, .verdCel a, a.verdCel:hover {color:#009295;} 
+.verd5D8835, .verd5D8835 a, a.verd5D8835:hover  {color:#5D8835;}
+.verd6d6a15, .verd6d6a15a, a.verd6d6a15:hover { color:#6d6a15;}
+.verdfort, .verdfort a, a.verdfort:hover {color:#383818;} 
+.verdpistacho, .verdpistacho a, a.verdpistacho:hover {color:#738400;}
+.verdFestucBBCA25, .verdFestucBBCA25 a, a.verdFestucBBCA25:hover {color:#BBCA25;}
+.verd, .verd a, a.verd:hover {color: #45AD36;}
+.rosaCC0066, .rosaCC0066 a, a.rosaCC0066:hover {color:#CC0066;}
+.verd006B2A, .verd006B2A a, a.verd006B2A:hover {color:#006B2A;}
+.verd224B0C, .verd224B0C a, a.verd224B0C:hover {color:#224B0C;}
+.verdCel088E94, .verdCel088E94 a, a.verdCel088E94:hover {color:#088E94;}
+.vermellB01C24, .vermellB01C24 a, a.vermellB01C24:hover {color:#B01C24;}
+.vermellF93A22, .vermellF93A22 a, a.vermellF93A22:hover {color:#F93A22;}
+.vermellA30030, .vermellA30030 a, a.vermellA30030:hover {color:#A30030;}
+.carbassaCC9933, .carbassaCC9933 a, a.carbassaCC9933:hover {color:#CC9933;}
+.blau418FA5, .blau418FA5 a, a.blau418FA5:hover {color:#418FA5;}
+.blau3399FF, .blau3399FF a, a.blau3399FF:hover {color:#3399FF;}
+.blau669999, .blau669999 a, a.blau669999:hover {color:#669999;}
+.blau009EE0, .blau009EE0 a, a.blau009EE0:hover {color:#009EE0;}
+.taronjaFF7E00, .taronjaFF7E00 a, a.taronjaFF7E00:hover {color:#FF7E00;}
+.taronjaFF9C00, .taronjaFF9C00 a, a.taronjaFF9C00:hover {color:#FF9C00;}
+.vermellC40000, .vermellC40000 a, a.vermellC40000:hover {color:#C40000;}
+.vermellRosat, .vermellRosat a, a.vermellRosat:hover {color:#AA122B;} 
+.vermellRosatBF2A32, .vermellRosatBF2A32 a, a.vermellRosatBF2A32:hover { color:#BF2A32;}
+.vermell, .vermell a, a.vermell:hover {color:#D8001D;} 
+.rosac14370, .rosac14370 a, a.rosac14370:hover { color:#c14370;}
+.rosat, .rosat a, a.rosat:hover {color:#AF0025;} 
+.carnFF8888, .carnFF8888 a, a.carnFF8888:hover {color:#FF8888;} 
+.taronja, .taronja a, a.taronja:hover {color:#EC8214;} 
+.blaucel216ED6, .blaucel216ED6 a, a.blaucel216ED6:hover {color:#216ED6;}
+.blauce2EA195, .blauce2EA195 a, a.blauce2EA195:hover {color:#2EA195;}
+.taronjafosforFD7114, .taronjafosforFD7114 a, a.taronjafosforFD7114:hover {color:#FD7114;}
+.gris878787, .gris878787 a, a.gris878787:hover {color:#878787;}
+.gris333333, .gris333333 a, a.gris333333:hover {color:#333333;}
+.gris4D4D4D, .gris4D4D4D a, a.gris4D4D4D:hover {color:#4D4D4D;}
+.gris474747, .gris474747 a, a.gris474747:hover {color:#474747;}
+.gris616768, .gris616768 a, a.gris616768:hover {color:#616768;}
+.gris8E8E8E, .gris8E8E8E a, a.gris8E8E8E:hover {color:#8E8E8E;}
+.gris353535, .gris353535 a, a.gris353535:hover {color: #353535;}
+.grisA9A9A9, .grisA9A9A9 a, a.grisA9A9A9:hover {color:#A9A9A9;} 
+.gris909090, .gris909090 a, a.grisA9A9A9:hover {color:#909090;} 
+.gris7F7F7F, .gris7F7F7F a, a.gris7F7F7F:hover {color:#7F7F7F;} 
+.gris4B4B4B, .gris4B4B4B a, a.gris4B4B4B:hover {color:#4B4B4B;} 
+.gris575757, .gris575757 a, a.gris575757:hover {color:#575757;} 
+.grisblavos, .grisblavos a, a.grisblavos:hover {color: #717C82;} 
+.grana912f38, .grana912f38 a, a.grana912f38:hover {color:#912f38;}
+.grana97112A, .grana97112A a, a.grana97112A:hover { color:#97112A;}
+.grana, .grana a, a.grana:hover {color: #800000;} 
+.grana8B0D29, .grana8B0D29 a, a.grana8B0D29:hover {color: #8B0D29;}
+.granafluix, .granafluix a, a.granafluix :hover {color:#A30000;} 
+.rojo, .rojo a, a.rojo:hover {color: #D8001D;} 
+.blancFEFFFF, .blancFEFFFF a, a.blancFEFFFF:hover {color:#FEFFFF;}
+.blanc, .blanc a, a.blanc, a.blanc:hover {color:#FFFFFF;} 
+.gris, .gris a, a.gris:hover {color:#444444;} 
+.grisfort, .grisfort a, a.grisfort:hover {color:#2E2E2E;} 
+.rosa, .rosa a, a.rosa:hover {color:#C80A39;} 
+.fucsia, .fucsia a, a.fucsia:hover {color:#BB0078;} 
+.taronjaC53500, .taronjaC53500 a, a.taronjaC53500:hover {color:#C53500;} 
+.tejaD72300, .tejaD72300 a, a.tejaD72300:hover {color:#D72300;} 
+.lilafort, .lilafort a, a.lilafort:hover {color:#79231B;} 
+.lila9A6FAA, .lila9A6FAA a, a.lila9A6FAA:hover { color:#9A6FAA;}
+.lila680C61, .lila680C61 a, a.lila680C61:hover {color:#680C61;} 
+.taronjafort, .taronjafort a, a.taronjafort:hover {color: #BA3C00;} 
+.blauFlort, .blauFlort a, a.blauFlort:hover {color: #0D4970;} 
+.blaucel, .blauFlort a, a.blaucel:hover {color:#017D7F;} 
+.blaulila, .blaulila a, a.blaulila:hover{color: #1A0042;} 
+.grisfluix, .grisfluix a, a.grisfluix:hover{color:#B4B4B4;} 
+.lilafluix, .lilafluix a, a.lilafluix:hover {color:#553685;} 
+.marro, .marro a, a.marro:hover {color:#863B12;} 
+.marro462309, .marro462309 a, a.marro462309:hover {color:#462309;}
+.marroB35611, .marroB35611 a, a.marroB35611:hover {color:#B35611;}
+.rosaFECECE, .rosaFECECE a, a.rosaFECECE:hover {color:#FECECE;}
+.blau, .blau a, a.blau:hover {color:#4573B9;}
+.blau00AAC8, .blau00AAC8 a, a.blau00AAC8:hover {color:#00AAC8;}
+.blau1B7EAA, .blau1B7EAA a, a.blau1B7EAA:hover {color:#1B7EAA;}
+.grocF3AC00, .grocF3AC00 a, a.grocF3AC00:hover {color:#F3AC00;}
+.grocffb61a, .grocffb61a a, a.grocffb61a:hover {color:#ffb61a;}
+
+
+/* fons hexadecimals*/
+/* especils home */
+.fonsBombolles {background: url(https://www.l-h.cat/webs/especials/jornadaconvivenciaurbanaposible/img/fons_bombolles.gif) center top no-repeat; background-color:#FFFFFF;}
+.fonsFestesPrima {background: url(https://www.l-h.cat/img/especials/prima11/fons_festesprima11.gif) center top no-repeat;}
+
+/* fi especials home */
+
+
+.fonsCapsaEleccions11 { background:url(https://www.l-h.cat/img/ajuntament/eleccions/fons_capsa_eleccions.gif) center bottom no-repeat; background-color:#e3e6ff;}
+.fonsCapsaEleccionsSeguimentJornada11 {background-color:#e3e6ff;}
+
+.fonsBlauCorporatiu { background-color:#0097A7;}
+.fonsBlauGenF1FCFD { background-color:#F1FCFD;}
+.fonsBlau { background-color:#19659D;}
+.fonsBlauTurquesa {background-color:#0194A8;}
+.fonsBlau0088c1 { background-color:#0088c1;}
+.fonsBlauEBF4F4 { background-color:#EBF4F4;}
+.fonsBlau27434C { background-color:#27434C;}
+.fonsVerd { background-color:#17971E;}
+.fonsVerdfbfae4 { background-color:#fbfae4;}
+.fonsVerd007b48 { background-color:#007b48;}
+.fonsVerd00ab64 { background-color:#00ab64;}
+.fonsVerd9db515 { background-color:#9db515;}
+.fonsVerd71d11e { background-color:#71d11e;}
+.fonsVerdDEE4D3 { background-color:#DEE4D3;}
+.fonsVerdF3F6EE { background-color:#F3F6EE;}
+.fonsVerdE6E358 { background-color:#E6E358;}
+.fonsGroc { background-color:#F4B221;}
+.fonsGrocffffde { background-color:#ffffde;}
+.fonsGrocffb61a	{background-color:#ffb61a;}
+.fonsLila3d448f { background-color:#3d448f;}
+.fonsLilaF2F2F6 { background-color:#F2F2F6;}
+.fonsLilaD2D2E6 { background-color:#D2D2E6;}
+.fonsLila383993 { background-color:#383993;}
+.fonsGrocfcffd5 { background-color:#fcffd5;}
+.fonsGrocF0F1C5 { background-color:#F0F1C5;}
+.fonsGrocF4BE64 { background-color:#F4BE64;}
+.fonsGrocFFEDD0 { background-color:#FFEDD0;}
+.overGris:hover { background-color:#F1F1F1; padding-left:5px; border:1px solid #ccc}
+
+.fonsGrocFEE28F {background-color:#FEE28F;}
+.fonsGrocFEF1C7 {background-color:#FEF1C7;}
+
+.fonsRosatE1837E { background-color:#e1837e;}
+.fonsRosatD86A6A { background-color:#D86A6A;}
+.fonsRosac14370 { background-color:#c14370;}
+.fonsVermellRosat { background-color:#AA122B;}
+.fonsVermell621C1C { background-color:#621C1C;}
+.fonsVermellA01F1D { background-color:#A01F1D;}
+.fonsVermellRosatf8eced { background-color:#f8eced;}
+.fonsVermellRosatBF2A32 { background-color:#BF2A32;}
+.fonsVermellB01C24 { background-color:#B01C24;}
+.fonsBeixFAEFDD { background-color:#FAEFDD;}
+.fonsBlauFluixE6F1FD { background-color:#E6F1FD;}
+.fonsBlau105c75 { background-color:#105c75;}
+.fonsBlauA1CEDB { background-color:#A1CEDB;}
+.fonsBlau182944 { background-color:#182944;}
+.fonsBlau52A7B6 { background-color:#52A7B6;}
+.fonscarbassaE48D00 {background-color:#E48D00;}
+.fonsCarbassaFCAC00 { background-color:#FCAC00;}
+.fonsTurquesa6ECED6 { background-color:#6ECED6;}
+.fonsTaronjafff2d8 { background-color:#fff2d8;}
+.fonsTaronjaff7200 { background-color:#ff7200;}
+.fonsTaronjae85e09 { background-color:#e85e09;}
+.fonsTaronjaFDECCA { background-color:#FDECCA;}
+.fonsTaronjaFF7E00 { background-color:#FF7E00;}
+.fonsTaronjafa6d15 { background-color:#fa6d15;}
+.fonsTaronjae75b00 { background-color:#e75b00;}
+.fonsTaronjaFFF2DE { background-color:#FFF2DE;}
+.fonsTaronjaFF9C00 { background-color:#FF9C00;}
+.fonsTaronjaFFC23F { background-color:#FFC23F;}
+.fonsTaronjaFFAE00 { background-color:#FFAE00;}
+.fonsTaronjaFF9900 { background-color:#FF9900;}
+.fonsTaronjaFluixFDF7EF { background-color:#FDF7EF;}
+.fonsTaronjaFCDEB0 { background-color:#FCDEB0}
+.fonsTaronjaFluixFCF9F6 { background-color:#FCF9F6;}
+.fonsTaronjaFFF2E9 { background-color:#FFE3D0;}
+.fonsTaronjaF7AC72 {background-color:#FFCEAC;}
+.fonsTaronjaF6AC74 { background-color:#F6AC74;}
+.fonsTaronjaFFF2E8 { background-color:#FFF2E8;}
+.fonsTaronjaEC3200 { background-color:#EC3200;}
+.fonsTaronjaFF6C00 { background-color:#FF6C00;}
+.fonsGris6e6e6e { background-color:#6e6e6e;}
+.fonsGrisB0AFAF { background-color:#B0AFAF;}
+.fonsGrisE8E8E8 { background-color:#E8E8E8;}
+.fonsGris575757 { background-color:#575757;}
+.fonsGris828282 {background-color:#828282;}
+.fonsGrisF3F3F3 { background-color:#F3F3F3;}
+.fonsGris444444 { background-color:#444444;}
+.fonsGris838383 { background-color:#838383;}
+.fonsGrisF5F5F5 { background-color:#F5F5F5;}
+.fonsGris646464 { background-color:#646464;}
+.fonsGris494949 { background-color:#494949;}
+.fonsGris515151 { background-color:#515151;}
+.fonsGris333333 { background-color:#333333;}
+.fonsGris373535 { background-color:#373535;}
+.fonsGris727071 { background-color:#727071;}
+.fonsGrisFluixEDEDED { background-color:#EDEDED;}
+.fonsGrisCFCFCF { background-color:#CFCFCF;}
+.fonsGris3D3D3D { background-color:#3D3D3D;}
+.fonsGrisCBCBCB { background-color:#CBCBCB;}
+.fonsGris4C4C4C { background-color:#4C4C4C;}
+.fonsGrisDDDDDD { background-color:#DDDDDD;}
+.fonsTaronjaSubmenu {background-color:#FFE6DD;}
+.fonsRosat { background-color:#AF0025;}
+.fonsRosatFF9A83 { background-color:#FF9A83;}
+.fonsRosatAA122B {background-color:#AA122B;}
+.fonsGrisMoltfosc {background-color:#404040;}
+.fonsverdfluix {background-color:#FBFFE4;}
+.fonsVerdB19F00 { background-color:#B19F00;}
+.fonsVerdA6B925 { background-color:#A6B925;}
+.fonsVerdf2f9c5 { background-color:#f2f9c5;}
+.fonsVerdE7F3C7 { background-color:#E7F3C7;}
+.fonsVerd5D8835 { background-color:#5D8835;}
+.fonsVerd41550B { background-color:#41550B;}
+.fonsVerd89AD27 { background-color:#89AD27;}
+.fonsVerdC1E962 { background-color:#C1E962;}
+.fonsVerdA8D441 { background-color:#A8D441;}
+.fonspistacho {background-color:#717127;}
+.fonsVerdCaquiTramits {background-color:#748d21;}
+.fonsVerdTramits {background-color:#C9D9C0;}
+.fonsverdfort {background-color:#383818;}
+.fonsLilaB492E9 { background-color:#B492E9;}
+.fonsLila8969BD { background-color:#8969BD;}
+.fonsLilaFluixDirectori {background-color:#F5F3F7;}
+.fonsgrisverd90A488 {background-color:#90A488;}
+.fonsViA80D50 { background-color:#A80D50;}
+.fonsrosaFDF3CF {background-color:#FDF3CF;} 
+.fonsRosaf7e7ea { background-color:#F7E7EA;}
+.fonsTaronjaFCF3E7 { background-color:#FCF3E7;}
+.fonsTaronjaF9E7D0 { background-color:#F9E7D0;}
+.fonsTaronjaF8EBE3 {background-color:#F8EBE3;}
+.fonsTaronjafff8cc { background-color:#fff8cc;}
+.fonstaronjaF2CEB1 {background-color:#F2CEB1;}
+.fonsTaronjaEAA55A { background-color:#EAA55A;}
+.fonsCaquiF6F1ED { background-color:#F6F1ED;}
+.fonsCaquiF1F0D0 { background-color:#F1F0D0;}
+.fonsCaquiFDFCEF { background-color:#FDFCEF;}
+.fonsCarnF9F0E6 {background-color:#F9F0E6;}
+.fonsCarnF3E5D5 {background-color:#F3E5D5;}
+.fonsCarnF6E3CE {background-color:#F6E3CE;}
+.fonsCarnF3DAC0 { background-color:#F3DAC0;}
+.fonsCarnF1C391 {background-color:#F1C391;}
+.fonsCarnF1C391 { background-color:#F1C391;}
+.fonsTaronjaFDF0EA {background-color:#FDF0EA;}
+.fonsTaronjaFluixFDF5E6 {background-color:#FDF5E6;}
+.fonsMarro8A3C00 {background-color:#8A3C00;}
+.fonsMarroCiutat {background-color:#902A00;}
+.fonsMarroFluixD9992F { background-color:#D9992F;}
+.fonsTaronjaCiutat {background-color:#CB3200;}
+.fonsgrocFFFFEB {background-color:#FFFFEB;}
+.fonsGrocFECF44 { background-color:#FECF44;}
+.fonsGranaAD3939 {background-color:#AD3939;}
+.fonsRosatAC1212 { background-color:#AC1212;}
+.fonsGranaA1162D { background-color:#A1162D;}
+.fonsblau00A2FF {background-color:#00A2FF;}
+.fonsgrana650000 {background-color:#650000;}
+.fonsGranaC4929A { background-color:#C4929A;}
+.fonsBlauBarra237288 { background-color:#237288;}
+.fonsblauEAF1F3 { background-color:#EAF1F3;}
+.fonsBlauBarra6BA4B4 { background-color:#6BA4B4;}
+.fonsvermell990012 {background-color:#990012;}
+.fonsvermellE70000 {background-color:#E70000;}
+.fonsVermellD3222A { background-color:#D3222A;}
+.fonsAlterGrocAjunt {background-color:#FFE8D7;}
+.fonsAlterGrocflAjunt {background-color:#FDF8F5;}
+.fonsTejaBD4231 {background-color:#BD4231;}
+.fonsVermellFluixFF5F5F {background-color:#FF5F5F;}
+.fonsBlauFluix5FC4FB {background-color:#5FC4FB;}
+.fonsBlau0093e7 { background-color:#0093e7;}
+.fonsBlau00659C {background-color:#00659C;}
+.fonsGrocFFF990 {background-color:#FFF990;}
+.fonsGrocffc600 { background-color:#ffc600;}
+.fonsTaronjaFF9A31 {background-color:#FF9A31;}
+.fonsVerdFluix5FF55F {background-color:#5FF55F;}
+.fonsVerd009600 {background-color:#009600;}
+.fonsVerd6fcd00 { background-color:#6fcd00;}
+.fonsmarroFFBE60 {background-color:#FFBE60;}
+.fonsMarroC25F01 {background-color:#C25F01;}
+.fonsverd008634 {background-color:#008634;}
+.fonsvermellD40000 {background-color:#D40000;}
+.fonsverd007022 {background-color:#007022;}
+.fonsrosaFF4949 {background-color:#FF4949;}
+.fonsrosaD24937 {background-color:#D24937;}
+.fonsVerdCel { background-color:#EEF8F8;}
+.fonsVerdCel088E94 { background-color:#088E94;}
+.fonsVerdCelF7FFFF { background-color:#F7FFFF;}
+.fonsVerdCelEBFEFF { background-color:#EBFEFF;}
+.fonsVerdCelE2FEFF { background-color:#E2FEFF;}
+.fonsVerdCelD6FEFF { background-color:#D6FEFF;}
+.fonsVerdCel51AFB3 { background-color:#51AFB3;}
+.fonsVerdCel84BCBE { background-color:#84BCBE;}
+.fonsVerdCel2 { background-color:#F9FFFF;}
+.taulaVerdCel1 { background-color:#F4FFFF;}
+.taulaVerdCel2 { background-color:#D9EFEF;}
+.fonsGrisF9F9F9 {background-color:#F9F9F9;}
+.fonsGrisECECEC {background-color:#ECECEC;}
+.fonsGrisF1F1F1 {background-color:#F1F1F1;}
+.fonsnegre {background-color:#000000;}
+.fonsGris505050 { background-color:#505050;}
+.fonsGrisE5E5E5 { background-color:#E5E5E5;}
+.fonsgrisblavos {background-color: #9AA7AE;}
+.fonsgrisblavosfluix {background-color: #ECF0F2;}
+.fonstaronjaE98F0F {background-color:#E98F0F;}
+.fonsTaronjaFF621D { background-color:#FF621D;}
+.fonsTaronjaF38900 { background-color:#F38900;}
+.fonsTaronjaF38900 { background-color:#F38900;}
+.fonstaronjaE53E00 {background-color:#E53E00;}
+.fonsGrocFFB400 { background-color:#FFB400;}
+.fonsGrocFFFFF1 { background-color:#FFFFF1;}
+.fonsTaronjaFluixFFF7ED {background-color:#FFF7ED;}
+.fonsTaronjaFluixFFEDE5 {background-color:#FFEDE5;}
+.blauagenda {background-color:#00427A;}
+.blaufluixagenda {background-color:#4989D9;}
+.blaufortagenda {background-color:#2A519F;}
+.fucsiabarradas {background-color:#BD0079;}
+.fonsverdE2F3D9 {background-color:#E2F3D9;}
+.fonsVerdA0BE29 {background-color:#A0BE29;}
+.fonsGrocFFB044 {background-color:#FFB044;}
+.fonsGrocFFEBB4 {background-color: #FFEBB4;}
+.fonsGrocFFFFE9 {background-color:#FFFFE9;}
+.fonsGrocFFD59C {background-color:#FFD59C;}
+.fonsvermellnormal {background-color:#ff0000;}
+.fonsRosa {background-color:#FF5D5D;}
+.fonsRosae73d87 { background-color:#e73d87;}
+.fonsBlanc { background-color:#ffffff;}
+.fonsRosatC98BB2 { background-color:#C98BB2;}
+.fonsRosatF4DBDB { background-color:#F4DBDB;}
+.fonsRosatCD7B7B { background-color:#CD7B7B;}
+.fonsRosatFAE9E7 {background-color:#FAE9E7;}
+.fonsVerd33B3A6 {background-color:#33B3A6;}
+.fonsVerd4E6819 { background-color:#4E6819;}
+.fonsVerd829E49 { background-color:#829E49;}
+.fonsblanc {background-color:#ffffff;}
+.fonsblancTransparent {background-image:url(https://www.l-h.cat/img/opacity.png); background-repeat:repeat;}
+.fonsGrana800000 { background-color:#800000;}
+.fonsVerd33B3A6 {background-color:#33B3A6;}
+.fonsverdE1F0DA {background-color:#E1F0DA;}
+.fonsGris939393 {background-color:#939393;}
+.fonsRosaF3DFDF {background-color:#F3DFDF;}
+.fonsblau013B8D {background-color:#013B8D;}
+.fonsBlauE8EAF3 { background-color:#E8EAF3;}
+.fonsBlau3F497A { background-color:#3F497A;}
+.fonsBlauB6D1F2 {background-color:#B6D1F2;}
+.fonsBlau232948 {background-color:#232948;}
+.fonsBlauCel51C8C8 { background-color:#51C8C8;}
+.fonsBlauCelC2EAEA { background-color:#C2EAEA;}
+.fonsBlauCel01636E { background-color:#01636E;}
+.fonsBlauCelE3F4F4 { background-color:#E3F4F4 ;}
+.fonsGrisEEEEEE {background-color:#EEEEEE;}
+.fonsGris616161{background-color:#616161;}
+.fonsGrisAEAEAE { background-color:#AEAEAE;}
+.fonsCarbassaFFDAA0 { background-color:#FFDAA0;}
+.fonsCarbassaFFE5BC { background-color:#FFE5BC;}
+.fonsCarbassaFFD99F { background-color:#FFD99F;}
+.fonsVermellCA1620{background-color:#CA1620;}
+.fonsVermellA51000 { background-color:#A51000;}
+.fonsvermellB22222 {background-color:#B22222;}
+.fonsVermellED210F {background-color:#ED210F;}
+.fonsvermellD93F3F {background-color:#D93F3F;}
+.fonsBlauC2C8FF {background-color:#C2C8FF;}
+.fonsGrisFosc { background-color:#444444;}
+.fonsvermell { background-color:#BD110F;}
+.fonsvermellfluix { background-color:#F1D7D8;}
+.fonsblaucelC9E7FF { background-color:#C9E7FF;}
+.fonsBlauCelEAF3F3 { background-color:#EAF3F3;}
+.fonsBlauCelc8f3ff {background-color:#c8f3ff;}
+.fonsBlauCelCBE3E3 { background-color:#CBE3E3;}
+.fonsgris05 { background-color:#FBFBFB;}
+.fonsgris10 { background-color:#E6E6E6;}
+.fonsgris20 { background-color:#F5F5F5;}
+.fonsgris30 { background-color:#E5E5E5;}
+.fonsgris40 { background-color:#DEDEDE;}
+.fonsgris50 { background-color:#D8D8D8;}
+.fonsgris60 { background-color:#CDCDCD;}
+.fonsgris70 { background-color:#B6B6B6;}
+.fonsgris80 { background-color:#747474;}
+.fonsgris90 { background-color:#474747;}
+.fonsGrisd1d1d1 { background-color:#d1d1d1;}
+.fonsRosatF9ECEC { background-color:#F9ECEC;}
+.fonsvermell100 { background-color:#BD110F; height:0%;}
+.fonsvermellfortbarra {background-color: #990011;}
+.fonsvermellbarra {background-color:#B22222;}
+.fonsvermellFBBFB9 { background-color:#FBBFB9;}
+.fonsverd9FC420 {background-color:#9FC420;}
+.fonsblau03A3ED { background-color:#03A3ED;}
+.fonsgrocFDB400 { background-color:#FDB400;}
+.fonslila6D1468 { background-color:#6D1468;}
+.fonsLilaF1EAF1 { background-color:#F1EAF1;}
+.fonsLilaFluixF1EAF1 { background-color:#F1EAF1;}
+.fonsLilaB386B1 { background-color:#B386B1;}
+.fonsLila7C3276 {background-color:#7C3276;}
+.fonsLila553f7a { background-color:#553f7a;}
+.fonsblaumoltfluix{background-color: #F4F7FA;}
+.fonsblaufluix{background-color: #E7ECF3;}
+.fonsGrocNormMunicipals {background-color:#FF9C00;}
+.fonsGrocFoscNormMunicipals {background-color:#D68300;}
+.fonsGrocFFF8C6 {background-color:#FFF8C6;}
+.taronja1 { background-color:#F7F0EE;}
+.taronja2 { background-color:#E9D6D0;}
+.verd1 { background-color:#FAFFF5;}
+.verd2 { background-color:#E5F3D9;}
+.gfonsvermell { background-color:#BD110F; font-family: Arial, Helvetica, sans-serif; font-size: 123%; color: #FFFFFF; font-weight: normal; text-decoration: none ;text-align:left;}
+.gfonsgris { border-style:solid;border-color: #EEEEEE; border-width:1px; background-color:#EEEEEE;color: #990000;}
+.caixaInvisibleJesus {left: 0px; position: absolute; top: -500px;}
+.fonsBlauD2DCDE { background-color:#D2DCDE;}
+.fonsFormulariGaleria{ background-color:#EEF6F8;}
+.fonsGrocDDB009 { background-color:#DDB009;}
+.fonsRosaE482D2 { background-color:#E482D2;}
+.blau304566 { color:#304566}
+.blau08566A { color:#08566A;}
+.blau182944 { color:#182944}
+.blau232948 { color:#232948;}
+.fonsGrocFFF7D0 { background-color:#FFF7D0;}
+
+/* fons d'imatges */
+.pastSeuInici {background-image:url(https://www.l-h.cat/img/past_seu_inici.jpg); background-repeat:no-repeat; background-position:bottom; background-color:#f2fafc;}
+.pastSeuInici2 {background-image:url(https://www.l-h.cat/img/past_seu_inici2.gif); background-repeat:no-repeat; background-position:bottom; height:12px;}
+.fonsDadesEstadistiques { background-image:url(https://www.l-h.cat/img/fons_dades_estadistiques.gif); background-repeat:no-repeat;}
+.fonsNovaFinestra { background-image:url(https://www.l-h.cat/img/fons_novafinestra.gif); background-repeat:no-repeat; background-position:right;}
+.fons100x100 { background-image:url(https://www.l-h.cat/img/flash/fons_100x100.gif)}
+.pastVerdCarpeta {background-image:url(https://www.l-h.cat/carpetaCiutadana/img/past_verd_carpeta.gif);}
+.pastPlanolTurquesa { background-image:url(https://www.l-h.cat/img/past_planol_turquesa.gif); background-color:#0097A7; background-repeat:repeat-x;}
+.pastVerdCarpetaFort {background-image:url(https://www.l-h.cat/carpetaCiutadana/img/past_verdF_carpeta.gif);}
+.fonsCaixesCarpeta {background-image:url(https://www.l-h.cat/carpetaCiutadana/img/fons_caixes_carpeta.gif);}
+.fonsBotoVermell {background-image:url(https://www.l-h.cat/img/fons_botovermell.gif); background-color:#A81D1D;}
+.pastGranaCarpetaSegon {background-color:#801718;}
+.pastGranaFluixCarpetaSegon {background-color:#F2E6E6;} /* fort */
+.pastGranaFluixCarpetadSegon {background-color:#FFF7F6;}/* fluix */
+.pastcaqui{background-image:url(https://www.l-h.cat/carpetaCiutadana/img/cc_past_caqui.gif); background-color:#996633;}
+.pastCaquiLlarga{background-image:url(https://www.l-h.cat/carpetaCiutadana/img/cc_past_caqui_llarga.gif); background-color:#996633;}
+.fonsBlauBlanc { background-image: url(https://www.l-h.cat/img/fons_blaublanc.gif);}
+.trescolumnes{background-image:url(https://www.l-h.cat/img/cc_tres_columnes.gif);}
+.fonswebmunicipals {background-image:url(https://www.l-h.cat/img/fons_websmunicipals.gif);}
+.columnaesquerra{background-image:url(https://www.l-h.cat/img/columna_esquerra.gif);}
+.columnaEsquerraCentreTrans {background:url(https://www.l-h.cat/img/columna_esquerra_centretrans.gif) top left repeat-y; background-color:#FFFFFF;}
+.columnacentre{background-image:url(https://www.l-h.cat/img/columna_centre.gif);}
+.columnadreta{background-image:url(https://www.l-h.cat/img/columna_dreta.gif);}
+.pastTransGrisTc {background-image: url(https://www.l-h.cat/img/past_transgris_trescol.gif);}
+.pastVermellMenu1{background-image:url(https://www.l-h.cat/img/past_vermell_menu1.gif); background-color:#8B0000;}
+.pastRosablancMenu1{background-color:#AC1212;}
+.pastVermellblancMenu1{background-color:#960001;}
+
+.pastTurquesaBloc2 {background-image:url(https://www.l-h.cat/img/past_turquesa_bloc2.gif); background-color:#00636D;}
+.pastVermellLlarga { background-image: url(https://www.l-h.cat/img/past_vermell_llarga_mapa.gif);}
+.pastVermellFLlarga { background-image: url(https://www.l-h.cat/img/past_vermellfllarga_web.gif);}
+.pastBlaucelMenu{background-image:url(https://www.l-h.cat/img/past_blaucel_menu.gif); background-color:#33B3A6;}
+.pastGrocMenu{background-image:url(https://www.l-h.cat/img/past_groc_menu.gif); background-color:#2C844A;}
+.pastVermellBloc1{background-image:url(https://www.l-h.cat/img/past_vermell_bloc1.gif); background-color:#7D0000;}
+.pastNovetatsBloc1 {background-image:url(https://www.l-h.cat/img/past_novetats_bloc1.gif); background-color:#057D50;}
+.pastGrocBloc1{background-image:url(https://www.l-h.cat/img/past_groc_bloc1.gif); background-color:#D7A01B;}
+.pastBlauBloc2{background-image:url(https://www.l-h.cat/img/past_blau_bloc2.gif); background-color:#005398;}
+
+.pastVermellMenu2{background-image:url(https://www.l-h.cat/img/past_vermell_menu2.gif); background-color:#630000;}
+.pastRosablancMenu2{background-color:#AB1212;}
+.pastVermellblancMenu2{background-color:#950000;}
+
+.pastTaronjaMenu2{background-image:url(https://www.l-h.cat/img/past_taronja_menu2.gif); background-color:#A50F00;}
+.pastCarbasablancMenu2{background-color:#CB3200;}
+.pastTaronjablancMenu2{background-color:#CB3200;}
+
+.pastTaronjaMenu1{background-image:url(https://www.l-h.cat/img/past_taronja_menu1.gif); background-color:#A50F00;}
+.pastCarbasablancMenu1{ background-color:#CB3200;}
+.pastTaronjablancMenu1{background-color:#CB3200;}
+
+.pastTurquesaMenu1{background-image:url(https://www.l-h.cat/img/past_turquesa_menu1.gif); background-color:#00636D;}
+.pastTurquesaBlancMenu1{background-color:#007A87;}
+
+.pastVerdMenu1 {background-image:url(https://www.l-h.cat/img/past_verd_menu1.gif); background-color:#2C844A;} 
+.pastVermellNoticiaPrimer {background-image:url(https://www.l-h.cat/img/past_vermellnoticia_primer.gif); background-color:#6F0000;}
+.pastVermellNoticiaMenu2 {background-image:url(https://www.l-h.cat/img/past_vermellnoticies_menu2.gif); background-color:#6F0000;}
+.pastGrocNoticiaMenu2 {background-image:url(https://www.l-h.cat/img/past_grocnoticies_menu2.gif); background-color:#CC9000;}
+.pastVerdaa21Bloc2 { background-image:url(https://www.l-h.cat/img/past_verda21_bloc2.gif); background-color:#E78B0F;}
+.pastVerda21Primer { background-image:url(https://www.l-h.cat/img/past_verda21_primer.gif); background-color:#008634; color:#FFFFFF;}
+.pastVerdaa21Bloc1 { background-image:url(https://www.l-h.cat/img/past_verda21_bloc1.gif); background-color:#006C2A;}
+.pastVerdTramitsBloc1 { background-image:url(https://www.l-h.cat/img/past_verdtramits_bloc1.gif); background-color:#3A450E;}
+.pastVerdaa21dadesMenu1 { background-image:url(https://www.l-h.cat/img/past_verda21dades_menu1.gif); background-color:#006B2A;}
+.pastVerdaa21Segon { background-image:url(https://www.l-h.cat/img/past_verda21_segon.gif); background-color:#006C2A;}
+.pastVerdaa21grocSegon { background-image:url(https://www.l-h.cat/img/past_verda21groc_segon.gif); background-color:#E78B0F;}
+.pastVerdaa21Menu2 { background-image:url(https://www.l-h.cat/img/past_verda21_menu2.gif); background-color:#003716;}
+.pastVerdaa21Menu1 { background-image:url(https://www.l-h.cat/img/past_verda21_menu1.gif); background-color:#006B2A;}
+.pastamarilla{background-image:url(https://www.l-h.cat/img/cc_past_amarilla.gif);}
+.pastaronjaBloc1{background-image:url(https://www.l-h.cat/img/past_taronja_bloc1.gif);}
+.pastBlaumariLlarga{background-image:url(https://www.l-h.cat/img/past_blaumari_llarga.gif); background-color:#A50F00}
+.pastransLlarga{background-image:url(https://www.l-h.cat/img/past_trans_llarga.png);}
+.pastransBlancLlarga{background-image:url(https://www.l-h.cat/img/past_transblanc_llarga.png); background-repeat:repeat; }
+.pastransGrisLlarga{background-image:url(https://www.l-h.cat/img/past_transgris_llarga.png); background-repeat:repeat;}
+.pastransVerdaLlarga{background-image:url(https://www.l-h.cat/img/past_transverda_llarga.gif);}
+.pastransTaronjaLlarga{background-image:url(https://www.l-h.cat/img/past_transtaronja_llarga.gif);}
+.pasTransSegon{background-image:url(https://www.l-h.cat/img/past_trans_segon.gif);}
+.pastransLlargaGris{background-image:url(https://www.l-h.cat/img/past_trans_llarga_gris.gif);}
+.pastransLlargaVerd{background-image:url(https://www.l-h.cat/img/past_trans_llarga_verd.gif);}
+.pasTransTrescol{background-image:url(https://www.l-h.cat/img/past_trans_trescol.gif);}
+.pasTransDoscol{background-image:url(https://www.l-h.cat/img/past_trans_doscol.gif);}
+.pasTransLlargaSub{background-image:url(https://www.l-h.cat/img/past_trans_llargasub.gif);}
+.pasTransLlargaBloc2{background-image:url(https://www.l-h.cat/img/past_transllarga_bloc2.gif);}
+.pasTransLlargaMenu2{background-image:url(https://www.l-h.cat/img/past_transllarga_menu2.gif);}
+.fonsBlanctransBloc1 {background-image:url(https://www.l-h.cat/img/fons_blanctrans_bloc1.gif); background-color:#F5F5F5;}
+.fonsBlanctransBloc2 {background-image:url(https://www.l-h.cat/img/fons_blanctrans_bloc2.gif); background-color:#F5F5F5;}
+.fonsBlanctransBloc2pad10 {background-image:url(https://www.l-h.cat/img/fons_blanctrans_bloc2pad10.gif); background-color:#F5F5F5;}
+.pastVerdCelGenSegon{background-image:url(https://www.l-h.cat/img/past_verdcelgen_segon.gif); background-color:#2EA195;}
+.pastBlauFortGenMenu1{background-image:url(https://www.l-h.cat/img/past_blaufortgen_menu1.gif); background-color:#002D6A;}
+.pastBlauGenericPrimer{background-image:url(https://www.l-h.cat/img/past_blaugen_primer.gif); background-color:#017D7F;}
+.pastBlauGenericMenu1{background-image:url(https://www.l-h.cat/img/past_blaugen_menu1.gif); background-color:#007A87;}
+.pastBlauGenericMenu2{background-image:url(https://www.l-h.cat/img/past_blaugen_menu2.gif); background-color:#007A87;}
+.pastBlauCelGenSegon{background-image:url(https://www.l-h.cat/img/past_blaucelgen_segon.png);}
+.pastBlaufluixGenSegon{background-image:url(https://www.l-h.cat/img/past_blaufluixgen_segon.gif); background-color:#66C8CA;}
+.pastBlauCelSubTitolSegon{background-image:url(https://www.l-h.cat/img/past_blaucelsubtit_segon.gif); background-color:#71CBCD;}
+
+
+
+
+
+/*esports*/
+.pastEsportsPrimer { background-image:url(https://www.l-h.cat/img/esports/past_esports_primer.gif); background-color:#005B6F;}
+.pastEsports1Menu{ background-image:url(https://www.l-h.cat/img/esports/past_esports1_menu.gif); background-color:#005B6F;}
+.pastEsportsEnllasos{ background-image:url(https://www.l-h.cat/img/esports/past_esports_enllasos.gif); background-color:#000;}
+.pastEsportsSegon{ background-image:url(https://www.l-h.cat/img/esports/past_esports_segon.png);background-color:#40B3C0;}
+
+
+/* punts, fletxes, botons, llistes i linees*/
+/*menus*/
+.menuGenericEsquerra{width:100%; float:left; padding:0;}	
+.menuGenericEsquerra ul{padding: 0; margin:0;}
+.menuGenericEsquerra ul li{margin-left:5px; padding-left: 5px;}
+.menuGenericEsquerra ul li h3 { padding-left:5px;}
+.menuGenericEsquerra ul li:after{content: "."; display: block; height: 0; clear: both; visibility: hidden;}
+.menuGenericEsquerra ul.segon{list-style-type:none;}
+.menuGenericEsquerra ul li{display: inline-block;}
+* html .menuGenericEsquerra ul li{height: 1%;}
+.menuGenericEsquerra ul li{display: block;}
+
+
+.menuGenericDreta{width: 100%; float:left; padding:0;}	
+.menuGenericDreta ul li{margin-right:5px; padding-right: 5px;}
+.menuGenericDreta ul li h3 {padding-right:5px;}
+.menuGenericDreta ul li:after{content: "."; display: block; height: 0; clear: both; visibility: hidden;}
+.menuGenericDreta ul.segon{margin: 0; padding: 5px 15px 5px 5px; list-style-type:none;}
+.menuGenericDreta ul li{display: inline-block;}
+* html .menuGenericDreta ul li{height: 1%;}
+.menuGenericDreta ul li{display: block;}
+/* LLISTAT FLETXES */
+
+/* rombo blau */
+.llistaRomboBlau{
+	width: 100%;
+	float: left;
+	padding:0;
+	}
+.llistaRomboBlau ul{
+	margin: 0;
+	padding: 0;
+	list-style:none;
+}
+.llistaRomboBlau ul li {
+	background: url(https://www.l-h.cat/img/common/romboBlau.gif) no-repeat left 4px;
+}
+.llistaRomboBlau ul li:after{
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+.llistaRomboBlau ul li{
+	padding: 0 0 5px 10px;
+	clear:both;
+}
+.llistaRomboBlau ul li{display: inline-block;}
+* html .llistaRomboBlau ul li{height: 1%;}
+.llistaRomboBlau ul li{display: block;}
+/* fi rombo blau */
+
+ol {
+ 	margin:0 0 0 25px;
+	padding: 0 0 0 0;
+}
+ol li { padding:5px 0 0 0; margin:0}
+
+.llistatPuntBlau {
+margin:0;
+padding:0;
+float:left;
+width:100%;
+}
+
+.llistatPuntBlau ul{
+  list-style:none;
+	margin:0;
+	padding:0;
+}
+
+.llistatPuntBlau ul li {
+	background:url(https://www.l-h.cat/img/lh12/common/punt_blau.png) no-repeat 0 7px;
+	padding:2px 0 2px 10px;
+	display:inline;
+	font-size:0.75em;
+	}
+
+.llistatPuntBlau ul li a {
+	text-decoration:none;
+	font-family:Arial, Helvetica, sans-serif;
+	padding: 3px 0 3px 0;
+	color:#000
+	
+
+}
+
+.llistatPuntBlau ul li a.blauTurquesa {color:#0093a8; text-decoration:underline}
+
+.llistatPuntBlau ul li:after{
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+.llistatPuntBlau ul li {display: inline-block;}
+* html .llistatPuntBlau ul li{height: 1%;}
+.llistatPuntBlau ul li {display: block;}
+
+.llistatPuntBlau ul li ul li{
+	padding:3px 0 3px 15px;
+	margin:0;
+	font-size:1em;
+	background:url(https://www.l-h.cat/img/lh12/common/fletxa_blava.png) no-repeat 0 2px;
+}
+
+.llistatPuntBlau ul li.sensePunt { margin:0; padding:0; background:transparent; list-style:none; float:left}
+.llistatPuntBlau ul li.sensePunt a { margin:0; padding:3px 0 3px 0; float:left}
+.llistatPuntBlau ul li div.fonsPuntBlau
+	{ 
+	padding:5px 0 3px 15px;
+	margin:0;
+	background:url(https://www.l-h.cat/img/lh12/common/fletxa_blava.png) no-repeat 0 5px;}
+
+
+
+.llistatPuntBlau ul li .llistatPdf ul li{
+	padding:0;
+	margin:0;
+	background:url(https://www.l-h.cat/img/ico_pdf.png) left 2px no-repeat; 
+	padding-left:10px;
+	margin:0; 
+	top:0; 
+}
+.llistatPuntBlau ul li .llistatPdf ul li a { text-decoration:underline; color:#0093a8;}
+
+
+
+
+/* punt cel */
+.llistaPuntCel{
+	width: 100%;
+	float: left;
+	padding:0;
+	}
+.llistaPuntCel ul{
+	margin: 0;
+	padding: 0;
+	list-style:none;
+}
+.llistaPuntCel ul li {
+	background: url(https://www.l-h.cat/img/puntverd.gif) no-repeat left 3px;
+}
+.llistaPuntCel ul li:after{
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+.llistaPuntCel ul li{
+	padding: 0 0 5px 10px;
+	clear:both;
+}
+.llistaPuntCel ul li{display: inline-block;}
+* html .llistaPuntCel ul li{height: 1%;}
+.llistaPuntCel ul li{display: block;}
+/* fi punt cel */
+
+
+/* llistat escoles bressol */
+.llistatEscolesBressol {
+	width: 100%;
+	float: left;
+	padding:0;
+	}
+.llistatEscolesBressol ul{
+	margin: 0;
+	padding: 0;
+	list-style:none;
+}
+.llistatEscolesBressol ul li.arbres {
+	background: url(https://www.l-h.cat/img/educacio/ico_arbres.gif) no-repeat left 0px; padding-left:40px !important; padding-bottom:15px;
+}
+.llistatEscolesBressol ul li.moli {
+	background: url(https://www.l-h.cat/img/educacio/ico_moli.gif) no-repeat left 0px; padding-left:40px !important; padding-bottom:15px;
+}
+.llistatEscolesBressol ul li.parc {
+	background: url(https://www.l-h.cat/img/educacio/ico_parc.gif) no-repeat left 0px; padding-left:40px !important; padding-bottom:15px;
+}
+.llistatEscolesBressol ul li.contes {
+	background: url(https://www.l-h.cat/img/educacio/ico_contes.gif) no-repeat left 0px; padding-left:40px !important; padding-bottom:15px;
+}
+.llistatEscolesBressol ul li.flors {
+	background: url(https://www.l-h.cat/img/educacio/ico_flors.gif) no-repeat left 0px; padding-left:40px !important; padding-bottom:15px;
+}
+.llistatEscolesBressol ul li.muntanya {
+	background: url(https://www.l-h.cat/img/educacio/ico_muntanya.gif) no-repeat left 0px; padding-left:40px !important; padding-bottom:15px;
+}
+.llistatEscolesBressol ul li:after{
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+.llistatEscolesBressol ul li{
+	padding: 5px 0 15px 38px;
+	clear:both;
+ }
+.llistatEscolesBressol  ul li{display: inline-block;}
+* html .llistatEscolesBressol  ul li{height: 1%;}
+.llistatEscolesBressol  ul li{display: block;}
+/* fi rombo blau */
+
+
+
+/* pdf */
+.llistaPdf{
+	width: 100%;
+	float: left;
+	padding:0;
+	}
+.llistaPdf ul{
+	margin: 0;
+	padding: 0;
+	list-style:none;
+}
+.llistaPdf ul li {
+	background: url(https://www.l-h.cat/img/ico_pdfmed.gif) no-repeat left 0px;
+}
+.llistaPdf ul li:after{
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+.llistaPdf ul li{
+	padding: 2px 0 3px 20px;
+	clear:both;
+}
+.llistaPdf ul li{display: inline-block;}
+* html .llistaPdf ul li{height: 1%;}
+.llistaPdf ul li{display: block;}
+
+
+.llistaPdf ul li.img {background: url(https://www.l-h.cat/img/ic_doc_imagen.gif) no-repeat 3px 0px;}
+/* fi pdf */
+
+/* documents */
+.llistaContinguts{
+	width: 100%;
+	float: left;
+	padding:0;
+	}
+.llistaContinguts ul{
+	margin: 0;
+	padding: 0;
+	list-style:none;
+}
+.llistaContinguts ul li {
+	background: url(https://www.l-h.cat/img/fletxanegra2.gif) no-repeat 6px 4px;
+}
+.llistaContinguts ul li.fullalinkgif {
+	background: url(https://www.l-h.cat/img/fullaweb.gif) no-repeat left 0px;
+}
+.llistaContinguts ul li.icdocwordgif {
+	background: url(https://www.l-h.cat/img/ic_doc_word.gif) no-repeat left 0px;
+}
+.llistaContinguts ul li.icdocacrobat1gif {
+	background: url(https://www.l-h.cat/img/ico_pdfmed.gif) no-repeat left 0px;
+}
+.llistaContinguts ul li.iconotgif{
+	background: url(https://www.l-h.cat/img/ico_not.gif) no-repeat left 0px;
+}
+.llistaContinguts ul li.icoagendagif{
+	background: url(https://www.l-h.cat/img/ico_agenda.gif) no-repeat left 0px;
+}
+.llistaContinguts ul li.icodirectorigif{
+	background: url(https://www.l-h.cat/img/ico_directori.gif) no-repeat left 0px;
+}
+.llistaContinguts ul li.icotramitgif{
+	background: url(https://www.l-h.cat/img/ico_tramit.gif) no-repeat left 0px;
+}
+
+.llistaContinguts ul li:after{
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+.llistaContinguts ul li{
+	padding: 2px 0 3px 20px;
+	clear:both;
+}
+.llistaContinguts ul li{display: inline-block;}
+* html .llistaContinguts ul li{height: 1%;}
+.llistaContinguts ul li{display: block;}
+/* fi documents */
+
+
+.llistaPdfs{
+	width: 100%;
+	float: left;
+	padding:0;
+	}
+.llistaPdfs ul{
+	margin: 0;
+	padding: 0;
+	list-style:none;
+}
+.llistaPdfs ul li{
+	background: url(https://www.l-h.cat/img/ico_pdf.png) no-repeat left 0px;
+}
+.llistaPdfs ul li:after{
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+.llistaPdfs ul li{
+	padding: 0 0 5px 22px;
+	clear:both;
+}
+.llistaPdfs ul li{display: inline-block;}	
+* html .llistaPdfs ul li{height: 1%;}	
+.llistaPdfs ul li{display: block;}
+
+
+.llistaSenseFletxes{
+	width: 100%;
+	float: left;
+	padding:0;
+	margin:0
+	}
+.llistaSenseFletxes ul{
+	float:left;
+	width:100%;
+	margin: 0;
+	padding: 0;
+	list-style:none;
+}
+.llistaSenseFletxes ul li{
+	padding: 2px 0 2px 0px;
+	float:left;
+	width:100%;	
+}
+
+.llistaSenseFletxes ul li:after{
+    content: "."; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+.llistaSenseFletxes ul li{display: inline-block;}
+* html .llistaSenseFletxes ul li{height: 1%;}
+.llistaSenseFletxes ul li{display: block;}
+
+
+
+
+
+.llistaFletxaBlauCel{
+	width:100%;
+	float:left;
+	margin:0;
+	padding:0; 
+}
+.llistaFletxaBlauCel ul{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.llistaFletxaBlauCel ul li {
+	background: url(https://www.l-h.cat/img/fletxa_blaucel.gif) no-repeat left 5px;
+	padding: 3px 5px 3px 17px;
+	margin:0;
+}
+.llistaFletxaBlauCel ul li:after{
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+.llistaFletxaBlauCel ul a {
+	color:#000;
+	font-family:Arial, Helvetica, sans-serif;
+	text-decoration:none;
+	float:left;
+}
+.llistaFletxaBlauCel ul li.titol {
+	background: transparent; border:0; padding:0 0 10px 0;
+}
+.llistaFletxaBlauCel ul li.subtitol {
+	margin:0; background:transparent; padding:0; font-size:0.55em; border-bottom:0px;
+}
+.llistaFletxaBlauCel ul li h3 { font-size:1.4em;}
+.llistaFletxaBlauCel ul li h4 { font-size:1.2em;}
+
+.llistaFletxaBlauCel ul li.ultim {
+	border:0;
+}
+
+.llistaFletxaBlauCel ul li.sensefons { background:transparent;}
+
+.llistaFletxaBlauCel ul li{display: inline-block;}
+* html .llistaFletxaBlauCel ul li{height: 1%;}
+.llistaFletxaBlauCel ul li {display: block;}
+.llistaFletxaBlauCel ul li div { width:100%; float:left;}
+.llistaFletxaBlauCel ul li div ul li {
+	background: url(https://www.l-h.cat/img/punt_blaucel.gif) no-repeat left 8px;
+	border-bottom:1px dashed #d2d2d2;
+	margin:0;
+	padding:4px 5px 4px 10px;
+}
+.llistaFletxaBlauCel ul li div ul li.ultim {
+	border:0;
+	background: url(https://www.l-h.cat/img/punt_blaucel.gif) no-repeat left 8px;
+	border-bottom:0;
+}
+
+
+
+
+
+
+.llistaFletxaNegra{
+	width: 100%;
+	float: left;
+	padding:0;
+	font-family:Arial, Verdana, Helvetica, sans-serif;
+	}
+.llistaFletxaNegra ul{
+	margin: 0;
+	padding: 0;
+	list-style:none;
+}
+.llistaFletxaNegra ul li {
+	background: url(https://www.l-h.cat/img/fletxa_negra.png) no-repeat left 4px; font-weight:bold; 
+}
+.llistaFletxaNegra ul li a{ color:#000000}
+.llistaFletxaNegra ul li ul li a{ color:#585858}
+.llistaFletxaNegra ul li a.vermell{ color:#B01C24 !important;}
+.llistaFletxaNegra ul li ul { margin-top:5px}
+.llistaFletxaNegra ul li ul li {background:url(https://www.l-h.cat/img/punt_negre.png) no-repeat left 4px; font-weight:normal;}
+.llistaFletxaNegra ul li.fonsGrisE8E8E8 { background-color:#E8E8E8;}
+.llistaFletxaNegra ul li.fonsGrocFFF8C6 { background-color:#FFF8C6;}
+
+.llistaFletxaNegra ul li.primer{
+	padding: 5px 0 5px 0;
+	clear:both;
+	margin-left:0;
+	background-image:none;
+}
+
+.llistaFletxaNegra ul li.ultim{
+	padding: 5px 0 5px 0;
+	clear:both;
+	margin-left:0;
+	background-image:none;
+
+}
+
+.llistaFletxaNegra ul li.ultim a, li.primer h3{ font-family:Arial, Verdana, Helvetica, sans-serif; font-size:1em}
+
+
+.llistaFletxaNegra ul li:after{
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+.llistaFletxaNegra ul li{
+	padding: 0 0 5px 8px;
+	clear:both;
+	
+}
+.llistaFletxaNegra ul li{display: inline-block;}
+* html .llistaFletxaNegra ul li{height: 1%;}
+.llistaFletxaNegra ul li {display: block;}
+
+
+
+
+.titolDirectori {
+	padding: 5px 5px 5px 15px;
+	clear:both;
+	margin-left:0;
+	margin-bottom:5px;
+	background-color:#9C3127;
+	background-image:url(https://www.l-h.cat/img/past_blaudirectori_menu1.gif); background-repeat: repeat-y;
+	color:#FFFFFF;
+	font-size:0.7em;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+.titolDirectori2 {
+	padding: 5px 15px 5px 5px;
+	clear:both;
+	margin-left:0;
+	margin-bottom:5px;
+	background-color:#9C3127;
+	background-image:url(https://www.l-h.cat/img/past_liladirect_menu2.gif); background-repeat: repeat-y;
+	color:#FFFFFF;
+	font-size:0.7em;
+	font-family:Arial, Helvetica, sans-serif;
+	}
+
+
+
+
+
+.titolTramitsiServeis{
+	padding: 3px 3px 3px 45px;
+	clear:both;
+	margin-right:0;
+	margin-bottom:5px;
+	background-color:#3A450E;
+	background-image:url(https://www.l-h.cat/img/past_verdtramits_bloc1.gif); background-repeat:repeat-y; color:#FFFFFF; font-family:Arial, Helvetica, sans-serif; font-size:1em
+}
+
+.titolAgenda{
+	padding: 3px 3px 3px 45px;
+	clear:both;
+	margin-right:0;
+	margin-bottom:5px;
+	background-color:#005398;
+	background-image:url(https://www.l-h.cat/img/past_blau_bloc2.gif); background-repeat:repeat-y; color:#FFFFFF; font-family:Arial, Helvetica, sans-serif; font-size:1em
+}
+.llistafonsVerd2col{
+	width: 100%;
+	float: left;
+	}
+.llistafonsVerd2col ul{
+	margin: 0;
+	padding: 0;
+	list-style:none;
+}
+.llistafonsVerd2col ul li {
+	background-color:#0091A1;
+}
+.llistafonsVerd2col ul li:after{
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+.llistafonsVerd2col ul li{
+	padding:10px;
+	float:left;
+	width:44%;
+	text-align:center;
+	vertical-align:text-top;
+}
+.llistafonsVerd2col ul li{display: inline-block;}
+* html .llistafonsVerd2col ul li{height: 1%;}
+
+.llistafonsVerd3col{
+	width: 100%;
+	float: left;
+	}
+.llistafonsVerd3col ul{
+	margin: 0;
+	padding: 0;
+	list-style:none;
+}
+.llistafonsVerd3col ul li {
+	background-color:#0091A1;
+}
+.llistafonsVerd3col ul li:after{
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+.llistafonsVerd3col ul li{
+	padding:10px;
+	float:left;
+	width:26.95%;
+	text-align:center;
+	vertical-align:text-top;
+}
+.llistafonsVerd3col ul li{display: inline-block;}
+* html .llistafonsVerd3col ul li{height: 1%;}
+
+
+
+.llistaFletxaNegra2col{
+	width: 100%;
+	float: left;
+	}
+.llistaFletxaNegra2col ul{
+	margin: 0;
+	padding: 0;
+	list-style:none;
+}
+.llistaFletxaNegra2col ul li {
+	background: url(https://www.l-h.cat/img/fletxanegra.gif) no-repeat left 4px;
+}
+.llistaFletxaNegra2col ul li:after{
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+.llistaFletxaNegra2col ul li{
+	padding: 0 0 3px 8px;
+	float:left;
+	width:47%;
+	vertical-align:text-top;
+}
+.llistaFletxaNegra2col ul li{display: inline-block;}
+* html .llistaFletxaNegra2col ul li{height: 1%;}
+
+
+.llistaFletxaNegra3col{
+	width: 100%;
+	float: left;
+	}
+.llistaFletxaNegra3col ul{
+	margin: 0;
+	padding: 0;
+	list-style:none;
+}
+.llistaFletxaNegra3col ul li {
+	background: url(https://www.l-h.cat/img/fletxanegra.gif) no-repeat left 4px;
+}
+.llistaFletxaNegra3col ul li:after{
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+.llistaFletxaNegra3col ul li{
+	padding: 0 0 3px 8px;
+	float:left;
+	width:31%;
+	vertical-align:text-top;
+}
+.llistaFletxaNegra3col ul li{display: inline-block;}
+* html .llistaFletxaNegra3col ul li{height: 1%;}
+
+
+.llistaPestanyes{
+	width: 100%;
+	float: left;
+	padding-top:10px;
+	color:#000;
+	font-weight:bold;
+	font-family:Arial, Helvetica, sans-serif;
+	}
+.llistaPestanyes ul{
+	margin: 0;
+	padding: 0;
+	list-style:none;
+}
+.llistaPestanyes ul li {
+	background:#fff;
+	border-left:1px solid #B9B9B9;
+	border-right:1px solid #B9B9B9;
+	border-top:1px solid #B9B9B9;
+	margin-left:5px;
+	font-weight:bold;
+	color:#000;
+}
+.llistaPestanyes ul li.seleccionat{
+	background-image:url(https://www.l-h.cat/img/fons_pestanya_contractacio.gif);
+	border-left:1px solid #B9B9B9;
+	border-right:1px solid #B9B9B9;
+	border-top:1px solid #B9B9B9;
+	margin-left:5px;
+	font-weight:bold;
+	color:#000;
+}
+
+.llistaPestanyes ul li a{
+	color:#000;
+	text-decoration:none;
+	text-transform:uppercase;
+}
+.llistaPestanyes ul li a:hover{
+	color:#000;
+	text-decoration:none;
+}
+
+
+.llistaPestanyes ul li input {
+	background:transparent;
+	border:0;
+	font-size:0.7em;
+	font-weight:bold;
+	font-family:Arial, Helvetica, sans-serif;
+	color:#000;
+	padding:0;
+	margin:0;
+}
+
+
+
+.llistaPestanyes ul li:after{
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+.llistaPestanyes ul li{
+	padding: 4px 6px 8px 6px;
+	float:left;
+	vertical-align:text-top;
+}
+.llistaPestanyes ul li{display: inline-block;}
+* html .llistaPestanyes ul li{height: 1%;}
+
+
+
+/* llistat pestanyes contractacio */
+.llistaPestanyesContractacio{
+	width: 100%;
+	float: left;
+	padding-top:10px;
+	color:#000;
+	font-weight:bold;
+	font-family:Arial, Helvetica, sans-serif;
+	}
+.llistaPestanyesContractacio ul{
+	margin: 0;
+	padding: 0;
+	list-style:none;
+}
+.llistaPestanyesContractacio ul li {
+	background-color:#FFFFFF;
+	border-left:1px solid #B9B9B9;
+	border-right:1px solid #B9B9B9;
+	border-top:1px solid #B9B9B9;
+	margin-left:5px;
+	font-weight:bold;
+	color:#000;
+}
+.llistaPestanyesContractacio ul li a{
+	color:#000;
+	text-decoration:none;
+}
+.llistaPestanyesContractacio ul li:active {
+	background-image:url(https://www.l-h.cat/img/fons_pestanya_contractacio.gif);
+	border-left:1px solid #000;
+	border-right:1px solid #000;
+	border-top:1px solid #000;
+	margin-left:5px;
+	font-weight:bold;
+	color:#000000;
+}
+
+
+.llistaPestanyesContractacio ul li input {
+	background:transparent;
+	border:0;
+	font-size:0.7em;
+	font-weight:bold;
+	font-family:Arial, Helvetica, sans-serif;
+	color:#000;
+	padding:0;
+	margin:0;
+}
+.llistaPestanyesContractacio ul li.seleccionat{
+	background-image:url(https://www.l-h.cat/img/fons_pestanya_contractacio.gif);
+	border-left:1px solid #000;
+	border-right:1px solid #000;
+	border-top:1px solid #000;
+	margin-left:5px;
+	font-weight:bold;
+	color:#000;
+}
+
+
+.llistaPestanyesContractacio ul li:after{
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+.llistaPestanyesContractacio ul li{
+	padding: 4px 6px 4px 6px;
+	float:left;
+	vertical-align:text-top;
+}
+.llistaPestanyesContractacio ul li{display: inline-block;}
+* html .llistaPestanyesContractacio ul li{height: 1%;}
+
+
+/* temps*/
+
+.llistaTemps{
+	width: 100%;
+	float: left;
+	padding:0;
+	border-top:1px solid #cccccc;
+	border-left:1px solid #cccccc;
+	border-right:1px solid #cccccc;
+	background-image:url(https://www.l-h.cat/img/temps/fons_temps.gif); 
+	background-repeat:repeat-x; 
+	background-color:#CCCCCC;
+	}
+.llistaTemps ul{
+	margin: 0;
+	padding: 0;
+	background:url(https://www.l-h.cat/img/temps/fons_linea.gif) repeat-y left 0;
+}
+.llistaTemps ul li:after{
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+.llistaTemps ul li{
+	padding: 1px 0 2px 33px;
+	clear:both;	
+}
+.llistaTemps ul li a {color:#0097A7}
+.llistaTemps ul li{display: inline-block;}
+* html .llistaTemps ul li{height: 1%;}
+.llistaTemps ul li {display: block;}
+
+.ico_sol {background: url(https://www.l-h.cat/img/temps/ico_sol.gif) no-repeat left 0;}
+.ico_nva {background: url(https://www.l-h.cat/img/temps/ico_nva.gif) no-repeat left 0;}
+.ico_pen {background: url(https://www.l-h.cat/img/temps/ico_pen.gif) no-repeat left 0;}
+.ico_men {background: url(https://www.l-h.cat/img/temps/ico_men.gif) no-repeat left 0;}
+.ico_moen {background: url(https://www.l-h.cat/img/temps/ico_moen.gif) no-repeat left 0;}
+.ico_cob {background: url(https://www.l-h.cat/img/temps/ico_cob.gif) no-repeat left 0;}
+.ico_cal {background: url(https://www.l-h.cat/img/temps/ico_cal.gif) no-repeat left 0;}
+.ico_boi {background: url(https://www.l-h.cat/img/temps/ico_boi.gif) no-repeat left 0;}
+.ico_boir {background: url(https://www.l-h.cat/img/temps/ico_boir.gif) no-repeat left 0;}
+.ico_rui {background: url(https://www.l-h.cat/img/temps/ico_rui.gif) no-repeat left 0;}
+.ico_xaf {background: url(https://www.l-h.cat/img/temps/ico_xaf.gif) no-repeat left 0;}
+.ico_plu {background: url(https://www.l-h.cat/img/temps/ico_plu.gif) no-repeat left 0;}
+.ico_pluj {background: url(https://www.l-h.cat/img/temps/ico_pluj.gif) no-repeat left 0;}
+.ico_tem {background: url(https://www.l-h.cat/img/temps/ico_tem.gif) no-repeat left 0;}
+.ico_xtem {background: url(https://www.l-h.cat/img/temps/ico_xtem.gif) no-repeat left 0;}
+.ico_tcal {background: url(https://www.l-h.cat/img/temps/ico_tcal.gif) no-repeat left 0;}
+.ico_xtcal {background: url(https://www.l-h.cat/img/temps/ico_xtcal.gif) no-repeat left 0;}
+.ico_ruin {background: url(https://www.l-h.cat/img/temps/ico_ruin.gif) no-repeat left 0;}
+.ico_xafn {background: url(https://www.l-h.cat/img/temps/ico_xafn.gif) no-repeat left 0;}
+.ico_nfeb {background: url(https://www.l-h.cat/img/temps/ico_nfeb.gif) no-repeat left 0;}
+.ico_neu {background: url(https://www.l-h.cat/img/temps/ico_neu.gif) no-repeat left 0;}
+.ico_tneu {background: url(https://www.l-h.cat/img/temps/ico_tneu.gif) no-repeat left 0;}
+.ico_xan {background: url(https://www.l-h.cat/img/temps/ico_xan.gif) no-repeat left 0;}
+.ico_ain {background: url(https://www.l-h.cat/img/temps/ico_ain.gif) no-repeat left 0;}
+
+.sol {background: url(https://www.l-h.cat/img/temps/ico_sol.gif) no-repeat left 0;}
+.nubalts {background: url(https://www.l-h.cat/img/temps/ico_nva.gif) no-repeat left 0;}
+.nubsol {background: url(https://www.l-h.cat/img/temps/ico_pen.gif) no-repeat left 0;}
+.nuvol {background: url(https://www.l-h.cat/img/temps/ico_men.gif) no-repeat left 0;}
+.plugim {background: url(https://www.l-h.cat/img/temps/ico_plu.gif) no-repeat left 0;}
+.pluja {background: url(https://www.l-h.cat/img/temps/ico_pluj.gif) no-repeat left 0;}
+.plujasol {background: url(https://www.l-h.cat/img/temps/ico_rui.gif) no-repeat left 0;}
+.tempesta {background: url(https://www.l-h.cat/img/temps/ico_tem.gif) no-repeat left 0;}
+.pedra {background: url(https://www.l-h.cat/img/temps/ico_tcal.gif) no-repeat left 0;}
+.neu2 {background: url(https://www.l-h.cat/img/temps/ico_neu.gif) no-repeat left 0;}
+.boira {background: url(https://www.l-h.cat/img/temps/ico_boir.gif) no-repeat left 0;}
+.boirina {background: url(https://www.l-h.cat/img/temps/ico_boi.gif) no-repeat left 0;}
+.ruixatneu {background: url(https://www.l-h.cat/img/temps/ico_ruin.gif) no-repeat left 0;}
+
+/* fi temps */
+
+
+.fonsFletxaActes1 {background: url(https://www.l-h.cat/img/fletxanegraespai.gif) no-repeat left 5px; background-color:#ffffff;}
+.fonsFletxaActes2 {background: url(https://www.l-h.cat/img/fletxanegraespai.gif) no-repeat left 5px; background-color:#F4F4F4;}
+
+
+.llistaActes{
+	width: 100%;
+	float: left;
+	padding:0;
+	}
+.llistaActes ul{
+	margin: 0;
+	padding: 0;
+}
+.llistaActes ul li:after{
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+.llistaActes ul li{
+	padding: 2px 0 5px 14px;
+	clear:both;
+}
+.llistaActes ul li{display: inline-block;}
+* html .llistaActes ul li{height: 1%;}
+.llistaActes ul li {display: block;}
+
+
+
+
+
+
+
+
+/* llistat continguts */
+.llistatContinguts{
+	width: 100%;
+	float:left;
+	margin:0;
+	padding:0;
+	}
+.llistatContinguts ul{
+	margin: 0;
+	padding: 0;
+	list-style:none;
+}
+
+.llistatContinguts ul li ul{
+padding-left:15px;
+margin-top:10px;
+margin-bottom:10px;
+}
+
+.llistatContinguts ul li ul li{
+background: url(https://www.l-h.cat/img/fletxanegra.gif) no-repeat left 4px !important;
+padding-left:8px;
+}
+
+.llistatContinguts ul li:after{
+    content: "."; 
+    display: block; 
+    height: 0; 
+	clear: both; 
+    visibility: hidden;
+}
+.llistatContinguts ul li{
+	padding:0;
+	margin:0;
+}
+.llistatContinguts ul li{display: inline-block;}
+* html .llistatContinguts ul li{height: 1%;}
+.llistatContinguts ul li {display: block;}
+/* fi llistat continguts */
+
+
+.llistaFletxaVerda{
+	width: 100%;
+	float: left;
+	padding:0;
+	}
+.llistaFletxaVerda ul{
+	margin: 0;
+	padding: 0 0 0 0;
+}
+.llistaFletxaVerda ul li {
+	background: url(https://www.l-h.cat/img/fletxaverda.gif) no-repeat left 3px;
+}
+.llistaFletxaVerda ul li:after{
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+.llistaFletxaVerda ul li{
+	padding: 0 0 5px 8px;
+	clear:both;
+}
+.llistaFletxaVerda ul li{display: inline-block;}
+* html .llistaFletxaVerda ul li{height: 1%;}
+.llistaFletxaVerda ul li {display: block;}
+
+.llistaFletxaGrana{
+	width: 100%;
+	float: left;
+	padding:0;
+	}
+.llistaFletxaGrana ul{
+	margin: 0;
+	padding: 0 0 0 0;
+}
+.llistaFletxaGrana ul li {
+	background: url(https://www.l-h.cat/img/fletxagrana.gif) no-repeat left 3px;
+}
+.llistaFletxaGrana ul li:after{
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+.llistaFletxaGrana ul li{
+	padding: 0 0 5px 8px;
+	clear:both;
+}
+.llistaFletxaGrana ul li{display: inline-block;}
+* html .llistaFletxaGrana ul li{height: 1%;}
+.llistaFletxaGrana ul li{display: block;}
+
+.llistaFletxaVermella{
+	width: 100%;
+	float: left;
+	padding:0;
+	margin:0;
+	}
+.llistaFletxaVermella ul{
+	margin: 0;
+	padding: 0;
+}
+.llistaFletxaVermella ul li {
+	background: url(https://www.l-h.cat/img/fletxavermella.gif) no-repeat left 3px;
+}
+.llistaFletxaVermella ul li:after{
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+.llistaFletxaVermella ul li{
+	padding: 0 0 5px 8px;
+	clear:both;
+}
+.llistaFletxaVermella ul li{display: inline-block;}
+* html .llistaFletxaVermella ul li{height: 1%;}
+.llistaFletxaVermella ul li{display: block;}
+
+
+
+.llistaMapaWeb{
+	float: left;
+	width:100%;
+	}
+	
+.llistaMapaWeb2{
+	padding-left:10px;
+	margin:0;
+	}
+	
+.llistaMapaWeb ul{
+	margin: 0;
+	padding: 0;
+}
+.llistaMapaWeb ul li.primer{
+	padding:0;
+	clear:both;
+	background-image:none;
+	width:100%;
+	float:left;
+	margin:0
+}
+
+.llistaMapaWeb ul li h3{ 	
+	color:#fff;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:0.7em;
+	padding:4px 5px 4px 5px;
+	float:left;	
+	width:100%
+}
+.llistaMapaWeb ul li h3 a {color:#fff; float:left;}
+.llistaMapaWeb ul li div.titolSeccio{
+	width:100%;
+	float:left;
+	margin-bottom:1px;
+	background-color:#747474;
+	float:left;
+	padding:0
+}
+.llistaMapaWeb2 ul li div.titolSeccio{
+	width:100%;
+	float:left;
+	margin-bottom:1px;
+	background-color:#E6E6E6;
+	padding:0
+}
+.llistaMapaWeb2 ul li h4 {
+	color:#000;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:0.7em;
+	padding:4px 5px 4px 5px;
+	float:left;	
+	width:100%
+	}
+	
+.llistaMapaWeb2 ul li h4 a {color:#000; float:left;}
+.llistaMapaWeb ul li div ul {float:left; padding-top:5px; padding-bottom:5px; padding-left:5px;}
+.llistaMapaWeb ul li div ul.sensemarge {float:left; margin:0; padding:0}
+.llistaMapaWeb ul li div ul li {
+	background: url(https://www.l-h.cat/img/fletxavermella.gif) no-repeat left 3px;
+	padding-left:8px;
+	margin-left:10px;
+	vertical-align:middle;
+	width:14em;
+	float:left; 
+	display:inline;
+}
+
+.llistaMapaWeb ul li div ul li a {float:left}
+.llistaMapaWeb ul li:after{
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+
+.llistaMapaWeb ul li{display: inline-block;}
+* html .llistaMapaWeb ul li{height:1%;}
+.llistaMapaWeb ul li{display: inline;}
+
+
+.llistaCarpetaMarro{
+	width: 100%;
+	float: left;
+	padding:0;
+	}
+.llistaCarpetaMarro ul{
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+}
+.llistaCarpetaMarro ul li {
+	background: url(https://www.l-h.cat/img/carpeta_marro.gif) no-repeat left 3px;
+}
+.llistaCarpetaMarro ul li:after{
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+.llistaCarpetaMarro ul li{
+	padding: 4px 0 0 20px;
+	clear:both;
+}
+.llistaCarpetaMarro ul li{display: inline-block;}
+* html .llistaCarpetaMarro ul li{height: 1%;}
+.llistaCarpetaMarro ul li{display: block;}
+
+
+.llistaCarpetaVerda{
+	width: 100%;
+	float: left;
+	padding:0;
+	}
+.llistaCarpetaVerda ul{
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+}
+.llistaCarpetaVerda ul li {
+	background: url(https://www.l-h.cat/img/carpeta_verda.gif) no-repeat left 3px;
+}
+.llistaCarpetaVerda ul li:after{
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+.llistaCarpetaVerda ul li{
+	padding: 4px 0 0 20px;
+	clear:both;
+}
+.llistaCarpetaVerda ul li{display: inline-block;}
+* html .llistaCarpetaVerda ul li{height: 1%;}
+.llistaCarpetaVerda ul li{display: block;}
+
+.llistaFletxaBlanca {
+	width: 100%;
+	float: left;
+	padding:0;
+	}
+.llistaFletxaBlanca ul {
+	margin: 0;
+	padding: 0 0 0 0;
+}
+.llistaFletxaBlanca ul li {
+	background: url(https://www.l-h.cat/img/fletxa_blanca.gif) no-repeat left 3px;
+}
+.llistaFletxaBlanca ul li:after {
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+.llistaFletxaBlanca ul li {
+	padding: 0 0 5px 8px;
+	clear:both;
+}
+.llistaFletxaBlanca ul li {display: inline-block;}
+* html .llistaFletxaBlanca ul li {height: 1%;}
+.llistaFletxaBlanca ul li {display: block;}
+
+
+
+#llistaPertemes{
+	width: 100%;
+	float: left;
+	padding:0;
+	font-family:Arial, Helvetica, sans-serif;
+	color:#FFFFFF;
+	font-weight:bold;
+	font-size:0.7em;
+	}
+	
+.titolPerTemes{
+	padding: 3px 5px 3px 15px;
+	clear:both;
+	margin-bottom:1px;
+	margin-left:0;
+	background-image:url(https://www.l-h.cat/img/past_taronja_menu1.gif); background-color:#A50F00;
+	font-family:Arial, Helvetica, sans-serif;
+	color:#FFFFFF;
+	font-size:1em;
+}
+
+#llistaPertemes a{
+	color:#FFFFFF; text-decoration:none}
+#llistaPertemes ul{
+	margin: 0;
+	padding: 0 0 0 0;
+}
+#llistaPertemes ul li:after{
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+#llistaPertemes ul li{
+	padding: 5px;
+	clear:both;
+	margin-bottom:1px;
+	margin-left:10px;
+	min-height:14px;
+}
+#llistaPertemes ul li{display: inline-block;}
+* html #llistaPertemes ul li{height: 1%;}
+#llistaPertemes ul li {display: block;}
+
+
+
+#llistaTaulell{
+	width: 100%;
+	float: left;
+	padding:0;
+	font-family:Arial, Helvetica, sans-serif;
+	color:#FFFFFF;
+	font-weight:bold;
+	font-size:0.7em;
+	}
+.titolTaulell{
+	padding: 3px 5px 3px 15px;
+	clear:both;
+	margin-bottom:1px;
+	margin-left:0;
+	background-image:url(https://www.l-h.cat/img/past_turquesa_menu1.gif); background-color:#00636D;
+	color:#FFFFFF;
+	font-size:1em;
+	font-family:Arial, Helvetica, sans-serif;
+}
+#llistaTaulell a{
+	color:#FFFFFF; text-decoration:none}
+#llistaTaulell ul{
+	margin: 0;
+	padding: 0 0 0 0;
+}
+#llistaTaulell ul li:after{
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+#llistaTaulell ul li{
+	padding: 5px 5px 5px 5px;
+	clear:both;
+	margin-bottom:1px;
+	margin-left:10px;
+	background-color:#007A87;	
+	min-height:14px;
+}
+#llistaTaulell ul li{display: inline-block;}
+* html #llistaTaulell ul li{height: 1%;}
+#llistaTaulell ul li {display: block;}
+
+
+#llistaAjuntament{
+	width: 100%;
+	float: left;
+	padding:0;
+	font-family:Arial, Helvetica, sans-serif;
+	color:#FFFFFF;
+	font-weight:bold;
+	font-size:0.7em;
+	}
+.titolAjuntamentEsquerra{
+	padding: 3px 15px 3px 5px;
+	clear:both;
+	margin-bottom:1px;
+	margin-right:0;
+	background-image:url(https://www.l-h.cat/img/past_vermell_menu2.gif); background-color:#630000;
+	color:#FFFFFF;
+	font-size:1em;
+	font-family:Arial, Helvetica, sans-serif;
+}
+.titolAjuntamentDreta{
+	padding: 3px 15px 3px 5px;
+	clear:both;
+	margin-bottom:1px;
+	margin-right:0;
+	background-image:url(https://www.l-h.cat/img/past_vermell_menu.gif); background-color:#630000;
+	color:#FFFFFF;
+	font-size:1em;
+	font-family:Arial, Helvetica, sans-serif;
+}
+#llistaAjuntament a{
+	color:#FFFFFF; text-decoration:none}
+#llistaAjuntament ul{
+	margin: 0;
+	padding: 0;
+}
+#llistaAjuntament ul li:after{
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+#llistaAjuntament ul li{
+	clear:both;
+	margin-bottom:1px;
+	margin-right:10px;
+	min-height:14px;
+}
+#llistaAjuntament ul li{display: block;}
+* html #llistaAjuntament ul li{height: 1%;}
+#llistaAjuntament ul li {display: block;}
+
+
+
+#llistaCiutat{
+	width: 100%;
+	float: left;
+	padding:0;
+	font-family:Arial, Helvetica, sans-serif;
+	color:#FFFFFF;
+	font-weight:bold;
+	font-size:0.7em;
+	}
+.titolCiutatDreta{
+	padding: 3px 15px 3px 5px;
+	clear:both;
+	margin-bottom:1px;
+	background-image:url(https://www.l-h.cat/img/past_taronja_menu2.gif); background-color:#A50F00;
+	margin-right:0;
+	color:#FFFFFF;
+	font-size:1em;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+#llistaCiutat ul li.espaiBanner { padding:0; margin-right:0; float:left}
+#llistaCiutat a{
+	color:#FFFFFF; text-decoration:none}
+#llistaCiutat ul{
+	margin: 0;
+	padding: 0;
+}
+#llistaCiutat ul li:after{
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+#llistaCiutat ul li{
+	clear:both;
+	margin-bottom:1px;
+	margin-right:10px;
+	padding:5px;
+	min-height:14px;
+}
+#llistaCiutat ul li{display: inline-block;}
+* html #llistaCiutat ul li{height: 1%;}
+#llistaCiutat ul li {display: block;}
+
+
+
+#llistaCiutatInterior{
+	width: 100%;
+	float: left;
+	padding:0;
+	margin:0;
+	font-family:Arial, Helvetica, sans-serif;
+	color:#FFFFFF;
+	font-weight:bold;
+	font-size:0.7em;
+	}
+.titolCiutatEsquerra{
+	padding: 3px 5px 3px 15px;
+	clear:both;
+	margin-bottom:1px;
+	background-image:url(https://www.l-h.cat/img/past_taronja_menu1.gif); background-color:#A50F00;
+	margin-left:0px;
+	color:#FFFFFF;
+	font-size:1em;
+	font-family:Arial, Helvetica, sans-serif;
+}
+#llistaCiutatInterior ul li.espaiBanner { padding:0; margin-right:0; float:left}
+
+#llistaCiutatInterior a{
+	color:#FFFFFF; text-decoration:none}
+#llistaCiutatInterior ul{
+	margin: 0;
+	padding: 0;
+}
+#llistaCiutatInterior ul li:after{
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+#llistaCiutatInterior ul li{
+	clear:both;
+	margin-bottom:1px;
+	margin-left:10px;
+	padding:5px;
+}
+#llistaCiutatInterior ul li{display: inline-block;}
+* html #llistaCiutatInterior ul li{height: 1%;}
+#llistaCiutatInterior ul li {display: block;}
+
+
+
+#llistaMenuNavegacio{
+	width:305px; 
+	float:left;
+}
+#llistaMenuNavegacio ul{
+	margin: 35px 0 20px 0;
+	padding: 0;
+	list-style: none;
+	text-align:center;
+
+}
+#llistaMenuNavegacio ul li {
+	display: inline;
+	margin: 0; 
+	padding: 0 3px 0 7px;
+	background: url(https://www.l-h.cat/img/separador.gif) left 6px no-repeat;
+	color:#FFFFFF;
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:bold;	
+	cursor:pointer;
+
+}
+#llistaMenuNavegacio ul li.junt {background:transparent; padding:0}
+#llistaMenuNavegacio ul a {
+	color:#FFFFFF;
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:bold;	
+	text-decoration:none;	
+}
+
+
+
+/* llista molles pa */
+#llistaMollespa{
+	font-size:0.7em;
+	float:left;
+	color:#D8001D;
+	font-family: Arial, Helvetica, sans-serif;
+}
+#llistaMollespa ul{
+	margin: 0 0 5px 0;
+	padding: 0 0 0 5px;
+	list-style: none;
+}
+#llistaMollespa ul li {
+	display: inline;
+	margin: 0; 
+	padding: 3px 0 3px 0;
+
+
+}
+#llistaMollespa ul li a {
+	display: inline;
+	margin: 0; 
+	padding: 3px 0 3px 0;
+	color:#D8001D;
+	font-family: Arial, Helvetica, sans-serif;
+
+}
+
+#llistaMollespa ul li.primer {
+	background: transparent;
+}
+/*fi llista molles pa */
+
+
+
+
+
+/* llista molles pa directori */
+.llistaMollespaDirectori{
+	font-size:0.7em;
+	float:left;
+	color:#1A0042;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.llistaMollespaDirectori ul{
+	margin: 0 0 10px 0;
+	padding: 0 0 0 0;
+	list-style: none;
+}
+.llistaMollespaDirectori ul li {
+	display: inline;
+	margin: 0; 
+	padding: 3px 0 3px 0;
+}
+.llistaMollespaDirectori ul li a {
+	display: inline;
+	margin: 0; 
+	padding: 3px 0 3px 0;
+	color:#1A0042;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.llistaMollespaDirectori ul li.primer {
+	background: transparent;
+}
+/*fi llista molles pa directori */
+
+
+
+#llistasobreAjuntament{
+	width:100%;
+	margin:0; 
+	padding:0;
+	clear:both;
+}
+
+#llistasobreAjuntament ul{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+#llistasobreAjuntament ul li {
+	display: inline;
+	margin: 0; 	
+	padding: 0 3px 0 7px;
+	background: url(https://www.l-h.cat/img/separador.gif) center left no-repeat;
+	color:#FFFFFF;
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:bold;	
+}
+#llistasobreAjuntament ul a {
+	color:#FFFFFF;
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:bold;	
+	text-decoration:none;	
+}
+#llistasobreAjuntament ul li.primer {
+	background: transparent;
+}
+
+#llistasobreAjuntament ul li.dreta {
+	text-align:right;
+	margin-right:15px;
+	float:right;
+}
+#llistasobreAjuntament ul li{display: inline-block;}
+* html #llistasobreAjuntament ul li{height: 1%;}
+#llistasobreAjuntament ul li {display: inline;}
+
+
+
+
+/* botons */ 
+
+/* modul verd fluix */
+.teVerdF,
+.tdVerdF,
+.beVerdF,
+.bdVerdF{ /* Aqui pondras todos los estilos comunes, para no repetir */
+   width: 3px; height: 3px; position: absolute;
+}
+.modulVerdF {position:relative; float:left; font-weight:bold; background-color:#E6E8C6;}
+.teVerdF {background: url(https://www.l-h.cat/img/teVerdF.gif) left top no-repeat; left: 0; top: 0;}
+.tdVerdF {background: url(https://www.l-h.cat/img/tdVerdF.gif) right top no-repeat; right: 0; top: 0;}
+.beVerdF {background: url(https://www.l-h.cat/img/beVerdF.gif) left bottom no-repeat; left: 0; bottom: 0;}
+.bdVerdF {background: url(https://www.l-h.cat/img/bdVerdF.gif) right bottom no-repeat; right: 0; bottom: 0;}
+/* fi modul verd fluix */
+
+
+/* modul negre*/
+.teNegre,
+.tdNegre,
+.beNegre,
+.bdNegre{ /* Aqui pondras todos los estilos comunes, para no repetir */
+   width: 3px; height: 3px; position: absolute;
+}
+.modulNegre {position:relative; float:left; font-weight:bold; background-color:#000000;}
+.teNegre {background: url(https://www.l-h.cat/img/teNegre.gif) left top no-repeat; left: 0; top: 0;}
+.tdNegre {background: url(https://www.l-h.cat/img/tdNegre.gif) right top no-repeat; right: 0; top: 0;}
+.beNegre {background: url(https://www.l-h.cat/img/beNegre.gif) left bottom no-repeat; left: 0; bottom: 0;}
+.bdNegre {background: url(https://www.l-h.cat/img/bdNegre.gif) right bottom no-repeat; right: 0; bottom: 0;}
+/* fi modul negre*/
+
+/* modul blau cel*/
+.teBlauCel,
+.tdBlauCel,
+.beBlauCel,
+.bdBlauCel{ /* Aqui pondras todos los estilos comunes, para no repetir */
+   width: 3px; height: 3px; position: absolute;
+}
+.modulBlauCel {position:relative; float:left; font-weight:bold; background-color:#0097A7;}
+.teBlauCel{background: url(https://www.l-h.cat/img/teBlauCel.gif) left top no-repeat; left: 0; top: 0;}
+.tdBlauCel {background: url(https://www.l-h.cat/img/tdBlauCel.gif) right top no-repeat; right: 0; top: 0;}
+.beBlauCel {background: url(https://www.l-h.cat/img/beBlauCel.gif) left bottom no-repeat; left: 0; bottom: 0;}
+.bdBlauCel {background: url(https://www.l-h.cat/img/bdBlauCel.gif) right bottom no-repeat; right: 0; bottom: 0;}
+/* fi modul blau cel*/
+
+/*boto blau */
+.topEsqBlau,
+.topDreBlau,
+.botEsqBlau,
+.botDreBlau{ /* Aqui pondras todos los estilos comunes, para no repetir */
+   width: 3px; height: 3px; position: absolute;
+}
+.modulBlau {position:relative; float:left; font-weight:bold; background-color:#00b7f3; display:block;}
+.topEsqBlau {background: url(https://www.l-h.cat/img/joventut/topEsqBlau.gif) left top no-repeat; left: 0; top: 0;}
+.topDreBlau {background: url(https://www.l-h.cat/img/joventut/topDreBlau.gif) right top no-repeat; right: 0; top: 0;}
+.botEsqBlau {background: url(https://www.l-h.cat/img/joventut/botEsqBlau.gif) left bottom no-repeat; left: 0; bottom: 0;}
+.botDreBlau {background: url(https://www.l-h.cat/img/joventut/botDreBlau.gif) right bottom no-repeat; right: 0; bottom: 0;}
+/* fi boto blau */
+.fonsBotoInscripcio { background-image:url(https://www.l-h.cat/img/joventut/ico_inscripcio.gif); background-repeat:no-repeat; background-position:6px center;}
+
+
+/* boto verd */
+.teVerd,
+.tdVerd,
+.beVerd,
+.bdVerd{ /* Aqui pondras todos los estilos comunes, para no repetir */
+   width: 3px; height: 3px; position: absolute;
+}
+.botoVerd {position:relative; float:left; font-weight:bold; background-color:#6d7123;}
+.teVerd {background: url(https://www.l-h.cat/img/teVerd.gif) left top no-repeat; left: 0; top: 0;}
+.tdVerd {background: url(https://www.l-h.cat/img/tdVerd.gif) right top no-repeat; right: 0; top: 0;}
+.beVerd {background: url(https://www.l-h.cat/img/beVerd.gif) left bottom no-repeat; left: 0; bottom: 0;}
+.bdVerd {background: url(https://www.l-h.cat/img/bdVerd.gif) right bottom no-repeat; right: 0; bottom: 0;}
+/* fi boto verd */
+
+
+.botoIconaDescarregar {background-image:url(https://www.l-h.cat/img/ico_descarregar.gif); margin-bottom:5px; margin-top:5px; background-repeat:no-repeat; padding-top:1px;  padding-left:25px; display:list-item; list-style:none;}
+
+.botoTramitar {position:relative; background-color:#336816; float:left; width:100%;}
+.bordeVerdEsqTop {background: url(https://www.l-h.cat/img/common/borde_verd_esq_top.gif) left top no-repeat; left: 0; top: 0; width: 11px; height: 12px; position: absolute;}
+.bordeVerdDreTop {background: url(https://www.l-h.cat/img/common/borde_verd_dre_top.gif) right top no-repeat; right: 0; top: 0; width: 11px; height: 12px; position: absolute;}
+.bordeVerdEsqBot {background: url(https://www.l-h.cat/img/common/borde_verd_esq_bot.gif) left bottom no-repeat; left: 0; bottom: 0; width: 11px; height: 12px; position: absolute;}
+.bordeVerdDreBot{background: url(https://www.l-h.cat/img/common/borde_verd_dre_bot.gif) right bottom no-repeat; right: 0; bottom: 0; width: 11px; height: 12px; position: absolute;}
+.botoTramitarTexte {border:2px solid #133600; padding-left:18px; padding-right:11px; font-family:Arial, Helvetica, sans-serif;}
+.iconatramit {left: 0; top: 0; position: absolute;}
+
+
+.botoAccedirCarpeta {position:relative; background-color:#DD5800; float:left; width:100%;}
+.bordeTaronjaEsqTop {background: url(https://www.l-h.cat/img/common/borde_tar_esq_top.gif) left top no-repeat; left: 0; top: 0; width: 11px; height: 12px; position: absolute;}
+.bordeTaronjaDreTop {background: url(https://www.l-h.cat/img/common/borde_tar_dre_top.gif) right top no-repeat; right: 0; top: 0; width: 11px; height: 12px; position: absolute;}
+.bordeTaronjaEsqBot {background: url(https://www.l-h.cat/img/common/borde_tar_esq_bot.gif) left bottom no-repeat; left: 0; bottom: 0; width: 11px; height: 12px; position: absolute;}
+.bordeTaronjaDreBot{background: url(https://www.l-h.cat/img/common/borde_tar_dre_bot.gif) right bottom no-repeat; right: 0; bottom: 0; width: 11px; height: 12px; position: absolute;}
+.botoAccedirCarpetaTexte {border:2px solid #9F3F00; padding-left:24px; padding-right:11px; font-family:Arial, Helvetica, sans-serif;}
+.iconacarpeta {left:0; top:0; position: absolute;}
+
+
+.botoinscripcio {position:relative; background-color:#B20000; float:left; width:100%;}
+.bordeVermellEsqTop {background: url(https://www.l-h.cat/img/common/borde_verm_esq_top.gif) left top no-repeat; left: 0; top: 0; width: 11px; height: 12px; position: absolute;}
+.bordeVermellDreTop {background: url(https://www.l-h.cat/img/common/borde_verm_dre_top.gif) right top no-repeat; right: 0; top: 0; width: 11px; height: 12px; position: absolute;}
+.bordeVermellEsqBot {background: url(https://www.l-h.cat/img/common/borde_verm_esq_bot.gif) left bottom no-repeat; left: 0; bottom: 0; width: 11px; height: 12px; position: absolute;}
+.bordeVermellDreBot{background: url(https://www.l-h.cat/img/common/borde_verm_dre_bot.gif) right bottom no-repeat; right: 0; bottom: 0; width: 11px; height: 12px; position: absolute;}
+.botoInscripcioTexte {border:2px solid #5D0800; padding-left:17px; padding-right:11px; font-family:Arial, Helvetica, sans-serif;}
+.iconainscripcio {left: 10px; top: -2px; position: absolute;}
+/* fi botons*/
+
+
+/* FI LLISTAT FLETXES */
+
+.fonsFletxaNegra {background: url(https://www.l-h.cat/img/fletxanegra.gif) no-repeat left 4px; padding-left:10px;}
+.llistadisc {list-style-position:outside; list-style-type:disc; margin-top:0; margin-bottom:0;}
+.botovermell {background-color:#8B0000; color:#FFFFFF; font-weight:bold; border:0 solid #8B0000; padding:.2em;}
+.boton {background-color:#57741C; color:#FFFFFF; font-weight:bold; border:0 solid #000000; font-size:1em;}
+.botoverda21{background-color:#204A00; color:#FFFFFF; font-weight:bold; border:0 solid #000000;}
+.botoVerdCel{background-color:#33B3A6; color:#FFFFFF; font-weight:bold; border:0 solid #000000;}
+.inputform{border:0 solid #000000;font-size:1em;}
+.llistaFletxaVerd06 {list-style-image:url(https://www.l-h.cat/img/fletxap.gif);}
+.input_vermell{border:1px solid #800000; background-color:#800000; color:#ffffff; font-size:1em; font-weight:bold; margin-top:2px;}
+.botoVermell {border:1px solid #7D7D7D; background-color:#800000; color:#ffffff; font-weight:bold;}
+.input_vermell2{border:1px solid #800000;background-color:#800000;color:#ffffff;font-weight:bold;margin-top:2px;}
+.inputmarro {background-color:#9E6200; border:1px solid #000000;}
+.llistatGuioNegre {margin-top:5px; margin-bottom:0px; margin-left:0; padding-left:20px; list-style-image:url(https://www.l-h.cat/img/common/guio.gif);}
+.fletxaGuioNegre {margin-top:5px; margin-bottom:0px; margin-left:0; padding-left:20px; list-style-image:url(https://www.l-h.cat/img/common/fletxa_guio_negre.gif);}
+.fonslineagrana {background-image:url(https://www.l-h.cat/img/fonslineagrana.gif);}
+.fonslinea {background-image:url(https://www.l-h.cat/img/fonslineagris.gif);}
+.fonslineagris {background-image:url(https://www.l-h.cat/img/biblioteques/GAIA/fonslinea.gif);}
+.fonsflechaverda {background-image:url(https://www.l-h.cat/img/biblioteques/GAIA/fonsflechaverda.gif);}
+.lineaPuntsLila {background-image:url(https://www.l-h.cat/img/linea_punts_lila.gif);}
+.lineaPuntsVerda {background-image:url(https://www.l-h.cat/img/linea_punts_verda.gif);}
+
+/* encapçalaments */
+h1,h2,h3,h4,h5,h6 {margin:0;}
+.capHabitatgeUrbanisme { background:url(https://www.l-h.cat/img/urbanisme/cap_habitatge.jpg);}
+/* fi encapçalaments */
+
+/* tamany lletres */
+.t0 {font-size:0em;}
+
+.t1 {font-size:1em;}
+.t2 {font-size:2em;}
+.t3 {font-size:3em;}
+.t4 {font-size:4em;}
+.t5 {font-size:5em;}
+
+.t04 {font-size:0.4em;}
+.t05 {font-size:0.5em;}
+.t06 {font-size:0.6em;}
+.t065 {font-size:0.65em;}
+.t07 {font-size:0.7em;}
+.t075 {font-size:0.75em;}
+.t08 {font-size:0.8em;}
+.t085 {font-size:0.85em;}
+.t09 {font-size:0.9em;}
+
+.t11 {font-size:1.1em;}
+.t12 {font-size:1.2em;}
+.t13 {font-size:1.3em;}
+.t14 {font-size:1.4em;}
+.t15 {font-size:1.5em;}
+.t16 {font-size:1.6em;}
+.t17 {font-size:1.7em;}
+.t18 {font-size:1.8em;}
+.t19 {font-size:1.9em;}
+
+.t21 {font-size:2.1em;}
+.t22 {font-size:2.2em;}
+.t23 {font-size:2.3em;}
+.t24 {font-size:2.4em;}
+.t25 {font-size:2.5em;}
+.t26 {font-size:2.6em;}
+.t27 {font-size:2.7em;}
+.t28 {font-size:2.8em;}
+.t29 {font-size:2.9em;}
+
+.t31 {font-size:3.1em;}
+.t32 {font-size:3.2em;}
+.t33 {font-size:3.3em;}
+.t34 {font-size:3.4em;}
+.t35 {font-size:3.5em;}
+.t36 {font-size:3.6em;}
+.t37 {font-size:3.7em;}
+.t38 {font-size:3.8em;}
+.t39 {font-size:3.9em;}
+
+.t41 {font-size:4.1em;}
+.t42 {font-size:4.2em;}
+.t43 {font-size:4.3em;}
+.t44 {font-size:4.4em;}
+.t45 {font-size:4.5em;}
+.t46 {font-size:4.6em;}
+.t47 {font-size:4.7em;}
+.t48 {font-size:4.8em;}
+.t49 {font-size:4.9em;}
+
+
+.t0 {font-size:0em; height:0px; background-color:#FFFFFF;}
+.t40 {font-size:0.4em;}
+.t50 {font-size:0.5em;}
+.t55 {font-size:0.55em;}
+.t60 {font-size:0.65em;}
+.t65 {font-size:0.65em;}
+.t66 {font-size:0.66em;}
+.t70 {font-size:0.7em;}
+.t75 {font-size:0.75em;}
+.t80 {font-size:0.8em;}
+.t81 {font-size:0.81em;}
+.t82 {font-size:0.82em;}
+.t83 {font-size:0.83em;}
+.t84 {font-size:0.84em;}
+.t85 {font-size:0.85em;}
+.t86 {font-size:0.86em;}
+.t90 {font-size:0.9em;}
+.t95 {font-size:0.95em;}
+.t100 {font-size:1em;}
+.t110 {font-size:1.1em;}
+.t120 {font-size:1.2em;}
+.t130 {font-size:1.3em;}
+.t140 {font-size:1.4em;}
+.t150 {font-size:1.5em;}
+.t160 {font-size:1.6em;}
+.t170 {font-size:1.7em;}
+.t180 {font-size:1.8em;}
+.t190 {font-size:1.9em;}
+.t200 {font-size:2em;}
+.t210 {font-size:2.1em;}
+.t250 {font-size:2.5em;}
+.t300 {font-size:3em;}
+.t400 {font-size:4em;}
+.t500 {font-size:5em;}
+.t600 {font-size:6em;}
+.t700 {font-size:7em;}
+/*fi tamany lletres */
+
+
+
+/* espais i marges */
+.line0{line-height:0px;}
+.line8{line-height:8px;}
+.line20{line-height:20px;}
+.line25{line-height:25px;}
+.line4{line-height:10px;}
+.line5{line-height:15px;}
+.line18{line-height:18px;}
+.line23{line-height:23px;}
+.line10 {line-height:10px;}
+.line11 {line-height:11px;}
+.line12 {line-height:12px;}
+.line13 {line-height:13px;}
+.line14 {line-height:14px;}
+.line15 {line-height:15px;}
+.line50 { line-height:60px;}
+.marginTop5 { margin-top:5px;}
+.marginTop8 { margin-top:8px;}
+.marginTop10 { margin-top:10px;}
+.marginTop15 { margin-top:15px;}
+.marginTop20 { margin-top:20px;}
+.marginTop25 { margin-top:25px;}
+.marginTop30 { margin-top:30px;}
+.marginTop35 { margin-top:35px;}
+.marginDreta3 { margin-right:3px;}
+.marginDreta4 { margin-right:4px;}
+.marginDreta5 { margin-right:5px;}
+.marginDreta10 { margin-right:10px;}
+.marginDreta20 { margin-right:20px;}
+.marginDreTop20 { margin-right:20px; margin-top:20px;}
+.marginDreta12 { margin-right:12px;}
+.marginDreta15 { margin-right:15px;}
+.marginDreta75 { margin-right:75px;}
+.marginDreta80 { margin-right:80px;}
+.marginDreta85 { margin-right:85px;}
+.marginDre10Inf10 {margin-right:10px; margin-bottom:10px;}
+.marginDretaEsquerra2 { margin-right:2px; margin-left:2px;}
+.marginDretaEsquerra5 { margin-right:5px; margin-left:5px;}
+.marginDretaEsquerra10 {margin-left:10px; margin-right:10px;}
+.marginDretaEsquerra14 {margin-left:14px; margin-right:14px;}
+.marginDretaEsquerra15 {margin-left:15px; margin-right:15px;}
+.marginDretaEsquerra20 {margin-left:20px; margin-right:20px;}
+.marginTopDretaEsquerra20 {margin-left:20px; margin-right:20px; margin-top:20px;}
+.marginEsquerra2 {margin-left:2px;}
+.marginEsquerra3 {margin-left:3px;}
+.marginEsquerra4 {margin-left:4px;}
+.marginEsquerra5 {margin-left:5px;}
+.marginEsquerra10 {margin-left:10px;}
+.marginEsquerra15 {margin-left:15px;}
+.marginEsquerra20 {margin-left:20px;}
+.marginEsquerra25 {margin-left:25px;}
+.marginEsquerra30 {margin-left:30px;}
+.marginEsquerra40 {margin-left:40px;}
+.marginEsquerra50 {margin-left:50px;}
+.marginEsq15Dre25 { margin-right:25px; margin-left:15px;}
+.marginEsq15Dre10 {margin-left:15px; margin-right:10px;}
+.marginEsq10Dre15 {margin-left:10px; margin-right:15px;}
+.marginBottom1 {margin-bottom:1px;}
+.marginBottom2 {margin-bottom:2px;}
+.marginBottom3 {margin-bottom:3px;}
+.marginBottom4 {margin-bottom:4px;}
+.marginBottom5 {margin-bottom:5px;}
+.marginBottom7 {margin-bottom:7px;}
+.marginBottom9 { margin-bottom:9px}
+.marginBottom10 {margin-bottom:10px}
+.marginBottom14 {margin-bottom:14px;}
+.marginBottom20 {margin-bottom:20px}
+.marginBottom30 {margin-bottom:30px}
+.marginBottom40 {margin-bottom:40px}
+.marginBottom27 {margin-bottom:27px;}
+.marginEsquerra0 {margin-left: 0px;}
+.margin5_10_0_10{margin:5px 10px 0 10px;}
+.margin0_20_20_20{margin:0 20px 20px 20px;}
+.margin0_10_1_0{margin:0 10px 1px 0;}
+.margin0_15_0_15{margin:0 15px 0 15px;}
+.margin0_30_0_30{margin:0 30px 0 30px;}
+.margin0_20_0_20{margin:0 20px 0 20px;}
+.margin0_0_0_20{margin:0 0 0 20px;}
+.margin5_15_0_15{margin:5px 10px 0 15px;}
+.marginDreBotEsq14 {margin-right:14px; margin-left:14px; margin-bottom:14px;}
+.padding4_4_4_4{padding:4px 4px 4px 4px;}
+.padding4_4_3_45 {padding:4px 4px 3px 45px;}
+.padding10_20_10_20{padding:10px 20px 10px 20px;}
+.padding10_10_20_10{padding:10px 20px 0 10px;}
+.padding10_10_100_10{padding:10px 10px 100px 10px;}
+.padding10_10_0_10 {padding-top:10px; padding-left:10px; padding-right:10px}
+.padding10_10_10_15{padding:10px 10px 10px 15px;}
+.paddingDreta70 {padding-right: 70px;}
+.paddingDre33Esq22Top5 { padding-right:33px; padding-left:22px; padding-top:5px;}
+.paddingright40{padding-right:40px;}
+.padding5_15_0_10{padding:5px 15px 0 10px;}
+.padding5_20_5_10{padding:5px 20px 10px 10px;}
+.paddingright25{padding:0 0 0 25px;}
+.paddingright20{padding:0 0 0 20px;}
+.paddingright15{display:block; padding:0 0 0 15px;}
+.paddingright10{padding:0 0 0 10px;}
+.paddingright5{padding:0 0 0 5px;}
+.paddingrighttop10{padding:5px 0 0 10px;}
+.padding10_10_10_10{padding:10px 10px 10px 10px;}
+.padding7 {padding: 7px;}
+.padding8_7_7_8 {padding: 8px 7px 7px 8px;}
+.padding8_7_7_7 {padding: 8px 7px 7px 7px;}
+.paddingTopBottom12 {padding-top:12px; padding-bottom:12px;}
+.paddingTopBottom5 {padding-top:5px; padding-bottom:5px;}
+.paddingTopBottom10 {padding-top:10px; padding-bottom:10px;}
+.paddingBottom10 {padding-bottom:10px;}
+.paddingBottom11 {padding-bottom:11px;}
+.paddingBottom12 {padding-bottom:12px;}
+.paddingBottom13 {padding-bottom:13px;}
+.paddingBottom20 {padding-bottom:20px;}
+.paddingBottom30 {padding-bottom:30px;}
+.paddingBottom35 {padding-bottom:35px;}
+.paddingBottom100 {padding-bottom:100px;}
+.padding2_0_1_15{padding-top: 2px; padding-bottom: 1px; padding-left:15px;}
+.paddingTop5Dre15Inf5Esq5 {padding:5px 15px 5px 5px;}
+.paddingTop5Inf5Esq5 { padding-bottom:5px; padding-top:5px; padding-left:5px;}
+.paddingTop5Dre5Inf5Esq15 {padding:5px 5px 5px 15px;}
+.paddingTop5Dre5Inf5Esq5 {padding:5px 5px 5px 5px;}
+.paddingTop5Bottom10 {padding-top:5px; padding-bottom:10px;}
+.cell0 {margin:0px 0px 0px 0px; padding:0px 0px 0px 0px;}
+.paddingLeft35 {padding-left: 35px;}
+.paddingLeft40 {padding-left: 40px;}
+.paddingLeft45 {padding-left: 45px;}
+.paddingEsq35Dre15 {padding-left:35px; padding-right:15px;}
+.paddingEsq35Dre5 {padding-left:35px; padding-right:5px;}
+.paddingEsq45Dre5 {padding-left:45px; padding-right:5px;}
+.paddingEsq45Dre15 {padding-left:45px; padding-right:15px;}
+.paddingEsq40Dre5 {padding-left:40px; padding-right:5px;}
+.paddingEsq40Dre15 {padding-left:40px; padding-right:15px;}
+.paddingLeft60 {padding: 0px 0px 0px 50px;}
+.marginTop1 {margin-top:1px;}
+.marginTop2 {margin-top:2px;}
+.marginTop3 {margin-top:3px;}
+.marginTop27 { margin-top:27px;}
+.marginTop143 {margin-top:143px;}
+.marginSup {margin-top:2px;}
+.marginSup10 {margin-top:10px;}
+.marginSup20 {margin-top:20px;}
+.marginSup1 {margin-top:1px;}
+.margininf1 {margin-bottom:1px;}
+.marginInf0  {margin-bottom:0px;}
+.marginTopDreEsq1 {margin-top:1px; margin-left:1px; margin-right:1px;}
+.marginSupInf0 {margin-top:0px; margin-bottom:0px;}
+.marginSupInf2 {margin-top:2px; margin-bottom:2px;}
+.margininf {margin-bottom:2px;}
+.marginsupinf {margin-top:2px; margin-bottom:2px;}
+.marginsupinf10 {margin-top:10px; margin-bottom:10px;}
+.letterspacing30 {letter-spacing:0.3em;}
+.paddingsupinf05{padding:5px 0 5px 3px;margin:0 0 0 0;}
+.alineallista {padding-left:16px; margin-left:16px; margin:0;}
+.marginInf {margin:0px 0px 2px 0px;}
+.paddingTop5line20 {padding-top: 5px; line-height: 20px;}
+.paddingTT{padding:0% 2% 0% 2%;}
+.paddingTTsupinf {padding:2% 0% 2% 0%;}
+.paddingTTinf {padding:0% 0% 2% 0%;}
+.paddingTTDreta4 {padding: 0% 2% 0% 0%;}
+.paddingTTDreta10 {padding: 0% 4% 0% 0%;}
+.paddingTTDreta20 {padding: 0% 8% 0% 0%;}
+.paddingTTDreta40 {padding: 0% 16% 0% 0%;}
+.paddingTT10 {padding: 4% 4% 4% 4%;}
+.paddingTT5 {padding: 2% 2% 2% 2%;}
+.paddingTTEsquerra10 {padding: 0% 0% 0% 4%;}
+.paddingTTEsquerra5 {padding: 0% 0% 0% 2%;}
+.paddingTTDretaEsquerra10 {padding:0% 4% 0% 4%;}
+.paddingTTDretaEsquerra5 {padding:0% 1% 0% 1%;}
+.paddingTTDretaEsquerra2 {padding:0% 1% 0% 1%;}
+.paddingTTTop10{padding:1% 0% 0% 0%;}
+.paddingTT2 {padding: 1% 1% 1% 1%;}
+.padding10_2_8_2 {padding:10px 2px 8px 2px;}
+.padding{padding:0px 2px 0px 2px;}
+.paddingsupinf{padding-top:2px; padding-bottom:2px;}
+.paddingsupinf0{padding-top:0px; padding-bottom:0px;}
+.paddingsupinf1{padding-top:1px; padding-bottom:1px;}
+.paddingsupinf2{padding-top:2px; padding-bottom:2px;}
+.paddingsupinf3{padding-top:3px; padding-bottom:3px;}
+.paddingsupinf4{padding-top:4px; padding-bottom:4px;}
+.paddingsupinf5{padding-top:5px; padding-bottom:5px;}
+.paddingsupinf6{padding-top:6px; padding-bottom:6px;}
+.paddingsupinf7 {padding-top:7px; padding-bottom:7px;}
+.paddingsupinf8 {padding-top:8px; padding-bottom:8px;}
+.paddingsupinf9 {padding-top:9px; padding-bottom:9px;}
+.paddingsupinf10 {padding-top:10px; padding-bottom:10px;}
+.paddingsupinf11 {padding-top:11px; padding-bottom:11px;}
+.paddingsupinf13 {padding-top:13px; padding-bottom:13px;}
+.paddingsupinf15 {padding-top:15px; padding-bottom:15px;}
+.paddingsupinf20 {padding-top:20px; padding-bottom:20px;}
+.paddingsupinf23 {padding-top:23px; padding-bottom:23px;}
+.paddingsup18inf19 {padding-top:18px; padding-bottom:19px;}
+.paddinginf {padding-bottom:2px;}
+.paddinginf1 {padding-bottom:1px;}
+.paddinginf2 {padding-bottom:2px;}
+.paddinginf3 {padding-bottom:3px;}
+.paddinginf4 {padding-bottom:4px;}
+.paddinginf5 {padding-bottom:5px;}
+.paddinginf10 {padding-bottom:10px;}
+.paddinginf20 {padding-bottom:20px;}
+.paddinginf30 {padding-bottom:30px;}
+.paddingsup1 {padding-top:1px;}
+.paddingsup2 {padding-top:2px;}
+.paddingsup3 {padding-top:3px;}
+.paddingsup4 {padding-top:4px;}
+.paddingsup5 {padding-top:5px;}
+.paddingsup6 {padding-top:6px;}
+.paddingsup7 {padding-top:7px;}
+.paddingsup8 {padding-top:8px;}
+.paddingsup9 {padding-top:9px;}
+.paddingsup10 {padding-top:10px;}
+.paddingsup15 {padding-top:15px;}
+.paddingsup {padding-top:2px;}
+.paddingBottom1 {padding-bottom:1px;}
+.paddingBottom2 {padding-bottom:2px;}
+.paddingBottom3 {padding-bottom:3px;}
+.paddingBottom7 {padding-bottom:7px;}
+.paddingDreta1 {padding-right:1px;}
+.paddingDreta2 {padding-right:2px;}
+.paddingDreta3 {padding-right:3px;}
+.paddingDreta4 {padding-right:4px;}
+.paddingDreta10 {padding-right:10px;}
+.paddingDreta12 {padding-right:12px;}
+.paddingDreta13 {padding-right:13px;}
+.paddingDreta5 {padding-right:5px;}
+.paddingDreta6 {padding-right:6px;}
+.paddingDreta7 {padding-right:7px;}
+.paddingDreta8 {padding-right:8px;}
+.paddingDreta9 {padding-right:9px;}
+.paddingDreta15Inf5 {padding-right: 15px; padding-bottom: 5px;}
+.paddingDreta25 {padding-right:25px;}
+.paddingDreta20 {padding-right:20px;}
+.paddingDreta30 {padding-right:30px;}
+.paddingDreta2 {padding-right: 2px;}
+.paddingDreta40 {padding-right:40px;}
+.paddingDreta50 {padding-right:50px;}
+.paddingDreta75 {padding-right:75px;}
+.paddingDreta80 {padding-right:80px;}
+.paddingDreta85 {padding-right:85px;}
+.paddingDreta168 { padding-right:168px;}
+.paddingEsq5Dreta40 { padding-left: 5px; padding-right: 40px;}
+.paddingEsq5Dre15 { padding-left: 5px; padding-right: 15px;}
+.padding8 {padding:8px;}
+.padding10 {padding:10px;}
+.padding12 {padding:12px;}
+.padding14 {padding:14px;}
+.padding15 {padding:15px;}
+.margin15 {margin:15px;}
+.padding20 {padding:20px;}
+.paddingDreBotEsq20 {padding:0 20px 20px 20px;}
+.paddingTopBotEsq20 {padding:20px 0 20px 20px;}
+.paddingBotEsq20 {padding-bottom:20px; padding-left:20px;}
+.padding30 {padding:30px;}
+.padding35 {padding:35px;}
+.padding47 { padding:47px}
+.padding1 {padding: 1px;}
+.padding2 {padding: 2px;}
+.padding3 {padding:3px;}
+.padding5 {padding:5px;}
+.padding6 {padding:6px;}
+.padding4 {padding:4px;}
+.padding28 {padding:28px;}
+.paddingDreEsqBottom28 {padding: 0px 28px 28px 28px;}
+.paddingSup5Inf5Esq5 {padding-top: 5px; padding-bottom: 5px; padding-left:5px;}
+.paddingSup15Esq15 {padding-top:15px; padding-left:15px;}
+.paddingSup10Esq10 {padding-top:10px; padding-left:10px;}
+.paddingEsquerra1 {padding-left:1px;}
+.paddingEsquerra2 {padding-left:2px;}
+.paddingEsquerra3 {padding-left:3px;}
+.paddingEsquerra4 {padding-left:4px;}
+.paddingEsquerra5 {padding-left:5px;}
+.paddingEsquerra6 {padding-left:6px;}
+.paddingEsquerra7 {padding-left:7px;}
+.paddingEsquerra8 {padding-left:8px;}
+.paddingEsquerra9 {padding-left:9px;}
+.paddingEsquerra10 {padding-left:10px;}
+.paddingEsquerra11 {padding-left:11px;}
+.paddingEsquerra12 {padding-left:12px;}
+.paddingEsquerra13 {padding-left:13px;}
+.paddingEsquerra14 {padding-left:14px;}
+.paddingEsquerra15 {padding-left:15px;}
+.paddingEsquerra17 {padding-left:17px;}
+.paddingEsquerra19 {padding-left:19px;}
+.paddingEsquerra20 {padding-left:20px;}
+.paddingEsquerra22 {padding-left:22px;}
+.paddingEsquerra25 {padding-left:25px;}
+.paddingEsquerra30 {padding-left:30px;}
+.paddingesquerra30 {padding-left:30px;}
+.paddingEsquerra35 {padding-left:35px;}
+.paddingEsquerra36 {padding-left:36px;}
+.paddingEsquerra38 {padding-left:38px;}
+.paddingEsquerra40 {padding-left:40px;}
+.paddingEsquerra44 {padding-left:44px;}
+.paddingEsquerra45 {padding-left:45px;}
+.paddingEsquerra48 {padding-left:48px;}
+.paddingEsquerra49 {padding-left:49px;}
+.paddingEsquerra50 {padding-left:50px;}
+.paddingEsquerra51 {padding-left:51px;}
+.paddingEsquerra53 {padding-left:53px;}
+.paddingEsquerra54 {padding-left:54px;}
+.paddingEsquerra55 {padding-left:55px;}
+.paddingEsquerra57 {padding-left:57px;}
+.paddingEsquerra58 {padding-left:58px;}
+.paddingEsquerra60 {padding-left:60px;}
+.paddingEsquerra61 {padding-left:61px;}
+.paddingEsquerra62 {padding-left:62px;}
+.paddingEsquerra64 {padding-left:64px;}
+.paddingEsquerra65 {padding-left:65px;}
+.paddingEsquerra66 {padding-left:66px;}
+.paddingEsquerra68 {padding-left:68px;}
+.paddingEsquerra70 {padding-left:70px;}
+.paddingEsquerra71 {padding-left:71px;}
+.paddingEsquerra72 {padding-left:72px;}
+.paddingEsquerra73 {padding-left:73px;}
+.paddingEsquerra75 {padding-left:75px;}
+.paddingEsquerra80 {padding-left:80px;}
+.paddingEsquerra85 {padding-left:85px;}
+.paddingEsquerra90 {padding-left:90px;}
+.paddingEsquerra92 {padding-left:92px;}
+.paddingEsquerra93 {padding-left:93px;}
+.paddingEsquerra94 {padding-left:94px;}
+.paddingEsquerra95 {padding-left:95px;}
+.paddingEsquerra97 {padding-left:97px;}
+.paddingEsquerra98 {padding-left:98px;}
+.paddingEsquerra99 {padding-left:99px;}
+.paddingEsquerra109 {padding-left:109px;}
+.paddingEsquerra100 {padding-left:100px;}
+.paddingEsquerra110 {padding-left:110px;}
+.paddingEsquerra150 {padding-left:150px;}
+.paddingEsquerra101 {padding-left:101px;}
+.paddingEsquerra105 {padding-left:105px;}
+.paddingEsquerra106 {padding-left:106px;}
+.paddingEsquerra200 {padding-left:200px;}
+.paddingEsquerra300 {padding-left:300px;}
+.paddingEsquerra400 {padding-left:400px;}
+.paddingEsquerra500 {padding-left:500px;}
+.paddingEsq20Dre5 {padding-left:20px; padding-right:5px;}
+.paddingEsq15Dre5 {padding-left:15px; padding-right:5px;}
+.padding0_5_5_15 {padding: 0px 5px 5px 15px;}
+.padding5_5_5_15 {padding: 5px 5px 5px 15px;}
+.padding5_15_5_5 {padding: 5px 15px 5px 5px;}
+.padding3_3_3_15{padding: 3px 3px 3px 15px;}
+.padding3_20_2_10 {padding: 3px 20px 2px 10px;}
+.padding81_49_49_49 {padding:81px 49px 49px 49px;}
+.paddingDre5Esq15{padding-right:5px; padding-left:15px;}
+.paddingDre15Esq5{padding-right:15px; padding-left:5px;}
+.paddingDre10Inf5  { padding-right:10px; padding-bottom:5px;}
+.paddingDre10Inf10  { padding-right:10px; padding-bottom:10px;}
+.paddingDre10Esq15{padding-right:10px; padding-left:15px;}
+.paddingDre15Esq10 {padding-right:15px; padding-left:10px;}
+.paddingDretaEsquerra1 { padding-left:1px; padding-right:1px;}
+.paddingDretaEsquerra2 { padding-left:2px; padding-right:2px;}
+.paddingDretaEsquerra3 { padding-left:3px; padding-right:3px;}
+.paddingDretaEsquerra5 {padding-left:5px; padding-right:5px;}
+.paddingDretaEsquerra6 {padding-left:6px; padding-right:6px;}
+.paddingDretaEsquerra7 { padding-left:7px; padding-right:7px;}
+.paddingDretaEsquerra9 {padding-right:9px; padding-left:9px}
+.paddingDretaEsquerra10 {padding-left:10px; padding-right:10px;}
+.paddingDretaEsquerra14 {padding-left:14px; padding-right:14px;}
+.paddingDretaEsquerra20 {padding-left:20px; padding-right:20px;}
+.paddingDretaEsquerra25 {padding-left:25px; padding-right:25px;}
+.paddingDreta20Esquerra15 {padding-left:20px; padding-right:15px;}
+.paddingDretaEsquerra30 {padding-left:30px; padding-right:30px;}
+.paddingDretaEsquerra35 {padding-left:35px; padding-right:35px;}
+.paddingDretaEsquerra39 {padding-left:39px; padding-right:39px;}
+.paddingDretaEsquerra50 {padding-left:50px; padding-right:50px;}
+.paddingDretaEsquerraBottom30 {padding-left:30px; padding-right:30px; padding-bottom:30px;}
+.paddingleft5right15 {padding-left:5px; padding-right:15px;}
+.paddingleft15right5 {padding-left:15px; padding-right:5px;}
+.paddingleft10right15 {padding-left:10px; padding-right:15px;}
+.padding0_0_2_10 {padding-bottom:2px; padding-left:10px;}
+.paddingesquerra215{padding-left:215px;}
+.padding0_10_2_10 {padding-right: 10px; padding-bottom: 2px; padding-left: 10px;}
+.padding0_0_10_15 {padding-bottom: 10px; padding-left: 15px;}
+.padding0_10_10_10 {padding:0px 10px 10px 10px;}
+.padding10_10_2_10 {padding:10px 10px 2px 10px;}
+.padding15_6_6_6 { padding:15px 6px 6px 6px;}
+.padding15_14_15_13 {padding:15px 14px 15px 13px;}
+.padding121_30_30_30 { padding:121px 30px 30px 30px;}
+.paddingSupInf10 {padding-top:10px;padding-bottom:10px;}
+.paddingsup3inf3 {padding-top:3px; padding-bottom:3px;}
+.paddingsup1inf1 {padding-top:1px; padding-bottom:1px;}
+.paddingsup2inf1 {padding-top:2px; padding-bottom:1px;}
+.padding2_5_2_5 {padding: 2px 5px 2px 5px;}
+.padding2_10_2_10 {padding: 2px 10px 2px 10px;}
+.padding3_10_3_45 {padding: 3px 10px 3px 45px;}
+.treurewidth {}
+.paddingTop1{padding-top:1px;}
+.paddingTop2{padding-top:2px;}
+.paddingTop3{padding-top:3px;}
+.paddingTop4{padding-top:4px;}
+.paddingTop5{padding-top:5px;}
+.paddingTop6{padding-top:6px;}
+.paddingTop7{padding-top:7px;}
+.paddingTop8{padding-top:8px;}
+.paddingTop9{padding-top:9px;}
+.paddingTop10{padding-top:10px;}
+.paddingTop14{padding-top:14px;}
+.paddingTop15{padding-top:15px;}
+.paddingTop16{padding-top:16px;}
+.paddingTop19{padding-top:19px;}
+.paddingTop20{padding-top:20px;}
+.paddingTop22{padding-top:22px;}
+.paddingTop23{padding-top:23px;}
+.paddingTop25{padding-top:25px;}
+.paddingTop27{padding-top:27px;}
+.paddingTop29{padding-top:29px;}
+.paddingTop30{padding-top:30px;}
+.paddingTop35{padding-top:35px;}
+.paddingTop40{padding-top:40px;}
+.paddingTop50{padding-top:50px;}
+.paddingTop60{padding-top:60px;}
+.paddingTop70{padding-top:70px;}
+.paddingTop80{padding-top:80px;}
+.paddingTop90{padding-top:90px;}
+.paddingTop100{padding-top:100px;}
+.paddingTop105{padding-top:105px;}
+.paddingTop121{padding-top:121px;}
+.paddingTop130 {padding-top:130px;}
+.paddingTop150 {padding-top:150px;}
+.paddingDretaEsquerra15 {padding-left:15px; padding-right:15px;}
+.paddingBottom5 {padding-bottom:5px;}
+.paddingBottom6 {padding-bottom:6px;}
+.paddingsup10inf2{padding-top:10px; padding-bottom:2px;}
+.paddinginf6 {padding-bottom:6px;}
+.paddingDretaInf20 {padding-right:20px; padding-bottom:20px;}
+.padding5_5_5_0 {padding-top:5px; padding-right:5px; padding-bottom:5px;}
+.padding10_10_10_0 {padding-top:10px; padding-right:10px; padding-bottom:10px;}
+.padding10_0_10_10 {padding-top:10px; padding-bottom:10px; padding-left:10px;}
+.paddingleftright10 {padding-right:10px; padding-left:10px;}
+.paddingDreta15 {padding-right: 15px;}
+.paddingSup2Dre5Esq15 { padding-top:2px; padding-right:5px; padding-left:15px;}
+.paddingSup2Dre5Esq10 { padding-top:2px; padding-right:5px; padding-left:10px;}
+.paddingSup2Dre15Esq5 { padding-top:2px; padding-right:15px; padding-left:5px;}
+.margin0 {margin:0;}
+.padding0 {padding:0;}
+.margin5 {margin: 5px 5px 5px 5px;}
+.margin10 { margin:10px;}
+.margin14 {margin:14px;}
+.margin20 { margin:20px;}
+.margin30 { margin:30px;}
+.margin30_30_0_0 { margin:30px 30px 0px 0px;}
+.margin10_20_10_20 {margin:10px 20px 10px 20px;}
+.marginInf8 {margin-bottom: 8px;}
+.margetop0 {margin-top:0px;}
+
+
+
+
+/* altres */
+.flash { z-index:-1000; position:relative;}
+html, body {margin:0; padding:0; min-height:100%;}
+.fonsNadal2012 {background:url(https://www.l-h.cat/img/especials/nadal12/fons_webmunicipal.png) no-repeat center 0 !important; background-attachment:fixed; background-color:#FFFFFF; }
+div {overflow:visible;} /* evitar que se salgan los elelmentos flotantes de su contenedor i aplicar hasLayout para diferentes versiones de explorer */
+.overflowhidden { overflow:hidden;}
+br {clear:none;}
+#navegapagines {border-bottom:2px solid #6F6A09; border-left:2px solid #6F6A09; border-top:2px solid #6F6A09; float:right; background-color:#FFFFFF;}
+#navegapagines a {font-size:0.7em; color:#6F6A09; text-decoration:none; border-right:2px #6F6A09 solid; padding:5px;}
+.nodeco a {text-decoration:none;}
+.nodeco a:hover {text-decoration:none;}
+a:hover.nodeco{text-decoration:none;}
+a.nodeco{text-decoration:none;}
+.yesdeco{text-decoration:underline;}
+.mayusculas {text-transform:uppercase;}
+.minusculas {text-transform:lowercase;}
+.colEsq {width:70px;float:left;text-align:right; padding-right:5px;}
+.colDre {width:315px;float:left; text-align:left;}
+
+.floatright {float:right; display:inline;}
+.floatleft {float:left; display:inline;}
+.floatnone { float:none; display:inline;}
+.clearleft {clear:left;}
+.clearboth {clear:both;} 
+.cleardreta {clear:right;}
+.clearbothDreta { clear:both; text-align:right;}
+.clearesquerra {clear:left;}
+.clearambdos {clear:both;}
+.clearnone { clear:none;}
+
+legend {margin:0; padding:0;}
+legend span {width:100%; float:left; display:block;}
+fieldset {margin:0; padding:0; border:0;}
+.esq { text-align:left;}
+.dre { text-align: right;}
+.jus {text-align: justify;}
+.cen {text-align: center;}
+.floatrightDreta {text-align: right; float:right;}
+.floatrightJustificat {text-align: justify; float:right; display:inline;}
+.esquerra { text-align:left;}
+.dreta { text-align: right;}
+.justificat {text-align: justify;}
+.centrat {text-align: center;}
+.bold {font-weight:bold;}
+.normal {font-weight:normal;}
+.cursiva {font-style:italic;}
+.subratllat {text-decoration:underline;}
+.valignTop {vertical-align:top;}
+.valignMiddle { vertical-align:middle;}
+.valignBottom {vertical-align:bottom;}
+.absoluto {position:absolute;}
+.relativo {position:relative;}
+.relative {}
+.absolute {}
+.noImprimible {}
+.nomesImpressora {display:none;}
+.activar { display:block;}
+.desactivar { display:none;}
+.displayBlock { display:block}
+.displayInline { display:inline}
+.displayInlineBlock { display:inline-block}
+
+
+/* imatges */
+.mesImatges {position:relative; float:left;}
+.mesImatges .simbolmes {position:absolute; bottom:2px; right:2px; margin:0; padding:0; float:right; border:0;}
+
+/* capsal per imprimir */
+.flotaresquerra {float:right;}
+.ample50p {width:50px;}
+.blind {width:1px; height:1px;}
+
+
+.clearfix:after {content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;}
+.clearfix {display: inline-block;}
+/* Hides from IE-mac \*/
+* html .clearfix { height: 1%;}
+.clearfix {display: block;}
+/* End hide from IE-mac */
+
+.mouse {}
+.imatges {border-right-color:#000000; border-right-style:solid; border-right-width:1px; border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:1px; display:block; float:left; font-weight:bold; font-family:Arial, Helvetica, sans-serif;}
+.ultimaimatge {border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:1px; display:inline; float:left; font-weight:bold; font-family:Arial, Helvetica, sans-serif;}
+.hand { cursor:pointer;}
+.block {display:block}
+.inlinetable {display:inline-table;}
+.displaylistitem { display:list-item;}
+.displayTablecol {display: table-column;}
+.displayTablecell {display: table-cell;}
+.displayTablerow{display: table-row;}
+.displayTable {display:table;}
+.displayInlineBlock {display: inline-block}
+.displayInlineTable{display: inline-table}
+.top50{}
+.topm50 {}
+.inline {display:inline;}
+.inlineblock { display:inline-block;}
+.overflowauto { overflow:auto;}
+.overflowVisible{overflow:visible;}
+.overflowHidden {overflow: hidden;}
+.visibilidad { visibility:visible;}
+.visibilidadoculta {position:absolute; left:-9999px; overflow:hidden;}
+
+/* caixes i marcs */
+#panelOutput {z-index: 100; position: relative;}
+.caixaMarroBorder1 { background-color:#FDF8E4; border:1px solid #FADDB8;}
+.caixaGrogaBorder1 { background-color:#FDFDE4; border:1px solid #FDEEA0;}
+.caixaVermellaBorder1 { background-color:#FFEEEE; border:1px dotted #D8001D;}
+.caixaBlauCelBorder1 { background-color:#E3FAFA; border:1px solid #94EEEE;}
+.caixaBlavaBorder2 { background-color:#F4F7FA; border:2px solid #216ED6;}
+.caixaform {width:60%;background-color:#57741C;padding:1em 1em 1em 1em; color:#ffffff;}
+.caixaTaronja20 {border: 1px solid #EC8214; /*-moz-border-radius: 10px; -webkit-border-radius: 10px;*/ padding: 10px; background-color:#FFEFDF;}
+.caixaTaronja30 {border: 1px solid #EC8214;/*-moz-border-radius: 10px; -webkit-border-radius: 10px;*/ padding: 10px; background-color:#FFE5CB;}
+.caixaGris10 {border: 1px solid #e5e5e5; background-color:#f6f6f6;}
+.caixaGris20 {border: 1px solid #848484; /*-moz-border-radius: 10px; -webkit-border-radius: 10px;*/ padding: 10px; background-color:#EFEFEF;}
+.marco { padding:8px 8px 20px 8px; background-color: #E5EDEF; width: 90px; border: 1px solid #DBE2E4;}
+.marco10grisborderosa { padding:10px 10px 10px 10px; background-color: #FFFFCC; width: 200px; border: 1px solid #FF0000; color:#FF0000; font-weight:bold}
+.marco IMG{ border: 5px solid #ffffff;  width: 80px;} 
+
+/* modul Groc*/
+.titolmodulGroc {color: #000000; padding:15px; text-align:center;}
+.modulGroc {position:relative; float:left; width:100%; background-color:#FFFADD;}
+.esqSupIzqGroc {background: url(https://www.l-h.cat/img/esq_sup_izq_groc.gif) left top no-repeat; left: 0; top: 0; width: 16px; height: 16px; position: absolute;}
+.esqSupDerGroc {background: url(https://www.l-h.cat/img/esq_sup_der_groc.gif) right top no-repeat; right: 0; top: 0; width: 16px; height: 16px; position: absolute;}
+.esqInfIzqGroc {background: url(https://www.l-h.cat/img/esq_inf_izq_groc.gif) left bottom no-repeat; left: 0; bottom: 0; width: 16px; height: 16px; position: absolute;}
+.esqInfDerGroc {background: url(https://www.l-h.cat/img/esq_inf_der_groc.gif) right bottom no-repeat; right: 0; bottom: 0; width: 16px; height: 16px; position: absolute;}
+/* fi modul groc */
+
+/* modul boto vermell */
+.texteModulBotoVermell {padding:1px; float:left;}
+.modulBotoVermell {position:relative; background-image:url(https://www.l-h.cat/img/fons_boto_vermell.gif); background-color:#970000; background-repeat:repeat-x; float:left}
+.esqSupIzqBotoVermell {background: url(https://www.l-h.cat/img/esq_sup_izq_bot_vermell.gif) left top no-repeat; left: 0; top: 0; width:3px; height:3px; position:absolute;}
+.esqSupDerBotoVermell {background: url(https://www.l-h.cat/img/esq_sup_der_bot_vermell.gif) right top no-repeat; right: 0; top: 0; width:3px; height:3px; position:absolute;}
+.esqInfIzqBotoVermell {background: url(https://www.l-h.cat/img/esq_inf_izq_bot_vermell.gif) left bottom no-repeat; left: 0; bottom: 0; width:3px; height:3px; position:absolute;}
+.esqInfDerBotoVermell {background: url(https://www.l-h.cat/img/esq_inf_der_bot_vermell.gif) right bottom no-repeat; right: 0; bottom: 0; width:3px; height:3px; position:absolute;}
+/* fi modul boto vermell */
+
+/* modul boto tramit */
+.texteModulBotoTramit {padding:3px; float:left;}
+.modulBotoTramit {position:relative; background-image:url(https://www.l-h.cat/img/fons_boto_verd.gif); background-color:#1B6700; background-repeat:repeat-x; float:right;}
+.esqSupIzqBotoTramit {background: url(https://www.l-h.cat/img/esq_sup_izq_bot_verd.gif) left top no-repeat; left: 0; top: 0; width:3px; height:3px; position:absolute;}
+.esqSupDerBotoTramit {background: url(https://www.l-h.cat/img/esq_sup_der_bot_verd.gif) right top no-repeat; right: 0; top: 0; width:3px; height:3px; position:absolute;}
+.esqInfIzqBotoTramit {background: url(https://www.l-h.cat/img/esq_inf_izq_bot_verd.gif) left bottom no-repeat; left: 0; bottom: 0; width:3px; height:3px; position:absolute;}
+.esqInfDerBotoTramit {background: url(https://www.l-h.cat/img/esq_inf_der_bot_verd.gif) right bottom no-repeat; right: 0; bottom: 0; width:3px; height:3px; position:absolute;}
+/* fi modul boto vermell */
+
+
+
+
+
+
+
+/* cercador */
+.verd6F6A09 {color:#6F6A09;}
+.pastCercadorPrimer { background-image:url(https://www.l-h.cat/img/past_cercador_primer.gif); background-color:#5F5A04;}
+.fonsVerd6d7123 { background-color:#6d7123;}
+.fonsVerdB8CC18 { background-color:#B8CC18;}
+.fonsVerdAEAB5C { background-color:#AEAB5C;}
+.fonsVerd8FBE2E { background-color:#8FBE2E;}
+.fonsVerd204A00 { background-color:#204A00;}
+.fonsVerd6F6A09 {background-color:#6F6A09;}
+.fonsVerdE1DD20 { background-color:#E1DD20;}
+.fonsVerd98BC76 { background-color:#98BC76;}
+.fonsVerdB8D39D { background-color:#B8D39D;}
+.fonsVerdFosforE8E38D { background-color:#E8E38D;}
+.border1VerdDBD109 { border: 1px solid #DBD109;}
+.border1VerdD3D6A4 { border:1PX solid #D3D6A4;}
+.border1DreSolidGris{ border-right:1px solid #dddddd;}
+.border1DreEsqGaleria { border-left:1px solid #D2DCDE; border-right:1px solid #D2DCDE;}
+.pastVerdOnCercador { background-image:url(https://www.l-h.cat/img/past_verdOn_cercador.gif); background-color:#5F5A04;}
+.pastVerdOffCercador { background-image:url(https://www.l-h.cat/img/past_verdOff_cercador.gif); background-color:#5F5A04;}
+.fonsVerd454100 { background-color:#454100;}
+.fonsVerdEEECD2 { background-color:#EEECD2;}
+.fonsVerdFAF9E7 { background-color:#FAF9E7;}
+.border2DretaVerd { border-right-color:#6F6A09; border-right-style:solid; border-right-width:2px;}
+.border2VerdTopLeftBottom6F6A09 { border-bottom:2px solid #6F6A09; border-left:2px solid #6F6A09; border-top:2px solid #6F6A09;}
+.fonsVerdPagines { background-image:url(https://www.l-h.cat/img/fons_verd_pagines.gif); background-color:#5F5A04;} 
+.border2DreEsqBottomVerd6F6A09 { border-bottom:2px solid #6F6A09; border-left:2px solid #6F6A09; border-right:2px solid #6F6A09;}
+
+
+
+
+/* cercador gris CAU */
+#cercadorGris { padding:0; position:relative; display:inline-block; vertical-align:middle;}
+#cercadorGris .campCercadorGris { padding:0;}
+#cercadorGris .campCercadorGris label { font-weight:bold;}
+#cercadorGris form {padding:0; margin:0; float:left;}
+#cercadorGris .campCercadorGris .buscaTextGris {
+background-color:#FFFFFF;
+color:#000;
+border:1px solid #CCCCCC;
+margin-right:5px;
+padding-left:5px;
+padding-top:3px;
+padding-bottom:3px;
+width:265px;
+font-size:inherit;
+}
+#cercadorGris .campCercadorDispGris .buscaTextGris {
+background-color:#FFFFFF;
+color:#000;
+border:1px solid #CCCCCC;
+margin-right:10px;
+padding-left:10px;
+padding-top:3px;
+padding-bottom:3px;
+width:100px;
+font-size:inherit;
+vertical-align:middle;
+display:inline-block;
+}
+.ui-autocomplete-loading {background: transparent !important;}
+
+/* cercador gris CAU */
+
+
+
+/* tramits */
+.pastVerdFlTramitsMenu1 {background-image:url(https://www.l-h.cat/img/past_verdfltramits_menu1.gif); background-color:#3A450E;}
+.pastVerdFlTramitsSegon {background-image:url(https://www.l-h.cat/img/past_verdfltramits_segon.gif); background-color:#3A450E;}
+.pastVerdclarTramitsSegon {background-image:url(https://www.l-h.cat/img/past_verdcltramits_segon.gif); background-color:#3A450E;}
+.pastVerdBusTramitsMenu1 {background-image:url(https://www.l-h.cat/img/past_verdbustramits_menu1.gif); background-color:#3A450E;}
+.pastVerdflTramitsPrimer {background-image:url(https://www.l-h.cat/img/past_verdfltramits_primer.gif); background-color:#3A450E;}
+.pastVerdflTramitsItem {background-image:url(https://www.l-h.cat/img/past_verdfltramits_item.gif); background-color:#3A450E;}
+.pastVerdCaquiTramitsPrimer {background-image:url(https://www.l-h.cat/img/past_verdctramits_primer.gif); background-color:#3A450E;}
+.pastTaronjaTramitsBloc1 {background-image:url(https://www.l-h.cat/img/past_taronjatramits_bloc1.gif); background-color:#CB3200;}
+.pastBluaAgeTramitsBloc2 {background-image:url(https://www.l-h.cat/img/past_blauagetramits_bloc2.gif); background-color:#3A450E;}
+.pastVerdFortTramitsPrimer {background-image:url(https://www.l-h.cat/img/past_verdftramits_primer.gif); background-color:#3A450E;}
+.pastVermFortTramitsMenu2 {background-image:url(https://www.l-h.cat/img/past_vermfortramits_menu2.gif); background-color:#3A450E;}
+.pastMarroTramitsMenu2 {background-image:url(https://www.l-h.cat/img/past_marrotramits_menu2.gif); background-color:#622500;}
+.pastMarroftTramitsMenu2 {background-image:url(https://www.l-h.cat/img/past_marfortramits_menu2.gif); background-color:#643A00;}
+.pastMarroflTramitsMenu2 {background-image:url(https://www.l-h.cat/img/past_marrofltramits_menu2.gif); background-color:#824E07;}
+.pastVermTramitsMenu2 {background-image:url(https://www.l-h.cat/img/past_vermtramits_menu2.gif); background-color:#940000;}
+
+/* agenda */
+.pastBlauagendaLlarga{background-image:url(https://www.l-h.cat/img/past_blauagenda_llarga.gif); background-color:#4781CA;}
+.pastBlauagendaMenu1{background-image:url(https://www.l-h.cat/img/past_blauagenda_menu1.gif); background-color:#00427A;} 
+.pastBlaucelblancMenu1{background-image:url(https://www.l-h.cat/img/past_blaucelblanc_menu.gif); background-color:#40E0D0;} 
+.pastBlaufortblancMenu1{background-image:url(https://www.l-h.cat/img/past_blaufortblanc_menu.gif); background-color:#008B8B;} 
+.pastBlauFortMenu1 {background-image:url(https://www.l-h.cat/img/past_blaufort_menu1.gif); background-color:#1A3963;} 
+.pastVerdFortblancMenu1 {background-image:url(https://www.l-h.cat/img/past_verdfortblanc_menu1.gif); background-color:#18472C;} 
+.pastVerdFluixblancMenu1 {background-image:url(https://www.l-h.cat/img/past_verdfluixblanc_menu1.gif); background-color:#2C844A;} 
+.pastVerdTramitsBloc1 {background-image:url(https://www.l-h.cat/img/past_verdtramits_bloc1.gif); background-color:#3A450E; padding:4px 4px 4px 45px;} 
+.pastMarroContrMenu2 {background-image:url(https://www.l-h.cat/img/past_marroajuda_contr.gif); background-color:#3C1D0A;}
+.pastMarrofluixContrMenu2 {background-image:url(https://www.l-h.cat/img/past_marrollegenda_contr.gif); background-color:#9E3B00;}
+.pastTaronjaContrMenu2 {background-image:url(https://www.l-h.cat/img/past_taronja_contr.gif); background-color:#CC4700;}
+.pastBlauAgendaPrimer {background-image:url(https://www.l-h.cat/img/past_blauagenda_primer.gif); background-color:#004B89;}
+.pastBlauAgendaSegon {background-image:url(https://www.l-h.cat/img/past_blauagenda_segon.gif); background-color:#005BA6;}
+.pastBlauFluixAgendaSegon {background-image:url(https://www.l-h.cat/img/past_blaufluixagenda_segon.gif); background-color:#005BA6;}
+.pastBlau2AgendaMenu2 {background-image:url(https://www.l-h.cat/img/past_blau2agenda_menu2.gif); background-color:#123271;}
+.pastBlauAgendaMenu2 {background-image:url(https://www.l-h.cat/img/past_blauagenda_menu2.gif); background-color:#002368;}
+.pastTaronjaContrSegon {background-image:url(https://www.l-h.cat/img/past_taronjacontr_segon.gif); background-color:#CC5800;}
+.pastRosaContrSegon {background-image:url(https://www.l-h.cat/img/past_rosacontr_segon.gif); background-color:#E3D2AC;}
+.pastTaronjaFluixContrSegon {background-image:url(https://www.l-h.cat/img/past_taronjafluixcontr_sego.gif); background-color:#CB3200;}
+.pastVermellContrSegon {background-image:url(https://www.l-h.cat/img/past_vermellcontr_segon.gif); background-color:#BA1100;}
+.pastTaronjaAgendaSegon {background-image:url(https://www.l-h.cat/img/past_taronjagenda_segon.gif); background-color:#CC3200;}
+.pastTaronjaFluixAgendaSegon {background-image:url(https://www.l-h.cat/img/past_taronjafluixagenda_segon.gif); background-color:#D7AD7C;}
+.pastRosaActeSuspesBloc2 {background-image:url(https://www.l-h.cat/img/past_rosactesuspes_bloc2.gif); background-color:#FCEAEC;}
+.pastBlauCelAgendaSegon {background-image:url(https://www.l-h.cat/img/past_blaucelagenda_segon.gif); background-color:#C6D1DE;}
+.pastBlauClarAgendaSegon {background-image:url(https://www.l-h.cat/img/past_blauclaragenda_segon.gif); background-color:#7EA3D2;}
+.pastBlauAgendaFluixSegon {background-color:#EFF6FD;}/* fort*/
+.pastBlauAgendaFluixdSegon {background-color:#FFFFFF;}/* fluix */
+
+
+
+
+/* contractacio */
+#FotocopiesDisponibles{float: left;margin: 0px;padding: 0px 1px 0px 0px;width: 10%;font-family: Arial, Helvetica, sans-serif, Helvetica, sans-serif; font-size: 70%; color: #990000; text-decoration: none ; font-weight: bold; vertical-align:sub; text-align:left;}
+#DataPublicacio{float: left;margin: 0px;padding: 0px 1px 0px 0px;width: 13%;font-family: Arial, Helvetica, sans-serif, Helvetica, sans-serif; font-size: 70%;  color: #990000; text-decoration: none ; font-weight: bold; vertical-align:sub;}
+#Document{float: left;margin: 0px;padding: 0px 1px 0px 0px;width: 13%;font-family: Arial, Helvetica, sans-serif, Helvetica, sans-serif; font-size: 70%;  color: #990000; text-decoration: none ; font-weight: bold;  vertical-align:sub;}
+#Descripcio{float: left;margin: 0px;padding: 0px 1px 0px 0px;width: 36%;font-family: Arial, Helvetica, sans-serif, Helvetica, sans-serif; font-size: 70%;  color: #990000; text-decoration: none ; font-weight: bold;  vertical-align:sub;}
+#Pressupost{float: left;margin: 0px;padding: 0px 1px 0px 0px;width: 12%;font-family: Arial, Helvetica, sans-serif, Helvetica, sans-serif; font-size: 70%;  color: #990000; text-decoration: none ; font-weight: bold;  vertical-align:sub;}
+#Ofertes{	float: left;margin: 0px;padding: 0px 1px 0px 0px;width: 15%;font-family: Arial, Helvetica, sans-serif, Helvetica, sans-serif; font-size: 70%; color: #990000; text-decoration: none ; font-weight: bold; vertical-align:sub;}
+.fonsPestanyaContractacio { background-image:url(https://www.l-h.cat/img/fons_pestanya_contractacio.gif);}
+
+/* amplades*/ 
+.w950h205 { width:950px; height:205px;}
+.w650h290 { width:650px; height:290px;}
+.w202h165 { width:202px; height:165px;}
+.w670h300 { width:670px; height:290px;}
+.w670h310 { width:670px; height:310px;}
+.w670h311 { width:670px; height:311px;}
+.w782h264 { width:782px; height:264px;}
+.w759h759 { width:759px; height:759px;}
+.w50h33 { width:50px; height:33px;}
+.w40h50 { width:40px; height:50px;}
+.w50h60 { width:50px; height:60px;}
+.w50h70 { width:50px; height:70px;}
+.w55h33 { width:55px; height:33px;}
+.w80ph80p {width:80%;}
+.w125h125 {width:125px; height:125px;}
+.w145h192 { width:145px; height:192px;}
+.w145h100 {width:145px; height:100px;}
+.w145h145 {width:145px; height:145px;}
+.w145h186 {width:145px; height:186px;}
+.w304h58 { width:304px; height:58px;}
+.w123h67 { width:123px; height:67px;}
+.w162h188 { width:162px; height:188px;}
+.w419h80 {width:419px; height:80px;}
+.w419h90 {width:419px; height:90px;}
+.w419h197 {width:419px; height:197px;}
+.w419h100 {width:419px; height:100px;}
+.w423h362 {width:423px; height:362px;}
+.w425h320 {width:425px; height:320px;}
+.w807h160 { width:807px; height:160px;}
+.w1p {width:1%;}
+.w1p {width:1%;}
+.w2p { width:2%;}
+.w5p {width:5%;}
+.w7p {width:7%;}
+.w8p {width:8%;}
+.w9p {width:9%;}
+.w10p {width:10%;}
+.w12p {width:12%;}
+.w13p {width:13%;}
+.w14p {width:14%;}
+.w15p {width:15%;}
+.w16p {width:16%;}
+.w17p {width:17%;}
+.w12460p {width:11%;}
+.w20p {width:20%;}
+.w23p {width:23%;}
+.w233p {width:23.3%}
+.w24p {width:24%}
+.w242p {width:24.2%}
+.w25p {width:25%;}
+.w26p {width:26%;}
+.w27p {width:27%;}
+.w25po {width:25%;}
+.w30p {width:30%;}
+.w31p {width:31%;}
+.w32p {width:32%;}
+.w33p {width:33.333%;}
+.w34p {width:34%;}
+.w35p {width:35%;}
+.w37p {width:37%;}
+.w38p {width:38%;}
+.w39p {width:39%;}
+.w40p {width:40%;}
+.w45p {width:45%;}
+.w46p {width:46%;}
+.w47p {width:47%;}
+.w48p {width:48%;}
+.w49p {width:49%;}
+.w50p {width:50%;}
+.w51p {width:51%;}
+.w55p {width:55%;}
+.w60p {width:60%;}
+.w61p {width:61%;}
+.w62p {width:62%;}
+.w65p {width:65%;}
+.w69p {width:69%;}
+.w70p {width:70%;}
+.w75p {width:75%;}
+.w80p {width:80%;}
+.w85p {width:85%;}
+.w86p {width:86%;}
+.w87p {width:87%;}
+.w88p {width:88%;}
+.w89p {width:89%;}
+.w90p {width:90%;}
+.w91p {width:91%;}
+.w94p {width:94%;}
+.w95p {width:95%;}
+.w96p {width:96%;}
+.w97p {width:97%;}
+.w98p {width:98%;}
+.w99p {width:99%;}
+.w100p {width:100%;}
+.w2 {width:2px;}
+.w3 {width:3px;}
+.w4 {width:4px;}
+.w10 { width:10px;}
+.w12 { width:12px;}
+.w15 { width:15px;}
+.w16 { width:16px;}
+.w19 { width:19px;}
+.w30 { width:30px;}
+.w33 {width:33%;}
+.w39 {width:39px;}
+.w20 {width:20px;}
+.w24 {width:24px;}
+.w40 {width:40px;}
+.w45 {width:45px;}
+.w50 {width:50px;}
+.w52 {width:52px;}
+.w55 {width:55px;}
+.w59 {width:59px;}
+.w60 {width:60px;}
+.w61 {width:61px;}
+.w67 {width:67px;}
+.w69 {width:69px;}
+.w70 {width:70px;}
+.w71 {width:71px;}
+.w72 {width:72px;}
+.w73 {width:73px;}
+.w75 {width:75px;}
+.w80 {width:80px;}
+.w88 {width:88px;}
+.w90 {width:90px;}
+.w93 {width:93px;}
+.w94 {width:90px;}
+.w95 {width:95px;}
+.w96 {width:96px;}
+.w97 {width:97px;}
+.w100 {width:100px;}
+.w104 {width:104px;}
+.w105 {width:105px;}
+.w109 {width:109px;}
+.w110 {width:110px;}
+.w115 {width:115px;}
+.w117 {width:117px;}
+.w118 {width:118px;}
+.w119 {width:119px;}
+.w120 {width:120px;}
+.w125 {width:125px;}
+.w130 {width:130px;}
+.w132 {width:132px;}
+.w135 {width:135px;}
+.w137 {width:138px;}
+.w138 {width:138px;}
+.w139 {width:139px;}
+.w140 {width:140px;}
+.w143 {width:143px;}
+.w145 {width:145px;}
+.w146 {width:146px;}
+.w149 {width:149px;}
+.w150 {width:150px;}
+.w153 {width:153px;}
+.w155 {width:155px;}
+.w156 {width:156px;}
+.w157 {width:157px;}
+.w158 {width:158px;}
+.w160 {width:160px;}
+.w164 {width:164px;}
+.w165 {width:165px;}
+.w166 {width:166px;}
+.w167 {width:167px;}
+.w168 {width:168px;}
+.w169 {width:169px;}
+.w170 {width:170px;}
+.w171 {width:171px;}
+.w174 {width:174px;}
+.w175 {width:175px;}
+.w177 {width:177px;}
+.w178 {width:178px;}
+.w179 {width:179px;}
+.w180 {width:180px;}
+.w181 {width:181px;}
+.w184 {width:184px;}
+.w185 {width:185px;}
+.w189 {width:189px;}
+.w190 {width:190px;}
+.w192 {width:192px;}
+.w195 {width:195px;}
+.w200 {width:200px;}
+.w202 {width:202px;}
+.w205 {width:205px;}
+.w206 {width:206px;}
+.w210 {width:210px;}
+.w232 {width:232px;}
+.w235 {width:235px;}
+.w215 {width:215px;}
+.w217 {width:217px;}
+.w220 {width:220px;}
+.w423 {width:423px;}
+.w424 {width:424px;}
+.w225 {width:225px;}
+.w230 {width:230px;}
+.w240 {width:240px;}
+.w241 {width:241px;}
+.w245 {width:245px;}
+.w250 {width:250px;}
+.w256 {width:256px;}
+.w260 {width:260px;}
+.w265 {width:265px;}
+.w267 {width:267px;}
+.w270 {width:270px;}
+.w280 {width:280px;}
+.w290 {width:290px;}
+.w272 {width:272px;}
+.w300 {width:300px;}
+.w303 {width:303px;}
+.w314 {width:314px;}
+.w280 {width:280px;}
+.w346 {width:346px;}
+.w337 {width:337px;}
+.w441 {width:441px;}
+.w458 {width:458px;}
+.w561 {width:561px;}
+.w564 {width:564px;}
+.w576 {width:576px;}
+.w579 {width:579px;}
+.w584 {width:584px;}
+.w589 {width:589px;}
+.w590 {width:590px;}
+.w595 {width:595px;}
+.w596 {width:596px;}
+.w710 {width:710px;}
+.w719 {width:719px;}
+.w730 {width:730px;}
+.w739 {width:739px;}
+.w749 {width:749px;}
+.w759 {width:759px;}
+.w320 {width:320px;}
+.w350 {width:350px;}
+.w352 {width:352px;}
+.w364 {width:364px;}
+.w367 {width:367px;}
+.w368 {width:368px;}
+.w369 {width:369px;}
+.w370 {width:370px;}
+.w375 {width:375px;}
+.w378 {width:378px;}
+.w380 {width:380px;}
+.w390 {width:390px;}
+.w395 {width:395px;}
+.w397 {width:397px;}
+.w399 {width:399px;}
+.w400 {width:400px;}
+.w403 {width:403px;}
+.w409 {width:409px;}
+.w412 {width:412px;}
+.w413 {width:413px;}
+.w414 {width:414px;}
+.w417 {width:417px;}
+.w418 {width:418px;}
+.w419 {width:419px;}
+.w420 {width:420px;}
+.w424 {width:200px;}
+.w432 {width:432px;}
+.w440 {width:440px;}
+.w444 {width:444px;}
+.w449 {width:449px;}
+.w450 {width:450px;}
+.w455 {width:455px;}
+.w459 {width:459px;}
+.w460 {width:460px;}
+.w461 {width:461px;}
+.w463 {width:463px;}
+.w464 {width:464px;}
+.w467 {width:467px;}
+.w470 {width:470px;}
+.w475 {width:475px;}
+.w480 {width:480px;}
+.w490 {width:490px;}
+.w496 {width:496px;}
+.w500 {width:500px;}
+.w510 {width:510px;}
+.w520 {width:520px;}
+.w530 {width:530px;}
+.w534 {width:534px;}
+.w538 {width:538px;}
+.w540 {width:540px;}
+.w542 {width:545px;}
+.w549 {width:549px;}
+.w550 {width:550px;}
+.w560 {width:560px;}
+.w565 {width:565px;}
+.w510 {width:510px;}
+.w580 {width:580px;}
+.w582 {width:582px;}
+.w590 {width:590px;}
+.w598 {width:598px;}
+.w599 {width:599px;}
+.w705 {width:705px;}
+.w717 {width:717px;}
+.w600 {width:600px;}
+.w626 {width:626px;}
+.w602 {width:602px;}
+.w604 {width:604px;}
+.w606 {width:606px;}
+.w608 {width:608px;}
+.w616 {width:616px;}
+.w617 {width:617px;}
+.w661 {width:661px;}
+.w620 {width:620px;}
+.w621 {width:621px;}
+.w626 {width:626px;}
+.w636 {width:636px;}
+.w639 {width:639px;}
+.w670 {width:670px;}
+.w671 {width:671px;}
+.w680 {width:680px;}
+.w695 {width:695px;}
+.w700 {width:700px;}
+.w739 {width:739px;}
+.w746 {width:746px;}
+.w800 {width:800px;}
+.w850 {width:850px;}
+.w900 {width:900px;}
+.w930 {width:930px;}
+.w950 {width:950px;}
+.wh1 {height:1px; width:1px;}
+.wh10 {height:10px; width:10px;}
+.wh49 {height:49px; width:49px;}
+.tdiv100ph { display: block; height: 274px;}
+.wh100 { height:100px; width:100px;}
+.w1000h800 { width:1000px; height:800px;}
+.wh120 { height:120px; width:120px;}
+.wh202 { width:202px; height:202px;}
+.wh466 {width:466px; height:466px;}
+.w164h60 {width:164px; height:60px;}
+.w164h90 {width:164px; height:90px;}
+.w164h80 {width:164px; height:80px;}
+.w336h141 {width:336px; height:141px;}
+.w419h55 { width:419px; height:55px;}
+.w49h49 { width:49px; height:49px;}
+.w50h50 {width:50px; height:50px;}
+.w65h65 {width:65px; height:65px;}
+.w70h70 { width:70px; height:70px;}
+.w15h19 {width:15px; height:19px;}
+.w105h95 { width:105px; height:95px;}
+.w104h95 { width:104px; height:95px;}
+.w419h297 {width:419px; height:297px;}
+.w564h297 {width:564px; height:297px;}
+.w800h600 { width:800px; height:600px;}
+.h79 {height:79px;}
+.h700 {height:700px;}
+.divorova { width:25%;}
+.divorova2 {width:74.7%;}
+.w403t60 {width:403px; font-size:0.6em;}
+
+/* imprescindibles web */
+.pastCarpetaBloc2{background-image:url(https://www.l-h.cat/img/fons_carpeta_bloc2.gif); background-color:#007A87; background-repeat:no-repeat; background-position: left;}
+.cc_fonspeu {background-image:url(https://www.l-h.cat/img/cc_fons_peu.gif); background-color:#B22222;}
+.cc_trescolumnes{background-image:url(https://www.l-h.cat/img/cc_tres_columnes.gif);}
+#espai{margin-top:8px}
+#contenidorGeneral{width:759px; text-align:left; margin-left:auto; margin-right:auto;}
+#mollespa {padding:0px 0px 3px 10px;}
+#linksblancs{width:305px; float:left; padding:30px 0 0 0; text-align:center;}
+#logos{background-color:#0097A7; background-image:url(https://www.l-h.cat/img/cap_turquesa.gif); width:759px; float:left;}
+#buscador {	clear:both; padding:0 0 0 20px;}
+#linksbuscador{clear:both; display:inline; padding:0 0 0 3em; margin:0 0 0 0;}
+#pertemes{padding:0 0 0 15px; width:140px;float:left;}
+#doscolumnes{width:604px;float:right;position:relative;} 
+#columna{width:155px;float:right;}
+#contingut{overflow:auto; float:left; position:relative; width:449px;} 
+#footer{width:759px; float:left;}  
+#footer2{width:759px; height:25px; clear:both;} 
+.parraf{width:409px;}
+.cercar{border:1px solid #800001; background-color:#800000; color:#ffffff;}
+.linksvert{	display:inline; padding:0 0 0 0;margin:0 0 0 0;}
+.linksvert li{display:inline; padding:0 0 0 0;margin:0 0 0 0;}
+.linkshor{padding:0 0 0 0;margin:0 0 0 0;}
+.llistafletxes {list-style-position:inherit; list-style-image:url(https://www.l-h.cat/img/flechaverda.gif); list-style-type:armenian; line-height:normal; margin:0;}
+.none{text-decoration:none; color:#000000; background-image:url(/img/cc_past_gris_menu.gif); padding-left:1.5em; margin-top:1px; margin-bottom:1px;}
+a.none:hover{text-decoration:underline;	background-image:url(https://www.l-h.cat/img/cc_past_verdfluix_menu.gif); color:#FFFFFF;} 
+a:hover{text-decoration:underline;}
+/*.active{text-decoration:underline;background-image:url(https://www.l-h.cat/img/cc_past_verd_menu.gif);color:#FFFFFF; padding-left:1.5em;}	
+a.active:hover{text-decoration:underline;background-image:url(https://www.l-h.cat/img/cc_past_verd_menu.gif); color:#FFFFFF; padding-left:1.5em;}
+*/
+.verdhover{text-decoration:none; background-image:url(https://www.l-h.cat/img/past_verdfortblanc_menu1.gif); color:#FFFFFF; background-color:#18472C;}
+a.verdhover:hover{text-decoration:underline; background-image:url(https://www.l-h.cat/img/past_rollverdblanc_menu1.gif); color:#FFFFFF; background-color:#246D3F;}
+
+.blauhover{text-decoration:none; background-image:url(https://www.l-h.cat/img/past_blaufortblanc_menu.gif); color:#FFFFFF; background-color:#008B8B;}
+a.blauhover:hover{text-decoration:underline; background-image:url(https://www.l-h.cat/img/past_rollblaublanc_menu1.gif); color:#FFFFFF; background-color:#22B8B0;} 
+
+.blau017DB5 {color:#017DB5;}
+
+.over{display:block;padding-top:3px;padding-bottom:3px;}
+.formulari {width:100%;}
+
+
+/* alçades */
+.h0 {height:0px;}
+.h1 {height:1px;}
+.h1p {height:1%;}
+.h2 {height:2px;}
+.h3 {height:3px;}
+.h5 {height:5px;}
+.h8 {height:8px;}
+.h9 {height:9px;}
+.h10{height:10px;}
+.h12{height:12px;}
+.h15 {height:15px;}
+.h18 {height:18px;}
+.h20{height:20px;}
+.h22{height:22px;}
+.h24{height:24px;}
+.h25{ height:25px;}
+.h27{height:27px;}
+.h28{height:28px;}
+.h35{height:35px;}
+.h36{height:36px;}
+.h37 {height:37px;}
+.h47 {height:47px;}
+.h50 {height:50px;}
+.h57 {height:57px;}
+.h58 {height:58px;}
+.h59 {height:59px;}
+.h61 {height:61px;}
+.h63 {height:63px;}
+.h65 {height:65px;}
+.h67 {height:67px;}
+.h75 {height:75px;}
+.h80 {height:80px;}
+.h89 {height:89px;}
+.h97 {height:97px;}
+.h100 {height:100px;}
+.h101 {height:101px;}
+.h116 {height:116px;}
+.h128 {height:128px;}
+.h120 {height:120px;}
+.h123 {height:123px;}
+.h130 {height:130px;}
+.h137 {height:137px;}
+.h150 {height:150px;}
+.h153 {height:127px;}
+.h160 {height:160px;}
+.h170 {height:170px;}
+.h180 {height:180px;}
+.h190 {height:190px;}
+.h191 {height:191px;}
+.h200 {height:200px;}
+.h210 {height:210px;}
+.h220 {height:220px;}
+.h230 {height:230px;}
+.h232 {height:232px;}
+.h250 {height:250px;}
+.h300 {height:300px;}
+.h330 {height:330px;}
+.h350 {height:350px;}
+.h355 {height:355px;}
+.h380 {height:380px;}
+.h400 {height:400px;}
+.h450 {height:450px;}
+.h460 {height:460px;}
+.h470 {height:470px;}
+.h490 {height:490px;}
+.hauto {height:auto;}
+.hinherit {height: inherit;}
+.h100p { height:100%;}
+.minh14 {min-height:14px;}
+.minh35 {min-height:35px;}
+.minh55 { min-height:55px;}
+.minheight100 {min-height:100px;}
+.minheight140 {min-height:140px;}
+.minh200px {min-height:200px;}
+.minh204px {min-height:204px;}
+.minh268px {min-height:268px}
+.minh300px {min-height:300px;}
+.minh350px {min-height:350px;}
+.minh400px {min-height:400px;}
+.mh450 {min-height:450px;}
+
+
+
+/* visor documents */
+.fonsVisorDoc {background:url(https://www.l-h.cat/img/fons_blau_visordoc.jpg) 0 0 repeat; display:block; float:left; background-color:#005793;}
+.fonsBlauVisor {background-color:#005793;}
+
+/* visor imatges */
+.visualEsquerra {background-image:url(https://www.l-h.cat/img/common/visual_esquerra.gif);}
+.visualDreta {background-image:url(https://www.l-h.cat/img/common/visual_dreta.gif);}
+.visualCentre {background-image:url(https://www.l-h.cat/img/common/visual_centre.gif);}
+.fonsVisualBordes { background-image:url(https://www.l-h.cat/img/common/fons_visual_bordes.gif);}
+.fonsVisualPeu { background-image:url(https://www.l-h.cat/img/common/fons_visual_peu.gif);}
+.fonsVisualBordeBotttom { background-image:url(https://www.l-h.cat/img/common/fons_visual_borderbottom.gif);}
+.fonsVisualBordeBotttom2 { background-image:url(https://www.l-h.cat/img/common/fons_visual_borderbottom2.gif);}
+.fonsVisual {background-image:url(https://www.l-h.cat/img/common/fons_visual.gif);}

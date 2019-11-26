@@ -6,6 +6,8 @@ Imports System.IO
 Imports System.Net
 Imports KCommon.Net.FTP
 Imports System.Drawing.Imaging
+Imports System.DirectoryServices
+
 
 'Necessari per la funció DameLonLatDeCoordenadals
 
@@ -13,6 +15,7 @@ Imports System.Convert
 Imports System.Drawing
 Imports SharpMap.CoordinateSystems
 Imports SharpMap.CoordinateSystems.Transformations
+Imports System.Data
 
 
 '******************************************************************************************+
@@ -103,7 +106,7 @@ Public MustInherit Class clsPermisos
 
 
 
-    Private Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub Page_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         Dim objconn As OleDbConnection
         objconn = GAIA2.bdIni()
         Dim rel As New clsRelacio
@@ -600,8 +603,9 @@ Public MustInherit Class clsPermisos
         Try
             Dim pathLDAP As String = String.Empty
             Dim GroupString As String = String.Empty
-            Dim oDE As New System.DirectoryServices.DirectoryEntry("LDAP://l-h.es", usuariAdm, pwd)
-            Dim oDSearcher As New DirectoryServices.DirectorySearcher(oDE)
+            Dim oDE As New DirectoryEntry("LDAP://l-h.es", usuariAdm, pwd)
+
+            Dim oDSearcher As New DirectorySearcher(oDE)
             oDSearcher.Filter = "sAMAccountName=" & usuariXarxa
             oDSearcher.PropertiesToLoad.Add("memberOf")
 

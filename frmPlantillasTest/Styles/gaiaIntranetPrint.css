@@ -1,0 +1,469 @@
+
+/* CSS Document */
+body {}
+br {clear:none}
+div { width:100%;}
+span {}
+.printhide {display: none;}
+.imatgepetita {width:30px;}
+.imatgemitjana {width:50px;}
+.imatgegran {width:60px;}
+.imatgenorme {width:200px;}
+.imatgemaxim {width:100%;}
+
+.capPrint {display:block; top: 0; left: 0; width: 100%; height:5%;}
+.trescolumnes{background-color:#FFFFFF;}
+img {width:20%}
+.w759 {}
+.body {} 
+#contenidor{} 
+#contingut{} 
+.wpx759{} 
+.wpx604{} 
+.wpx155{} 
+.wpx419{} 
+.wpx135{}
+em {}
+h1,h2,h3,h4,h5,h6{}
+.gtxt {font-family:  Helvetica, sans-serif; text-decoration:none; color:#000000}
+.gtxt a:hover {text-decoration:underline; color:#000000}
+
+.gtxtBold {font-family: Helvetica, Arial, sans-serif;text-decoration:none; font-weight:bold; color:#000000}
+.gtxtBold a:hover {text-decoration:underline; font-weight:bold; color:#000000}
+
+.gtxtBlancBold {font-family: Helvetica, Arial, sans-serif; font-weight:bold; text-decoration:underline; color:#000000;}
+.gtxtBlancBold a:hover {text-decoration:underline; font-weight:bold; color:#000000;}
+
+.gtxtVermell {font-family: Helvetica, Arial, sans-serif; text-decoration:none; color:#000000;}
+.gtxtVermell a:hover {text-decoration:underline; color:#000000;}
+
+.gtxtVermellBold {font-family: Helvetica, Arial, sans-serif; text-decoration:none; font-weight:bold; color:#000000;}
+.gtxtVermellBold a:hover {text-decoration:underline; font-weight:bold; color:#000000;}
+
+.text06 {font-family: Helvetica, Arial, sans-serif; text-decoration:none; color:#000000}
+.text06 a:hover {text-decoration:underline; color:#000000}
+
+.text06negre {font-family:Arial, Helvetica, sans-serif; text-decoration:none; color:#000000}
+.text06negre a:hover {text-decoration:underline; color:#000000;}
+
+.text06negreBold {font-family: Helvetica, Arial, sans-serif; text-decoration:none; color:#000000; font-weight:bold;}
+.text06negreBold a:hover {text-decoration:underline; color:#000000; font-weight:bold;}
+
+.text06BlancBold {font-family: Helvetica, Arial, sans-serif; text-decoration:none; color:#000000; font-weight:bold}
+.text06BlancBold a:hover {text-decoration:underline; color:#000000; font-weight:bold}
+
+.text06Bold {font-family: Helvetica, Arial, sans-serif;text-decoration:none; font-weight:bold}
+.text06Bold a:hover {text-decoration:underline; color:#000000; font-weight:bold}
+
+.text06VermellBold {font-family: Helvetica, Arial, sans-serif; text-decoration:none; color:#D8001D; font-weight:bold}
+.text06VermellBold a:hover {text-decoration:underline; color:#000000; font-weight:bold}
+
+.text {font-family: Helvetica, Arial, sans-serif; text-decoration:none; }
+.text a:hover {text-decoration:underline; color:#000000;}
+
+.textneg {font-family: Helvetica, Arial, sans-serif;text-decoration:none; color:#000000 }
+a:hover.textneg {text-decoration:underline; color:#000000;}
+
+.textblanc {font-family: Helvetica, Arial, sans-serif;text-decoration:none; color:#000000 }
+a:hover.textblanc {text-decoration:underline; color:#000000;}
+
+.text06bolditalic {font-family: Helvetica, Arial, sans-serif; font-weight:bold; font-style:italic;}
+.arialbold {font-family: Helvetica, Arial, sans-serif; text-decoration:none; font-weight:bold; }
+
+.text06italic {font-family: Helvetica, Arial, sans-serif; font-style:italic;}
+
+.negre {color: #000000;}
+a:hover.negre {color: #000000}
+
+.vermell {color: #000000;}
+a:hover.vermell {color: #000000;}
+
+.grana {color: #000000;}
+a:hover.grana {color: #000000;}
+
+.granafluix {color:#000000}
+a:hover.granafluix {color:#000000}
+
+.rojo {color: #000000;}
+a:hover.rojo {color: #000000;}
+
+.blanc {color:#000000;}
+a:hover.blanc{color:#000000; text-decoration:none}
+
+.gris {color:#000000;}
+a:hover.gris {color:#000000;}
+
+.grisfort {color:#000000;}
+a:hover.grisfort {color:#000000;}
+
+.rosa {color:#000000;}
+a:hover.rosa {color:#000000;}
+
+.fucsia {color:#000000;}
+a:hover.fucsia {color:#000000;}
+
+.taronjaC53500 {color:#000000;}
+a:hover.taronjaC53500 {color:#000000;}
+
+.lilafort {color:#000000}
+a:hover.lilafort {color:#000000}
+
+.taronjafort {color: #000000;}
+a:hover.taronjafort {color: #000000;}
+
+.blauFlort {color: #000000;}
+a:hover.blauFlort {color: #000000;}
+
+.blaucel {color:#000000;}
+a:hover.blaucel {color:#000000;}
+
+.blaulila {color: #000000;}
+a:hover.blaulila {color: #000000;}
+
+.grisfluix {color:#000000;}
+a:hover.grisfluix {color:#000000;}
+
+.lilafluix {color:#000000;}
+a:hover.lilafluix {color:#000000;}
+
+.marro {color:#000000}
+a:hover.marro {color:#000000}
+
+
+.blauagenda {}
+.subratllat {text-decoration:underline;}
+
+.t0 {font-size:0pt; height:0px; background-color:#FFFFFF;}
+.t50 {font-size:8pt;}
+.t55 {font-size:8pt;}
+.t60 {font-size:8pt;}
+.t65 {font-size:8pt;}
+.t70 {font-size:8pt;}
+.t75 {font-size:9pt;}
+.t80 {font-size:8pt;}
+.t85 {font-size:8pt;}
+.t90 {font-size:9pt;}
+.t95 {font-size:9pt;}
+.t100 {font-size:10pt;}
+.t110 {font-size:11pt;}
+.t120 {font-size:12pt;}
+.t140 {font-size:14pt;}
+.t150 {font-size:15pt;}
+.t160 {font-size:16pt;}
+.t180 {font-size:18pt;}
+
+
+.grocoverSIOT{text-decoration:none; font-weight:normal; font-size:0.7em; font-family:Arial, Helvetica, sans-serif; display:block}
+a:hover.grocoverSIOT{color:#000000; background-color:#FFDF78; text-decoration:none; font-size:0.7em; font-family:Arial, Helvetica, sans-serif; display:block} 
+a:active.grocoverSIOT {color:#000000; font-weight:bold; font-size:0.7em; font-family:Arial, Helvetica, sans-serif; display:block; background-color:#FFDF78} 
+
+.blauoverSIOT{text-decoration:none; font-weight:normal; font-size:0.75em; font-family:Arial, Helvetica, sans-serif; display:block}
+a:hover.blauoverSIOT {color:#000000; background-color:#C6D6E6; text-decoration:none; font-size:0.75em; font-family:Arial, Helvetica, sans-serif; display:block} 
+a:active.blauoverSIOT {color:#000000; font-weight:bold; font-size:0.75em; font-family:Arial, Helvetica, sans-serif; display:block; background-color:#C6D6E6;} 
+
+
+
+.valignTop {vertical-align:text-top;}
+.valignMiddle { vertical-align:middle}
+.valignBottom {vertical-align:bottom;}
+.displayTablecol {display:table-column;}
+.displayTablecell {display: table-cell;}
+.displayTable {display:table;}
+/* .top50 {_top: 50%;}*/
+.top50{}
+/*.topm50 {_top: -50%;}*/
+.topm50 {}
+.overflow{overflow:visible;}
+.overflowHidden {overflow: hidden;}
+/*.relative {_position: relative;}
+.absolute {_position: absolute;}
+*/
+.relative {}
+.absolute {}
+.imatge {}
+.marginInf {}
+.jus {text-align: justify;}
+.justificat {text-align: justify;}
+
+
+.brdAlerta { border-style:solid;border-color: #000000; border-width:2px}
+.brdSupInfNegre2px {border-top-style:solid; border-top-color: #000000; border-top-width:2px; border-bottom-style:solid; border-bottom-color: #000000; border-bottom-width:2px;}
+.brdSupInfBlanc1px {border-top-style:solid; border-top-color: #ffffff; border-top-width:1px; border-bottom-style:solid; border-bottom-color: #ffffff; border-bottom-width:1px; }
+
+.brdNegre2px {border-style:solid; border-color: #000000; border-width:2px;}
+.brdNegre1px {border-style:solid; border-color: #000000; border-width:1px;}
+.brdDreEsqNegre1px {border-left-style:solid; border-left-color: #000000; border-left-width:1px; border-right-style:solid; border-right-color: #000000; border-right-width:1px;}
+.brdInfGris { border-bottom-style:solid; border-bottom-color: #CCCCCC; border-bottom-width:1px; }
+.brdInf2Blanc{ border-bottom-style:solid; border-bottom-color: #ffffff; border-bottom-width:2px; }
+.brdinfvermell { border-bottom-style:solid; border-bottom-color: #990000; border-bottom-width:1px;}
+.brdInfGrisDotted { border-bottom-style:dotted; border-bottom-color: #CCCCCC; border-bottom-width:1px; }
+.brdInfGrisDottedTamany0 { border-bottom-style:dotted; border-bottom-color: #CCCCCC; border-bottom-width:1px;height:1px; }
+.brdinftaronja { border-bottom-style: solid; border-bottom-color: #BA3C00; border-bottom-width:1px;}
+.brdInfBlau { border-bottom-color:#B0C4DE; border-bottom-width: 1px; border-bottom-style:solid;}
+.brdBlau {border-style:solid; border-color: #B0C4DE; border-width: 1px;}
+.brdGrisfluix { border-style: solid; border-color: #999999;border-width:1px 1px 1px 1px; }
+.brdGrisfluixTL { border-style: solid; border-color: #999999;border-width:1px 1px 0px 0px; }
+.brdGrisfluixBR { border-style: solid; border-color: #999999;border-width:0px 0px 1px 1px; }
+
+.border0 {border:0;}
+
+
+.brdGris { border-style:solid; border-color: #999999;border-width:0px 1px 1px 1px; }
+
+.bold {font-weight:bold}
+.normal {font-weight:normal}
+.cursiva { font-style:italic}
+
+.cleardreta {
+clear:right
+}
+
+.clearesquerra {
+clear:left
+}
+
+.clearambdos {
+clear:both
+}
+
+/* ESTILS ANTICS
+	-----INICI-----*/
+.gtxtneg100padding{ font-family: Helvetica, Arial, sans-serif; font-size: 75%; color: #000000; font-weight: normal; text-decoration: none;  padding:2px 8px 2px 4px; text-align:left;}
+.gtxtrojo100 { font-family: Helvetica, Arial, sans-serif; font-size: 75%; color: #990000; font-weight: normal; text-decoration: none ;text-align:left; }
+.gtxtrojo120 { font-family: Helvetica, Arial, sans-serif; font-size: 90%; color: #990000; font-weight: normal; text-decoration: none ;text-align:left; }
+.gTxtRojo140 { font-family: Helvetica, Arial, sans-serif; font-size: 105%; color: #990000; font-weight: normal; text-decoration: none ;text-align:left; }
+.gTxtRojo160 { font-family: Helvetica, Arial, sans-serif; font-size: 123%; color: #990000; font-weight: normal; text-decoration: none ; text-align:left;}
+.gTxtRojo180 { font-family: Helvetica, Arial, sans-serif; font-size: 135%; color: #990000; font-weight: normal; text-decoration: none ;text-align:left; }
+.gTxtNeg100 { font-family: Helvetica, Arial, sans-serif; font-size: 75%; color: #000000; font-weight: normal; text-decoration: none ; text-align:left;}
+.gTxtNeg120 { font-family: Helvetica, Arial, sans-serif; font-size: 90%; color: #000000; font-weight: normal; text-decoration: none ;text-align:left; }
+.gTxtNeg140 { font-family: Helvetica, Arial, sans-serif; font-size: 105%; color: #000000; font-weight: normal; text-decoration: none ;text-align:left;}
+.gTxtNeg160 { font-family: Helvetica, Arial, sans-serif; font-size: 123%; color: #000000; font-weight: normal; text-decoration: none ; text-align:left;}
+.gTxtNeg180 { font-family: Helvetica, Arial, sans-serif; font-size:  135%; color: #000000; font-weight: normal; text-decoration: none ; text-align:left;}
+.gTxtBlanc120 { font-family: Helvetica, Arial, sans-serif; font-size: 90%; color: #FFFFFF; font-weight: normal; text-decoration: none ; text-align:left;}
+
+/* ESTILS ANTICS
+	-----FI-----*/
+
+
+/* ESTILS DE CAPCELERA DE CONTRACTACIO 
+	-----INICI-----*/
+#FotocopiesDisponibles{margin: 0px;padding: 0px 1px 0px 0px;width: 10%;font-family: Arial, Helvetica, sans-serif, Helvetica, sans-serif; font-size: 70%; color: #990000; text-decoration: none ; font-weight: bold; vertical-align:sub; text-align:left;}
+#DataPublicacio{margin: 0px;padding: 0px 1px 0px 0px;width: 13%;font-family: Arial, Helvetica, sans-serif, Helvetica, sans-serif; font-size: 70%;  color: #990000; text-decoration: none ; font-weight: bold; vertical-align:sub;}
+#Document{margin: 0px;padding: 0px 1px 0px 0px;width: 13%;font-family: Arial, Helvetica, sans-serif, Helvetica, sans-serif; font-size: 70%;  color: #990000; text-decoration: none ; font-weight: bold;  vertical-align:sub;}
+#Descripcio{margin: 0px;padding: 0px 1px 0px 0px;width: 36%;font-family: Arial, Helvetica, sans-serif, Helvetica, sans-serif; font-size: 70%;  color: #990000; text-decoration: none ; font-weight: bold;  vertical-align:sub;}
+#Pressupost{margin: 0px;padding: 0px 1px 0px 0px;width: 12%;font-family: Arial, Helvetica, sans-serif, Helvetica, sans-serif; font-size: 70%;  color: #990000; text-decoration: none ; font-weight: bold;  vertical-align:sub;}
+#Ofertes{margin: 0px;padding: 0px 1px 0px 0px;width: 15%;font-family: Arial, Helvetica, sans-serif, Helvetica, sans-serif; font-size: 70%; color: #990000; text-decoration: none ; font-weight: bold; vertical-align:sub}
+/* ESTILS DE CAPCELERA DE CONTRACTACIO 
+	-----FI-----*/
+
+
+	
+	
+/*********************************/
+/*ESTILS CAPES BIBLIOTEQUES*/
+/********************************/
+.letterspacing30 {letter-spacing:0.3em;}
+
+#titol {padding-left:10px; background-color:#CECF63;  border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:1px; width:654px;}
+.imatges {border-right-color:#000000; border-right-style:solid; border-right-width:1px; border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:1px; display:inline; ; font-weight:bold; font-family:Arial, Helvetica, sans-serif;}
+.ultimaimatge {border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:1px; display:inline; ; font-weight:bold; font-family:Arial, Helvetica, sans-serif;}
+.bordetop1 {border-top-color:#000000; border-top-style:solid; border-top-width:1px;}
+
+
+.puntsespaciadors{background-image:url(/img/biblioteques/gaia/bb_punts.gif); height:1px; font-size:0;}
+.espainegre{background-color:#000000; height:1px; font-size:0;}
+
+#menubiblio{display:block;}
+#menuprincipal{padding:16px 0 16px 0;margin:0 0 0 0;}
+.block {display:block}
+.fonsBiblioteca {background-image:url(http://www.l-h.cat/img/biblioteques/GAIA/fons_biblioteca.gif);}
+.bb_fonsinici {background-image:url(http://www.l-h.cat/img/biblioteques/GAIA/bb_fonsinici.gif);}
+.bb_fonsmenuinici {background-image:url(http://www.l-h.cat/img/biblioteques/GAIA/bb_fonsmenuinici.gif);}
+.bb_fonsvermell {background-image:url(http://www.l-h.cat/img/biblioteques/GAIA/bb_fonsvermell.gif);}
+.bb_fonsmenuvermell {background-image:url(http://www.l-h.cat/img/biblioteques/GAIA/bb_fonsmenuvermell.gif);}
+.bb_fonsrosa {background-image:url(http://www.l-h.cat/img/biblioteques/GAIA/bb_fonsrosa.gif);}
+.bb_fonsmenurosa {background-image:url(http://www.l-h.cat/img/biblioteques/GAIA/bb_fonsmenurosa.gif);}
+.bb_fonslila {background-image:url(http://www.l-h.cat/img/biblioteques/GAIA/bb_fonslila.gif);}
+.bb_fonsmenulila {background-image:url(http://www.l-h.cat/img/biblioteques/GAIA/bb_fonsmenulila.gif);}
+.bb_fonsblau {background-image:url(http://www.l-h.cat/img/biblioteques/GAIA/bb_fonsblau.gif);}
+.bb_fonsmenublau {background-image:url(http://www.l-h.cat/img/biblioteques/GAIA/bb_fonsmenublau.gif);}
+.bb_fonstaronja {background-image:url(http://www.l-h.cat/img/biblioteques/GAIA/bb_fonstaronja.gif);}
+.bb_fonsmenutaronja {background-image:url(http://www.l-h.cat/img/biblioteques/GAIA/bb_fonsmenutaronja.gif);}
+.bb_fonsgroc {background-image:url(http://www.l-h.cat/img/biblioteques/GAIA/bb_fonsgroc.gif);}
+.bb_fonsmenugroc {background-image:url(http://www.l-h.cat/img/biblioteques/GAIA/bb_fonsmenugroc.gif);}
+.bb_fonsverd {background-image:url(http://www.l-h.cat/img/biblioteques/GAIA/bb_fonsverd.gif);}
+.bb_fonsmenuverd {background-image:url(http://www.l-h.cat/img/biblioteques/GAIA/bb_fonsmenuverd.gif);}
+.fonslinea {background-image:url(http://www.l-h.cat/img/fonslineagris.gif);}
+.fonslineagris {background-image:url(http://www.l-h.cat/img/biblioteques/GAIA/fonslinea.gif);}
+.fonsflechaverda {background-image:url(http://www.l-h.cat/img/biblioteques/GAIA/fonsflechaverda.gif);}
+.fonsgris05 { background-color:#FBFBFB;}
+.fonsgris30 { background-color:#EFEFEF;}
+.fonsgris70 { background-color:#B6B6B6;}
+.mouse {}
+
+.tornarmenu {background-color:#444444; padding-top:5px; padding-bottom:5px;}
+.lineaPuntsLila {background-image:url(http://www.l-h.cat/img/linea_punts_lila.gif);}
+.lineaPuntsVerda {background-image:url(http://www.l-h.cat/img/linea_punts_verda.gif);}
+
+#submenuserveis {list-style-type:none;display:block;margin:0 0 0 0;padding:0 0 0 0;}
+
+
+#bb_contenidor {background-image:url(http://www.l-h.cat/img/biblioteques/GAIA/bb_fons_menu2.gif); overflow:hidden; width:100%; position:absolute; display:inline; border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:1px; border-top-color:#000000; border-top-style:solid; border-top-width:1px;}
+#bb_menu {width:100%; overflow:hidden; }
+.bordedret1 {border-right-color:#000000; border-right-style:solid; border-right-width:1px;}
+#bb_contingut{display:block;}
+#bb_top{clear:both;}
+#bb_cos {clear:both;padding:10px 0 10px 10px;}
+
+.clearfix:after { content: ".";  display: block;  height: 0;  clear: both;  visibility: hidden; }
+.clearfix{display: inline-table;}
+ 
+.bordetopleftright1 {border-top-color:#000000; border-top-style:solid; border-top-width:1px;border-left-color:#000000; border-left-style:solid;border-left-width:1px;border-right-color:#000000; border-right-style:solid; border-right-width:1px;}
+.bordeleftright1 {border-left-color:#000000; border-left-style:solid;border-left-width:1px;	border-right-color:#000000;	border-right-style:solid;border-right-width:1px;	}
+
+.verdfort {color:#000000;}
+.verdpistacho {color:#000000;}
+.blau {color: #000000;}
+.verd {color: #000000;}
+.fonsverdfluix {background-color:#000000;}
+.fonsVerdA8D441 { background-color:#000000}
+.fonspistacho {background-color:#000000;}
+.fonsVerdCaquiTramits {background-color:#000000;}
+.fonsVerdTramits {background-color:#000000;}
+.fonsverdfort{background-color:#000000;}
+.floatleft {}
+.clearleft {}
+
+.floatright {}
+.clearboth{} 
+.noImprimible {display:none;}
+.nomesImpressora {}
+
+/* capcal per imprimir */
+.flotaresquerra {}
+.ample50p {width:50px}
+ 
+
+
+.inlinetable {display:inline-table;}
+
+
+
+/* Hides from IE-mac \*/
+* html .clearfix{height:1%;}
+.clearfix{display: block;}
+/* End hide from IE-mac */  
+
+/*********************************/
+/*FI ESTILS CAPES BIBLIOTEQUES*/
+/********************************/
+
+/*********************************/
+/* ESTILS FORMULARIS		*/
+/********************************/
+.colEsq {width:70px;text-align:right; padding-right:5px;}
+.colDre {width:315px; text-align:left;}
+
+/*********************************/
+/* ESTILS CAPES CARPETA CIUTADANA*/
+/********************************/
+.w604 {width:100%}
+#espai{height:8px}
+#contenidorGeneral{	width:759px;text-align:left; margin-left:auto;margin-right:auto;}
+#mollespa {padding:0px 0px 3px 10px;}
+#linksblancs{width:354px; padding:30px 0 0 0; text-align:center;}
+#logos{}
+#buscador {}
+#linksbuscador{}
+#capsal{}
+#barratitol{height:25px; line-height:25px}
+#pertemes{padding:0 0 0 15px;width:140px;}
+#cc_titol{padding:0 0 0 60px;width:389px;}
+#titolcolumna{padding:0 0 0 5px;width:150px;float:right;}
+#menu{width:155px;;position:relative;overflow:hidden;} 
+#doscolumnes{width:604px;float:right;position:relative;} 
+#columna{width:155px;float:right;position:relative;}
+#contingut{overflow:auto; display:inline; position:relative; width:449px;} 
+.blau1D4770 {color:#000000}
+
+
+
+#noprint {display:none;}
+.parraf{width:409px;}
+/*input {	border:1px solid #000000;}*/
+.cercar{border:1px solid #800001; background-color:#800000; color:#ffffff;}
+.input_vermell{border:1px solid #800000; background-color:#800000; color:#ffffff; font-size:1em; font-weight:bold; margin-top:2px;}
+.input_vermell2{border:1px solid #800000; background-color:#800000; color:#ffffff; font-weight:bold; margin-top:2px;}
+.inputmarro {background-color:#9E6200; border:1px solid #000000}
+.linksvert{	display:inline; padding:0 0 0 0; margin:0 0 0 0;}
+.linksvert li{display:inline; padding:0 0 0 0; margin:0 0 0 0;}
+.linkshor{padding:0 0 0 0; margin:0 0 0 0;}
+
+.none{text-decoration:none;color:#000000;background-image:url(/img/cc_past_gris_menu.gif); padding-left:1.5em; margin-top:1px;	margin-bottom:1px;}
+
+a:hover.none{text-decoration:underline;	background-image:url(/img/cc_past_verdfluix_menu.gif); color:#FFFFFF;} 
+a:hover{text-decoration:underline;}
+
+.active{text-decoration:underline;background-image:url(/img/cc_past_verd_menu.gif);color:#FFFFFF; padding-left:1.5em;}	
+a:hover.active{text-decoration:underline;background-image:url(/img/cc_past_verd_menu.gif); color:#FFFFFF; padding-left:1.5em;}
+
+.verdhover{text-decoration:none; background-image:url(/img/past_verdfortblanc_menu1.gif); color:#FFFFFF; background-color:#18472C}
+a:hover.verdhover{text-decoration:underline; background-image:url(/img/past_rollverdblanc_menu1.gif); color:#FFFFFF; background-color:#246D3F}
+
+.blauhover{text-decoration:none; background-image:url(/img/past_blaufortblanc_menu.gif); color:#FFFFFF; background-color:#008B8B}
+a:hover.blauhover{text-decoration:underline; background-image:url(/img/past_rollblaublanc_menu1.gif); color:#FFFFFF; background-color:#22B8B0} 
+
+.over{display:block;padding-top:3px;padding-bottom:3px;}
+
+.formulari {width:100%;}
+.caixaform {width:60%;background-color:#57741C;padding:1em 1em 1em 1em; color:#000000;}
+.boton{background-color:#57741C; color:#FFFFFF; font-weight:bold; border:0 solid #000000; font-size:1em}
+.botoverda21{background-color:#008634; color:#000000; font-weight:bold; border:0 solid #000000}
+.botoVerdCel{background-color:#33B3A6; color:#000000; font-weight:bold; border:0 solid #000000}
+.inputform{border:0 solid #000000;font-size:1em;}
+.border0solid{border:0 solid #ffffff;}
+.border1solidverd {border:1px solid #748d21;}
+.border2solidgrana { border:2px solid #B32525;}
+.border1solidverda21 {border:1px solid #008634;}
+.border1solidverdcel {border:1px solid #33B3A6;}
+.border1 {border:1px solid #000000;}
+.borderTop1Blanc { border-top-width: 1px; border-top-style:solid; border-top-color:#FFFFFF}
+.borderBottom1Blanc { border-bottom-width: 1px; border-bottom-style:solid; border-bottom-color:#FFFFFF}
+
+.cell0 {margin:0px 0px 0px 0px; padding:0px 0px 0px 0px}
+.llistaFletxaVerd06 {list-style-image:url(/img/fletxap.gif);}
+
+
+/* lh2010*/
+.fonsBotoBlanc {background-image:url(/img/fons_botoblanc.gif); background-color:#ffffff;}
+/* fi lh2010 */
+
+.fonswebmunicipals {background-image:url(/img/fons_websmunicipals.gif);}
+
+.columnaesquerra{background-image:url(/img/columna_esquerra.gif);}
+.columnacentre{background-image:url(/img/columna_centre.gif);}
+.columnadreta{background-image:url(/img/columna_dreta.gif);}
+.cc_fonsrosa{background-image:url(/img/cc_fons_rosa_centre.gif); background-color:#E1D4BE}
+.cc_fonsgris{background-image:url(/img/cc_fons_gris_centre.gif);}
+.cc_fonsgrisdreta{background-image:url(/img/cc_fons_gris_dreta.gif);}
+.cc_fonsrosadreta{background-image:url(/img/cc_fons_rosa_dreta.gif);}
+.cc_fonsgriscont{background-image:url(/img/cc_fonsgris_cont.gif);}
+.cc_fonspeu{background-image:url(/img/cc_fons_peu.gif);}
+.cc_fonslogo{background-image:url(/img/cc_fons_logo.gif); background-repeat:no-repeat; background-position:right;}
+
+
+.nodeco{text-decoration:none}
+.yesdeco{text-decoration:underline}
+.mayusculas {text-transform:uppercase}
+.minusculas {text-transform:lowercase}
+.marginTop1 {margin-top:1px;}
+.marginSup {margin-top:2px;}
+.marginInf0  {margin-bottom:0px;}
+.marginBottom5 {margin-bottom:5px;}
+.marginSupInf0 {margin-top:0px; margin-bottom:0px}
+.margininf {margin-bottom:2px;}
+.marginsupinf {margin-top:2px; margin-bottom:2px}
+.fonsGrisMoltfosc {background-color:#404040;}
+
+
+

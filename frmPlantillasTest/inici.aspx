@@ -1,9 +1,31 @@
-<!doctype html><html lang="ca" ><head runat="server"><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><asp:Literal id="lblhead" runat="server"></asp:Literal><meta http-equiv="Content-Style-Type" content="text/css"/><meta http-equiv="Content-Language" content="ca"/><meta http-equiv="Content-Script-Type" content="text/javascript"/><meta name="Author" content="Ajuntament de L'Hospitalet"/><meta name="DC.Creator" content="Ajuntament de L'Hospitalet"/><meta name="DC.Identifier" content="http://www.l-h.cat"/><meta id="metatitle" name="title" content="Inici" runat="server" /><meta name="DC.title" content="Inici"/><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"/><meta name="DC.Language" content="ca"/><meta name="Copyright" content="http://www.l-h.cat/gdocs/d6779062.pdf"/><meta name="DC.Description" content="Inici"/><meta name="Description" content="Inici"/><meta name="keywords" content="educa, cultura"/><meta name="DC.subject" content="educa, cultura"/><meta name="robots" content="INDEX,FOLLOW"/><link rel="stylesheet" type="text/css" href="Styles/default.css" /><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<!doctype html>
+<html lang="ca" ><head runat="server">
+    <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <asp:Literal id="lblhead" runat="server">
+
+    </asp:Literal><meta http-equiv="Content-Style-Type" content="text/css"/>
+    <meta http-equiv="Content-Language" content="ca"/>
+    <meta http-equiv="Content-Script-Type" content="text/javascript"/>
+    <meta name="Author" content="Ajuntament de L'Hospitalet"/>
+    <meta name="DC.Creator" content="Ajuntament de L'Hospitalet"/>
+    <meta name="DC.Identifier" content="http://www.l-h.cat"/>
+    <meta id="metatitle" name="title" content="Inici" runat="server" />
+    <meta name="DC.title" content="Inici"/><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"/>
+    <meta name="DC.Language" content="ca"/><meta name="Copyright" content="http://www.l-h.cat/gdocs/d6779062.pdf"/>
+    <meta name="DC.Description" content="Inici"/>
+    <meta name="Description" content="Inici"/>
+    <meta name="keywords" content="educa, cultura"/>
+    <meta name="DC.subject" content="educa, cultura"/>
+    <meta name="robots" content="INDEX,FOLLOW"/>
+    <link rel="stylesheet" type="text/css" href="Styles/default.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 <!-- visor imatges -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-tools/1.2.7/jquery.tools.min.js"> </script>
     <script type="text/javascript" src="js/visorimatges/jquery.min.js"></script>
     <script type="text/javascript" src="js/visorimatges/jquery-1.6.4.min.js"></script>
 <script type="text/javascript" src="js/visorimatges/jquery.lightbox-0.5CAS.js"></script>
@@ -11,11 +33,15 @@
 <script type="text/javascript" src="js/visorimatges/noscript.js"></script>
 <!-- fi visor imatges -->
     <title>Inici</title>
-    
     <link rel="stylesheet" href="https://www.l-h.cat/css/barresLH/barraLH.css" type="text/css" media="screen"/>
     <link rel="stylesheet" href="Styles/culturaLHeduca.css" type="text/css" media="screen"/>
     <link rel="stylesheet" href="Styles/formulariCulturalheduca.css" type="text/css" media="screen"/>
-    <link rel="stylesheet" href="http://www.l-h.cat/css/jquery.lightbox-0.5.css" type="text/css" media="screen"/></head><body > <div><div class='row'><div class='col' >
+    <link rel="stylesheet" href="Styles/jquery.lightbox-0.5.css" type="text/css" media="screen"/>
+
+</head>
+    <body > 
+        <div><div class='row'>
+            <div class='col' >
 <nav role="navigation" class="navbar navbar-LH navbar-static-top">
       <div class="container-fluid">
     		<!-- Logo i boto expandir menu -->

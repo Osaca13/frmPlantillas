@@ -1,0 +1,729 @@
+
+body {font-family: Arial, Helvetica, sans-serif; background-color:#FFFFFF; background-repeat: no-repeat; text-align: justify; border-top-width: 0px; border-left-width: 0px;}
+#ImgPrevDiv { display:inline;}
+#DocPrevDiv {display:inline;}
+/* taules */
+.taula {
+width:100%;
+text-align:center;
+float:left;
+border-collapse:separate;
+}
+
+
+.filera {
+float:left;
+border:1px solid #CAD1D3; 
+
+}
+
+.columna {
+height:100%;
+float:left;
+border:1px solid #CAD1D3;  
+vertical-align:top;
+height:60px;
+
+}
+
+.columnaSeleccionada {
+border:1px solid #CAD1D3; 
+display:table-cell; 
+vertical-align:top;
+background-color:#f5f5f5;
+}
+
+
+.flotar {float:left; border:1px solid #CAD1D3; text-align:center; height:auto; width:}
+.noflotar {clear:both}
+
+/* taules */
+
+
+
+
+
+.taulaNoticies tr td{ border-bottom:2px solid #fff;}
+.noticiaHome {font-family: Arial; font-size: 11px; color:#666666; font-weight:normal; text-decoration:none; text-align:justify; padding:10px; border-top:1px solid #CCC; }
+.noticiaHome img {border:1px solid #666666; margin-right:10px; text-align:left; float:left; width:100px; margin-bottom:10px;}
+.noticiaHome img.senseborde {border:0; margin-right:10px; text-align:left; float:left; width:100px; margin-bottom:10px;}
+.noticiaHome img.apaisat {border:1px solid #666666; text-align:left; float:left; width:334px; margin-bottom:10px;}
+.noticiaHome h3 { font-weight:bold; padding-bottom:10px; font-size: 11px; text-transform: uppercase; color:#4C4C4C;}
+.noticiaHome .totenunacolumna {float:right; text-align:left; width:225px}
+.noticiaHome a.enllas {font-family: Arial; font-size: 11px; color:#CB0101; display:list-item; list-style-image:url(/img/common/fletxa_noticia_home.gif); list-style-position:inside; font-weight: bold; text-decoration: yes; text-align:right; margin-top:3px}
+.noticiaHome a.doc {font-family: Arial; font-size: 11px; color:#CB0101; display:list-item; list-style-image:url(/img/common/pdf.png); list-style-position:inside; font-weight: bold; text-decoration: yes; text-align:right; margin-top:3px;}
+.noticiaHome a {font-family: Arial; font-size: 11px; color:#CB0101; text-decoration: none; margin-top:10px; vertical-align:middle}
+/*.noticiaHome a {font-family: Arial; font-size: 11px; color:#990000; text-decoration: yes ;}*/
+
+.grocFFFFCC { background-color:#FFFFCC;}
+
+.tablabordepeqroj {border: 1px solid #D3D3D3;}
+.tablabordepeqroj tr{border: 1px solid #D3D3D3;}
+
+.tablabordepeqroj textarea {border:1px solid #ccc; padding:3px; margin-bottom:5px; font-family:Arial, Helvetica, sans-serif}
+.tablabordepeqroj select { border:1px solid #CCC;}
+.tablabordepeqroj input[type="text"]{border:1px solid #ccc; padding:3px; margin-right:5px; vertical-align:middle;}
+.tablabordepeqroj input.border0{ border:0;}
+.txtGrisCL_MenuTop10px { font-family: Arial, Helvetica, sans-serif; font-size: 10px; color:#CCCCCC; font-weight: normal; text-decoration: none}
+.txtGrisCL_MenuTop10px:hover { font-family: Arial, Helvetica, sans-serif; font-size: 10px; color:#FFFFFF; font-weight: normal; text-decoration: none }
+.txtGrisCL_TextoBuscar10px { font-family: Arial, Helvetica, sans-serif; font-size: 10px; color:#666666; font-weight: normal; text-decoration: none ; width: 100px; height: 18px}
+.Boton_Buscar {  font-family: Arial, Helvetica, sans-serif; font-size: 10px; color:#cccccc; text-decoration: none; height: 18px; width: 18px; border: 1px #666666 solid; background-color:#036101}
+
+.botoEsborrar {border:1px solid #7c0000; background-color:#cc0000; padding:5px 10px; border-radius:8px; margin-top:20px; margin-bottom:20px; margin-right:5px; font-weight:bold; color:#fff; font-family:"Roboto Condensed", Arial, Sans-Serif; text-transform:uppercase; font-weight:400; vertical-align:middle}
+.botoEsborrar input {border:0; background-color:#cc0000; padding:0; border-radius:8px; margin-top:20px; margin-bottom:20px; font-weight:bold; color:#fff; font-family:"Roboto Condensed", Arial, Sans-Serif; text-transform:uppercase; font-weight:400;}
+
+
+.botoAcceptarModificar {border:1px solid #007C8E; background-color:#0093A8; padding:5px 10px; border-radius:8px; margin-top:20px; margin-bottom:20px; margin-right:5px; font-weight:bold; color:#fff; font-family:"Roboto Condensed", Arial, Sans-Serif; text-transform:uppercase; font-weight:400;  vertical-align:middle}
+.botoAcceptarModificar input {border:0; background-color:#0093A8; padding:0; border-radius:8px; margin-top:20px; margin-bottom:20px; font-weight:bold; color:#fff; font-family:"Roboto Condensed", Arial, Sans-Serif; text-transform:uppercase; font-weight:400;}
+
+
+.txtGrisCL_MenuBottom10px { font-family: Arial, Helvetica, sans-serif; font-size: 10px; color:#CCCCCC; font-weight: normal; text-decoration: none }
+.txtGrisCL_MenuBottom10px:hover { font-family: Arial, Helvetica, sans-serif; font-size: 10px; color:#FFFFFF; font-weight: normal; text-decoration: none }
+.txtGrisCL_ListaWebs_Bottom10px { font-family: Arial, Helvetica, sans-serif; font-size: 10px; color:#666666; font-weight: normal; text-decoration: none ; width: 145px; height: 10px}
+.txtRojo_TitulosAreas14px { font-family: Arial, Helvetica, sans-serif; font-size: 14px; color:#CB0101; font-weight: bold; text-decoration: none ; padding-right: 4px; padding-left: 4px}
+.txtNegro_TitulosAreas14px { font-family: Arial, Helvetica, sans-serif; font-size: 14px; color:#000; font-weight: bold; text-decoration: none ; padding-right: 4px; padding-left: 4px}
+.txtBlanco_TitulosAreas14px { font-family: Arial, Helvetica, sans-serif; font-size: 14px; color:#fff; font-weight: bold; text-decoration: none ; padding-right: 4px; padding-left: 4px}
+.txtGris_TextosBase11px { font-family: Arial, Helvetica, sans-serif; font-size: 11px; color:#666666; font-weight: normal; text-decoration: none ; padding-right: 4px; padding-left: 4px}
+.txtGris_InfoUsuario10px { font-family: Arial, Helvetica, sans-serif; font-size: 10px; color:#666666; font-weight: normal; text-decoration: none ; padding-right: 0px; padding-left: 0px; letter-spacing: 0.9px}
+.txtGris_MenuHome11px { font-family: Arial, Helvetica, sans-serif; font-size: 11px; color:#666666; font-weight: normal; text-decoration: none }
+.grisvermell { font-family: Arial, Helvetica, sans-serif; font-size: 11px; color:#666666; font-weight: normal; text-decoration: none }
+.grisvermell:hover { font-family: Arial, Helvetica, sans-serif; font-size: 11px; color:#D40000; font-weight: normal; text-decoration: none}
+.txtGris_MenuHome11px:hover { font-family: Arial, Helvetica, sans-serif; font-size: 11px; color:#003366; font-weight: normal; text-decoration: none}
+.txtGris_TickerHora10px { font-family: Arial; font-size: 9px; color:#666666; font-weight: normal; text-decoration: none ; width: 145px; height: 10px }
+.txtGrisGL_TickerAviso10px { font-family: Arial, Helvetica, sans-serif; font-size: 10px; color:#666666; font-weight: normal; text-decoration: none }
+.txtGrisGL_TickerAviso10px:hover { font-family: Arial, Helvetica, sans-serif; font-size: 10px; color:#666666; font-weight: normal; text-decoration: none ; clip:   rect(   )}
+.txtGris_NoticiasHome11px { font-family: Arial, Helvetica, sans-serif; font-size: 11px; color:#666666; font-weight: normal; text-decoration: none }
+.txtGris_NoticiasHome11px:hover { font-family: Arial, Helvetica, sans-serif; font-size: 11px; color:#000000; font-weight: normal; text-decoration: none }
+.txtGrisCL_FechaNoticiasHome9px {  font-family: Arial, Helvetica, sans-serif; font-size: 9px; color:#666666; text-decoration: none; font-weight: normal; margin-left: -1px}
+.10px_EspacioCeldasHome {  margin-left: 10px}
+.txtRojo_AreaPersonal9px { font-family: Arial, Helvetica, sans-serif; font-size: 10px; color:#993333; font-weight: normal; text-decoration: none ; letter-spacing: 0.9px}
+.txtRojo_AreaPersonal9px:hover { font-family: Arial, Helvetica, sans-serif; font-size: 10px; color:#993333; font-weight: normal; text-decoration: underline}
+.txtGris_Path10px { font-family: Arial, Helvetica, sans-serif; font-size: 10px; color:#666666; font-weight: normal; text-decoration: none }
+.txtGris_Path10px:hover { font-family: Arial, Helvetica, sans-serif; font-size: 10px; color:#666666; font-weight: normal; text-decoration: none }
+.txtRojo_Titulo_PagInterior18px { font-family: Arial, Helvetica, sans-serif; font-size: 18px; color:#CA1620; font-weight: bold; text-decoration: none }
+.txtRojo_Titulo_PagInterior16px { font-family: Arial, Helvetica, sans-serif; font-size: 16px; color:#CA1620; font-weight: bold; text-decoration: none }
+.txtBlau_Titulo_PagInterior16px { font-family: Arial, Helvetica, sans-serif; font-size: 16px; color:#002292; font-weight: bold; text-decoration: none; border-bottom:1px dotted #002292; border-top:1px dotted #002292; padding-bottom:2px; padding-top:2px; background-color:#F5F7FD;}
+.txtRojo_Titulo_PagInterior14px { font-family: Arial, Helvetica, sans-serif; font-size: 14px; color:#CA1620; font-weight: bold; text-decoration: none }
+.txtRojo_Titulo_PagInterior13px { font-family: Arial, Helvetica, sans-serif; font-size: 13px; color:#CA1620; font-weight: bold; text-decoration: none }
+.txtRojo_Titulo_PagInterior12px { font-family: Arial, Helvetica, sans-serif; font-size: 12px; color:#CA1620; font-weight: bold; text-decoration: none }
+.txtGrisCL_Copy_Interior11px { font-family: Arial, Helvetica, sans-serif; font-size: 11px; color:#666666; font-weight: normal; text-decoration: none ; clip:  rect(   )}
+.txtRojo_Indice_Interior11px { font-family: Arial, Helvetica, sans-serif; font-size: 11px; color:#CA1620; font-weight: normal; text-decoration: none ; clip: rect( ) }
+.txtRojo_Interior11px { font-family: Arial, Helvetica, sans-serif; font-size: 11px; color:#CA1620; font-weight: normal; text-decoration: none ;}
+.txtRojo_Indice_Interior11px:hover { font-family: Arial, Helvetica, sans-serif; font-size: 11px; color:#CA1620; font-weight: normal; text-decoration: underline; clip: rect( ) }
+.txtRojo_Indice_Interior15px { font-family: Arial, Helvetica, sans-serif; font-size: 15px; color:#CA1620; font-weight: bold; text-decoration: none ; clip: rect( ) }
+.txtRojo_Indice_Interior15px:hover { font-family: Arial, Helvetica, sans-serif; font-size: 15px; color:#CA1620; font-weight: bold; text-decoration: underline; clip: rect( ) }
+.txtGrisCL_CopyrightLegal10px { font-family: Arial, Helvetica, sans-serif; font-size: 10px; color:#AAAAAA; font-weight: normal; text-decoration: none }
+.txtGrisCL_CopyrightLegal10px:hover { font-family: Arial, Helvetica, sans-serif; font-size: 10px; color:#666666; font-weight: normal; text-decoration: none }
+.txtNegro_Anclas11px { font-family: Arial, Helvetica, sans-serif; font-size: 11px; color:#000000; font-weight: normal; text-decoration: none ; clip: rect( ) }
+.txtNegro_Anclas11px:hover { font-family: Arial, Helvetica, sans-serif; font-size: 11px; color:#000000; font-weight: normal; text-decoration: underline; clip: rect( ) }
+.txtNegro_VerMas11px { font-family: Arial, Helvetica, sans-serif; font-size: 11px; color:#000066; font-weight: normal; text-decoration: none; clip: rect( ) }
+.txtNegro_VerMas11px:hover { font-family: Arial, Helvetica, sans-serif; font-size: 11px; color:#000066; font-weight: normal; text-decoration: underline; clip: rect( ) }
+.txtGris_InfoDocumentos10px { font-family: Arial, Helvetica, sans-serif; font-size: 10px; color:#666666; font-weight: normal; text-decoration: none ; clip: rect( ) }
+.txtGris10px { font-family: Arial; font-size: 10px; color:#666666; font-weight: normal; text-decoration: none ; }
+.txtGris10px:hover { font-family: Arial; font-size: 10px; color:#000000; font-weight: normal; text-decoration: none ; }
+.txtGris9px { font-family: Arial; font-size: 9px; color:#666666; font-weight: normal; text-decoration: none ; }
+.txtGris9px:hover { font-family: Arial; font-size: 9px; color:#000000; font-weight: normal; text-decoration: none ; }
+
+.txtNeg10px { font-family: Arial; font-size: 9px; color:#000000; font-weight: normal; text-decoration: none ; }
+.txtgris12px { font-family: Arial; font-size: 12px; color:#666666; font-weight: normal; text-decoration: none ; }
+.txtGris12px:hover { font-family: Arial; font-size: 12px; color:#000000; font-weight: normal; text-decoration: none ; }
+.txtNeg12px { font-family: Arial; font-size: 12px; color:#000000; font-weight: normal; text-decoration: none ; }
+a.txtNeg12px:hover { font-family: Arial; font-size: 12px; color:#666666; font-weight: normal; text-decoration: underline ; }
+.txtNeg12pxFF { font-family: Arial; font-size: 12px; color:#000000; font-weight: normal; text-decoration: none ; }
+.bordeRojo {  border: 1px #990000; height: 1px; width: 1px}
+.txtRojo12px { font-family: Arial; font-size: 12px; color:#990000; font-weight: normal; text-decoration: none ;  }
+.txtTaronja11px { font-family: Arial; font-size: 11px; color:#B82D0A; font-weight: normal; text-decoration: none ; }
+.txtTaronja12px { font-family: Arial; font-size: 12px; color:#B82D0A; font-weight: normal; text-decoration: none ; }
+.txtTaronja14px { font-family: Arial; font-size: 14px; color:#B82D0A; font-weight: normal; text-decoration: none ; }
+.txtRojo14px { font-family: Arial; font-size: 14px; color:#990000; font-weight: normal; text-decoration: none ; }
+.txtNeg14px { font-family: Arial; font-size: 14px; color:#000000; font-weight: normal; text-decoration: none ; }
+.saltPagina {  page-break-before: always; page-break-after: always}
+.txtNeg11px { font-family: Arial; font-size: 11px; color:#000000; font-weight: normal; text-decoration: none ; }
+.txtBlanco14px { font-family: Arial; font-size: 14px; color:#FFFFFF; font-weight: normal; text-decoration: none ; }
+.INPUTTEXTROJO {  background-color:#FFF4F4}
+.INPUTTEXTBLANCO { background-color:#FFFFFF}
+.txtRojo24px { font-family: Arial; font-size: 24px; color:#990000; font-weight: normal; text-decoration: none ; }
+.inputTextrojo12px { font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: bold; text-decoration: none ; clip:   rect(   ); text-align: right; color:#990033}
+.inputTextrojoL12px { font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: bold; text-decoration: none ; clip:   rect(   ); text-align: left; color:#990033}
+.inputTextverd12px { font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: bold; text-decoration: none ; clip:  rect(   ); text-align: right; color:#009933}
+.inputTextverd16px { font-family: Arial, Helvetica, sans-serif; font-size: 16px; font-weight: bold; text-decoration: none ; clip:  rect(   ); text-align: right; color:#009933}
+.inputTextrojo24px { font-family: Arial, Helvetica, sans-serif; font-size: 18px; color:#993333; font-weight: bold; text-decoration: none ; clip: rect( ); text-align: right }
+.inputTextverd24px { font-family: Arial, Helvetica, sans-serif; font-size: 18px; color:#009933; font-weight: bold; text-decoration: none ; clip: rect( ); text-align: right }
+.txtAzul12px { font-family: Arial; font-size: 12px; color:#0033FF; font-weight: normal; text-decoration: none ; }
+.txtGris24px { font-family: Arial; font-size: 24px; color:#CCCCCC; font-weight: normal; text-decoration: none ; }
+.txtGris36px { font-family: Arial; font-size: 36px; color:#CCCCCC; font-weight: normal; text-decoration: none ; }
+.txtGris16px { font-family: Arial; font-size: 16px; color:#666666; font-weight: normal; text-decoration: none ; }
+.txtBlanco12px { font-family: Arial; font-size: 12px; color:#FFFFFF; font-weight: normal; text-decoration: none ; }
+.txtBlanco10px { font-family: Arial; font-size: 10px; color:#FFFFFF; font-weight: normal; text-decoration: none ; }
+.txtBlanco11px { font-family: Arial; font-size: 11px; color:#FFFFFF; font-weight: normal; text-decoration: none ; }
+.txtGris11px { font-family: Arial; font-size: 11px; color:#666666; font-weight: normal; text-decoration: none ; }
+.txtGris11px:hover { font-family: Arial; font-size: 11px; color:#000000; font-weight: normal; text-decoration: none ; }
+.inputTextrojo10px { font-family: Arial, Helvetica, sans-serif; font-size: 10px; font-weight: bold; text-decoration: none ; clip: rect( ); text-align: right; color:#990033 }
+.nomMajuscules {  text-transform: capitalize}
+.INPUTTEXTAZUL {background-color:#D6E4E9 }
+.txtRojo11px { font-family: Arial; font-size: 11px; color:#990000; font-weight: normal; text-decoration: none ; }
+.txtRojo18px {
+font-family: Arial; font-size: 18px; color:#990000; font-weight: normal; text-decoration: none ;
+}
+.INPUTTEXTROJO11px {
+	background-color:#FFF4F4;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	background-position: center center;
+}
+.txtRojoSobreBlanco {
+	background-color:#990000;
+	color:#FFFFFF;
+}
+.txtNegroSobreBlanco {
+	background-color:#FFFFFF;
+	color:#000000;
+}
+
+.txtNeg16px {
+font-family: Arial; font-size: 16px; color:#000000; font-weight: normal; text-decoration: none ;
+}
+.txtRojo16px {
+
+font-family: Arial; font-size: 16px; color:#990000; font-weight: normal; text-decoration: none ;
+}
+.txtBlanco18px {
+font-family: Arial; font-size: 18px; color:#FFFFFF; font-weight: normal; text-decoration: none 
+}
+.INPUTTEXTAZULOscuro {
+background-color:#38617E
+}
+.negroSobreBlanco14px {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color:#000000;
+	background-color:#FFFFFF;
+	border: thin none #FFFFFF;
+}
+.blancSobreNegre { font-family: Arial; font-size: 80%; background-color:#000000; color:#FFFFFF;text-decoration:none; font-weight:bold;}
+.blancSobreVermell { border:0; font-family: Arial; font-size: 80%; background-color:#BD110F; color:#FFFFFF; text-decoration:none;  }
+.fonsAdminTributaria {background-image:url(/img/fons_admin_tributaria.gif);}
+.fonsIntranet {background-image:url(/img/fons_intranet.gif);}
+.linearatlles { background-image:url(/img/linea_ratlles.gif);}
+.fonsSecretaria {background-image:url(/img/secretaria/fons_secretaria.gif);}
+.fonsVermellFCE1D8 {background-color:#FCE1D8;}
+.fonsVermell { background-color:#990000}
+.caixaTaronjalh2010 {border-left: 1px solid #C47700; border-top: 1px solid #C47700; border-right: 1px solid #C47700; border-bottom: 1px solid #C47700; /*-moz-border-radius: 10px; -webkit-border-radius: 10px;*/ padding:10px; background-color:#FEEFD8;}
+
+.scrollw288h270 {overflow-x:hidden; overflow-y:auto; width:288px; height:270px; clip:rect('0', '288', '270', '0'); position:relative;}
+.scrollBenestarSocial {overflow-x:hidden; overflow-y:auto; width:456px; height:400px; position:relative;}
+/* alineacion vertical */
+.av450 {margin-top: expression((450 - this.height)/2);}
+.w337 {width:337px;}
+.h79 { height:79px;}
+
+
+/* new */
+
+
+.fonsBotoNegre {background-image:url(/img/fons_botonegre.jpg); background-repeat:no-repeat}
+
+*html fieldset {position: relative; top:0;}
+fieldset {
+    display: block;
+    position: relative;
+	padding-top:20px;
+    margin: 20px 10px 10px 10px;
+    border: 1px solid #999;
+	font-size:12px;
+}
+
+*html legend {position:absolute; top:0; left:0;}
+legend {
+    display: block;
+	background-color:#666666;
+    margin:0;
+	color:#FFFFFF;
+	float:left;
+    padding: 3px 5px;
+	position:absolute;
+	top:-10px;
+	left:6px;	
+}
+
+
+.formFieldset {
+	display: block;
+    position: relative;
+	padding:30px 10px 10px 10px;
+    margin: 20px 0 0 0 ;
+    border: 1px solid #999;
+	font-size:11px;}
+*html .formFieldset {position: relative; top:0;}
+
+*html .formLegend {position:absolute; top:0; left:0;}
+.formLegend {
+  display: block;
+	background-color:#575757;
+  margin:0;
+	color:#FFFFFF;
+	float:left;
+  padding: 3px 5px;
+	position:absolute;
+	top:-10px;
+	left:6px;	
+	font-weight:bold;
+}
+
+
+div.caixaBoresGris{
+   float:left;
+   width:100%;
+   height:auto;
+   background-color:#454545;    
+}
+span.boreratopGris, span.borerabottomGris{
+   width:100%;
+   height:4px; /* El alto debe ser la mitad de alto de la imagen GIF */
+   display:block;
+   background-color:#000000;
+}
+/* A continuación viene el verdadero truco, la posición de las imágenes de fondo es importante*/
+span.boreratopGris {
+   background:url(/img/LCGris.gif) top left no-repeat; 
+}
+span.borerabottomGris{
+   background:url(/img/LCGris.gif) bottom left no-repeat;  
+}
+span.boreratopGris span, span.borerabottomGris span{
+   width:4px; /* De acuerdo al tamano de la imagen GIF */
+   height:4px; /*De acuerdo al tamano de la imagen GIF */
+   float:right;
+   font-size:2px; /* Esto es para IE6, que no respeta el height del span si el tamano de letra es mayor a este  */
+}
+span.boreratopGris span{
+   background:url(/img/RCGris.gif) top right no-repeat;   
+}
+span.borerabottomGris span{
+   background:url(/img/RCGris.gif) bottom right no-repeat;
+}
+
+
+
+.contenidor { width:100%; clear:both; margin-bottom:20px; margin-left:10px}
+.westlawAtencio {display:block; width:736px; background-color:#ffd259; float:left; margin-bottom:10px}
+.westlawAtencioContent { float:left; padding-right:20px; padding-left:20px; font-family:Arial, Helvetica, sans-serif; font-size:0.8em}
+.westlawAtencioTop {background:url(/img/westlaw/topGroc.gif) no-repeat top left; width:736px; height:5px; float:left; font-size:0em}
+.westlawAtencioBottom {background:url(/img/westlaw/bottomGroc.gif) no-repeat bottom left; width:736px; height:5px; float:left; font-size:0em}
+
+.westlawContent {width:736px; background-color:#81accf; float:left; display:block;}
+.westlawContentTop {background:url(/img/westlaw/topblau.gif) no-repeat top left; width:736px; height:5px; float:left; font-size:0em}
+.westlawContentBottom {background:url(/img/westlaw/bottomblau.gif) no-repeat bottom left; width:736px; height:5px; float:left; font-size:0em}
+.westlawContentMarge { margin:30px 45px 30px 45px; float:left;}
+.westlaw {float:left; display:block; padding:20px;}
+.westlaw form { margin:0; float:left; padding:0; width:100%}
+.westlaw form  input { margin:0; float:right; padding:0; background-color:#0862ad; border:0; color:#FFFFFF; font-weight:bold; font-family:Arial, Helvetica, sans-serif; font-size:0.7em; padding:2px;}
+.westlawTop {background:url(/img/westlaw/topblanc.gif) no-repeat top left; width:640px; height:5px; float:left; font-size:0em}
+.westlawBottom {background:url(/img/westlaw/bottomblanc.gif) no-repeat bottom left; width:640px; height:5px; float:left; font-size:0em}
+.westlaw h2 { font-family:Arial, Helvetica, sans-serif; font-size:1em; font-weight:bold; float:left; width:100%; margin:0; padding:0 0 10px 0}
+.mar { margin-bottom:20px; float:left; width:640px; background-color:#f5f8fb;}
+.westlawList {width:100%; float:left; margin:0; padding:0;}
+.westlawList ul { margin:0; padding:0; float:left}
+.westlawList ul li{ margin:0; padding:0; display:block; text-align:justify; font-family:Arial, Helvetica, sans-serif; font-size:0.7em; background: url(/img/fletxanegra.png) no-repeat left 7px; padding-left:8px;}
+
+
+/* missatges */
+
+.missatgeOkIntranet {
+   position:relative;
+	 display:block;
+   width:100%;
+   background: url(/img/common/fons_notificacions_ok.gif) top left repeat;
+   color:#fff;
+   margin:20px 0 20px 0;   
+   font-family:Arial, Helvetica, sans-serif;
+	 font-size:0.75em;
+	 clear:both;
+	 
+}
+.missatgeOkIntranet .icona {background:url(/img/common/ico_ok_p.png) no-repeat 0 5px; padding:10px 10px 10px 35px; margin:15px; color:#fff; display:block;}
+.missatgeOkIntranet .icona ul { padding:0; margin:0; display:block; clear:both}
+.missatgeOkIntranet .icona ul li { padding:0; margin:0; display:block; clear:both}
+.missatgeOkIntranet .llistatContinguts { padding:0; margin:0; display:block; clear:both}
+.missatgeOkIntranet a { color:#FFFFFF !important;}
+.missatgeOkIntranet ul li {color:#FFFFFF !important;}
+
+
+
+.missatgeErrorIntranet{
+   position:relative;
+	 display:block;
+   width:100%;
+   background: url(/img/common/fons_notificacions_error.gif) top left repeat;
+   color:#fff;
+   margin:20px 0 20px 0;
+   font-family:Arial, Helvetica, sans-serif;
+	 font-size:0.75em;
+	 clear:both;
+}
+.missatgeErrorIntranet .icona {background:url(/img/common/ico_error_p.png) no-repeat 0 5px; padding:10px 10px 10px 35px; margin:15px; color:#FFF; display:block;}
+.missatgeErrorIntranet .icona ul { padding:0; margin:0; display:block; clear:both}
+.missatgeErrorIntranet .icona ul li { padding:0; margin:0; display:block; clear:both}
+.missatgeErrorIntranet .llistatContinguts { padding:0; margin:0; display:block; clear:both}
+.missatgeErrorIntranet a { color:#FFFFFF !important;}
+.missatgeErrorIntranet ul li {color:#FFFFFF !important;}
+
+
+
+.missatgeAvisIntranet{
+	position:relative;
+	display:block;
+	width:100%;
+	background: url(/img/common/fons_notificacions_avis.gif) top left repeat;
+	color:#fff;
+	margin:20px 0 20px 0;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:0.8em;
+	-webkit-border-radius:15px; 
+	-moz-border-radius:15px; 
+	border-radius:15px;
+	overflow:hidden;
+}
+.missatgeAvisIntranet .icona {background:url(/img/common/ico_avis_p.png) no-repeat 10px 10px; padding:15px 15px 15px 45px; margin:0; color:#fff; display:block;}
+.missatgeAvisIntranet .icona ul { padding:0; margin:0; display:block; clear:both}
+.missatgeAvisIntranet .icona ul li { padding:0; margin:0; display:block; clear:both}
+.missatgeAvisIntranet .llistatContinguts { padding:0; margin:0; display:block; clear:both}
+.missatgeAvisIntranet a { color:#FFFFFF !important;}
+.missatgeAvisIntranet ul li {color:#FFFFFF !important;}
+
+
+/* fi missatges */
+
+
+
+.llistaEleccions{
+	margin: 0 0 10px 0;
+	padding:0;
+	font-family:Arial, Helvetica, sans-serif;
+	width:100%;
+	display:block;
+	}
+
+.llistaEleccions ul {
+	margin:0;	
+	padding:0;
+	list-style:none;
+	width:100%;
+	display:block;
+}
+
+.llistaEleccions ul li{
+	margin:0;
+	padding:0;
+	background:none;
+	display:block;
+}
+
+.llistaEleccions ul li a{
+margin:0;
+padding:3px 10px 3px 10px;
+background-color:#CCCCCC;
+border-bottom:3px solid #fff;
+color:#000000;
+text-decoration:none;
+font-size:0.75em;
+font-weight:bold;
+display:block;
+clear:both;
+}
+.llistaEleccions ul li a:hover {color:#000000;}
+.llistaEleccions ul li ul{
+	margin:0;	
+	padding:0;
+	list-style:none;
+}
+
+.llistaEleccions ul li ul li{
+margin:0;
+padding:0;
+background:none;
+}
+
+
+.llistaEleccions ul li ul li a{
+margin:0;
+padding:0 0 0 7px;
+color:#CA1620;
+background: url(/img/common/g_bullet_flecha_interiores.gif) 0 center no-repeat; 
+font-size:0.7em;
+font-weight:normal;
+border:0;
+display:block;
+clear:both;
+}
+.llistaEleccions ul li ul li a:hover {color:#CA1620; text-decoration:underline;}
+
+
+.bloc1 .llistaEleccions{
+	margin: 0 0 10px 0;
+	padding:0;
+	font-family:Arial, Helvetica, sans-serif;
+	width:100%;
+	display:block;
+	}
+
+.bloc1 .llistaEleccions ul {
+	margin:0;	
+	padding:0;
+	list-style:none;
+	width:100%;
+	display:block;
+}
+
+.bloc1 .llistaEleccions ul li{
+	margin:0;
+	padding:0;
+	background:none;
+}
+
+.bloc1 .llistaEleccions ul li a{
+margin:0;
+padding:3px 10px 3px 5px;
+background-color:#CCCCCC;
+color:#000000;
+text-decoration:none;
+font-size:0.75em;
+font-weight:bold;
+display:block;
+clear:both;
+}
+.bloc1 .llistaEleccions ul li a:hover {color:#000000;}
+.bloc1 .llistaEleccions ul li ul{
+	margin:0;	
+	padding:0;
+	list-style:none;
+	display:block;
+}
+
+.bloc1 .llistaEleccions ul li ul li{
+margin:0;
+padding:0;
+background:none;
+display:inline-block;
+}
+
+
+.bloc1 .llistaEleccions ul li ul li a{
+margin:0;
+padding:0 0 0 7px;
+color:#CA1620;
+background: transparent;
+font-size:0.7em;
+font-weight:normal;
+border:0;
+display:inline;
+}
+.bloc1 .llistaEleccions ul li ul li a:hover {color:#CA1620; text-decoration:underline;}
+.bloc1 .llistaEleccions ul li ul.carrega { border-bottom:3px solid #fff;}
+.bloc1 .llistaEleccions ul li ul.carrega li {background: url(/img/anar_verd.png) 5px center no-repeat; padding:5px; background-color:#E1F3C6; display:block; clear:both;}
+.bloc1 .llistaEleccions ul li ul.carrega li a {padding:0 0 0 20px; color:#000; font-weight:bold;}
+
+.bloc1 .llistaEleccions ul li ul.links {background:#FAE8E7; background: url(/img/anar_vermell.png) 5px 2px no-repeat; margin:0; padding:0}
+.bloc1 .llistaEleccions ul li ul.links li {display:block; clear:both; padding-top:2px;}
+.bloc1 .llistaEleccions ul li ul.links li a {padding:0 0 0 25px;}
+
+
+
+.taulaIntranet {border:1px solid #D6DDE5; border-collapse:collapse; margin-bottom:10px; margin-top:10px; width:100%; font-size:0.75em; background-color:#F2F2F2;}
+.taulaIntranet tr {padding:0; margin:0; border-bottom:1px; border-bottom-style:solid; border-bottom-color:#D6DDE5;}
+.taulaIntranet th {padding:7px; border-collapse:collapse; border:0; vertical-align:bottom; text-align:center; background-color:#466480; color:#FFFFFF;  font-weight:bold;}
+.taulaIntranet th a {color:#FFFFFF;}
+.taulaIntranet td {border-collapse:collapse; padding:6px; border:0}
+.taulaIntranet tfoot { background-color:#2F4456; color:#fff; border:0;}
+
+.taulaIntranet .llistat {
+margin:0;
+padding:0;
+float:left;
+width:100%;
+}
+
+.taulaIntranet .llistat ul{
+    list-style:none;
+	margin:0;
+	padding:0;
+}
+
+.taulaIntranet .llistat ul li {
+	background:url(http://www.l-h.cat/img/lh12/common/punt_blau.png) no-repeat 0 7px;
+	padding:2px 0 2px 10px;
+	display:inline;
+	}
+
+.taulaIntranet .llistat ul li a {
+	color: #000;
+	text-decoration:none;
+	font-family:Arial, Helvetica, sans-serif;
+	padding: 3px 0 3px 0;
+	
+
+}
+
+.taulaIntranet .llistat ul li a.blauTurquesa {color:#0093a8; text-decoration:underline}
+
+.taulaIntranet .llistat ul li:after{
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+.taulaIntranet .llistat ul li {display: inline-block;}
+* html .taulaIntranet .llistat ul li{height: 1%;}
+.taulaIntranet .llistat ul li {display: block;}
+
+.fonsAgendaIntranet { background-image:url(/img/common/fons_agenda_intranet.png); background-position:left middle; height:120px;}
+
+/* formulari */
+.formulariIntranet {display:block; overflow:hidden; position:relative;}
+.formulariIntranet div { margin-bottom:8px;}
+.formulariIntranet .label label
+ {
+	display:inline-block;	
+  width:40%;
+	text-align:right;
+	vertical-align:top;
+	margin-right:8px;
+	font-weight:bold;
+}
+
+.formulariIntranet .camp .input 
+{
+ 
+	border:1px solid #dbe7e7; 
+	padding: 5px 5px 3px 5px; 
+	color:#333333; 
+	background-color:#f5f8f8; 
+	font-family:Arial, Helvetica, sans-serif;
+	display: inline-block;
+	clear:right;
+	}
+
+.formulariIntranet .labelInline label
+ {				
+		font-size:0.75em;
+		color:#333333; 
+		display:inline-block;
+    *display: inline;     /* for IE7*/
+    display:inline;
+		clear:both;
+    margin-right:8px;
+    text-align: left;
+    width: auto;
+}
+
+.formulariIntranet .campInline input
+ {
+	border:1px solid #dbe7e7; 
+	padding: 4px 5px 4px 5px; 
+	font-size:0.75em;
+	color:#333333; 
+	background-color:#f5f8f8; 
+	font-family:Arial, Helvetica, sans-serif; 
+	display:inline-block;
+	vertical-align:middle;
+	*display: inline;     /* for IE7*/
+
+
+}
+
+.formulariIntranet .campInline select
+ {
+	border:1px solid #dbe7e7; 
+	padding: 3px 5px 3px 5px; 
+	font-size:0.75em;
+	color:#333333; 
+	background-color:#f5f8f8; 
+	font-family:Arial, Helvetica, sans-serif; 
+	display:inline-block;
+	vertical-align:middle
+}
+
+
+.formulariIntranet .check input[type="checkbox"]
+ {
+	float:left;	
+	line-height:2em;
+	border:0;
+	width:3%;
+
+}
+
+.formulariIntranet .boto {margin-top:20px; width:100%; text-align:center; margin-bottom:20px; display:block; clear:both; position:relative;}
+.llistatPagines {margin-top:20px; width:100%; margin-bottom:20px; display:block; clear:both; position:relative;}
+.llistatPagines h3 {width:auto; background-color:#999; padding:5px; color:#fff; margin-bottom:20px; display:block; clear:both; position:relative;}
+.llistatPagines h3 a { color:#fff}
+.llistatPagines h4 {width:auto; padding:0; color:#000; text-transform:uppercase; margin-bottom:10px; display:block; clear:both; position:relative; font-size:0.8em}
+.llistatPagines ul {
+  list-style:none;
+	margin:0;
+	padding:0;
+	display:block;
+	clear:both;
+	width:auto;
+}
+
+.llistatPagines ul li{ 
+	background:url(/img/common/punt_negre.png) no-repeat 0 8px;
+	list-style:circle;
+	padding:0 0 10px 10px;
+	margin:0;
+	display:inline;
+	font-size:0.75em;
+	color:#666;
+	}
+	
+.llistatPagines ul li a {color:#000; font-weight:bold; padding-bottom:4px; display:inline-block}
+
+.llistatPagines ul li:after{
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+.llistatPagines ul li {display: inline-block;}
+.llistatPagines * html ul li{height: 1%;}
+.llistatPagines ul li {display: block;}
+
+
+
+
+.llistatPuntsScroll {padding:0; display:block; position:relative; overflow:auto; width:auto; height:300px; max-height:300px; margin:0; overflow-x: hidden; -ms-overflow-style: scrollbar;}
+.llistatPuntsScroll ul {
+  list-style:none;
+	margin:0;
+	padding:0;
+	display:block;
+	clear:both;
+}
+
+.llistatPuntsScroll ul li{ 
+	padding:3px 5px 3px 5px;
+	margin:0 0 1px 0;
+	display:inline;
+	font-size:0.9em;
+	color:#000;
+	background:transparent;
+	}
+
+.llistatPuntsScroll ul li.color1 { background-color:#f7f7f7;}
+.llistatPuntsScroll ul li.color2 { background-color:#fbfbfb;}
+	
+.llistatPuntsScroll ul li a {color:#000; display:inline-block; margin:0; padding:0;}
+
+.llistatPuntsScroll ul li:after{
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+.llistatPuntsScroll ul li {display: inline-block;}
+.llistatPuntsScroll * html ul li{height: 1%;}
+.llistatPuntsScroll ul li {display: block;}

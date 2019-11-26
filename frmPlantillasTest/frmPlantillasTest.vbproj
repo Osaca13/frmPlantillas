@@ -120,22 +120,54 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="232511_1.aspx" />
+    <Content Include="img\ico_pdf.png" />
+    <Content Include="img\open-iconic-bootstrap.css" />
     <Content Include="inici.aspx" />
+    <Content Include="js\App_LocalResources\menu.ascx" />
+    <Content Include="js\App_LocalResources\menu.aspx" />
+    <Content Include="js\App_LocalResources\visordocumentshtml.ascx" />
+    <Content Include="js\App_LocalResources\visordocumentshtml.aspx" />
     <Content Include="js\App_LocalResources\visordocumentsHtmlNew.ascx" />
+    <Content Include="js\jquery-1.10.2.js" />
+    <Content Include="js\jquery.dcmegamenu.1.3.3.js" />
+    <Content Include="js\jquery.hoverIntent.minified.js" />
     <Content Include="js\visorimatges\jquery-1.6.4.min.js" />
     <Content Include="js\visorimatges\jquery.lightbox-0.5CAS.js" />
     <Content Include="js\visorimatges\jquery.lightbox-0.5CAT.js" />
     <Content Include="js\visorimatges\jquery.min.js" />
     <Content Include="js\visorimatges\noscript.js" />
+    <Content Include="frmPlantillas.aspx" />
+    <Content Include="Styles\black.css" />
+    <Content Include="Styles\blue.css" />
     <Content Include="Styles\culturaLHeduca.css" />
+    <Content Include="Styles\dcmegamenu.css" />
     <Content Include="Styles\default.css" />
     <Content Include="Styles\formulariCulturalheduca.css" />
     <Content Include="Styles\formularisGaia.css" />
+    <Content Include="Styles\gaiaIntranet.css" />
+    <Content Include="Styles\gaiaIntranetPrint.css" />
+    <Content Include="Styles\green.css" />
+    <Content Include="Styles\grey.css" />
+    <Content Include="Styles\intranet.css" />
+    <Content Include="Styles\jquery.lightbox-0.5.css" />
+    <Content Include="Styles\light_blue.css" />
+    <Content Include="Styles\orange.css" />
+    <Content Include="Styles\orange_light.css" />
+    <Content Include="Styles\red.css" />
+    <Content Include="Styles\white.css" />
+    <Content Include="Styles\whiteNeus.css" />
+    <Content Include="visorarbres.aspx" />
     <Content Include="Web.config" />
     <Content Include="WebForm1.aspx" />
+    <Content Include="WebUserControl1.ascx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GAIA2.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="js\App_LocalResources\visordocumentshtml.ascx.vb">
+      <DependentUpon>visordocumentshtml.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -157,12 +189,26 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="frmPlantillas.aspx.designer.vb">
+      <DependentUpon>frmPlantillas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmPlantillas.aspx.vb">
+      <DependentUpon>frmPlantillas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="WebForm1.aspx.designer.vb">
       <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebForm1.aspx.vb">
       <DependentUpon>WebForm1.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="WebUserControl1.ascx.designer.vb">
+      <DependentUpon>WebUserControl1.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebUserControl1.ascx.vb">
+      <DependentUpon>WebUserControl1.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
