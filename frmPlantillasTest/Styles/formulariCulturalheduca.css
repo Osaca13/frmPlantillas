@@ -1,0 +1,138 @@
+@charset "utf-8";
+/* CSS Document */
+
+.formCulturalheduca {
+	display:block; 
+	overflow:hidden; 
+	position:relative;
+	width:100%;
+	padding:30px 50px 30px 50px;
+ 	margin-bottom:15px;
+	border:1px solid #dbe1eb;
+	border-radius:5px;
+	moz-border-radius:5px;
+	-webkit-border-radius:5px;	
+	background-color:#f7f7f7;
+	}
+
+*html .formCulturalheduca fieldset {display:block; position: relative; top:0; height:100%; width:60%;}
+.formCulturalheduca fieldset {
+  	display: block;
+  	position: relative;	
+	width:60%;
+	margin:0 auto;	
+}
+
+.cercadorCap { width:30%;}
+
+*html .formCulturalheduca fieldset.llistaResultats {display:block; position: relative; top:0; height:100%; width:100%;}
+.formCulturalheduca fieldset.llistaResultats {display:block; position: relative; width:100%;}
+.formCulturalheduca .llistaResultats table { width:auto; color:#000; font-family:"Arimo", Arial, Helvetica, sans-serif; border-collapse:collapse; font-size:1em;}
+.formCulturalheduca .llistaResultats table td { padding:5px; margin:0; line-height:1.4; text-align:justify; border-bottom:1px dotted #999999; vertical-align:top}
+.formCulturalheduca .llistaResultats table a { text-decoration:none; font-weight:bold;  color:#2ea3f2; display:block}
+.formCulturalheduca .llistaResultats table td img {width:100%;}
+.formCulturalheduca a { text-decoration:none; color:#2ea3f2;}
+.paginacio {display:block; position:relative; overflow:hidden; text-align:right; font-family:"Arimo", Arial, Helvetica, sans-serif;  margin-bottom:20px}
+.paginacio .actiu { color:#FFF; background-color:#2ea3f2; padding:10px 15px; text-decoration:none; display:inline-block;}
+.paginacio .noactiu { color:#000; background-color:#e1e1e1; padding:10px 15px; display:inline-block;}
+.paginacio a { color:#000; background-color:#e1e1e1; padding:10px 15px; display:inline-block;}
+
+*html .formCulturalheduca legend {top:0; left:0;}
+.formCulturalheduca legend {
+  	display: block;
+  	margin:0;
+	color:#000;
+ 	text-align:center;
+	margin:0 auto;
+	padding-bottom:40px;
+	}
+
+ 
+.formCulturalheduca fieldset.politica { background-color:#ECECEC;}
+.formCulturalheduca fieldset.politica legend { background-color:#A1A1A1; }
+
+.formCulturalheduca fieldset div {display:block; margin-bottom:0; width:auto;}
+
+/* posicion de los campos */
+.formCulturalheduca .label label {
+	display:block;	
+	*display:block;   /* for IE7*/
+}
+
+.formCulturalheduca .camp input, select, textarea {
+	display:block;	
+	*display:block;   /* for IE7*/	
+	}
+
+
+
+.formCulturalheduca .check input[type="checkbox"] { display:inline;}
+.formCulturalheduca .check label {display:inline; font-weight:normal; color:#666; text-align:justify;}
+
+.formCulturalheduca .botoCentrat { text-align:center; display:block; width:100%; margin-top:15px; margin-bottom:15px}
+.formCulturalheduca .botoCentrat input[type="submit"] { 
+	background-color:#dd3333;
+	border:0;
+	border-radius:5px;
+	moz-border-radius:5px;
+	-webkit-border-radius:5px;	
+	color:#fff;
+	padding:15px 30px;
+	
+	}
+
+/* estilos de los campos */
+.formCulturalheduca label
+ {
+	color:#484848;
+	padding: 0; 
+	margin-bottom:3px; 
+	font-weight:400;	
+	font-size:1.5em;
+	font-family:'Arimo', Arial, Helvetica, sans-serif;
+}
+
+
+
+.formCulturalheduca input[type="text"], textarea, select {
+	font-size: 1.4em !important;
+	border:1px solid #dbe1eb;
+	color:#4e4e4e; 
+	background-color:#fff;
+	margin-bottom:10px;
+	width:100%;
+	font-weight:400;
+	border-radius:5px;
+	moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	font-family:'Arimo', Arial, Helvetica, sans-serif;
+	}
+
+
+.formCulturalheduca input[type="text"], textarea
+{ 
+	padding: 10px; 
+}	
+
+.formCulturalheduca select 
+{ 
+	padding: 0 0 0 20px;	
+	height:2.5em;
+}
+	
+	
+.formCulturalheduca input[type="text"]:focus, .formCulturalheduca textarea:focus { background: #fff; border:1px solid #dbe7e7;}
+.formCulturalheduca .asterisc { color:#86c0c8; display:inline-block; vertical-align:middle; margin:0; padding:0}
+
+.formCulturalheduca input[type="text"]:required:valid, .formCulturalheduca textarea:required:valid, .formCulturalheduca select:required:valid, .formCulturalheduca input[type="checkbox"]:required:valid{
+    box-shadow: 0 0 5px #52dbee;
+    border-color: #86c0c8;
+}
+.formCulturalheduca input[type="text"]:focus:invalid, .formCulturalheduca textarea:focus:invalid, .formCulturalheduca select:focus:invalid, .formCulturalheduca input[type="checkbox"]:focus:invalid {
+    box-shadow: 0 0 5px #d45252;
+    border-color: #b03535
+}
+
+.formCulturalheduca .text .titol1 {
+ color:#0093a8; margin-bottom:15px; display:block}
+

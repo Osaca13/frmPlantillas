@@ -1,0 +1,825 @@
+@font-face {
+	font-family: 'icomoon';
+	src: url('../fonts/icomoon.eot');
+	src: url('../fonts/icomoon.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/icomoon.woff') format('woff'),
+		url('../fonts/icomoon.ttf') format('truetype'),
+		url('../fonts/icomoon.svg#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* Windows Chrome ugly fix http://stackoverflow.com/questions/13674808/chrome-svg-font-rendering-breaks-layout/14345363#14345363 */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+	@font-face {
+		font-family: 'icomoon';
+		src: url('../fonts/icomoon.svg#icomoon') format('svg');
+	};
+}
+
+@import url(https://fonts.googleapis.com/css?family=Arimo:400,700,400italic,700italic);
+body {font-family:'Arimo', Arial, Helvetica, sans-serif; background-color:#F9F9F9; line-height:1.4em;}
+#myCarousel { border-radius:15px;}
+
+h1 {font-size: 4em;}
+h2 {font-size: 1.5em;}
+h3 {font-size: 2em;}
+h4 {font-size: 1em;}
+h5 {font-size: 0.9em;}
+h6 {font-size: 0.8em;}
+h1, h2, h3, h4, h5, h6 {
+	line-height:1.2em;	
+  	font-weight: normal;
+	font-family:'Arimo', Arial, Helvetica, sans-serif;  
+	margin:0;
+	padding:0;
+}
+.titolSeccio { color:#E02B20; font-family:'Arimo', Arial, Helvetica, sans-serif; font-size: 1.6em; margin-bottom:20px; }
+
+.icon-menu {
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+}
+
+
+.icon-menu:before {
+	content: "\f0c9";
+}
+
+a, li {
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+
+
+.informacionsProjectes {
+	margin:0;
+	padding:0;
+}	
+.informacionsProjectes a {color: #2ea3f2; text-decoration:none}
+
+.informacionsProjectes div.wpx350 div {width:330px !important;}
+
+.informacionsProjectes .reproductor iframe { z-index:0; width:326px !important; height:180px !important;}
+.informacionsProjectes .reproductor object { z-index:0; width:326px !important; height:180px !important;}
+
+
+.informacionsProjectes ul li{display: inline-block;}
+* html .informacionsProjectes ul li{height: 1%;}
+.informacionsProjectes ul li{display: block;}
+
+.grid {
+	width:725px;
+	overflow:hidden;
+	}
+
+.grid-item {	
+	padding:0;
+	margin:10px 20px 0 0;
+	float:left;
+	width:340px;
+	} 
+	
+.grid .grid-item > div {display:block}
+
+
+/* Global CSS that are applied for all screen sizes */
+
+.navPestanyes  {
+	padding:0; list-style:none; display:block; width:100%; background-color:#f4f4f4;
+}
+
+.navPestanyes li {padding:0; margin:0; background:transparent}
+
+.navPestanyes li a {
+color:#777; font-weight:700; text-decoration:none; padding:30px; display:block; background-color:#f4f4f4; font-family:'Arimo', Arial, Helvetica, sans-serif;
+}
+
+.navPestanyes i{
+	/* Make the font smoother for Chrome */
+	-webkit-transform: translate3d(0, 0, 0);
+	-moz-transform: translate3d(0, 0, 0);
+	-o-transform: translate3d(0, 0, 0);
+	-ms-transform: translate3d(0, 0, 0);
+	transform: translate3d(0, 0, 0);
+}
+.tab-content {display:block; background-color:#fff; padding:20px; clear:both; border: 1px solid #ddd; top: -1px; position: relative;  overflow: hidden;  z-index: -1;}
+
+.llistatPuntBlauCapsaDirectori ul li { font-size:inherit !important}
+.llistatPdf ul li { font-size:inherit !important;}
+
+nav.navPortada ul {
+	margin:0; padding:0; list-style:none; display:inline-block; width:100%; line-height:1.2em;
+}
+
+nav.navPortada li { background:transparent; padding:0; float:left; display:inline; margin:0 0 10px 10px;}
+
+nav.navPortada li span {
+	vertical-align:middle; display:block; padding:0; margin:0;
+}
+
+nav.navPortada li a {
+	color:#ffffff; text-align:left; vertical-align:top; text-transform:uppercase; font-weight:700; width:112px; height:176px; text-decoration:none; display:block; padding:30px 15px 15px 15px; margin:0; background-color:#DD1919; font-family:'Arimo', Arial, Helvetica, sans-serif; font-size:0.8em;
+}
+nav.navPortada li a:hover {
+	color:#000000; background-color:#FDA2A2;
+}
+
+nav.navPortada i{
+	/* Make the font smoother for Chrome */
+	-webkit-transform: translate3d(0, 0, 0);
+	-moz-transform: translate3d(0, 0, 0);
+	-o-transform: translate3d(0, 0, 0);
+	-ms-transform: translate3d(0, 0, 0);
+	transform: translate3d(0, 0, 0);
+}
+
+
+nav.navPortada ul {
+	margin:0; padding:0; list-style:none; display:inline-block; width:80%; line-height:1.2em;
+}
+
+nav.navPortada li { background:transparent;}
+
+nav.navPortada li span {
+	vertical-align:middle; display:block; padding:0; margin:0; 
+}
+
+nav.navPortada li a {
+	color:#ffffff; text-align:left; vertical-align:middle; font-weight:400; text-decoration:none; display:block; padding:15px; margin:0; background-color:#DD1919; font-family:'Arimo', Arial, Helvetica, sans-serif;
+}
+nav.navPortada li a:hover {
+	color:#000000; background-color:#FDA2A2;
+}
+nav.navPortada li a.actiu {
+	color:#ffffff; background-color:#606060;
+}
+
+nav.navPortada i{
+	/* Make the font smoother for Chrome */
+	-webkit-transform: translate3d(0, 0, 0);
+	-moz-transform: translate3d(0, 0, 0);
+	-o-transform: translate3d(0, 0, 0);
+	-ms-transform: translate3d(0, 0, 0);
+	transform: translate3d(0, 0, 0);
+}
+
+/* Remove the blue Webkit background when element is tapped */
+
+a, button {
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.botoInici {background:url(http://www.culturalheduca.cat/img/ico_inici.png) no-repeat right center #840000; border-radius:30px; border:5px solid #000; color:#fff; padding:15px 40px 15px 15px; position:relative; display:inline-block; margin-bottom:10px; text-decoration:none; font-size:1.4em}
+.botoInici:hover { background-color:#000; color:#fff; text-decoration:none;}
+
+
+/* botons tandem */
+
+
+
+
+
+.botonsTandem > div {margin:0; font-size:0.9em; margin:0; display:inline-block; text-align:left; width:241px; min-height:225px; position:relative; }
+.botonsTandem div a {color: #ffffff; text-decoration:none; vertical-align:middle; width:241px; min-height:225px; display:inline-block; padding:70px 10px 0 10px}
+.botonsTandem > div:nth-child(1){ background-color:#d03434;}
+.botonsTandem > div:nth-child(2){ background-color:#8e0000;}
+.botonsTandem > div:nth-child(3){ background-color:#a72a71;}
+.botonsTandem > div:nth-child(4){ background-color:#720040;}
+.botonsTandem > div:nth-child(5){ background-color:#ae5a15;}
+.botonsTandem > div:nth-child(6){ background-color:#3f0000;}
+.botonsTandem > div:nth-child(7){ background-color:#d03434;}
+.botonsTandem > div:nth-child(8){ background-color:#8e0000;}
+.botonsTandem > div:nth-child(9){ background-color:#a72a71;}
+.botonsTandem > div:nth-child(10){ background-color:#720040;}
+.botonsTandem > div:nth-child(11){ background-color:#ae5a15;}
+.botonsTandem > div:nth-child(12){ background-color:#3f0000;}
+.botonsTandem > div:nth-child(13){ background-color:#d03434;}
+.botonsTandem > div:nth-child(14){ background-color:#8e0000;}
+.botonsTandem > div:nth-child(15){ background-color:#a72a71;}
+.botonsTandem > div:nth-child(16){ background-color:#720040;}
+.botonsTandem > div:nth-child(17){ background-color:#ae5a15;}
+.botonsTandem > div:nth-child(18){ background-color:#3f0000;}
+.botonsTandem > div:nth-child(19){ background-color:#d03434;}
+.botonsTandem > div:nth-child(20){ background-color:#8e0000;}
+.botonsTandem > div:nth-child(21){ background-color:#a72a71;}
+.botonsTandem > div:nth-child(22){ background-color:#720040;}
+.botonsTandem > div:nth-child(23){ background-color:#ae5a15;}
+.botonsTandem > div:nth-child(24){ background-color:#3f0000;}
+
+.botonsTandem > div:hover {background-color:#000;}
+
+
+.llistatTematiquesTandems {margin:0 auto;}
+.llistatTematiquesTandems > div {width:352px;  position:relative; border-radius:5px; padding:20px; margin-bottom:10px;}
+.llistatTematiquesTandems .llistatTandems ul li {background:url(http://www.l-h.cat/img/lh12/common/punt_negre.png) no-repeat 0 10px;}
+.llistatTematiquesTandems .llistatTandems {padding:10px; border-radius:5px;}
+
+.llistatTematiquesTandems > div:nth-child(1) {background-color:#ffeaea; border:1px solid #f2d0d0; margin-right:10px;}
+.llistatTematiquesTandems > div:nth-child(1) .subtitolTandem {color:#d64b4b}
+.llistatTematiquesTandems > div:nth-child(1) a {color:#d64b4b}
+.llistatTematiquesTandems > div:nth-child(1) .llistatTandems {background-color:#FDF9F9;}
+
+.llistatTematiquesTandems > div:nth-child(2) {background-color:#F4E5EE; border:1px solid #f2d7e6; margin-right:0}
+.llistatTematiquesTandems > div:nth-child(2) .subtitolTandem {color:#a8226e}
+.llistatTematiquesTandems > div:nth-child(2) a {color:#a8226e}
+.llistatTematiquesTandems > div:nth-child(2) .llistatTandems {background-color:#FCFAFB;}
+
+
+.llistatTematiquesTandems > div:nth-child(3) { background-color:#e5dff2; border:1px solid #d5ccea; margin-right:10px;}
+.llistatTematiquesTandems > div:nth-child(3) .subtitolTandem {color:#5f38b4;}
+.llistatTematiquesTandems > div:nth-child(3) a {color:#5f38b4}
+.llistatTematiquesTandems > div:nth-child(3) .llistatTandems {background-color:#faf7ff;}
+
+
+.llistatTematiquesTandems > div:nth-child(4) { background-color:#dff2ef; border:1px solid #c0e7e1; margin-right:0}
+.llistatTematiquesTandems > div:nth-child(4) .subtitolTandem {color:#168775;}
+.llistatTematiquesTandems > div:nth-child(4) a {color:#168775}
+.llistatTematiquesTandems > div:nth-child(4) .llistatTandems {background-color:#F7FBFA;}
+
+
+.llistatTematiquesTandems > div:nth-child(5){background-color:#edf6e7; border:1px solid #d8eacb; margin-right:10px;}
+.llistatTematiquesTandems > div:nth-child(5) .subtitolTandem {color:#4B712F;}
+.llistatTematiquesTandems > div:nth-child(5) a {color:#4B712F}
+.llistatTematiquesTandems > div:nth-child(5) .llistatTandems {background-color:#F8FAF6;}
+
+
+
+.llistatTematiquesTandems > div:nth-child(6) { background-color:#f7f6db; border:1px solid #ecebc5; margin-right:0}
+.llistatTematiquesTandems > div:nth-child(6) .subtitolTandem {color:#c38936;}
+.llistatTematiquesTandems > div:nth-child(6) a {color:#c38936}
+.llistatTematiquesTandems > div:nth-child(6) .llistatTandems {background-color:#F8FAF6;}
+
+
+
+.llistatTematiquesTandems div .titolTandem { font-size:1.6em; color:#000000; margin-bottom:5px; line-height:1.2em;}
+.llistatTematiquesTandems div .subtitolTandem {margin-bottom:5px; text-transform:uppercase; font-size:0.85em; font-weight:600; line-height:1.3em;}
+.llistatTematiquesTandems div .textTandem {margin-bottom:5px;}
+.llistatTematiquesTandems div .imatgeTandem  { margin-bottom:10px;}
+.llistatTematiquesTandems div .imatgeTandem img {width:100%; margin-bottom:5px; display:block; border-radius:5px;}
+
+
+
+
+
+
+/* carrusel */
+.container { padding:0}
+
+.card-title a {
+    color: #fff !important;
+}
+
+.panel-grana .panel-collapse > .card-body { border-top:1px solid #9a0031 !important; }
+.panel-grana {
+ background-color: #9a0031;
+}
+
+.panel-grana .card-body .blauTurquesa { color:#9a0031;}
+
+.panel-taronja .card-body { border-top:1px solid #f08200 !important;}
+.panel-taronja {
+ background-color: #f08200;
+}
+
+.panel-taronja .card-body .blauTurquesa { color:#f08200;}
+
+.panel-granaFluix .card-body { border-top:1px solid #b4003a;}
+.panel-granaFluix {
+ background-color: #b4003a;
+}
+
+.panel-granaFluix .card-body .blauTurquesa { color:#b4003a;}
+
+.panel-groc .card-body { border-top:1px solid #dd9933;}
+.panel-groc {
+ background-color: #dd9933;
+}
+
+.panel-groc .card-body .blauTurquesa { color:#dd9933;}
+
+
+.panel-verd .card-body { border-top:1px solid #009681;}
+.panel-verd {
+ background-color: #009681;
+}
+
+.panel-verd .card-body .blauTurquesa { color:#009681;}
+
+
+.panel-blau .card-body { border-top:1px solid #19004c;}
+.panel-blau {
+ background-color: #19004c;
+}
+
+.panel-blau .card-body .blauTurquesa { color:#19004c;}
+
+.botonsVermellsCLHEduca { 
+	width:100%;
+	display: block;
+	position:relative;
+	text-align: center;	
+	margin:0;
+	padding:0;
+ }
+.botonsVermellsCLHEduca a{
+	background-color:#dd1919; 
+	color:#FFF !important; 
+	display: inline-block; 
+	padding:8px 15px;
+	margin:0 5px 5px 0;
+	font-size:0.9em;
+	text-align:center;
+	text-decoration:none;	
+	}
+	
+
+.botonsNegresCLHEducaEsquerra { 
+	width:100%;
+	display: block;
+	position:relative;
+	text-align: left;	
+	margin:0 0 20px 0;
+	padding:0;
+ }
+.botonsNegresCLHEducaEsquerra a{
+	background-color:#000; 
+	color:#FFF !important; 
+	display: inline-block; 
+	padding:8px 15px;
+	margin:0 5px 5px 0;
+	font-size:0.9em;
+	text-align:center;
+	text-decoration:none;	
+	}
+
+
+/* For screen bigger than 800px */
+@media (min-width: 50em) {
+/* Transforms the list into a horizontal navigation */
+	nav.navPortada li {
+		margin:0 0 5px 0; padding:0; background:transparent; z-index:5; width:100%; display:block; position:relative;
+	}
+
+	nav.navPortada a {
+		display: block;
+		width: auto;
+	}
+	
+	nav.navPortadali { background:transparent; padding:0; float:left; display:inline; margin:0 0 10px 10px;}
+
+	nav.navPortada a {
+		display: block;
+		width: auto;
+	}
+
+	
+	/* Placing the icon */
+	
+	.icon {
+		padding-top: 1.4em;
+	}
+
+	.icon + span {
+		margin-top: 2.1em;
+		-webkit-transition: margin .5s;
+		-moz-transition: margin .5s;
+		-o-transition: margin .5s;
+		-ms-transition: margin .5s;
+		transition: margin .5s;
+	}
+
+	/* Animating the height of the element*/
+
+
+
+	/* Making the text follow the height animation */
+	.no-touch .nav a:hover .icon + span {
+		margin-top: 3.2em;
+		-webkit-transition: margin .5s;
+		-moz-transition: margin .5s;
+		-o-transition: margin .5s;
+		-ms-transition: margin .5s;
+		transition: margin .5s;
+	}
+	
+	.no-touch .navPortada a:hover .icon + span {
+		margin-top: 3.2em;
+		-webkit-transition: margin .5s;
+		-moz-transition: margin .5s;
+		-o-transition: margin .5s;
+		-ms-transition: margin .5s;
+		transition: margin .5s;
+	}
+
+	/* Positioning the icons and preparing for the animation*/
+	nav.navPortada i {
+		position: relative;
+		display: inline-block;
+		margin: 0 auto;
+		padding: 0.4em;
+		border-radius: 50%;
+		font-size: 1.8em;
+		box-shadow: 0 0 0 30px transparent;
+		background: rgba(255,255,255,0.1);
+		-webkit-transform: translate3d(0, 0, 0);
+		-moz-transform: translate3d(0, 0, 0);
+		-o-transform: translate3d(0, 0, 0);
+		-ms-transform: translate3d(0, 0, 0);
+		transform: translate3d(0, 0, 0);
+		-webkit-transition: box-shadow .6s ease-in-out;
+		-moz-transition: box-shadow .6s ease-in-out;
+		-o-transition: box-shadow .6s ease-in-out;
+		-ms-transition: box-shadow .6s ease-in-out;
+		transition: box-shadow .6s ease-in-out;
+	}	
+	
+	nav.navPortada i {
+		position: relative;
+		display: inline-block;
+		margin: 0 auto;
+		padding: 0.4em;
+		border-radius: 50%;
+		font-size: 1.8em;
+		box-shadow: 0 0 0 30px transparent;
+		background: rgba(255,255,255,0.1);
+		-webkit-transform: translate3d(0, 0, 0);
+		-moz-transform: translate3d(0, 0, 0);
+		-o-transform: translate3d(0, 0, 0);
+		-ms-transform: translate3d(0, 0, 0);
+		transform: translate3d(0, 0, 0);
+		-webkit-transition: box-shadow .6s ease-in-out;
+		-moz-transition: box-shadow .6s ease-in-out;
+		-o-transition: box-shadow .6s ease-in-out;
+		-ms-transition: box-shadow .6s ease-in-out;
+		transition: box-shadow .6s ease-in-out;
+	}	
+	
+	/* Animate the box-shadow to create the effect */
+	.no-touch nav.navPortada a:hover i,
+	.no-touch nav.navPortada a:active i,
+	.no-touch nav.navPortada a:focus i {		
+		box-shadow: 0 0 0 0 rgba(255,255,255,0.2);
+		-webkit-transition: box-shadow .4s ease-in-out;
+		-moz-transition: box-shadow .4s ease-in-out;
+		-o-transition: box-shadow .4s ease-in-out;
+		-ms-transition: box-shadow .4s ease-in-out;
+		transition: box-shadow .4s ease-in-out;
+	}
+	
+	.no-touch nav.navPortada a:hover i,
+	.no-touch nav.navPortada a:active i,
+	.no-touch nav.navPortada a:focus i {		
+		box-shadow: 0 0 0 0 rgba(255,255,255,0.2);
+		-webkit-transition: box-shadow .4s ease-in-out;
+		-moz-transition: box-shadow .4s ease-in-out;
+		-o-transition: box-shadow .4s ease-in-out;
+		-ms-transition: box-shadow .4s ease-in-out;
+		transition: box-shadow .4s ease-in-out;
+	}
+	
+#carouselEducalh {width:750px; margin-bottom:50px}
+.carousel-indicators {
+	bottom: -30px;
+}
+.carousel-control.right,
+.carousel-control.left {
+	background-image: none;
+}
+.carousel .item {
+	min-height: 548px; 
+	height: 100%;
+	width:100%; 
+}
+
+.carouselFemTandem  { margin-bottom:20px;}
+.carouselFemTandem .item { min-height:auto; height:auto;}
+
+.carousel-caption {
+	background-color: #DCDCDC;
+	margin:0;
+	width:auto;
+ 	 right: 0;
+  	left:0;
+	bottom:-2px;
+ 	 padding-bottom: 1em;
+	padding-top:0;
+	padding-left:1.5em;
+	padding-right:1.5em; 
+	color:#000000;
+	text-shadow:none;
+
+}
+.carousel-caption h2 {
+	padding: .5em;
+	font-weight:700;
+}
+.carousel .icon-container {
+	display: inline-block;
+	font-size: 25px;
+	line-height: 25px;
+	padding: 1em;
+	text-align: center;	
+	border-radius: 50%;
+}
+
+
+.carousel-image {
+	position:absolute;
+}
+.carousel-image img {	
+	overflow:hidden;
+	position:absolute;
+	}
+
+/* Animation delays */
+.carousel-caption {
+	-webkit-animation-delay: 1s;
+	animation-delay: 1s;}
+	
+.carousel-caption button {
+	-webkit-animation-delay: 2s;
+	animation-delay: 2s;
+}
+
+
+/* fi carrusel */
+
+.capPortada {display:block; width:auto; background-color:#AA3112; margin-bottom:10px; padding:10px; overflow:hidden; text-align:center;}
+.capPortada h1{ display:inline; color:#FFF; font-size:5em; font-weight:700; text-align:center; }
+
+.capInterior {display:block; width:auto; background-color:#E02B20; margin-bottom:10px; padding:10px; overflow:hidden; text-align:center}
+.capInterior span{ color:#000; font-size:1em; font-weight:700; font-style:italic; vertical-align:text-top; margin-left:10px;}
+.capInterior h1{ color:#FFF; font-size:2.5em; font-weight:700; vertical-align:middle; display:inline;}
+
+
+/* llistats */
+
+.llistatRedsSocials { display:block; width:auto; overflow:hidden; margin:0; padding:0}
+.llistatRedsSocials ul {display:block; width:100%; margin:0; padding:0; list-style:none}
+.llistatRedsSocials ul li {display:inline-block; width:auto; margin:0 5px 0 0; padding:0; background:transparent;}
+.llistatRedsSocials ul li.facebook a { width:32px; height:32px; display:inline-block; background:url(http://www.culturalheduca.cat/img/ico_facebook.png) no-repeat top left; background-size:contain; text-decoration:none}
+.llistatRedsSocials ul li.twitter a { width:32px; height:32px; display:inline-block; background:url(http://www.culturalheduca.cat/img/ico_twitter.png) no-repeat top left; background-size:contain; text-decoration:none}
+.llistatRedsSocials ul li.issuu a { width:32px; height:32px; display:inline-block; background:url(http://www.culturalheduca.cat/img/ico_issuu.png) no-repeat top left; background-size:contain; text-decoration:none}
+.llistatRedsSocials ul li.youtube a { width:32px; height:32px; display:inline-block; background:url(http://www.culturalheduca.cat/img/ico_youtube.png) no-repeat top left; background-size:contain; text-decoration:none}
+
+
+
+
+/* Menu */
+.ocultPC { display:none;}
+
+
+
+
+.informacionsCanalsYoutube {
+	margin:0;
+	padding:0;
+	/*width:725px;*/
+	display:block;
+}	
+
+.informacionsCanalsYoutube > div {	
+	float:left;
+	border-radius:0.5em;
+	margin-top:1em;
+	padding:0.6em;
+	} 
+	
+
+.informacionsCanalsYoutube a {color:#2ea3f2; text-decoration:none}
+
+
+
+.informacionsCanalsYoutube .reproductor iframe { z-index:0; }
+.informacionsCanalsYoutube .reproductor object { z-index:0; }
+
+
+
+.informacionsCanalsYoutube > div:nth-child(1){ background-color:#bd3a69; margin-right:1em;}
+.informacionsCanalsYoutube > div:nth-child(2){ background-color:#dd9933; margin-right:1em;}
+.informacionsCanalsYoutube > div:nth-child(3){ background-color:#80b6af; margin-right:1em;}
+.informacionsCanalsYoutube > div:nth-child(4){ background-color:#9587a1; margin-right:1em;}
+.informacionsCanalsYoutube > div:nth-child(5){ background-color:#f07700; margin-right:1em;}
+.informacionsCanalsYoutube > div:nth-child(6){ background-color:#d95b55; margin-right:1em;}
+.informacionsCanalsYoutube > div:nth-child(7){ background-color:#809db8; margin-right:1em;}
+.informacionsCanalsYoutube > div:nth-child(8){ background-color:#8fbee2; margin-right:1em;}
+.informacionsCanalsYoutube > div:nth-child(9){ background-color:#bd3a69; margin-right:1em;}
+
+
+
+}
+
+
+/* The "tablet" and "mobile" version */
+@media (max-width: 49.938em) {
+.barraWebsMunicipals { display:none !important}
+	.sombraBarraWebsMunicipals { display:none !important}
+	.margeBarraWebsMunicipals { display:none !important}
+	#contenidor { width:100% !important}
+	.wpx995 { width:100% !important}
+	.wpx270 { width:100% !important}
+	.wpx725 { width:100% !important}
+	.wpx750 { width:100% !important}
+	.wpx245 { width:100% !important}
+	.main {border-bottom: 4px solid #000; float:left; display:inline-block}	
+	nav.navPortada ul li {
+		-webkit-transition: background 0.5s;
+		-moz-transition: background 0.5s;
+		-o-transition: background 0.5s;
+		-ms-transition: background 0.5s;
+		transition: background 0.5s;
+	}	
+	nav.navPortada li {
+		margin:0 0 5px 0; padding:0; background:transparent; z-index:5; width:100%; display:block; position:relative;
+	}
+	
+	nav.navPortada ul li {
+		-webkit-transition: background 0.5s;
+		-moz-transition: background 0.5s;
+		-o-transition: background 0.5s;
+		-ms-transition: background 0.5s;
+		transition: background 0.5s;
+	}	
+	nav.navPortada li {
+		margin:0 0 5px 0; padding:0; background:transparent; z-index:5; width:100%; height:auto; display:block; position:relative; float:none;
+	}
+	nav.navPortada li a {
+	color:#ffffff; text-align:left; vertical-align:top; text-transform:uppercase; font-weight:700; width:100%; height:auto; text-decoration:none; display:block; padding:30px 15px 15px 15px; margin:0; background-color:#DD1919; font-family:'Arimo', Arial, Helvetica, sans-serif; font-size:0.8em;
+}
+	nav.navPortada li a:hover {
+	color:#000000; background-color:#FDA2A2;
+}
+
+	nav.navPortada ul { width:100%; }
+	nav.navPortada ul { width:100%; }
+	
+.botoInici { padding:0.2em; background-image:none; float:right; border:3px solid #000;}
+.botoInici { color:#fff;}
+.botoInici:hover { color:#fff; text-decoration:none;}
+	
+.capPortada {display:block; width:auto; background-color:#AA3112; margin-bottom:10px; padding:10px; overflow:hidden; text-align:center;}
+.capPortada h1{ display:inline; color:#FFF; font-size:2em; font-weight:700; text-align:center; }	
+.capInterior {display:block; width:auto; background-color:#E02B20; margin-bottom:10px; padding:5px; overflow:hidden; text-align:center}
+.capInterior span{ color:#000; font-size:0.9em; font-weight:700; font-style:italic; vertical-align:text-top; margin-left:10px;}
+.capInterior h1{ color:#FFF; font-size:1.2em; font-weight:700; vertical-align:middle; display:inline;}
+#carouselEducalh {width:100%; margin-bottom:10px}
+.carousel .item {
+	min-height: 350px;
+	height:350px; }
+	
+.llistatRedsSocials {width:auto; overflow:hidden; margin:5px 10px; padding:0}
+.llistatRedsSocials ul {display:block; width:100%; margin:0; padding:0; list-style:none}
+.llistatRedsSocials ul li {display:inline-block; width:auto; margin:0 5px 0 0; padding:0; background:transparent;}
+.llistatRedsSocials ul li.facebook a { width:22px; height:22px; display:inline-block; background:url(http://www.culturalheduca.cat/img/ico_facebook.png) no-repeat top left; background-size:contain; text-decoration:none}
+.llistatRedsSocials ul li.twitter a { width:22px; height:22px; display:inline-block; background:url(http://www.culturalheduca.cat/img/ico_twitter.png) no-repeat top left; background-size:contain; text-decoration:none}
+.llistatRedsSocials ul li.flickr a { width:22px; height:22px; display:inline-block; background:url(http://www.culturalheduca.cat/img/ico_flickr.png) no-repeat top left; background-size:contain;text-decoration:none}
+.llistatRedsSocials ul li.youtube a { width:22px; height:22px; display:inline-block; background:url(http://www.culturalheduca.cat/img/ico_youtube.png) no-repeat top left; background-size:contain;text-decoration:none}
+}
+
+@media (min-width: 32.5em) and (max-width: 38.688em) {
+	#contenidor { width:100% !important}
+	.wpx995 { width:100% !important}
+	.wpx270 { width:100% !important}
+	.wpx725 { width:100% !important}
+	.wpx750 { width:100% !important}
+	.wpx245 { width:100% !important}
+	nav.navPortada li span.icon {
+		width: 50%;
+	}
+	nav.navPortada li span.icon {
+		width: 50%;
+	}
+	nav.navPortada li {
+		margin:0 0 5px 0; padding:0; background:transparent; z-index:5; width:100%; height:auto; display:block; position:relative;
+
+
+	}
+	.main {border-bottom: 4px solid #000;}	
+	
+}
+/* Styling the toggle menu link and hiding it */
+nav.navPortada .navtoogle{
+	display: none;	
+	width: auto;
+	padding: 0.5em 0.5em 0.8em;
+	font-weight: normal;
+	text-align: left;
+	color: rgb(7, 16, 15);
+	font-size: 1em;
+	background: none;	
+	border: none;
+	cursor: pointer;
+
+
+}
+
+nav.navPortada .navtoogle{
+	display: none;	
+	width: auto;
+	padding: 0.5em 0.5em 0.8em;
+	font-weight: normal;
+	text-align: left;
+	color: rgb(7, 16, 15);
+	font-size: 1em;
+	background: none;	
+	border: none;
+	cursor: pointer;
+
+
+}
+
+nav.navPortada .navtoogle i{
+	z-index:-1;		
+}
+
+.icon-menu {
+	position: relative;
+	top: 3px;
+	line-height: 0;
+	font-size: 1.6em;
+}
+@media (max-width: 32.438em) {
+	#contenidor { width:100% !important}
+	.wpx995 { width:100% !important}
+	.wpx270 { width:100% !important}
+	.wpx725 { width:100% !important}
+	.wpx750 { width:100% !important}
+	.barraWebsMunicipals { display:none !important}
+	.sombraBarraWebsMunicipals { display:none !important}
+	.margeBarraWebsMunicipals { display:none !important}
+	/* Unhiding the styled menu link */
+	nav.navPortada .navtoogle{
+		margin: 0;
+		display: inline-block;
+	}
+	nav.navPortada .navtoogle{
+		margin: 0;
+		display: inline-block;
+	}
+	
+	/* Animating the height of the navigation when the button is clicked */
+	
+	/* When JavaScript is disabled, we hide the menu */
+	
+	.no-js nav.navPortada ul {
+		max-height: 30em;
+		overflow: hidden;
+	}
+	
+	/* When JavaScript is enabled, we hide the menu */
+	.js nav.navPortada ul {
+		max-height: 0em;
+		overflow: hidden;
+	}
+	
+	
+	/* Displaying the menu when the user has clicked on the button*/
+	.js nav.navPortada .active + ul {		
+		max-height: 30em;
+		overflow: hidden;
+		-webkit-transition: max-height .4s;
+		-moz-transition: max-height .4s;
+		-o-transition: max-height .4s;
+		-ms-transition: max-height .4s;
+		transition: max-height .4s;
+	}
+	
+	.js nav.navPortada .active + ul {		
+		max-height: 30em;
+		overflow: hidden;
+		-webkit-transition: max-height .4s;
+		-moz-transition: max-height .4s;
+		-o-transition: max-height .4s;
+		-ms-transition: max-height .4s;
+		transition: max-height .4s;
+	}
+
+	/* Adapting the layout of the menu for smaller screens : icon on the left and text on the right*/
+
+	
+	nav.navPortada li span {
+		display: inline-block;
+		height: 100%;
+	}
+
+
+	
+	.icon + span {
+		margin-left: 1em;
+		font-size: 0.8em;
+	}
+	
+	
+	/* make the nav bigger on touch screens */
+	.touch nav.navPortada a {
+		padding: 0.8em;
+	}
+	
+	}
