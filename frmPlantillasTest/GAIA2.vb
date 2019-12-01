@@ -9,6 +9,7 @@ Imports System.Drawing.Imaging
 Imports System.DirectoryServices
 
 
+
 'Necessari per la funció DameLonLatDeCoordenadals
 
 Imports System.Convert
@@ -16,6 +17,8 @@ Imports System.Drawing
 Imports SharpMap.CoordinateSystems
 Imports SharpMap.CoordinateSystems.Transformations
 Imports System.Data
+Imports System.Web
+
 
 
 '******************************************************************************************+
@@ -14131,17 +14134,18 @@ Public Class GAIA2
     'Convierte un punto en ED50 (UTM o Cartografia) a WGS84 (longitud/latitud) 
     '*******************************************************************************************************
     Public Shared Function DameLonLatDeCoordenada(ByVal punto As String) As String
-        Dim CG As New Cartografia.CartoGEOM
+        'Dim CG As New Cartografia.CartoGEOM
         Dim wktFrom As String = "PROJCS[""ED50 / UTM zone 31N"",GEOGCS[""ED50"",DATUM[""European Datum 1950"",SPHEROID[""International 1924"", 6378388.0, 297.0,AUTHORITY[""EPSG"",""7022""]],TOWGS84[-157.89,-17.16,-78.41,2.118,2.697,-1.434,-1.1097046576093785], AUTHORITY[""EPSG"",""6230""]],PRIMEM[""Greenwich"", 0.0,AUTHORITY[""EPSG"",""8901""]],UNIT[""degree"", 0.017453292519943295],AXIS[""Geodetic longitude"", EAST],AXIS[""Geodetic latitude"", NORTH],AUTHORITY[""EPSG"",""4230""]],PROJECTION[""Transverse_Mercator""],PARAMETER[""central_meridian"", 3.0],PARAMETER[""latitude_of_origin"", 0.0],PARAMETER[""scale_factor"", 0.9996],PARAMETER[""false_easting"", 500000.0],PARAMETER[""false_northing"", 0.0],UNIT[""m"", 1.0], AXIS[""Easting"", EAST], AXIS[""Northing"", NORTH],AUTHORITY[""EPSG"",""23031""]]"
         Dim csFrom As IInfo = SharpMap.Converters.WellKnownText.CoordinateSystemWktReader.Parse(wktFrom)
         Dim csWgs84 As GeographicCoordinateSystem = GeographicCoordinateSystem.WGS84
         Dim ctFactory As CoordinateTransformationFactory = New CoordinateTransformationFactory()
         Dim trans As ICoordinateTransformation = ctFactory.CreateFromCoordinateSystems(csFrom, csWgs84)
         Dim numberFormat_EnUS As System.Globalization.NumberFormatInfo = New System.Globalization.CultureInfo("en-US", False).NumberFormat
-        Dim ptoWkt As String = "POINT(" & CG.DameUTM(punto).Replace(",", " ") & ")"
-        Dim pto As SharpMap.Geometries.Point = SharpMap.Converters.WellKnownText.GeometryFromWKT.Parse(ptoWkt)
-        Dim ptoRes As Double() = trans.MathTransform.Transform(pto.ToDoubleArray)
-        Return ptoRes(1).ToString(numberFormat_EnUS) & "," & ptoRes(0).ToString(numberFormat_EnUS)
+        'Dim ptoWkt As String = "POINT(" & CG.DameUTM(punto).Replace(",", " ") & ")"
+        'Dim pto As SharpMap.Geometries.Point = SharpMap.Converters.WellKnownText.GeometryFromWKT.Parse(ptoWkt)
+        'Dim ptoRes As Double() = trans.MathTransform.Transform(pto.ToDoubleArray)
+        Return "23,41"
+        'ptoRes(1).ToString(numberFormat_EnUS) & "," & ptoRes(0).ToString(numberFormat_EnUS)
     End Function
 
 

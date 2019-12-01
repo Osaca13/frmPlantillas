@@ -47,28 +47,28 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CSCartografia">
-      <HintPath>..\..\GAIA\bin\CSCartografia.dll</HintPath>
+      <HintPath>..\..\..\GAIA\bin\CSCartografia.dll</HintPath>
     </Reference>
     <Reference Include="gaiaws">
-      <HintPath>..\..\GAIA\bin\gaiaws.dll</HintPath>
+      <HintPath>..\..\..\GAIA\bin\gaiaws.dll</HintPath>
     </Reference>
     <Reference Include="kcommon">
-      <HintPath>..\..\GAIA\bin\kcommon.dll</HintPath>
+      <HintPath>..\..\..\GAIA\bin\kcommon.dll</HintPath>
     </Reference>
     <Reference Include="lhCodParam">
-      <HintPath>..\..\GAIA\bin\lhCodParam.dll</HintPath>
+      <HintPath>..\..\..\GAIA\bin\lhCodParam.dll</HintPath>
     </Reference>
     <Reference Include="lhUtil">
-      <HintPath>..\..\GAIA\bin\lhUtil.dll</HintPath>
+      <HintPath>..\..\..\GAIA\bin\lhUtil.dll</HintPath>
     </Reference>
     <Reference Include="ProjNET">
-      <HintPath>..\..\GAIA\bin\ProjNET.dll</HintPath>
+      <HintPath>..\..\..\GAIA\bin\ProjNET.dll</HintPath>
     </Reference>
     <Reference Include="RadTreeView">
-      <HintPath>..\..\GAIA\bin\RadTreeView.DLL</HintPath>
+      <HintPath>..\..\..\GAIA\bin\RadTreeView.DLL</HintPath>
     </Reference>
     <Reference Include="SharpMap">
-      <HintPath>..\..\GAIA\bin\SharpMap.dll</HintPath>
+      <HintPath>..\..\..\GAIA\bin\SharpMap.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -138,6 +138,7 @@
     <Content Include="js\visorimatges\jquery.min.js" />
     <Content Include="js\visorimatges\noscript.js" />
     <Content Include="frmPlantillas.aspx" />
+    <Content Include="RadControls\TreeView\Scripts\RadTreeView_Client_4_0_4.js" />
     <Content Include="Styles\black.css" />
     <Content Include="Styles\blue.css" />
     <Content Include="Styles\culturaLHeduca.css" />
