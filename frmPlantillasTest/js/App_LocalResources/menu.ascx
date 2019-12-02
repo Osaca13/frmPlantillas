@@ -79,157 +79,157 @@ $(document).ready(function($){
 </div>
 </asp:panel>
 <script runat="server">
-	Dim objconn as OleDbConnection
-	Dim usuariXarxa as string=string.empty
-	Dim grupsAD as string=""
-	Dim idusuari as integer=-1	
-	
-	
-	
-	public  function GetVaryByCustomString( context as HttpContext ,  arg as string) as string
-		if (arg = "userName") THEN    
-			return context.User.Identity.Name
-		END IF
-		return string.Empty
-	end function
-	
-				
-	Private Sub Page_Load(sender As Object, e As System.EventArgs) Handles MyBase.Load      
-		Dim usuariActiu as boolean= False
-		IF session("menuGAIA")="" THEN
-		IF HttpContext.Current.User.Identity.Name.length>0 THEN
-			UsuariXarxa= GAIA.FormatejaUsuari(HttpContext.Current.User.Identity.Name)
-			
-			
-		
-			IF (Session("nif") is nothing) THEN			
-				Session("nif") =GAIA.nifUsuari(objconn,UsuariXarxa,usuariActiu).Trim()				
-			END IF
-			
-			IF true then 'usuariActiu THEN
-			
-				IF Session("codiOrg") is nothing THEN			
-					session("CodiOrg")=GAIA.trobaNodeUsuari(objConn, Session("nif")).tostring().Trim()
-				END IF
-				idUsuari = Session("CodiOrg")
-				grupsAD = clsPermisos.getGroupsAD(usuariXarxa)
-				
-			
-				pnlMenuGaia.visible = true
-		
-						
-				Dim ds as dataset 
-				ds = new dataset()
-				ds = llistaRelacionsAmbPermis()
-				'ltMenuArbres.text = menuArbres(ds)
-				ltMenuContinguts.text=  menuLinks(231018, 1, ds)		
-				ltMenuGestio.text = menuLinks(231023, 1,ds)
-				ltMenuDissenyWeb.text = menuLinks(231022, 1,ds)
-				ltMenuLlistats.text = menuLinks(231024, 1,ds)
-				ltMenuBackoffice.text = menulinks(270711, 1, ds)
-				
+    Dim objconn as OleDbConnection
+    Dim usuariXarxa as string=string.empty
+    Dim grupsAD as string=""
+    Dim idusuari as integer=-1
 
-				
-				if (idUsuari=49730 OR idUsuari=49727  OR idUsuari=56935  OR idUsuari=80879  OR idUsuari=144886 OR idUsuari=156704 or idUsuari=297650 or idUsuari=313486 or idUsuari=346231) AND (ltMenuGestio.text.length>0 OR ltMenuDissenyWeb.text.length>0 OR ltMenuLlistats.text.length>0 OR ltMenuBackoffice.text.length>0) THEN
-				
-					pnlAdm.visible=true
-				else 
-				
-					pnlAdm.visible=false
-				END IF
-				
-				
-				ltUtilitats.text = menuLinks(231021, 1,ds)
-				
-				
-				
-				ds.dispose()
-			END IF
 
-		END IF
-		END IF		
-		'END IF
-	End sub
-	
-	
-	Protected Function llistaRelacionsAmbPermis() as dataset
+
+    public  function GetVaryByCustomString( context as HttpContext ,  arg as string) as string
+        if (arg = "userName") THEN
+            return context.User.Identity.Name
+        END IF
+        return string.Empty
+    end function
+
+
+    Private Sub Page_Load(sender As Object, e As System.EventArgs) Handles MyBase.Load
+        Dim usuariActiu as boolean= False
+        IF session("menuGAIA")="" THEN
+            IF HttpContext.Current.User.Identity.Name.length>0 THEN
+                UsuariXarxa= GAIA.FormatejaUsuari(HttpContext.Current.User.Identity.Name)
+
+
+
+                IF (Session("nif") is nothing) THEN
+                    Session("nif") =GAIA.nifUsuari(objconn,UsuariXarxa,usuariActiu).Trim()
+                END IF
+
+                IF true then 'usuariActiu THEN
+
+                    IF Session("codiOrg") is nothing THEN
+                        session("CodiOrg")=GAIA.trobaNodeUsuari(objConn, Session("nif")).tostring().Trim()
+                    END IF
+                    idUsuari = Session("CodiOrg")
+                    grupsAD = clsPermisos.getGroupsAD(usuariXarxa)
+
+
+                    pnlMenuGaia.visible = true
+
+
+                    Dim ds as dataset
+                    ds = new dataset()
+                    ds = llistaRelacionsAmbPermis()
+                    'ltMenuArbres.text = menuArbres(ds)
+                    ltMenuContinguts.text=  menuLinks(231018, 1, ds)
+                    ltMenuGestio.text = menuLinks(231023, 1,ds)
+                    ltMenuDissenyWeb.text = menuLinks(231022, 1,ds)
+                    ltMenuLlistats.text = menuLinks(231024, 1,ds)
+                    ltMenuBackoffice.text = menulinks(270711, 1, ds)
+
+
+
+                    if (idUsuari=49730 OR idUsuari=49727  OR idUsuari=56935  OR idUsuari=80879  OR idUsuari=144886 OR idUsuari=156704 or idUsuari=297650 or idUsuari=313486 or idUsuari=346231) AND (ltMenuGestio.text.length>0 OR ltMenuDissenyWeb.text.length>0 OR ltMenuLlistats.text.length>0 OR ltMenuBackoffice.text.length>0) THEN
+
+                        pnlAdm.visible=true
+                    else
+
+                        pnlAdm.visible=false
+                    END IF
+
+
+                    ltUtilitats.text = menuLinks(231021, 1,ds)
+
+
+
+                    ds.dispose()
+                END IF
+
+            END IF
+        END IF
+        'END IF
+    End sub
+
+
+    Protected Function llistaRelacionsAmbPermis() as dataset
 
 
         Dim DS As DataSet
         Dim dbRow As DataRow
         DS = New dataset()
-		
-		Dim rel as new clsRelacio
-      
-		Dim llistaPendents as string=""
-		Dim llistaAmbPermisos as string=""
-		Dim llistaSensePermisos as string=""
+
+        Dim rel as new clsRelacio
+
+        Dim llistaPendents as string=""
+        Dim llistaAmbPermisos as string=""
+        Dim llistaSensePermisos as string=""
         GAIA.bdR(objConn, "select * FROM METLREL WHERE (RELCDHER LIKE '%_163944%' ) AND RELCDSIT<96", DS)
         For Each dbRow In ds.Tables(0).Rows
-			if llistaPendents.length>0 THEN
-				llistaPendents &= ","
-			END IF
-			llistaPendents &= dbrow("RELINCOD")
-		Next dbRow			
-		clsPermisos.trobaPermisLlistaRelacions(objconn, 9, llistaPendents, idUsuari, grupsAD, "", llistaAmbPermisos, llistaSensePermisos, usuariXarxa)
-		if llistaAmbPermisos.length=0 THEN
-			llistaAmbPermisos="-1"
-		END IF
-		GAIA.bdR(objconn,"SELECT DISTINCT  len(relMenu.RELCDHER),relMenu.RELCDHER,isnull(METLREI.REIINCOD, 0) AS REIINCOD,nodeMenu.NODDSTXT as nomMenu, nodePareMenu.NODDSTXT as nomPare, relMenu.RELINFIL, relMenu.RELINPAR, relMenu.RELCDRSU, relMenu.RELINCOD as relacio, LNKINNOD, METLLNK.LNKWNTIP, METLLNK.LNKDSLNK,METLLNK.LNKDSTXT, relContingut.RELDSFIT, METLREI.REIDSFIT, relMenu.RELCDORD FROM METLREL relMenu WITH(NOLOCK) INNER JOIN METLNOD nodePareMenu WITH(NOLOCK) on nodePareMenu.NODINNOD=relMenu.RELINPAR INNER JOIN METLNOD nodeMenu WITH(NOLOCK) on nodeMenu.NODINNOD=relMenu.RELINFIL  LEFT OUTER JOIN METLLNK WITH(NOLOCK) ON relMenu.RELINFIL = METLLNK.LNKINNOD AND (METLLNK.LNKINIDI =1) LEFT OUTER JOIN METLREI WITH(NOLOCK) ON METLLNK.LNKCDREL = METLREI.REIINCOD AND METLREI.REIINIDI =1 LEFT OUTER JOIN METLREL relContingut WITH(NOLOCK) ON METLLNK.LNKCDREL = relContingut.RELINCOD  AND relContingut.RELCDSIT<98 WHERE   relMenu.RELINCOD IN (" & llistaAmbPermisos & " )  AND (relMenu.RELCDSIT< 98) ORDER BY len(relMenu.RELCDHER), relMenu.RELCDORD" ,DS)
-
-
-		return (ds)
-
-	
-	End Function
-	
-	
-	Protected Function menuArbres(ds as dataset) as string
-    
-		For Each dbRow In ds.Tables(0).Rows
-			IF dbrow("RELINFIL")=dbrow("RELINPAR") THEN
-				menuArbres &= "<li><a href=""/gaia/aspx/visorArbres.aspx?ca="  & dbrow("relacio") &   """ title=""Anar a " & dbrow("nomMenu") & """>"  & dbrow("nomMenu").replace("arbre ","")  & "</a></li>" 
-			END IF
+            if llistaPendents.length>0 THEN
+                llistaPendents &= ","
+            END IF
+            llistaPendents &= dbrow("RELINCOD")
         Next dbRow
-      
+        clsPermisos.trobaPermisLlistaRelacions(objconn, 9, llistaPendents, idUsuari, grupsAD, "", llistaAmbPermisos, llistaSensePermisos, usuariXarxa)
+        if llistaAmbPermisos.length=0 THEN
+            llistaAmbPermisos="-1"
+        END IF
+        GAIA.bdR(objconn,"SELECT DISTINCT  len(relMenu.RELCDHER),relMenu.RELCDHER,isnull(METLREI.REIINCOD, 0) AS REIINCOD,nodeMenu.NODDSTXT as nomMenu, nodePareMenu.NODDSTXT as nomPare, relMenu.RELINFIL, relMenu.RELINPAR, relMenu.RELCDRSU, relMenu.RELINCOD as relacio, LNKINNOD, METLLNK.LNKWNTIP, METLLNK.LNKDSLNK,METLLNK.LNKDSTXT, relContingut.RELDSFIT, METLREI.REIDSFIT, relMenu.RELCDORD FROM METLREL relMenu WITH(NOLOCK) INNER JOIN METLNOD nodePareMenu WITH(NOLOCK) on nodePareMenu.NODINNOD=relMenu.RELINPAR INNER JOIN METLNOD nodeMenu WITH(NOLOCK) on nodeMenu.NODINNOD=relMenu.RELINFIL  LEFT OUTER JOIN METLLNK WITH(NOLOCK) ON relMenu.RELINFIL = METLLNK.LNKINNOD AND (METLLNK.LNKINIDI =1) LEFT OUTER JOIN METLREI WITH(NOLOCK) ON METLLNK.LNKCDREL = METLREI.REIINCOD AND METLREI.REIINIDI =1 LEFT OUTER JOIN METLREL relContingut WITH(NOLOCK) ON METLLNK.LNKCDREL = relContingut.RELINCOD  AND relContingut.RELCDSIT<98 WHERE   relMenu.RELINCOD IN (" & llistaAmbPermisos & " )  AND (relMenu.RELCDSIT< 98) ORDER BY len(relMenu.RELCDHER), relMenu.RELCDORD" ,DS)
+
+
+        return (ds)
+
+
+    End Function
+
+
+    Protected Function menuArbres(ds as dataset) as String
+        Dim menuArbresTemp As String = String.Empty
+
+        For Each dbRow In ds.Tables(0).Rows
+            IF dbrow("RELINFIL")=dbrow("RELINPAR") Then
+                menuArbresTemp &= "<li><a href=""/gaia/aspx/visorArbres.aspx?ca=" & dbRow("relacio") & """ title=""Anar a " & dbRow("nomMenu") & """>" & dbRow("nomMenu").replace("arbre ", "") & "</a></li>"
+            End IF
+        Next dbRow
+
         DS.dispose()
- 
+        Return menuArbresTemp
+    End Function
 
-	End Function
 
-	
-	Private function menuLinks(byVal codiRelacio as integer, byVal codiIdioma as integer, byVal llistaAmbPermisos as dataset) as string
-		Dim DS As DataSet    
-		Dim dbRow as DataRow
-		DS = New DataSet()	
-		Dim strMenu as string=""		
-		Dim strLink as string
-		Dim txtNovaFinestra as string = "nova finestra"
-		Dim cont as integer = 0
-		Dim strImatgeFinestraNova as string = " <img class=""finestraNova"" alt=""Obrir enllaç"" src=""/img/common/finestra_nova.png""/>"		
-		dim rel as new clsrelacio()
-		
-		rel.bdget(objconn, codiRelacio)
-		
-		For each dbRow in llistaAmbPermisos.tables(0).Rows			
-			IF (instr(dbrow("RELCDHER"), rel.infil)>0) AND NOT isdbnull(dbrow("LNKINNOD")) THEN		
-				if cont=0 THEN
-					strMenu &= "<li><a href=""#"">" & dbrow("nomPare") & "</a><ul>"
-				END IF
-				strLink= iif(isdbnull(dbrow("REIDSFIT")) OR dbrow("REIINCOD")=0,iif(isdbnull(dbRow("RELDSFIT")),dbROW("LNKDSLNK"),dbrow("RELDSFIT")),dbrow("REIDSFIT"))
-				strMenu &= "<li><a href=""" & strLink & """ target=""" & iif(dbrow("LNKWNTIP")=1, "_blank", "_self") & """ title=""Anar a " & dbrow("LNKDSTXT") & iif(dbrow("LNKWNTIP")=1, txtNovaFinestra,"") & """>"  & dbrow("LNKDSTXT") & iif(dbrow("LNKWNTIP")=1, strImatgeFinestraNova,"") & "</a>"  & "</li>" 
-				cont = cont + 1
-			END IF
-		Next dbrow
-		
-		if cont>0 THEN
-			strMenu &= "</ul></li>"
-			'strMenu =  iif(cont>1, "<ul><li>","") & strMenu  & iif(cont>1, "</li></ul>","") 
-			
-			
-		END IF
-		
-		return strMenu
+    Private function menuLinks(byVal codiRelacio as integer, byVal codiIdioma as integer, byVal llistaAmbPermisos as dataset) as string
+        Dim DS As DataSet
+        Dim dbRow as DataRow
+        DS = New DataSet()
+        Dim strMenu as string=""
+        Dim strLink as string
+        Dim txtNovaFinestra as string = "nova finestra"
+        Dim cont as integer = 0
+        Dim strImatgeFinestraNova as string = " <img class=""finestraNova"" alt=""Obrir enllaç"" src=""/img/common/finestra_nova.png""/>"
+        dim rel as new clsrelacio()
 
-	End function
+        rel.bdget(objconn, codiRelacio)
+
+        For each dbRow in llistaAmbPermisos.tables(0).Rows
+            IF (instr(dbrow("RELCDHER"), rel.infil)>0) AND NOT isdbnull(dbrow("LNKINNOD")) THEN
+                if cont=0 THEN
+                    strMenu &= "<li><a href=""#"">" & dbrow("nomPare") & "</a><ul>"
+                END IF
+                strLink= iif(isdbnull(dbrow("REIDSFIT")) OR dbrow("REIINCOD")=0,iif(isdbnull(dbRow("RELDSFIT")),dbROW("LNKDSLNK"),dbrow("RELDSFIT")),dbrow("REIDSFIT"))
+                strMenu &= "<li><a href=""" & strLink & """ target=""" & iif(dbrow("LNKWNTIP")=1, "_blank", "_self") & """ title=""Anar a " & dbrow("LNKDSTXT") & iif(dbrow("LNKWNTIP")=1, txtNovaFinestra,"") & """>"  & dbrow("LNKDSTXT") & iif(dbrow("LNKWNTIP")=1, strImatgeFinestraNova,"") & "</a>"  & "</li>"
+                cont = cont + 1
+            END IF
+        Next dbrow
+
+        if cont>0 THEN
+            strMenu &= "</ul></li>"
+            'strMenu =  iif(cont>1, "<ul><li>","") & strMenu  & iif(cont>1, "</li></ul>","") 
+
+
+        END IF
+
+        return strMenu
+
+    End function
 </script>
