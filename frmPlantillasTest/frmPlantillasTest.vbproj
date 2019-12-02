@@ -48,28 +48,28 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CSCartografia">
-      <HintPath>..\..\GAIA\bin\CSCartografia.dll</HintPath>
+      <HintPath>..\..\..\GAIA\bin\CSCartografia.dll</HintPath>
     </Reference>
     <Reference Include="gaiaws">
-      <HintPath>..\..\GAIA\bin\gaiaws.dll</HintPath>
+      <HintPath>..\..\..\GAIA\bin\gaiaws.dll</HintPath>
     </Reference>
     <Reference Include="kcommon">
-      <HintPath>..\..\GAIA\bin\kcommon.dll</HintPath>
+      <HintPath>..\..\..\GAIA\bin\kcommon.dll</HintPath>
     </Reference>
     <Reference Include="lhCodParam">
-      <HintPath>..\..\GAIA\bin\lhCodParam.dll</HintPath>
+      <HintPath>..\..\..\GAIA\bin\lhCodParam.dll</HintPath>
     </Reference>
     <Reference Include="lhUtil">
-      <HintPath>..\..\GAIA\bin\lhUtil.dll</HintPath>
+      <HintPath>..\..\..\GAIA\bin\lhUtil.dll</HintPath>
     </Reference>
     <Reference Include="ProjNET">
-      <HintPath>..\..\GAIA\bin\ProjNET.dll</HintPath>
+      <HintPath>..\..\..\GAIA\bin\ProjNET.dll</HintPath>
     </Reference>
     <Reference Include="RadTreeView">
-      <HintPath>..\..\GAIA\bin\RadTreeView.DLL</HintPath>
+      <HintPath>..\..\..\GAIA\bin\RadTreeView.DLL</HintPath>
     </Reference>
     <Reference Include="SharpMap">
-      <HintPath>..\..\GAIA\bin\SharpMap.dll</HintPath>
+      <HintPath>..\..\..\GAIA\bin\SharpMap.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
