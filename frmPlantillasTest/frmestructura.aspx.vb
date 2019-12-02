@@ -21,13 +21,15 @@ Public Class frmestructura
 
         If HttpContext.Current.User.Identity.Name.Length > 0 Then
             If (Session("nif") Is Nothing) Then
-                Session("nif") = GAIA.nifUsuari(objconn, HttpContext.Current.User.Identity.Name).Trim()
+                'Session("nif") = GAIA.nifUsuari(objconn, HttpContext.Current.User.Identity.Name).Trim()
             End If
             If Session("codiOrg") Is Nothing Then
-                Session("CodiOrg") = GAIA.trobaNodeUsuari(objconn, Session("nif")).ToString().Trim()
+                'Session("CodiOrg") = GAIA.trobaNodeUsuari(objconn, Session("nif")).ToString().Trim()
             End If
         End If
-        nif = Session("nif").Trim()
+        'nif = Session("nif").Trim()
+        'idUsuari = "346231"
+        Session("codiOrg") = "346231"
         If Not Page.IsPostBack Then
             nroArbreOrigen.Text = Request("nroArbreOrigen")
             nroArbreDesti.Text = Request("nroArbreDesti")

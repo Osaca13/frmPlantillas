@@ -1,36 +1,15 @@
-Imports System
 Imports System.Xml
-Imports System.Data
-Imports System.Web
-Imports system.web.HttpServerUtility
 Imports System.Data.OleDb
-Imports System.Web.UI.WebControls
-Imports System.Web.UI.HtmlControls
 Imports Telerik.WebControls
 Imports System.Data.SqlClient
-Imports System.Collections
 Imports System.IO
-Imports System.Configuration
-Imports System.Web.UI.HtmlControls.HtmlInputFile 
-Imports System.Web.HttpPostedFile
-Imports Microsoft.VisualBasic
-Imports System.Text.RegularExpressions 
-Imports System.Text
 Imports System.Net
-Imports System.Web.SessionState
-Imports System.Runtime.InteropServices
-Imports System.Security.Principal
-Imports System.Security.Permissions
 Imports KCommon.Net.FTP
-Imports lhCodParam
 Imports System.Drawing.Imaging
 Imports System.DirectoryServices
-Imports System.Collections.Generic
 
 'Necessari per la funció DameLonLatDeCoordenadals
-Imports Cartografia
 
-Imports SharpMap
 Imports SharpMap.CoordinateSystems
 Imports SharpMap.Converters.WellKnownText
 Imports SharpMap.CoordinateSystems.Transformations
@@ -50,21 +29,21 @@ Imports System.Drawing
 '******************************************************************************************+
 '******************************************************************************************+
 '******************************************************************************************+
-MustInherit Public Class clsPermisos
-		Inherits System.Web.UI.Page  		
-		Protected WithEvents RadTree1 As RadTreeView
-		Protected lblNode AS Label
-		Protected cerca AS TextBox
-		Protected lblPersonesAmbPermis AS Label
-		Protected lblpersones  AS Label
-		Protected lblpermisos,lblpermisosHerencia  AS Label
-		Protected persona() as htmlanchor 
-		Protected btnClickLlistaAmpliada as button
-		
-		Public shared  nropersones AS Integer					
-		Public shared strValor as string
-		Public Shared nif as String
-		Public shared idUsuari as Integer
+Public MustInherit Class clsPermisos
+    Inherits System.Web.UI.Page
+    Protected WithEvents RadTree1 As RadTreeView
+    Protected lblNode As Label
+    Protected cerca As TextBox
+    Protected lblPersonesAmbPermis As Label
+    Protected lblpersones As Label
+    Protected lblpermisos, lblpermisosHerencia As Label
+    Protected persona() As htmlanchor
+    Protected btnClickLlistaAmpliada As button
+
+    Public Shared nropersones As Integer
+    Public Shared strValor As String
+    Public Shared nif As String
+    Public Shared idUsuari As Integer
 
     Public Shared hOrganigrama As Dictionary(Of Integer, String)
 
@@ -76,7 +55,7 @@ MustInherit Public Class clsPermisos
         objconn = GAIA.bdIni()
         Dim ds As New DataSet()
         Dim dbrow As DataRow
-		
+
         clsPermisos.hOrganigrama = New Dictionary(Of Integer, String)
         Dim codiAnt As Integer = 0
         Dim llistaNodes As String = ""
@@ -233,7 +212,7 @@ MustInherit Public Class clsPermisos
                 End If
                 If Request("modificat" & item.ToString()) = "1" Then
                     assignarPermisos(objconn, Request("permis" & item), item, rel.infil, permisDescendent)
-                    assignarPermisos2(objconn, Request("permis" & item), item, rel.infil, permisDescendent)					
+                    assignarPermisos2(objconn, Request("permis" & item), item, rel.infil, permisDescendent)
                     If cont > 0 Then
                         llistaPersonesAmbCanviPermis += ","
                     End If
@@ -242,7 +221,7 @@ MustInherit Public Class clsPermisos
                 Else
                     If permisDescendent Then
                         assignarPermisos(objconn, Request("permis" & item), item, rel.infil, permisDescendent)
-						assignarPermisos2(objconn, Request("permis" & item), item, rel.infil, permisDescendent)
+                        assignarPermisos2(objconn, Request("permis" & item), item, rel.infil, permisDescendent)
                         If cont2 > 0 Then
                             llistaPersonesAmbCanviPermisDirecte += ","
                         End If
@@ -266,12 +245,12 @@ MustInherit Public Class clsPermisos
         'Actualitzo els permisos heretats
 
         If llistaPersonesAmbCanviPermis <> "" Then
-'            clsPermisos.tractaPermisosHeretats(objconn, "", Request("nodes"), llistaPersonesAmbCanviPermis, "", 0)			
-			clsPermisos.tractaPermisosHeretats2(objConn, nothing,  Request("nodes"), llistaPersonesAmbCanviPermis, 1, 0)
+            '            clsPermisos.tractaPermisosHeretats(objconn, "", Request("nodes"), llistaPersonesAmbCanviPermis, "", 0)			
+            clsPermisos.tractaPermisosHeretats2(objConn, Nothing, Request("nodes"), llistaPersonesAmbCanviPermis, 1, 0)
         End If
         If llistaPersonesAmbCanviPermisDirecte <> "" Then
-'            clsPermisos.tractaPermisosHeretats(objconn, 0, Request("nodes"), llistaPersonesAmbCanviPermisDirecte, "", 1)
-			clsPermisos.tractaPermisosHeretats2(objConn, nothing,  Request("nodes"), llistaPersonesAmbCanviPermisDirecte, 1, 1)
+            '            clsPermisos.tractaPermisosHeretats(objconn, 0, Request("nodes"), llistaPersonesAmbCanviPermisDirecte, "", 1)
+            clsPermisos.tractaPermisosHeretats2(objConn, Nothing, Request("nodes"), llistaPersonesAmbCanviPermisDirecte, 1, 1)
         End If
 
         GAIA.bdFi(objconn)
@@ -367,14 +346,14 @@ MustInherit Public Class clsPermisos
     '	Procés: 	
     '		Selecciona les persones amb permis manual sobre el node o bé les persones amb permis heretat sobre node/arbre
     '******************************************************************
-  Public Shared Sub carregaPersonesAmbPermis(ByVal objConn As OleDbConnection, ByVal rel As clsRelacio, ByVal llistaAmpliada As Integer, ByRef strPersonesAmbPermis As String, ByRef lblpersones As String, ByRef lblpermisos As String, ByRef lblPermisosHerencia As String, ByVal permisos As String, ByVal nronivells As Integer)
-       'per eliminar
+    Public Shared Sub carregaPersonesAmbPermis(ByVal objConn As OleDbConnection, ByVal rel As clsRelacio, ByVal llistaAmpliada As Integer, ByRef strPersonesAmbPermis As String, ByRef lblpersones As String, ByRef lblpermisos As String, ByRef lblPermisosHerencia As String, ByVal permisos As String, ByVal nronivells As Integer)
+        'per eliminar
     End Sub  'carregaPersonesAmbPermis
 
 
 
     Public Shared Function llistaPersonesAmbPermis(ByVal objConn As OleDbConnection, ByVal node As Integer, ByVal rel As clsRelacio) As String
-       	'per eliminar
+        'per eliminar
         Return ""
     End Function
 
@@ -389,8 +368,8 @@ MustInherit Public Class clsPermisos
     '		codi del permis negatiu
     '******************************************************************
     Public Shared Function trobaPermisNegatiu(ByVal permis As Integer) As Integer
-		'per eliminar
-       return 0
+        'per eliminar
+        Return 0
     End Function
 
 
@@ -414,7 +393,7 @@ MustInherit Public Class clsPermisos
 
 
 
-Public Shared Sub assignarPermisos2(ByVal objConn As OleDbConnection, ByVal permisosIni As Integer, ByVal numNodeOrganigrama As Integer, ByVal codiNode As Integer, ByVal recursiu As Boolean)
+    Public Shared Sub assignarPermisos2(ByVal objConn As OleDbConnection, ByVal permisosIni As Integer, ByVal numNodeOrganigrama As Integer, ByVal codiNode As Integer, ByVal recursiu As Boolean)
 
         Dim arrPermis(9) As Integer
         Dim cont As Integer
@@ -444,8 +423,8 @@ Public Shared Sub assignarPermisos2(ByVal objConn As OleDbConnection, ByVal perm
                 End If
             Next cont
 
-   			clsPermisos.gravaPermis2(objconn, numNodeOrganigrama, rel,0, arrPermis(0), arrPermis(1), arrPermis(2), arrPermis(3), arrPermis(4), arrPermis(5), arrPermis(6), arrPermis(7), arrPermis(8), arrPermis(9),true)
-		Next dbrow
+            clsPermisos.gravaPermis2(objconn, numNodeOrganigrama, rel, 0, arrPermis(0), arrPermis(1), arrPermis(2), arrPermis(3), arrPermis(4), arrPermis(5), arrPermis(6), arrPermis(7), arrPermis(8), arrPermis(9), True)
+        Next dbrow
 
 
         'Si he de gravar permis directe cap avall, faig el tractament
@@ -464,7 +443,7 @@ Public Shared Sub assignarPermisos2(ByVal objConn As OleDbConnection, ByVal perm
         ds2.Dispose()
     End Sub 'assignarPermisos2
 
-  
+
 
 
 
@@ -503,13 +482,13 @@ Public Shared Sub assignarPermisos2(ByVal objConn As OleDbConnection, ByVal perm
                 'res
             Else
                 rel.bdget(objConn, dbRow("RELINCOD"))
-				if false then
-					tePermisEdicio = clsPermisos.tepermis(objConn, 3, numNodeOrganigrama, numNodeOrganigrama, rel, 0)
-				end if
-	
+                If False Then
+                    tePermisEdicio = clsPermisos.tepermis(objConn, 3, numNodeOrganigrama, numNodeOrganigrama, rel, 0)
+                End If
 
 
-                tePermisEdicio = clsPermisos.tepermis2(objConn, 3, numNodeOrganigrama, numNodeOrganigrama, rel, 0,"","", 0)
+
+                tePermisEdicio = clsPermisos.tepermis2(objConn, 3, numNodeOrganigrama, numNodeOrganigrama, rel, 0, "", "", 0)
                 If tePermisEdicio = 1 Then
                     strPermisos = rel.noddstxt
                 End If
@@ -530,23 +509,23 @@ Public Shared Sub assignarPermisos2(ByVal objConn As OleDbConnection, ByVal perm
     ' Si node=-1, la funció s'ha cridat desde un "tractaPermisosHeretats" superior i caldrà tractar-ho de forma especial.
     ' ex: per actualitar tots els permisosHeretats de la intranet:   clsPermisos.tractaPermisosHeretats(objconn,"_55785",-1)
     '*******************************************************************************************************
-Public Shared Sub tractaPermisosHeretats(ByVal objconn As OleDbConnection, ByVal herenciaNode As String, ByVal node As Integer, ByVal llistaPersonesInicial As String, ByVal llistaPersones As String, ByVal tractarFillsORG As Integer)
-	tractaPermisosHeretats(objconn, herenciaNode,node,llistaPersonesInicial,llistaPersones, tractarFillsOrg, false)
-End Sub
+    Public Shared Sub tractaPermisosHeretats(ByVal objconn As OleDbConnection, ByVal herenciaNode As String, ByVal node As Integer, ByVal llistaPersonesInicial As String, ByVal llistaPersones As String, ByVal tractarFillsORG As Integer)
+        tractaPermisosHeretats(objconn, herenciaNode, node, llistaPersonesInicial, llistaPersones, tractarFillsOrg, False)
+    End Sub
 
 
-    Public Shared Sub tractaPermisosHeretats(ByVal objconn As OleDbConnection, ByVal herenciaNode As String, ByVal node As Integer, ByVal llistaPersonesInicial As String, ByVal llistaPersones As String, ByVal tractarFillsORG As Integer, byVal tractarPermisosEnDiferit as boolean)
-	
-	
-	'29/6/2015: Msv, Gravo en METLMAP2  per saber el que hauré de canviar després de proves
-'	GAIA.bdSR(objconn, "INSERT INTO METLMAP2 (MAPINNOD, MAPCDREL, MAPDSLPE, MAPDTTIM, MAPCDERR) VALUES (" & node & ",0,'" & llistaPersones & "', GETDATE(),0)")
+    Public Shared Sub tractaPermisosHeretats(ByVal objconn As OleDbConnection, ByVal herenciaNode As String, ByVal node As Integer, ByVal llistaPersonesInicial As String, ByVal llistaPersones As String, ByVal tractarFillsORG As Integer, ByVal tractarPermisosEnDiferit As Boolean)
 
-	'per eliminar
+
+        '29/6/2015: Msv, Gravo en METLMAP2  per saber el que hauré de canviar després de proves
+        '	GAIA.bdSR(objconn, "INSERT INTO METLMAP2 (MAPINNOD, MAPCDREL, MAPDSLPE, MAPDTTIM, MAPCDERR) VALUES (" & node & ",0,'" & llistaPersones & "', GETDATE(),0)")
+
+        'per eliminar
     End Sub
 
 
 
-     Private Shared Sub assignaPermisosHeretats(ByVal objconn As OleDbConnection, ByVal rel As clsRelacio, ByVal llistaPersones As String, ByVal tractarFillsORG As Integer)
+    Private Shared Sub assignaPermisosHeretats(ByVal objconn As OleDbConnection, ByVal rel As clsRelacio, ByVal llistaPersones As String, ByVal tractarFillsORG As Integer)
         'per eliminar
     End Sub
 
@@ -579,19 +558,19 @@ End Sub
         Dim objconn As OleDbConnection
         Dim DS As DataSet
         Dim dbRow As DataRow
-        DS = New DataSet()     
+        DS = New DataSet()
         objconn = GAIA.bdIni()
-		gaia.bdr(objconn, "SELECT * FROM METLMAP2 WITH(NOLOCK) WHERE MAPCDERR=0 ORDER BY MAPINCOD ASC", DS)
-		For Each dbRow In DS.Tables(0).Rows
+        gaia.bdr(objconn, "SELECT * FROM METLMAP2 WITH(NOLOCK) WHERE MAPCDERR=0 ORDER BY MAPINCOD ASC", DS)
+        For Each dbRow In DS.Tables(0).Rows
             clsPermisos.tractaPermisosHeretats2(objconn, Nothing, dbRow("MAPINNOD"), dbRow("MAPDSLPE"), 1, 0, True)
             GAIA.bdSR(objconn, "UPDATE METLMAP2 SET MAPCDERR=2 WHERE  MAPINNOD=" & dbRow("MAPINNOD"))
-		Next dbRow
-		
-		
-		'26/3/2018, MSV: Hi ha un problema amb l'arbre "el meu espai". No sabem el motiu però apareixen permisos de lectura al usuari TOTS
-		Gaia.bdr(objconn, "UPDATE METLPER2 SET PERCDPE9=0,PERCDPE10=1 WHERE PERINORG=115969 AND PERCDREL IN (select RELINCOD FROM METLREL WITH(NOLOCK),METLPER2 WITH(NOLOCK) WHERE RELCDRSU=198336 AND PERCDREL=RELINCOD AND RELCDSIT<98 AND PERINORG=115969 AND PERCDPE10=0)", DS)
-		
-		
+        Next dbRow
+
+
+        '26/3/2018, MSV: Hi ha un problema amb l'arbre "el meu espai". No sabem el motiu però apareixen permisos de lectura al usuari TOTS
+        Gaia.bdr(objconn, "UPDATE METLPER2 SET PERCDPE9=0,PERCDPE10=1 WHERE PERINORG=115969 AND PERCDREL IN (select RELINCOD FROM METLREL WITH(NOLOCK),METLPER2 WITH(NOLOCK) WHERE RELCDRSU=198336 AND PERCDREL=RELINCOD AND RELCDSIT<98 AND PERINORG=115969 AND PERCDPE10=0)", DS)
+
+
         DS.Dispose()
     End Sub 'mantenimentPermisosHeretats
 
@@ -686,15 +665,15 @@ End Sub
 
 
 
-'Faig el canvi al nou sistema de permisos
-	return(clsPermisos.tepermis2(objconn, permis, numNodeOrganigramaini, numNodeOrganigrama, rel, heretat, usuariXarxa, grupsAd, node))
-	
-	
-	
+        'Faig el canvi al nou sistema de permisos
+        Return (clsPermisos.tepermis2(objconn, permis, numNodeOrganigramaini, numNodeOrganigrama, rel, heretat, usuariXarxa, grupsAd, node))
 
 
 
-	
+
+
+
+
     End Function
 
     'afegeix un element a una llista separada per comes (l'element pot ser una altra llista)
@@ -715,7 +694,7 @@ End Sub
     End Sub
 
     Public Shared Function existeixElement(ByVal element As String, ByRef llista As String) As Boolean
-  
+
 
         If llista = element Or InStr(llista, "," & element & ",") > 0 Or InStr(llista, element & ",") > 0 Or InStr(llista, "," & element) > 0 Then
             Return True
@@ -774,11 +753,11 @@ End Sub
 
 
 
-    Public Shared Sub trobaPermisLlistaRelacions(ByVal objConn As OleDbConnection, ByVal permis As Integer, ByRef llistaPendents As String, ByVal usuariGAIA As Integer, ByRef grupsAD As String, ByVal herenciaORG As String, ByRef llistaAmbPermisos As String, ByRef llistaSensePermisos As String, ByVal usuariXarxa As String, Optional ByVal pendentsSonNodes As boolean  = false, optional byRef llistaNodesSensePermis as string = "")
-	
-	
-		clsPermisos.trobaPermisLlistaRelacions2(objConn, permis, llistaPendents, usuariGAIA, grupsAD, herenciaORG, llistaAmbPermisos, llistaSensePermisos, usuariXarxa,pendentsSonNodes,llistaNodesSensePermis)
-	
+    Public Shared Sub trobaPermisLlistaRelacions(ByVal objConn As OleDbConnection, ByVal permis As Integer, ByRef llistaPendents As String, ByVal usuariGAIA As Integer, ByRef grupsAD As String, ByVal herenciaORG As String, ByRef llistaAmbPermisos As String, ByRef llistaSensePermisos As String, ByVal usuariXarxa As String, Optional ByVal pendentsSonNodes As Boolean = False, Optional ByRef llistaNodesSensePermis As String = "")
+
+
+        clsPermisos.trobaPermisLlistaRelacions2(objConn, permis, llistaPendents, usuariGAIA, grupsAD, herenciaORG, llistaAmbPermisos, llistaSensePermisos, usuariXarxa, pendentsSonNodes, llistaNodesSensePermis)
+
     End Sub
 
 
@@ -796,47 +775,47 @@ End Sub
     '		Si no existeix retorna fals
     '******************************************************************	
     Public Shared Function tePermisLecturaNode(ByVal objConn As OleDbConnection, ByVal rel As clsRelacio, ByVal numNodeOrganigrama As Integer, ByVal nodeRoot As Integer) As Integer
-        		
-		
-		IF clsPermisos.tepermis2(objconn, 9, numNodeOrganigrama, numNodeOrganigrama, rel, 0)= 1 THEN
-			return TRUE
-		ELSE
-	  		return FALSE
-		END IF
 
 
-		IF FALSE THEN		
-		
-			If clsPermisos.tepermis(objConn, 11, numNodeOrganigrama, numNodeOrganigrama, rel, 0) = 1 Then
-				Return True
-			Else
-				Return False
-			End If
-		end if
+        If clsPermisos.tepermis2(objconn, 9, numNodeOrganigrama, numNodeOrganigrama, rel, 0) = 1 Then
+            Return True
+        Else
+            Return False
+        End If
+
+
+        If False Then
+
+            If clsPermisos.tepermis(objConn, 11, numNodeOrganigrama, numNodeOrganigrama, rel, 0) = 1 Then
+                Return True
+            Else
+                Return False
+            End If
+        End If
     End Function 'tePermisLecturaNode
 
 
     Public Shared Function tePermisLecturaNode(ByVal objConn As OleDbConnection, ByVal rel As clsRelacio, ByVal numNodeOrganigrama As Integer, ByVal nodeRoot As Integer, ByVal usuariXarxa As String) As Integer
-		  
-        IF clsPermisos.tepermis2(objconn, 9, numNodeOrganigrama, numNodeOrganigrama, rel, 0, usuariXarxa, "")= 1 THEN
-			return TRUE
-		ELSE
-	  		return FALSE
-		END IF
-		
-		
-		
-		
-		
-		
-		
-		if false then		
-			If clsPermisos.tepermis(objConn, 11, numNodeOrganigrama, numNodeOrganigrama, rel, 0, usuariXarxa, "") = 1 Then
-				Return True
-			Else
-				Return False
-			End If
-		end if
+
+        If clsPermisos.tepermis2(objconn, 9, numNodeOrganigrama, numNodeOrganigrama, rel, 0, usuariXarxa, "") = 1 Then
+            Return True
+        Else
+            Return False
+        End If
+
+
+
+
+
+
+
+        If False Then
+            If clsPermisos.tepermis(objConn, 11, numNodeOrganigrama, numNodeOrganigrama, rel, 0, usuariXarxa, "") = 1 Then
+                Return True
+            Else
+                Return False
+            End If
+        End If
     End Function
 
 
@@ -862,7 +841,7 @@ End Sub
         'per eliminar
     End Sub
 
-	
+
     Public Shared Function completarLlistaAmbParesOrganigrama(ByVal objconn As OleDb.OleDbConnection, ByVal usuariGaia As String, ByVal posaTots As Boolean) As String
         Dim DS As DataSet
         Dim dbRow As DataRow
@@ -881,9 +860,9 @@ End Sub
         End If
         DS.Dispose()
         Return (completarLlistaAmbParesOrganigrama)
-    End Function	
-	
-	
+    End Function
+
+
 #Region "Permisos 2"
 
     '**************************************************************************************************
@@ -1148,8 +1127,8 @@ End Sub
 
 
     Public Shared Sub tractaPermisosHeretats2(ByVal objconn As OleDbConnection, ByVal rel As clsRelacio, ByVal node As Integer, ByVal llistaPersonesInicial As String, ByVal tractarFillsORG As Integer, ByVal tractarPermisosEnDiferit As Boolean, Optional ByVal posarPermisosAscendents As Boolean = False)
-	
-		  
+
+
         Dim DS As DataSet
         Dim dbRow As DataRow
         DS = New DataSet()
@@ -1229,41 +1208,41 @@ End Sub
         DS = New DataSet()
         Dim strsql As String = ""
 
-       If Not String.IsNullOrEmpty(llistaPersones) Then
+        If Not String.IsNullOrEmpty(llistaPersones) Then
 
-        ' busco els permisos directes o heretats que té el node superior en la relació o bé els permisos directes de la relació
-        ' si llistaPersones valor<>"" busco només els permisos d'aquests usuaris. Això és correcte perque a la relació superior ja tenim calculats els permisos.
+            ' busco els permisos directes o heretats que té el node superior en la relació o bé els permisos directes de la relació
+            ' si llistaPersones valor<>"" busco només els permisos d'aquests usuaris. Això és correcte perque a la relació superior ja tenim calculats els permisos.
 
-  		
-        GAIA.bdr(objconn, "SELECT * FROM METLREL WITH(NOLOCK) WHERE RELCDRSU=" & rel.incod & " AND (RELCDSIT<96  OR RELCDSIT =98)", DS)
 
-        Dim DS2 As DataSet
-        Dim dbRow2 As DataRow
-        DS2 = New DataSet()
+            GAIA.bdr(objconn, "SELECT * FROM METLREL WITH(NOLOCK) WHERE RELCDRSU=" & rel.incod & " AND (RELCDSIT<96  OR RELCDSIT =98)", DS)
 
-        If DS.Tables(0).Rows.Count > 0 Then
-            strsql = "SELECT * FROM METLPER2 WITH(NOLOCK) WHERE PERCDREL=" & rel.incod
-            If llistaPersones.Length > 0 Then
-                strsql += " AND PERINORG IN (" + llistaPersones + ")"
+            Dim DS2 As DataSet
+            Dim dbRow2 As DataRow
+            DS2 = New DataSet()
+
+            If DS.Tables(0).Rows.Count > 0 Then
+                strsql = "SELECT * FROM METLPER2 WITH(NOLOCK) WHERE PERCDREL=" & rel.incod
+                If llistaPersones.Length > 0 Then
+                    strsql += " AND PERINORG IN (" + llistaPersones + ")"
+                End If
+                GAIA.bdr(objconn, strsql, DS2)
+
+
+                For Each dbRow In DS.Tables(0).Rows
+                    Dim relFill As New clsRelacio()
+
+                    For Each dbRow2 In DS2.Tables(0).Rows
+                        relFill.bdget(objconn, dbRow("RELINCOD"))
+                        gravaPermis2(objconn, dbRow2("PERINORG"), relFill, 1, dbRow2("PERCDPE1"), dbRow2("PERCDPE2"), dbRow2("PERCDPE3"), dbRow2("PERCDPE4"), dbRow2("PERCDPE5"), dbRow2("PERCDPE6"), dbRow2("PERCDPE7"), dbRow2("PERCDPE8"), dbRow2("PERCDPE9"), dbRow2("PERCDPE10"), 0, False)
+                        clsPermisos.tractaPermisosHeretats2(objconn, relFill, relFill.infil, llistaPersones, tractarFillsORG, False, False)
+                    Next dbRow2
+
+
+                Next dbRow
+                DS2.Dispose()
             End If
-            GAIA.bdr(objconn, strsql, DS2)
-
-
-            For Each dbRow In DS.Tables(0).Rows
-                Dim relFill As New clsRelacio()
-
-                For Each dbRow2 In DS2.Tables(0).Rows
-                    relFill.bdget(objconn, dbRow("RELINCOD"))
-                    gravaPermis2(objconn, dbRow2("PERINORG"), relFill, 1, dbRow2("PERCDPE1"), dbRow2("PERCDPE2"), dbRow2("PERCDPE3"), dbRow2("PERCDPE4"), dbRow2("PERCDPE5"), dbRow2("PERCDPE6"), dbRow2("PERCDPE7"), dbRow2("PERCDPE8"), dbRow2("PERCDPE9"), dbRow2("PERCDPE10"), 0, False)
-                    clsPermisos.tractaPermisosHeretats2(objconn, relFill, relFill.infil, llistaPersones, tractarFillsORG, False, False)
-                Next dbRow2
-
-
-            Next dbRow
-            DS2.Dispose()
+            DS.Dispose()
         End If
-        DS.Dispose()
-       End If
     End Sub 'assignaPermisosHeretats2
 
 
@@ -1282,10 +1261,10 @@ End Sub
             DS = New DataSet()
 
             If usuariXarxa = "" Then
-                If usuariGAIA = 0 Or usuariGAIA = cstUsuariTots Then 				
-					'******************************************************************************************************************************
-					'Si no hi ha usr xarxa, no puc mostrar continguts que no siguin de web o d'arbre codificació (a més hauré de comprovar els permisos)
-					'******************************************************************************************************************************				
+                If usuariGAIA = 0 Or usuariGAIA = cstUsuariTots Then
+                    '******************************************************************************************************************************
+                    'Si no hi ha usr xarxa, no puc mostrar continguts que no siguin de web o d'arbre codificació (a més hauré de comprovar els permisos)
+                    '******************************************************************************************************************************				
                     If Not pendentsSonNodes Then
                         GAIA.bdr(Nothing, "SELECT RELINCOD FROM METLREL WITH(NOLOCK) WHERE RELINCOD IN (" & llistaPendents & ") AND (RELCDARB<>8 AND NOT RELCDHER LIKE '_57135%')", DS)
                         For Each dbRow In DS.Tables(0).Rows
@@ -1296,21 +1275,21 @@ End Sub
                     Else 'llistapendents són nodes
                         'només moure a "sensepermis" els nodes que no tinguin alguna relació en web(relcdarb=8) o codificació (RELCDHER='_57135%')
 
-                      
+
                         GAIA.bdr(Nothing, "SELECT RELINCOD, RELINFIL, RELCDHER FROM METLREL WITH(NOLOCK) WHERE RELINFIL IN (" & llistaPendents & ") AND (RELCDARB=8 OR RELCDHER LIKE '_57135%')", DS)
                         llistaSensePermisos = llistaPendents
                         llistaPendents = ""
                         For Each dbRow In DS.Tables(0).Rows
                             clsPermisos.afegirElement(dbRow("RELINFIL"), llistaPendents)
-                            clsPermisos.eliminarElement(dbRow("RELINFIL"), llistaSensePermisos)                            
+                            clsPermisos.eliminarElement(dbRow("RELINFIL"), llistaSensePermisos)
                         Next dbRow
                     End If
 
                 End If
             Else
-                If usuariGAIA <> cstUsuariTots and usuariGAIA<>0 Then
+                If usuariGAIA <> cstUsuariTots And usuariGAIA <> 0 Then
                     'afegeixo l'usuari GAIA si hi ha
-                     GAIA.bdr(objConn, "SELECT FORDSWIN FROM METLFOR WITH(NOLOCK) WHERE FORINNOD=" & usuariGAIA & " AND FORINNOD IN (SELECT RELINFIL FROM METLREL WITH(NOLOCK) WHERE RELCDHER LIKE '_56261_115969%' AND RELCDSIT<98)", DS)
+                    GAIA.bdr(objConn, "SELECT FORDSWIN FROM METLFOR WITH(NOLOCK) WHERE FORINNOD=" & usuariGAIA & " AND FORINNOD IN (SELECT RELINFIL FROM METLREL WITH(NOLOCK) WHERE RELCDHER LIKE '_56261_115969%' AND RELCDSIT<98)", DS)
                     If DS.Tables(0).Rows.Count > 0 Then
                         usuariXarxa = DS.Tables(0).Rows(0)("FORDSWIN").trim()
                     End If
@@ -1435,8 +1414,8 @@ End Sub
             DS.Dispose()
         End If
     End Sub
-	
-	  Public Shared Function tepermis2(ByVal objConn As OleDbConnection, ByVal permis As Integer, ByVal numNodeOrganigramaini As Integer, ByVal numNodeOrganigrama As Integer, ByVal rel As clsRelacio, ByRef heretat As Integer, Optional ByVal usuariXarxa As String="", Optional ByVal grupsAD As String ="",Optional ByVal node As Integer=0) As Integer
+
+    Public Shared Function tepermis2(ByVal objConn As OleDbConnection, ByVal permis As Integer, ByVal numNodeOrganigramaini As Integer, ByVal numNodeOrganigrama As Integer, ByVal rel As clsRelacio, ByRef heretat As Integer, Optional ByVal usuariXarxa As String = "", Optional ByVal grupsAD As String = "", Optional ByVal node As Integer = 0) As Integer
 
 
         Dim DS As DataSet
@@ -1459,19 +1438,19 @@ End Sub
             'cerco permís per relació
             llistaPendents = rel.incod
         End If
-	
 
-		
+
+
         clsPermisos.trobaPermisLlistaRelacions2(objConn, permis, llistaPendents, numNodeOrganigramaini, grupsAD, "", llistaAmbPermisos, llistaSensePermisos, usuariXarxa)
         If llistaAmbPermisos.Length > 0 Then
             tepermis2 = 1
         End If
         Return tepermis2
     End Function
-	
-	
-	
-	
+
+
+
+
 #End Region
 
 End Class
@@ -1491,176 +1470,176 @@ End Class
 
 
 
-Public Class GAIA 
+Public Class GAIA
 
-Inherits System.Web.UI.Page
+    Inherits System.Web.UI.Page
 
-Public shared llistatErrors as string=""
-Public shared llistatWarnings as string=""
-'*******************************************************+
-' DECLARACIÓ DE CONSTANTS
-'*******************************************************+
-'Tipus d'accio. Es correspon amb les dades a METLCOD.CODINCOD amb CODINTIP=2
-Public Const TAPUBLICAR as Integer=8
-Public Const TAINSERTAR as Integer=9
-Public Const TAESBORRAR as Integer=10
-Public Const TAMOURE1 as Integer=11
-Public Const TAMOURE2 as Integer=19
-Public Const TACANVIESTAT as Integer=12
-Public Const TACANVIPERMISOS as Integer=14
-Public Const TACADUCAR as Integer=20
-Public Const TAAPROVAR as Integer=21
-Public Const TADENEGAR as Integer=21
-Public Const TAMODIFICAR as Integer=41
-Public Const TAREVISAR as Integer=42
-Public Const TALLEGIR as Integer=43
+    Public Shared llistatErrors As String = ""
+    Public Shared llistatWarnings As String = ""
+    '*******************************************************+
+    ' DECLARACIÓ DE CONSTANTS
+    '*******************************************************+
+    'Tipus d'accio. Es correspon amb les dades a METLCOD.CODINCOD amb CODINTIP=2
+    Public Const TAPUBLICAR As Integer = 8
+    Public Const TAINSERTAR As Integer = 9
+    Public Const TAESBORRAR As Integer = 10
+    Public Const TAMOURE1 As Integer = 11
+    Public Const TAMOURE2 As Integer = 19
+    Public Const TACANVIESTAT As Integer = 12
+    Public Const TACANVIPERMISOS As Integer = 14
+    Public Const TACADUCAR As Integer = 20
+    Public Const TAAPROVAR As Integer = 21
+    Public Const TADENEGAR As Integer = 21
+    Public Const TAMODIFICAR As Integer = 41
+    Public Const TAREVISAR As Integer = 42
+    Public Const TALLEGIR As Integer = 43
 
-'Tipus d'estat d'una relació
-Public CONST ctINICIAL as Integer=1
-Public Const ctPENDENTPUBLICAR as Integer=2 's'ha demanat la publicació i està a l'espera de que arribi la data de publicació.
-Public Const ctPUBLICAR as Integer=3 'Publicat o preparat per a publicar 
+    'Tipus d'estat d'una relació
+    Public Const ctINICIAL As Integer = 1
+    Public Const ctPENDENTPUBLICAR As Integer = 2 's'ha demanat la publicació i està a l'espera de que arribi la data de publicació.
+    Public Const ctPUBLICAR As Integer = 3 'Publicat o preparat per a publicar 
 
-Public Const ctPENDENTCADUCAR as Integer=4	 ' = a pendent de caducar
-Public Const ctESBORRATCADUCAT as Integer=98
-Public Const ctESBORRATMANUAL as Integer=99
-Public Const ctIMATGE as Integer=96
-Public Const ctDOCUMENT as Integer=97
+    Public Const ctPENDENTCADUCAR As Integer = 4     ' = a pendent de caducar
+    Public Const ctESBORRATCADUCAT As Integer = 98
+    Public Const ctESBORRATMANUAL As Integer = 99
+    Public Const ctIMATGE As Integer = 96
+    Public Const ctDOCUMENT As Integer = 97
 
-Public Const ctESBORRATMANUALIMATGE as Integer=9997
-Public Const ctESBORRATMANUALDOCUMENT as Integer=9996
-Public Const ctESBORRATCADUCATIMATGE as Integer=9897
-Public Const ctESBORRATCADUCATDOCUMENT as Integer=9896
-
-
+    Public Const ctESBORRATMANUALIMATGE As Integer = 9997
+    Public Const ctESBORRATMANUALDOCUMENT As Integer = 9996
+    Public Const ctESBORRATCADUCATIMATGE As Integer = 9897
+    Public Const ctESBORRATCADUCATDOCUMENT As Integer = 9896
 
 
 
-Public Const ctPENDENTPUBLICARCIRCUIT as Integer=6 's'ha demanat la publicació i està a l'espera d'una aprovació
-Public Const ctPUBLICARCIRCUIT as Integer=7 'Preparat per a publicar. S'ha aprovat dins d'un circuit)
-Public Const ctPENDENTCADUCARCIRCUIT as Integer=8	 ' = a pendent de caducar, pendent d'una aprovació de caducitat
-
-public shared fitxerXML as streamwriter
 
 
+    Public Const ctPENDENTPUBLICARCIRCUIT As Integer = 6 's'ha demanat la publicació i està a l'espera d'una aprovació
+    Public Const ctPUBLICARCIRCUIT As Integer = 7 'Preparat per a publicar. S'ha aprovat dins d'un circuit)
+    Public Const ctPENDENTCADUCARCIRCUIT As Integer = 8  ' = a pendent de caducar, pendent d'una aprovació de caducitat
 
-'Funció  sense el paràmetre "tipus"
-Public Shared SUB generaArbre(byval objconn as oledbconnection, byVal objArbre as radtreeview,  byVal nroArbre As Integer, byVal  idUsuari as Integer, byVal rel as clsRelacio, byVal nomArbre as string,  byval recursiu as integer, byVal nivells as integer)
-	GAIA.generaArbre(objConn, objArbre, nroArbre, idUsuari, rel, nomArbre, 0,recursiu, nivells,0)
-	
-End SUB
+    Public Shared fitxerXML As streamwriter
 
 
-Public Shared SUB generaArbre(byval objconn as oledbconnection, byVal objArbre as radtreeview,  byVal nroArbre As Integer, byVal  idUsuari as Integer, byREF rel as clsRelacio, byVal nomArbre as string, byVal tipus as integer,byVal recursiu as integer, byVal nivells as integer)
-GAIA.generaArbre(objConn, objArbre, nroArbre, idUsuari, rel, nomArbre, 0,recursiu, nivells,0)
-END SUB
-'***************************************************************************************************
-'	Funció: GAIA.generaArbre
-'	Entrada: 
-'				objconn: connexió a la bd.
-'				objArbre: objecte que apunta a l'arbre de la pantalla
-'				nroArbre: Nro d'arbres en pantalla, 1 o 2.
-'				idUsuari: Usuari que vol obrir l'arbre
-'				codiRelacio: Codi de la relació que apunta al node on volem obrir un arbre
-'				nomArbre: nom de l'arbre que volem obrir (si codirelacio=0 llavors utilitzem el nom de l'arbre)
-'				recursiu: 1 si volem obrir l'arbre sencer
-'				tipus: Tipus de nodes que vull afegir. Si =0 afegeixo qualsevol 
-'				novisibles: si 1 no es mostraran els continguts no visibles (RELSWVIS=0)
-'						
-'	Procés: 
-'***************************************************************************************************	
 
-Public Shared SUB generaArbre(byval objconn as oledbconnection, byVal objArbre as radtreeview,  byVal nroArbre As Integer, byVal  idUsuari as Integer, byREF rel as clsRelacio, byVal nomArbre as string, byVal tipus as integer,byVal recursiu as integer, byVal nivells as integer, byVal novisibles as boolean)
-dim strErr as string =""
+    'Funció  sense el paràmetre "tipus"
+    Public Shared Sub generaArbre(ByVal objconn As oledbconnection, ByVal objArbre As radtreeview, ByVal nroArbre As Integer, ByVal idUsuari As Integer, ByVal rel As clsRelacio, ByVal nomArbre As String, ByVal recursiu As Integer, ByVal nivells As Integer)
+        GAIA.generaArbre(objConn, objArbre, nroArbre, idUsuari, rel, nomArbre, 0, recursiu, nivells, 0)
 
-		Dim DS As DataSet    
-		Dim node As RadTreeNode
-		Dim dbRow As DataRow
-		Dim codiRelacio as integer
-		Dim relTmp as New clsRelacio
+    End Sub
 
-		DS = New DataSet()
-		codiRelacio = rel.incod
-		
-		IF codiRelacio=0 THEN
-			IF nomArbre="organigramacserveis" THEN
-				nomArbre="organigrama cataleg de serveis"
 
-			END IF
-			GAIA.bdR(objConn,"SELECT RELINCOD FROM METLREL WITH(NOLOCK), METLNOD WITH(NOLOCK) WHERE (NODDSTXT like 'arbre "+nomArbre.ToString() +"' OR NODDSTXT like '"+nomArbre.tostring()+"') AND RELINPAR=NODINNOD AND RELINPAR=RELINFIL AND RELCDSIT<98 "+ " AND RELCDSIT<>"+ ctESBORRATCADUCAT.tostring() & iif(novisibles," AND RELSWVIS=1",""),DS)						
+    Public Shared Sub generaArbre(ByVal objconn As oledbconnection, ByVal objArbre As radtreeview, ByVal nroArbre As Integer, ByVal idUsuari As Integer, ByRef rel As clsRelacio, ByVal nomArbre As String, ByVal tipus As Integer, ByVal recursiu As Integer, ByVal nivells As Integer)
+        GAIA.generaArbre(objConn, objArbre, nroArbre, idUsuari, rel, nomArbre, 0, recursiu, nivells, 0)
+    End Sub
+    '***************************************************************************************************
+    '	Funció: GAIA.generaArbre
+    '	Entrada: 
+    '				objconn: connexió a la bd.
+    '				objArbre: objecte que apunta a l'arbre de la pantalla
+    '				nroArbre: Nro d'arbres en pantalla, 1 o 2.
+    '				idUsuari: Usuari que vol obrir l'arbre
+    '				codiRelacio: Codi de la relació que apunta al node on volem obrir un arbre
+    '				nomArbre: nom de l'arbre que volem obrir (si codirelacio=0 llavors utilitzem el nom de l'arbre)
+    '				recursiu: 1 si volem obrir l'arbre sencer
+    '				tipus: Tipus de nodes que vull afegir. Si =0 afegeixo qualsevol 
+    '				novisibles: si 1 no es mostraran els continguts no visibles (RELSWVIS=0)
+    '						
+    '	Procés: 
+    '***************************************************************************************************	
 
-			IF ds.Tables(0).Rows.Count>0 THEN						
-				dbRow = ds.Tables(0).Rows(0)				
-				rel.bdGET(objconn, dbRow("RELINCOD"))
-				codiRelacio = rel.incod		
-			END IF
-		END IF
+    Public Shared Sub generaArbre(ByVal objconn As oledbconnection, ByVal objArbre As radtreeview, ByVal nroArbre As Integer, ByVal idUsuari As Integer, ByRef rel As clsRelacio, ByVal nomArbre As String, ByVal tipus As Integer, ByVal recursiu As Integer, ByVal nivells As Integer, ByVal novisibles As Boolean)
+        Dim strErr As String = ""
 
-		objArbre.nodes.clear
-		IF nroArbre=1 THEN				
-			objArbre.RetainScrollPosition=TRUE	
-		ELSE
-			objArbre.RetainScrollPosition=FALSE
-		END IF
-		 	GAIA.bdR(objConn,"SELECT * FROM METLNOD WITH(NOLOCK), METLREL WITH(NOLOCK) WHERE RELINCOD=" & codiRelacio & " AND RELINFIL=NODINNOD AND RELCDSIT<98  AND RELCDSIT<>" & ctESBORRATCADUCAT & iif(novisibles," AND RELSWVIS=1","") & " ORDER BY NODINNOD DESC",DS)
-		
-		'GAIA.bdr(objconn, "exec sp_executesql @statement = N'SELECT * FROM METLNOD WITH(NOLOCK), METLREL WITH(NOLOCK) WHERE RELINCOD=@P1 AND RELINFIL=NODINNOD AND RELCDSIT<98   ORDER BY NODINNOD DESC ', @parameters =N'@P1 varchar(100)',@P1=N'" & codiRelacio & "'", DS)		
-		For Each dbRow In  ds.Tables(0).Rows
-		
-			relTmp.bdGet(objconn, dbRow("RELINCOD"))
-			IF  clsPermisos.tePermisLecturaNode(objconn,rel, idUsuari, dbRow("NODINNOD")) THEN
-				node = GAIA.creaNodePantalla(objConn,dbRow("NODDSTXT"),  dbRow("NODINNOD").toString()&"-"&dbRow("RELCDARB").toString()&"_"&dbRow("RELINCOD"), "arbre","",0, idUsuari, relTMP,0,0 )		
-				IF recursiu THEN
-						node.expandmode=ExpandMode.ClientSide
+        Dim DS As DataSet
+        Dim node As RadTreeNode
+        Dim dbRow As DataRow
+        Dim codiRelacio As Integer
+        Dim relTmp As New clsRelacio
 
-				ELSE	
-					IF nivells>1 THEN
-						node.expandMode=ExpandMode.ClientSide
-					ELSE
-						node.expandMode=ExpandMode.ServerSide
-					END IF
-				END IF
-				objArbre.AddNode(node)		
-				'Afegeixo nodes 
-				IF recursiu=1 THEN				
-				
-					GAIA.afegeixNodesFillsPantallaLlista(objConn,dbrow("NODINNOD"), node,dbRow("RELCDARB"), idUsuari,nroArbre,tipus,recursiu,nivells,false, novisibles)	
-					
-					objArbre.CollapseAllNodes()																
-				ELSE
-					IF nivells>1 THEN
+        DS = New DataSet()
+        codiRelacio = rel.incod
 
-						GAIA.afegeixNodesFillsPantallaLlista(objConn,dbrow("NODINNOD"), node,dbRow("RELCDARB"), idUsuari,nroArbre,tipus,recursiu,nivells-1, false, novisibles)	
-						objArbre.CollapseAllNodes()		
-					END IF
-				END IF				
-			END IF
-		Next dbRow
-		IF (objArbre.IsEmpty) THEN
-			objArbre.Visible = FALSE
-		ELSE
-			objArbre.Visible = TRUE
-		END IF			
-		Ds.Dispose()	
-	End SUB 'generaArbre
-	
-	
-	
-	
-	
-	Public Shared SUB generaArbre2(byval objconn as oledbconnection, byVal objArbre as radtreeview,  byVal nroArbre As Integer, byVal  idUsuari as Integer, byREF rel as clsRelacio, byVal nomArbre as string, byVal tipus as integer,byVal recursiu as integer, byVal nivells as integer, byVal novisibles as boolean)
-dim strErr as string =""
+        If codiRelacio = 0 Then
+            If nomArbre = "organigramacserveis" Then
+                nomArbre = "organigrama cataleg de serveis"
 
-         Dim DS As DataSet
+            End If
+            GAIA.bdR(objConn, "SELECT RELINCOD FROM METLREL WITH(NOLOCK), METLNOD WITH(NOLOCK) WHERE (NODDSTXT like 'arbre " + nomArbre.ToString() + "' OR NODDSTXT like '" + nomArbre.tostring() + "') AND RELINPAR=NODINNOD AND RELINPAR=RELINFIL AND RELCDSIT<98 " + " AND RELCDSIT<>" + ctESBORRATCADUCAT.tostring() & iif(novisibles, " AND RELSWVIS=1", ""), DS)
+
+            If ds.Tables(0).Rows.Count > 0 Then
+                dbRow = ds.Tables(0).Rows(0)
+                rel.bdGET(objconn, dbRow("RELINCOD"))
+                codiRelacio = rel.incod
+            End If
+        End If
+
+        objArbre.nodes.clear
+        If nroArbre = 1 Then
+            objArbre.RetainScrollPosition = True
+        Else
+            objArbre.RetainScrollPosition = False
+        End If
+        GAIA.bdR(objConn, "SELECT * FROM METLNOD WITH(NOLOCK), METLREL WITH(NOLOCK) WHERE RELINCOD=" & codiRelacio & " AND RELINFIL=NODINNOD AND RELCDSIT<98  AND RELCDSIT<>" & ctESBORRATCADUCAT & iif(novisibles, " AND RELSWVIS=1", "") & " ORDER BY NODINNOD DESC", DS)
+
+        'GAIA.bdr(objconn, "exec sp_executesql @statement = N'SELECT * FROM METLNOD WITH(NOLOCK), METLREL WITH(NOLOCK) WHERE RELINCOD=@P1 AND RELINFIL=NODINNOD AND RELCDSIT<98   ORDER BY NODINNOD DESC ', @parameters =N'@P1 varchar(100)',@P1=N'" & codiRelacio & "'", DS)		
+        For Each dbRow In ds.Tables(0).Rows
+
+            relTmp.bdGet(objconn, dbRow("RELINCOD"))
+            If clsPermisos.tePermisLecturaNode(objconn, rel, idUsuari, dbRow("NODINNOD")) Then
+                node = GAIA.creaNodePantalla(objConn, dbRow("NODDSTXT"), dbRow("NODINNOD").toString() & "-" & dbRow("RELCDARB").toString() & "_" & dbRow("RELINCOD"), "arbre", "", 0, idUsuari, relTMP, 0, 0)
+                If recursiu Then
+                    node.expandmode = ExpandMode.ClientSide
+
+                Else
+                    If nivells > 1 Then
+                        node.expandMode = ExpandMode.ClientSide
+                    Else
+                        node.expandMode = ExpandMode.ServerSide
+                    End If
+                End If
+                objArbre.AddNode(node)
+                'Afegeixo nodes 
+                If recursiu = 1 Then
+
+                    GAIA.afegeixNodesFillsPantallaLlista(objConn, dbrow("NODINNOD"), node, dbRow("RELCDARB"), idUsuari, nroArbre, tipus, recursiu, nivells, False, novisibles)
+
+                    objArbre.CollapseAllNodes()
+                Else
+                    If nivells > 1 Then
+
+                        GAIA.afegeixNodesFillsPantallaLlista(objConn, dbrow("NODINNOD"), node, dbRow("RELCDARB"), idUsuari, nroArbre, tipus, recursiu, nivells - 1, False, novisibles)
+                        objArbre.CollapseAllNodes()
+                    End If
+                End If
+            End If
+        Next dbRow
+        If (objArbre.IsEmpty) Then
+            objArbre.Visible = False
+        Else
+            objArbre.Visible = True
+        End If
+        Ds.Dispose()
+    End Sub 'generaArbre
+
+
+
+
+
+    Public Shared Sub generaArbre2(ByVal objconn As oledbconnection, ByVal objArbre As radtreeview, ByVal nroArbre As Integer, ByVal idUsuari As Integer, ByRef rel As clsRelacio, ByVal nomArbre As String, ByVal tipus As Integer, ByVal recursiu As Integer, ByVal nivells As Integer, ByVal novisibles As Boolean)
+        Dim strErr As String = ""
+
+        Dim DS As DataSet
 
         Dim strTmp As String = ""
-		
+
         Dim dbRow As DataRow
         Dim codiRelacio As String
         Dim relTmp As New clsRelacio
         Dim cont As Integer = 1
-		DS = New DataSet()
-		codiRelacio = rel.incod
-		
+        DS = New DataSet()
+        codiRelacio = rel.incod
+
         If codiRelacio = "0" Then
             If nomArbre = "organigramacserveis" Then
                 nomArbre = "organigrama cataleg de serveis"
@@ -1674,223 +1653,223 @@ dim strErr as string =""
             End If
         End If
 
-		objArbre.nodes.clear
-		IF nroArbre=1 THEN				
-			objArbre.RetainScrollPosition=TRUE	
-		ELSE
-			objArbre.RetainScrollPosition=FALSE
-		END IF
+        objArbre.nodes.clear
+        If nroArbre = 1 Then
+            objArbre.RetainScrollPosition = True
+        Else
+            objArbre.RetainScrollPosition = False
+        End If
 
         GAIA.bdr(objconn, "SELECT * FROM METLNOD WITH(NOLOCK), METLREL WITH(NOLOCK), METLTIP WITH(NOLOCK) WHERE RELINCOD=" & codiRelacio & " AND RELINFIL=NODINNOD AND RELCDSIT<98   AND TIPINTIP=NODCDTIP ORDER BY NODINNOD DESC", DS)
-		For Each dbRow In  ds.Tables(0).Rows
-			GAIA.ObteFillsNodeAmbPermisos2(objconn, objarbre, idusuari, rel, nomarbre, tipus, recursiu,nivells, dbrow("NODINNOD"), dbrow("TIPDSDES"))
+        For Each dbRow In ds.Tables(0).Rows
+            GAIA.ObteFillsNodeAmbPermisos2(objconn, objarbre, idusuari, rel, nomarbre, tipus, recursiu, nivells, dbrow("NODINNOD"), dbrow("TIPDSDES"))
 
-          Next dbRow
-		IF (objArbre.IsEmpty) THEN
-			objArbre.Visible = FALSE
-		ELSE
-			objArbre.Visible = TRUE
-		END IF			
-		Ds.Dispose()	
+        Next dbRow
+        If (objArbre.IsEmpty) Then
+            objArbre.Visible = False
+        Else
+            objArbre.Visible = True
+        End If
+        Ds.Dispose()
     End Sub 'generaArbre2
-	
-	
-	
-	'******************************************************************************************************************
-	' fa una filtre dels nodes segons permisos i retorna la part d'arbre amb els nivells demanats
-	'******************************************************************************************************************
 
-	Public Shared SUB ObteFillsNodeAmbPermisos2(byval objconn as oledbconnection, byVal objArbre as radtreeview, byVal  idUsuari as Integer, byREF rel as clsRelacio, byVal nomArbre as string, byVal tipus as integer,byVal recursiu as integer, byVal nivells as integer, byval codiNode as integer, byVal tipdsdes as string)
-dim strErr as string =""
 
-       Dim DS As DataSet
-       
+
+    '******************************************************************************************************************
+    ' fa una filtre dels nodes segons permisos i retorna la part d'arbre amb els nivells demanats
+    '******************************************************************************************************************
+
+    Public Shared Sub ObteFillsNodeAmbPermisos2(ByVal objconn As oledbconnection, ByVal objArbre As radtreeview, ByVal idUsuari As Integer, ByRef rel As clsRelacio, ByVal nomArbre As String, ByVal tipus As Integer, ByVal recursiu As Integer, ByVal nivells As Integer, ByVal codiNode As Integer, ByVal tipdsdes As String)
+        Dim strErr As String = ""
+
+        Dim DS As DataSet
+
         Dim strTmp As String = ""
-		Dim node As RadTreeNode
+        Dim node As RadTreeNode
         Dim dbRow, dbrowTmp As DataRow
         Dim codiRelacio As String
         Dim relTmp As New clsRelacio
         Dim cont As Integer = 1
-		DS = New DataSet()
-		codiRelacio = rel.incod		        
-			
-         	
-		GAIA.bdr(objconn, "select METLREL.RELINCOD FROM METLREL WITH(NOLOCK), METLNOD WITH(NOLOCK) WHERE (METLREL.RELINCOD=" & codiRelacio & " OR METLREL.RELCDHER LIKE '%_" & codiNode & "%') AND METLREL.RELCDSIT<95 AND RELINFIL=NODINNOD " & IIf(tipus > 0, " AND NODCDTIP=" & tipus, "") & " AND ((LEN(RELCDHER)-LEN(replace(RELCDHER,'_','')))<" & nivells + (rel.cdher.split("_").length) & ")", ds)
-           
-		Dim llistaRel As String = ""
-		Dim llistaAmbPermisos As String = ""
-		Dim hsNodes As New Hashtable()
-		For Each dbrow In ds.Tables(0).Rows
-			If llistaRel.Length > 0 Then llistaRel &= ","
-			llistaRel &= dbrow("RELINCOD")
-		Next dbrow
-		clsPermisos.trobaPermisLlistaRelacions(objconn, 9, llistaRel, idUsuari, "", 0, llistaAmbPermisos, "")
-		If llistaAmbPermisos.Length > 0 Then
-			GAIA.bdr(objconn, "select DISTINCT METLREL.RELCDRSU,METLREL.RELINFIL, METLREL.RELINCOD, METLREL.RELCDARB, METLREL.RELCDORD, METLNOD.NODINNOD, METLNOD.NODDSTXT FROM METLREL WITH(NOLOCK), METLNOD WITH(NOLOCK) WHERE (METLREL.RELINCOD IN (" & llistaAmbPermisos & ")  OR RELINCOD=" & rel.incod & ") AND RELINFIL=NODINNOD ORDER BY RELCDORD  ", ds)
-			For Each dbrow In ds.Tables(0).Rows
-				If hsNodes.Contains(dbrow("RELCDRSU").ToString()) Then
-					strTmp = hsNodes(dbrow("RELCDRSU").ToString())
-					hsNodes.Remove(dbrow("RELCDRSU").ToString())
-					hsNodes.Add(dbrow("RELCDRSU").ToString(), strTmp & "," & dbrow("RELINCOD"))
-				Else
-					hsNodes.Add(dbrow("RELCDRSU").ToString(), dbrow("RELINCOD"))
-				End If
-			Next dbrow
+        DS = New DataSet()
+        codiRelacio = rel.incod
 
-			'en hsNodes tinc una relació de RELINPAR amb els RELINFIL que he de representar en l'arbre
-			'Començo per la relació que hi ha a "codirelacio" i baixo el nro de nivells demanat
 
-			If hsNodes.Contains(codiRelacio.ToString()) Then
-				dbrowTmp = ds.Tables(0).Select("RELINCOD=" & codiRelacio)(0)
-				relTmp.bdget(objconn, codiRelacio)
-				node = GAIA.creaNodePantalla(objconn, dbrowTmp("NODDSTXT"), dbrowTmp("NODINNOD").ToString() & "-" & dbrowTmp("RELCDARB").ToString() & "_" & dbrowTmp("RELINCOD"), tipdsdes, "", 0, idUsuari, relTmp, 0, 0)
-			  
-				GAIA.afegeixNodesFillsPantallaLlista2(objconn, codiRelacio, node, dbrowTmp("RELCDARB"), recursiu, nivells, hsNodes, ds, idUsuari,1,0)
-				objArbre.AddNode(node)
-			End If
+        GAIA.bdr(objconn, "select METLREL.RELINCOD FROM METLREL WITH(NOLOCK), METLNOD WITH(NOLOCK) WHERE (METLREL.RELINCOD=" & codiRelacio & " OR METLREL.RELCDHER LIKE '%_" & codiNode & "%') AND METLREL.RELCDSIT<95 AND RELINFIL=NODINNOD " & IIf(tipus > 0, " AND NODCDTIP=" & tipus, "") & " AND ((LEN(RELCDHER)-LEN(replace(RELCDHER,'_','')))<" & nivells + (rel.cdher.split("_").length) & ")", ds)
 
-		End If
-		Ds.Dispose()	
-	 End Sub 'ObteFillsNodeAmbPermisos2
-	
-	
-	
-	
-	Public Shared SUB generaArbre_NP(byval objconn as oledbconnection, byVal objArbre as radtreeview,  byVal nroArbre As Integer, byVal  idUsuari as Integer, byREF rel as clsRelacio, byVal nomArbre as string, byVal tipus as integer,byVal recursiu as integer, byVal nivells as integer, byVal novisibles as boolean)
-dim strErr as string =""
-
-		Dim DS As DataSet    
-		Dim node As RadTreeNode
-		Dim dbRow As DataRow
-		Dim codiRelacio as integer
-		Dim relTmp as New clsRelacio
-		DS = New DataSet()
-		codiRelacio = rel.incod
-		
-		IF codiRelacio=0 THEN
-			IF nomArbre="organigramacserveis" THEN
-				nomArbre="organigrama cataleg de serveis"
-
-			END IF
-			GAIA.bdR(objConn,"SELECT RELINCOD FROM METLREL WITH(NOLOCK), METLNOD WITH(NOLOCK) WHERE (NODDSTXT like 'arbre "+nomArbre.ToString() +"' OR NODDSTXT like '"+nomArbre.tostring()+"') AND RELINPAR=NODINNOD AND RELINPAR=RELINFIL AND RELCDSIT<98 "+ " AND RELCDSIT<>"+ ctESBORRATCADUCAT.tostring() & iif(novisibles," AND RELSWVIS=1",""),DS)						
-
-			IF ds.Tables(0).Rows.Count>0 THEN						
-				dbRow = ds.Tables(0).Rows(0)				
-				rel.bdGET(objconn, dbRow("RELINCOD"))
-				codiRelacio = rel.incod		
-			END IF
-		END IF
-
-		objArbre.nodes.clear
-		IF nroArbre=1 THEN				
-			objArbre.RetainScrollPosition=TRUE	
-		ELSE
-			objArbre.RetainScrollPosition=FALSE
-		END IF
-		 	GAIA.bdR(objConn,"SELECT * FROM METLNOD WITH(NOLOCK), METLREL WITH(NOLOCK) WHERE RELINCOD=" & codiRelacio & " AND RELINFIL=NODINNOD AND RELCDSIT<98  AND RELCDSIT<>" & ctESBORRATCADUCAT & iif(novisibles," AND RELSWVIS=1","") & " ORDER BY NODINNOD DESC",DS)
-		
-		'GAIA.bdr(objconn, "exec sp_executesql @statement = N'SELECT * FROM METLNOD WITH(NOLOCK), METLREL WITH(NOLOCK) WHERE RELINCOD=@P1 AND RELINFIL=NODINNOD AND RELCDSIT<98   ORDER BY NODINNOD DESC ', @parameters =N'@P1 varchar(100)',@P1=N'" & codiRelacio & "'", DS)		
-		For Each dbRow In  ds.Tables(0).Rows
-		
-			relTmp.bdGet(objconn, dbRow("RELINCOD"))
-			IF  clsPermisos.tePermisLecturaNode(objconn,rel, idUsuari, dbRow("NODINNOD")) THEN
-				node = GAIA.creaNodePantalla(objConn,dbRow("NODDSTXT"),  dbRow("NODINNOD").toString()&"-"&dbRow("RELCDARB").toString()&"_"&dbRow("RELINCOD"), "arbre","",0, idUsuari, relTMP,0,0 )		
-				IF recursiu THEN
-						node.expandmode=ExpandMode.ClientSide
-
-				ELSE	
-					IF nivells>1 THEN
-						node.expandMode=ExpandMode.ClientSide
-					ELSE
-						node.expandMode=ExpandMode.ServerSide
-					END IF
-				END IF
-				objArbre.AddNode(node)		
-				'Afegeixo nodes 
-				IF recursiu=1 THEN				
-				
-					GAIA.afegeixNodesFillsPantallaLlista_NP(objConn,dbrow("NODINNOD"), node,dbRow("RELCDARB"), idUsuari,nroArbre,tipus,recursiu,nivells,false, novisibles)	
-					
-					objArbre.CollapseAllNodes()																
-				ELSE
-					IF nivells>1 THEN
-
-						GAIA.afegeixNodesFillsPantallaLlista_NP(objConn,dbrow("NODINNOD"), node,dbRow("RELCDARB"), idUsuari,nroArbre,tipus,recursiu,nivells-1, false, novisibles)	
-						objArbre.CollapseAllNodes()		
-					END IF
-				END IF				
-			END IF
-		Next dbRow
-		IF (objArbre.IsEmpty) THEN
-			objArbre.Visible = FALSE
-		ELSE
-			objArbre.Visible = TRUE
-		END IF			
-		Ds.Dispose()	
-	End SUB 'generaArbre
-	
-	
-	'******************************************************************************************************************
-	' fa una filtre dels nodes segons permisos i retorna la part d'arbre amb els nivells demanats
-	'******************************************************************************************************************
-
-	Public Shared SUB ObteFillsNodeAmbPermisos_NP(byval objconn as oledbconnection, byVal objArbre as radtreeview, byVal objNode as RadTreeNode, byVal  idUsuari as Integer, byREF rel as clsRelacio, byVal nomArbre as string, byVal tipus as integer,byVal recursiu as integer, byVal nivells as integer, byval codiNode as integer, byVal tipdsdes as string)
-dim strErr as string =""
-
-       Dim DS As DataSet
-       
-        Dim strTmp As String = ""
-		Dim node As RadTreeNode
-        Dim dbRow, dbrowTmp As DataRow
-        Dim codiRelacio As String
-        Dim relTmp As New clsRelacio
-        Dim cont As Integer = 1
-		DS = New DataSet()
-		codiRelacio = rel.incod		        
-			
-         	
-			GAIA.bdr(objconn, "select METLREL.RELINCOD FROM METLREL WITH(NOLOCK), METLNOD WITH(NOLOCK) WHERE (METLREL.RELINCOD=" & codiRelacio & " OR METLREL.RELCDHER LIKE '%_" & codinode & "%') AND METLREL.RELCDSIT<95 AND RELINFIL=NODINNOD " & IIf(tipus > 0, " AND NODCDTIP=" & tipus, "") & " AND ((LEN(RELCDHER)-LEN(replace(RELCDHER,'_','')))<" & nivells & (rel.cdher.split("_").length) & ")", ds)
-           
-            Dim llistaRel As String = ""
-            Dim llistaAmbPermisos As String = ""
-            Dim hsNodes As New Hashtable()
+        Dim llistaRel As String = ""
+        Dim llistaAmbPermisos As String = ""
+        Dim hsNodes As New Hashtable()
+        For Each dbrow In ds.Tables(0).Rows
+            If llistaRel.Length > 0 Then llistaRel &= ","
+            llistaRel &= dbrow("RELINCOD")
+        Next dbrow
+        clsPermisos.trobaPermisLlistaRelacions(objconn, 9, llistaRel, idUsuari, "", 0, llistaAmbPermisos, "")
+        If llistaAmbPermisos.Length > 0 Then
+            GAIA.bdr(objconn, "select DISTINCT METLREL.RELCDRSU,METLREL.RELINFIL, METLREL.RELINCOD, METLREL.RELCDARB, METLREL.RELCDORD, METLNOD.NODINNOD, METLNOD.NODDSTXT FROM METLREL WITH(NOLOCK), METLNOD WITH(NOLOCK) WHERE (METLREL.RELINCOD IN (" & llistaAmbPermisos & ")  OR RELINCOD=" & rel.incod & ") AND RELINFIL=NODINNOD ORDER BY RELCDORD  ", ds)
             For Each dbrow In ds.Tables(0).Rows
-                If llistaRel.Length > 0 Then llistaRel &= ","
-                llistaRel &= dbrow("RELINCOD")
+                If hsNodes.Contains(dbrow("RELCDRSU").ToString()) Then
+                    strTmp = hsNodes(dbrow("RELCDRSU").ToString())
+                    hsNodes.Remove(dbrow("RELCDRSU").ToString())
+                    hsNodes.Add(dbrow("RELCDRSU").ToString(), strTmp & "," & dbrow("RELINCOD"))
+                Else
+                    hsNodes.Add(dbrow("RELCDRSU").ToString(), dbrow("RELINCOD"))
+                End If
             Next dbrow
 
-            clsPermisos.trobaPermisLlistaRelacions2(objconn, 9, llistaRel, idUsuari, "", 0, llistaAmbPermisos, "","")
-            If llistaAmbPermisos.Length > 0 Then
-                GAIA.bdr(objconn, "select DISTINCT METLREL.RELCDRSU,METLREL.RELINFIL, METLREL.RELINCOD, METLREL.RELCDARB, METLNOD.NODINNOD, METLNOD.NODDSTXT FROM METLREL WITH(NOLOCK), METLNOD WITH(NOLOCK) WHERE (METLREL.RELINCOD IN (" & llistaAmbPermisos & ")  OR RELINCOD=" & rel.incod & ") AND RELINFIL=NODINNOD ", ds)
-                For Each dbrow In ds.Tables(0).Rows
-                    If hsNodes.Contains(dbrow("RELCDRSU").ToString()) Then
-                        strTmp = hsNodes(dbrow("RELCDRSU").ToString())
-                        hsNodes.Remove(dbrow("RELCDRSU").ToString())
-                        hsNodes.Add(dbrow("RELCDRSU").ToString(), strTmp & "," & dbrow("RELINCOD"))
-                    Else
-                        hsNodes.Add(dbrow("RELCDRSU").ToString(), dbrow("RELINCOD"))
-                    End If
-                Next dbrow
+            'en hsNodes tinc una relació de RELINPAR amb els RELINFIL que he de representar en l'arbre
+            'Començo per la relació que hi ha a "codirelacio" i baixo el nro de nivells demanat
 
-                'en hsNodes tinc una relació de RELINPAR amb els RELINFIL que he de representar en l'arbre
-                'Començo per la relació que hi ha a "codirelacio" i baixo el nro de nivells demanat
+            If hsNodes.Contains(codiRelacio.ToString()) Then
+                dbrowTmp = ds.Tables(0).Select("RELINCOD=" & codiRelacio)(0)
+                relTmp.bdget(objconn, codiRelacio)
+                node = GAIA.creaNodePantalla(objconn, dbrowTmp("NODDSTXT"), dbrowTmp("NODINNOD").ToString() & "-" & dbrowTmp("RELCDARB").ToString() & "_" & dbrowTmp("RELINCOD"), tipdsdes, "", 0, idUsuari, relTmp, 0, 0)
 
-                If hsNodes.Contains(codiRelacio.ToString()) Then
-                    dbrowTmp = ds.Tables(0).Select("RELINCOD=" & codiRelacio)(0)
-                    relTmp.bdget(objconn, codiRelacio)
-                    node = GAIA.creaNodePantalla(objconn, dbrowTmp("NODDSTXT"), dbrowTmp("NODINNOD").ToString() & "-" & dbrowTmp("RELCDARB").ToString() & "_" & dbrowTmp("RELINCOD"), tipdsdes, "", 0, idUsuari, relTmp, 0, 0)
-                  
-                    GAIA.afegeixNodesFillsPantallaLlista2(objconn, codiRelacio, node, dbrowTmp("RELCDARB"), recursiu, nivells, hsNodes, ds, idUsuari,1,0)
-                    IF objNode is nothing THEN
-						objArbre.AddNode(node)
-					ELSE
-						objNode.AddNode(node)
-					END IF
-                End If
+                GAIA.afegeixNodesFillsPantallaLlista2(objconn, codiRelacio, node, dbrowTmp("RELCDARB"), recursiu, nivells, hsNodes, ds, idUsuari, 1, 0)
+                objArbre.AddNode(node)
+            End If
+
+        End If
+        Ds.Dispose()
+    End Sub 'ObteFillsNodeAmbPermisos2
+
+
+
+
+    Public Shared Sub generaArbre_NP(ByVal objconn As oledbconnection, ByVal objArbre As radtreeview, ByVal nroArbre As Integer, ByVal idUsuari As Integer, ByRef rel As clsRelacio, ByVal nomArbre As String, ByVal tipus As Integer, ByVal recursiu As Integer, ByVal nivells As Integer, ByVal novisibles As Boolean)
+        Dim strErr As String = ""
+
+        Dim DS As DataSet
+        Dim node As RadTreeNode
+        Dim dbRow As DataRow
+        Dim codiRelacio As Integer
+        Dim relTmp As New clsRelacio
+        DS = New DataSet()
+        codiRelacio = rel.incod
+
+        If codiRelacio = 0 Then
+            If nomArbre = "organigramacserveis" Then
+                nomArbre = "organigrama cataleg de serveis"
 
             End If
-		Ds.Dispose()	
-	    End Sub 'ObteFillsNodeAmbPermisos_NP
+            GAIA.bdR(objConn, "SELECT RELINCOD FROM METLREL WITH(NOLOCK), METLNOD WITH(NOLOCK) WHERE (NODDSTXT like 'arbre " + nomArbre.ToString() + "' OR NODDSTXT like '" + nomArbre.tostring() + "') AND RELINPAR=NODINNOD AND RELINPAR=RELINFIL AND RELCDSIT<98 " + " AND RELCDSIT<>" + ctESBORRATCADUCAT.tostring() & iif(novisibles, " AND RELSWVIS=1", ""), DS)
+
+            If ds.Tables(0).Rows.Count > 0 Then
+                dbRow = ds.Tables(0).Rows(0)
+                rel.bdGET(objconn, dbRow("RELINCOD"))
+                codiRelacio = rel.incod
+            End If
+        End If
+
+        objArbre.nodes.clear
+        If nroArbre = 1 Then
+            objArbre.RetainScrollPosition = True
+        Else
+            objArbre.RetainScrollPosition = False
+        End If
+        GAIA.bdR(objConn, "SELECT * FROM METLNOD WITH(NOLOCK), METLREL WITH(NOLOCK) WHERE RELINCOD=" & codiRelacio & " AND RELINFIL=NODINNOD AND RELCDSIT<98  AND RELCDSIT<>" & ctESBORRATCADUCAT & iif(novisibles, " AND RELSWVIS=1", "") & " ORDER BY NODINNOD DESC", DS)
+
+        'GAIA.bdr(objconn, "exec sp_executesql @statement = N'SELECT * FROM METLNOD WITH(NOLOCK), METLREL WITH(NOLOCK) WHERE RELINCOD=@P1 AND RELINFIL=NODINNOD AND RELCDSIT<98   ORDER BY NODINNOD DESC ', @parameters =N'@P1 varchar(100)',@P1=N'" & codiRelacio & "'", DS)		
+        For Each dbRow In ds.Tables(0).Rows
+
+            relTmp.bdGet(objconn, dbRow("RELINCOD"))
+            If clsPermisos.tePermisLecturaNode(objconn, rel, idUsuari, dbRow("NODINNOD")) Then
+                node = GAIA.creaNodePantalla(objConn, dbRow("NODDSTXT"), dbRow("NODINNOD").toString() & "-" & dbRow("RELCDARB").toString() & "_" & dbRow("RELINCOD"), "arbre", "", 0, idUsuari, relTMP, 0, 0)
+                If recursiu Then
+                    node.expandmode = ExpandMode.ClientSide
+
+                Else
+                    If nivells > 1 Then
+                        node.expandMode = ExpandMode.ClientSide
+                    Else
+                        node.expandMode = ExpandMode.ServerSide
+                    End If
+                End If
+                objArbre.AddNode(node)
+                'Afegeixo nodes 
+                If recursiu = 1 Then
+
+                    GAIA.afegeixNodesFillsPantallaLlista_NP(objConn, dbrow("NODINNOD"), node, dbRow("RELCDARB"), idUsuari, nroArbre, tipus, recursiu, nivells, False, novisibles)
+
+                    objArbre.CollapseAllNodes()
+                Else
+                    If nivells > 1 Then
+
+                        GAIA.afegeixNodesFillsPantallaLlista_NP(objConn, dbrow("NODINNOD"), node, dbRow("RELCDARB"), idUsuari, nroArbre, tipus, recursiu, nivells - 1, False, novisibles)
+                        objArbre.CollapseAllNodes()
+                    End If
+                End If
+            End If
+        Next dbRow
+        If (objArbre.IsEmpty) Then
+            objArbre.Visible = False
+        Else
+            objArbre.Visible = True
+        End If
+        Ds.Dispose()
+    End Sub 'generaArbre
+
+
+    '******************************************************************************************************************
+    ' fa una filtre dels nodes segons permisos i retorna la part d'arbre amb els nivells demanats
+    '******************************************************************************************************************
+
+    Public Shared Sub ObteFillsNodeAmbPermisos_NP(ByVal objconn As oledbconnection, ByVal objArbre As radtreeview, ByVal objNode As RadTreeNode, ByVal idUsuari As Integer, ByRef rel As clsRelacio, ByVal nomArbre As String, ByVal tipus As Integer, ByVal recursiu As Integer, ByVal nivells As Integer, ByVal codiNode As Integer, ByVal tipdsdes As String)
+        Dim strErr As String = ""
+
+        Dim DS As DataSet
+
+        Dim strTmp As String = ""
+        Dim node As RadTreeNode
+        Dim dbRow, dbrowTmp As DataRow
+        Dim codiRelacio As String
+        Dim relTmp As New clsRelacio
+        Dim cont As Integer = 1
+        DS = New DataSet()
+        codiRelacio = rel.incod
+
+
+        GAIA.bdr(objconn, "select METLREL.RELINCOD FROM METLREL WITH(NOLOCK), METLNOD WITH(NOLOCK) WHERE (METLREL.RELINCOD=" & codiRelacio & " OR METLREL.RELCDHER LIKE '%_" & codinode & "%') AND METLREL.RELCDSIT<95 AND RELINFIL=NODINNOD " & IIf(tipus > 0, " AND NODCDTIP=" & tipus, "") & " AND ((LEN(RELCDHER)-LEN(replace(RELCDHER,'_','')))<" & nivells & (rel.cdher.split("_").length) & ")", ds)
+
+        Dim llistaRel As String = ""
+        Dim llistaAmbPermisos As String = ""
+        Dim hsNodes As New Hashtable()
+        For Each dbrow In ds.Tables(0).Rows
+            If llistaRel.Length > 0 Then llistaRel &= ","
+            llistaRel &= dbrow("RELINCOD")
+        Next dbrow
+
+        clsPermisos.trobaPermisLlistaRelacions2(objconn, 9, llistaRel, idUsuari, "", 0, llistaAmbPermisos, "", "")
+        If llistaAmbPermisos.Length > 0 Then
+            GAIA.bdr(objconn, "select DISTINCT METLREL.RELCDRSU,METLREL.RELINFIL, METLREL.RELINCOD, METLREL.RELCDARB, METLNOD.NODINNOD, METLNOD.NODDSTXT FROM METLREL WITH(NOLOCK), METLNOD WITH(NOLOCK) WHERE (METLREL.RELINCOD IN (" & llistaAmbPermisos & ")  OR RELINCOD=" & rel.incod & ") AND RELINFIL=NODINNOD ", ds)
+            For Each dbrow In ds.Tables(0).Rows
+                If hsNodes.Contains(dbrow("RELCDRSU").ToString()) Then
+                    strTmp = hsNodes(dbrow("RELCDRSU").ToString())
+                    hsNodes.Remove(dbrow("RELCDRSU").ToString())
+                    hsNodes.Add(dbrow("RELCDRSU").ToString(), strTmp & "," & dbrow("RELINCOD"))
+                Else
+                    hsNodes.Add(dbrow("RELCDRSU").ToString(), dbrow("RELINCOD"))
+                End If
+            Next dbrow
+
+            'en hsNodes tinc una relació de RELINPAR amb els RELINFIL que he de representar en l'arbre
+            'Començo per la relació que hi ha a "codirelacio" i baixo el nro de nivells demanat
+
+            If hsNodes.Contains(codiRelacio.ToString()) Then
+                dbrowTmp = ds.Tables(0).Select("RELINCOD=" & codiRelacio)(0)
+                relTmp.bdget(objconn, codiRelacio)
+                node = GAIA.creaNodePantalla(objconn, dbrowTmp("NODDSTXT"), dbrowTmp("NODINNOD").ToString() & "-" & dbrowTmp("RELCDARB").ToString() & "_" & dbrowTmp("RELINCOD"), tipdsdes, "", 0, idUsuari, relTmp, 0, 0)
+
+                GAIA.afegeixNodesFillsPantallaLlista2(objconn, codiRelacio, node, dbrowTmp("RELCDARB"), recursiu, nivells, hsNodes, ds, idUsuari, 1, 0)
+                If objNode Is Nothing Then
+                    objArbre.AddNode(node)
+                Else
+                    objNode.AddNode(node)
+                End If
+            End If
+
+        End If
+        Ds.Dispose()
+    End Sub 'ObteFillsNodeAmbPermisos_NP
 
 
 
@@ -1969,366 +1948,366 @@ dim strErr as string =""
 
     'funció a partir de "afegeixNodesFillsPantalla" per tal de treballar els permisos en llista, en comptes d'un a un.
 
-    Public shared Sub afegeixNodesFillsPantallaLlista(byVal objConn as OleDbConnection, byVal nodePare As integer, ByRef node As RadTreeNode, byVal codiArbre as integer, byVal idUsuari as Integer, byVal nroArbre as integer,  byVal tipus as integer, byVal recursiu as integer, byVal nivells as integer) 
-		afegeixNodesFillsPantallaLlista(objConn, nodePare, node, codiArbre, idUsuari,nroArbre,tipus,recursiu,nivells, false, false)
-	End sub
-	
-	Public shared Sub afegeixNodesFillsPantallaLlista(byVal objConn as OleDbConnection, byVal nodePare As integer, ByRef node As RadTreeNode, byVal codiArbre as integer, byVal idUsuari as Integer, byVal nroArbre as integer,  byVal tipus as integer, byVal recursiu as integer, byVal nivells as integer, byval veuretots as boolean) 
-		afegeixNodesFillsPantallaLlista(objConn, nodePare, node, codiArbre, idUsuari,nroArbre,tipus,recursiu,nivells, veuretots, false)
-	End sub
-	
-	Public shared Sub afegeixNodesFillsPantallaLlista(byVal objConn as OleDbConnection, byVal nodePare As integer, ByRef node As RadTreeNode, byVal codiArbre as integer, byVal idUsuari as Integer, byVal nroArbre as integer,  byVal tipus as integer, byVal recursiu as integer, byVal nivells as integer, byval veuretots as boolean,byVal novisibles as boolean) 
-	
-		Dim DS As DataSet
-		Dim dbRow As DataRow    
-
-		DIM strSql as String
-
-		DS = New DataSet()
-'		Dim tmpstr as String
-		Dim relacioPare AS Integer
-		Dim pathRelacioPare As String
-		Dim nodeRoot as Integer
-		Dim relTMP as NEW clsRelacio
-		DIm grupsAD as string=""
-		Dim llistaRel as string
-		Dim item as string
-		Dim aRel as string()
-		Dim usuariXarxa as string=""
-		Dim llistaSensePermisos as string=""
-		Dim llistaAmbPermisos as string=""
-		Dim nroMaxim as integer=150
-		Dim cont as integer=0
-
-		Dim relPare as New clsRelacio
-		 Dim heretat as integer=0
-		relacioPare = GAIA.obtenirRelacioPantalla(node)	
-		relPare.bdget(objconn, relacioPare)			
-		pathRelacioPare = relPare.cdher
-		' poso els fills del node seleccionat	
-	
-		strSql ="SELECT NODSWSIT,RELINCOD, NODCDTIP FROM  METLREL WITH(NOLOCK), METLNOD WITH(NOLOCK) WHERE  RELINPAR<>RELINFIL AND RELCDRSU=" & relPare.incod & " AND (RELCDSIT<95  OR RELCDSIT=98 AND NODSWSIT=1) " & iif(novisibles," AND RELSWVIS=1","") & " AND NODINNOD=RELINPAR "
-		IF tipus>0 THEN
-			strSql &= " AND NODCDTIP=" & tipus
-		END IF
-		strSql += " ORDER BY RELCDORD ASC" 
-	
-		GAIA.bdR(objconn, strSql, ds)  		
-		IF pathRelacioPare.length=0 THEN 
-			nodeRoot = nodePare
-		ELSE
-			IF pathRelacioPare.lastIndexOf("_")=0 THEN
-				nodeRoot = pathRelacioPare.SubString(1)
-			ELSE
-				nodeRoot =  pathRelacioPare.Substring(1,pathRelacioPare.IndexOf("_",1)-1)
-			END IF
-		END IF		
-		llistaRel = ""
-		For Each dbRow In  ds.Tables(0).Rows
-			if llistaRel <> "" then llistaRel &= ","
-			llistaRel &= dbROW("RELINCOD")
-		Next dbRow
-		'response.write("llista Inicial: " & llistaRel)
-		dim llistaRelTmp as string
-		llistaRelTmp = llistaRel
-		if idUsuari<>0 then				
-			clsPermisos.trobaPermisLlistaRelacions(objconn,9, llistaRel, idUsuari, grupsAD, 0, llistaAmbPermisos, llistaSensePermisos)		
-			llistaRel = llistaAmbPermisos
-		end if
-		
-		if trim(llistaRel) <> "" then
-			aRel = split(llistaRel,",")
-			ds = new dataset
-			strSQL = "SELECT RELINCOD FROM METLREL WITH(NOLOCK) WHERE RELINCOD IN (" & llistaRel & ") ORDER BY RELCDORD"
-			GAIA.bdr(objConn,strSQL,ds)
-			
-			'Si estic en l'arbre codificació i només per notícies, agafo només les darreres 50 codificades
-			cont=0
-			IF NOT veureTots then		
-				IF nroMaxim<ds.tables(0).Rows.count THEN 
-					cont = 	ds.tables(0).Rows.count - nroMaxim					
-				END IF
-			ELSE
-				nromaxim=0
-			END IF		
-			Dim i as integer
-			
-			For i=cont to 	ds.tables(0).Rows.count-1
-			
-				dbrow = ds.tables(0).Rows(i)
-				item = dbRow("RELINCOD")
-				relTmp.bdGet(objconn, item)						
-                Dim childNode As RadTreeNode = GAIA.creaNodePantalla(objConn, relTMP.noddstxt, relTMP.infil & "-" & relTMP.cdarb & "_" & relTMP.incod, relTMP.tipdsdes, "", GAIA.nrofills(objconn, relTMP), idUsuari, relTMP, relTMP.pcrincod.ToString(), nroMaxim)
-	
-				IF  recursiu=1 THEN
-
-					afegeixNodesFillsPantallaLlista(objConn, relTMP.infil, childNode, codiArbre, idUsuari, nroArbre, tipus, recursiu, nivells, veuretots, novisibles)
-					ChildNode.Expanded = False
-					'expand d'un node no fa acció al servidor
-					childnode.ExpandMode = ExpandMode.ClientSide
-				ELSE
-					IF nivells>1 THEN
-						afegeixNodesFillsPantallaLlista(objConn, relTMP.incod, childNode, codiArbre, idUsuari, nroArbre, tipus, -1, nivells-1, veuretots, novisibles)																					
-						childNode.ExpandMode = ExpandMode.ClientSide
-						childNode.Expanded=false
-					ELSE
-						childNode.ExpandMode = ExpandMode.ServerSide
-					END IF																											
-				END IF
-				node.AddNode(childNode)
-			Next i	
-		end if		
-
-		Ds.Dispose()			
-	End Sub 'afegeixNodesFillsPantallaLlista
-
-	
-	
-	Public shared Sub afegeixNodesFillsPantallaLlista_NP(byVal objConn as OleDbConnection, byVal nodePare As integer, ByRef node As RadTreeNode, byVal codiArbre as integer, byVal idUsuari as Integer, byVal nroArbre as integer,  byVal tipus as integer, byVal recursiu as integer, byVal nivells as integer, byval veuretots as boolean,byVal novisibles as boolean, Optional ByVal veureCaducats As boolean=false) 
-	
-		Dim DS As DataSet
-		Dim dbRow As DataRow    
-
-		DIM strSql as String
-
-		DS = New DataSet()
-'		Dim tmpstr as String
-		Dim relacioPare AS Integer
-		Dim pathRelacioPare As String
-		Dim nodeRoot as Integer
-		Dim relTMP as NEW clsRelacio
-		DIm grupsAD as string=""
-		Dim llistaRel as string
-		Dim item as string
-		Dim aRel as string()
-		Dim usuariXarxa as string=""
-		Dim llistaSensePermisos as string=""
-		Dim llistaAmbPermisos as string=""
-		Dim nroMaxim as integer=150
-		Dim cont as integer=0
-
-		Dim relPare as New clsRelacio
-		 Dim heretat as integer=0
-		relacioPare = GAIA.obtenirRelacioPantalla(node)	
-		relPare.bdget(objconn, relacioPare)			
-		pathRelacioPare = relPare.cdher
-		' poso els fills del node seleccionat	
-		
-		strSql ="SELECT NODSWSIT,RELINCOD, NODCDTIP FROM  METLREL WITH(NOLOCK), METLNOD WITH(NOLOCK) WHERE  RELINPAR<>RELINFIL AND RELCDRSU=" & relPare.incod & " AND (RELCDSIT<95  OR (RELCDSIT=98 AND NODSWSIT=1) " & iif(veureCaducats, " or (RELCDSIT=98)","") & ")" & iif(novisibles," AND RELSWVIS=1","") & " AND NODINNOD=RELINPAR "
-		IF tipus>0 THEN
-			strSql &= " AND NODCDTIP=" & tipus
-		END IF
-		strSql += "ORDER BY RELCDORD ASC" 
-	
-		GAIA.bdR(objconn, strSql, ds)  		
-		IF pathRelacioPare.length=0 THEN 
-			nodeRoot = nodePare
-		ELSE
-			IF pathRelacioPare.lastIndexOf("_")=0 THEN
-				nodeRoot = pathRelacioPare.SubString(1)
-			ELSE
-				nodeRoot =  pathRelacioPare.Substring(1,pathRelacioPare.IndexOf("_",1)-1)
-			END IF
-		END IF		
-		llistaRel = ""
-		For Each dbRow In  ds.Tables(0).Rows
-			if llistaRel <> "" then llistaRel &= ","
-			llistaRel &= dbROW("RELINCOD")
-		Next dbRow
-		'response.write("llista Inicial: " & llistaRel)
-		dim llistaRelTmp as string
-		llistaRelTmp = llistaRel
-		if idUsuari<>0 then				
-	
-			
-			clsPermisos.trobaPermisLlistaRelacions2(objconn,9, llistaRel, idUsuari, grupsAD, 0, llistaAmbPermisos, llistaSensePermisos,"")		
-			llistaRel = llistaAmbPermisos
-		end if
-		
-		if trim(llistaRel) <> "" then
-			aRel = split(llistaRel,",")
-			ds = new dataset
-			strSQL = "SELECT RELINCOD FROM METLREL WITH(NOLOCK) WHERE RELINCOD IN (" & llistaRel & ") ORDER BY RELCDORD"
-			GAIA.bdr(objConn,strSQL,ds)
-			
-			'Si estic en l'arbre codificació i només per notícies, agafo només les darreres 50 codificades
-			cont=0
-			IF NOT veureTots then		
-				IF nroMaxim<ds.tables(0).Rows.count THEN 
-					cont = 	ds.tables(0).Rows.count - nroMaxim					
-				END IF
-			ELSE
-				nromaxim=0
-			END IF		
-			Dim i as integer
-			
-			For i=cont to 	ds.tables(0).Rows.count-1
-			
-				dbrow = ds.tables(0).Rows(i)
-				item = dbRow("RELINCOD")
-				relTmp.bdGet(objconn, item)						
-                Dim childNode As RadTreeNode = GAIA.creaNodePantalla(objConn, relTMP.noddstxt, relTMP.infil & "-" & relTMP.cdarb & "_" & relTMP.incod, relTMP.tipdsdes, "", GAIA.nrofills(objconn, relTMP), idUsuari, relTMP, relTMP.pcrincod.ToString(), nroMaxim)
-	
-				IF  recursiu=1 THEN
-
-					afegeixNodesFillsPantallaLlista(objConn, relTMP.infil, childNode, codiArbre, idUsuari, nroArbre, tipus, recursiu, nivells, veuretots, novisibles)
-					ChildNode.Expanded = False
-					'expand d'un node no fa acció al servidor
-					childnode.ExpandMode = ExpandMode.ClientSide
-				ELSE
-					IF nivells>1 THEN
-						afegeixNodesFillsPantallaLlista(objConn, relTMP.incod, childNode, codiArbre, idUsuari, nroArbre, tipus, -1, nivells-1, veuretots, novisibles)																					
-						childNode.ExpandMode = ExpandMode.ClientSide
-						childNode.Expanded=false
-					ELSE
-						childNode.ExpandMode = ExpandMode.ServerSide
-					END IF																											
-				END IF
-				node.AddNode(childNode)
-			Next i	
-		end if		
-
-		Ds.Dispose()			
-	End Sub 'afegeixNodesFillsPantallaLlista_NP
-	
-'************************** Funcions per generar arbres de codificacio en XML ***********************************
-    Public shared Sub generarArbresCodificacio()
-        Dim objConn As OleDbConnection
-        objConn = GAIA.bdIni()
-	
-		'creo xmls de codificació pel formulari de tràmits
-		'temps de resposta
-		GAIA.generaCodificacioXml(objconn, 	184496)
-
-		'organ de resolucio
-		GAIA.generaCodificacioXml(objconn, 	184523)
-		'Competencia
-		GAIA.generaCodificacioXml(objconn, 	184470)
-		'Tipus procediment
-		GAIA.generaCodificacioXml(objconn, 	184476)
-		'Repercussio Economica
-		GAIA.generaCodificacioXml(objconn, 	184492)
-		'Canal
-		GAIA.generaCodificacioXml(objconn, 	184509)
-		'Instancia
-
-		GAIA.generaCodificacioXml(objconn, 	184513)		
-		'Volumetria
-		GAIA.generaCodificacioXml(objconn, 	184516)
-		'tipus usuari
-		GAIA.generaCodificacioXml(objconn, 	187152)		
-		'NivellProteccio LOPD
-		GAIA.generaCodificacioXml(objconn, 	187165)
-		'Efectes silenci administratiu
-		GAIA.generaCodificacioXml(objconn, 	184503)
-		'tràmit/servei
-
-		GAIA.generaCodificacioXml(objconn, 	192011)
-		
-		'intern/extern
-		GAIA.generaCodificacioXml(objconn, 	360085)
-		
-		GAIA.generaArbreXml(objConn, 12367, "47,35")
-		GAIA.generaArbreXml(objConn, 12364, "47")
-		GAIA.generaArbreXml(objConn, 12365, "47")
-		'directori
-		GAIA.generaArbreXml(objConn, 50349, "47")
-		'tramits
-		GAIA.generaArbreXml(objConn, 69762, "47")		
-		'Agenda
-		GAIA.generaArbreXml(objConn, 12391, "47")		
-		GAIA.generaArbreXml(objConn, 12392, "47")		
-		
-		'Projectes
-		GAIA.generaArbreXml(objConn, 102072, "47")		
-		'Contractació
-		GAIA.generaArbreXml(objconn, 114392, "47")	
-		'Contractació per La Farga
-		GAIA.generaArbreXml(objconn, 130846, "47")
-		
-
-
-gaia.generaCodificacioXml( objconn ,854771)
-gaia.generaCodificacioXml( objconn ,854772)
-					
-        GAIA.bdFi(objConn)
+    Public Shared Sub afegeixNodesFillsPantallaLlista(ByVal objConn As OleDbConnection, ByVal nodePare As Integer, ByRef node As RadTreeNode, ByVal codiArbre As Integer, ByVal idUsuari As Integer, ByVal nroArbre As Integer, ByVal tipus As Integer, ByVal recursiu As Integer, ByVal nivells As Integer)
+        afegeixNodesFillsPantallaLlista(objConn, nodePare, node, codiArbre, idUsuari, nroArbre, tipus, recursiu, nivells, False, False)
     End Sub
-	Public shared SUB generaCodificacioXml(ByVal objconn As OleDbConnection, ByRef codiRelacio As Integer)
-			Dim DS As DataSet
-	        Dim dbRow As DataRow
-			Dim text As String, valor As String
-		 	DS = New DataSet		
-			Gaia.BdR(objconn, "SELECT NCODSTIT, NCOINNOD FROM METLNCO WITH(NOLOCK),METLREL WITH(NOLOCK) WHERE RELCDRSU=" & codiRelacio & " AND NCOINIDI=1 AND RELCDSIT<98 AND RELINFIL=NCOINNOD", ds)
-			fitxerXML = New StreamWriter("c:\Inetpub\wwwroot\GAIA\aspx\codificacio\codificacio" & codiRelacio & ".xml", False, Encoding.Default)
-			fitxerXML.WriteLine("<?xml version=""1.0"" encoding=""ISO-8859-1"" ?>")
-			fitxerXML.WriteLine("<Codificacio><Node Text="""" Value=""-1""></Node>")
-			
-			For Each dbRow In DS.Tables(0).Rows	
-				text =  httputility.HtmlEncode(gaia.netejahtml(dbRow("NCODSTIT"))).replace("''","'").replace("´´","'").replace("&rsquo;","'")
-				valor = dbRow("NCOINNOD")
-				fitxerXML.WriteLine("<Node Text=""" & text & """ Value=""" & valor & """></Node>")
-			Next dbrow	
-		
-			fitxerXML.WriteLine("</Codificacio>")
-			fitxerXML.Close()
-			DS.Dispose()
-	End Sub
-	
-	
-	'Genero un xml que utilitzaré en els formularis de fulles, nodes web i plantilles per mostrar els estils que es poden seleccionar per a cada cel·la
-	Public shared SUB generaCodisEstils(ByVal objconn As OleDbConnection)
-			Dim fitxerXML as streamwriter
-			Dim DS As DataSet
-	        Dim dbRow As DataRow
-			Dim text As String, valor As String=""
-		 	DS = New DataSet		
-			Gaia.BdR(objconn, "SELECT isNUll(CSSINCOD, 0) as Identificador, CODDSTXT as nomGrup, isNUll(CSSDSTXT,'') as NomCamp, isNull(CODINCOD,'') as grup  FROM METLCOD WITH(NOLOCK) LEFT OUTER JOIN METLCSS WITH(NOLOCK) ON CSSINTIP=CODINCOD WHERE CODINTIP=4   order by   CSSDSTXT,CSSINTIP", ds)
-			fitxerXML = New StreamWriter("c:\Inetpub\wwwroot\GAIA\aspx\codificacio\codificacioEstils.xml", False, Encoding.Default)
-			fitxerXML.WriteLine("<?xml version=""1.0"" encoding=""ISO-8859-1"" ?>")
-			fitxerXML.WriteLine("<Codificacio>")
-			Dim grup as integer=0	
-			Dim strTmp as string=""
-			For Each dbRow In DS.Tables(0).Rows	
-				IF grup<>dbrow("grup") THEN
-					grup = dbrow("grup")
-					if NOT string.isnullOrEmpty(strTmp) THEN
-						strTmp &= "</Node>"
-					END IF
-					strTmp &= "<Node Text=""" & dbrow("nomGrup") & """ Value="""">"
-				END IF
-							
-				text =  httputility.HtmlEncode(gaia.netejahtml(dbRow("NomCamp")))
-				valor = dbrow("Identificador")
-				strTmp &= "<Node Text=""" & text & """ Value=""" & valor & """></Node>"			
-			Next dbrow	
-		
-			IF strTmp.length>0 THEN
-				strTMP &= "</Node>" 
-			END IF
-			fitxerXML.WriteLine(strTMP)
-			fitxerXML.WriteLine("</Codificacio>")
-			fitxerXML.Close()
-			DS.Dispose()
-	End Sub
-	
-    Public shared SUB generaArbreXml(ByVal objconn As OleDbConnection, ByRef codiRelacio As Integer, ByVal tipus As string)
+
+    Public Shared Sub afegeixNodesFillsPantallaLlista(ByVal objConn As OleDbConnection, ByVal nodePare As Integer, ByRef node As RadTreeNode, ByVal codiArbre As Integer, ByVal idUsuari As Integer, ByVal nroArbre As Integer, ByVal tipus As Integer, ByVal recursiu As Integer, ByVal nivells As Integer, ByVal veuretots As Boolean)
+        afegeixNodesFillsPantallaLlista(objConn, nodePare, node, codiArbre, idUsuari, nroArbre, tipus, recursiu, nivells, veuretots, False)
+    End Sub
+
+    Public Shared Sub afegeixNodesFillsPantallaLlista(ByVal objConn As OleDbConnection, ByVal nodePare As Integer, ByRef node As RadTreeNode, ByVal codiArbre As Integer, ByVal idUsuari As Integer, ByVal nroArbre As Integer, ByVal tipus As Integer, ByVal recursiu As Integer, ByVal nivells As Integer, ByVal veuretots As Boolean, ByVal novisibles As Boolean)
+
         Dim DS As DataSet
         Dim dbRow As DataRow
-		Dim imatge as string=""
+
+        Dim strSql As String
+
+        DS = New DataSet()
+        '		Dim tmpstr as String
+        Dim relacioPare As Integer
+        Dim pathRelacioPare As String
+        Dim nodeRoot As Integer
+        Dim relTMP As New clsRelacio
+        Dim grupsAD As String = ""
+        Dim llistaRel As String
+        Dim item As String
+        Dim aRel As String()
+        Dim usuariXarxa As String = ""
+        Dim llistaSensePermisos As String = ""
+        Dim llistaAmbPermisos As String = ""
+        Dim nroMaxim As Integer = 150
+        Dim cont As Integer = 0
+
+        Dim relPare As New clsRelacio
+        Dim heretat As Integer = 0
+        relacioPare = GAIA.obtenirRelacioPantalla(node)
+        relPare.bdget(objconn, relacioPare)
+        pathRelacioPare = relPare.cdher
+        ' poso els fills del node seleccionat	
+
+        strSql = "SELECT NODSWSIT,RELINCOD, NODCDTIP FROM  METLREL WITH(NOLOCK), METLNOD WITH(NOLOCK) WHERE  RELINPAR<>RELINFIL AND RELCDRSU=" & relPare.incod & " AND (RELCDSIT<95  OR RELCDSIT=98 AND NODSWSIT=1) " & iif(novisibles, " AND RELSWVIS=1", "") & " AND NODINNOD=RELINPAR "
+        If tipus > 0 Then
+            strSql &= " AND NODCDTIP=" & tipus
+        End If
+        strSql += " ORDER BY RELCDORD ASC"
+
+        GAIA.bdR(objconn, strSql, ds)
+        If pathRelacioPare.length = 0 Then
+            nodeRoot = nodePare
+        Else
+            If pathRelacioPare.lastIndexOf("_") = 0 Then
+                nodeRoot = pathRelacioPare.SubString(1)
+            Else
+                nodeRoot = pathRelacioPare.Substring(1, pathRelacioPare.IndexOf("_", 1) - 1)
+            End If
+        End If
+        llistaRel = ""
+        For Each dbRow In ds.Tables(0).Rows
+            If llistaRel <> "" Then llistaRel &= ","
+            llistaRel &= dbROW("RELINCOD")
+        Next dbRow
+        'response.write("llista Inicial: " & llistaRel)
+        Dim llistaRelTmp As String
+        llistaRelTmp = llistaRel
+        If idUsuari <> 0 Then
+            clsPermisos.trobaPermisLlistaRelacions(objconn, 9, llistaRel, idUsuari, grupsAD, 0, llistaAmbPermisos, llistaSensePermisos)
+            llistaRel = llistaAmbPermisos
+        End If
+
+        If trim(llistaRel) <> "" Then
+            aRel = split(llistaRel, ",")
+            ds = New dataset
+            strSQL = "SELECT RELINCOD FROM METLREL WITH(NOLOCK) WHERE RELINCOD IN (" & llistaRel & ") ORDER BY RELCDORD"
+            GAIA.bdr(objConn, strSQL, ds)
+
+            'Si estic en l'arbre codificació i només per notícies, agafo només les darreres 50 codificades
+            cont = 0
+            If Not veureTots Then
+                If nroMaxim < ds.tables(0).Rows.count Then
+                    cont = ds.tables(0).Rows.count - nroMaxim
+                End If
+            Else
+                nromaxim = 0
+            End If
+            Dim i As Integer
+
+            For i = cont To ds.tables(0).Rows.count - 1
+
+                dbrow = ds.tables(0).Rows(i)
+                item = dbRow("RELINCOD")
+                relTmp.bdGet(objconn, item)
+                Dim childNode As RadTreeNode = GAIA.creaNodePantalla(objConn, relTMP.noddstxt, relTMP.infil & "-" & relTMP.cdarb & "_" & relTMP.incod, relTMP.tipdsdes, "", GAIA.nrofills(objconn, relTMP), idUsuari, relTMP, relTMP.pcrincod.ToString(), nroMaxim)
+
+                If recursiu = 1 Then
+
+                    afegeixNodesFillsPantallaLlista(objConn, relTMP.infil, childNode, codiArbre, idUsuari, nroArbre, tipus, recursiu, nivells, veuretots, novisibles)
+                    ChildNode.Expanded = False
+                    'expand d'un node no fa acció al servidor
+                    childnode.ExpandMode = ExpandMode.ClientSide
+                Else
+                    If nivells > 1 Then
+                        afegeixNodesFillsPantallaLlista(objConn, relTMP.incod, childNode, codiArbre, idUsuari, nroArbre, tipus, -1, nivells - 1, veuretots, novisibles)
+                        childNode.ExpandMode = ExpandMode.ClientSide
+                        childNode.Expanded = False
+                    Else
+                        childNode.ExpandMode = ExpandMode.ServerSide
+                    End If
+                End If
+                node.AddNode(childNode)
+            Next i
+        End If
+
+        Ds.Dispose()
+    End Sub 'afegeixNodesFillsPantallaLlista
+
+
+
+    Public Shared Sub afegeixNodesFillsPantallaLlista_NP(ByVal objConn As OleDbConnection, ByVal nodePare As Integer, ByRef node As RadTreeNode, ByVal codiArbre As Integer, ByVal idUsuari As Integer, ByVal nroArbre As Integer, ByVal tipus As Integer, ByVal recursiu As Integer, ByVal nivells As Integer, ByVal veuretots As Boolean, ByVal novisibles As Boolean, Optional ByVal veureCaducats As Boolean = False)
+
+        Dim DS As DataSet
+        Dim dbRow As DataRow
+
+        Dim strSql As String
+
+        DS = New DataSet()
+        '		Dim tmpstr as String
+        Dim relacioPare As Integer
+        Dim pathRelacioPare As String
+        Dim nodeRoot As Integer
+        Dim relTMP As New clsRelacio
+        Dim grupsAD As String = ""
+        Dim llistaRel As String
+        Dim item As String
+        Dim aRel As String()
+        Dim usuariXarxa As String = ""
+        Dim llistaSensePermisos As String = ""
+        Dim llistaAmbPermisos As String = ""
+        Dim nroMaxim As Integer = 150
+        Dim cont As Integer = 0
+
+        Dim relPare As New clsRelacio
+        Dim heretat As Integer = 0
+        relacioPare = GAIA.obtenirRelacioPantalla(node)
+        relPare.bdget(objconn, relacioPare)
+        pathRelacioPare = relPare.cdher
+        ' poso els fills del node seleccionat	
+
+        strSql = "SELECT NODSWSIT,RELINCOD, NODCDTIP FROM  METLREL WITH(NOLOCK), METLNOD WITH(NOLOCK) WHERE  RELINPAR<>RELINFIL AND RELCDRSU=" & relPare.incod & " AND (RELCDSIT<95  OR (RELCDSIT=98 AND NODSWSIT=1) " & iif(veureCaducats, " or (RELCDSIT=98)", "") & ")" & iif(novisibles, " AND RELSWVIS=1", "") & " AND NODINNOD=RELINPAR "
+        If tipus > 0 Then
+            strSql &= " AND NODCDTIP=" & tipus
+        End If
+        strSql += "ORDER BY RELCDORD ASC"
+
+        GAIA.bdR(objconn, strSql, ds)
+        If pathRelacioPare.length = 0 Then
+            nodeRoot = nodePare
+        Else
+            If pathRelacioPare.lastIndexOf("_") = 0 Then
+                nodeRoot = pathRelacioPare.SubString(1)
+            Else
+                nodeRoot = pathRelacioPare.Substring(1, pathRelacioPare.IndexOf("_", 1) - 1)
+            End If
+        End If
+        llistaRel = ""
+        For Each dbRow In ds.Tables(0).Rows
+            If llistaRel <> "" Then llistaRel &= ","
+            llistaRel &= dbROW("RELINCOD")
+        Next dbRow
+        'response.write("llista Inicial: " & llistaRel)
+        Dim llistaRelTmp As String
+        llistaRelTmp = llistaRel
+        If idUsuari <> 0 Then
+
+
+            clsPermisos.trobaPermisLlistaRelacions2(objconn, 9, llistaRel, idUsuari, grupsAD, 0, llistaAmbPermisos, llistaSensePermisos, "")
+            llistaRel = llistaAmbPermisos
+        End If
+
+        If trim(llistaRel) <> "" Then
+            aRel = split(llistaRel, ",")
+            ds = New dataset
+            strSQL = "SELECT RELINCOD FROM METLREL WITH(NOLOCK) WHERE RELINCOD IN (" & llistaRel & ") ORDER BY RELCDORD"
+            GAIA.bdr(objConn, strSQL, ds)
+
+            'Si estic en l'arbre codificació i només per notícies, agafo només les darreres 50 codificades
+            cont = 0
+            If Not veureTots Then
+                If nroMaxim < ds.tables(0).Rows.count Then
+                    cont = ds.tables(0).Rows.count - nroMaxim
+                End If
+            Else
+                nromaxim = 0
+            End If
+            Dim i As Integer
+
+            For i = cont To ds.tables(0).Rows.count - 1
+
+                dbrow = ds.tables(0).Rows(i)
+                item = dbRow("RELINCOD")
+                relTmp.bdGet(objconn, item)
+                Dim childNode As RadTreeNode = GAIA.creaNodePantalla(objConn, relTMP.noddstxt, relTMP.infil & "-" & relTMP.cdarb & "_" & relTMP.incod, relTMP.tipdsdes, "", GAIA.nrofills(objconn, relTMP), idUsuari, relTMP, relTMP.pcrincod.ToString(), nroMaxim)
+
+                If recursiu = 1 Then
+
+                    afegeixNodesFillsPantallaLlista(objConn, relTMP.infil, childNode, codiArbre, idUsuari, nroArbre, tipus, recursiu, nivells, veuretots, novisibles)
+                    ChildNode.Expanded = False
+                    'expand d'un node no fa acció al servidor
+                    childnode.ExpandMode = ExpandMode.ClientSide
+                Else
+                    If nivells > 1 Then
+                        afegeixNodesFillsPantallaLlista(objConn, relTMP.incod, childNode, codiArbre, idUsuari, nroArbre, tipus, -1, nivells - 1, veuretots, novisibles)
+                        childNode.ExpandMode = ExpandMode.ClientSide
+                        childNode.Expanded = False
+                    Else
+                        childNode.ExpandMode = ExpandMode.ServerSide
+                    End If
+                End If
+                node.AddNode(childNode)
+            Next i
+        End If
+
+        Ds.Dispose()
+    End Sub 'afegeixNodesFillsPantallaLlista_NP
+
+    '************************** Funcions per generar arbres de codificacio en XML ***********************************
+    Public Shared Sub generarArbresCodificacio()
+        Dim objConn As OleDbConnection
+        objConn = GAIA.bdIni()
+
+        'creo xmls de codificació pel formulari de tràmits
+        'temps de resposta
+        GAIA.generaCodificacioXml(objconn, 184496)
+
+        'organ de resolucio
+        GAIA.generaCodificacioXml(objconn, 184523)
+        'Competencia
+        GAIA.generaCodificacioXml(objconn, 184470)
+        'Tipus procediment
+        GAIA.generaCodificacioXml(objconn, 184476)
+        'Repercussio Economica
+        GAIA.generaCodificacioXml(objconn, 184492)
+        'Canal
+        GAIA.generaCodificacioXml(objconn, 184509)
+        'Instancia
+
+        GAIA.generaCodificacioXml(objconn, 184513)
+        'Volumetria
+        GAIA.generaCodificacioXml(objconn, 184516)
+        'tipus usuari
+        GAIA.generaCodificacioXml(objconn, 187152)
+        'NivellProteccio LOPD
+        GAIA.generaCodificacioXml(objconn, 187165)
+        'Efectes silenci administratiu
+        GAIA.generaCodificacioXml(objconn, 184503)
+        'tràmit/servei
+
+        GAIA.generaCodificacioXml(objconn, 192011)
+
+        'intern/extern
+        GAIA.generaCodificacioXml(objconn, 360085)
+
+        GAIA.generaArbreXml(objConn, 12367, "47,35")
+        GAIA.generaArbreXml(objConn, 12364, "47")
+        GAIA.generaArbreXml(objConn, 12365, "47")
+        'directori
+        GAIA.generaArbreXml(objConn, 50349, "47")
+        'tramits
+        GAIA.generaArbreXml(objConn, 69762, "47")
+        'Agenda
+        GAIA.generaArbreXml(objConn, 12391, "47")
+        GAIA.generaArbreXml(objConn, 12392, "47")
+
+        'Projectes
+        GAIA.generaArbreXml(objConn, 102072, "47")
+        'Contractació
+        GAIA.generaArbreXml(objconn, 114392, "47")
+        'Contractació per La Farga
+        GAIA.generaArbreXml(objconn, 130846, "47")
+
+
+
+        gaia.generaCodificacioXml(objconn, 854771)
+        gaia.generaCodificacioXml(objconn, 854772)
+
+        GAIA.bdFi(objConn)
+    End Sub
+    Public Shared Sub generaCodificacioXml(ByVal objconn As OleDbConnection, ByRef codiRelacio As Integer)
+        Dim DS As DataSet
+        Dim dbRow As DataRow
+        Dim text As String, valor As String
+        DS = New DataSet
+        Gaia.BdR(objconn, "SELECT NCODSTIT, NCOINNOD FROM METLNCO WITH(NOLOCK),METLREL WITH(NOLOCK) WHERE RELCDRSU=" & codiRelacio & " AND NCOINIDI=1 AND RELCDSIT<98 AND RELINFIL=NCOINNOD", ds)
+        fitxerXML = New StreamWriter("c:\Inetpub\wwwroot\GAIA\aspx\codificacio\codificacio" & codiRelacio & ".xml", False, Encoding.Default)
+        fitxerXML.WriteLine("<?xml version=""1.0"" encoding=""ISO-8859-1"" ?>")
+        fitxerXML.WriteLine("<Codificacio><Node Text="""" Value=""-1""></Node>")
+
+        For Each dbRow In DS.Tables(0).Rows
+            text = httputility.HtmlEncode(gaia.netejahtml(dbRow("NCODSTIT"))).replace("''", "'").replace("´´", "'").replace("&rsquo;", "'")
+            valor = dbRow("NCOINNOD")
+            fitxerXML.WriteLine("<Node Text=""" & text & """ Value=""" & valor & """></Node>")
+        Next dbrow
+
+        fitxerXML.WriteLine("</Codificacio>")
+        fitxerXML.Close()
+        DS.Dispose()
+    End Sub
+
+
+    'Genero un xml que utilitzaré en els formularis de fulles, nodes web i plantilles per mostrar els estils que es poden seleccionar per a cada cel·la
+    Public Shared Sub generaCodisEstils(ByVal objconn As OleDbConnection)
+        Dim fitxerXML As streamwriter
+        Dim DS As DataSet
+        Dim dbRow As DataRow
+        Dim text As String, valor As String = ""
+        DS = New DataSet
+        Gaia.BdR(objconn, "SELECT isNUll(CSSINCOD, 0) as Identificador, CODDSTXT as nomGrup, isNUll(CSSDSTXT,'') as NomCamp, isNull(CODINCOD,'') as grup  FROM METLCOD WITH(NOLOCK) LEFT OUTER JOIN METLCSS WITH(NOLOCK) ON CSSINTIP=CODINCOD WHERE CODINTIP=4   order by   CSSDSTXT,CSSINTIP", ds)
+        fitxerXML = New StreamWriter("c:\Inetpub\wwwroot\GAIA\aspx\codificacio\codificacioEstils.xml", False, Encoding.Default)
+        fitxerXML.WriteLine("<?xml version=""1.0"" encoding=""ISO-8859-1"" ?>")
+        fitxerXML.WriteLine("<Codificacio>")
+        Dim grup As Integer = 0
+        Dim strTmp As String = ""
+        For Each dbRow In DS.Tables(0).Rows
+            If grup <> dbrow("grup") Then
+                grup = dbrow("grup")
+                If Not String.isnullOrEmpty(strTmp) Then
+                    strTmp &= "</Node>"
+                End If
+                strTmp &= "<Node Text=""" & dbrow("nomGrup") & """ Value="""">"
+            End If
+
+            text = httputility.HtmlEncode(gaia.netejahtml(dbRow("NomCamp")))
+            valor = dbrow("Identificador")
+            strTmp &= "<Node Text=""" & text & """ Value=""" & valor & """></Node>"
+        Next dbrow
+
+        If strTmp.length > 0 Then
+            strTMP &= "</Node>"
+        End If
+        fitxerXML.WriteLine(strTMP)
+        fitxerXML.WriteLine("</Codificacio>")
+        fitxerXML.Close()
+        DS.Dispose()
+    End Sub
+
+    Public Shared Sub generaArbreXml(ByVal objconn As OleDbConnection, ByRef codiRelacio As Integer, ByVal tipus As String)
+        Dim DS As DataSet
+        Dim dbRow As DataRow
+        Dim imatge As String = ""
         Dim relTmp As New clsRelacio, text As String, valor As String
         fitxerXML = New StreamWriter("c:\Inetpub\wwwroot\GAIA\aspx\codificacio\arbre" & codiRelacio & ".xml", False, Encoding.Default)
         fitxerXML.WriteLine("<?xml version=""1.0"" encoding=""ISO-8859-1"" ?>")
         fitxerXML.WriteLine("<Tree>")
         DS = New DataSet
-        GAIA.bdR(objconn, "SELECT * FROM METLNOD WITH(NOLOCK), METLREL WITH(NOLOCK) WHERE RELINCOD=" + codiRelacio.ToString() + " AND RELINFIL=NODINNOD AND RELCDSIT<98 " + "  AND RELCDSIT<>" + ctESBORRATCADUCAT.ToString() + " AND RELCDSIT<>" + ctIMATGE.tostring()+ " AND RELCDSIT<>"+ ctDOCUMENT.tostring() + " ORDER BY NODINNOD DESC", DS)
+        GAIA.bdR(objconn, "SELECT * FROM METLNOD WITH(NOLOCK), METLREL WITH(NOLOCK) WHERE RELINCOD=" + codiRelacio.ToString() + " AND RELINFIL=NODINNOD AND RELCDSIT<98 " + "  AND RELCDSIT<>" + ctESBORRATCADUCAT.ToString() + " AND RELCDSIT<>" + ctIMATGE.tostring() + " AND RELCDSIT<>" + ctDOCUMENT.tostring() + " ORDER BY NODINNOD DESC", DS)
         For Each dbRow In DS.Tables(0).Rows
-						IF dbrow("RELSWVIS")=1 THEN
-							imatge ="node_codificacio.png"		
-						ELSE
-							imatge ="node_codificacio5.png"
-						END IF
+            If dbrow("RELSWVIS") = 1 Then
+                imatge = "node_codificacio.png"
+            Else
+                imatge = "node_codificacio5.png"
+            End If
             relTmp.bdget(objconn, dbRow("RELINCOD"))
-            text = gaia.netejahtml(dbRow("NODDSTXT")).replace("''","'").replace("´´","'")
+            text = gaia.netejahtml(dbRow("NODDSTXT")).replace("''", "'").replace("´´", "'")
 
             valor = dbRow("NODINNOD").ToString() & "-" & dbRow("RELCDARB") & "_" & dbRow("RELINCOD")
             fitxerXML.WriteLine("<Node Text=""" & text & """ Image=""" & imatge & """ Value=""" & valor & """>")
@@ -2339,55 +2318,55 @@ gaia.generaCodificacioXml( objconn ,854772)
         fitxerXML.WriteLine("</Tree>")
         fitxerXML.Close()
         DS.Dispose()
-    End SUB 'generaArbreXml
+    End Sub 'generaArbreXml
 
-    Public shared Sub afegeixNodesFillsPantallaXml(ByVal objConn As OleDbConnection, ByVal nodePare As Integer, ByVal codiRelacio As Integer, ByVal codiArbre As Integer, ByVal tipus As string)
-        Dim DS As DataSet, dbRow As DataRow, strSql As String=""
+    Public Shared Sub afegeixNodesFillsPantallaXml(ByVal objConn As OleDbConnection, ByVal nodePare As Integer, ByVal codiRelacio As Integer, ByVal codiArbre As Integer, ByVal tipus As String)
+        Dim DS As DataSet, dbRow As DataRow, strSql As String = ""
         Dim pathRelacioPare As String, relTMP As New clsRelacio
-		Dim relPare as new clsRelacio
+        Dim relPare As New clsRelacio
         Dim text As String, valor As String, fills As Integer
-				Dim imatge as string=""
+        Dim imatge As String = ""
         DS = New DataSet
-		
-		relPare.bdget(objconn, codiRelacio)
-		
+
+        relPare.bdget(objconn, codiRelacio)
+
         pathRelacioPare = GAIA.obtenirPathRelacio(objConn, codiRelacio)
-		
-		
-'        strSql = "SELECT RELSWVIS,PCRINCOD, RELINCOD FROM  METLREL WITH(NOLOCK),METLPCR WITH(NOLOCK),METLNOD WITH(NOLOCK) WHERE  RELINPAR<>RELINFIL AND RELCDRSU=" & relPare.incod & "  AND RELINCOD*=PCRINCOD AND RELCDSIT<95  AND NODINNOD=RELINFIL "
-		'
-		strsql = "SELECT RELSWVIS,PCRINCOD, RELINCOD FROM  METLREL WITH(NOLOCK) INNER JOIN METLNOD WITH(NOLOCK) ON NODINNOD=RELINFIL "
-		If tipus <> "0" Then
-				strSql += " AND NODCDTIP in (" & tipus & ")"
-			
+
+
+        '        strSql = "SELECT RELSWVIS,PCRINCOD, RELINCOD FROM  METLREL WITH(NOLOCK),METLPCR WITH(NOLOCK),METLNOD WITH(NOLOCK) WHERE  RELINPAR<>RELINFIL AND RELCDRSU=" & relPare.incod & "  AND RELINCOD*=PCRINCOD AND RELCDSIT<95  AND NODINNOD=RELINFIL "
+        '
+        strsql = "SELECT RELSWVIS,PCRINCOD, RELINCOD FROM  METLREL WITH(NOLOCK) INNER JOIN METLNOD WITH(NOLOCK) ON NODINNOD=RELINFIL "
+        If tipus <> "0" Then
+            strSql += " AND NODCDTIP in (" & tipus & ")"
+
         End If
-		
-		        strSql &= " LEFT OUTER JOIN METLPCR WITH(NOLOCK) ON RELINCOD=PCRINCOD WHERE  RELINPAR<>RELINFIL AND RELCDRSU=" & relPare.incod & " AND RELCDSIT<95 "
+
+        strSql &= " LEFT OUTER JOIN METLPCR WITH(NOLOCK) ON RELINCOD=PCRINCOD WHERE  RELINPAR<>RELINFIL AND RELCDRSU=" & relPare.incod & " AND RELCDSIT<95 "
         strSql += "ORDER BY RELCDORD ASC"
         GAIA.bdR(objConn, strSql, DS)
         For Each dbRow In DS.Tables(0).Rows
-						IF dbrow("RELSWVIS")=1 THEN
-							imatge ="node_codificacio.png"		
-						ELSE
-							imatge ="node_codificacio5.png"
-						END IF
+            If dbrow("RELSWVIS") = 1 Then
+                imatge = "node_codificacio.png"
+            Else
+                imatge = "node_codificacio5.png"
+            End If
 
             relTMP.bdget(objConn, dbRow("RELINCOD"))
             'tmpstr = relPare.cdher
-           ' If nodePare.ToString().Length > 0 Then
-           '     tmpstr += "_" + nodePare.ToString()
-           ' End If
+            ' If nodePare.ToString().Length > 0 Then
+            '     tmpstr += "_" + nodePare.ToString()
+            ' End If
             'If relTMP.infil.ToString().Length > 0 Then
             '    tmpstr += "_" + relTMP.infil.ToString()
             'End If
             fills = GAIA.nroFills(objConn, relTMP)
-            text = gaia.netejahtml(httputility.HtmlDecode(relTMP.noddstxt)).replace("&rsquo;","'").replace("’’","'")
-			
+            text = gaia.netejahtml(httputility.HtmlDecode(relTMP.noddstxt)).replace("&rsquo;", "'").replace("’’", "'")
+
             If fills > 0 Then
                 text &= " (" + fills.ToString() + ")"
             End If
             valor = relTMP.infil.ToString() & "-" & relTMP.cdarb & "_" & relTMP.incod
-            fitxerXML.WriteLine("<Node Text=""" & text & """ Image="""+imatge+""" Value=""" & valor & """>")
+            fitxerXML.WriteLine("<Node Text=""" & text & """ Image=""" + imatge + """ Value=""" & valor & """>")
             afegeixNodesFillsPantallaXml(objConn, relTMP.infil, relTMP.incod, codiArbre, tipus)
             fitxerXML.WriteLine("</Node>")
         Next dbRow
@@ -2438,60 +2417,60 @@ gaia.generaCodificacioXml( objconn ,854772)
     ''<param name="dataRevisio">Data. Cercarem els continguts pendents de backoffice amb data < que dataRevisio</param>
     ''<param name="tipus">Integer, Tipus de contingut del que generarem la llista</param>
     ''<returns>dataset amb codi contingut, data manteniment, nom Contingut, link d'edició </returns>
-    Public Shared Function bitacolaLlistaBackofficesPendentsDS(byVal datarevisio as date) as dataset
-		Dim DS as Dataset
-	
-		DS = New DataSet()	
-		'Fulla INFo. Si és bitàcola, cerco els continguts pendents de manteniment. 
-		
+    Public Shared Function bitacolaLlistaBackofficesPendentsDS(ByVal datarevisio As Date) As dataset
+        Dim DS As Dataset
+
+        DS = New DataSet()
+        'Fulla INFo. Si és bitàcola, cerco els continguts pendents de manteniment. 
+
         GAIA.bdr(Nothing, "(select DISTINCT INFINNOD as codi, INFDSTIT as nom, INFDTPBK as dataManteniment, cast(INFDSPBK as varchar(8000)) as descripcio, '' as edicio, '56' as tipus, '' as icona FROM METLREL WITH(NOLOCK),METLINF WITH(NOLOCK) WHERE RELCDHER LIKE '_55785%' AND RELINFIL=INFINNOD AND INFWNBAU=1 AND INFINIDI=1 AND INFDTPBK<='" & datarevisio & "' AND RELCDSIT<98 AND INFDTPBK<>'1/1/1900') order by dataManteniment, codi", DS)
-		
+
         For cont As Integer = 0 To DS.Tables(0).Rows.Count - 1
-			DS.Tables(0).Rows(cont)("edicio") = "http://lhintranet/GAIA/aspx/noticies/CarregaInfo.aspx?id=" & DS.Tables(0).Rows(cont)("codi") & "&idiArbre=1"
-			DS.Tables(0).Rows(cont)("icona") = "http://lhintranet/gaia/aspx/img/ico_noticia.png" 
+            DS.Tables(0).Rows(cont)("edicio") = "http://lhintranet/GAIA/aspx/noticies/CarregaInfo.aspx?id=" & DS.Tables(0).Rows(cont)("codi") & "&idiArbre=1"
+            DS.Tables(0).Rows(cont)("icona") = "http://lhintranet/gaia/aspx/img/ico_noticia.png"
         Next cont
-	  	ds.Tables(0).AcceptChanges()
-		return ds
-	End function
-	
+        ds.Tables(0).AcceptChanges()
+        Return ds
+    End Function
 
-'************************** Fi funcions per generar arbres de codificació en XML ********************************	
 
-	
-   	 Public shared FUNCTION seleccionaMenuContextual(byVal objConn as OleDbConnection,byVal idUsuari as integer, byVal rel as clsRelacio, byVal descTipus as string, byVal nroArbre as integer) as string
-	 	return (seleccionaMenuContextual(objconn, idUsuari, rel, descTipus, nroarbre, false))
-	 END FUNCTION
-'****************************************************************************************************************
-'	Funció: seleccionaMenuContextual
-'	Entrada: 
-'		idusuari: Nro del node que apunta al node organigrama al que li retornarem el menu contextual
-'		codiRelacio: nro de relació que apunta al node fill sobre el que volem veure el nivell de permisos
-'		descTipus: string amb la descripció del tipus de node. Si no és web (arbre|node|fulla) no mostraré l'opció "PUBLICAR"
-'		nroArbre: nro del arbre on està el node al que volem posar el menu. Pot ser 1 o 2.
-'		superamaxim: booleà que indica si hi ha més nodes del màxim que es mostren per defecte (ex:100). En aquests cas es crida a un menú amb nom +
-'					que mostrarà tots
-'	Procés: 	
-'		Retorna el nom d'un menu contextual (dels que es troben a "contextmenus.xml") segons el nivell de permisos
-'		que es tinguin.
-'	Sortida:
-'		string amb el nom del menú contextual.
-'****************************************************************************************************************
-	 Public shared FUNCTION seleccionaMenuContextual(byVal objConn as OleDbConnection,byVal idUsuari as integer, byVal rel as clsRelacio, byVal descTipus as string, byVal nroArbre as integer, byval superamaxim as boolean) as string
-	 		Dim menu as string		
-			Dim codiRelacio as integer
-			codiRelacio = rel.incod
-			
-			menu=""
-			seleccionaMenuContextual="" 
-			IF descTipus="node estructura"  THEN
-				menu="menuBuit"
-			ELSE
-				IF idUsuari<>0 THEN
-				'Tengo que buscar si el arbol al que pertenece el nodo es de tipo web			
-					'IF clsPermisos.tePermis(objconn, 1, idUsuari, idUsuari, rel,heretat)=1 THEN				
-					
-					SELECT CASE UCase(descTipus.trim())
-							
+    '************************** Fi funcions per generar arbres de codificació en XML ********************************	
+
+
+    Public Shared Function seleccionaMenuContextual(ByVal objConn As OleDbConnection, ByVal idUsuari As Integer, ByVal rel As clsRelacio, ByVal descTipus As String, ByVal nroArbre As Integer) As String
+        Return (seleccionaMenuContextual(objconn, idUsuari, rel, descTipus, nroarbre, False))
+    End Function
+    '****************************************************************************************************************
+    '	Funció: seleccionaMenuContextual
+    '	Entrada: 
+    '		idusuari: Nro del node que apunta al node organigrama al que li retornarem el menu contextual
+    '		codiRelacio: nro de relació que apunta al node fill sobre el que volem veure el nivell de permisos
+    '		descTipus: string amb la descripció del tipus de node. Si no és web (arbre|node|fulla) no mostraré l'opció "PUBLICAR"
+    '		nroArbre: nro del arbre on està el node al que volem posar el menu. Pot ser 1 o 2.
+    '		superamaxim: booleà que indica si hi ha més nodes del màxim que es mostren per defecte (ex:100). En aquests cas es crida a un menú amb nom +
+    '					que mostrarà tots
+    '	Procés: 	
+    '		Retorna el nom d'un menu contextual (dels que es troben a "contextmenus.xml") segons el nivell de permisos
+    '		que es tinguin.
+    '	Sortida:
+    '		string amb el nom del menú contextual.
+    '****************************************************************************************************************
+    Public Shared Function seleccionaMenuContextual(ByVal objConn As OleDbConnection, ByVal idUsuari As Integer, ByVal rel As clsRelacio, ByVal descTipus As String, ByVal nroArbre As Integer, ByVal superamaxim As Boolean) As String
+        Dim menu As String
+        Dim codiRelacio As Integer
+        codiRelacio = rel.incod
+
+        menu = ""
+        seleccionaMenuContextual = ""
+        If descTipus = "node estructura" Then
+            menu = "menuBuit"
+        Else
+            If idUsuari <> 0 Then
+                'Tengo que buscar si el arbol al que pertenece el nodo es de tipo web			
+                'IF clsPermisos.tePermis(objconn, 1, idUsuari, idUsuari, rel,heretat)=1 THEN				
+
+                Select Case UCase(descTipus.trim())
+
                     Case "FULLA WEB"
                         menu = "menuAW"
                     Case "FULLA LINK"
@@ -2516,716 +2495,716 @@ gaia.generaCodificacioXml( objconn ,854772)
                     Case Else
                         menu = "menuA"
                 End Select
-					
 
-				
-				ELSE
-					menu="menuBuit"
-				END IF
-				if superaMaxim THEN
-					menu = menu & "+"
-				END IF
-				seleccionaMenuContextual =menu
-				if nroArbre=2 THEN
-					menu=menu+"2"
-				END IF
-			END IF
-			
-			
-		END Function 'seleccionaMenuContextual
 
-	 
-	 
-	 Public Shared FUNCTION nroFills(byVal objConn as OleDbConnection, byVal rel as clsRelacio)  as integer
-		Dim DS as Dataset
-		Dim dbRow As DataRow   	
-		'return(0)
-		DS = New DataSet()	
-	 	GAIA.BDR(objconn, "SELECT COUNT(*) as nrofills FROM METLREL WITH(NOLOCK) WHERE RELCDRSU=" & rel.INCOD & " AND RELCDSIT<95" , DS)		
-		IF ds.Tables(0).Rows.count>0 THEN  
-			dbRow=ds.tables(0).Rows(0)
-			nroFills = dbRow("nrofills")
-		ELSE
-			nroFills = 0
-		END IF
-		DS.Dispose()
-	 End Function 'nroFills
-	 
-		Public Shared FUNCTION esPotExpandir(byVal objConn as OleDbConnection, descTipusNodePare as string, descTipusNOde as String)	  as integer
-			'IF descTipusNodePare<>"fulla catalegServeis" THEN
-				'esPotExpandir=TRUE
-			'ELSE
-				'IF descTipusNOde="fulla catalegServeis" THEN
-					'esPotExpandir=TRUE
-				'ELSE
-					esPotExpandir=TRUE
-				'END IF
-				
-			'END IF	
-		END FUNCTION 'esPotExpandir
-	 
-	 
-	 'Si imatge=null llavors afegeixo la imatge que hi ha a "nomImatge" 
-	 
-	 Public Shared FUNCTION creaNodePantalla(byVal objConn as OleDbConnection, text AS String, valor AS  String, imatge AS String, nomImatge as string, fills as integer, byVal idUsuari as integer, byVal rel as clsRelacio, byVal pasDeCircuit as string, byVal nroMaxim as integer)  AS RadTreeNode		
-		Dim DS As DataSet		
-		Dim textAlt as string=""		
-		DS = New DataSet()		
-		Dim codiRelacio,nroArbre,situacio as integer
-		codiRelacio = rel.incod
-		nroArbre = rel.cdarb
-		situacio = rel.cdsit
-		Dim superoNumeroMaxim as boolean=false
-		Dim limit as Integer	
-		if fills>0 THEN
-			IF fills>nroMaxim and nroMaxim<>0 THEN			
-				text &= " (" & nromaxim & "+)"	
-				superoNumeroMaxim=true	
-			ELSE
-				text &= " (" & fills & ")"		
-			END IF
-		END IF
-			
-		
-	
-		text = gaia.netejaHTML(httputility.HtmlDecode(text.replace("´´","´")))
-		
-		text = httputility.HtmlDecode(text)
-		textAlt = text
-		limit = text.Length
-		IF limit > 55 THEN
-			limit = 55			
-		END IF	
-		text = GAIA.tallaText(text, limit)
-		
-		Dim node As NEW RadTreeNode(text)						
-						
-		node.tooltip = textAlt
-		node.Value = valor
-		'node.Expanded = False
-		'node.ExpandMode= ExpandMode.Serverside
-		IF imatge.length>0 THEN
-			SELECT CASE imatge.Trim
-				CASE "arbre"
-					node.Image = "arbre.png"
-				CASE "fulla organigrama"
-					node.Image ="ico_organigrama.png"
-				CASE "fulla directori"
-					node.Image ="ico_directori5.png"
-					IF rel.swvis=1 THEN
-						GAIA.BDR(objconn, "select DIRSWVIS FROM METLDIR WITH(NOLOCK) WHERE DIRINNOD="+rel.infil.tostring(), DS)				
-						IF ds.Tables(0).Rows.count>0 THEN  	
-							IF ds.Tables(0).Rows(0)("DIRSWVIS")=1 THEN
-								node.Image ="ico_directori.png"							
-							END IF
-						END IF
-					END IF
-					CASE "node estructura"
-					node.Image ="node_estructura.png"
-					CASE "node directori"
-					node.Image ="node directori.png"
-				CASE "fulla tramit"
-					node.Image ="ico_tramit5.png"
-					IF rel.swvis=1 THEN
-						GAIA.BDR(objconn, "select FTRSWVIS FROM METLFTR WITH(NOLOCK) WHERE FTRINNOD="+rel.infil.tostring(), DS)				
-						IF ds.Tables(0).Rows.count>0 THEN  	
-							IF ds.Tables(0).Rows(0)("FTRSWVIS")=1 THEN
-								node.Image ="ico_tramit.png"							
-							END IF
-						END IF
-					END IF
-				CASE "node tramit"
-					node.Image ="node_tramits.png"
-				CASE	"node organigrama"
-					node.Image ="node_organigrama.png"
-				CASE "node elMeuEspai"
-					node.Image = "ico_elmeuespai.png"
-				CASE	"fulla web"
-					node.Image ="ico_web" & situacio & ".png"			
-				CASE "fulla info"					
-					IF rel.swvis=1 THEN
-						node.Image ="ico_info" & situacio & ".png"	
-					ELSE
-						node.Image ="ico_info5.png"	
-					END IF		
 
-				CASE "node codificacio"
-					IF rel.swvis=1 THEN
-						node.Image ="node_codificacio.png"		
-					ELSE
-						node.Image ="node_codificacio5.png"
-					END IF
-					
-					
-					GAIA.bdr(objConn, "select top 1 NCOSWCOD FROM METLNCO WITH(NOLOCK) WHERE NCOINIDI=1 AND NCOINNOD=" + rel.infil.ToString(), DS)
+            Else
+                menu = "menuBuit"
+            End If
+            If superaMaxim Then
+                menu = menu & "+"
+            End If
+            seleccionaMenuContextual = menu
+            If nroArbre = 2 Then
+                menu = menu + "2"
+            End If
+        End If
+
+
+    End Function 'seleccionaMenuContextual
+
+
+
+    Public Shared Function nroFills(ByVal objConn As OleDbConnection, ByVal rel As clsRelacio) As Integer
+        Dim DS As Dataset
+        Dim dbRow As DataRow
+        'return(0)
+        DS = New DataSet()
+        GAIA.BDR(objconn, "SELECT COUNT(*) as nrofills FROM METLREL WITH(NOLOCK) WHERE RELCDRSU=" & rel.INCOD & " AND RELCDSIT<95", DS)
+        If ds.Tables(0).Rows.count > 0 Then
+            dbRow = ds.tables(0).Rows(0)
+            nroFills = dbRow("nrofills")
+        Else
+            nroFills = 0
+        End If
+        DS.Dispose()
+    End Function 'nroFills
+
+    Public Shared Function esPotExpandir(ByVal objConn As OleDbConnection, descTipusNodePare As String, descTipusNOde As String) As Integer
+        'IF descTipusNodePare<>"fulla catalegServeis" THEN
+        'esPotExpandir=TRUE
+        'ELSE
+        'IF descTipusNOde="fulla catalegServeis" THEN
+        'esPotExpandir=TRUE
+        'ELSE
+        esPotExpandir = True
+        'END IF
+
+        'END IF	
+    End Function 'esPotExpandir
+
+
+    'Si imatge=null llavors afegeixo la imatge que hi ha a "nomImatge" 
+
+    Public Shared Function creaNodePantalla(ByVal objConn As OleDbConnection, text As String, valor As String, imatge As String, nomImatge As String, fills As Integer, ByVal idUsuari As Integer, ByVal rel As clsRelacio, ByVal pasDeCircuit As String, ByVal nroMaxim As Integer) As RadTreeNode
+        Dim DS As DataSet
+        Dim textAlt As String = ""
+        DS = New DataSet()
+        Dim codiRelacio, nroArbre, situacio As Integer
+        codiRelacio = rel.incod
+        nroArbre = rel.cdarb
+        situacio = rel.cdsit
+        Dim superoNumeroMaxim As Boolean = False
+        Dim limit As Integer
+        If fills > 0 Then
+            If fills > nroMaxim And nroMaxim <> 0 Then
+                text &= " (" & nromaxim & "+)"
+                superoNumeroMaxim = True
+            Else
+                text &= " (" & fills & ")"
+            End If
+        End If
+
+
+
+        text = gaia.netejaHTML(httputility.HtmlDecode(text.replace("´´", "´")))
+
+        text = httputility.HtmlDecode(text)
+        textAlt = text
+        limit = text.Length
+        If limit > 55 Then
+            limit = 55
+        End If
+        text = GAIA.tallaText(text, limit)
+
+        Dim node As New RadTreeNode(text)
+
+        node.tooltip = textAlt
+        node.Value = valor
+        'node.Expanded = False
+        'node.ExpandMode= ExpandMode.Serverside
+        If imatge.length > 0 Then
+            Select Case imatge.Trim
+                Case "arbre"
+                    node.Image = "arbre.png"
+                Case "fulla organigrama"
+                    node.Image = "ico_organigrama.png"
+                Case "fulla directori"
+                    node.Image = "ico_directori5.png"
+                    If rel.swvis = 1 Then
+                        GAIA.BDR(objconn, "select DIRSWVIS FROM METLDIR WITH(NOLOCK) WHERE DIRINNOD=" + rel.infil.tostring(), DS)
+                        If ds.Tables(0).Rows.count > 0 Then
+                            If ds.Tables(0).Rows(0)("DIRSWVIS") = 1 Then
+                                node.Image = "ico_directori.png"
+                            End If
+                        End If
+                    End If
+                Case "node estructura"
+                    node.Image = "node_estructura.png"
+                Case "node directori"
+                    node.Image = "node directori.png"
+                Case "fulla tramit"
+                    node.Image = "ico_tramit5.png"
+                    If rel.swvis = 1 Then
+                        GAIA.BDR(objconn, "select FTRSWVIS FROM METLFTR WITH(NOLOCK) WHERE FTRINNOD=" + rel.infil.tostring(), DS)
+                        If ds.Tables(0).Rows.count > 0 Then
+                            If ds.Tables(0).Rows(0)("FTRSWVIS") = 1 Then
+                                node.Image = "ico_tramit.png"
+                            End If
+                        End If
+                    End If
+                Case "node tramit"
+                    node.Image = "node_tramits.png"
+                Case "node organigrama"
+                    node.Image = "node_organigrama.png"
+                Case "node elMeuEspai"
+                    node.Image = "ico_elmeuespai.png"
+                Case "fulla web"
+                    node.Image = "ico_web" & situacio & ".png"
+                Case "fulla info"
+                    If rel.swvis = 1 Then
+                        node.Image = "ico_info" & situacio & ".png"
+                    Else
+                        node.Image = "ico_info5.png"
+                    End If
+
+                Case "node codificacio"
+                    If rel.swvis = 1 Then
+                        node.Image = "node_codificacio.png"
+                    Else
+                        node.Image = "node_codificacio5.png"
+                    End If
+
+
+                    GAIA.bdr(objConn, "select top 1 NCOSWCOD FROM METLNCO WITH(NOLOCK) WHERE NCOINIDI=1 AND NCOINNOD=" + rel.infil.ToString(), DS)
                     If DS.Tables(0).Rows.Count > 0 Then
                         If DS.Tables(0).Rows(0)("NCOSWCOD") = "S" Then
                             node.Checkable = True
                         Else
-                            node.Checkable = true
+                            node.Checkable = True
                         End If
                     End If
-					
-				CASE "fulla codificacio"			
-					IF rel.swvis=1 THEN
-						node.Image ="node_codificacio.png"		
-					ELSE
-						node.Image ="node_codificacio5.png"
-					END IF
-				CASE "fulla document" 
-					IF rel.swvis=1 THEN					
-																			
-						GAIA.BDR(objconn, "select TDODSIMG FROM METLTDO WITH(NOLOCK),METLDOC WITH(NOLOCK) WHERE DOCINTDO=TDOCDTDO and DOCINNOD=" &valor.SubString(0,valor.IndexOf("-"))	, DS)				
-						IF ds.Tables(0).Rows.count>0 THEN  	
-							node.Image =ds.Tables(0).Rows(0)(0).Replace(".png",situacio.tostring()+".png")
-						ELSE
-							node.Image ="ico_document.png" 
-						END IF
-										
-					ELSE
-						node.Image ="ico_document5.png"
-					END IF		
-				CASE "node web"
-					node.Image = "node_web.png"
-				case "node plantillaWeb"
-					node.Image = "node_plantilla.png"
-				CASE "fulla plantillaWeb"
-					node.Image = "ico_plantilla.png"
-				CASE "fulla noticia"					
-					IF rel.swvis=1 THEN
-						node.Image ="ico_noticia" & situacio & ".png"	
-					ELSE
-						node.Image ="ico_noticia5.png"	
-					END IF		
-				CASE "fulla projecte"					
-					IF rel.swvis=1 THEN
-						node.Image ="ico_projecte" & situacio & ".png"
-					ELSE
-						node.Image ="ico_projecte5.png"	
-					END IF		
+
+                Case "fulla codificacio"
+                    If rel.swvis = 1 Then
+                        node.Image = "node_codificacio.png"
+                    Else
+                        node.Image = "node_codificacio5.png"
+                    End If
+                Case "fulla document"
+                    If rel.swvis = 1 Then
+
+                        GAIA.BDR(objconn, "select TDODSIMG FROM METLTDO WITH(NOLOCK),METLDOC WITH(NOLOCK) WHERE DOCINTDO=TDOCDTDO and DOCINNOD=" & valor.SubString(0, valor.IndexOf("-")), DS)
+                        If ds.Tables(0).Rows.count > 0 Then
+                            node.Image = ds.Tables(0).Rows(0)(0).Replace(".png", situacio.tostring() + ".png")
+                        Else
+                            node.Image = "ico_document.png"
+                        End If
+
+                    Else
+                        node.Image = "ico_document5.png"
+                    End If
+                Case "node web"
+                    node.Image = "node_web.png"
+                Case "node plantillaWeb"
+                    node.Image = "node_plantilla.png"
+                Case "fulla plantillaWeb"
+                    node.Image = "ico_plantilla.png"
+                Case "fulla noticia"
+                    If rel.swvis = 1 Then
+                        node.Image = "ico_noticia" & situacio & ".png"
+                    Else
+                        node.Image = "ico_noticia5.png"
+                    End If
+                Case "fulla projecte"
+                    If rel.swvis = 1 Then
+                        node.Image = "ico_projecte" & situacio & ".png"
+                    Else
+                        node.Image = "ico_projecte5.png"
+                    End If
 
 
-				CASE "fulla link"	
-				IF rel.swvis=1 THEN
-						node.Image ="ico_link" & situacio & ".png"
-					ELSE
-						node.Image ="ico_link5.png"	
-					END IF						
-				
-
-				CASE "node document"
-					node.Image ="folder.png"			
-				CASE "node catalegServeis"
-					node.Image = "node_catalegserveis.png"
-				CASE "fulla catalegServeis"
-					node.Image = "ico_catalegserveis.png"
-				CASE "fulla codiWeb"
-					node.Image = "ico_llibreria.png"
-				CASE "node codiWeb"
-					node.Image = "node_llibreria.png"
-				CASE	"node circuit"
-					node.image = "node_circuit.png"
-				CASE "fulla circuit"
-					node.image = "ico_circuit.png"
-				CASE "fulla missatge"
-					node.image = "fullaMissatges.gif"
-				CASE "node missatge"
-					node.image = "nodeMissatges.gif"
-				CASE "fulla contractació"					
-					node.Image ="ico_contractacio" & situacio & ".png"
-				CASE "fulla agenda"							
-					node.Image ="ico_agenda5.png"
-					IF rel.swvis=1 THEN
-						GAIA.BDR(objconn, "select AGDSWVIS FROM METLAGD WITH(NOLOCK) WHERE AGDINNOD="+rel.infil.tostring(), DS)				
-						IF ds.Tables(0).Rows.count>0 THEN  	
-							IF ds.Tables(0).Rows(0)("AGDSWVIS")=1 THEN
-								node.Image ="ico_agenda" & situacio & ".png"		
-							END IF
-						END IF
-					END IF
-				CASE "node agenda"					
-					node.Image ="node_agenda.png"			
-
-				CASE "node tramit"
-					node.Image ="node_tramits.png"						
-			END SELECT
-		
-			'Tracto els casos especials
-				IF text.IndexOf("Sense classificar")=0 THEN
-					node.Image ="folder.png"	
-				ELSE
-					IF text.IndexOf("Missatges")=0 THEN
-						node.Image = "node_missatges.png"					
-					END IF
-				END IF
-		ELSE
-			node.Image = nomImatge
-			imatge=nomImatge
-
-		END IF
-		'if (pasdecircuit.length>0 and pasdecircuit<>"0") THEN
-		'	node.Image= node.Image.Replace(".gif","p.gif")
-		'END IF
-		node.ContextMenuName= GAIA.seleccionaMenuContextual(objconn, idUsuari, rel,imatge, nroArbre, superoNumeroMaxim)
-		Ds.Dispose()		
-		Return node
-	END FUNCTION 'creaNodePantalla
-	
-
-Public Shared FUNCTION bdIni() as oleDbConnection
-		Dim objconn as New oledbconnection
-	'	Try
-	'	 	objConn.ConnectionString = "Provider=SQLOLEDB;Data Source=sql;Initial Catalog=SILH; pwd=secopc; user id=CPDsa"';Min Pool Size=100;"
-	'		objConn.Open()		
-	'	Catch
-'					GAIA.f_logError(objconn, "Base de dades", "BDINI. "+err.number.tostring(),  Err.Description)
-			'objconn = GAIA.bdIni()
-	'	END TRY		
-		return objconn
-END FUNCTION
-	
-Public Shared SUB bdFi(objConn as oleDbConnection) 
-	'IF NOT objconn is nothing THEN
-
-	'objconn.dispose()
-	'END IF
-END SUB
+                Case "fulla link"
+                    If rel.swvis = 1 Then
+                        node.Image = "ico_link" & situacio & ".png"
+                    Else
+                        node.Image = "ico_link5.png"
+                    End If
 
 
-'************************************************************************************************************
-'	Funció: Executa acció a bd sense resultats
-'************************************************************************************************************
+                Case "node document"
+                    node.Image = "folder.png"
+                Case "node catalegServeis"
+                    node.Image = "node_catalegserveis.png"
+                Case "fulla catalegServeis"
+                    node.Image = "ico_catalegserveis.png"
+                Case "fulla codiWeb"
+                    node.Image = "ico_llibreria.png"
+                Case "node codiWeb"
+                    node.Image = "node_llibreria.png"
+                Case "node circuit"
+                    node.image = "node_circuit.png"
+                Case "fulla circuit"
+                    node.image = "ico_circuit.png"
+                Case "fulla missatge"
+                    node.image = "fullaMissatges.gif"
+                Case "node missatge"
+                    node.image = "nodeMissatges.gif"
+                Case "fulla contractació"
+                    node.Image = "ico_contractacio" & situacio & ".png"
+                Case "fulla agenda"
+                    node.Image = "ico_agenda5.png"
+                    If rel.swvis = 1 Then
+                        GAIA.BDR(objconn, "select AGDSWVIS FROM METLAGD WITH(NOLOCK) WHERE AGDINNOD=" + rel.infil.tostring(), DS)
+                        If ds.Tables(0).Rows.count > 0 Then
+                            If ds.Tables(0).Rows(0)("AGDSWVIS") = 1 Then
+                                node.Image = "ico_agenda" & situacio & ".png"
+                            End If
+                        End If
+                    End If
+                Case "node agenda"
+                    node.Image = "node_agenda.png"
 
- Public Shared function bdSR(byRef objConn as oleDbConnection, byVal strSql as String) as integer
+                Case "node tramit"
+                    node.Image = "node_tramits.png"
+            End Select
+
+            'Tracto els casos especials
+            If text.IndexOf("Sense classificar") = 0 Then
+                node.Image = "folder.png"
+            Else
+                If text.IndexOf("Missatges") = 0 Then
+                    node.Image = "node_missatges.png"
+                End If
+            End If
+        Else
+            node.Image = nomImatge
+            imatge = nomImatge
+
+        End If
+        'if (pasdecircuit.length>0 and pasdecircuit<>"0") THEN
+        '	node.Image= node.Image.Replace(".gif","p.gif")
+        'END IF
+        node.ContextMenuName = GAIA.seleccionaMenuContextual(objconn, idUsuari, rel, imatge, nroArbre, superoNumeroMaxim)
+        Ds.Dispose()
+        Return node
+    End Function 'creaNodePantalla
+
+
+    Public Shared Function bdIni() As oleDbConnection
+        Dim objconn As New oledbconnection
+        '	Try
+        '	 	objConn.ConnectionString = "Provider=SQLOLEDB;Data Source=sql;Initial Catalog=SILH; pwd=secopc; user id=CPDsa"';Min Pool Size=100;"
+        '		objConn.Open()		
+        '	Catch
+        '					GAIA.f_logError(objconn, "Base de dades", "BDINI. "+err.number.tostring(),  Err.Description)
+        'objconn = GAIA.bdIni()
+        '	END TRY		
+        Return objconn
+    End Function
+
+    Public Shared Sub bdFi(objConn As oleDbConnection)
+        'IF NOT objconn is nothing THEN
+
+        'objconn.dispose()
+        'END IF
+    End Sub
+
+
+    '************************************************************************************************************
+    '	Funció: Executa acció a bd sense resultats
+    '************************************************************************************************************
+
+    Public Shared Function bdSR(ByRef objConn As oleDbConnection, ByVal strSql As String) As Integer
         'bdSR(objConn, strSql, "sql4", "SILHTEST")
-        return(bdSR(objConn, strSql, "SQL6", "SILH"))
- End function
- 
+        Return (bdSR(objConn, strSql, "SQL6", "SILH"))
+    End Function
 
- Public Shared function bdSR(byRef objConn as oleDbConnection, byVal strSql as String, byVal dataSource as string, byVal bd as string) as integer
- 		dim strUsr as string=""
-		dim strPwd as string=""
- 		objconn =  New oledbconnection		
-		Dim myCommand As New OleDbCommand
-		dim resultat as integer=0
-		IF UCASE(dataSource)="SQL" THEN
-			dataSource="SQL6"			
-		END IF
+
+    Public Shared Function bdSR(ByRef objConn As oleDbConnection, ByVal strSql As String, ByVal dataSource As String, ByVal bd As String) As Integer
+        Dim strUsr As String = ""
+        Dim strPwd As String = ""
+        objconn = New oledbconnection
+        Dim myCommand As New OleDbCommand
+        Dim resultat As Integer = 0
+        If UCASE(dataSource) = "SQL" Then
+            dataSource = "SQL6"
+        End If
         'objConn.ConnectionString = "Provider=SQLOLEDB;Data Source=" + dataSource + ";Initial Catalog=" + bd + "; pwd=secopc; user id=CPDsa" ';Min Pool Size=100;"
         ' objConn.ConnectionString = "Provider=SQLOLEDB;Data Source=" + dataSource + ";Initial Catalog=" + bd + "; pwd=sa12roKa; user id=CPDsa" ';Min Pool Size=100;"
-		 
-		 SELECT CASE UCASE(dataSource)
-			CASE "SQL6" 'web
-				strUsr="CPDsa"
-                strPwd="sa12roKa"
-				
-			CASE "SQLBI" 'bussiness				
-				strUsr="usr_weblh"
-                strPWD="Tjk8%sQ"
-				
-			CASE "SQL2" 'cartografia
-				strUsr="usr_weblh"
-                strPwd="Tjk8%sQ;"
-				
 
-            CASE "SQL7" 'AUPAC
-                strUsr="aupac"
-                strPwd="BZwmi7Yf4T"
-                
-            CASE "SQL7PROVES" 'AUPAC proves
-                dataSource="SQL7"
-                strPwd="SeQWghXdvO"
-                strUsr="aupac_proves"
-			case else
-				strPwd="sa12roKa"
-				strUsr="CPDsa"
-		END SELECT
-		 
+        Select Case UCASE(dataSource)
+            Case "SQL6" 'web
+                strUsr = "CPDsa"
+                strPwd = "sa12roKa"
 
-		 objConn.ConnectionString = "Provider=SQLOLEDB;Data Source=" + dataSource + ";Initial Catalog=" + bd + "; pwd=" & strPwd & "; user id=" & strUsr  & ";Current Language=Spanish"
-		' objConn.ConnectionString = "Provider=SQLOLEDB;Data Source=" + dataSource + ";Initial Catalog=" + bd + "; pwd=sa12roKa; user id=CPDsa;Current Language=Spanish"
-		
-		try
-			objConn.Open()		
-			myCommand= New OleDbCommand(strsql, objConn)
-			myCommand.ExecuteNonQuery()	
-			myCommand.Dispose()			      
-	    Catch ex As SqlException
-           
+            Case "SQLBI" 'bussiness				
+                strUsr = "usr_weblh"
+                strPWD = "Tjk8%sQ"
+
+            Case "SQL2" 'cartografia
+                strUsr = "usr_weblh"
+                strPwd = "Tjk8%sQ;"
+
+
+            Case "SQL7" 'AUPAC
+                strUsr = "aupac"
+                strPwd = "BZwmi7Yf4T"
+
+            Case "SQL7PROVES" 'AUPAC proves
+                dataSource = "SQL7"
+                strPwd = "SeQWghXdvO"
+                strUsr = "aupac_proves"
+            Case Else
+                strPwd = "sa12roKa"
+                strUsr = "CPDsa"
+        End Select
+
+
+        objConn.ConnectionString = "Provider=SQLOLEDB;Data Source=" + dataSource + ";Initial Catalog=" + bd + "; pwd=" & strPwd & "; user id=" & strUsr & ";Current Language=Spanish"
+        ' objConn.ConnectionString = "Provider=SQLOLEDB;Data Source=" + dataSource + ";Initial Catalog=" + bd + "; pwd=sa12roKa; user id=CPDsa;Current Language=Spanish"
+
+        Try
+            objConn.Open()
+            myCommand = New OleDbCommand(strsql, objConn)
+            myCommand.ExecuteNonQuery()
+            myCommand.Dispose()
+        Catch ex As SqlException
+
             GAIA.f_logError(objConn, "Base de dades", "BDSR", "error nro: " & ex.ErrorCode & " / " & ex.Message & "/" & strSql)
             If ex.Number = 1205 Then 'deadlock.. si es produeix, intento fer-ho de nou
                 resultat = bdSR(objConn, strSql, dataSource, bd)
             End If
-			resultat = ex.Number 
-		end try
-
-		
-		objconn.close()
-        objConn.Dispose()
-		return(resultat)
-    End function
-
-
-'************************************************************************************************************
-'	Funció: Executa acció a bd sense resultats i retorna el camp identitat (si existeix)
-'************************************************************************************************************
-     Public Shared FUNCTION bdSR_id(byRef objConn as oleDbConnection, byVal strSql as String) as integer    
-        Return bdSR_id(objConn, strSql, "SQL6", "SILH")
-	 End FUNCTION
-  	Public Shared FUNCTION bdSR_id(byRef objConn as oleDbConnection, byVal strSql as String, byVal dataSource as string, byVal bd as string) as integer 
-
-
-
-		dim strUsr as string=""
-
-		dim strPwd as string=""
-		
-		IF UCASE(dataSource)="SQL" THEN
-			dataSource="SQL6"			
-		END IF
- 
- 		SELECT CASE UCASE(dataSource)
-			CASE "SQL6" 'web
-				strPwd="sa12roKa"
-				strUsr="CPDsa"
-			CASE "SQLBI" 'bussiness				
-				strPWD="Tjk8%sQ"
-				strUsr="usr_weblh"
-			CASE "SQL2" 'cartografia
-					strPwd="Tjk8%sQ;"
-					strUsr="usr_weblh"
-            CASE "SQL7" 'AUPAC
-
-                
-                strUsr="aupac"
-                strPwd="BZwmi7Yf4T"
-            CASE "SQL7PROVES" 'AUPAC proves
-            dataSource="SQL7"
-                strPwd="SeQWghXdvO"
-                strUsr="aupac_proves"
-			case else
-				strPwd="sa12roKa"
-				strUsr="CPDsa"
-		END SELECT
- 
- 	
-		Dim identitat As Integer
-		objconn =  New oledbconnection	
-        objConn.ConnectionString = "Provider=SQLOLEDB;Data Source=" + dataSource + ";Initial Catalog=" + bd + "; pwd=" & strPwd & "; user id=" & strUsr 
-         'objConn.ConnectionString = "Provider=SQLOLEDB;Data Source=" + dataSource + ";Initial Catalog=" + bd + "; pwd=secopc; user id=CPDsa"
-		objConn.Open()	
-		
-		Dim myCommand As New OleDbCommand
-		Try
-			myCommand= New OleDbCommand(strsql, objConn)
-			myCommand.ExecuteNonQuery()	
-			myCommand.CommandText = "SELECT SCOPE_IDENTITY()"
-            identitat = myCommand.ExecuteScalar
-       Catch ex As SqlException
-            GAIA.f_logError(objConn, "Base de dades", "BDSR_ID.",  "error nro: " & ex.ErrorCode & " / " & ex.Message & "/" & strSql)				
+            resultat = ex.Number
         End Try
 
-        
-		objconn.close()
+
+        objconn.close()
+        objConn.Dispose()
+        Return (resultat)
+    End Function
+
+
+    '************************************************************************************************************
+    '	Funció: Executa acció a bd sense resultats i retorna el camp identitat (si existeix)
+    '************************************************************************************************************
+    Public Shared Function bdSR_id(ByRef objConn As oleDbConnection, ByVal strSql As String) As Integer
+        Return bdSR_id(objConn, strSql, "SQL6", "SILH")
+    End Function
+    Public Shared Function bdSR_id(ByRef objConn As oleDbConnection, ByVal strSql As String, ByVal dataSource As String, ByVal bd As String) As Integer
+
+
+
+        Dim strUsr As String = ""
+
+        Dim strPwd As String = ""
+
+        If UCASE(dataSource) = "SQL" Then
+            dataSource = "SQL6"
+        End If
+
+        Select Case UCASE(dataSource)
+            Case "SQL6" 'web
+                strPwd = "sa12roKa"
+                strUsr = "CPDsa"
+            Case "SQLBI" 'bussiness				
+                strPWD = "Tjk8%sQ"
+                strUsr = "usr_weblh"
+            Case "SQL2" 'cartografia
+                strPwd = "Tjk8%sQ;"
+                strUsr = "usr_weblh"
+            Case "SQL7" 'AUPAC
+
+
+                strUsr = "aupac"
+                strPwd = "BZwmi7Yf4T"
+            Case "SQL7PROVES" 'AUPAC proves
+                dataSource = "SQL7"
+                strPwd = "SeQWghXdvO"
+                strUsr = "aupac_proves"
+            Case Else
+                strPwd = "sa12roKa"
+                strUsr = "CPDsa"
+        End Select
+
+
+        Dim identitat As Integer
+        objconn = New oledbconnection
+        objConn.ConnectionString = "Provider=SQLOLEDB;Data Source=" + dataSource + ";Initial Catalog=" + bd + "; pwd=" & strPwd & "; user id=" & strUsr
+        'objConn.ConnectionString = "Provider=SQLOLEDB;Data Source=" + dataSource + ";Initial Catalog=" + bd + "; pwd=secopc; user id=CPDsa"
+        objConn.Open()
+
+        Dim myCommand As New OleDbCommand
+        Try
+            myCommand = New OleDbCommand(strsql, objConn)
+            myCommand.ExecuteNonQuery()
+            myCommand.CommandText = "SELECT SCOPE_IDENTITY()"
+            identitat = myCommand.ExecuteScalar
+        Catch ex As SqlException
+            GAIA.f_logError(objConn, "Base de dades", "BDSR_ID.", "error nro: " & ex.ErrorCode & " / " & ex.Message & "/" & strSql)
+        End Try
+
+
+        objconn.close()
         objConn.Dispose()
         Return identitat
     End Function
 
-'************************************************************************************************************
-'	Funció: Executa acció a bd amb resultats i ho retorna a l'array pasat per referencia
-'************************************************************************************************************
+    '************************************************************************************************************
+    '	Funció: Executa acció a bd amb resultats i ho retorna a l'array pasat per referencia
+    '************************************************************************************************************
 
- Public Shared  function bdr(byRef objConn as oleDbConnection, byVal strSql as String, byRef DS As DataSet) as integer
-       ' bdR(objConn, strSql, DS, "sql", "SILH")
-        return(bdR(objConn, strSql, DS, "SQL6", "SILH"))
- End function 
- 
- 
- Public Shared function bdR(byRef objConn as oleDbConnection, byVal strSql as String,byRef DS As DataSet, byVal dataSource as string, byVal bd as string) as integer
-		Dim resultat as integer=0
-		dim strUsr as string=""
-		dim strPwd as string=""
+    Public Shared Function bdr(ByRef objConn As oleDbConnection, ByVal strSql As String, ByRef DS As DataSet) As Integer
+        ' bdR(objConn, strSql, DS, "sql", "SILH")
+        Return (bdR(objConn, strSql, DS, "SQL6", "SILH"))
+    End Function
+
+
+    Public Shared Function bdR(ByRef objConn As oleDbConnection, ByVal strSql As String, ByRef DS As DataSet, ByVal dataSource As String, ByVal bd As String) As Integer
+        Dim resultat As Integer = 0
+        Dim strUsr As String = ""
+        Dim strPwd As String = ""
         DS.Clear()
-		IF UCASE(dataSource)="SQL" THEN
-			dataSource="SQL6"			
-		END IF
-       	
+        If UCASE(dataSource) = "SQL" Then
+            dataSource = "SQL6"
+        End If
 
-			SELECT CASE UCASE(dataSource)
-				CASE "SQL6" 'web
-					strPwd="sa12roKa"
-					strUsr="CPDsa"
-				CASE "SQLBI" 'bussiness				
-				    strPWD="sa12roKa"
-					strUsr="CPDsa"
-				CASE "SQL2" 'cartografia
-					strPwd="Tjk8%sQ;"
-					strUsr="usr_weblh"
-				CASE "SQL7" 'AUPAC
-					strUsr="aupac"
-                     strPwd="BZwmi7Yf4T"
-                CASE "SQL7PROVES" 'AUPAC proves
-                   dataSource="SQL7"
-                    strPwd="SeQWghXdvO"
-                    strUsr="aupac_proves"
-				case else
-					strPwd="sa12roKa"
-					strUsr="CPDsa"
-			END SELECT
-      		
 
-            objConn = New OleDbConnection
-           ' objConn.ConnectionString = "Provider=SQLOLEDB;Data Source=" + dataSource + ";Initial Catalog=" + bd + "; pwd=secopc; user id=CPDsa"
-            objConn.ConnectionString = "Provider=SQLOLEDB;Data Source=" + dataSource + ";Initial Catalog=" + bd + "; pwd=" & strPwd & "; user id=" & strUsr 
-            objConn.Open()
-            Dim MyCommand As New OleDbDataAdapter()
-            Try
-                MyCommand.SelectCommand = New OleDbCommand(strSql, objConn)
-                MyCommand.SelectCommand.CommandTimeout = 200
-                MyCommand.Fill(DS)
-                
-                'GAIA.bdSR(objConn, "INSERT INTO METLDEB (TEXT,data) VALUES ('" + strSql.Replace("'", "''") + "','kkpp - " & Now & "')")
-            Catch ex As SqlException
-                GAIA.f_logError(objConn, "Base de dades", "BDR", Err.Description + ".." + strSql)
-				resultat = ex.Number
-            End Try
+        Select Case UCASE(dataSource)
+            Case "SQL6" 'web
+                strPwd = "sa12roKa"
+                strUsr = "CPDsa"
+            Case "SQLBI" 'bussiness				
+                strPWD = "sa12roKa"
+                strUsr = "CPDsa"
+            Case "SQL2" 'cartografia
+                strPwd = "Tjk8%sQ;"
+                strUsr = "usr_weblh"
+            Case "SQL7" 'AUPAC
+                strUsr = "aupac"
+                strPwd = "BZwmi7Yf4T"
+            Case "SQL7PROVES" 'AUPAC proves
+                dataSource = "SQL7"
+                strPwd = "SeQWghXdvO"
+                strUsr = "aupac_proves"
+            Case Else
+                strPwd = "sa12roKa"
+                strUsr = "CPDsa"
+        End Select
 
-            objConn.Close()
-            objConn.Dispose()
-            MyCommand.Dispose()
-			
-			return(resultat)
-    End function
 
- 
-	 
-'******************************************************************
-'	Funció: tipusNodebyNro
-'	Entrada: 
-'		nroNode: Nro del node
-'	Procés: 	
-'		Cerca dins de la taula de nodes i retorna el tipus al que pertany
-'	Sortida:
-'		Codi del tipus de node
-'******************************************************************
-Public Shared FUNCTION tipusNodebyNro(byVal objConn as OleDbConnection, byVal nroNode as integer, byRef descTipus as string) as string
-		Dim DS As DataSet		
-		Dim dbRow As DataRow   
-		DS = New DataSet()  
-		tipusNodebyNro=""
-		GAIA.BDR(objconn, "SELECT  NODCDTIP,TIPDSDES FROM METLNOD WITH(NOLOCK), METLTIP WITH(NOLOCK) WHERE TIPINTIP=NODCDTIP  AND NODINNOD=" & nronode.ToString.Trim() & " ORDER BY  TIPCDVER DESC ", DS)				
-		tipusNodebyNro=0
-		descTipus=""		
+        objConn = New OleDbConnection
+        ' objConn.ConnectionString = "Provider=SQLOLEDB;Data Source=" + dataSource + ";Initial Catalog=" + bd + "; pwd=secopc; user id=CPDsa"
+        objConn.ConnectionString = "Provider=SQLOLEDB;Data Source=" + dataSource + ";Initial Catalog=" + bd + "; pwd=" & strPwd & "; user id=" & strUsr
+        objConn.Open()
+        Dim MyCommand As New OleDbDataAdapter()
+        Try
+            MyCommand.SelectCommand = New OleDbCommand(strSql, objConn)
+            MyCommand.SelectCommand.CommandTimeout = 200
+            MyCommand.Fill(DS)
 
-		For Each dbRow In  ds.Tables(0).Rows							
-			tipusNodebyNro = dbRow("NODCDTIP")
-			descTipus =dbRow("TIPDSDES").Trim
-		Next dbRow		
-		Ds.Dispose()
-END FUNCTION
-	 
+            'GAIA.bdSR(objConn, "INSERT INTO METLDEB (TEXT,data) VALUES ('" + strSql.Replace("'", "''") + "','kkpp - " & Now & "')")
+        Catch ex As SqlException
+            GAIA.f_logError(objConn, "Base de dades", "BDR", Err.Description + ".." + strSql)
+            resultat = ex.Number
+        End Try
 
-'******************************************************************
-'	Funció: tipusNodeFillbyRelacio
-'	Entrada: 
-'		codiRelacio: codi de relacio
-'	Procés: 	
-'		Cerca el tipus del fill de la relacio
-'	Sortida:
-'		Codi del tipus de node
-'******************************************************************
-Public Shared FUNCTION tipusNodeFillbyRelacio(byVal objConn as OleDbConnection, byVal codiRelacio as integer, byRef descTipus as string) as integer
-		Dim DS As DataSet		
-		Dim dbRow As DataRow   
-		DS = New DataSet()  
-	
-		GAIA.BDR(objconn, "SELECT  NODCDTIP,TIPDSDES FROM METLNOD WITH(NOLOCK), METLTIP WITH(NOLOCK), METLREL WITH(NOLOCK) WHERE RELINFIL=NODINNOD AND TIPINTIP=NODCDTIP  AND RELINCOD=" + codiRelacio.ToString.Trim() + " AND RELCDSIT<98 "+ " ORDER BY  TIPCDVER DESC ", DS)				
-		tipusNodeFillbyRelacio=0
-		descTipus=""		
-		For Each dbRow In  ds.Tables(0).Rows							
-			tipusNodeFillbyRelacio = dbRow("NODCDTIP")
-			descTipus =dbRow("TIPDSDES").Trim
-		Next dbRow		
-		Ds.Dispose()
-END FUNCTION 'tipusNodeFillbyRelacio
+        objConn.Close()
+        objConn.Dispose()
+        MyCommand.Dispose()
+
+        Return (resultat)
+    End Function
 
 
 
-'******************************************************************
-'	Funció: tipusNodeByTxt
-'	Entrada: 
-'		descNode: nom del tipus de node
-'	Procés: 	
-'		Cerca dins de la taula de tipus de nodes i retorna el codi del tipus associat a la descripció
-'	Sortida:
-'		codi tipusNode
-'******************************************************************
-Public Shared FUNCTION tipusNodeByTxt(byVal objConn as OleDbConnection, byVal descTipusNode as String)  as integer
-		Dim DS As DataSet		
-		Dim dbRow As DataRow   
-		DS = New DataSet()
-		tipusNodebyTxt=0
-		GAIA.BDR(objconn, "SELECT TIPINTIP FROM METLTIP WITH(NOLOCK) WHERE TIPDSDES LIKE '%" & descTipusNode & "%' ORDER BY  TIPCDVER DESC", DS)			
-		For Each dbRow In  ds.Tables(0).Rows							
-			tipusNodeByTxt =dbRow("TIPINTIP")
-		Next dbRow
-		Ds.Dispose()
-END FUNCTION
-	
-'******************************************************************
-'	Funció: codiNodeByTxt
-'	Entrada: 
-'		nomTipus: nom del tipus de node
-'		descNode: descripció del node
-'	Procés: 	
-'		Cerca dins de la taula de nodes i retorna el codi del node associat a la descripció i a l'arbre
-'	Sortida:
-'		codi Node o 0 si no trobat
-'******************************************************************
-Public Shared FUNCTION codiNodeByTxt(byVal objConn as OleDbConnection, byVal nomTipus as String, byVal descNode as String)  as Integer
-		Dim DS As DataSet		
-		Dim dbRow As DataRow   
-		DS = New DataSet()
-		codiNodeByTxt=0
-		GAIA.BDR(objconn, "SELECT NODINNOD FROM METLNOD WITH(NOLOCK),METLTIP WITH(NOLOCK),METLREL WITH(NOLOCK) WHERE NODDSTXT like '%"+descNode.Trim()+"%' AND NODCDTIP=TIPINTIP AND TIPDSDES like '%"+nomTipus.toString()+"%'  AND RELINFIL=NODINNOD  AND RELCDSIT<>99 ORDER BY  NODINNOD DESC ", DS)		
-		
-		For Each dbRow In  ds.Tables(0).Rows							
-			codiNodeByTxt =dbRow("NODINNOD")
-		Next dbRow
-		Ds.Dispose()
-		return codiNodebyTxt
-END FUNCTION
- 
- 
-'******************************************************************
-'	Funció: codiNodeElMeuEspaiByTxtPropietari
-'	Entrada: 
-'		descNode: descripció del node
-'		codiOrg: codi organigrama propietaria del node
+    '******************************************************************
+    '	Funció: tipusNodebyNro
+    '	Entrada: 
+    '		nroNode: Nro del node
+    '	Procés: 	
+    '		Cerca dins de la taula de nodes i retorna el tipus al que pertany
+    '	Sortida:
+    '		Codi del tipus de node
+    '******************************************************************
+    Public Shared Function tipusNodebyNro(ByVal objConn As OleDbConnection, ByVal nroNode As Integer, ByRef descTipus As String) As String
+        Dim DS As DataSet
+        Dim dbRow As DataRow
+        DS = New DataSet()
+        tipusNodebyNro = ""
+        GAIA.BDR(objconn, "SELECT  NODCDTIP,TIPDSDES FROM METLNOD WITH(NOLOCK), METLTIP WITH(NOLOCK) WHERE TIPINTIP=NODCDTIP  AND NODINNOD=" & nronode.ToString.Trim() & " ORDER BY  TIPCDVER DESC ", DS)
+        tipusNodebyNro = 0
+        descTipus = ""
 
-'	Procés: 	
-
-'		Cerca dins de la taula de nodes de ElMeuEspai i cerca per nom i propietari el codi de node
-'	Sortida:
-'		codi Node o 0 si no trobat
-'******************************************************************
-Public Shared FUNCTION codiNodeElMeuEspaiByTxtPropietari(byVal objConn as OleDbConnection, byVal descNode as String, byVal codiOrg as integer)  as Integer
-		Dim DS As DataSet		
-		Dim dbRow As DataRow   
-		DS = New DataSet()
+        For Each dbRow In ds.Tables(0).Rows
+            tipusNodebyNro = dbRow("NODCDTIP")
+            descTipus = dbRow("TIPDSDES").Trim
+        Next dbRow
+        Ds.Dispose()
+    End Function
 
 
-		codiNodeElMeuEspaiByTxtPropietari=0
-		GAIA.BDR(objconn, "SELECT NESINNOD FROM METLNES WITH(NOLOCK),METLREL WITH(NOLOCK) WHERE NESDSTIT like '%"+descNode.Trim()+"%' and 	NESCDORG="+codiOrg.toString() + " AND NESINIDI=1 AND RELINFIL=NESINNOD AND RELCDSIT<>99", DS)				
-		
-		IF ds.Tables(0).Rows.count>0 THEN
-			dbRow = ds.Tables(0).Rows(0) 			
-			codiNodeElMeuEspaiByTxtPropietari =dbRow("NESINNOD")
-		END IF
+    '******************************************************************
+    '	Funció: tipusNodeFillbyRelacio
+    '	Entrada: 
+    '		codiRelacio: codi de relacio
+    '	Procés: 	
+    '		Cerca el tipus del fill de la relacio
+    '	Sortida:
+    '		Codi del tipus de node
+    '******************************************************************
+    Public Shared Function tipusNodeFillbyRelacio(ByVal objConn As OleDbConnection, ByVal codiRelacio As Integer, ByRef descTipus As String) As Integer
+        Dim DS As DataSet
+        Dim dbRow As DataRow
+        DS = New DataSet()
 
-		
-		
-		Ds.Dispose()
-END FUNCTION
- 
-
-'******************************************************************
-'	Funció: trobaFills
-'	Entrada: 
-'		codiRelacio: codi de la relació
-'		codiNode	: Codi del Node pare
-'		nodesFills:	array on guardo els fills trobats
-'		nroFills:  Nro de fills trobats
-'		relacions: array de les relacions on el RELINFIL es descendent de codiNode
-'		nroOrg: 	En cas de nroOrg=0 llavors no comprovarem els permisos, només retornarem els nodes sobre els que
-'							l'usuari nodeOrganigrama tingui permís de lectura
-'		tipus: Tipus de fill que volem trobar. Si tipus=0 llavors retornem tots els fills
-'	Procés: 	
-'		Si el codi de Relació=0 llavors, codiNode és l'arrel i buscaré tots els nodes que penjen.
-'		Obté tots els fills de codiNode per a la relació codiRelacio. 
-'	Sortida:
-'******************************************************************
-	Public shared SUB trobaFills(byVal objConn as OleDbConnection, byVal rel as clsRelacio, byVal codiNode as integer, byRef nodesFills() AS Integer, byRef nroFills AS Integer, byRef relacions() as Integer, byVal nroOrg as integer, byVal tipus as integer) 			
-
-		Dim DS As DataSet
-		Dim dbRow As DataRow    
-		Dim nodeRoot, permis as integer
-		nroFills=0
-		Dim reltmp as new clsRelacio
-
-		REDim nodesFills(0)
-		REDim relacions(0)
-	
-		
-		DS = New DataSet()
-
-		If tipus>0 THEN		
-
-			GAIA.BDR(objconn, "SELECT RELINCOD, RELINFIL,RELCDHER,RELINPAR FROM METLREL WITH(NOLOCK), METLNOD WITH(NOLOCK) WHERE RELINCOD<>" & rel.incod & " AND RELCDRSU=" & rel.incod & "  AND RELCDSIT<98  AND RELINFIL=NODINNOD AND NODCDTIP=" + tipus.tostring() + " ORDER BY DATALENGTH(RELCDHER), RELCDORD asc", DS)							
-		ELSE			
-			gaia.BDR(objconn, "SELECT RELINCOD, RELINFIL,RELCDHER,RELINPAR FROM METLREL WITH(NOLOCK) WHERE RELINCOD<>"  & rel.incod & " AND RELCDRSU=" & rel.incod & "  AND RELCDSIT<98   ORDER BY DATALENGTH(RELCDHER), RELCDORD asc",ds)
-		END IF
-			
-		For Each dbRow In  ds.Tables(0).Rows	
-			IF nroOrg=0 THEN
-				Dim strTmp as string=""
-				IF dbRow("RELINPAR")=dbROW("RELINFIL") THEN
-					nodeRoot=dbROW("RELINCOD")
-				ELSE						
-					strTmp = dbROW("RELCDHER").SubString(1)
-					IF strTmp.IndexOf("_")>0 THEN
-						strTmp= strTmp.Substring(0,strTmp.IndexOF("_"))
-
-					END IF
-				END IF
-				nodeRoot= GAIA.obtenirRoot(objconn, strTmp)
-			END IF		
-			permis=0
-			IF nroOrg=0 THEN
-				permis=1
-			ELSE
-				reltmp.bdget(objconn,dbRow("RELINCOD"))
-				IF clsPermisos.tePermisLecturaNode(objconn, reltmp, nroOrg, nodeRoot) THEN
-					permis=1
-				END IF
-			END IF		
-			IF permis=1 THEN
-				REDIM preserve nodesFills(nroFills)
-				nodesFills(nroFills)=dbRow("RELINFIL")			
-				REDIM preserve relacions(nroFills)
-				relacions(nroFills)=dbROW("RELINCOD")				
-				nroFills= nroFills + 1					
-			END IF
-		Next dbRow
-		'END IF
-		Ds.Dispose()
-	END SUB
+        GAIA.BDR(objconn, "SELECT  NODCDTIP,TIPDSDES FROM METLNOD WITH(NOLOCK), METLTIP WITH(NOLOCK), METLREL WITH(NOLOCK) WHERE RELINFIL=NODINNOD AND TIPINTIP=NODCDTIP  AND RELINCOD=" + codiRelacio.ToString.Trim() + " AND RELCDSIT<98 " + " ORDER BY  TIPCDVER DESC ", DS)
+        tipusNodeFillbyRelacio = 0
+        descTipus = ""
+        For Each dbRow In ds.Tables(0).Rows
+            tipusNodeFillbyRelacio = dbRow("NODCDTIP")
+            descTipus = dbRow("TIPDSDES").Trim
+        Next dbRow
+        Ds.Dispose()
+    End Function 'tipusNodeFillbyRelacio
 
 
-'******************************************************************
-'	Funció: obtenirRoot
-'	Entrada: 
-'		codiNode: Code del node que apunta al primer node de l'arbre
-'	Procés: 	
-'		Cerca la relació que defineix la primera relació d'un arbre
-'	Sortida:
-'		codi relació o 0 si no trobat
-'******************************************************************
-Public Shared FUNCTION obtenirRoot(byVal objConn as OleDbConnection, byVal codiNode as string) as Integer
+
+    '******************************************************************
+    '	Funció: tipusNodeByTxt
+    '	Entrada: 
+    '		descNode: nom del tipus de node
+    '	Procés: 	
+    '		Cerca dins de la taula de tipus de nodes i retorna el codi del tipus associat a la descripció
+    '	Sortida:
+    '		codi tipusNode
+    '******************************************************************
+    Public Shared Function tipusNodeByTxt(ByVal objConn As OleDbConnection, ByVal descTipusNode As String) As Integer
+        Dim DS As DataSet
+        Dim dbRow As DataRow
+        DS = New DataSet()
+        tipusNodebyTxt = 0
+        GAIA.BDR(objconn, "SELECT TIPINTIP FROM METLTIP WITH(NOLOCK) WHERE TIPDSDES LIKE '%" & descTipusNode & "%' ORDER BY  TIPCDVER DESC", DS)
+        For Each dbRow In ds.Tables(0).Rows
+            tipusNodeByTxt = dbRow("TIPINTIP")
+        Next dbRow
+        Ds.Dispose()
+    End Function
+
+    '******************************************************************
+    '	Funció: codiNodeByTxt
+    '	Entrada: 
+    '		nomTipus: nom del tipus de node
+    '		descNode: descripció del node
+    '	Procés: 	
+    '		Cerca dins de la taula de nodes i retorna el codi del node associat a la descripció i a l'arbre
+    '	Sortida:
+    '		codi Node o 0 si no trobat
+    '******************************************************************
+    Public Shared Function codiNodeByTxt(ByVal objConn As OleDbConnection, ByVal nomTipus As String, ByVal descNode As String) As Integer
+        Dim DS As DataSet
+        Dim dbRow As DataRow
+        DS = New DataSet()
+        codiNodeByTxt = 0
+        GAIA.BDR(objconn, "SELECT NODINNOD FROM METLNOD WITH(NOLOCK),METLTIP WITH(NOLOCK),METLREL WITH(NOLOCK) WHERE NODDSTXT like '%" + descNode.Trim() + "%' AND NODCDTIP=TIPINTIP AND TIPDSDES like '%" + nomTipus.toString() + "%'  AND RELINFIL=NODINNOD  AND RELCDSIT<>99 ORDER BY  NODINNOD DESC ", DS)
+
+        For Each dbRow In ds.Tables(0).Rows
+            codiNodeByTxt = dbRow("NODINNOD")
+        Next dbRow
+        Ds.Dispose()
+        Return codiNodebyTxt
+    End Function
 
 
-		Dim DS As DataSet		
-		Dim dbRow As DataRow   
-		DS = New DataSet()
-		obtenirRoot=0
-		
-		GAIA.BDR(objconn, "SELECT RELINCOD FROM METLREL WITH(NOLOCK) WHERE RELINPAR=RELINFIL AND RELINPAR="+codiNode  + " AND RELCDSIT<98 ", ds)						
-		IF ds.Tables(0).Rows.count>0 THEN
-			dbRow = ds.Tables(0).Rows(0) 			
-			obtenirRoot =dbRow("RELINCOD")
-		END IF
-		
-		Ds.Dispose()
+    '******************************************************************
+    '	Funció: codiNodeElMeuEspaiByTxtPropietari
+    '	Entrada: 
+    '		descNode: descripció del node
+    '		codiOrg: codi organigrama propietaria del node
+
+    '	Procés: 	
+
+    '		Cerca dins de la taula de nodes de ElMeuEspai i cerca per nom i propietari el codi de node
+    '	Sortida:
+    '		codi Node o 0 si no trobat
+    '******************************************************************
+    Public Shared Function codiNodeElMeuEspaiByTxtPropietari(ByVal objConn As OleDbConnection, ByVal descNode As String, ByVal codiOrg As Integer) As Integer
+        Dim DS As DataSet
+        Dim dbRow As DataRow
+        DS = New DataSet()
+
+
+        codiNodeElMeuEspaiByTxtPropietari = 0
+        GAIA.BDR(objconn, "SELECT NESINNOD FROM METLNES WITH(NOLOCK),METLREL WITH(NOLOCK) WHERE NESDSTIT like '%" + descNode.Trim() + "%' and 	NESCDORG=" + codiOrg.toString() + " AND NESINIDI=1 AND RELINFIL=NESINNOD AND RELCDSIT<>99", DS)
+
+        If ds.Tables(0).Rows.count > 0 Then
+            dbRow = ds.Tables(0).Rows(0)
+            codiNodeElMeuEspaiByTxtPropietari = dbRow("NESINNOD")
+        End If
+
+
+
+        Ds.Dispose()
+    End Function
+
+
+    '******************************************************************
+    '	Funció: trobaFills
+    '	Entrada: 
+    '		codiRelacio: codi de la relació
+    '		codiNode	: Codi del Node pare
+    '		nodesFills:	array on guardo els fills trobats
+    '		nroFills:  Nro de fills trobats
+    '		relacions: array de les relacions on el RELINFIL es descendent de codiNode
+    '		nroOrg: 	En cas de nroOrg=0 llavors no comprovarem els permisos, només retornarem els nodes sobre els que
+    '							l'usuari nodeOrganigrama tingui permís de lectura
+    '		tipus: Tipus de fill que volem trobar. Si tipus=0 llavors retornem tots els fills
+    '	Procés: 	
+    '		Si el codi de Relació=0 llavors, codiNode és l'arrel i buscaré tots els nodes que penjen.
+    '		Obté tots els fills de codiNode per a la relació codiRelacio. 
+    '	Sortida:
+    '******************************************************************
+    Public Shared Sub trobaFills(ByVal objConn As OleDbConnection, ByVal rel As clsRelacio, ByVal codiNode As Integer, ByRef nodesFills() As Integer, ByRef nroFills As Integer, ByRef relacions() As Integer, ByVal nroOrg As Integer, ByVal tipus As Integer)
+
+        Dim DS As DataSet
+        Dim dbRow As DataRow
+        Dim nodeRoot, permis As Integer
+        nroFills = 0
+        Dim reltmp As New clsRelacio
+
+        ReDim nodesFills(0)
+        ReDim relacions(0)
+
+
+        DS = New DataSet()
+
+        If tipus > 0 Then
+
+            GAIA.BDR(objconn, "SELECT RELINCOD, RELINFIL,RELCDHER,RELINPAR FROM METLREL WITH(NOLOCK), METLNOD WITH(NOLOCK) WHERE RELINCOD<>" & rel.incod & " AND RELCDRSU=" & rel.incod & "  AND RELCDSIT<98  AND RELINFIL=NODINNOD AND NODCDTIP=" + tipus.tostring() + " ORDER BY DATALENGTH(RELCDHER), RELCDORD asc", DS)
+        Else
+            gaia.BDR(objconn, "SELECT RELINCOD, RELINFIL,RELCDHER,RELINPAR FROM METLREL WITH(NOLOCK) WHERE RELINCOD<>" & rel.incod & " AND RELCDRSU=" & rel.incod & "  AND RELCDSIT<98   ORDER BY DATALENGTH(RELCDHER), RELCDORD asc", ds)
+        End If
+
+        For Each dbRow In ds.Tables(0).Rows
+            If nroOrg = 0 Then
+                Dim strTmp As String = ""
+                If dbRow("RELINPAR") = dbROW("RELINFIL") Then
+                    nodeRoot = dbROW("RELINCOD")
+                Else
+                    strTmp = dbROW("RELCDHER").SubString(1)
+                    If strTmp.IndexOf("_") > 0 Then
+                        strTmp = strTmp.Substring(0, strTmp.IndexOF("_"))
+
+                    End If
+                End If
+                nodeRoot = GAIA.obtenirRoot(objconn, strTmp)
+            End If
+            permis = 0
+            If nroOrg = 0 Then
+                permis = 1
+            Else
+                reltmp.bdget(objconn, dbRow("RELINCOD"))
+                If clsPermisos.tePermisLecturaNode(objconn, reltmp, nroOrg, nodeRoot) Then
+                    permis = 1
+                End If
+            End If
+            If permis = 1 Then
+                ReDim Preserve nodesFills(nroFills)
+                nodesFills(nroFills) = dbRow("RELINFIL")
+                ReDim Preserve relacions(nroFills)
+                relacions(nroFills) = dbROW("RELINCOD")
+                nroFills = nroFills + 1
+            End If
+        Next dbRow
+        'END IF
+        Ds.Dispose()
+    End Sub
+
+
+    '******************************************************************
+    '	Funció: obtenirRoot
+    '	Entrada: 
+    '		codiNode: Code del node que apunta al primer node de l'arbre
+    '	Procés: 	
+    '		Cerca la relació que defineix la primera relació d'un arbre
+    '	Sortida:
+    '		codi relació o 0 si no trobat
+    '******************************************************************
+    Public Shared Function obtenirRoot(ByVal objConn As OleDbConnection, ByVal codiNode As String) As Integer
+
+
+        Dim DS As DataSet
+        Dim dbRow As DataRow
+        DS = New DataSet()
+        obtenirRoot = 0
+
+        GAIA.BDR(objconn, "SELECT RELINCOD FROM METLREL WITH(NOLOCK) WHERE RELINPAR=RELINFIL AND RELINPAR=" + codiNode + " AND RELCDSIT<98 ", ds)
+        If ds.Tables(0).Rows.count > 0 Then
+            dbRow = ds.Tables(0).Rows(0)
+            obtenirRoot = dbRow("RELINCOD")
+        End If
+
+        Ds.Dispose()
     End Function
 
 
@@ -3242,7 +3221,7 @@ Public Shared FUNCTION obtenirRoot(byVal objConn as OleDbConnection, byVal codiN
     Public Shared Function obtenirTarget(ByVal objConn As OleDbConnection, ByVal rel As clsRelacio) As Integer
         Dim DS As DataSet
         Dim dbRow As DataRow
-        DS = New DataSet()       
+        DS = New DataSet()
         obtenirTarget = 0
         GAIA.bdR(objConn, "SELECT LNKWNTIP FROM METLLNK WITH(NOLOCK) WHERE LNKINNOD=" & rel.infil, DS)
         If DS.Tables(0).Rows.Count > 0 Then
@@ -3254,136 +3233,136 @@ Public Shared FUNCTION obtenirRoot(byVal objConn as OleDbConnection, byVal codiN
 
         DS.Dispose()
     End Function
- 
- 
- 
 
-		
-'************************************************************************************
-'	Funció: buscaParesRel
-'	Entrada: 
-'		Arbre: codi de l'arbre
-'		nodeFill:	Node del q volem trobar tots els pares
-'		nodosPerObrir:  array de nodes on afegiré recursivament tots els pares.
-'	Procés: 	
-'		troba tots els nodes que hi ha al camí  d'on penja nodefill fins l'arrel
-'************************************************************************************
-	Public Shared Sub buscaParesRel(byVal objConn as OleDbConnection, byVal codiRelacio as integer, byRef nodosPerObrir() As string)   	
-		Dim DS As DataSet
-		Dim dbRow As DataRow    
-		DS = New DataSet()	
-		Dim existe as integer
-		DIm item as string
 
-		Dim tmp as String
-		Dim path as String
-		'cont = nodosPerObrir.length+1
-		GAIA.BDR(objconn, "SELECT * FROM METLREL WITH(NOLOCK) WHERE RELINCOD="+codiRelacio.tostring(),DS)
-		'Per a totes les relacions on nodeFill sigui Fill, busco els pares, els afegeixo a un array sense repetits i ho retorno.
-		For Each dbRow in ds.Tables(0).Rows			
-			IF  dbRow("RELCDHER").toString().length>0 THEN		
-				path=dbRow("RELCDHER").Trim().substring(1)&""				
-				while path.length>0					
-					existe=FALSE										
-					if path.indexOf("_")>=0 THEN
-						tmp = path.substring(0,path.indexOf("_"))	
-						path=path.substring(path.indexOf("_")+1)
-					else
-						tmp=path.substring(0)	
-						path=""
-					END IF
-					For each item in nodosPerObrir
-						IF tmp=item
-							existe=true
-							exit for
-						END IF
-					NEXT item				
-					IF NOT existe THEN
-						ReDim Preserve nodosPerObrir(nodosPerObrir.length)	
-						' SELECT RELINCOD FROM METLREL WHERE RELCDHER LIKE '"+path+"'"
-						nodosPerObrir(nodosPerObrir.length-1)=tmp
-					END IF					
 
-				end while				
-			END IF
-			'array.sort(nodosPerObrir)		
-		Next dbRow			
-		
-		'ultim cas
-			'SELECT RELINCOD FROM METLREL WHERE RELINPAR=RELINFIL AND RELINPAR= 'a')
-		
-		Ds.Dispose()
-	End Sub 'buscaParesRel
- 
-	'Busca el node dins de l'arbre actiu a la pantalla (pot apareixer + d'un cop)
-	Public Shared Function buscaNodeArbrePantalla(byVal objConn as OleDbConnection,byVal treeview1 as RadTreeView, byVal node AS Integer)  as RadtreeNode()
-		DIM nodeTrobat AS RadTreeNode
-		Dim cont AS Integer
-		DIM llistaNodesTrobats() AS RadTreeNode={}
-		cont=0
-		
-		For each nodeTrobat in treeview1.GetAllNodes()
-			IF nodetrobat.Value.SubString(0,nodetrobat.Value.toString().IndexOf("-"))=node.toString()  THEN					
-				REDIM preserve llistaNodesTrobats(cont)
-				llistaNodesTrobats(cont)=nodeTrobat
 
-				cont = cont + 1
-			END IF									
-		next nodetrobat
-		if cont=0 THEN
-			REDIM preserve llistaNodesTrobats(1)
-			llistaNodesTrobats(1)=nothing
-		END IF
-		return llistaNodesTrobats
-		
-	End Function 'buscaNodeArbrePantalla
-	
-	
-	'Busca la relació dins de l'arbre actiu a la pantalla 
-	Public Shared Function buscaRelacioArbrePantalla(byVal objConn as OleDbConnection,byVal tree as RadTreeView, byVal codiRelacio AS integer	)  as radtreenode
-		buscaRelacioArbrePantalla = new radtreenode
-		DIM item AS RadTreeNode			
-		For each item in tree.GetAllNodes()
-			IF item.Value.SubString(item.Value.toString().IndexOf("_")+1)=codiRelacio.toString()  THEN					
-				buscaRelacioArbrePantalla= item				
-			END IF									
+
+    '************************************************************************************
+    '	Funció: buscaParesRel
+    '	Entrada: 
+    '		Arbre: codi de l'arbre
+    '		nodeFill:	Node del q volem trobar tots els pares
+    '		nodosPerObrir:  array de nodes on afegiré recursivament tots els pares.
+    '	Procés: 	
+    '		troba tots els nodes que hi ha al camí  d'on penja nodefill fins l'arrel
+    '************************************************************************************
+    Public Shared Sub buscaParesRel(ByVal objConn As OleDbConnection, ByVal codiRelacio As Integer, ByRef nodosPerObrir() As String)
+        Dim DS As DataSet
+        Dim dbRow As DataRow
+        DS = New DataSet()
+        Dim existe As Integer
+        Dim item As String
+
+        Dim tmp As String
+        Dim path As String
+        'cont = nodosPerObrir.length+1
+        GAIA.BDR(objconn, "SELECT * FROM METLREL WITH(NOLOCK) WHERE RELINCOD=" + codiRelacio.tostring(), DS)
+        'Per a totes les relacions on nodeFill sigui Fill, busco els pares, els afegeixo a un array sense repetits i ho retorno.
+        For Each dbRow In ds.Tables(0).Rows
+            If dbRow("RELCDHER").toString().length > 0 Then
+                path = dbRow("RELCDHER").Trim().substring(1) & ""
+                While path.length > 0
+                    existe = False
+                    If path.indexOf("_") >= 0 Then
+                        tmp = path.substring(0, path.indexOf("_"))
+                        path = path.substring(path.indexOf("_") + 1)
+                    Else
+                        tmp = path.substring(0)
+                        path = ""
+                    End If
+                    For Each item In nodosPerObrir
+                        If tmp = item Then
+                            existe = True
+                            Exit For
+                        End If
+                    Next item
+                    If Not existe Then
+                        ReDim Preserve nodosPerObrir(nodosPerObrir.length)
+                        ' SELECT RELINCOD FROM METLREL WHERE RELCDHER LIKE '"+path+"'"
+                        nodosPerObrir(nodosPerObrir.length - 1) = tmp
+                    End If
+
+                End While
+            End If
+            'array.sort(nodosPerObrir)		
+        Next dbRow
+
+        'ultim cas
+        'SELECT RELINCOD FROM METLREL WHERE RELINPAR=RELINFIL AND RELINPAR= 'a')
+
+        Ds.Dispose()
+    End Sub 'buscaParesRel
+
+    'Busca el node dins de l'arbre actiu a la pantalla (pot apareixer + d'un cop)
+    Public Shared Function buscaNodeArbrePantalla(ByVal objConn As OleDbConnection, ByVal treeview1 As RadTreeView, ByVal node As Integer) As RadtreeNode()
+        Dim nodeTrobat As RadTreeNode
+        Dim cont As Integer
+        Dim llistaNodesTrobats() As RadTreeNode = {}
+        cont = 0
+
+        For Each nodeTrobat In treeview1.GetAllNodes()
+            If nodetrobat.Value.SubString(0, nodetrobat.Value.toString().IndexOf("-")) = node.toString() Then
+                ReDim Preserve llistaNodesTrobats(cont)
+                llistaNodesTrobats(cont) = nodeTrobat
+
+                cont = cont + 1
+            End If
+        Next nodetrobat
+        If cont = 0 Then
+            ReDim Preserve llistaNodesTrobats(1)
+            llistaNodesTrobats(1) = Nothing
+        End If
+        Return llistaNodesTrobats
+
+    End Function 'buscaNodeArbrePantalla
+
+
+    'Busca la relació dins de l'arbre actiu a la pantalla 
+    Public Shared Function buscaRelacioArbrePantalla(ByVal objConn As OleDbConnection, ByVal tree As RadTreeView, ByVal codiRelacio As Integer) As radtreenode
+        buscaRelacioArbrePantalla = New radtreenode
+        Dim item As RadTreeNode
+        For Each item In tree.GetAllNodes()
+            If item.Value.SubString(item.Value.toString().IndexOf("_") + 1) = codiRelacio.toString() Then
+                buscaRelacioArbrePantalla = item
+            End If
         Next item
 
-	End Function 'buscaRelacioArbrePantalla
-	
-
-'******************************************************************
-'	Funció:	Esborrar Node
-'	Entrada: 
-'		arbre: nro d'arbre al que pertany el node que es vol esborrar
-'		codiNode: node a esborrar. si =0 llavors el trobo a partir de RELINFIL de codirelacio
-'		rel: relació que apunta al node
-'		esborrarDocumentPublicat: si 1: si el node apunta a un document, esborro el document en el servidor on s'ha publicat el document, sempre i quan no l'utilitzi ningú més.
-'		esborrarRecursiu: si =1 esborro el node  i tots els fills, si 0 esborro el node i poso els fills al mateix nivell
-'	Sortida:	 0 Si ok , >0 si error
-'	Procés: 	
-'		Esborra el node. 
-' No deixo esborrar un node de tipus arbre.
-'	0- Esborro els permisos que té node
-' 1- Si es un node de tipus "node": Poso tots els fills dels diferents arbres al mateix nivell
-' 2- esborro totes les relacions del node
-'
-' 	3.1- esborro el node
-' 	3.2- esborro la fulla
-' 		Si es un node fulla i hi han documents relacionats no faig res amb els documents.
-'			Eliminant les relacions amb ells hi ha prou.
-'******************************************************************
+    End Function 'buscaRelacioArbrePantalla
 
 
-Public Shared FUNCTION esborrarNode(byVal objConn as OleDbConnection, byVal codiNode as Integer, byVal rel as clsRelacio,byVal esborrarDocumentPublicat as integer, byVal codiUsuari as string, byVal esborrarRecursiu as integer, byVal tipusEsborrat as integer) as string
+    '******************************************************************
+    '	Funció:	Esborrar Node
+    '	Entrada: 
+    '		arbre: nro d'arbre al que pertany el node que es vol esborrar
+    '		codiNode: node a esborrar. si =0 llavors el trobo a partir de RELINFIL de codirelacio
+    '		rel: relació que apunta al node
+    '		esborrarDocumentPublicat: si 1: si el node apunta a un document, esborro el document en el servidor on s'ha publicat el document, sempre i quan no l'utilitzi ningú més.
+    '		esborrarRecursiu: si =1 esborro el node  i tots els fills, si 0 esborro el node i poso els fills al mateix nivell
+    '	Sortida:	 0 Si ok , >0 si error
+    '	Procés: 	
+    '		Esborra el node. 
+    ' No deixo esborrar un node de tipus arbre.
+    '	0- Esborro els permisos que té node
+    ' 1- Si es un node de tipus "node": Poso tots els fills dels diferents arbres al mateix nivell
+    ' 2- esborro totes les relacions del node
+    '
+    ' 	3.1- esborro el node
+    ' 	3.2- esborro la fulla
+    ' 		Si es un node fulla i hi han documents relacionats no faig res amb els documents.
+    '			Eliminant les relacions amb ells hi ha prou.
+    '******************************************************************
 
-	Dim DS As DataSet
-	Dim dbRow As DataRow    
-	DS = New DataSet()
-	Dim relTMP as New clsRelacio
-	Dim tipusLog as integer
-	Dim resultat as string=""
-	esborrarNode=""
+
+    Public Shared Function esborrarNode(ByVal objConn As OleDbConnection, ByVal codiNode As Integer, ByVal rel As clsRelacio, ByVal esborrarDocumentPublicat As Integer, ByVal codiUsuari As String, ByVal esborrarRecursiu As Integer, ByVal tipusEsborrat As Integer) As String
+
+        Dim DS As DataSet
+        Dim dbRow As DataRow
+        DS = New DataSet()
+        Dim relTMP As New clsRelacio
+        Dim tipusLog As Integer
+        Dim resultat As String = ""
+        esborrarNode = ""
 
 #If RealExec Then
 
@@ -3481,23 +3460,23 @@ Public Shared FUNCTION esborrarNode(byVal objConn as OleDbConnection, byVal codi
 #End If
 
 
-    End FUNCTION 'esborrarNode
+    End Function 'esborrarNode
 
-'******************************************************************
+    '******************************************************************
 
-'	Funció: Esborra relacions
+    '	Funció: Esborra relacions
 
-'	Entrada: 
-' codiRelació: codi de la relació que vull esborrar
-'	Procés: 	
-'		esborra les relacions del node.
+    '	Entrada: 
+    ' codiRelació: codi de la relació que vull esborrar
+    '	Procés: 	
+    '		esborra les relacions del node.
 
-'	Si esborro les relacions com a pare, he de modificar totes les relacions cap avall per treure el node
-' del path.!!!!
-'******************************************************************
-Public Shared SUB esborrarRelacions(byVal objConn as OleDbConnection, byVal rel as clsRelacio, byVal esborrarRecursiu as integer, byVal tipusEsborrat as integer)		
+    '	Si esborro les relacions com a pare, he de modificar totes les relacions cap avall per treure el node
+    ' del path.!!!!
+    '******************************************************************
+    Public Shared Sub esborrarRelacions(ByVal objConn As OleDbConnection, ByVal rel As clsRelacio, ByVal esborrarRecursiu As Integer, ByVal tipusEsborrat As Integer)
 
-	Dim nouEstat as integer=1
+        Dim nouEstat As Integer = 1
 #If RealExec Then
 
         If rel.cdsit=96 OR rel.cdsit=97 OR rel.cdsit=95 THEN
@@ -3645,7 +3624,7 @@ Public Shared SUB esborrarRelacions(byVal objConn as OleDbConnection, byVal rel 
     '		Esborra la fulla "codiWeb"
     ' 
     '******************************************************************
-    Public Shared SUB esborrarFullaCodiWeb(byVal objConn as OleDbConnection,byVal codiNode as integer)
+    Public Shared Sub esborrarFullaCodiWeb(ByVal objConn As OleDbConnection, ByVal codiNode As Integer)
 #If RealExec Then
         GAIA.bdSR(objConn, "DELETE FROM METLLCW WHERE LCWINNOD=" & codiNode)
 #End If
@@ -3790,41 +3769,41 @@ Public Shared SUB esborrarRelacions(byVal objConn as OleDbConnection, byVal rel 
     '	Sortida:
     '		desc tipusNode
     '******************************************************************
-    Public Shared FUNCTION descTipusNode(byVal objConn as OleDbConnection,byVal tipusNode as integer) as string
-		Dim DS As DataSet		
-		Dim dbRow As DataRow   
-		DS = New DataSet()
-		descTipusNode=""
-		GAIA.BDR(objconn, "SELECT TIPDSDES FROM METLTIP WITH(NOLOCK)   WHERE TIPINTIP=" & tipusNode.ToString() & " ORDER BY  TIPCDVER DESC ", ds)			
-		For Each dbRow In  ds.Tables(0).Rows							
-			descTipusNode =dbRow("TIPDSDES").Trim
+    Public Shared Function descTipusNode(ByVal objConn As OleDbConnection, ByVal tipusNode As Integer) As String
+        Dim DS As DataSet
+        Dim dbRow As DataRow
+        DS = New DataSet()
+        descTipusNode = ""
+        GAIA.BDR(objconn, "SELECT TIPDSDES FROM METLTIP WITH(NOLOCK)   WHERE TIPINTIP=" & tipusNode.ToString() & " ORDER BY  TIPCDVER DESC ", ds)
+        For Each dbRow In ds.Tables(0).Rows
+            descTipusNode = dbRow("TIPDSDES").Trim
 
-		Next dbRow
-		Ds.Dispose()
-END FUNCTION
+        Next dbRow
+        Ds.Dispose()
+    End Function
 
-'******************************************************************
-'	Funció: descNode
-'	Entrada: 
-'		codiNode: identificador del node
-'	Procés: 	
+    '******************************************************************
+    '	Funció: descNode
+    '	Entrada: 
+    '		codiNode: identificador del node
+    '	Procés: 	
 
-'		Cerca dins de la taula de nodes i retorna la descripció
-'	Sortida:
-'		descripció del node
-'******************************************************************
-Public Shared FUNCTION descNode(byVal objConn as OleDbConnection,byVal codiNode AS Integer) as string
-	Dim DS As DataSet		
+    '		Cerca dins de la taula de nodes i retorna la descripció
+    '	Sortida:
+    '		descripció del node
+    '******************************************************************
+    Public Shared Function descNode(ByVal objConn As OleDbConnection, ByVal codiNode As Integer) As String
+        Dim DS As DataSet
 
-		Dim dbRow As DataRow   
-		DS = New DataSet()
-		descNode=""
-		GAIA.BDR(objconn, "SELECT NODDSTXT FROM METLNOD WITH(NOLOCK)   WHERE NODINNOD=" & codiNode.ToString(), ds)			
-		For Each dbRow In  ds.Tables(0).Rows							
-			descNode =gaia.netejahtml(dbRow("NODDSTXT").Trim)
-		Next dbRow
-		Ds.Dispose()
-END Function
+        Dim dbRow As DataRow
+        DS = New DataSet()
+        descNode = ""
+        GAIA.BDR(objconn, "SELECT NODDSTXT FROM METLNOD WITH(NOLOCK)   WHERE NODINNOD=" & codiNode.ToString(), ds)
+        For Each dbRow In ds.Tables(0).Rows
+            descNode = gaia.netejahtml(dbRow("NODDSTXT").Trim)
+        Next dbRow
+        Ds.Dispose()
+    End Function
 
 
 
@@ -3895,55 +3874,55 @@ END Function
     '******************************************************************
 
 
-    Public Shared SUB moureNode(byVal objConn as OleDbConnection, byRef relOrigen as clsRelacio, byVal relDesti as clsRelacio, byVal moureFills as Integer, byVal posicioEstructura as integer, byVal tipusMoviment as integer, byVal relDestiInicial as clsRelacio, byVal tipusOrdre as integer)
- 		
+    Public Shared Sub moureNode(ByVal objConn As OleDbConnection, ByRef relOrigen As clsRelacio, ByVal relDesti As clsRelacio, ByVal moureFills As Integer, ByVal posicioEstructura As Integer, ByVal tipusMoviment As Integer, ByVal relDestiInicial As clsRelacio, ByVal tipusOrdre As Integer)
 
-		
+
+
         Dim NroNodePareAnterior As Integer
-		Dim nroArbreOrigen, nroArbreDesti, nroNodeOrigen, nroNodeDesti AS Integer
-		Dim nodePathNou, nodePathVell as String
+        Dim nroArbreOrigen, nroArbreDesti, nroNodeOrigen, nroNodeDesti As Integer
+        Dim nodePathNou, nodePathVell As String
         '**************************************************************************************************************************************
         '	Desactivo l'opció moureNode sense moure fills. Provoca errors als usuaris als usuaris i millor no fer-ho per ara. MaxSV. 15/11/06
-		'**************************************************************************************************************************************
+        '**************************************************************************************************************************************
 
 
-		'Poso l'estat de la relacio a 1: estat inicial
-		IF relOrigen.cdsit<>96 AND relOrigen.cdsit<>97 AND relOrigen.cdsit<>95 THEN
-			GAIA.canviEstatRelacio(objconn, relOrigen, 1,0)
-		END IF	
-		nroArbreOrigen = relOrigen.cdarb
-		nroNodeOrigen = relOrigen.infil
-		nodePathVell = relOrigen.cdher
-		nroNodePareAnterior = relOrigen.inpar		
-		nroArbreDesti = relDesti.cdarb
-		nroNodeDesti = relDesti.infil
-		nodePathNou = relDesti.cdher+"_"+relDesti.infil.tostring()
-        
-		'si he de moure el node , he de canviar el node destí, que pasa a ser el node pare apuntat per la relacio: codiRelacioDesti
-		' Només faig un moviment si el tipusmoviment=0 i el node a on volem moure no és l'arrel de l'arbre
-       
+        'Poso l'estat de la relacio a 1: estat inicial
+        If relOrigen.cdsit <> 96 And relOrigen.cdsit <> 97 And relOrigen.cdsit <> 95 Then
+            GAIA.canviEstatRelacio(objconn, relOrigen, 1, 0)
+        End If
+        nroArbreOrigen = relOrigen.cdarb
+        nroNodeOrigen = relOrigen.infil
+        nodePathVell = relOrigen.cdher
+        nroNodePareAnterior = relOrigen.inpar
+        nroArbreDesti = relDesti.cdarb
+        nroNodeDesti = relDesti.infil
+        nodePathNou = relDesti.cdher + "_" + relDesti.infil.tostring()
+
+        'si he de moure el node , he de canviar el node destí, que pasa a ser el node pare apuntat per la relacio: codiRelacioDesti
+        ' Només faig un moviment si el tipusmoviment=0 i el node a on volem moure no és l'arrel de l'arbre
+
         'Modifico la relació del node que vull moure.
         GAIA.modificaRelacio(objConn, relOrigen, nodePathNou, nroArbreDesti, nroNodeDesti, 0, posicioEstructura, -1, 1)
 
-		'Assigno els permisos heretats a la nova ubicació		
+        'Assigno els permisos heretats a la nova ubicació		
         'clsPermisos.tractaPermisosHeretats(objConn, nodePathNou, nroNodeOrigen, "", "", 1)
-		clsPermisos.tractaPermisosHeretats2(objConn, relDesti, relDesti.infil, "", true, true)
-		
-	
-		' Faig el manteniment de l'ordre de les relacions
-		
-		GAIA.canviOrdre(objconn, relOrigen, relDesti, moureFills,  tipusOrdre, reldestiInicial)
-		
-		'Arregla estructura de nodes segons plantilla		
-		IF relOrigen.cdsit<>96 AND relOrigen.cdsit<>95 AND relOrigen.cdsit<>97 THEN
-			GAIA.corregirErrorsEstructura(objconn, relOrigen,1, posicioEstructura)		
-		END IF
-END SUB 'moureNode
+        clsPermisos.tractaPermisosHeretats2(objConn, relDesti, relDesti.infil, "", True, True)
+
+
+        ' Faig el manteniment de l'ordre de les relacions
+
+        GAIA.canviOrdre(objconn, relOrigen, relDesti, moureFills, tipusOrdre, reldestiInicial)
+
+        'Arregla estructura de nodes segons plantilla		
+        If relOrigen.cdsit <> 96 And relOrigen.cdsit <> 95 And relOrigen.cdsit <> 97 Then
+            GAIA.corregirErrorsEstructura(objconn, relOrigen, 1, posicioEstructura)
+        End If
+    End Sub 'moureNode
 
 
 
 
-'Fa una copia d'un contingut i retorna la nova relació creada
+    'Fa una copia d'un contingut i retorna la nova relació creada
     Public Shared Function ferCopiaContingut(ByVal objConn As OleDbConnection, ByVal rel As clsRelacio, ByVal codiUsuari As Integer, Optional ByRef prefix As String = "", Optional ByVal reldesti As clsRelacio = Nothing) As Integer
         Dim docAnt As String = ""
         Dim codiNode As Integer
@@ -3982,26 +3961,26 @@ END SUB 'moureNode
 
         Select Case UCase(rel.tipdsdes.Trim())
             Case "NODE WEB"
-				 'Teresa: añado la posibilidad de GAIA2
+                'Teresa: añado la posibilidad de GAIA2
                 If GAIA.esGAIA2(objConn, rel.infil) Then
                     GAIA.bdr(objConn, "SELECT NWEINNOD, NWEINIDI, isNull(NWEDSTIT,'') as NWEDSTIT, NWEDSUSR, NWEDSTCO,NWEDSPLA, NWEDSEST, NWEDSHTM, NWEDSLCW, NWEDSCAR, isnull(NWEDSCSS,'') as NWEDSCSS,NWEDSEBO,isnull(NWEDSMET,'') as NWEDSMET,isnull(NWEDSPEU,'') as NWEDSPEU, isnull(NWEDSCSP,'') as NWEDSCSP, isnull(NWEDSCSI,'') as NWEDSCSI FROM METLNWE2  WITH(NOLOCK) WHERE NWEINNOD=" & rel.infil, DS)
                     For Each dbRow In DS.Tables(0).Rows
                         GAIA.bdSR(objConn, "INSERT INTO METLNWE2 (NWEINNOD, NWEINIDI,NWEDSTIT, NWEDSUSR, NWEDSTCO,NWEDSPLA, NWEDSEST, NWEDSHTM, NWEDSLCW, NWEDSCAR, NWEDSCSS,NWEDSEBO,NWEDSMET, NWEDSPEU, NWEDSCSP, NWEDSCSI) VALUES (" & codiNode & "," & dbRow("NWEINIDI") & ",'" & dbRow("NWEDSTIT").Replace("'", "''") & "','" & dbRow("NWEDSUSR") & "','" & dbRow("NWEDSTCO") & "','" & dbRow("NWEDSPLA") & "','" & dbRow("NWEDSEST").Replace("'", "''") & "','" & dbRow("NWEDSHTM").Replace("'", "''") & "','" & dbRow("NWEDSLCW") & "','" & dbRow("NWEDSCAR") & "','" & dbRow("NWEDSCSS").replace("'", "''") & "','" & dbRow("NWEDSEBO") & "','" & dbRow("NWEDSMET").Replace("'", "''") & "','" & dbRow("NWEDSPEU").Replace("'", "''") & "','" & dbRow("NWEDSCSP").Replace("'", "''") & "','" & dbRow("NWEDSCSI").Replace("'", "''") & "')")
                     Next dbRow
                 Else
-                GAIA.bdR(objConn, "SELECT NWEINNOD, NWEINIDI, isNull(NWEDSTIT,'') as NWEDSTIT, NWEDSUSR,NWEDSTHOR, NWEDSTVER, NWEDSTCO,NWEDSPLA, NWEDSEST, NWEDSATR, NWEDSLCW, NWEDSCAR, isnull(NWEDSCSS,'') as NWEDSCSS,NWEDSEBO,isnull(NWEDSMET,'') as NWEDSMET,isnull(NWEDSPEU,'') as NWEDSPEU, isnull(NWEDSCSP,'') as NWEDSCSP, isnull(NWEDSCSI,'') as NWEDSCSI FROM METLNWE  WITH(NOLOCK) WHERE NWEINNOD=" & rel.infil, DS)
-                For Each dbRow In DS.Tables(0).Rows
-                    GAIA.bdSR(objConn, "INSERT INTO METLNWE (NWEINNOD, NWEINIDI,NWEDSTIT, NWEDSUSR,NWEDSTHOR, NWEDSTVER, NWEDSTCO,NWEDSPLA, NWEDSEST, NWEDSATR, NWEDSLCW, NWEDSCAR, NWEDSCSS,NWEDSEBO,NWEDSMET, NWEDSPEU, NWEDSCSP, NWEDSCSI) VALUES (" & codiNode & "," & dbRow("NWEINIDI") & ",'" & dbRow("NWEDSTIT").Replace("'", "''") & "','" & dbRow("NWEDSUSR") & "','" & dbRow("NWEDSTHOR") & "','" & dbRow("NWEDSTVER") & "','" & dbRow("NWEDSTCO") & "','" & dbRow("NWEDSPLA") & "','" & dbRow("NWEDSEST") & "','" & dbRow("NWEDSATR") & "','" & dbRow("NWEDSLCW") & "','" & dbRow("NWEDSCAR") & "','" & dbRow("NWEDSCSS").replace("'", "''") & "','" & dbRow("NWEDSEBO") & "','" & dbRow("NWEDSMET").Replace("'", "''") & "','" & dbRow("NWEDSPEU").Replace("'", "''") & "','" & dbRow("NWEDSCSP").Replace("'", "''") & "','" & dbRow("NWEDSCSI").Replace("'", "''") & "')")
-                Next dbRow
+                    GAIA.bdR(objConn, "SELECT NWEINNOD, NWEINIDI, isNull(NWEDSTIT,'') as NWEDSTIT, NWEDSUSR,NWEDSTHOR, NWEDSTVER, NWEDSTCO,NWEDSPLA, NWEDSEST, NWEDSATR, NWEDSLCW, NWEDSCAR, isnull(NWEDSCSS,'') as NWEDSCSS,NWEDSEBO,isnull(NWEDSMET,'') as NWEDSMET,isnull(NWEDSPEU,'') as NWEDSPEU, isnull(NWEDSCSP,'') as NWEDSCSP, isnull(NWEDSCSI,'') as NWEDSCSI FROM METLNWE  WITH(NOLOCK) WHERE NWEINNOD=" & rel.infil, DS)
+                    For Each dbRow In DS.Tables(0).Rows
+                        GAIA.bdSR(objConn, "INSERT INTO METLNWE (NWEINNOD, NWEINIDI,NWEDSTIT, NWEDSUSR,NWEDSTHOR, NWEDSTVER, NWEDSTCO,NWEDSPLA, NWEDSEST, NWEDSATR, NWEDSLCW, NWEDSCAR, NWEDSCSS,NWEDSEBO,NWEDSMET, NWEDSPEU, NWEDSCSP, NWEDSCSI) VALUES (" & codiNode & "," & dbRow("NWEINIDI") & ",'" & dbRow("NWEDSTIT").Replace("'", "''") & "','" & dbRow("NWEDSUSR") & "','" & dbRow("NWEDSTHOR") & "','" & dbRow("NWEDSTVER") & "','" & dbRow("NWEDSTCO") & "','" & dbRow("NWEDSPLA") & "','" & dbRow("NWEDSEST") & "','" & dbRow("NWEDSATR") & "','" & dbRow("NWEDSLCW") & "','" & dbRow("NWEDSCAR") & "','" & dbRow("NWEDSCSS").replace("'", "''") & "','" & dbRow("NWEDSEBO") & "','" & dbRow("NWEDSMET").Replace("'", "''") & "','" & dbRow("NWEDSPEU").Replace("'", "''") & "','" & dbRow("NWEDSCSP").Replace("'", "''") & "','" & dbRow("NWEDSCSI").Replace("'", "''") & "')")
+                    Next dbRow
                 End If
-                novaRel = GAIA.creaRelacio(objConn, reldesti.cdarb, reldesti.infil, codiNode, 0, reldesti.cdher & "_" & reldesti.infil, rel.cdest, rel.cdsit, rel.cdord+1000, 1, false, codiUsuari)
-			
+                novaRel = GAIA.creaRelacio(objConn, reldesti.cdarb, reldesti.infil, codiNode, 0, reldesti.cdher & "_" & reldesti.infil, rel.cdest, rel.cdsit, rel.cdord + 1000, 1, False, codiUsuari)
+
             Case "NODE DOCUMENT"
                 GAIA.bdR(objConn, "SELECT NDOINNOD,NDOINIDI,isNull(NDODSTIT,'') as NDODSTIT, NDODSUSR, isnull(NDODSOBS,'') as NDODSOBS FROM METLNDO  WITH(NOLOCK) WHERE NDOINNOD=" & rel.infil, DS)
                 For Each dbRow In DS.Tables(0).Rows
                     GAIA.bdSR(objConn, "INSERT INTO METLNDO (NDOINNOD,NDOINIDI,NDODSTIT, NDODSUSR,NDODSOBS) VALUES (" & codiNode & "," & dbRow("NDOINIDI") & ",'" & dbRow("NDODSTIT").Replace("'", "''") & "','" & dbRow("NDODSUSR") & "','" & dbRow("NDODSOBS").Replace("'", "''") + "')")
                 Next dbRow
-                novaRel = GAIA.creaRelacio(objConn, reldesti.cdarb, reldesti.infil, codiNode, 0, reldesti.cdher & "_" & reldesti.infil, rel.cdest, rel.cdsit, rel.cdord+1000, 1, false, codiUsuari)
+                novaRel = GAIA.creaRelacio(objConn, reldesti.cdarb, reldesti.infil, codiNode, 0, reldesti.cdher & "_" & reldesti.infil, rel.cdest, rel.cdsit, rel.cdord + 1000, 1, False, codiUsuari)
             Case "FULLA DOCUMENT"
                 Dim r As New Random()
                 Dim hDocs As New Dictionary(Of String, String)
@@ -4053,7 +4032,7 @@ END SUB 'moureNode
                                 File.Copy(savePath & nomVell.Replace(".jpg", "P1366.jpg"), savePath & nomDocument.Replace(".jpg", "P1366.jpg"))
                             End If
                         End If
-						
+
                     End If
                 Next dbRow
 
@@ -4064,15 +4043,15 @@ END SUB 'moureNode
                 'copio relacions
                 GAIA.bdR(objConn, "SELECT *	FROM METLREL  WITH(NOLOCK) WHERE RELCDRSU=" & rel.cdrsu & " AND RELCDSIT<99", DS)
                 For Each dbRow In DS.Tables(0).Rows
-				novaRel = GAIA.creaRelacio(objConn, reldesti.cdarb, reldesti.infil, codiNode, 0, reldesti.cdher & "_" & reldesti.infil, rel.cdest, rel.cdsit, rel.cdord+1000,1, false, codiUsuari)
+                    novaRel = GAIA.creaRelacio(objConn, reldesti.cdarb, reldesti.infil, codiNode, 0, reldesti.cdher & "_" & reldesti.infil, rel.cdest, rel.cdsit, rel.cdord + 1000, 1, False, codiUsuari)
 
                 Next dbRow
                 'copio METLREI
                 GAIA.bdR(objConn, "SELECT * FROM METLREI  WITH(NOLOCK) WHERE REIINCOD=" & rel.incod, DS)
                 For Each dbRow In DS.Tables(0).Rows
                     Try
-                        
-						GAIA.bdSR(objConn, "INSERT INTO METLREI VALUES (" & novaRel.incod & "," & dbRow("REIINIDI") & ",'" & CDate(dbRow("REIDTPUB")) & "','" & CDate(dbRow("REIDTCAD")) & "','/gdocs/" & hDocs.Item(nomVell) & "','" & hDocs.Item(nomVell) & "','" & dbRow("REIDSHAS") & "')")
+
+                        GAIA.bdSR(objConn, "INSERT INTO METLREI VALUES (" & novaRel.incod & "," & dbRow("REIINIDI") & ",'" & CDate(dbRow("REIDTPUB")) & "','" & CDate(dbRow("REIDTCAD")) & "','/gdocs/" & hDocs.Item(nomVell) & "','" & hDocs.Item(nomVell) & "','" & dbRow("REIDSHAS") & "')")
                     Catch ex As Exception
                         'no faig res si ja existia
                     End Try
@@ -4080,7 +4059,7 @@ END SUB 'moureNode
                 Next dbRow
 
             Case "FULLA PLANTILLAWEB"
-				'Teresa: añado la posibilidad de GAIA2
+                'Teresa: añado la posibilidad de GAIA2
                 If GAIA.esGAIA2(objConn, rel.infil) Then
                     GAIA.bdr(objConn, "SELECT * FROM METLPLT2  WITH(NOLOCK) WHERE PLTINNOD=" & rel.infil, DS)
                     If DS.Tables(0).Rows.Count > 0 Then
@@ -4088,59 +4067,59 @@ END SUB 'moureNode
                         GAIA.bdSR(objConn, "INSERT INTO METLPLT2 (PLTINNOD, PLTDSTIT,PLTDSOBS, PLTDTANY, PLTDSUSR,PLTDSNUM, PLTDSCMP,PLTDSEST,PLTDSHTM,PLTDSCSS, PLTDSLNK,PLTDSALT, PLTDSIMG, PLTDSFLW, PLTDSTCO,PLTDSLCW, PLTDSLC2, PLTDSPLT, PLTDSALK, PLTCDPAL, PLTDSAAL,PLTDSALF, PLTDSNIV, PLTSWVIS) VALUES (" & codiNode & ",'" & dbRow("PLTDSTIT") & "','" & dbRow("PLTDSOBS") & "',getdate(),'" & codiUsuari & "','" & dbRow("PLTDSNUM") & "','" & dbRow("PLTDSCMP") & "','" & dbRow("PLTDSEST").Replace("'", "''") & "','" & dbRow("PLTDSHTM").Replace("'", "''") & "','" & dbRow("PLTDSCSS") & "','" & dbRow("PLTDSLNK") & "','" & dbRow("PLTDSALT") & "','" & dbRow("PLTDSIMG") & "','" & dbRow("PLTDSFLW") & "','" & dbRow("PLTDSTCO") & "','" & dbRow("PLTDSLCW") & "','" & dbRow("PLTDSLC2") & "','" & dbRow("PLTDSPLT") & "','" & dbRow("PLTDSALK") & "','" & dbRow("PLTCDPAL") & "','" & dbRow("PLTDSAAL") & "','" & dbRow("PLTDSALF") & "','" & dbRow("PLTDSNIV") & "'," & dbRow("PLTSWVIS") & ")")
                     End If
                 Else
-                GAIA.bdR(objConn, "SELECT * FROM METLPLT  WITH(NOLOCK) WHERE PLTINNOD=" & rel.infil, DS)
-                If DS.Tables(0).Rows.Count > 0 Then
-                    dbRow = DS.Tables(0).Rows(0)
-                    GAIA.bdSR(objConn, "INSERT INTO METLPLT (PLTINNOD, PLTDSTIT,PLTDSOBS, PLTDTANY, PLTDSUSR,PLTDSHOR,PLTDSVER,PLTDSNUM, PLTDSCMP,PLTDSEST,PLTDSATR,PLTDSCSS, PLTDSLNK,PLTDSALT, PLTDSIMG, PLTDSFLW, PLTDSTCO,PLTDSLCW, PLTDSLC2, PLTDSPLT, PLTDSALK, PLTCDPAL, PLTDSAAL,PLTDSALF, PLTDSNIV, PLTSWVIS) VALUES (" & codiNode & ",'" & dbRow("PLTDSTIT") & "','" & dbRow("PLTDSOBS") & "',getdate(),'" & codiUsuari & "','" & dbRow("PLTDSHOR") & "','" & dbRow("PLTDSVER") & "','" & dbRow("PLTDSNUM") & "','" & dbRow("PLTDSCMP") & "','" & dbRow("PLTDSEST") & "','" & dbRow("PLTDSATR") & "','" & dbRow("PLTDSCSS") & "','" & dbRow("PLTDSLNK") & "','" & dbRow("PLTDSALT") & "','" & dbRow("PLTDSIMG") & "','" & dbRow("PLTDSFLW") & "','" & dbRow("PLTDSTCO") & "','" & dbRow("PLTDSLCW") & "','" & dbRow("PLTDSLC2") & "','" & dbRow("PLTDSPLT") & "','" & dbRow("PLTDSALK") & "','" & dbRow("PLTCDPAL") & "','" & dbRow("PLTDSAAL") & "','" & dbRow("PLTDSALF") & "','" & dbRow("PLTDSNIV") & "'," & dbRow("PLTSWVIS") & ")")
+                    GAIA.bdR(objConn, "SELECT * FROM METLPLT  WITH(NOLOCK) WHERE PLTINNOD=" & rel.infil, DS)
+                    If DS.Tables(0).Rows.Count > 0 Then
+                        dbRow = DS.Tables(0).Rows(0)
+                        GAIA.bdSR(objConn, "INSERT INTO METLPLT (PLTINNOD, PLTDSTIT,PLTDSOBS, PLTDTANY, PLTDSUSR,PLTDSHOR,PLTDSVER,PLTDSNUM, PLTDSCMP,PLTDSEST,PLTDSATR,PLTDSCSS, PLTDSLNK,PLTDSALT, PLTDSIMG, PLTDSFLW, PLTDSTCO,PLTDSLCW, PLTDSLC2, PLTDSPLT, PLTDSALK, PLTCDPAL, PLTDSAAL,PLTDSALF, PLTDSNIV, PLTSWVIS) VALUES (" & codiNode & ",'" & dbRow("PLTDSTIT") & "','" & dbRow("PLTDSOBS") & "',getdate(),'" & codiUsuari & "','" & dbRow("PLTDSHOR") & "','" & dbRow("PLTDSVER") & "','" & dbRow("PLTDSNUM") & "','" & dbRow("PLTDSCMP") & "','" & dbRow("PLTDSEST") & "','" & dbRow("PLTDSATR") & "','" & dbRow("PLTDSCSS") & "','" & dbRow("PLTDSLNK") & "','" & dbRow("PLTDSALT") & "','" & dbRow("PLTDSIMG") & "','" & dbRow("PLTDSFLW") & "','" & dbRow("PLTDSTCO") & "','" & dbRow("PLTDSLCW") & "','" & dbRow("PLTDSLC2") & "','" & dbRow("PLTDSPLT") & "','" & dbRow("PLTDSALK") & "','" & dbRow("PLTCDPAL") & "','" & dbRow("PLTDSAAL") & "','" & dbRow("PLTDSALF") & "','" & dbRow("PLTDSNIV") & "'," & dbRow("PLTSWVIS") & ")")
                     End If
-					novaRel = GAIA.creaRelacio(objConn, reldesti.cdarb, reldesti.infil, codiNode, 0, reldesti.cdher & "_" & reldesti.infil, rel.cdest, rel.cdsit, rel.cdord+1000,1, false,codiUsuari)
+                    novaRel = GAIA.creaRelacio(objConn, reldesti.cdarb, reldesti.infil, codiNode, 0, reldesti.cdher & "_" & reldesti.infil, rel.cdest, rel.cdsit, rel.cdord + 1000, 1, False, codiUsuari)
 
                 End If
             Case "FULLA WEB"
-				'Teresa: añado la posibilidad de GAIA2
+                'Teresa: añado la posibilidad de GAIA2
                 If GAIA.esGAIA2(objConn, rel.infil) Then
                     GAIA.bdr(objConn, "SELECT * FROM METLWEB2  WITH(NOLOCK) WHERE WEBINNOD=" & rel.infil, DS)
                     For Each dbRow In DS.Tables(0).Rows
                         GAIA.bdSR(objConn, "INSERT INTO METLWEB2 (WEBINNOD, WEBINIDI,WEBDSTIT,WEBDSFIT, WEBDSURL, WEBDTPUB, WEBDTCAD, WEBDTANY, WEBDSUSR, WEBTPBUS, WEBDSTCO, WEBDSPLA, WEBDSEST, WEBDSHTM, WEBDSLCW, WEBDSCSS, WEBTPHER, WEBCDRAL, WEBDSNST, WEBDSIMP,WEBDSCND, WEBWNMTH,WEBSWFRM, WEBSWEML,WEBDSEBO, WEBDSDES, WEBDSPCL, WEBSWSSL, WEBDSLC2) VALUES (" & codiNode & "," & dbRow("WEBINIDI") & ",'" & dbRow("WEBDSTIT").replace("'", "''") & "','','','" & dbRow("WEBDTPUB") & "','" & dbRow("WEBDTCAD") & "','" & dbRow("WEBDTANY") & "','" & dbRow("WEBDSUSR") & "','" & dbRow("WEBTPBUS") & "','" & dbRow("WEBDSTCO") & "','" & dbRow("WEBDSPLA") & "','" & dbRow("WEBDSEST").Replace("'", "''") & "','" & dbRow("WEBDSHTM").Replace("'", "''") & "','" & dbRow("WEBDSLCW") & "','" & dbRow("WEBDSCSS") & "', '" & dbRow("WEBTPHER") & "'," & dbRow("WEBCDRAL") & ",'" & dbRow("WEBDSNST") & "','" & dbRow("WEBDSIMP") & "','" & dbRow("WEBDSCND") & "'," & dbRow("WEBWNMTH") & ",'" & dbRow("WEBSWFRM") & "','" & dbRow("WEBSWEML") & "','" & dbRow("WEBDSEBO") & "','" & dbRow("WEBDSDES").replace("'", "''") & "','" & dbRow("WEBDSPCL").replace("'", "''") & "','" & dbRow("WEBSWSSL") & "','" & dbRow("WEBDSLC2") & "')")
                     Next dbRow
                 Else
-                GAIA.bdR(objConn, "SELECT * FROM METLWEB  WITH(NOLOCK) WHERE WEBINNOD=" & rel.infil, DS)
-                For Each dbRow In DS.Tables(0).Rows
+                    GAIA.bdR(objConn, "SELECT * FROM METLWEB  WITH(NOLOCK) WHERE WEBINNOD=" & rel.infil, DS)
+                    For Each dbRow In DS.Tables(0).Rows
 
-                    GAIA.bdSR(objConn, "INSERT INTO METLWEB (WEBINNOD, WEBINIDI,WEBDSTIT,WEBDSFIT, WEBDSURL, WEBDTPUB, WEBDTCAD, WEBDTANY, WEBDSUSR,WEBTPBUS,WEBDSTHOR, WEBDSTVER, WEBDSTCO, WEBDSPLA, WEBDSEST, WEBDSATR, WEBDSLCW, WEBDSCSS, WEBDSCIP, WEBDSCIC, WEBTPHER, WEBDSDEC, WEBCDRAL, WEBDSIMP,WEBDSCND, WEBWNMTH,WEBSWFRM, WEBSWEML,WEBDSEBO, WEBDSDES, WEBDSPCL, WEBSWSSL) VALUES (" & codiNode & "," & dbRow("WEBINIDI") & ",'" & dbRow("WEBDSTIT").replace("'", "''") & "','','','" & dbRow("WEBDTPUB") & "','" & dbRow("WEBDTCAD") & "','" & dbRow("WEBDTANY") & "','" & dbRow("WEBDSUSR") & "','" & dbRow("WEBTPBUS") & "','" & dbRow("WEBDSTHOR") & "','" & dbRow("WEBDSTVER") & "','" & dbRow("WEBDSTCO") & "','" & dbRow("WEBDSPLA") & "','" & dbRow("WEBDSEST") & "','" & dbRow("WEBDSATR") & "','" & dbRow("WEBDSLCW") & "','" & dbRow("WEBDSCSS") & "'," & dbRow("WEBDSCIP") & "," & dbRow("WEBDSCIC") & ", '" & dbRow("WEBTPHER") & "','" & dbRow("WEBDSDEC").Replace("'", "''") & "'," & dbRow("WEBCDRAL") & ",'" & dbRow("WEBDSIMP") & "','" & dbRow("WEBDSCND") & "'," & dbRow("WEBWNMTH") & ",'" & dbRow("WEBSWFRM") & "','" & dbRow("WEBSWEML") & "','" & dbRow("WEBDSEBO") & "','" & dbRow("WEBDSDES").replace("'", "''") & "','" & dbRow("WEBDSPCL").replace("'", "''") & "','" & dbRow("WEBSWSSL") & "')")
+                        GAIA.bdSR(objConn, "INSERT INTO METLWEB (WEBINNOD, WEBINIDI,WEBDSTIT,WEBDSFIT, WEBDSURL, WEBDTPUB, WEBDTCAD, WEBDTANY, WEBDSUSR,WEBTPBUS,WEBDSTHOR, WEBDSTVER, WEBDSTCO, WEBDSPLA, WEBDSEST, WEBDSATR, WEBDSLCW, WEBDSCSS, WEBDSCIP, WEBDSCIC, WEBTPHER, WEBDSDEC, WEBCDRAL, WEBDSIMP,WEBDSCND, WEBWNMTH,WEBSWFRM, WEBSWEML,WEBDSEBO, WEBDSDES, WEBDSPCL, WEBSWSSL) VALUES (" & codiNode & "," & dbRow("WEBINIDI") & ",'" & dbRow("WEBDSTIT").replace("'", "''") & "','','','" & dbRow("WEBDTPUB") & "','" & dbRow("WEBDTCAD") & "','" & dbRow("WEBDTANY") & "','" & dbRow("WEBDSUSR") & "','" & dbRow("WEBTPBUS") & "','" & dbRow("WEBDSTHOR") & "','" & dbRow("WEBDSTVER") & "','" & dbRow("WEBDSTCO") & "','" & dbRow("WEBDSPLA") & "','" & dbRow("WEBDSEST") & "','" & dbRow("WEBDSATR") & "','" & dbRow("WEBDSLCW") & "','" & dbRow("WEBDSCSS") & "'," & dbRow("WEBDSCIP") & "," & dbRow("WEBDSCIC") & ", '" & dbRow("WEBTPHER") & "','" & dbRow("WEBDSDEC").Replace("'", "''") & "'," & dbRow("WEBCDRAL") & ",'" & dbRow("WEBDSIMP") & "','" & dbRow("WEBDSCND") & "'," & dbRow("WEBWNMTH") & ",'" & dbRow("WEBSWFRM") & "','" & dbRow("WEBSWEML") & "','" & dbRow("WEBDSEBO") & "','" & dbRow("WEBDSDES").replace("'", "''") & "','" & dbRow("WEBDSPCL").replace("'", "''") & "','" & dbRow("WEBSWSSL") & "')")
 
-                Next dbRow
-				End If
-                novaRel = GAIA.creaRelacio(objConn, reldesti.cdarb, reldesti.infil, codiNode, 0, reldesti.cdher & "_" & reldesti.infil, rel.cdest, rel.cdsit, rel.cdord+1000,1, false, codiUsuari)
+                    Next dbRow
+                End If
+                novaRel = GAIA.creaRelacio(objConn, reldesti.cdarb, reldesti.infil, codiNode, 0, reldesti.cdher & "_" & reldesti.infil, rel.cdest, rel.cdsit, rel.cdord + 1000, 1, False, codiUsuari)
             Case "FULLA TRAMIT"
                 GAIA.bdR(objConn, "SELECT * FROM METLFTR  WITH(NOLOCK) WHERE FTRINNOD=" & rel.infil, DS)
-				
+
 
                 For Each dbRow In DS.Tables(0).Rows
-                   'GAIA.bdSR(objConn, "INSERT INTO METLFTR  (FTRDSNOM, FTRDSEEX, FTRDSDES, FTRDSQUI, FTRDSHOW, FTRDSPRS, FTRDSTEL, FTRDSWEB, FTRDSQUA, FTRDSOBS, FTRINIDI, FTRDSPRE, FTRDSTRE, FTRDSLEG, FTRDTPUB, FTRDTCAD, FTRDTMAN, FTRDSPCL, FTRDSCOM, FTRSWVIS, FTRDSCOR, FTRINUNI,FTRCDRTE, FTRINNOD, FTRDSALE, FTRDTALI, FTRDTALF, FTRSWCAR, FTRSWAOC, FTRCDSIL , FTRDSFAJ, FTRDSFDO,) VALUES ('" & dbRow("FTRDSNOM").replace("'", "''") & "','" & dbRow("FTRDSEEX").replace("'", "''") & "', '" & dbRow("FTRDSDES").replace("'", "''") & "', '" & dbRow("FTRDSQUI").replace("'", "''") & "', '" & dbRow("FTRDSHOW").replace("'", "''") & "', '" & dbRow("FTRDSPRS").replace("'", "''") & "', '" & dbRow("FTRDSTEL").replace("'", "''") & "', '" & dbRow("FTRDSWEB").replace("'", "''") & "', '" & dbRow("FTRDSQUA").replace("'", "''") & "', '" & dbRow("FTRDSOBS").replace("'", "''") & "', " & dbRow("FTRINIDI") & ", '" & dbRow("FTRDSPRE").replace("'", "''") & "', '" & dbRow("FTRDSTRE").replace("'", "''") & "', '" & dbRow("FTRDSLEG").replace("'", "''") & "', '" & dbRow("FTRDTPUB") & "', '" & dbRow("FTRDTCAD") & "', '" & dbRow("FTRDTMAN") & "', '" & dbRow("FTRDSPCL").replace("'", "''") & "', '" & dbRow("FTRDSCOM").replace("'", "''") & "', 0, '" & dbRow("FTRDSCOR").replace("'", "''") & "', " & dbRow("FTRINUNI") & ", '" & dbRow("FTRCDRTE") & "', " & codiNode & ", '" & dbRow("FTRDSALE").replace("'", "''") & "', '" & dbRow("FTRDTALI") & "', '" & dbRow("FTRDTALF") & "','" & dbRow("FTRSWCAR") & "', '" & dbRow("FTRSWAOC") & "', '" & dbRow("FTRCDSIL") & "', '" & dbRow("FTRDSFAJ").replace("'", "''") & "', '" & dbRow("FTRDSFDO").replace("'", "''") & "')")
-					GAIA.bdSR(objConn, "INSERT INTO [METLFTR]  ([FTRINNOD],[FTRDSNOM], [FTRDSEEX], [FTRDSDES], [FTRDSQUI], [FTRDSPRS], [FTRDSTEL], [FTRDSWEB], [FTRDSQUA], [FTRDSOBS], [FTRINIDI], [FTRDSPRE], [FTRDSTRE], [FTRDSLEG], [FTRDTPUB], [FTRDTCAD], [FTRDTMAN], [FTRDSPCL], [FTRDSCOM], [FTRSWVIS],[FTRSWVSE],[FTRSWVIN],[FTRSWVWE],[FTRDSCOR], [FTRINUNI],[FTRCDRTE], [FTRDSALE], [FTRDTALI], [FTRDTALF], [FTRSWCAR], [FTRSWAOC], [FTRDSFAJ], [FTRDSFDO],[FTRDSTDO],[FTRDSPDO], [FTRDSDEC], [FTRCDORG], [FTRDSTER], [FTRSWNOT], [FTRSWTPV],  [FTRSWREG], [FTRSWIDN], [FTRDSTEC], [FTRDSOBJ], [FTRDSETP], [FTRDSIND] , [FTRSWVUD], [FTRDSQDC], [FTRDSAPD], [FTRDSFWE],[FTRCDTRA],[FTRCDTTE],[FTRCDTTT],[FTRCDTTS],[FTRCDUTS],	[FTRDSNOC],[FTRDSVAL],[FTRDSRAP],[FTRDSRAT],[FTRDSRAI],[FTRDSDFG],[FTRDSDIP],[FTRDSDIT],[FTRDSDII])  VALUES(" & codiNode & ", " & formataCadena(dbrow("FTRDSNOM")) & ", " & formataCadena(dbrow("FTRDSEEX")) & ", " & formataCadena(dbrow("FTRDSDES")) & ", " & formataCadena(dbrow("FTRDSQUI"))  & ", " & formataCadena(dbrow("FTRDSPRS")) & ", " & formataCadena(dbrow("FTRDSTEL")) & ", " & formataCadena(dbrow("FTRDSWEB")) & ", " & formataCadena(dbrow("FTRDSQUA")) & ", " & formataCadena(dbrow("FTRDSOBS")) & ", " & dbrow("FTRINIDI") & ", " & formataCadena(dbrow("FTRDSPRE")) & ", " & formataCadena(dbrow("FTRDSTRE")) & ", " & formataCadena(dbrow("FTRDSLEG")) & ", " & FormataData(tractanullcadena(dbrow("FTRDTPUB"))) & ", " & FormataData(tractanullcadena(dbrow("FTRDTCAD"))) & ", " & FormataData(tractanullcadena(dbrow("FTRDTMAN"))) & ", " & formataCadena(dbrow("FTRDSPCL")) & ", " & formataCadena(dbrow("FTRDSCOM")) & ", " & formataSwitchbd(dbrow("FTRSWVIS")) & ", " & formataSwitchbd(dbrow("FTRSWVSE")) & ", " & formataSwitchbd(dbrow("FTRSWVIN")) & ", " & formataSwitchbd(dbrow("FTRSWVWE")) & ", " & formataCadena(dbrow("FTRDSCOR")) & ", " & dbrow("FTRINUNI") & ", '" & dbrow("FTRCDRTE") & "', " & formataCadena(dbrow("FTRDSALE")) & ", " & FormataData(tractanullcadena(dbrow("FTRDTALI"))) & ", " & FormataData(tractanullcadena(dbrow("FTRDTALF"))) & ", " & formataSwitchbd(dbrow("FTRSWCAR")) & ", " & formataSwitchbd(dbrow("FTRSWAOC")) & ", " & formataCadena(dbrow("FTRDSFAJ")) & ", " & formataCadena(dbrow("FTRDSFDO")) & ", " & formataCadena(dbrow("FTRDSTDO")) & ", " & formataCadena(dbrow("FTRDSPDO")) & ", " & formataCadena(dbrow("FTRDSDEC")) & ", " & formataInteger(dbrow("FTRCDORG")) & ", " & formataCadena(dbrow("FTRDSTER")) & ", " & formataSwitchbd(dbrow("FTRSWNOT")) & ", " & formataSwitchbd(dbrow("FTRSWTPV"))  & ", " & formataSwitchbd(dbrow("FTRSWREG")) & ", " & formataSwitchbd(dbrow("FTRSWIDN")) & ", " & formataCadena(dbrow("FTRDSTEC")) & ", " & formataCadena(dbrow("FTRDSOBJ")) & ", " & formataCadena(dbrow("FTRDSETP")) & ", " & formataCadena(dbrow("FTRDSIND"))  & ", " & formataSwitchbd(dbrow("FTRSWVUD")) & ", " & formataCadena(dbrow("FTRDSQDC")) & ", " & formataCadena(dbrow("FTRDSAPD")) & ", " & formataCadena(dbrow("FTRDSFWE"))  & ", " & tractaNullInteger(dbrow("FTRCDTRA")) & ", " & formataCadena(dbrow("FTRCDTTE")) & ", " & formataCadena(dbrow("FTRCDTTT")) & ", " & formataCadena(dbrow("FTRCDTTS"))  & ", " & tractaNullInteger(dbrow("FTRCDUTS")) & "," & formataCadena(dbrow("FTRDSNOC")) & "," & formataCadena(dbrow("FTRDSVAL")) & "," & formataCadena(dbrow("FTRDSRAP")) & "," & formataCadena(dbrow("FTRDSRAT")) & "," & formataCadena(dbrow("FTRDSRAI")) & "," & formataCadena(dbrow("FTRDSDFG")) & "," & formataCadena(dbrow("FTRDSDIP")) & "," & formataCadena(dbrow("FTRDSDIT")) & "," & formataCadena(dbrow("FTRDSDII")) & ")")	
-							
-                Next dbRow              
-                novaRel = GAIA.creaRelacio(objConn, reldesti.cdarb, reldesti.infil, codiNode, 0, reldesti.cdher & "_" & reldesti.infil, rel.cdest, rel.cdsit, rel.cdord+1000,1, false, codiUsuari)				
-				'copio associacions
-				Dim DS2 As DataSet
-				Dim dbRow2 As DataRow   
-				DS2 = New dataset()				
-				Gaia.bdr(objConn, "SELECT * FROM METLASS WHERE ASSCDNOD=" & rel.infil & " AND ASSCDTIP=51", ds2)
-				For Each dbRow2 In  ds2.Tables(0).Rows					
-					Gaia.BdSR(objConn, "INSERT INTO METLASS (ASSCDTPA,ASSCDNOD,ASSCDTIP,ASSCDNRL) VALUES (" & dbrow2("ASSCDTPA") & "," & codiNode  & ", 51," & dbrow2("ASSCDNRL") & ")")			
-				next dbrow2
-				ds2.dispose()
+                    'GAIA.bdSR(objConn, "INSERT INTO METLFTR  (FTRDSNOM, FTRDSEEX, FTRDSDES, FTRDSQUI, FTRDSHOW, FTRDSPRS, FTRDSTEL, FTRDSWEB, FTRDSQUA, FTRDSOBS, FTRINIDI, FTRDSPRE, FTRDSTRE, FTRDSLEG, FTRDTPUB, FTRDTCAD, FTRDTMAN, FTRDSPCL, FTRDSCOM, FTRSWVIS, FTRDSCOR, FTRINUNI,FTRCDRTE, FTRINNOD, FTRDSALE, FTRDTALI, FTRDTALF, FTRSWCAR, FTRSWAOC, FTRCDSIL , FTRDSFAJ, FTRDSFDO,) VALUES ('" & dbRow("FTRDSNOM").replace("'", "''") & "','" & dbRow("FTRDSEEX").replace("'", "''") & "', '" & dbRow("FTRDSDES").replace("'", "''") & "', '" & dbRow("FTRDSQUI").replace("'", "''") & "', '" & dbRow("FTRDSHOW").replace("'", "''") & "', '" & dbRow("FTRDSPRS").replace("'", "''") & "', '" & dbRow("FTRDSTEL").replace("'", "''") & "', '" & dbRow("FTRDSWEB").replace("'", "''") & "', '" & dbRow("FTRDSQUA").replace("'", "''") & "', '" & dbRow("FTRDSOBS").replace("'", "''") & "', " & dbRow("FTRINIDI") & ", '" & dbRow("FTRDSPRE").replace("'", "''") & "', '" & dbRow("FTRDSTRE").replace("'", "''") & "', '" & dbRow("FTRDSLEG").replace("'", "''") & "', '" & dbRow("FTRDTPUB") & "', '" & dbRow("FTRDTCAD") & "', '" & dbRow("FTRDTMAN") & "', '" & dbRow("FTRDSPCL").replace("'", "''") & "', '" & dbRow("FTRDSCOM").replace("'", "''") & "', 0, '" & dbRow("FTRDSCOR").replace("'", "''") & "', " & dbRow("FTRINUNI") & ", '" & dbRow("FTRCDRTE") & "', " & codiNode & ", '" & dbRow("FTRDSALE").replace("'", "''") & "', '" & dbRow("FTRDTALI") & "', '" & dbRow("FTRDTALF") & "','" & dbRow("FTRSWCAR") & "', '" & dbRow("FTRSWAOC") & "', '" & dbRow("FTRCDSIL") & "', '" & dbRow("FTRDSFAJ").replace("'", "''") & "', '" & dbRow("FTRDSFDO").replace("'", "''") & "')")
+                    GAIA.bdSR(objConn, "INSERT INTO [METLFTR]  ([FTRINNOD],[FTRDSNOM], [FTRDSEEX], [FTRDSDES], [FTRDSQUI], [FTRDSPRS], [FTRDSTEL], [FTRDSWEB], [FTRDSQUA], [FTRDSOBS], [FTRINIDI], [FTRDSPRE], [FTRDSTRE], [FTRDSLEG], [FTRDTPUB], [FTRDTCAD], [FTRDTMAN], [FTRDSPCL], [FTRDSCOM], [FTRSWVIS],[FTRSWVSE],[FTRSWVIN],[FTRSWVWE],[FTRDSCOR], [FTRINUNI],[FTRCDRTE], [FTRDSALE], [FTRDTALI], [FTRDTALF], [FTRSWCAR], [FTRSWAOC], [FTRDSFAJ], [FTRDSFDO],[FTRDSTDO],[FTRDSPDO], [FTRDSDEC], [FTRCDORG], [FTRDSTER], [FTRSWNOT], [FTRSWTPV],  [FTRSWREG], [FTRSWIDN], [FTRDSTEC], [FTRDSOBJ], [FTRDSETP], [FTRDSIND] , [FTRSWVUD], [FTRDSQDC], [FTRDSAPD], [FTRDSFWE],[FTRCDTRA],[FTRCDTTE],[FTRCDTTT],[FTRCDTTS],[FTRCDUTS],	[FTRDSNOC],[FTRDSVAL],[FTRDSRAP],[FTRDSRAT],[FTRDSRAI],[FTRDSDFG],[FTRDSDIP],[FTRDSDIT],[FTRDSDII])  VALUES(" & codiNode & ", " & formataCadena(dbrow("FTRDSNOM")) & ", " & formataCadena(dbrow("FTRDSEEX")) & ", " & formataCadena(dbrow("FTRDSDES")) & ", " & formataCadena(dbrow("FTRDSQUI")) & ", " & formataCadena(dbrow("FTRDSPRS")) & ", " & formataCadena(dbrow("FTRDSTEL")) & ", " & formataCadena(dbrow("FTRDSWEB")) & ", " & formataCadena(dbrow("FTRDSQUA")) & ", " & formataCadena(dbrow("FTRDSOBS")) & ", " & dbrow("FTRINIDI") & ", " & formataCadena(dbrow("FTRDSPRE")) & ", " & formataCadena(dbrow("FTRDSTRE")) & ", " & formataCadena(dbrow("FTRDSLEG")) & ", " & FormataData(tractanullcadena(dbrow("FTRDTPUB"))) & ", " & FormataData(tractanullcadena(dbrow("FTRDTCAD"))) & ", " & FormataData(tractanullcadena(dbrow("FTRDTMAN"))) & ", " & formataCadena(dbrow("FTRDSPCL")) & ", " & formataCadena(dbrow("FTRDSCOM")) & ", " & formataSwitchbd(dbrow("FTRSWVIS")) & ", " & formataSwitchbd(dbrow("FTRSWVSE")) & ", " & formataSwitchbd(dbrow("FTRSWVIN")) & ", " & formataSwitchbd(dbrow("FTRSWVWE")) & ", " & formataCadena(dbrow("FTRDSCOR")) & ", " & dbrow("FTRINUNI") & ", '" & dbrow("FTRCDRTE") & "', " & formataCadena(dbrow("FTRDSALE")) & ", " & FormataData(tractanullcadena(dbrow("FTRDTALI"))) & ", " & FormataData(tractanullcadena(dbrow("FTRDTALF"))) & ", " & formataSwitchbd(dbrow("FTRSWCAR")) & ", " & formataSwitchbd(dbrow("FTRSWAOC")) & ", " & formataCadena(dbrow("FTRDSFAJ")) & ", " & formataCadena(dbrow("FTRDSFDO")) & ", " & formataCadena(dbrow("FTRDSTDO")) & ", " & formataCadena(dbrow("FTRDSPDO")) & ", " & formataCadena(dbrow("FTRDSDEC")) & ", " & formataInteger(dbrow("FTRCDORG")) & ", " & formataCadena(dbrow("FTRDSTER")) & ", " & formataSwitchbd(dbrow("FTRSWNOT")) & ", " & formataSwitchbd(dbrow("FTRSWTPV")) & ", " & formataSwitchbd(dbrow("FTRSWREG")) & ", " & formataSwitchbd(dbrow("FTRSWIDN")) & ", " & formataCadena(dbrow("FTRDSTEC")) & ", " & formataCadena(dbrow("FTRDSOBJ")) & ", " & formataCadena(dbrow("FTRDSETP")) & ", " & formataCadena(dbrow("FTRDSIND")) & ", " & formataSwitchbd(dbrow("FTRSWVUD")) & ", " & formataCadena(dbrow("FTRDSQDC")) & ", " & formataCadena(dbrow("FTRDSAPD")) & ", " & formataCadena(dbrow("FTRDSFWE")) & ", " & tractaNullInteger(dbrow("FTRCDTRA")) & ", " & formataCadena(dbrow("FTRCDTTE")) & ", " & formataCadena(dbrow("FTRCDTTT")) & ", " & formataCadena(dbrow("FTRCDTTS")) & ", " & tractaNullInteger(dbrow("FTRCDUTS")) & "," & formataCadena(dbrow("FTRDSNOC")) & "," & formataCadena(dbrow("FTRDSVAL")) & "," & formataCadena(dbrow("FTRDSRAP")) & "," & formataCadena(dbrow("FTRDSRAT")) & "," & formataCadena(dbrow("FTRDSRAI")) & "," & formataCadena(dbrow("FTRDSDFG")) & "," & formataCadena(dbrow("FTRDSDIP")) & "," & formataCadena(dbrow("FTRDSDIT")) & "," & formataCadena(dbrow("FTRDSDII")) & ")")
+
+                Next dbRow
+                novaRel = GAIA.creaRelacio(objConn, reldesti.cdarb, reldesti.infil, codiNode, 0, reldesti.cdher & "_" & reldesti.infil, rel.cdest, rel.cdsit, rel.cdord + 1000, 1, False, codiUsuari)
+                'copio associacions
+                Dim DS2 As DataSet
+                Dim dbRow2 As DataRow
+                DS2 = New dataset()
+                Gaia.bdr(objConn, "SELECT * FROM METLASS WHERE ASSCDNOD=" & rel.infil & " AND ASSCDTIP=51", ds2)
+                For Each dbRow2 In ds2.Tables(0).Rows
+                    Gaia.BdSR(objConn, "INSERT INTO METLASS (ASSCDTPA,ASSCDNOD,ASSCDTIP,ASSCDNRL) VALUES (" & dbrow2("ASSCDTPA") & "," & codiNode & ", 51," & dbrow2("ASSCDNRL") & ")")
+                Next dbrow2
+                ds2.dispose()
 
             Case "FULLA CODIWEB"
                 GAIA.bdR(objConn, "SELECT * FROM METLLCW  WITH(NOLOCK) WHERE LCWINNOD=" & rel.infil, DS)
 
                 For Each dbRow In DS.Tables(0).Rows
-                    GAIA.bdSR(objConn, "INSERT INTO METLLCW (LCWINNOD, LCWINIDI, LCWDSTIT,LCWDSUSR,LCWDSTXT, LCWCDTIP,LCWTPFOR,LCWTPFOL) VALUES (" & codiNode & "," & dbRow("LCWINIDI") & ",'" & dbRow("LCWDSTIT").replace("'","''") & "','" & dbRow("LCWDSUSR") & "','" & dbRow("LCWDSTXT").replace("'","''") & "'," & dbRow("LCWCDTIP") & ",'" & dbRow("LCWTPFOR") & "','" & dbRow("LCWTPFOL") & "')")
+                    GAIA.bdSR(objConn, "INSERT INTO METLLCW (LCWINNOD, LCWINIDI, LCWDSTIT,LCWDSUSR,LCWDSTXT, LCWCDTIP,LCWTPFOR,LCWTPFOL) VALUES (" & codiNode & "," & dbRow("LCWINIDI") & ",'" & dbRow("LCWDSTIT").replace("'", "''") & "','" & dbRow("LCWDSUSR") & "','" & dbRow("LCWDSTXT").replace("'", "''") & "'," & dbRow("LCWCDTIP") & ",'" & dbRow("LCWTPFOR") & "','" & dbRow("LCWTPFOL") & "')")
                 Next dbRow
-                novaRel = GAIA.creaRelacio(objConn, reldesti.cdarb, reldesti.infil, codiNode, 0, reldesti.cdher & "_" & reldesti.infil, rel.cdest, rel.cdsit, rel.cdord+1000,1, false, codiUsuari)
+                novaRel = GAIA.creaRelacio(objConn, reldesti.cdarb, reldesti.infil, codiNode, 0, reldesti.cdher & "_" & reldesti.infil, rel.cdest, rel.cdsit, rel.cdord + 1000, 1, False, codiUsuari)
 
-               'copio totes les relacions afectades
+                'copio totes les relacions afectades
                 GAIA.bdR(objConn, "SELECT * FROM METLASS  WITH(NOLOCK) WHERE  ASSCDNOD=" & rel.infil, DS)
                 For Each dbRow In DS.Tables(0).Rows
                     GAIA.bdSR(objConn, "INSERT INTO METLASS (ASSCDTPA,ASSCDNOD,ASSCDTIP,ASSCDNRL) VALUES (" & dbrow("ASSCDTPA") & "," & codiNode & ",51," & dbRow("ASSCDNRL") & ")")
@@ -4152,7 +4131,7 @@ END SUB 'moureNode
                 For Each dbRow In DS.Tables(0).Rows
                     GAIA.bdSR(objConn, "INSERT INTO METLLNK (LNKINNOD, LNKINIDI, LNKDSTXT, LNKWNTIP, LNKDTPUB, LNKDTCAD, LNKDSUSR,  LNKCDREL, LNKDSDES, LNKDSLNK, LNKDSVID) VALUES (" & codiNode & "," & dbRow("LNKINIDI") & ",'" & dbRow("LNKDSTXT").replace("'", "''") & "'," & dbRow("LNKWNTIP") & ",'" & dbRow("LNKDTPUB") & "','" & dbRow("LNKDTCAD") & "','" & dbRow("LNKDSUSR") & "'," & IIf(IsDBNull(dbRow("LNKCDREL")), "null", dbRow("LNKCDREL")) & ",'" & dbRow("LNKDSDES").replace("'", "''") & "', '" & dbRow("LNKDSLNK") & "','" & dbRow("LNKDSVID") & "')")
                 Next dbRow
-                novaRel = GAIA.creaRelacio(objConn, reldesti.cdarb, reldesti.infil, codiNode, 0, reldesti.cdher & "_" & reldesti.infil, rel.cdest, rel.cdsit, rel.cdord+1000,1, false, codiUsuari)
+                novaRel = GAIA.creaRelacio(objConn, reldesti.cdarb, reldesti.infil, codiNode, 0, reldesti.cdher & "_" & reldesti.infil, rel.cdest, rel.cdsit, rel.cdord + 1000, 1, False, codiUsuari)
                 'copio METLREI
                 GAIA.bdR(objConn, "SELECT * FROM METLREI WITH(NOLOCK)  WHERE REIINCOD=" & rel.incod, DS)
                 For Each dbRow In DS.Tables(0).Rows
@@ -4169,7 +4148,7 @@ END SUB 'moureNode
                 For Each dbRow In DS.Tables(0).Rows
                     GAIA.bdSR(objConn, "insert into METLNOT (NOTINNOD, NOTINIDI,NOTDSTIT, NOTDSSUB, NOTDSAVN, NOTDSTXT, NOTDSRES,  NOTDTPUB, NOTDTCAD, NOTDTANY, NOTDSUSR,NOTDSLNK,NOTDSVID)  VALUES (" & codiNode & "," & dbRow("NOTINIDI") & ",'" & dbRow("NOTDSTIT").replace("'", "''") & "','" & dbRow("NOTDSSUB").replace("'", "''") & "','" & dbRow("NOTDSAVN").replace("'", "''") & "','" & dbRow("NOTDSTXT").replace("'", "''") & "','" & dbRow("NOTDSRES").replace("'", "''") & "','" & dbRow("NOTDTPUB") & "','" & dbRow("NOTDTCAD") & "','" & dbRow("NOTDTANY") & "','" & dbRow("NOTDSUSR") & "','" & dbRow("NOTDSLNK") & "','" & dbRow("NOTDSVID") & "')")
                 Next dbRow
-                novaRel = GAIA.creaRelacio(objConn, reldesti.cdarb, reldesti.infil, codiNode, 0, reldesti.cdher & "_" & reldesti.infil, rel.cdest, rel.cdsit, rel.cdord+1000,1, false, codiUsuari)
+                novaRel = GAIA.creaRelacio(objConn, reldesti.cdarb, reldesti.infil, codiNode, 0, reldesti.cdher & "_" & reldesti.infil, rel.cdest, rel.cdsit, rel.cdord + 1000, 1, False, codiUsuari)
                 'copio METLREI
                 GAIA.bdR(objConn, "SELECT * FROM METLREI  WITH(NOLOCK) WHERE REIINCOD=" & rel.incod, DS)
                 For Each dbRow In DS.Tables(0).Rows
@@ -4178,29 +4157,29 @@ END SUB 'moureNode
                     Catch
                         'no faig res si ja existia
                     End Try
-                    
+
                 Next dbRow
 
- 			 Case "FULLA AGENDA"
+            Case "FULLA AGENDA"
                 GAIA.bdR(objConn, "SELECT * FROM METLAGD WITH(NOLOCK) WHERE AGDINNOD=" & rel.infil, DS)
                 For Each dbRow In DS.Tables(0).Rows
-	
-				GAIA.bdSR(objConn, "INSERT INTO METLAGD (AGDINNOD, AGDINIDI, AGDDSTIT, AGDDSSUB, AGDDSRES, AGDDSDES, AGDDTINI,  AGDDSINS, AGDDTPUB, AGDDTCAD, AGDDSUSR, AGDDSCOM, AGDDTTIM, AGDDSEQP, AGDDSORG, AGDDSOBS, AGDIMPRE, AGDINENT,  AGDDSDUM, AGDDSDUH, AGDDTFIN, AGDDTINS, AGDDTINF, AGDSWVIS, AGDDSHOR,AGDCDJOV, AGDSWVAL, AGDSWSUS, AGDDSLNK, AGDDSVID) VALUES (" & codinode & "," & dbrow("AGDINIDI")&  ",'" & dbrow("AGDDSTIT") & "','" & dbrow("AGDDSSUB").replace("'","''")  & "','" & dbrow("AGDDSRES").replace("'","''")  & "','" & dbrow("AGDDSDES").replace("'","''")  & "','" & dbrow("AGDDTINI") & "','" & dbrow("AGDDSINS").replace("'","''") & "','" & dbrow("AGDDTPUB") & "','" & dbrow("AGDDTCAD") & "','" & dbrow("AGDDSUSR") & "','" & dbrow("AGDDSCOM").replace("'","''") & "','" & dbrow("AGDDTTIM") & "','" & dbrow("AGDDSEQP").replace("'","''") & "','" & dbrow("AGDDSORG").replace("'","''") & "','" & dbrow("AGDDSOBS").replace("'","''") & "'," & iif(IsDBNull(dbrow("AGDIMPRE")),0,dbrow("AGDIMPRE")) & "," & iif(IsDBNull(dbrow("AGDINENT")),1,dbrow("AGDINENT"))   & ",'" & dbrow("AGDDSDUM") & "','" & dbrow("AGDDSDUH") & "','" & dbrow("AGDDTFIN") & "','" & dbrow("AGDDTINS") & "','" & dbrow("AGDDTINF") & "'," & dbrow("AGDSWVIS") & ",'" & dbrow("AGDDSHOR") & "'," & dbrow("AGDCDJOV") & "," & dbrow("AGDSWVAL") & "," & dbrow("AGDSWSUS") & ",'" & dbrow("AGDDSLNK").replace("'","''") & "','" & dbrow("AGDDSVID") & "')")
-		
+
+                    GAIA.bdSR(objConn, "INSERT INTO METLAGD (AGDINNOD, AGDINIDI, AGDDSTIT, AGDDSSUB, AGDDSRES, AGDDSDES, AGDDTINI,  AGDDSINS, AGDDTPUB, AGDDTCAD, AGDDSUSR, AGDDSCOM, AGDDTTIM, AGDDSEQP, AGDDSORG, AGDDSOBS, AGDIMPRE, AGDINENT,  AGDDSDUM, AGDDSDUH, AGDDTFIN, AGDDTINS, AGDDTINF, AGDSWVIS, AGDDSHOR,AGDCDJOV, AGDSWVAL, AGDSWSUS, AGDDSLNK, AGDDSVID) VALUES (" & codinode & "," & dbrow("AGDINIDI") & ",'" & dbrow("AGDDSTIT") & "','" & dbrow("AGDDSSUB").replace("'", "''") & "','" & dbrow("AGDDSRES").replace("'", "''") & "','" & dbrow("AGDDSDES").replace("'", "''") & "','" & dbrow("AGDDTINI") & "','" & dbrow("AGDDSINS").replace("'", "''") & "','" & dbrow("AGDDTPUB") & "','" & dbrow("AGDDTCAD") & "','" & dbrow("AGDDSUSR") & "','" & dbrow("AGDDSCOM").replace("'", "''") & "','" & dbrow("AGDDTTIM") & "','" & dbrow("AGDDSEQP").replace("'", "''") & "','" & dbrow("AGDDSORG").replace("'", "''") & "','" & dbrow("AGDDSOBS").replace("'", "''") & "'," & iif(IsDBNull(dbrow("AGDIMPRE")), 0, dbrow("AGDIMPRE")) & "," & iif(IsDBNull(dbrow("AGDINENT")), 1, dbrow("AGDINENT")) & ",'" & dbrow("AGDDSDUM") & "','" & dbrow("AGDDSDUH") & "','" & dbrow("AGDDTFIN") & "','" & dbrow("AGDDTINS") & "','" & dbrow("AGDDTINF") & "'," & dbrow("AGDSWVIS") & ",'" & dbrow("AGDDSHOR") & "'," & dbrow("AGDCDJOV") & "," & dbrow("AGDSWVAL") & "," & dbrow("AGDSWSUS") & ",'" & dbrow("AGDDSLNK").replace("'", "''") & "','" & dbrow("AGDDSVID") & "')")
+
                 Next dbRow
-               
-                novaRel = GAIA.creaRelacio(objConn, reldesti.cdarb, reldesti.infil, codiNode, 0, reldesti.cdher & "_" & reldesti.infil, rel.cdest, rel.cdsit, rel.cdord+1000,1, false, codiUsuari)              
+
+                novaRel = GAIA.creaRelacio(objConn, reldesti.cdarb, reldesti.infil, codiNode, 0, reldesti.cdher & "_" & reldesti.infil, rel.cdest, rel.cdsit, rel.cdord + 1000, 1, False, codiUsuari)
                 'copio METLREI
                 GAIA.bdR(objConn, "SELECT * FROM METLREI  WITH(NOLOCK) WHERE REIINCOD=" & rel.incod, DS)
                 For Each dbRow In DS.Tables(0).Rows
                     Try
-				
+
                         GAIA.bdSR(objConn, "INSERT INTO METLREI VALUES (" & novaRel.incod & "," & dbRow("REIINIDI") & ",'" & dbRow("REIDTPUB") & "','" & dbRow("REIDTCAD") & "','" & dbRow("REIDSFIT") & "','" & dbRow("REIDSFI2") & "','" & dbRow("REIDSHAS") & "')")
-						
+
                     Catch
                         'no faig res si ja existia
                     End Try
-                    
+
                 Next dbRow
 
 
@@ -4211,9 +4190,9 @@ END SUB 'moureNode
             Case "FULLA INFO"
                 GAIA.bdR(objConn, "SELECT * FROM METLINF  WITH(NOLOCK) WHERE INFINNOD=" & rel.infil, DS)
                 For Each dbRow In DS.Tables(0).Rows
-                    GAIA.bdSR(objConn, "insert into METLINF (INFINNOD, INFINIDI, INFDSTIT, INFDSSUB, INFDSAVN, INFDSTXT, INFDSRES,  INFDTPUB, INFDTCAD, INFDTANY, INFDSUSR,INFDSLNK, INFDSVID, INFCDTIP, INFWNBAU, INFDSFON, INFDSPCL, INFDTPBK, INFDSPBK, INFWNREV, INFWNOAC, INFWN010)  VALUES (" & codiNode & "," & dbRow("INFINIDI") & ",'" & dbRow("INFDSTIT").replace("'", "''") & "','" & dbRow("INFDSSUB").replace("'", "''") & "','" & dbRow("INFDSAVN").replace("'", "''") & "','" & dbRow("INFDSTXT").replace("'", "''") & "','" & dbRow("INFDSRES").replace("'", "''") & "','" & dbRow("INFDTPUB") & "','" & dbRow("INFDTCAD") & "','" & dbRow("INFDTANY") & "','" & dbRow("INFDSUSR") & "','" & dbRow("INFDSLNK")  & "','" & dbRow("INFDSVID")& "'," & dbrow("INFCDTIP") & "," & dbrow("INFWNBAU") & ",'"  & dbrow("INFDSFON")  & "','" & dbrow("INFDSPCL") & "','" & dbrow("INFDTPBK") & "','" & dbrow("INFDSPBK") & "'," & dbrow("INFWNREV") & ",'" & dbrow("INFWNOAC") & "','" & dbrow("INFWN010") & "')")
+                    GAIA.bdSR(objConn, "insert into METLINF (INFINNOD, INFINIDI, INFDSTIT, INFDSSUB, INFDSAVN, INFDSTXT, INFDSRES,  INFDTPUB, INFDTCAD, INFDTANY, INFDSUSR,INFDSLNK, INFDSVID, INFCDTIP, INFWNBAU, INFDSFON, INFDSPCL, INFDTPBK, INFDSPBK, INFWNREV, INFWNOAC, INFWN010)  VALUES (" & codiNode & "," & dbRow("INFINIDI") & ",'" & dbRow("INFDSTIT").replace("'", "''") & "','" & dbRow("INFDSSUB").replace("'", "''") & "','" & dbRow("INFDSAVN").replace("'", "''") & "','" & dbRow("INFDSTXT").replace("'", "''") & "','" & dbRow("INFDSRES").replace("'", "''") & "','" & dbRow("INFDTPUB") & "','" & dbRow("INFDTCAD") & "','" & dbRow("INFDTANY") & "','" & dbRow("INFDSUSR") & "','" & dbRow("INFDSLNK") & "','" & dbRow("INFDSVID") & "'," & dbrow("INFCDTIP") & "," & dbrow("INFWNBAU") & ",'" & dbrow("INFDSFON") & "','" & dbrow("INFDSPCL") & "','" & dbrow("INFDTPBK") & "','" & dbrow("INFDSPBK") & "'," & dbrow("INFWNREV") & ",'" & dbrow("INFWNOAC") & "','" & dbrow("INFWN010") & "')")
                 Next dbRow
-                novaRel = GAIA.creaRelacio(objConn, reldesti.cdarb, reldesti.infil, codiNode, 0, reldesti.cdher & "_" & reldesti.infil, rel.cdest, rel.cdsit, rel.cdord+1000,1, false,codiUsuari)
+                novaRel = GAIA.creaRelacio(objConn, reldesti.cdarb, reldesti.infil, codiNode, 0, reldesti.cdher & "_" & reldesti.infil, rel.cdest, rel.cdsit, rel.cdord + 1000, 1, False, codiUsuari)
                 'copio METLREI
                 GAIA.bdR(objConn, "SELECT * FROM METLREI  WITH(NOLOCK) WHERE REIINCOD=" & rel.incod, DS)
                 For Each dbRow In DS.Tables(0).Rows
@@ -4223,11 +4202,11 @@ END SUB 'moureNode
                         'no faig res si ja existia
                     End Try
                 Next dbRow
-				'copio els equipaments relacionats
-				GAIA.bdr(objconn, "SELECT * FROM METLEQP WITH(NOLOCK) WHERE EQPINACT=" & rel.infil, DS)
-				For Each dbRow In DS.Tables(0).Rows
-					  GAIA.bdSR(objConn, "INSERT INTO METLEQP VALUES (" & codiNode & "," & dbrow("EQPINDIR") & ")")
-				Next dbRow 
+                'copio els equipaments relacionats
+                GAIA.bdr(objconn, "SELECT * FROM METLEQP WITH(NOLOCK) WHERE EQPINACT=" & rel.infil, DS)
+                For Each dbRow In DS.Tables(0).Rows
+                    GAIA.bdSR(objConn, "INSERT INTO METLEQP VALUES (" & codiNode & "," & dbrow("EQPINDIR") & ")")
+                Next dbRow
                 'COPIO IMATGES I DOCUMENTS
                 '    GAIA.bdR(objConn, "SELECT * FROM METLREL WHERE RELCDRSU=" & rel.incod & " AND RELCDSIT IN (96,97) ", DS)
                 '   For Each dbRow In DS.Tables(0).Rows
@@ -4236,11 +4215,11 @@ END SUB 'moureNode
 
             Case Else
                 'és un node que no té taula associada. Creant el node i la relació és suficient
-                novaRel = GAIA.creaRelacio(objConn, reldesti.cdarb, reldesti.infil, codiNode, 0, reldesti.cdher & "_" & reldesti.infil, rel.cdest, rel.cdsit, rel.cdord+1000,  1, false, codiUsuari)
+                novaRel = GAIA.creaRelacio(objConn, reldesti.cdarb, reldesti.infil, codiNode, 0, reldesti.cdher & "_" & reldesti.infil, rel.cdest, rel.cdsit, rel.cdord + 1000, 1, False, codiUsuari)
         End Select
 
         'Si no és una imatge faig copia dels continguts que pengin:
-        If Not UCase(rel.tipdsdes) = "FULLA DOCUMENT" Then            
+        If Not UCase(rel.tipdsdes) = "FULLA DOCUMENT" Then
             Dim reltmp As New clsRelacio
             GAIA.bdR(objConn, "SELECT * FROM METLREL  WITH(NOLOCK) WHERE RELCDRSU=" & rel.incod & " AND RELCDSIT <99 ", DS)
             For Each dbRow In DS.Tables(0).Rows
@@ -4257,27 +4236,27 @@ END SUB 'moureNode
 
 
 
-	 public shared Function FormataCadena(ByVal Text As object) As String
-        IF isdbnull(text) THEN
-			return "''"
-		ELSE
-		If Text.Trim = "" Then
+    Public Shared Function FormataCadena(ByVal Text As Object) As String
+        If isdbnull(text) Then
             Return "''"
         Else
-            Return "'" & Text.Trim.Replace("'", "''").replace("<p>","").replace("</p>","") & "'"
+            If Text.Trim = "" Then
+                Return "''"
+            Else
+                Return "'" & Text.Trim.Replace("'", "''").replace("<p>", "").replace("</p>", "") & "'"
+            End If
         End If
-		end if
-    End Function
-	
-	 public shared Function FormataInteger(ByVal Text As object) As String
-        IF isdbnull(text) THEN
-			return "''"
-		ELSE
-			return text
-		end if
     End Function
 
-    public shared Function FormataData(ByVal Text As String) As String
+    Public Shared Function FormataInteger(ByVal Text As Object) As String
+        If isdbnull(text) Then
+            Return "''"
+        Else
+            Return text
+        End If
+    End Function
+
+    Public Shared Function FormataData(ByVal Text As String) As String
         If Text.Trim = "" Then
             Return "1/1/1900"
         Else
@@ -4285,73 +4264,73 @@ END SUB 'moureNode
         End If
     End Function
 
-    public shared Function FormataSwitch(ByVal Valor As boolean) As String
-       If Valor Then
-				Return "'1'"
-			Else
-				Return "'0'"
-			End If
-    
-	End Function
-	
-	 public shared Function formataSwitchbd(ByVal Valor As object) As String       	    
-		valor=trim(valor)
-		If IsDbNull(Valor) THen 
-		 	return "'0'"
-		ELSE
-		   If Valor="1" Then
-				Return "'1'"
-			Else
-				Return "'0'"
-			End If
-    	END IF
-	End Function
+    Public Shared Function FormataSwitch(ByVal Valor As Boolean) As String
+        If Valor Then
+            Return "'1'"
+        Else
+            Return "'0'"
+        End If
 
-    public shared Function TractaNullData(ByVal Valor As Object) As String
-        If Convert.IsDbNull(Valor)   Then
-            Return ""
-        Else	
-			IF  valor.tostring()="" THEN 
-				return ""
-			ELSE 
-				IF CDate(valor) = CDate("1/1/1900") THEN
-					return ""
-				ELSE
-					Return CType(Valor, DateTime).Date		
-				END IF	
+    End Function
 
-			END IF
+    Public Shared Function formataSwitchbd(ByVal Valor As Object) As String
+        valor = trim(valor)
+        If IsDbNull(Valor) Then
+            Return "'0'"
+        Else
+            If Valor = "1" Then
+                Return "'1'"
+            Else
+                Return "'0'"
+            End If
         End If
     End Function
 
-    public shared Function TractaNullHora(ByVal Valor As Object) As String
-        If Convert.IsDbNull(Valor) or valor.tostring()="" Then
+    Public Shared Function TractaNullData(ByVal Valor As Object) As String
+        If Convert.IsDbNull(Valor) Then
             Return ""
         Else
-			Return CType(Valor.tostring().replace(".",":"), DateTime).TimeOfDay.ToString		
+            If valor.tostring() = "" Then
+                Return ""
+            Else
+                If CDate(valor) = CDate("1/1/1900") Then
+                    Return ""
+                Else
+                    Return CType(Valor, DateTime).Date
+                End If
+
+            End If
         End If
     End Function
 
-    public shared Function TractaNullCadena(ByVal Valor As Object) As String
+    Public Shared Function TractaNullHora(ByVal Valor As Object) As String
+        If Convert.IsDbNull(Valor) Or valor.tostring() = "" Then
+            Return ""
+        Else
+            Return CType(Valor.tostring().replace(".", ":"), DateTime).TimeOfDay.ToString
+        End If
+    End Function
+
+    Public Shared Function TractaNullCadena(ByVal Valor As Object) As String
         If Convert.IsDbNull(Valor) Then
             Return ""
         Else
             Return CStr(Valor)
         End If
     End Function
-	
-	
-	public shared Function TractaNullInteger(ByVal Valor As Object) As String
-		 If Convert.IsDbNull(Valor) Then
+
+
+    Public Shared Function TractaNullInteger(ByVal Valor As Object) As String
+        If Convert.IsDbNull(Valor) Then
             Return "0"
         Else
-			IF (valor.tostring() & "")  ="" THEN
-				return "0"
-			ELSE
-	            Return Valor.tostring()
-			END IF
+            If (valor.tostring() & "") = "" Then
+                Return "0"
+            Else
+                Return Valor.tostring()
+            End If
         End If
-	End Function
+    End Function
 
 
     '******************************************************************
@@ -4517,7 +4496,7 @@ END SUB 'moureNode
 
 
 
-   '**********************************************************************************************************************
+    '**********************************************************************************************************************
     '	Funció: Crea Relació
     '	Entrada: 
     '		pare		: node pare d'on volem penjar el node
@@ -4529,7 +4508,7 @@ END SUB 'moureNode
     '	Procés:
     '		Crea tantes relacions com instàncies del node pare. Es a dir, cerco totes les relacions que tenen al node pare i els hi penjo el fill.
     '**********************************************************************************************************************
-    Public Shared Function creaRelacioPerNode(ByVal objConn As OleDbConnection, ByVal pare As Integer, ByVal fill As Integer, ByVal posicioEstructura As Integer, ByVal situacioRelacio As Integer, ByVal ordre As Integer,Byval codiusuari as integer) As Integer
+    Public Shared Function creaRelacioPerNode(ByVal objConn As OleDbConnection, ByVal pare As Integer, ByVal fill As Integer, ByVal posicioEstructura As Integer, ByVal situacioRelacio As Integer, ByVal ordre As Integer, ByVal codiusuari As Integer) As Integer
         Dim cont As Integer = 0
 
         Dim DS As DataSet
@@ -4542,7 +4521,7 @@ END SUB 'moureNode
         For Each dbRow In DS.Tables(0).Rows
             herencia = dbRow("RELCDHER") + "_" + dbRow("RELINFIL").ToString()
 
-            GAIA.creaRelacio(objConn, dbRow("RELCDARB"), pare, fill, 0, herencia, posicioEstructura, situacioRelacio, ordre, 1, false, codiUsuari)
+            GAIA.creaRelacio(objConn, dbRow("RELCDARB"), pare, fill, 0, herencia, posicioEstructura, situacioRelacio, ordre, 1, False, codiUsuari)
             cont += 1
         Next dbRow
         DS.Dispose()
@@ -4569,24 +4548,24 @@ END SUB 'moureNode
     '******************************************************************
 
     Public Shared Function creaRelacio(ByVal objConn As OleDbConnection, ByVal arbre As Integer, ByVal pare As Integer, ByVal fill As Integer, ByVal versio As Integer, ByVal herencia As String, ByVal posicioEstructura As Integer, ByVal situacioRelacio As Integer) As clsRelacio
-        Return creaRelacio(objConn, arbre, pare, fill, versio, herencia, posicioEstructura, situacioRelacio, -1, 1, false, 0)
+        Return creaRelacio(objConn, arbre, pare, fill, versio, herencia, posicioEstructura, situacioRelacio, -1, 1, False, 0)
     End Function
 
 
 
     Public Shared Function creaRelacio(ByVal objConn As OleDbConnection, ByVal arbre As Integer, ByVal pare As Integer, ByVal fill As Integer, ByVal versio As Integer, ByVal herencia As String, ByVal posicioEstructura As Integer, ByVal situacioRelacio As Integer, ByVal ordre As Integer) As clsRelacio
-        Return creaRelacio(objConn, arbre, pare, fill, versio, herencia, posicioEstructura, situacioRelacio, ordre, 1, false, 0)
+        Return creaRelacio(objConn, arbre, pare, fill, versio, herencia, posicioEstructura, situacioRelacio, ordre, 1, False, 0)
     End Function
 
- Public Shared Function creaRelacio(ByVal objConn As OleDbConnection, ByVal arbre As Integer, ByVal pare As Integer, ByVal fill As Integer, ByVal versio As Integer, ByVal herencia As String, ByVal posicioEstructura As Integer, ByVal situacioRelacio As Integer, ByVal ordre As Integer, ByVal contingutEsVisibleAInternet As Integer) As clsRelacio
-		 Return creaRelacio(objConn, arbre, pare, fill, versio, herencia, posicioEstructura, situacioRelacio, ordre, contingutEsVisibleAInternet, false, 0)
+    Public Shared Function creaRelacio(ByVal objConn As OleDbConnection, ByVal arbre As Integer, ByVal pare As Integer, ByVal fill As Integer, ByVal versio As Integer, ByVal herencia As String, ByVal posicioEstructura As Integer, ByVal situacioRelacio As Integer, ByVal ordre As Integer, ByVal contingutEsVisibleAInternet As Integer) As clsRelacio
+        Return creaRelacio(objConn, arbre, pare, fill, versio, herencia, posicioEstructura, situacioRelacio, ordre, contingutEsVisibleAInternet, False, 0)
     End Function
- 
-    Public Shared Function creaRelacio(ByVal objConn As OleDbConnection, ByVal arbre As Integer, ByVal pare As Integer, ByVal fill As Integer, ByVal versio As Integer, ByVal herencia As String, ByVal posicioEstructura As Integer, ByVal situacioRelacio As Integer, ByVal ordre As Integer, ByVal contingutEsVisibleAInternet As Integer, byVal tractarPermisosEnDiferit as boolean) As clsRelacio
-		Return creaRelacio(objConn, arbre, pare, fill, versio, herencia, posicioEstructura, situacioRelacio, ordre, contingutEsVisibleAInternet, tractarPermisosEnDiferit, 0)
-	End Function
-	
-	Public Shared Function creaRelacio(ByVal objConn As OleDbConnection, ByVal arbre As Integer, ByVal pare As Integer, ByVal fill As Integer, ByVal versio As Integer, ByVal herencia As String, ByVal posicioEstructura As Integer, ByVal situacioRelacio As Integer, ByVal ordre As Integer, ByVal contingutEsVisibleAInternet As Integer, byVal tractarPermisosEnDiferit as boolean, byVal usuari as integer) As clsRelacio	
+
+    Public Shared Function creaRelacio(ByVal objConn As OleDbConnection, ByVal arbre As Integer, ByVal pare As Integer, ByVal fill As Integer, ByVal versio As Integer, ByVal herencia As String, ByVal posicioEstructura As Integer, ByVal situacioRelacio As Integer, ByVal ordre As Integer, ByVal contingutEsVisibleAInternet As Integer, ByVal tractarPermisosEnDiferit As Boolean) As clsRelacio
+        Return creaRelacio(objConn, arbre, pare, fill, versio, herencia, posicioEstructura, situacioRelacio, ordre, contingutEsVisibleAInternet, tractarPermisosEnDiferit, 0)
+    End Function
+
+    Public Shared Function creaRelacio(ByVal objConn As OleDbConnection, ByVal arbre As Integer, ByVal pare As Integer, ByVal fill As Integer, ByVal versio As Integer, ByVal herencia As String, ByVal posicioEstructura As Integer, ByVal situacioRelacio As Integer, ByVal ordre As Integer, ByVal contingutEsVisibleAInternet As Integer, ByVal tractarPermisosEnDiferit As Boolean, ByVal usuari As Integer) As clsRelacio
         Dim herenciapare As String
         Dim DS As DataSet
         Dim dbRow As DataRow
@@ -4597,7 +4576,7 @@ END SUB 'moureNode
         Dim sqlUpdate As String = ""
 
         'La visibilitat d'un document a dins d'un contingut es controla des del propi contingut 	
-        If situacioRelacio = 96 Or situacioRelacio = 97 or situacioRelacio = 95 Then
+        If situacioRelacio = 96 Or situacioRelacio = 97 Or situacioRelacio = 95 Then
             contingutEsVisibleAInternet = 1
             posicioEstructura = -1
         Else
@@ -4615,11 +4594,11 @@ END SUB 'moureNode
 
             If contingutEsVisibleAInternet = 0 Then
                 If rel.swvis = 1 Then
-                    sqlUpdate = "RELSWVIS=0"                  
+                    sqlUpdate = "RELSWVIS=0"
                 End If
             Else
                 If relSuperior.swvis <> rel.swvis Then
-                    sqlUpdate = "RELSWVIS=" & relSuperior.swvis                    
+                    sqlUpdate = "RELSWVIS=" & relSuperior.swvis
                 End If
             End If
             'Actualitzo l'ordre
@@ -4627,7 +4606,7 @@ END SUB 'moureNode
                 If sqlUpdate.Length > 0 Then
                     sqlUpdate += " , "
                 End If
-                sqlUpdate = "RELCDORD=" & ordre                
+                sqlUpdate = "RELCDORD=" & ordre
             End If
 
             If sqlUpdate.Length > 0 Then
@@ -4669,7 +4648,7 @@ END SUB 'moureNode
             rel.bdget(objConn, codiRElacio)
 
             relSuperior = GAIA.obtenirRelacioSuperior(objConn, rel)
-			 rel.cdrsu = relSuperior.incod
+            rel.cdrsu = relSuperior.incod
             'Actualitzo el codi de relació pare i hereto la propietat de visible a internet
 
             'GAIA.bdSR(Objconn, "UPDATE METLREL SET RELSWVIS=" & relSuperior.swvis & ", RELCDRSU=" & relSuperior.incod & " WHERE RELINCOD=" & rel.incod)
@@ -4685,22 +4664,22 @@ END SUB 'moureNode
                     GAIA.bdSR(objConn, "UPDATE METLREL SET RELCDRSU=" & relSuperior.incod & " WHERE RELINCOD=" & rel.incod)
                 End If
             End If
-			
-			
+
+
         End If
         creaRelacio = rel
-		IF usuari<>0 THEN
-			'Assigno permisos a l'usuari
-			clsPermisos.gravaPermis2(objConn,  usuari, rel, 0, 0,0,1,0,1,0,1,0,1,0,false)
-		END IF
-		
+        If usuari <> 0 Then
+            'Assigno permisos a l'usuari
+            clsPermisos.gravaPermis2(objConn, usuari, rel, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, False)
+        End If
+
         'Una vegada he creat la relació l'afegiré els permisos que s'hereten des dels nodes superiors
         If herencia = "" Or fill = 0 Then
             'no faig res
-        Else			
-			'clsPermisos.tractaPermisosHeretats(objConn, herencia, fill, "", "", tractarPermisosEnDiferit)						
-			clsPermisos.tractaPermisosHeretats2(objconn, rel, rel.infil, "", 1, 0)				 
-		End If
+        Else
+            'clsPermisos.tractaPermisosHeretats(objConn, herencia, fill, "", "", tractarPermisosEnDiferit)						
+            clsPermisos.tractaPermisosHeretats2(objconn, rel, rel.infil, "", 1, 0)
+        End If
         DS.Dispose()
     End Function 'creaRelacio
 
@@ -4943,7 +4922,7 @@ END SUB 'moureNode
         Dim nodeFullaOrg As Integer
         Dim codiNodeDesti As Integer
         Dim rel As New clsRelacio
-        Dim relArrel As New clsRelacio		
+        Dim relArrel As New clsRelacio
         Dim DS As DataSet
         Dim dbRow As DataRow
         DS = New DataSet()
@@ -4957,24 +4936,24 @@ END SUB 'moureNode
 
         If codiNodeElMeuEspai = 0 Then        'no he trobat el node i el creo				
             codiNodeElMeuEspai = insertarNode(objConn, tipusNodeElMeuEspai, "El meu espai de " + nomUsuari, codiOrg)
-            relArrel = creaRelacio(objConn, codiArbre, codiNodePare, codiNodeElMeuEspai, 0, "_" + codiNodePare.ToString(), -1, 1, -1, 1, false, codiOrg)
-		
+            relArrel = creaRelacio(objConn, codiArbre, codiNodePare, codiNodeElMeuEspai, 0, "_" + codiNodePare.ToString(), -1, 1, -1, 1, False, codiOrg)
+
             codiRelacio = relArrel.incod
             GAIA.bdSR(objConn, "INSERT INTO METLNES (NESINNOD,NESINIDI,NESDSTIT, NESDSUSR,NESCDORG) VALUES (" + codiNodeElMeuEspai.ToString() + ",1, 'El meu espai de " + nomUsuari + "',0," + codiOrg.ToString() + ")")
             ' Gravo el permis manual, amb arbre=0 perque és manual
             'clsPermisos.gravaPermis(objConn, 3, codiOrg, 0, 0, rel)
             'clsPermisos.gravaPermis(objConn, 10, 115969, 0, 0, rel)
 
-			
-			clsPermisos.gravaPermis2(objConn,  codiOrg, relArrel, 0, 0,0,1,0,0,0,0,0,0,0,false)
-			
-			clsPermisos.gravaPermis2(objConn,  115969, relArrel, 0, 0,0,0,0,0,0,0,0,0,1,false)
-			
-      		clsPermisos.gravaPermis2(objConn,  49730, relArrel, 0, 0,0,0,0,0,0,0,0,0,1,false)
+
+            clsPermisos.gravaPermis2(objConn, codiOrg, relArrel, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, False)
+
+            clsPermisos.gravaPermis2(objConn, 115969, relArrel, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, False)
+
+            clsPermisos.gravaPermis2(objConn, 49730, relArrel, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, False)
             '*************************************************************************
             ' Poso l'usuari en l'arbre d'usuaris, a la carpeta de sense classificar
             '*************************************************************************	
-            creaRelacio(objConn, 11, 151203, codiFulla, 0, "_56261_115969_151203", -1, 1,-1, 1, false, codiOrg)
+            creaRelacio(objConn, 11, 151203, codiFulla, 0, "_56261_115969_151203", -1, 1, -1, 1, False, codiOrg)
         End If
         ' tinc el node de "elmeuespai" de la persona (codiNode)  i a l'arbre "elMeuEspai" (nodePare)			
 
@@ -4988,50 +4967,50 @@ END SUB 'moureNode
         If codiNodeSenseClassificar = 0 Then
 
             codiNodeSenseClassificar = insertarNode(objConn, tipusNodeElMeuEspai, "Sense classificar", codiOrg)
-            rel = creaRelacio(objConn, codiArbre, codiNodeElMeuEspai, codiNodeSenseClassificar, 0, "_" + codiNodePare.ToString() + "_" + codiNodeElMeuEspai.ToString(), -1, 1, -1, 1, false, codiOrg)
+            rel = creaRelacio(objConn, codiArbre, codiNodeElMeuEspai, codiNodeSenseClassificar, 0, "_" + codiNodePare.ToString() + "_" + codiNodeElMeuEspai.ToString(), -1, 1, -1, 1, False, codiOrg)
             codiRelacio = rel.incod
             'clsPermisos.gravaPermis(objConn, 3, codiOrg, 0, 0, rel)
             'clsPermisos.gravaPermis(objConn, 10, 115969, 0, 0, rel)
-			
-			
-			clsPermisos.gravaPermis2(objConn,  codiOrg, rel, 0, 0,0,1,0,0,0,0,0,0,0,false)
-			clsPermisos.gravaPermis2(objConn,  115969, rel, 0, 0,0,0,0,0,0,0,0,0,1,false)
-      
-	  
+
+
+            clsPermisos.gravaPermis2(objConn, codiOrg, rel, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, False)
+            clsPermisos.gravaPermis2(objConn, 115969, rel, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, False)
+
+
             GAIA.bdSR(objConn, "INSERT INTO METLNES (NESINNOD,NESINIDI,NESDSTIT, NESDSUSR,NESCDORG) VALUES (" + codiNodeSenseClassificar.ToString() + ",1,'Sense classificar','0'," + codiOrg.ToString() + ")")
         End If
         If nomCarpetaBasica = "" Or nomCarpetaBasica = "Sense classificar" Then
             codiNodeDesti = codiNodeSenseClassificar
         End If
-   
+
 
         '*************************************************************************
         ' Afegeixo el contingut a l'arbre personal
         '*************************************************************************						
         If codiFulla <> 0 And tipusFulla <> 13 Then 'una fulla organigrama no la posaré al sense classificar del creador
             'Relaciono la fulla que volen insertar amb el node "sense classificar"
-            rel = creaRelacio(objConn, codiArbre, codiNodeDesti, codiFulla, 0, "_" + codiNodePare.ToString() + "_" + codiNodeElMeuEspai.ToString() + "_" + codiNodeDesti.ToString(), -1, 1,-1, 1, false, codiOrg)
+            rel = creaRelacio(objConn, codiArbre, codiNodeDesti, codiFulla, 0, "_" + codiNodePare.ToString() + "_" + codiNodeElMeuEspai.ToString() + "_" + codiNodeDesti.ToString(), -1, 1, -1, 1, False, codiOrg)
             codiRelacio = rel.incod
             insertaNodeArbrePersonal = rel
             'si és un tràmit només dono permís d'editor, a l'usuari i als grups d'organigrama als que pertany
             If tipusFulla = 51 Then
                 'clsPermisos.gravaPermis(objConn, 3, codiOrg, 0, 0, rel)
-				clsPermisos.gravaPermis2(objConn,  codiOrg, rel, 0, 0,0,1,0,0,0,0,0,0,0,false)
-				clsPermisos.gravaPermis2(objConn,  115969, rel, 0, 0,0,0,0,0,0,0,0,0,1,false)
-				clsPermisos.gravaPermis2(objConn,  49730, relArrel, 0, 0,0,0,0,0,0,0,0,0,1,false)
-	  
-				'el grup genéric "tràmits"=178621 no l'agafo. 
+                clsPermisos.gravaPermis2(objConn, codiOrg, rel, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, False)
+                clsPermisos.gravaPermis2(objConn, 115969, rel, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, False)
+                clsPermisos.gravaPermis2(objConn, 49730, relArrel, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, False)
+
+                'el grup genéric "tràmits"=178621 no l'agafo. 
                 GAIA.bdR(objConn, " SELECT RELINPAR as pareOrg FROM METLREL WITH(NOLOCK)  WHERE RELCDHER LIKE '_56261%' AND RELINPAR<>178621 AND RELINFIL=" & codiOrg, DS)
                 For Each dbRow In DS.Tables(0).Rows
                     'clsPermisos.gravaPermis(objConn, 3, dbRow("pareOrg"), 0, 0, rel)
-					clsPermisos.gravaPermis2(objConn,   dbRow("pareOrg"), rel, 0, 0,0,1,0,0,0,0,0,0,0,false)
+                    clsPermisos.gravaPermis2(objConn, dbRow("pareOrg"), rel, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, False)
 
                 Next dbRow
             Else
                 'clsPermisos.gravaPermis(objConn, 1, codiOrg, 0, 0, rel)
-				
-				clsPermisos.gravaPermis2(objConn,   codiOrg, rel, 0, 1,0,0,0,0,0,0,0,0,0,false)
-				
+
+                clsPermisos.gravaPermis2(objConn, codiOrg, rel, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, False)
+
             End If
             GAIA.log(objConn, rel, codiOrg, "", TAINSERTAR)
         Else
@@ -5040,8 +5019,8 @@ END SUB 'moureNode
         insertaNodeArbrePersonal = rel
 
 
-		clsPermisos.gravaPermis2(objConn,  115969, relArrel, 0, 0,0,0,0,0,0,0,0,0,1,false)
-      	clsPermisos.gravaPermis2(objConn,  49730, relArrel, 0, 0,0,0,0,0,0,0,0,0,1,false)
+        clsPermisos.gravaPermis2(objConn, 115969, relArrel, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, False)
+        clsPermisos.gravaPermis2(objConn, 49730, relArrel, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, False)
 
 
         DS.Dispose()
@@ -5138,19 +5117,19 @@ END SUB 'moureNode
         Dim DS As DataSet
         Dim dbRow As DataRow
         DS = New DataSet()
-		if usuari="adminbackup" then
-			usuari="msoria"
-		END IF
-		IF usuari="" THEN
-	        nifUsuari = "99999999"			
-		ELSE
-			GAIA.bdR(objConn, "SELECT top 1 FORDSNIF, RELCDSIT FROM METLFOR  WITH(NOLOCK), METLREL WITH(NOLOCK)  WHERE RELCDSIT<98 AND RELINFIL=FORINNOD AND FORDSWIN like '" + usuari + "' AND FORINIDI=1 ORDER BY RELCDSIT ASC", DS)
-			If DS.Tables(0).Rows.Count > 0 Then
-				dbRow = DS.Tables(0).Rows(0)
-				nifUsuari = dbRow("FORDSNIF")
-				usuariActiu = TRUE
-			End If
-		END IF
+        If usuari = "adminbackup" Then
+            usuari = "msoria"
+        End If
+        If usuari = "" Then
+            nifUsuari = "99999999"
+        Else
+            GAIA.bdR(objConn, "SELECT top 1 FORDSNIF, RELCDSIT FROM METLFOR  WITH(NOLOCK), METLREL WITH(NOLOCK)  WHERE RELCDSIT<98 AND RELINFIL=FORINNOD AND FORDSWIN like '" + usuari + "' AND FORINIDI=1 ORDER BY RELCDSIT ASC", DS)
+            If DS.Tables(0).Rows.Count > 0 Then
+                dbRow = DS.Tables(0).Rows(0)
+                nifUsuari = dbRow("FORDSNIF")
+                usuariActiu = True
+            End If
+        End If
         DS.Dispose()
     End Function        'NIF Usuari
 
@@ -5185,7 +5164,7 @@ END SUB 'moureNode
         Dim DS As DataSet
         Dim dbRow As DataRow
         DS = New DataSet()
-        trobaNodeUsuari =0 
+        trobaNodeUsuari = 0
         GAIA.bdR(objConn, "SELECT FORINNOD FROM METLFOR WITH(NOLOCK)  WHERE FORDSNIF like '" + strNif + "' AND FORINIDI=1", DS)
 
         If DS.Tables(0).Rows.Count > 0 Then
@@ -5559,9 +5538,9 @@ END SUB 'moureNode
                     relDesti.bdget(objConn, dbRow("RELINCOD"))
                     GAIA.bdSR(objConn, "UPDATE METLREL SET RELCDARB=" & codiArbreNou & ",RELCDHER='" & nodePath & "',RELSWVIS=" & contingutEsVisibleAInternet & " WHERE RELINCOD=" & dbRow("RELINCOD"))
                     If relDesti.cdsit < 95 Then
-                        GAIA.afegeixAccioManteniment(objConn, relDesti, 0, 99,Now, Now, relDesti, 1, posicioEstructuraNova,true)
-						
-						
+                        GAIA.afegeixAccioManteniment(objConn, relDesti, 0, 99, Now, Now, relDesti, 1, posicioEstructuraNova, True)
+
+
                     End If
 
 
@@ -5643,11 +5622,11 @@ END SUB 'moureNode
 
             sql = sql + ", RELSWVIS=" & contingutEsVisibleAInternet
             sql = sql & ", RELCDRSU = " & relSuperior.incod
-			
-			if relOrigen.cdsit=98 THEN                
-				estatRelacioNova = 98
-			END IF
-			
+
+            If relOrigen.cdsit = 98 Then
+                estatRelacioNova = 98
+            End If
+
             bdSR(objConn, " UPDATE METLREL SET " & sql.ToString() & " WHERE RELINCOD=" & relOrigen.incod)
             If relOrigen.cdsit < 95 Then
 
@@ -5659,13 +5638,13 @@ END SUB 'moureNode
             End If
         End If
 
-		if estatRelacioNova = 98 or estatRelacioNova=99 THEN
-			GAIA.esborrarCelles(nothing,"CELCDNOD=" & relDesti.infil)
-			'gaia.bdsr(objconn, "DELETE FROM METLCEL WHERE CELCDNOD=" & relDesti.infil)
-		END IF
+        If estatRelacioNova = 98 Or estatRelacioNova = 99 Then
+            GAIA.esborrarCelles(Nothing, "CELCDNOD=" & relDesti.infil)
+            'gaia.bdsr(objconn, "DELETE FROM METLCEL WHERE CELCDNOD=" & relDesti.infil)
+        End If
         'he de tractar els permisos heretats a la relació de destí, que és on s'han arrossegat els continguts.
         'clsPermisos.tractaPermisosHeretats(objConn, "", relDesti.infil, "", "", 1)
-		clsPermisos.tractaPermisosHeretats2(objConn, relOrigen, relOrigen.infil, "", 1, 1)
+        clsPermisos.tractaPermisosHeretats2(objConn, relOrigen, relOrigen.infil, "", 1, 1)
 
         DS.Dispose()
     End Sub 'modificaRelacio
@@ -6045,34 +6024,34 @@ END SUB 'moureNode
     '	Entrada:  codi de node i codiIdioma del contingut que volem comprovar
     '						
     '	Procés: retorna 1 si trobat, 0 si no trobat
-	'   29-1-2019 modificada para GAIA2
+    '   29-1-2019 modificada para GAIA2
     '************************************************************************************************************
- Public Shared Function existeixContingut(ByVal objConn As OleDbConnection, ByVal codiNode As Integer, ByVal codiRelacio As Integer, ByVal codiIdioma As Integer) As Integer
+    Public Shared Function existeixContingut(ByVal objConn As OleDbConnection, ByVal codiNode As Integer, ByVal codiRelacio As Integer, ByVal codiIdioma As Integer) As Integer
 
         Dim DS As DataSet
         Dim dbRow As DataRow
-		Dim rel As New clsRelacio
+        Dim rel As New clsRelacio
         Dim tabla As String = ""
 
         DS = New DataSet()
         existeixContingut = 0
 
         If codiRelacio <> 0 Then
-			rel.bdget(objConn, codiRelacio)
+            rel.bdget(objConn, codiRelacio)
             GAIA.bdR(objConn, "SELECT * FROM METLREL WITH(NOLOCK) ,METLTBL WITH(NOLOCK) ,METLNOD WITH(NOLOCK)  WHERE RELINCOD=" + codiRelacio.ToString() + " AND NODINNOD=RELINFIL AND  NODCDTIP=TBLINTFU AND RELCDSIT<98", DS)
-        	If esGAIA2(objConn, rel.infil) Then
-                tabla = "2"
-        	End If
-		Else
-            GAIA.bdR(objConn, "SELECT * FROM METLNOD WITH(NOLOCK) ,METLTBL  WITH(NOLOCK) WHERE NODINNOD=" + codiNode.ToString() + " AND NODCDTIP=TBLINTFU", DS)
-        	If esGAIA2(objConn, codiNode) Then
+            If esGAIA2(objConn, rel.infil) Then
                 tabla = "2"
             End If
-		End If
+        Else
+            GAIA.bdR(objConn, "SELECT * FROM METLNOD WITH(NOLOCK) ,METLTBL  WITH(NOLOCK) WHERE NODINNOD=" + codiNode.ToString() + " AND NODCDTIP=TBLINTFU", DS)
+            If esGAIA2(objConn, codiNode) Then
+                tabla = "2"
+            End If
+        End If
         If DS.Tables(0).Rows.Count > 0 Then
             dbRow = DS.Tables(0).Rows(0)
             codiNode = dbRow("NODINNOD")
-            Dim seleccioIdioma as string = ""
+            Dim seleccioIdioma As String = ""
             If codiIdioma <> 99 Then
                 seleccioIdioma = dbRow("TBLDSTXT").substring(4, 3) & "INIDI=" & codiIdioma & " AND "
             End If
@@ -6101,7 +6080,7 @@ END SUB 'moureNode
         Dim dbRow As DataRow
         heretarPropietatsWeb = 1
         DS = New DataSet()
-		'Teresa: incluyo GAIA2
+        'Teresa: incluyo GAIA2
         GAIA.bdr(objConn, "SELECT WEBTPHER,WEBWNMTH FROM METLWEB WITH(NOLOCK) , METLREL WITH(NOLOCK)  WHERE RELINFIL=WEBINNOD AND RELINCOD=" + codiRelacio.ToString() & " UNION SELECT WEBTPHER,WEBWNMTH FROM METLWEB2 WITH(NOLOCK), METLREL WITH(NOLOCK) WHERE RELINFIL=WEBINNOD AND RELINCOD=" & codiRelacio.ToString(), DS)
         If DS.Tables(0).Rows.Count > 0 Then
             dbRow = DS.Tables(0).Rows(0)
@@ -6167,8 +6146,8 @@ END SUB 'moureNode
 
     Public Shared Function pintaEstructura(ByVal objConn As OleDbConnection, ByRef arrayEstructura As String(), ByVal arrayAtributs As String(), ByVal arrayTVer As String(), ByVal arrayTHor As String(), ByVal veureEstructura As Integer, ByVal descripcio As String, ByVal border As Integer, ByVal sufix As String, ByVal arrayDescripcions As String(), ByVal arrayPlt As String(), ByVal modeEdicio As Integer) As String
         Dim res As String = ""
-        Dim item,hreftxt1, hreftxt2, txt,nomDivisio,selectPlantilles As String
-        Dim cont,i,orden As Integer
+        Dim item, hreftxt1, hreftxt2, txt, nomDivisio, selectPlantilles As String
+        Dim cont, i, orden As Integer
         Dim idxAtributs, idxAtributsSeguent As Integer
         Dim pintarDesc As Boolean = False
         Dim PlantillesPerCelda As String()
@@ -6177,7 +6156,7 @@ END SUB 'moureNode
         hreftxt2 = ""
         hreftxt1 = ""
         Dim HeightTotal As Integer = 0
-		
+
         If arrayEstructura.Length = 1 Then
             If veureEstructura = 1 Then
                 If (Not arrayDescripcions Is Nothing) Then
@@ -6219,7 +6198,7 @@ END SUB 'moureNode
                     If (Not arrayDescripcions Is Nothing) Then
                         If (arrayDescripcions.Length > 0) Then
                             If (arrayDescripcions(orden).Trim.Length > 0) Then
-                               	'faig un filtre de condicions per mostrar o no una cel·la"
+                                'faig un filtre de condicions per mostrar o no una cel·la"
                                 stronclick = " onclick=""seleccionaCelda('t" + idxAtributs.ToString() + "','" + nomDivisio + "');activaCamps(true);return false;"""
                                 hreftxt1 = "<div align=""center""><a href=""#"" onclick=""seleccionaCelda('t" + idxAtributs.ToString() + "','" + nomDivisio + "');activaCamps(false);return false;"" class=""text06 t90"
                                 hreftxt2 = "<div align=""center""><a href=""#"" onclick=""seleccionaCelda('t" + idxAtributs.ToString() + "','" + nomDivisio + "');activaCamps(true);return false;"" class=""text06 t90"
@@ -6393,8 +6372,8 @@ END SUB 'moureNode
 
             esForm = dbRowFullaWeb("WEBSWFRM")
             esEML = dbRowFullaWeb("WEBSWEML") 'Es email?
-			
-			If esEML = "S" Then  'Teresa: para poder conservar el historico de boletines, se añade la fecha de publicacion al nombre del archivo.
+
+            If esEML = "S" Then  'Teresa: para poder conservar el historico de boletines, se añade la fecha de publicacion al nombre del archivo.
 
                 Dim pos As String = InStr(nomFulla, ".")
                 nomFulla = nomFulla.Substring(0, pos - 1) & CDate(Now).ToString("yyyyMMdd") & ".aspx"
@@ -6403,7 +6382,7 @@ END SUB 'moureNode
                 urlDesti = urlDesti.Substring(0, pos - 1) & CDate(Now).ToString("yyyyMMdd") & ".aspx"
 
             End If
-			
+
             esSSL = dbRowFullaWeb("WEBSWSSL") 'Es ssl?
 
             If dbRowFullaWeb("WEBDSDES").length > 0 Then  'Description
@@ -6435,32 +6414,32 @@ END SUB 'moureNode
         Next i
 
         'Represento les cel·les que tinguin contingut associat
-		' Teresa: los idCel no tienen porque ser correlativos, puedo haber borrado celdas. Por ejempo que una página contenga 2 celdas que sean la d3 y d4
-        
-		'For Each idCel In strIdCel.Split(",")
-		For i As Integer = 0 To arrayEstructura.Length - 2
+        ' Teresa: los idCel no tienen porque ser correlativos, puedo haber borrado celdas. Por ejempo que una página contenga 2 celdas que sean la d3 y d4
+
+        'For Each idCel In strIdCel.Split(",")
+        For i As Integer = 0 To arrayEstructura.Length - 2
             idCel = arrayEstructura(i + 1).Substring(0, arrayEstructura(i + 1).IndexOf("'"))
             '*******************************************************************
             ' POSO LES LLIBRERIES DE CODI WEB 
             '*******************************************************************                
             ' Abans del contingut
-			If arrayLCW.Length > i Then
+            If arrayLCW.Length > i Then
                 If (arrayLCW(i).Trim().Length > 0) Then
                     For Each item In arrayLCW(i).Split("|")
                         codiWeb = GAIA.trobaCodiWeb2(objConn, plantilla, item, idioma, rel, relIni, 1, idCel, "", 0, codiUsuari, "", tagsMeta)
                     Next item
                 End If
-			End If
+            End If
             'If arrayLCW.Length > idCel Then
-                'If (arrayLCW(idCel).Trim().Length > 0) Then
-                    'For Each item In arrayLCW(idCel).Split("|")
-                        'codiWeb = GAIA.trobaCodiWeb2(objConn, plantilla, item, idioma, rel, relIni, 1, idCel, "", 0, codiUsuari, "", tagsMeta)
-                    'Next item
-                'End If
+            'If (arrayLCW(idCel).Trim().Length > 0) Then
+            'For Each item In arrayLCW(idCel).Split("|")
+            'codiWeb = GAIA.trobaCodiWeb2(objConn, plantilla, item, idioma, rel, relIni, 1, idCel, "", 0, codiUsuari, "", tagsMeta)
+            'Next item
+            'End If
             'End If
 
             'LC2 Després del contingut
-			If arrayLC2.Length > i Then
+            If arrayLC2.Length > i Then
                 If (arrayLC2(i).Trim().Length > 0) Then
                     For Each item In arrayLC2(i).Split("|")
                         codiWeb = GAIA.trobaCodiWeb2(objConn, plantilla, item, idioma, rel, relIni, 1, idCel, "", 0, codiUsuari, "", tagsMeta)
@@ -6468,11 +6447,11 @@ END SUB 'moureNode
                 End If
             End If
             'If arrayLC2.Length > idCel Then
-                'If (arrayLC2(idCel).Trim().Length > 0) Then
-                    'For Each item In arrayLC2(idCel).Split("|")
-                        'codiWeb2 = GAIA.trobaCodiWeb2(objConn, plantilla, item, idioma, rel, relIni, 1, idCel, "", 0, codiUsuari, "", tagsMeta)
-                    'Next item
-                'End If
+            'If (arrayLC2(idCel).Trim().Length > 0) Then
+            'For Each item In arrayLC2(idCel).Split("|")
+            'codiWeb2 = GAIA.trobaCodiWeb2(objConn, plantilla, item, idioma, rel, relIni, 1, idCel, "", 0, codiUsuari, "", tagsMeta)
+            'Next item
+            'End If
             'End If
 
             strsql = "select RELCDEST,isnull(REIINCOD, 0) AS REIINCOD, isnull(REIDTCAD, '1/1/1900') AS REIDTCAD, isnull(REIDTPUB, '1/1/1900') AS REIDTPUB, NODCDTIP FROM METLREL WITH(NOLOCK) INNER JOIN METLNOD WITH(NOLOCK) ON RELINFIL=NODINNOD LEFT OUTER JOIN METLREI WITH(NOLOCK) ON RELINCOD=REIINCOD AND REIINIDI=1 WHERE RELCDRSU=" & rel.incod & " AND  RELCDSIT<95 AND RELCDEST=" & idCel
@@ -6525,7 +6504,7 @@ END SUB 'moureNode
                             'DS2 = New DataSet()
                             'GAIA.bdr(objConn, "SELECT RELINCOD FROM METLREL WHERE RELINPAR=" & arrayPathRelacio(cont), DS2)
                             'If DS2.Tables(0).Rows.Count > 0 Then
-                                'relInf.bdget(objConn, DS2.Tables(0).Rows(0)("RELINCOD"))
+                            'relInf.bdget(objConn, DS2.Tables(0).Rows(0)("RELINCOD"))
                             'End If
 
                             'Tinc un node web, llegeixo l'estructura
@@ -6562,7 +6541,7 @@ END SUB 'moureNode
                             'DS2 = New DataSet()
                             'GAIA.bdr(objConn, "SELECT RELINCOD FROM METLREL WHERE RELINPAR=" & arrayPathRelacio(cont), DS2)
                             'If DS2.Tables(0).Rows.Count > 0 Then
-                                'relInf.bdget(objConn, DS2.Tables(0).Rows(0)("RELINCOD"))
+                            'relInf.bdget(objConn, DS2.Tables(0).Rows(0)("RELINCOD"))
                             'End If
 
                             'Tinc un node web, llegeixo l'estructura
@@ -6617,7 +6596,7 @@ END SUB 'moureNode
                             'DS2 = New DataSet()
                             'GAIA.bdr(objConn, "SELECT RELINCOD FROM METLREL WHERE RELINPAR=" & arrayPathRelacio(cont), DS2)
                             'If DS2.Tables(0).Rows.Count > 0 Then
-                                'relInf.bdget(objConn, DS2.Tables(0).Rows(0)("RELINCOD"))
+                            'relInf.bdget(objConn, DS2.Tables(0).Rows(0)("RELINCOD"))
                             'End If
                             'Node
                             DS2 = New DataSet()
@@ -6655,8 +6634,8 @@ END SUB 'moureNode
 
                                 esForm = dbRow("WEBSWFRM")                                                                      'Te un formulari de servidor?
                                 esEML = dbRow("WEBSWEML")                                                                       'Es un correu electróònic?
-                                
-								 If esEML = "S" Then  'Teresa: para poder conservar el historico de boletines, se añade la fecha de publicacion al nombre del archivo.
+
+                                If esEML = "S" Then  'Teresa: para poder conservar el historico de boletines, se añade la fecha de publicacion al nombre del archivo.
 
                                     Dim pos As String = InStr(fDesti, ".")
                                     fDesti = fDesti.Substring(0, pos - 1) & CDate(Now).ToString("yyyyMMdd") & ".aspx"
@@ -6665,8 +6644,8 @@ END SUB 'moureNode
                                     urlDesti = urlDesti.Substring(0, pos - 1) & CDate(Now).ToString("yyyyMMdd") & ".aspx"
 
                                 End If
-								
-								esSSL = dbRow("WEBSWSSL")                                                                       'Es una pàgina segura?
+
+                                esSSL = dbRow("WEBSWSSL")                                                                       'Es una pàgina segura?
                                 midaHoMaxima = dbRow("WEBWNMTH")                                                                'Mida horitzontal maxima
 
                                 If dbRow("WEBDSDES").length > 0 Then                                                            'Descripció
@@ -7600,9 +7579,9 @@ END SUB 'moureNode
                                                 '  strTmp = strTmp.Replace("?", "?" & idioma)
                                             End If
                                             If esEML = "N" Then
-                                                celdaFormateada = celdaFormateada.Substring(0, pospunt - 1) & "<a href=""" & GAIA.netejaHTML(strTmp) & """ " & estilsCSSSenseFons  & " title=""" & GAIA.obtenirTitolContingut(objConn, rel, idioma) & """>" & celdaFormateada.Substring(pospunt - 1, InStrRev(celdaFormateada, "</div>") - pospunt) & "</a></div>"
+                                                celdaFormateada = celdaFormateada.Substring(0, pospunt - 1) & "<a href=""" & GAIA.netejaHTML(strTmp) & """ " & estilsCSSSenseFons & " title=""" & GAIA.obtenirTitolContingut(objConn, rel, idioma) & """>" & celdaFormateada.Substring(pospunt - 1, InStrRev(celdaFormateada, "</div>") - pospunt) & "</a></div>"
                                             Else
-                                                celdaFormateada = celdaFormateada.Substring(0, pospunt - 1) & "<a href=""" & GAIA.netejaHTML(strTmp) & """ " & estilsCSSSenseFons  & " title=""" & GAIA.obtenirTitolContingut(objConn, rel, idioma) & """>" & celdaFormateada.Substring(pospunt - 1) & "</a>"
+                                                celdaFormateada = celdaFormateada.Substring(0, pospunt - 1) & "<a href=""" & GAIA.netejaHTML(strTmp) & """ " & estilsCSSSenseFons & " title=""" & GAIA.obtenirTitolContingut(objConn, rel, idioma) & """>" & celdaFormateada.Substring(pospunt - 1) & "</a>"
                                             End If
                                         End If
                                 End Select
@@ -7738,7 +7717,7 @@ END SUB 'moureNode
     '					Prepara la crida a la funció recursiva "dibuixax" i retorna el contingut dins de "html" i "css"
     '***********************************************************************************************************				
 
-Public Shared Sub dibuixaPreview(ByVal objConn As OleDbConnection, ByVal plantilla As clsPlantilla, ByVal estructura As String, ByVal formaEstructura As String(), ByVal thor As String, ByVal tver As String, ByVal tcont As String, ByVal tplant As String, ByRef html As String, ByRef css As String, ByVal tMaxhor As Double, ByVal tMaxVer As Double, ByVal prefix As String, ByVal rel As clsRelacio, ByVal pathRelacio As String, ByRef fDesti As String, ByRef urlDesti As String, ByRef nrocontingut As Integer, ByRef llistaDocuments As String(), ByRef publicar As Integer, ByVal idioma As Integer, ByVal estilCSS As String, ByVal relIni As clsRelacio, ByVal dataSimulacio As DateTime, ByVal codiUsuari As Integer, ByVal autolink As Integer, ByVal plantillesSecundaries As String, ByVal heretaPropietatsWeb As Boolean, ByVal estilFLW As String, ByRef titol As String, ByRef nivell As Integer, ByRef estilbody As String, ByVal llistaCND As String, ByRef esForm As String, ByRef esEML As String, ByRef esSSL As String, ByRef tagsMeta As String, ByRef htmlPeu As String, ByRef strCSSPantalla As String, ByRef strCSSImpressora As String, ByVal llistaNivellsTextos As String, Optional ByVal pareTeEnllac As Boolean = False)
+    Public Shared Sub dibuixaPreview(ByVal objConn As OleDbConnection, ByVal plantilla As clsPlantilla, ByVal estructura As String, ByVal formaEstructura As String(), ByVal thor As String, ByVal tver As String, ByVal tcont As String, ByVal tplant As String, ByRef html As String, ByRef css As String, ByVal tMaxhor As Double, ByVal tMaxVer As Double, ByVal prefix As String, ByVal rel As clsRelacio, ByVal pathRelacio As String, ByRef fDesti As String, ByRef urlDesti As String, ByRef nrocontingut As Integer, ByRef llistaDocuments As String(), ByRef publicar As Integer, ByVal idioma As Integer, ByVal estilCSS As String, ByVal relIni As clsRelacio, ByVal dataSimulacio As DateTime, ByVal codiUsuari As Integer, ByVal autolink As Integer, ByVal plantillesSecundaries As String, ByVal heretaPropietatsWeb As Boolean, ByVal estilFLW As String, ByRef titol As String, ByRef nivell As Integer, ByRef estilbody As String, ByVal llistaCND As String, ByRef esForm As String, ByRef esEML As String, ByRef esSSL As String, ByRef tagsMeta As String, ByRef htmlPeu As String, ByRef strCSSPantalla As String, ByRef strCSSImpressora As String, ByVal llistaNivellsTextos As String, Optional ByVal pareTeEnllac As Boolean = False)
 
 
         Dim tanca As Integer
@@ -7753,14 +7732,14 @@ Public Shared Sub dibuixaPreview(ByVal objConn As OleDbConnection, ByVal plantil
         Dim htmlIni As String
 
 
-       
+
         htmlIni = html
         codiRelacio = rel.incod
 
         cssini = (css.Length = 0)
         tanca = 0
         If cssini Then
-            If (tMaxhor <> 0) And prefix <> "p"  And prefix <> "f"   Then
+            If (tMaxhor <> 0) And prefix <> "p" And prefix <> "f" Then
                 css += "<style type=""text/css"" media=""screen""><!-- .body {margin:0px; font-size: 100%;} #contenidor{width: " + tMaxhor.ToString() + "px; min-height:" + tMaxVer.ToString() + "px; margin-left:auto; margin-right:auto;} #contingut{clear:both}"
             Else
                 css += "<style type=""text/css""><!--"
@@ -7849,7 +7828,7 @@ Public Shared Sub dibuixaPreview(ByVal objConn As OleDbConnection, ByVal plantil
 
             End If
         End If
-     
+
 
 
         hEstructura = Nothing
@@ -8515,7 +8494,7 @@ Public Shared Sub dibuixaPreview(ByVal objConn As OleDbConnection, ByVal plantil
 
                         htmlNou &= htmlTMP
 
-                       'guardo el html resultant en METLCEL
+                        'guardo el html resultant en METLCEL
                         If rel.incod = relIni.incod Then
                             Try
 
@@ -8717,7 +8696,7 @@ Public Shared Sub dibuixaPreview(ByVal objConn As OleDbConnection, ByVal plantil
 
 
     End Function 'dibuixaPreviewRec
-   
+
     Public Shared Sub datesPublicacio(ByVal objconn As OleDbConnection, ByVal rel As clsRelacio, ByVal idioma As Integer, ByRef dataIni As DateTime, ByRef dataFi As DateTime)
         Dim sSQL As String
         Dim DS As DataSet
@@ -8730,7 +8709,7 @@ Public Shared Sub dibuixaPreview(ByVal objConn As OleDbConnection, ByVal plantil
         dataIniRel = "1/1/2050"
         dataFiRel = "1/1/2050"
 
-        If rel.cdsit = 97 Or rel.cdsit = 96   Or rel.cdsit = 95  Then
+        If rel.cdsit = 97 Or rel.cdsit = 96 Or rel.cdsit = 95 Then
             dataIni = CDate("01/01/1900")
             dataFi = CDate("01/01/2050")
         Else
@@ -8768,7 +8747,7 @@ Public Shared Sub dibuixaPreview(ByVal objConn As OleDbConnection, ByVal plantil
         Dim prefixCamp As String = ""
         DS = New DataSet()
         'cerco dins de la taula on hi ha el contingut les dates de caducitat i publicació
- 		If idioma = 99 Or idioma = 0 Then idioma = 1
+        If idioma = 99 Or idioma = 0 Then idioma = 1
         GAIA.bdR(objconn, "SELECT TBLDSTXT FROM METLNOD WITH(NOLOCK) , METLTBL WITH(NOLOCK)  WHERE NODINNOD=" & codiNode.ToString() & " AND  NODCDTIP=TBLINTFU AND TBLINTFU<>9  ", DS)
         If DS.Tables(0).Rows.Count > 0 Then
             dbRow = DS.Tables(0).Rows(0)
@@ -8776,25 +8755,25 @@ Public Shared Sub dibuixaPreview(ByVal objConn As OleDbConnection, ByVal plantil
         End If
         dataIni = CDate("01/01/1900")
         dataFi = CDate("01/01/2100")
-        If taula <> "METLNWE" AND taula<>"METLFOR" Then
+        If taula <> "METLNWE" And taula <> "METLFOR" Then
             If taula.Length > 0 Then
-			
-				try
-					prefixCamp = taula.Substring(4).Trim()
-					GAIA.bdR(objconn, "SELECT  * FROM  " + taula.ToString() + " WITH(NOLOCK)  WHERE " + prefixCamp.ToString() + "INNOD=" + codiNode.ToString() + " AND " + prefixCamp.ToString() + "INIDI=" + idioma.ToString(), DS)
-					If DS.Tables(0).Rows.Count > 0 Then
-						dbRow = DS.Tables(0).Rows(0)
-						dataIni = CDate(dbRow(prefixCamp.ToString() + "DTPUB"))
-						If IsDBNull(dbRow(prefixCamp.ToString() + "DTCAD")) Then
-							dataFi = CDate("01/01/2050")
-						Else
-							dataFi = CDate(dbRow(prefixCamp.ToString() + "DTCAD"))
-						End If
-	
-					End If
-				catch
-					'la taula no te els camps dates de publicacio/caducitat i retorno 2100/1900
-				end try
+
+                Try
+                    prefixCamp = taula.Substring(4).Trim()
+                    GAIA.bdR(objconn, "SELECT  * FROM  " + taula.ToString() + " WITH(NOLOCK)  WHERE " + prefixCamp.ToString() + "INNOD=" + codiNode.ToString() + " AND " + prefixCamp.ToString() + "INIDI=" + idioma.ToString(), DS)
+                    If DS.Tables(0).Rows.Count > 0 Then
+                        dbRow = DS.Tables(0).Rows(0)
+                        dataIni = CDate(dbRow(prefixCamp.ToString() + "DTPUB"))
+                        If IsDBNull(dbRow(prefixCamp.ToString() + "DTCAD")) Then
+                            dataFi = CDate("01/01/2050")
+                        Else
+                            dataFi = CDate(dbRow(prefixCamp.ToString() + "DTCAD"))
+                        End If
+
+                    End If
+                Catch
+                    'la taula no te els camps dates de publicacio/caducitat i retorno 2100/1900
+                End Try
 
             End If
 
@@ -8825,309 +8804,309 @@ Public Shared Sub dibuixaPreview(ByVal objConn As OleDbConnection, ByVal plantil
     '************************************************************************************************************				
 
     Public Shared Sub obreFullaWeb(ByVal objConn As OleDbConnection, ByVal rel As clsRelacio, ByRef html As String, ByRef css As String, ByVal heretaPropietatsWeb As Boolean, ByVal tamanyHoritzontalTotal As Double, ByVal tamanyVerticalTotal As Double, ByRef pathRelacio As String, ByRef fDesti As String, ByRef urlDesti As String, ByRef nrocontingut As Integer, ByRef llistaDocuments As String(), ByVal publicar As Integer, ByVal idioma As Integer, ByVal relIni As clsRelacio, ByVal dataSimulacio As DateTime, ByVal codiUsuari As Integer, ByRef titol As String, ByVal nivell As Integer, ByRef estilbody As String, ByRef esForm As String, ByRef esEML As String, ByRef esSSL As String, ByRef tagsMeta As String, ByRef htmlPeu As String, ByRef strCSSPantalla As String, ByRef strCSSImpressora As String, ByVal iteracioInicial As Boolean)
-dim strErr as string=""
-try
-        Dim temps As Date = Now
+        Dim strErr As String = ""
+        Try
+            Dim temps As Date = Now
 
-        Dim nopublicar As Integer = 0
-        Dim DS As DataSet
-        Dim dbRow As DataRow
-        Dim nomFitxerPublicat As String
-        Dim arrayPathRelacio As String()
-        Dim cont, codiRelacio, relacioInicial As Integer
-        Dim descTipus, sql As String
-        Dim tipusIni As String = ""	
-        Dim relTmp As New clsRelacio
-        sql = ""
-        descTipus = ""
-        DS = New DataSet()
-        codiRelacio = rel.incod
-        relacioInicial = relIni.incod
-        If esEML = "" Then
-            esEML = "N"
-        End If
-        If esSSL = "" Then
-            esSSL = "N"
-        End If
-        Dim plantilla As New clsPlantilla
-
-        Dim estatSituacio As String = "98"
-        If dataSimulacio <> CDate("01/01/1900") Then
-            If Day(Now) & Month(Now) & Year(Now) > Day(dataSimulacio) & Month(dataSimulacio) & Year(dataSimulacio) Then
-                'Si la data de simulació es diferent al dia d'avui buscaré també continguts caducats.Per ara no tindré en compte la hora. (30/11/06-MAX)
-                estatSituacio = "99"
+            Dim nopublicar As Integer = 0
+            Dim DS As DataSet
+            Dim dbRow As DataRow
+            Dim nomFitxerPublicat As String
+            Dim arrayPathRelacio As String()
+            Dim cont, codiRelacio, relacioInicial As Integer
+            Dim descTipus, sql As String
+            Dim tipusIni As String = ""
+            Dim relTmp As New clsRelacio
+            sql = ""
+            descTipus = ""
+            DS = New DataSet()
+            codiRelacio = rel.incod
+            relacioInicial = relIni.incod
+            If esEML = "" Then
+                esEML = "N"
             End If
-        End If
-
-        '  titol=""
-
-        If heretaPropietatsWeb Then
-strErr = "1"
-            If pathRelacio.Length = 0 And iteracioInicial Then 'Encara no tinc la llista de nodes que defineixen les propietats de la pàgina i els busco										
-                pathRelacio = rel.cdher + "_" + rel.infil.ToString()
+            If esSSL = "" Then
+                esSSL = "N"
             End If
-            If pathRelacio.Length > 0 Then
+            Dim plantilla As New clsPlantilla
 
-                'Elimino de pathRelacio tots els nodes de tipus "fulla web" intermitges		
-                If pathRelacio = "_55785_109214_109158_109267" Then
-                    pathRelacio = "_55785_109214_109267"
+            Dim estatSituacio As String = "98"
+            If dataSimulacio <> CDate("01/01/1900") Then
+                If Day(Now) & Month(Now) & Year(Now) > Day(dataSimulacio) & Month(dataSimulacio) & Year(dataSimulacio) Then
+                    'Si la data de simulació es diferent al dia d'avui buscaré també continguts caducats.Per ara no tindré en compte la hora. (30/11/06-MAX)
+                    estatSituacio = "99"
                 End If
+            End If
 
-                arrayPathRelacio = Split(pathRelacio.Substring(1), "_")
-                '  Faig una neteja de la llista de nodes de la relació per obtenir només els de tipus "arbre web", 
-                ' 	node web" i finalment "fulla web"
-                '  Busco el primer node de tipus "arbre web", si no trobo cap, busco el primer node "node web", 
-                '  si no trobo cap, represento la pàgina web i prou.
+            '  titol=""
+
+            If heretaPropietatsWeb Then
+                strErr = "1"
+                If pathRelacio.Length = 0 And iteracioInicial Then 'Encara no tinc la llista de nodes que defineixen les propietats de la pàgina i els busco										
+                    pathRelacio = rel.cdher + "_" + rel.infil.ToString()
+                End If
+                If pathRelacio.Length > 0 Then
+
+                    'Elimino de pathRelacio tots els nodes de tipus "fulla web" intermitges		
+                    If pathRelacio = "_55785_109214_109158_109267" Then
+                        pathRelacio = "_55785_109214_109267"
+                    End If
+
+                    arrayPathRelacio = Split(pathRelacio.Substring(1), "_")
+                    '  Faig una neteja de la llista de nodes de la relació per obtenir només els de tipus "arbre web", 
+                    ' 	node web" i finalment "fulla web"
+                    '  Busco el primer node de tipus "arbre web", si no trobo cap, busco el primer node "node web", 
+                    '  si no trobo cap, represento la pàgina web i prou.
 
 
-                For cont = 0 To arrayPathRelacio.Length - 2
-                    GAIA.tipusNodebyNro(objConn, arrayPathRelacio(cont), descTipus)
+                    For cont = 0 To arrayPathRelacio.Length - 2
+                        GAIA.tipusNodebyNro(objConn, arrayPathRelacio(cont), descTipus)
+                        If sql = "" Then
+                            Select Case descTipus
+                                Case "arbre web"
+                                    sql = "SELECT * FROM METLREL WITH(NOLOCK) ,METLAWE WITH(NOLOCK) , METLSER WITH(NOLOCK)  WHERE RELINFIL=RELINPAR AND RELINFIL=" + arrayPathRelacio(cont).ToString() + " AND RELINPAR = AWEINNOD AND RELCDSIT<" + estatSituacio + " AND AWEDSSER = SERINCOD"
+                                    tipusIni = "arbre web"
+                                Case "node web"
+                                    sql = "SELECT * FROM METLREL WITH(NOLOCK) ,METLNWE  WITH(NOLOCK)  WHERE RELINCOD=" & codiRelacio & " AND  RELINFIL=" & arrayPathRelacio(cont) & " AND RELINFIL = NWEINNOD AND RELCDSIT<" & estatSituacio & " AND NWEINIDI=" & idioma
+
+                                    tipusIni = "node web"
+                                Case "fulla web"
+                                    ' LES PROPIETATS NO S'HERETEN PER ARA, continuo el bucle fins la darrera pàgina del camí
+                            End Select
+                        End If
+                    Next cont
+
                     If sql = "" Then
-                        Select Case descTipus
-                            Case "arbre web"
-                                sql = "SELECT * FROM METLREL WITH(NOLOCK) ,METLAWE WITH(NOLOCK) , METLSER WITH(NOLOCK)  WHERE RELINFIL=RELINPAR AND RELINFIL=" + arrayPathRelacio(cont).ToString() + " AND RELINPAR = AWEINNOD AND RELCDSIT<" + estatSituacio + " AND AWEDSSER = SERINCOD"
-                                tipusIni = "arbre web"
-                            Case "node web"
-                                sql = "SELECT * FROM METLREL WITH(NOLOCK) ,METLNWE  WITH(NOLOCK)  WHERE RELINCOD=" & codiRelacio & " AND  RELINFIL=" & arrayPathRelacio(cont) & " AND RELINFIL = NWEINNOD AND RELCDSIT<" & estatSituacio & " AND NWEINIDI=" & idioma
 
-                                tipusIni = "node web"
-                            Case "fulla web"
-                                ' LES PROPIETATS NO S'HERETEN PER ARA, continuo el bucle fins la darrera pàgina del camí
-                        End Select
+                        sql = "SELECT WEBDSATR,WEBSWSSL, WEBTPBUS,WEBDSDES,  WEBDSPCL, WEBDSTIT,WEBDSEST, WEBDSTHOR, WEBDSTVER, WEBDSTCO, WEBDSPLA, WEBDSFIT,WEBDSURL, WEBDSCSS, WEBDSCND, WEBSWFRM,  WEBSWEML, WEBDSEBO,	RELINCOD FROM METLWEB  WITH(NOLOCK) , METLREL WITH(NOLOCK)  WHERE RELINCOD=" & relacioInicial.ToString() & " AND RELINFIL=WEBINNOD AND WEBINIDI=" + idioma.ToString() + " AND RELCDSIT<" + estatSituacio
                     End If
-                Next cont
-
-                If sql = "" Then
-
-                    sql = "SELECT WEBDSATR,WEBSWSSL, WEBTPBUS,WEBDSDES,  WEBDSPCL, WEBDSTIT,WEBDSEST, WEBDSTHOR, WEBDSTVER, WEBDSTCO, WEBDSPLA, WEBDSFIT,WEBDSURL, WEBDSCSS, WEBDSCND, WEBSWFRM,  WEBSWEML, WEBDSEBO,	RELINCOD FROM METLWEB  WITH(NOLOCK) , METLREL WITH(NOLOCK)  WHERE RELINCOD=" & relacioInicial.ToString() & " AND RELINFIL=WEBINNOD AND WEBINIDI=" + idioma.ToString() + " AND RELCDSIT<" + estatSituacio
-                End If
 
 
-                GAIA.bdR(objConn, sql, DS)
-                If DS.Tables(0).Rows.Count = 0 Then
-                    If tipusIni = "node web" Then
-                        sql = "SELECT * FROM METLREL  WITH(NOLOCK) ,METLNWE WITH(NOLOCK)  WHERE RELINCOD=" & codiRelacio & " AND RELINFIL = NWEINNOD AND RELCDSIT<" & estatSituacio & " AND NWEINIDI=1"
-                        GAIA.bdR(objConn, sql, DS)
-                    Else
-                        sql = "SELECT WEBDSATR,WEBSWSSL, WEBTPBUS,WEBDSDES,  WEBDSPCL,  WEBDSTIT,WEBDSEST, WEBDSTHOR, WEBDSTVER, WEBDSTCO, WEBDSPLA, WEBDSFIT,WEBDSURL, WEBDSCSS, WEBDSCND, WEBSWFRM,WEBSWEML, WEBDSEBO, RELINCOD FROM METLWEB WITH(NOLOCK) , METLREL WITH(NOLOCK)  WHERE RELINCOD=" & relacioInicial & " AND RELINFIL=WEBINNOD AND WEBINIDI=1 AND RELCDSIT<" & estatSituacio
-                        GAIA.bdR(objConn, sql, DS)
-                        If DS.Tables(0).Rows.Count > 0 Then
-                            dbRow = DS.Tables(0).Rows(0)
-                            ' si trobo una versió en un altre idioma i té una adreça fixa, no la publico.
-                            If dbRow("WEBDSURL") <> "" Then
-                                nopublicar = 1
-                            End If
-                        End If
-
-                    End If
-                End If
-                If nopublicar = 0 Then
-                    If DS.Tables(0).Rows.Count > 0 Then
-
-                        dbRow = DS.Tables(0).Rows(0)
-                        'Trec el primer element de la llista
-                        If InStr(pathRelacio.Substring(1), "_") = 0 Then
-                            pathRelacio = ""
+                    GAIA.bdR(objConn, sql, DS)
+                    If DS.Tables(0).Rows.Count = 0 Then
+                        If tipusIni = "node web" Then
+                            sql = "SELECT * FROM METLREL  WITH(NOLOCK) ,METLNWE WITH(NOLOCK)  WHERE RELINCOD=" & codiRelacio & " AND RELINFIL = NWEINNOD AND RELCDSIT<" & estatSituacio & " AND NWEINIDI=1"
+                            GAIA.bdR(objConn, sql, DS)
                         Else
-                            pathRelacio = pathRelacio.Substring(InStr(pathRelacio.Substring(1), "_"))
+                            sql = "SELECT WEBDSATR,WEBSWSSL, WEBTPBUS,WEBDSDES,  WEBDSPCL,  WEBDSTIT,WEBDSEST, WEBDSTHOR, WEBDSTVER, WEBDSTCO, WEBDSPLA, WEBDSFIT,WEBDSURL, WEBDSCSS, WEBDSCND, WEBSWFRM,WEBSWEML, WEBDSEBO, RELINCOD FROM METLWEB WITH(NOLOCK) , METLREL WITH(NOLOCK)  WHERE RELINCOD=" & relacioInicial & " AND RELINFIL=WEBINNOD AND WEBINIDI=1 AND RELCDSIT<" & estatSituacio
+                            GAIA.bdR(objConn, sql, DS)
+                            If DS.Tables(0).Rows.Count > 0 Then
+                                dbRow = DS.Tables(0).Rows(0)
+                                ' si trobo una versió en un altre idioma i té una adreça fixa, no la publico.
+                                If dbRow("WEBDSURL") <> "" Then
+                                    nopublicar = 1
+                                End If
+                            End If
+
                         End If
+                    End If
+                    If nopublicar = 0 Then
+                        If DS.Tables(0).Rows.Count > 0 Then
+
+                            dbRow = DS.Tables(0).Rows(0)
+                            'Trec el primer element de la llista
+                            If InStr(pathRelacio.Substring(1), "_") = 0 Then
+                                pathRelacio = ""
+                            Else
+                                pathRelacio = pathRelacio.Substring(InStr(pathRelacio.Substring(1), "_"))
+                            End If
 
 
 
 
 
-                        Select Case tipusIni
-                            Case "arbre web"
-                                'Continuo representant				
-                                titol = dbRow("AWEDSTIT")
-                                fDesti += dbRow("AWEDSROT").Trim()
-                                estilbody += " " + dbRow("AWEDSEBO")
-                                strCSSPantalla += " " + dbRow("AWEDSCSP")
-                                strCSSImpressora += " " + dbRow("AWEDSCSI")
-                                'tagsMeta +=  dbRow("AWEDSPEU") & dbRow("AWEDSMET")
-								tagsMeta +=  dbRow("AWEDSMET")
+                            Select Case tipusIni
+                                Case "arbre web"
+                                    'Continuo representant				
+                                    titol = dbRow("AWEDSTIT")
+                                    fDesti += dbRow("AWEDSROT").Trim()
+                                    estilbody += " " + dbRow("AWEDSEBO")
+                                    strCSSPantalla += " " + dbRow("AWEDSCSP")
+                                    strCSSImpressora += " " + dbRow("AWEDSCSI")
+                                    'tagsMeta +=  dbRow("AWEDSPEU") & dbRow("AWEDSMET")
+                                    tagsMeta += dbRow("AWEDSMET")
 
-                                htmlPeu += dbRow("AWEDSPEU")
-                                urlDesti = dbRow("SERDSURL").Trim()
-                                If dbRow("SERDSPRT") <> "80" Then
-                                    urlDesti += ":" + dbRow("SERDSPRT").ToString()
-                                End If
-                                urlDesti += dbRow("AWEDSROT").Replace("\", "/")
-                                relTmp.bdget(objConn, dbRow("RELINCOD"))
-
-                                GAIA.dibuixaPreview(objConn, plantilla, dbRow("AWEDSEST"), dbRow("AWEDSATR").split(","), dbRow("AWEDSTHOR"), dbRow("AWEDSTVER"), dbRow("AWEDSTCO"), "", html, css, dbRow("AWEDSHOR"), dbRow("AWEDSVER"), "e", relTmp, pathRelacio, fDesti, urlDesti, nrocontingut, llistaDocuments, publicar, idioma, "", relIni, dataSimulacio, codiUsuari, False, "", heretaPropietatsWeb, "", titol, nivell, estilbody, "", esForm, esEML, esSSL, tagsMeta, htmlPeu, strCSSPantalla, strCSSImpressora, "")
-                            Case "node web"
-                                If Not TypeOf dbRow("NWEINNOD") Is DBNull Then
-                                    Dim estilsCSS As String
-                                    'Faig una excepció. Si la relació superior és el node "webs municipals" poso como a títol el nom del node per que és un web que no té arbre propi
-                                    If rel.cdrsu = 42234 Then
-                                        titol = dbRow("NWEDSTIT")
+                                    htmlPeu += dbRow("AWEDSPEU")
+                                    urlDesti = dbRow("SERDSURL").Trim()
+                                    If dbRow("SERDSPRT") <> "80" Then
+                                        urlDesti += ":" + dbRow("SERDSPRT").ToString()
                                     End If
-                                    estilbody += " " + dbRow("NWEDSEBO")
-                                    If dbRow("NWEDSCSP").Trim().length > 0 Then
-                                        If strCSSPantalla.Trim().Length > 0 Then
-                                            strCSSPantalla += ";"
-                                        End If
-                                        strCSSPantalla += dbRow("NWEDSCSP").Trim()
-                                    End If
-                                    If dbRow("NWEDSCSI").Trim().length > 0 Then
-                                        If strCSSImpressora.Trim().Length > 0 Then
-                                            strCSSImpressora += ";"
-                                        End If
-                                        strCSSImpressora += dbRow("NWEDSCSI").Trim()
-                                    End If
-
-                                    tagsMeta &= dbRow("NWEDSMET")
-
-                                    'Si hi ha un htmlPeu d'un node que té informació sobre google-analytics i també el htmlpeu heretat ho té, em quedo només amb la nova info.
-                                    If InStr(htmlPeu, "google-analytics") > 0 And InStr(dbRow("NWEDSPEU"), "google-analytics") > 0 Then
-                                        htmlPeu = dbRow("NWEDSPEU")
-                                    Else
-                                        htmlPeu = dbRow("NWEDSPEU") + htmlPeu
-                                    End If
-                                    'Continuo representant informació						
-                                    If Not TypeOf dbRow("NWEDSCAR") Is DBNull Then
-                                        If dbRow("NWEDSCAR").length > 0 Then
-                                            fDesti &= "/" & dbRow("NWEDSCAR").Trim()
-                                            urlDesti &= "/" & dbRow("NWEDSCAR").Trim().Replace("\", "/")
-                                        End If
-                                    End If
+                                    urlDesti += dbRow("AWEDSROT").Replace("\", "/")
                                     relTmp.bdget(objConn, dbRow("RELINCOD"))
-                                    If Not TypeOf dbRow("NWEDSCSS") Is DBNull Then
-                                        estilsCSS = dbRow("NWEDSCSS")
-                                    Else
-                                        estilsCSS = ""
+
+                                    GAIA.dibuixaPreview(objConn, plantilla, dbRow("AWEDSEST"), dbRow("AWEDSATR").split(","), dbRow("AWEDSTHOR"), dbRow("AWEDSTVER"), dbRow("AWEDSTCO"), "", html, css, dbRow("AWEDSHOR"), dbRow("AWEDSVER"), "e", relTmp, pathRelacio, fDesti, urlDesti, nrocontingut, llistaDocuments, publicar, idioma, "", relIni, dataSimulacio, codiUsuari, False, "", heretaPropietatsWeb, "", titol, nivell, estilbody, "", esForm, esEML, esSSL, tagsMeta, htmlPeu, strCSSPantalla, strCSSImpressora, "")
+                                Case "node web"
+                                    If Not TypeOf dbRow("NWEINNOD") Is DBNull Then
+                                        Dim estilsCSS As String
+                                        'Faig una excepció. Si la relació superior és el node "webs municipals" poso como a títol el nom del node per que és un web que no té arbre propi
+                                        If rel.cdrsu = 42234 Then
+                                            titol = dbRow("NWEDSTIT")
+                                        End If
+                                        estilbody += " " + dbRow("NWEDSEBO")
+                                        If dbRow("NWEDSCSP").Trim().length > 0 Then
+                                            If strCSSPantalla.Trim().Length > 0 Then
+                                                strCSSPantalla += ";"
+                                            End If
+                                            strCSSPantalla += dbRow("NWEDSCSP").Trim()
+                                        End If
+                                        If dbRow("NWEDSCSI").Trim().length > 0 Then
+                                            If strCSSImpressora.Trim().Length > 0 Then
+                                                strCSSImpressora += ";"
+                                            End If
+                                            strCSSImpressora += dbRow("NWEDSCSI").Trim()
+                                        End If
+
+                                        tagsMeta &= dbRow("NWEDSMET")
+
+                                        'Si hi ha un htmlPeu d'un node que té informació sobre google-analytics i també el htmlpeu heretat ho té, em quedo només amb la nova info.
+                                        If InStr(htmlPeu, "google-analytics") > 0 And InStr(dbRow("NWEDSPEU"), "google-analytics") > 0 Then
+                                            htmlPeu = dbRow("NWEDSPEU")
+                                        Else
+                                            htmlPeu = dbRow("NWEDSPEU") + htmlPeu
+                                        End If
+                                        'Continuo representant informació						
+                                        If Not TypeOf dbRow("NWEDSCAR") Is DBNull Then
+                                            If dbRow("NWEDSCAR").length > 0 Then
+                                                fDesti &= "/" & dbRow("NWEDSCAR").Trim()
+                                                urlDesti &= "/" & dbRow("NWEDSCAR").Trim().Replace("\", "/")
+                                            End If
+                                        End If
+                                        relTmp.bdget(objConn, dbRow("RELINCOD"))
+                                        If Not TypeOf dbRow("NWEDSCSS") Is DBNull Then
+                                            estilsCSS = dbRow("NWEDSCSS")
+                                        Else
+                                            estilsCSS = ""
+                                        End If
+
+                                        GAIA.dibuixaPreview(objConn, plantilla, dbRow("NWEDSEST"), dbRow("NWEDSATR").split(","), dbRow("NWEDSTHOR"), dbRow("NWEDSTVER"), dbRow("NWEDSTCO"), dbRow("NWEDSPLA"), html, css, tamanyHoritzontalTotal, tamanyVerticalTotal, "n", relTmp, pathRelacio, fDesti, urlDesti, nrocontingut, llistaDocuments, publicar, idioma, estilsCSS, relIni, dataSimulacio, codiUsuari, False, "", 1, "", titol, nivell, estilbody, "", esForm, esEML, esSSL, tagsMeta, htmlPeu, strCSSPantalla, strCSSImpressora, "")
                                     End If
 
-                                    GAIA.dibuixaPreview(objConn, plantilla, dbRow("NWEDSEST"), dbRow("NWEDSATR").split(","), dbRow("NWEDSTHOR"), dbRow("NWEDSTVER"), dbRow("NWEDSTCO"), dbRow("NWEDSPLA"), html, css, tamanyHoritzontalTotal, tamanyVerticalTotal, "n", relTmp, pathRelacio, fDesti, urlDesti, nrocontingut, llistaDocuments, publicar, idioma, estilsCSS, relIni, dataSimulacio, codiUsuari, False, "", 1, "", titol, nivell, estilbody, "", esForm, esEML, esSSL, tagsMeta, htmlPeu, strCSSPantalla, strCSSImpressora, "")
-                                End If
+                                Case Else 'fulla web
+                                    strErr &= "2"
+                                    'Quan trobo una fulla web vaig directament a la relació inicial que ha provocat la publicació. Això ho faig per saltar
+                                    'totes les fulles web intermitges i anar directament a l'última.
+                                    'Si es poden heretar les propietats d'altres fulles web això s'haurà de refer.
+                                    If InStr(titol, dbRow("WEBDSTIT")) <= 0 And InStr(titol, "|") <= 0 Then
+                                        titol = dbRow("WEBDSTIT") + " | " + titol
+                                    End If
+                                    estilbody += " " + dbRow("WEBDSEBO")
+                                    strErr &= "3"
+                                    If dbRow("WEBDSFIT").ToString().Length > 0 Then
+                                        Dim strTmp As String = ""
+                                        'potser a fdesti ja hi ha un troç del path que es repeteix amb webdsfit. Intento corregir aquí l'error.
+                                        strErr &= "4"
+                                        strtmp = dbrow("WEBDSFIT")
+                                        strErr &= "5"
 
-                            Case Else 'fulla web
-                                strErr &= "2"
-								'Quan trobo una fulla web vaig directament a la relació inicial que ha provocat la publicació. Això ho faig per saltar
-                                'totes les fulles web intermitges i anar directament a l'última.
-                                'Si es poden heretar les propietats d'altres fulles web això s'haurà de refer.
-                                If InStr(titol, dbRow("WEBDSTIT")) <= 0 And InStr(titol, "|") <= 0 Then
-                                    titol = dbRow("WEBDSTIT") + " | " + titol
-                                End If
-                                estilbody += " " + dbRow("WEBDSEBO")
-                                strErr &= "3"
-								If dbRow("WEBDSFIT").ToString().Length > 0 Then
-									Dim strTmp as string=""
-									'potser a fdesti ja hi ha un troç del path que es repeteix amb webdsfit. Intento corregir aquí l'error.
-									strErr &= "4"
-									strtmp = dbrow("WEBDSFIT")
-									strErr &= "5"
+                                        If Not String.IsNullOrEmpty(fdesti) Then
+                                            strTmp = strtmp.replace(fdesti, "")
+                                        End If
+                                        strErr &= "6"
 
-									if not String.IsNullOrEmpty(fdesti) THEN
-										strTmp = strtmp.replace(fdesti,"")									
-                                    end if
-									strErr &= "6"
-								
-									fDesti &= "/" & strtmp
-									'En el cas de ser una publicació per intranet, amb nom fix, he de treure el /gdocs
-									fdesti = fDesti.replace("/gdocs" ,"").replace("//","/")
-									
-                                    urlDesti = dbRow("WEBDSURL").Trim()
-									strErr &= "5"
-                                Else
-                                    fDesti += "/" + relacioInicial.ToString() + "_" + idioma.ToString() + ".aspx"
-                                    urlDesti += "/" + relacioInicial.ToString() + "_" + idioma.ToString() + ".aspx"
-                                End If
-                                If esForm <> "S" Then
-                                    esForm = dbRow("WEBSWFRM")
-                                End If
-                                If esEML <> "S" Then
-                                    esEML = dbRow("WEBSWEML")
-                                End If
-								If esEML = "S" Then  'Teresa: para poder conservar el historico de boletines, se añade la fecha de publicacion al nombre del archivo.
+                                        fDesti &= "/" & strtmp
+                                        'En el cas de ser una publicació per intranet, amb nom fix, he de treure el /gdocs
+                                        fdesti = fDesti.replace("/gdocs", "").replace("//", "/")
+
+                                        urlDesti = dbRow("WEBDSURL").Trim()
+                                        strErr &= "5"
+                                    Else
+                                        fDesti += "/" + relacioInicial.ToString() + "_" + idioma.ToString() + ".aspx"
+                                        urlDesti += "/" + relacioInicial.ToString() + "_" + idioma.ToString() + ".aspx"
+                                    End If
+                                    If esForm <> "S" Then
+                                        esForm = dbRow("WEBSWFRM")
+                                    End If
+                                    If esEML <> "S" Then
+                                        esEML = dbRow("WEBSWEML")
+                                    End If
+                                    If esEML = "S" Then  'Teresa: para poder conservar el historico de boletines, se añade la fecha de publicacion al nombre del archivo.
                                         Dim pos As String = InStrRev(fDesti, ".")
                                         fDesti = fDesti.Substring(0, pos - 1) & CDate(Now).ToString("yyyyMMdd") & ".aspx"
 
                                         pos = InStrRev(urlDesti, ".")
                                         urlDesti = urlDesti.Substring(0, pos - 1) & CDate(Now).ToString("yyyyMMdd") & ".aspx"
-                                End If
-                                If esSSL <> "S" Then
-                                    esSSL = dbRow("WEBSWSSL")
-                                End If
+                                    End If
+                                    If esSSL <> "S" Then
+                                        esSSL = dbRow("WEBSWSSL")
+                                    End If
 
-                                If dbRow("WEBDSDES").length > 0 Then
-                                    tagsMeta += "<meta name=""DC.Description"" content=""" + dbRow("WEBDSDES") + """/>"
-                                    tagsMeta += "<meta name=""Description"" content=""" + dbRow("WEBDSDES") + """/>"
-                                End If
+                                    If dbRow("WEBDSDES").length > 0 Then
+                                        tagsMeta += "<meta name=""DC.Description"" content=""" + dbRow("WEBDSDES") + """/>"
+                                        tagsMeta += "<meta name=""Description"" content=""" + dbRow("WEBDSDES") + """/>"
+                                    End If
 
-                                If dbRow("WEBDSPCL").length > 0 Then
-                                    tagsMeta += "<meta name=""keywords"" content=""" + dbRow("WEBDSPCL") + """/>"
-                                    tagsMeta += "<meta name=""DC.subject"" content=""" + dbRow("WEBDSPCL") + """/>"
-                                End If
-                                If dbRow("WEBTPBUS") = "S" Then
-                                    tagsMeta += "<meta name=""robots"" content=""INDEX,FOLLOW""/>"
-                                Else
-                                    tagsMeta += "<meta name=""robots"" content=""NOINDEX,NOFOLLOW""/>"
-                                End If
+                                    If dbRow("WEBDSPCL").length > 0 Then
+                                        tagsMeta += "<meta name=""keywords"" content=""" + dbRow("WEBDSPCL") + """/>"
+                                        tagsMeta += "<meta name=""DC.subject"" content=""" + dbRow("WEBDSPCL") + """/>"
+                                    End If
+                                    If dbRow("WEBTPBUS") = "S" Then
+                                        tagsMeta += "<meta name=""robots"" content=""INDEX,FOLLOW""/>"
+                                    Else
+                                        tagsMeta += "<meta name=""robots"" content=""NOINDEX,NOFOLLOW""/>"
+                                    End If
 
 
-                                GAIA.dibuixaPreview(objConn, plantilla, dbRow("WEBDSEST"), dbRow("WEBDSATR").split(","), dbRow("WEBDSTHOR"), dbRow("WEBDSTVER"), dbRow("WEBDSTCO"), dbRow("WEBDSPLA"), html, css, tamanyHoritzontalTotal, tamanyVerticalTotal, "c", relIni, pathRelacio, fDesti, urlDesti, nrocontingut, llistaDocuments, publicar, idioma, dbRow("WEBDSCSS"), relIni, dataSimulacio, codiUsuari, False, "", heretaPropietatsWeb, "", titol, nivell, estilbody, dbRow("WEBDSCND"), esForm, esEML, esSSL, tagsMeta, htmlPeu, strCSSPantalla, strCSSImpressora, "")
-                        End Select
+                                    GAIA.dibuixaPreview(objConn, plantilla, dbRow("WEBDSEST"), dbRow("WEBDSATR").split(","), dbRow("WEBDSTHOR"), dbRow("WEBDSTVER"), dbRow("WEBDSTCO"), dbRow("WEBDSPLA"), html, css, tamanyHoritzontalTotal, tamanyVerticalTotal, "c", relIni, pathRelacio, fDesti, urlDesti, nrocontingut, llistaDocuments, publicar, idioma, dbRow("WEBDSCSS"), relIni, dataSimulacio, codiUsuari, False, "", heretaPropietatsWeb, "", titol, nivell, estilbody, dbRow("WEBDSCND"), esForm, esEML, esSSL, tagsMeta, htmlPeu, strCSSPantalla, strCSSImpressora, "")
+                            End Select
+                        End If
                     End If
-                End If
-            End If 'pathRelacio.length>0
-        Else 'No heretem les propietats dels nodes superiors
-      
-            sql = "SELECT  WEBWNMTH,WEBDSATR,WEBSWSSL, WEBDSFIT, WEBDSURL, WEBDSEST, WEBDSTHOR, WEBDSTVER, WEBDSTCO, WEBDSPLA, WEBDSCSS, WEBDSCND,WEBSWFRM, WEBSWEML, WEBDSEBO FROM METLWEB  WITH(NOLOCK) , METLREL  WITH(NOLOCK) WHERE RELINCOD=" & codiRelacio.ToString() & " AND RELINFIL=WEBINNOD AND WEBINIDI=" + idioma.ToString() + " AND RELCDSIT<" + estatSituacio
-            GAIA.bdR(objConn, sql, DS)
-            If DS.Tables(0).Rows.Count > 0 Then
-                dbRow = DS.Tables(0).Rows(0)
-                'IF publicar THEN	
-                estilbody = dbRow("WEBDSEBO")
-                If dbRow("WEBDSFIT").ToString().Length > 0 Then
-                    fDesti = dbRow("WEBDSFIT")
-                    urlDesti = dbRow("WEBDSURL")
-                Else
-                    nomFitxerPublicat = rel.dsfit
-                    'IF nomFitxerPublicat.length>0 THEN
-                    'fDesti = nomFitxerPublicat
-                    'urlDesti= nomFitxerPublicat
-                    'ELSE
-                    fDesti += "/" + codiRelacio.ToString() + "_" + idioma.ToString() + ".aspx"
-                    urlDesti += "/" + codiRelacio.ToString() + "_" + idioma.ToString() + ".aspx"
+                End If 'pathRelacio.length>0
+            Else 'No heretem les propietats dels nodes superiors
 
-                    'END IF
-                End If
-                'END IF					
+                sql = "SELECT  WEBWNMTH,WEBDSATR,WEBSWSSL, WEBDSFIT, WEBDSURL, WEBDSEST, WEBDSTHOR, WEBDSTVER, WEBDSTCO, WEBDSPLA, WEBDSCSS, WEBDSCND,WEBSWFRM, WEBSWEML, WEBDSEBO FROM METLWEB  WITH(NOLOCK) , METLREL  WITH(NOLOCK) WHERE RELINCOD=" & codiRelacio.ToString() & " AND RELINFIL=WEBINNOD AND WEBINIDI=" + idioma.ToString() + " AND RELCDSIT<" + estatSituacio
+                GAIA.bdR(objConn, sql, DS)
+                If DS.Tables(0).Rows.Count > 0 Then
+                    dbRow = DS.Tables(0).Rows(0)
+                    'IF publicar THEN	
+                    estilbody = dbRow("WEBDSEBO")
+                    If dbRow("WEBDSFIT").ToString().Length > 0 Then
+                        fDesti = dbRow("WEBDSFIT")
+                        urlDesti = dbRow("WEBDSURL")
+                    Else
+                        nomFitxerPublicat = rel.dsfit
+                        'IF nomFitxerPublicat.length>0 THEN
+                        'fDesti = nomFitxerPublicat
+                        'urlDesti= nomFitxerPublicat
+                        'ELSE
+                        fDesti += "/" + codiRelacio.ToString() + "_" + idioma.ToString() + ".aspx"
+                        urlDesti += "/" + codiRelacio.ToString() + "_" + idioma.ToString() + ".aspx"
 
-                If esForm <> "S" Then
-                    esForm = dbRow("WEBSWFRM")
-                End If
-                If esEML <> "S" Then
-                    esEML = dbRow("WEBSWEML")	
-                End If
-				If esEML = "S" Then  'Teresa: para poder conservar el historico de boletines, se añade la fecha de publicacion al nombre del archivo.
+                        'END IF
+                    End If
+                    'END IF					
+
+                    If esForm <> "S" Then
+                        esForm = dbRow("WEBSWFRM")
+                    End If
+                    If esEML <> "S" Then
+                        esEML = dbRow("WEBSWEML")
+                    End If
+                    If esEML = "S" Then  'Teresa: para poder conservar el historico de boletines, se añade la fecha de publicacion al nombre del archivo.
                         Dim pos As String = InStrRev(fDesti, ".")
                         fDesti = fDesti.Substring(0, pos - 1) & CDate(Now).ToString("yyyyMMdd") & ".aspx"
 
                         pos = InStrRev(urlDesti, ".")
                         urlDesti = urlDesti.Substring(0, pos - 1) & CDate(Now).ToString("yyyyMMdd") & ".aspx"
                     End If
-                If esSSL <> "S" Then
-                    esSSL = dbRow("WEBSWSSL")
+                    If esSSL <> "S" Then
+                        esSSL = dbRow("WEBSWSSL")
+                    End If
+                    GAIA.dibuixaPreview(objConn, plantilla, dbRow("WEBDSEST"), dbRow("WEBDSATR").split(","), dbRow("WEBDSTHOR"), dbRow("WEBDSTVER"), dbRow("WEBDSTCO"), dbRow("WEBDSPLA"), html, css, dbRow("WEBWNMTH"), tamanyVerticalTotal, "c", rel, pathRelacio, fDesti, urlDesti, nrocontingut, llistaDocuments, publicar, idioma, dbRow("WEBDSCSS"), relIni, dataSimulacio, codiUsuari, False, "", heretaPropietatsWeb, "", titol, nivell, estilbody, dbRow("WEBDSCND"), esForm, esEML, esSSL, tagsMeta, htmlPeu, strCSSPantalla, strCSSImpressora, "")
                 End If
-                GAIA.dibuixaPreview(objConn, plantilla, dbRow("WEBDSEST"), dbRow("WEBDSATR").split(","), dbRow("WEBDSTHOR"), dbRow("WEBDSTVER"), dbRow("WEBDSTCO"), dbRow("WEBDSPLA"), html, css, dbRow("WEBWNMTH"), tamanyVerticalTotal, "c", rel, pathRelacio, fDesti, urlDesti, nrocontingut, llistaDocuments, publicar, idioma, dbRow("WEBDSCSS"), relIni, dataSimulacio, codiUsuari, False, "", heretaPropietatsWeb, "", titol, nivell, estilbody, dbRow("WEBDSCND"), esForm, esEML, esSSL, tagsMeta, htmlPeu, strCSSPantalla, strCSSImpressora, "")
             End If
-        End If
-        DS.Dispose()
+            DS.Dispose()
 
 
-        '*********************************************
-        'esborro la colecció de datasets
-        '*********************************************
+            '*********************************************
+            'esborro la colecció de datasets
+            '*********************************************
 
-        css = GAIA.netejaCSS(css)
+            css = GAIA.netejaCSS(css)
         Catch ex As Exception
-            GAIA.f_logError(objConn, "obrefullaweb", ex.Message," Rel.incod=" & rel.incod & "_" & strErr)
+            GAIA.f_logError(objConn, "obrefullaweb", ex.Message, " Rel.incod=" & rel.incod & "_" & strErr)
         End Try
     End Sub 'obreFullaWeb							
-					
+
 
     '************************************************************************************************************
     '	Funció: GAIA.netejaCss
@@ -9455,7 +9434,7 @@ strErr = "1"
     '		Actualitza METLREL amb el nou estat
     '******************************************************************
     Public Shared Sub canviEstatRelacio(ByVal objConn As OleDbConnection, ByVal rel As clsRelacio, ByVal codiEstat As Integer, ByVal circuit As Integer)
-        If rel.cdsit = 96 Or rel.cdsit = 97 Or rel.cdsit = 95 or rel.cdsit=98 or rel.cdsit=99 Then
+        If rel.cdsit = 96 Or rel.cdsit = 97 Or rel.cdsit = 95 Or rel.cdsit = 98 Or rel.cdsit = 99 Then
             'No faig res perque el continguts en aquest estat continuen sempre igual
         Else
             If codiEstat > 0 Then
@@ -9480,7 +9459,7 @@ strErr = "1"
                     End Select
                 End If
                 If codiEstat <> rel.cdsit Then
-                    GAIA.bdSR(objConn, "UPDATE METLREL SET RELCDSIT=" & codiEstat.ToString() + " WHERE RELINCOD=" + rel.incod.ToString())					
+                    GAIA.bdSR(objConn, "UPDATE METLREL SET RELCDSIT=" & codiEstat.ToString() + " WHERE RELINCOD=" + rel.incod.ToString())
                 End If
 
             End If
@@ -9510,7 +9489,7 @@ strErr = "1"
     '******************************************************************
 
 
-    Public Shared Function trobaCodiWeb(ByVal objConn As OleDbConnection, ByVal plantilla As clsPlantilla, ByVal codiWeb As string, ByVal codiIdioma As Integer, ByVal rel As clsRelacio, ByVal relIni As clsRelacio, ByRef forçarCodi As Integer, ByVal index As Integer, ByVal parametres As String, ByVal width As String, ByVal codiUsuari As Integer, ByRef strCss As String, ByRef tagsMeta As String) As String
+    Public Shared Function trobaCodiWeb(ByVal objConn As OleDbConnection, ByVal plantilla As clsPlantilla, ByVal codiWeb As String, ByVal codiIdioma As Integer, ByVal rel As clsRelacio, ByVal relIni As clsRelacio, ByRef forçarCodi As Integer, ByVal index As Integer, ByVal parametres As String, ByVal width As String, ByVal codiUsuari As Integer, ByRef strCss As String, ByRef tagsMeta As String) As String
         Dim DS As DataSet
         Dim dbRow As DataRow
         Dim csstmp As String = ""
@@ -9549,7 +9528,7 @@ strErr = "1"
                             Case 1  ' codi HTML 
                                 resultat += llibreria.Trim()
                             Case 2 'codi executable abans de la publicació (previsualització)
-	
+
 
                                 If InStr(llibreria, "?") > 0 Then
                                     'compte, ha de ser "lhintranet". només "intranet" dona un error de permisos
@@ -9587,10 +9566,10 @@ strErr = "1"
 
                     strCss &= csstmp
 
-					'********************************************************************************************************************
-					'	Cerco els blocs <style>  i els tagsmeta <link> de la execució de la llibreria i els poso a strcss i tagsMeta per 
-					' 	pujarlos posteriorment al head de la pàgina
-					'********************************************************************************************************************
+                    '********************************************************************************************************************
+                    '	Cerco els blocs <style>  i els tagsmeta <link> de la execució de la llibreria i els poso a strcss i tagsMeta per 
+                    ' 	pujarlos posteriorment al head de la pàgina
+                    '********************************************************************************************************************
                     If CInt(dbRow("LCWCDTIP")) = 2 Then
                         Dim posIni As Integer = InStr(resultat, "<style type=""text/css")
                         Dim posFi As Integer
@@ -9616,7 +9595,7 @@ strErr = "1"
 
                 End If
                 trobaCodiWeb &= resultat
-				resultat=""
+                resultat = ""
             Next
         Catch ex As Exception
 
@@ -9759,7 +9738,7 @@ strErr = "1"
     '		En cas de que no hagi igualat o superat la data de caducitat i encara no hagi arribat la data de publicació , retornaré
     '			"2" (pendent de publicació)
     '		En cas de que es pugui publicar retornaré "3" (publicar)
-	' 29-1-2019 modificada para GAIA2
+    ' 29-1-2019 modificada para GAIA2
     '******************************************************************
     Public Shared Function contingutEsPublicable(ByVal objConn As OleDbConnection, ByVal rel As clsRelacio, ByVal dataSimulacio As DateTime, ByVal codiIdioma As Integer, ByVal estatSituacio As String) As Integer
         Dim DS As DataSet
@@ -9790,10 +9769,10 @@ strErr = "1"
 
         If taula.Length > 0 Then
             prefixCamp = taula.Substring(4).Trim()
-			If esGAIA2(objConn, rel.infil) Then
+            If esGAIA2(objConn, rel.infil) Then
                 taula = taula.Trim() & "2"
             End If
-			
+
             GAIA.bdR(objConn, "SELECT  " + prefixCamp.ToString() + "DTPUB," + prefixCamp.ToString() + "DTCAD FROM  METLREL WITH(NOLOCK) , " + taula.ToString() + " WITH(NOLOCK)  WHERE RELCDSIT<" + estatSituacio + " AND RELINFIL=" + prefixCamp.ToString() + "INNOD AND RELINCOD=" + codiRelacio.ToString() + " AND " + prefixCamp.ToString() + "INIDI=" + codiIdioma.ToString(), DS)
             If DS.Tables(0).Rows.Count > 0 Then
                 dbRow = DS.Tables(0).Rows(0)
@@ -9876,150 +9855,150 @@ strErr = "1"
     '	Retorna 1 si ha publicat correctament
     '******************************************************************
     Public Shared Function publica(ByVal objConn As OleDbConnection, ByVal codiHtml As String, ByVal fDesti As String, ByVal llistaDocumentsPerAfegir As String(), ByVal llistaDocumentsPerEsborrar As String(), ByVal tipusAccio As Integer, ByVal relIni As clsRelacio, ByVal idioma As Integer, ByRef servidor As String, ByRef ftpSession As Session) As Integer
-       dim strErr as string=""
-	   TRY
-	   	
-	    Dim objStreamWriter As StreamWriter
-        Dim cont As Integer
-        Dim pathOrigen As String = "e:\docs\GAIA\"
-        Dim pathDocs As String
-        Dim posTMP As Integer
-        Dim document As String
-        Dim relacio As Integer
-        Dim relTmp As New clsRelacio
-        Dim servidorNou, usuari, pwd, pathDestiArrel, pathDocsDesti, URL As String
-        servidorNou = ""
-        usuari = ""
-        pwd = ""
-        pathDestiArrel = ""
-        pathDocsDesti = ""
-        URL = ""
-        Dim nomFitxer As String = ""
-        Dim ds As DataSet
-        ds = New DataSet
-        Dim port As String = ""
-        Dim codiDocument As Integer
-        Dim nomFitxerPublicat As String = ""
+        Dim strErr As String = ""
+        Try
 
-        Dim UPD As Integer = 0
+            Dim objStreamWriter As StreamWriter
+            Dim cont As Integer
+            Dim pathOrigen As String = "e:\docs\GAIA\"
+            Dim pathDocs As String
+            Dim posTMP As Integer
+            Dim document As String
+            Dim relacio As Integer
+            Dim relTmp As New clsRelacio
+            Dim servidorNou, usuari, pwd, pathDestiArrel, pathDocsDesti, URL As String
+            servidorNou = ""
+            usuari = ""
+            pwd = ""
+            pathDestiArrel = ""
+            pathDocsDesti = ""
+            URL = ""
+            Dim nomFitxer As String = ""
+            Dim ds As DataSet
+            ds = New DataSet
+            Dim port As String = ""
+            Dim codiDocument As Integer
+            Dim nomFitxerPublicat As String = ""
+
+            Dim UPD As Integer = 0
             strErr &= "1"
             publica = 1
-        pathDocs = "/gdocs"
-        If tipusAccio = 0 Then
-            'esborro la pàgina web
+            pathDocs = "/gdocs"
+            If tipusAccio = 0 Then
+                'esborro la pàgina web
 
-            'File.Delete(pathDesti+"\"+fDesti)
-            'Si no queda res a la carpeta també l'esborro
-            'IF Directori.GetFiles(pathDesti).length=0 THEN
-            '	Directori.delete(pathDesti)
-            'END IF
-            'esborro els documents de la llista
-            If Not llistaDocumentsPerEsborrar Is Nothing Then
-                For cont = 0 To llistaDocumentsPerEsborrar.Length - 1
-                    '				File.Delete(pathDocs+"\"+llistaDocumentsPerEsborrar(cont))
-                    '				IF File.Exists(pathOrigen.tostring()+llistaDocumentsPerEsborrar(cont).SubString(0,posTMP-1)+"P"+llistaDocumentsPerEsborrar(cont).substring(posTMP-1)) THEN
-                    'Si és una imatge i existeix la versió de THUMBNAIL també l'esborro
-                    '					File.Delete( pathDocs+"\"+	llistaDocumentsPerEsborrar(cont).SubString(0,posTMP-1)+"P"+llistaDocumentsPerEsborrar(cont).substring(posTMP-1))					
-                    '	END IF
-                Next cont
-            End If
+                'File.Delete(pathDesti+"\"+fDesti)
+                'Si no queda res a la carpeta també l'esborro
+                'IF Directori.GetFiles(pathDesti).length=0 THEN
+                '	Directori.delete(pathDesti)
+                'END IF
+                'esborro els documents de la llista
+                If Not llistaDocumentsPerEsborrar Is Nothing Then
+                    For cont = 0 To llistaDocumentsPerEsborrar.Length - 1
+                        '				File.Delete(pathDocs+"\"+llistaDocumentsPerEsborrar(cont))
+                        '				IF File.Exists(pathOrigen.tostring()+llistaDocumentsPerEsborrar(cont).SubString(0,posTMP-1)+"P"+llistaDocumentsPerEsborrar(cont).substring(posTMP-1)) THEN
+                        'Si és una imatge i existeix la versió de THUMBNAIL també l'esborro
+                        '					File.Delete( pathDocs+"\"+	llistaDocumentsPerEsborrar(cont).SubString(0,posTMP-1)+"P"+llistaDocumentsPerEsborrar(cont).substring(posTMP-1))					
+                        '	END IF
+                    Next cont
+                End If
 
-        Else 'tipusAccio=1 -> copiar
+            Else 'tipusAccio=1 -> copiar
                 strErr &= "2"
 
                 GAIA.trobaServidorDesti(objConn, relIni, servidorNou, usuari, pwd, pathDestiArrel, pathDocsDesti, port, URL)
                 strErr &= "3"
                 ftpSession = New Session()
-			ftpSession.Server = servidorNou
-			'strErr &="4- servidor=" & servidorNou & "--" & usuari & "--" & pwd & "rel=" & relTmp.incod & "--servidor=" & servidor
-			ftpSession.Connect(usuari, pwd)
-			strErr &="5"
-								
-								
-            If Not llistaDocumentsPerAfegir Is Nothing Then
+                ftpSession.Server = servidorNou
+                'strErr &="4- servidor=" & servidorNou & "--" & usuari & "--" & pwd & "rel=" & relTmp.incod & "--servidor=" & servidor
+                ftpSession.Connect(usuari, pwd)
+                strErr &= "5"
 
 
-                For cont = 0 To llistaDocumentsPerAfegir.Length - 1
-                    relacio = llistaDocumentsPerAfegir(cont).Substring(0, InStr(llistaDocumentsPerAfegir(cont), "_") - 1)
-                    document = llistaDocumentsPerAfegir(cont).Substring(InStr(llistaDocumentsPerAfegir(cont), "_"))
-                    If InStr(document, "/") >= 0 Then
-                        nomFitxer = document.Substring(InStrRev(document, "/"))
-                    Else
-                        nomFitxer = document
-                    End If
-					relTmp.bdget(objConn, relacio)
-														
-                    If servidorNou <> "" Then						
-                       If cont = 0 Then
-                            'si no existeix la carpeta destí la creo			
+                If Not llistaDocumentsPerAfegir Is Nothing Then
 
-                            'IF NOT directory.Exists(pathDocs) THEN
-                            '	Directory.CreateDirectory(pathDocs)
-                            'END IF
+
+                    For cont = 0 To llistaDocumentsPerAfegir.Length - 1
+                        relacio = llistaDocumentsPerAfegir(cont).Substring(0, InStr(llistaDocumentsPerAfegir(cont), "_") - 1)
+                        document = llistaDocumentsPerAfegir(cont).Substring(InStr(llistaDocumentsPerAfegir(cont), "_"))
+                        If InStr(document, "/") >= 0 Then
+                            nomFitxer = document.Substring(InStrRev(document, "/"))
+                        Else
+                            nomFitxer = document
                         End If
-                        'Comprovo que el document necessiti publicació i que alhora no s'hagi publicat
-                        nomFitxerPublicat = ""
-strErr &="6"
-                        GAIA.bdR(objConn, "SELECT METLREI.REIDSFIT, METLDOC.DOCWNUPD, METLDOC.DOCINNOD FROM METLREL  WITH(NOLOCK) INNER JOIN METLDOC WITH(NOLOCK)  ON METLDOC.DOCINNOD = METLREL.RELINFIL AND METLDOC.DOCINIDI =" + idioma.ToString() + " LEFT OUTER JOIN METLREI  WITH(NOLOCK) ON METLREI.REIINCOD = METLREL.RELINCOD AND METLREI.REIINIDI =" + idioma.ToString() + " WHERE (METLREL.RELINCOD =" + relacio.ToString() + ")", ds)
-                        If ds.Tables(0).Rows.Count > 0 Then
-strErr &= "(6.2)"
-                            If Not IsDBNull(ds.Tables(0).Rows(0)("REIDSFIT")) Then
-                                nomFitxerPublicat = ds.Tables(0).Rows(0)("REIDSFIT").Trim()
+                        relTmp.bdget(objConn, relacio)
+
+                        If servidorNou <> "" Then
+                            If cont = 0 Then
+                                'si no existeix la carpeta destí la creo			
+
+                                'IF NOT directory.Exists(pathDocs) THEN
+                                '	Directory.CreateDirectory(pathDocs)
+                                'END IF
                             End If
-                            UPD = ds.Tables(0).Rows(0)("DOCWNUPD")
-                            codiDocument = ds.Tables(0).Rows(0)("DOCINNOD")
-                        End If
+                            'Comprovo que el document necessiti publicació i que alhora no s'hagi publicat
+                            nomFitxerPublicat = ""
+                            strErr &= "6"
+                            GAIA.bdR(objConn, "SELECT METLREI.REIDSFIT, METLDOC.DOCWNUPD, METLDOC.DOCINNOD FROM METLREL  WITH(NOLOCK) INNER JOIN METLDOC WITH(NOLOCK)  ON METLDOC.DOCINNOD = METLREL.RELINFIL AND METLDOC.DOCINIDI =" + idioma.ToString() + " LEFT OUTER JOIN METLREI  WITH(NOLOCK) ON METLREI.REIINCOD = METLREL.RELINCOD AND METLREI.REIINIDI =" + idioma.ToString() + " WHERE (METLREL.RELINCOD =" + relacio.ToString() + ")", ds)
+                            If ds.Tables(0).Rows.Count > 0 Then
+                                strErr &= "(6.2)"
+                                If Not IsDBNull(ds.Tables(0).Rows(0)("REIDSFIT")) Then
+                                    nomFitxerPublicat = ds.Tables(0).Rows(0)("REIDSFIT").Trim()
+                                End If
+                                UPD = ds.Tables(0).Rows(0)("DOCWNUPD")
+                                codiDocument = ds.Tables(0).Rows(0)("DOCINNOD")
+                            End If
 
-strErr &= "(6.3)"
-                        If nomFitxerPublicat = "" Or UPD = 1 Then
-                            If UPD = 1 Then
-                                'Copio l'arxiu al destí
-								pathDocsDesti = pathdocsdesti.Replace("/webs/auditoribarradas", "").Replace("/webs/teatrejoventut", "")
-					
-								strErr &="7: pathDocsDesti=" & pathDocsDesti & ", document=" & document
-								 llistatErrors &=   GAIA.ftpCopiarFitxer(objConn, servidorNou, usuari, pwd, pathOrigen + document, pathDocsDesti + "/" + document, relacio, "", ftpSession,pathDestiArrel)
-								 strErr &= llistatErrors
-							
-								GAIA.bdSR(objConn, "UPDATE METLREL SET RELDSFIT='" & pathDocsDesti.replace(pathDestiArrel,"") &  "/" & document.Replace("/webs/auditoribarradas", "").Replace("/webs/teatrejoventut", "") + "' WHERE RELINCOD=" + relacio.ToString())
-                                If document.Length > 0 Then
-                                    GAIA.bdR(objConn, "SELECT * FROM METLREI  WITH(NOLOCK) WHERE REIINCOD=" + relacio.ToString() + " AND REIINIDI=" + idioma.ToString(), ds)
-                                    If ds.Tables(0).Rows.Count > 0 Then
+                            strErr &= "(6.3)"
+                            If nomFitxerPublicat = "" Or UPD = 1 Then
+                                If UPD = 1 Then
+                                    'Copio l'arxiu al destí
+                                    pathDocsDesti = pathdocsdesti.Replace("/webs/auditoribarradas", "").Replace("/webs/teatrejoventut", "")
 
-										
-										GAIA.bdSR(objConn, "UPDATE METLREI SET REIDSFIT='" + (pathDocsDesti.replace("\","/").replace(pathDestiArrel,"") & "/" & document).Replace("/webs/auditoribarradas", "").Replace("/webs/teatrejoventut", "").Replace("/webs/teatreJoventut", "") & "', REIDSFI2='" & nomFitxer & "' WHERE REIINCOD=" & relTmp.incod & " AND REIINIDI = " & idioma)
-										
-										
-                                    Else
-                                        Dim dataIni, dataFi As DateTime
-                                        GAIA.datesPublicacio(objConn, relTmp, idioma, dataIni, dataFi)
-										
-										GAIA.bdSR(objConn, "INSERT INTO METLREI VALUES(" & relTmp.incod & "," & idioma & ",'" & dataIni.ToString() & "','" & dataFi.ToString() & "','" & (pathDocsDesti.replace("\","/").replace(pathDestiArrel,"").Replace("/GAIA06", "").Replace("/GAIA", "") & "/" & document).Replace("/webs/auditoribarradas", "").Replace("/webs/teatreJoventut", "") & "','" & document & "','')")
+                                    strErr &= "7: pathDocsDesti=" & pathDocsDesti & ", document=" & document
+                                    llistatErrors &= GAIA.ftpCopiarFitxer(objConn, servidorNou, usuari, pwd, pathOrigen + document, pathDocsDesti + "/" + document, relacio, "", ftpSession, pathDestiArrel)
+                                    strErr &= llistatErrors
+
+                                    GAIA.bdSR(objConn, "UPDATE METLREL SET RELDSFIT='" & pathDocsDesti.replace(pathDestiArrel, "") & "/" & document.Replace("/webs/auditoribarradas", "").Replace("/webs/teatrejoventut", "") + "' WHERE RELINCOD=" + relacio.ToString())
+                                    If document.Length > 0 Then
+                                        GAIA.bdR(objConn, "SELECT * FROM METLREI  WITH(NOLOCK) WHERE REIINCOD=" + relacio.ToString() + " AND REIINIDI=" + idioma.ToString(), ds)
+                                        If ds.Tables(0).Rows.Count > 0 Then
+
+
+                                            GAIA.bdSR(objConn, "UPDATE METLREI SET REIDSFIT='" + (pathDocsDesti.replace("\", "/").replace(pathDestiArrel, "") & "/" & document).Replace("/webs/auditoribarradas", "").Replace("/webs/teatrejoventut", "").Replace("/webs/teatreJoventut", "") & "', REIDSFI2='" & nomFitxer & "' WHERE REIINCOD=" & relTmp.incod & " AND REIINIDI = " & idioma)
+
+
+                                        Else
+                                            Dim dataIni, dataFi As DateTime
+                                            GAIA.datesPublicacio(objConn, relTmp, idioma, dataIni, dataFi)
+
+                                            GAIA.bdSR(objConn, "INSERT INTO METLREI VALUES(" & relTmp.incod & "," & idioma & ",'" & dataIni.ToString() & "','" & dataFi.ToString() & "','" & (pathDocsDesti.replace("\", "/").replace(pathDestiArrel, "").Replace("/GAIA06", "").Replace("/GAIA", "") & "/" & document).Replace("/webs/auditoribarradas", "").Replace("/webs/teatreJoventut", "") & "','" & document & "','')")
+                                        End If
+
+
                                     End If
+                                    posTMP = InStrRev(document, ".")
+                                    If File.Exists(pathOrigen.ToString() + document.Substring(0, posTMP - 1) + "P" + document.Substring(posTMP - 1)) Then
+                                        'Si és una imatge i existeix la versió de THUMBNAIL també la copio
+
+                                        strErr &= "8"
+                                        llistatErrors &= GAIA.ftpCopiarFitxer(objConn, servidorNou, usuari, pwd, pathOrigen.ToString() + document.Substring(0, posTMP - 1) + "P" + document.Substring(posTMP - 1), pathDocsDesti + "/" + document.Substring(0, posTMP - 1) + "P" + document.Substring(posTMP - 1), relacio, "P", ftpSession, pathDestiArrel)
+                                        strErr &= "9" & llistatErrors
 
 
-                                End If
-                                posTMP = InStrRev(document, ".")
-                                If File.Exists(pathOrigen.ToString() + document.Substring(0, posTMP - 1) + "P" + document.Substring(posTMP - 1)) Then
-                                    'Si és una imatge i existeix la versió de THUMBNAIL també la copio
-									
-								strErr &="8"
-                                     llistatErrors &=   GAIA.ftpCopiarFitxer(objConn, servidorNou, usuari, pwd, pathOrigen.ToString() + document.Substring(0, posTMP - 1) + "P" + document.Substring(posTMP - 1), pathDocsDesti + "/" + document.Substring(0, posTMP - 1) + "P" + document.Substring(posTMP - 1), relacio, "P", ftpSession,pathDestiArrel)
-									strErr &="9" & llistatErrors
-									
-						
-                                   llistatErrors &=  GAIA.ftpCopiarFitxer(objConn, servidorNou, usuari, pwd, pathOrigen.ToString() + document.Substring(0, posTMP - 1) + "P100" + document.Substring(posTMP - 1), pathDocsDesti + "/" + document.Substring(0, posTMP - 1) + "P100" + document.Substring(posTMP - 1), relacio, "P100", ftpSession,pathDestiArrel)
-									strErr &="10" & llistatErrors
-                                End If
-                                If codiDocument > 0 Then
-                                    GAIA.bdSR(objConn, "UPDATE METLDOC SET DOCWNUPD=0 WHERE DOCINIDI=" + idioma.ToString() + " AND DOCINNOD=" + codiDocument.ToString())
+                                        llistatErrors &= GAIA.ftpCopiarFitxer(objConn, servidorNou, usuari, pwd, pathOrigen.ToString() + document.Substring(0, posTMP - 1) + "P100" + document.Substring(posTMP - 1), pathDocsDesti + "/" + document.Substring(0, posTMP - 1) + "P100" + document.Substring(posTMP - 1), relacio, "P100", ftpSession, pathDestiArrel)
+                                        strErr &= "10" & llistatErrors
+                                    End If
+                                    If codiDocument > 0 Then
+                                        GAIA.bdSR(objConn, "UPDATE METLDOC SET DOCWNUPD=0 WHERE DOCINIDI=" + idioma.ToString() + " AND DOCINNOD=" + codiDocument.ToString())
+                                    End If
                                 End If
                             End If
+                        Else
+                            ' no faig res per que no hi ha cap servidor per publicar
                         End If
-                    Else
-                        ' no faig res per que no hi ha cap servidor per publicar
-                    End If
-                Next cont
-            End If
+                    Next cont
+                End If
 
                 'Si no existex la carpeta destí la creo...
                 'If Not System.IO.Directory.Exists(pathDesti) Then
@@ -10030,174 +10009,174 @@ strErr &= "(6.3)"
                 '***************************************************************************************			
                 strErr &= "(6.4)"
                 codiHtml = codiHtml.Replace("src=""/gDocs", "src=""http://" + URL + "/gDocs")
-            Dim regexp As Regex
-            Dim strInPattern As String
-            codiHtml = codiHtml.Replace("<u>", "<span class='subratllat'>").Replace("<em>", "<span class='cursiva'>").Replace("<i>", "<span class='cursiva'>")
-            
-            strInPattern = "</u>|</i>|</em>"
-            regexp = New Regex(strInPattern, RegexOptions.IgnoreCase)
-            codiHtml = Regex.Replace(codiHtml, strInPattern, "</span>", RegexOptions.IgnoreCase)
-            regexp = Nothing
+                Dim regexp As Regex
+                Dim strInPattern As String
+                codiHtml = codiHtml.Replace("<u>", "<span class='subratllat'>").Replace("<em>", "<span class='cursiva'>").Replace("<i>", "<span class='cursiva'>")
+
+                strInPattern = "</u>|</i>|</em>"
+                regexp = New Regex(strInPattern, RegexOptions.IgnoreCase)
+                codiHtml = Regex.Replace(codiHtml, strInPattern, "</span>", RegexOptions.IgnoreCase)
+                regexp = Nothing
 
 
-            '***************************************************************************************
-            'Tinc el HTML preparat per gravar a la carpeta temporal i iniciar el procés de copia
-            '1- Generaré clau de HASH
-            '2- Només publicaré si és diferent al que hi ha publicat
-            '3- En aquest cas, publicaré i canviaré la clau
-            '***************************************************************************************
-            Dim sha1Obj As New System.Security.Cryptography.SHA1CryptoServiceProvider
-            Dim enc As New System.Text.UTF8Encoding()
+                '***************************************************************************************
+                'Tinc el HTML preparat per gravar a la carpeta temporal i iniciar el procés de copia
+                '1- Generaré clau de HASH
+                '2- Només publicaré si és diferent al que hi ha publicat
+                '3- En aquest cas, publicaré i canviaré la clau
+                '***************************************************************************************
+                Dim sha1Obj As New System.Security.Cryptography.SHA1CryptoServiceProvider
+                Dim enc As New System.Text.UTF8Encoding()
 
-            Dim strHash As String = Convert.ToBase64String(sha1Obj.ComputeHash(enc.GetBytes(codiHtml)))
+                Dim strHash As String = Convert.ToBase64String(sha1Obj.ComputeHash(enc.GetBytes(codiHtml)))
                 strErr &= "(6.5)"
 
                 GAIA.bdR(objConn, "SELECT isnull(REIDSHAS,'') as REIDSHAS FROM METLREI  WITH(NOLOCK) WHERE REIINCOD=" & relIni.incod & " AND REIINIDI=" & idioma, ds)
-            If ds.Tables(0).Rows.Count > 0 Then
-                If ds.Tables(0).Rows(0)("REIDSHAS") = strHash Then
-                    GAIA.llistatWarnings &= "No s'ha publicat la pàgina per que és igual a la que ja existia"
-                    publica = 0
-                End If
-            End If
-
-            If publica > 0 Then
-                Dim fitxerTMP As String
-                fitxerTMP = ""
-				
-                If InStr(fDesti, "/") Then
-
-                    fitxerTMP = "/" & fDesti.Substring(InStrRev(fDesti, "/"))
-                Else
-
-                    fitxerTMP = "/" & fDesti
-                    fDesti = fitxerTMP
-                End If
-                fDesti = fDesti.Replace("\\", "\").Replace("\\", "\").Replace("/", "\")
-
-				
-				strErr &= "(6.6)"
-                trobaServidorDesti(objConn, relIni, servidorNou, usuari, pwd, pathDestiArrel, pathDocsDesti, port, URL)
-                If servidorNou <> "" Then
-                    If servidorNou <> servidor Then
-					strErr &="11"
-                        servidor = servidorNou
-                        ftpSession.Close()
-                        ftpSession = New Session()
-                        ftpSession.Server = servidorNou
-                        ftpSession.Connect(usuari, pwd)
-										strErr &="12"	
+                If ds.Tables(0).Rows.Count > 0 Then
+                    If ds.Tables(0).Rows(0)("REIDSHAS") = strHash Then
+                        GAIA.llistatWarnings &= "No s'ha publicat la pàgina per que és igual a la que ja existia"
+                        publica = 0
                     End If
-                    'Copio al servidor Intranet on guardarem copia de tots els documents, amb excepció de proves o de una publicació a Intranet			
-                    If fitxerTMP.Length > 0 Then
-                       
-					
-						Dim destilocal As String = ""
-						If InStr(UCase(pathDestiArrel), "GAIA") <= 0 And InStr(UCase(pathDestiArrel), "SEUELEC") <= 0 Then
-							destilocal = "\webs"
-						End If				
-																				
-						'destilocal = "c:\inetpub\wwwroot\websGAIA\web" + destilocal + (pathDestiArrel + fDesti).Replace("\GAIA06", "").Replace("/GAIA06", "").Replace("/gaia", "").Replace("/GAIA", "")
-						destilocal = "c:\inetpub\wwwroot\websGAIA\web" + destilocal + (pathDestiArrel & "\" & relIni.incod  & "_" & idioma & ".aspx").Replace("\GAIA06", "").Replace("/GAIA06", "").Replace("/gaia", "").Replace("/GAIA", "")
-						destilocal = destilocal.Replace("/", "\")
-						
-						
-						Dim strPathTmp as string = destilocal.substring(0, instrrev(destilocal,"\")-1)						
-						
-						
-                        If InStr(UCase(pathDestiArrel + fDesti), "PROVES") <= 0 AND servidor<>"intranet" Then
-						'Si no existeix la carpeta, la creo ara
-							If(Not System.IO.Directory.Exists(strPathTmp)) Then
-								try
-									System.IO.Directory.CreateDirectory(strPathTmp)
-								catch
-								end try
-							End If																		
-							objStreamWriter = New StreamWriter(destilocal, False, Encoding.Default)
-                        Else
-                            objStreamWriter = New StreamWriter("c:\windows\temp\" + fitxerTMP, False, Encoding.Default)
-                        End If
-						
-						
-						
-						
-						              
-                        objStreamWriter.Write(codiHtml)
-                        objStreamWriter.Close()
-                        'el path es /GAIA06, copio al c:\inetpub\wwwroot\websGAIA\web\...  			
-                        If InStr(UCase(pathDestiArrel + fDesti), "PROVES") <= 0 AND servidor<>"intranet" Then
-											strErr &="13"
-										  
-											
-                            llistatErrors &=  GAIA.ftpCopiarFitxer(objConn, servidorNou, usuari, pwd, destilocal, pathDestiArrel + fDesti, relIni.incod, "", ftpSession,pathDestiArrel)
-							
-												strErr &="14"
-                        Else
-											strErr &="15"
-                            llistatErrors &=  GAIA.ftpCopiarFitxer(objConn, servidorNou, usuari, pwd, "c:\windows\temp\" + fitxerTMP, pathDestiArrel + fDesti, relIni.incod, "", ftpSession,pathDestiArrel)
-												strErr &="16"
-                        End If
-						
-						
-						
-						
-                       ' GAIA.bdSR(objConn, "UPDATE METLREL SET RELDSFIT='" + (pathDestiArrel.replace("\","/").Replace("/GAIA06", "").Replace("/gaia", "").Replace("/GAIA", "").Replace("/joventut", "").Replace("/lh2010", "").Replace("/museu", "").Replace("/ccbobila", "").Replace("/ccteclasala", "").Replace("/arranzbravo", "").Replace("/EMCA", "").Replace("/seuelectronica", "").Replace("/ccSantJosep", "").Replace("/promocio", "").Replace("/ccct", "").Replace("/cooperacio", "").Replace("/xarxasida", "") + fDesti).Replace("/webs/auditoribarradas", "").Replace("/webs/teatrejoventut", "").Replace("/lhon", "").replace("/TorreBarrina","").replace("/pmc","").replace("/pmlh","").replace("/pmsf","") + "' WHERE RELINCOD=" + relIni.incod.ToString())
-					    GAIA.bdSR(objConn, "UPDATE METLREL SET RELDSFIT='" & fDesti.Replace("/webs/teatrejoventut", "") & "' WHERE RELINCOD=" & relIni.incod.ToString())
-						strErr &="17"
-                        GAIA.bdR(objConn, "SELECT * FROM METLREI  WITH(NOLOCK) WHERE REIINCOD=" & relIni.incod & " AND REIINIDI=" & idioma, ds)
-						strErr &="18"
-                        If ds.Tables(0).Rows.Count > 0 Then
+                End If
 
-                            'pathDestiArrel = pathDestiArrel.Replace("\","/")
-							'pathDestiArrel = pathDestiArrel.Replace("/GAIA06", "").Replace("/gaia", "").Replace("/GAIA", "").Replace("/joventut", "").Replace("/lh2010", "").Replace("/museu", "").Replace("/ccbobila", "").Replace("/ccteclasala", "").Replace("/arranzbravo", "").Replace("/EMCA", "").Replace("/seuelectronica", "").Replace("/ccSantJosep", "").Replace("/promocio", "")
-                            'pathDestiArrel = pathDestiArrel.Replace("/ccct", "").Replace("/xarxasida", "").Replace("/cooperacio", "").replace("/pmc","").replace("/pmlh","").replace("/pmsf","") 
-                           'GAIA.bdSR(objConn, "UPDATE METLREI SET REIDSFIT='" & pathDestiArrel & fDesti.replace("\","/").Replace("/webs/auditoribarradas", "").Replace("/webs/teatrejoventut", "").Replace("/lhon", "").replace("/TorreBarrina","").replace("/pmc","").replace("/pmlh","").replace("/pmsf","") & "', REIDSFI2='" & fitxerTMP & "' , REIDSHAS='" & strHash & "' WHERE REIINCOD=" + relIni.incod.ToString() + " AND REIINIDI = " & idioma)
-						   
-						   GAIA.bdSR(objConn, "UPDATE METLREI SET REIDSFIT='" &  fDesti.replace("\","/").Replace("/webs/teatrejoventut", "") & "', REIDSFI2='" & fitxerTMP & "' , REIDSHAS='" & strHash & "' WHERE REIINCOD=" + relIni.incod.ToString() + " AND REIINIDI = " & idioma)
-	   						strErr &="19"
- 						Else
+                If publica > 0 Then
+                    Dim fitxerTMP As String
+                    fitxerTMP = ""
 
-                            Dim dataIni, dataFi As DateTime
-                            GAIA.datesPublicacio(objConn, relIni, idioma, dataIni, dataFi)
-                           ' GAIA.bdSR(objConn, "INSERT INTO METLREI VALUES(" + relIni.incod.ToString() + "," + idioma.ToString() + ",'" + dataIni.ToString() + "','" + dataFi.ToString() + "','" + (pathDestiArrel.replace("\","/").Replace("/GAIA06", "").Replace("/gaia", "").Replace("/GAIA", "").Replace("/cooperacio", "").Replace("/joventut", "").Replace("/lh2010", "").Replace("/museu", "").Replace("/ccbobila", "").Replace("/ccct", "").Replace("/ccteclasala", "").Replace("/arranzbravo", "").Replace("/EMCA", "").Replace("/seuelectronica", "").Replace("/ccSantJosep", "").Replace("/promocio", "").Replace("/xarxasida", "") + fDesti).Replace("/webs/auditoribarradas", "").Replace("/webs/teatrejoventut", "").Replace("/lhon", "").replace("/TorreBarrina","").replace("/pmc","").replace("/pmlh","").replace("/pmsf","") + "','" + fitxerTMP + "','" & strHash & "')")
-							strErr &="20"
-							try
-							strErr &="a"	
-							GAIA.bdSR(objConn, "INSERT INTO METLREI VALUES(" & relIni.incod & "," & idioma & ",'" & dataIni.ToString() & "','" & dataFi.ToString() & "','" &  fDesti.Replace("/webs/teatrejoventut", "") & "','" & fitxerTMP & "','" & strHash & "')")
-							strErr &="b"	
-							catch
-								gaia.debug(objconn, "publica: problema al fer aquesta acció: " &  "INSERT INTO METLREI VALUES(" & relIni.incod & "," & idioma & ",'" & dataIni.ToString() & "','" & dataFi.ToString() & "','" &  fDesti & "','" & fitxerTMP & "','" & strHash & "')")
-							end try
-							strErr &="21"							
-                        End If
-                        If InStr(UCase(pathDestiArrel), "PROVES") > 0 OR  servidor="intranet" Then
-                            file.delete("c:\windows\temp\"+fitxerTMP)		
-                        End If
+                    If InStr(fDesti, "/") Then
+
+                        fitxerTMP = "/" & fDesti.Substring(InStrRev(fDesti, "/"))
                     Else
-                        GAIA.debug(objConn, "Hi ha error al publicar la relació: " + relIni.incod.ToString() + ". Nom de fitxer buit")
+
+                        fitxerTMP = "/" & fDesti
+                        fDesti = fitxerTMP
+                    End If
+                    fDesti = fDesti.Replace("\\", "\").Replace("\\", "\").Replace("/", "\")
+
+
+                    strErr &= "(6.6)"
+                    trobaServidorDesti(objConn, relIni, servidorNou, usuari, pwd, pathDestiArrel, pathDocsDesti, port, URL)
+                    If servidorNou <> "" Then
+                        If servidorNou <> servidor Then
+                            strErr &= "11"
+                            servidor = servidorNou
+                            ftpSession.Close()
+                            ftpSession = New Session()
+                            ftpSession.Server = servidorNou
+                            ftpSession.Connect(usuari, pwd)
+                            strErr &= "12"
+                        End If
+                        'Copio al servidor Intranet on guardarem copia de tots els documents, amb excepció de proves o de una publicació a Intranet			
+                        If fitxerTMP.Length > 0 Then
+
+
+                            Dim destilocal As String = ""
+                            If InStr(UCase(pathDestiArrel), "GAIA") <= 0 And InStr(UCase(pathDestiArrel), "SEUELEC") <= 0 Then
+                                destilocal = "\webs"
+                            End If
+
+                            'destilocal = "c:\inetpub\wwwroot\websGAIA\web" + destilocal + (pathDestiArrel + fDesti).Replace("\GAIA06", "").Replace("/GAIA06", "").Replace("/gaia", "").Replace("/GAIA", "")
+                            destilocal = "c:\inetpub\wwwroot\websGAIA\web" + destilocal + (pathDestiArrel & "\" & relIni.incod & "_" & idioma & ".aspx").Replace("\GAIA06", "").Replace("/GAIA06", "").Replace("/gaia", "").Replace("/GAIA", "")
+                            destilocal = destilocal.Replace("/", "\")
+
+
+                            Dim strPathTmp As String = destilocal.substring(0, instrrev(destilocal, "\") - 1)
+
+
+                            If InStr(UCase(pathDestiArrel + fDesti), "PROVES") <= 0 And servidor <> "intranet" Then
+                                'Si no existeix la carpeta, la creo ara
+                                If (Not System.IO.Directory.Exists(strPathTmp)) Then
+                                    Try
+                                        System.IO.Directory.CreateDirectory(strPathTmp)
+                                    Catch
+                                    End Try
+                                End If
+                                objStreamWriter = New StreamWriter(destilocal, False, Encoding.Default)
+                            Else
+                                objStreamWriter = New StreamWriter("c:\windows\temp\" + fitxerTMP, False, Encoding.Default)
+                            End If
+
+
+
+
+
+                            objStreamWriter.Write(codiHtml)
+                            objStreamWriter.Close()
+                            'el path es /GAIA06, copio al c:\inetpub\wwwroot\websGAIA\web\...  			
+                            If InStr(UCase(pathDestiArrel + fDesti), "PROVES") <= 0 And servidor <> "intranet" Then
+                                strErr &= "13"
+
+
+                                llistatErrors &= GAIA.ftpCopiarFitxer(objConn, servidorNou, usuari, pwd, destilocal, pathDestiArrel + fDesti, relIni.incod, "", ftpSession, pathDestiArrel)
+
+                                strErr &= "14"
+                            Else
+                                strErr &= "15"
+                                llistatErrors &= GAIA.ftpCopiarFitxer(objConn, servidorNou, usuari, pwd, "c:\windows\temp\" + fitxerTMP, pathDestiArrel + fDesti, relIni.incod, "", ftpSession, pathDestiArrel)
+                                strErr &= "16"
+                            End If
+
+
+
+
+                            ' GAIA.bdSR(objConn, "UPDATE METLREL SET RELDSFIT='" + (pathDestiArrel.replace("\","/").Replace("/GAIA06", "").Replace("/gaia", "").Replace("/GAIA", "").Replace("/joventut", "").Replace("/lh2010", "").Replace("/museu", "").Replace("/ccbobila", "").Replace("/ccteclasala", "").Replace("/arranzbravo", "").Replace("/EMCA", "").Replace("/seuelectronica", "").Replace("/ccSantJosep", "").Replace("/promocio", "").Replace("/ccct", "").Replace("/cooperacio", "").Replace("/xarxasida", "") + fDesti).Replace("/webs/auditoribarradas", "").Replace("/webs/teatrejoventut", "").Replace("/lhon", "").replace("/TorreBarrina","").replace("/pmc","").replace("/pmlh","").replace("/pmsf","") + "' WHERE RELINCOD=" + relIni.incod.ToString())
+                            GAIA.bdSR(objConn, "UPDATE METLREL SET RELDSFIT='" & fDesti.Replace("/webs/teatrejoventut", "") & "' WHERE RELINCOD=" & relIni.incod.ToString())
+                            strErr &= "17"
+                            GAIA.bdR(objConn, "SELECT * FROM METLREI  WITH(NOLOCK) WHERE REIINCOD=" & relIni.incod & " AND REIINIDI=" & idioma, ds)
+                            strErr &= "18"
+                            If ds.Tables(0).Rows.Count > 0 Then
+
+                                'pathDestiArrel = pathDestiArrel.Replace("\","/")
+                                'pathDestiArrel = pathDestiArrel.Replace("/GAIA06", "").Replace("/gaia", "").Replace("/GAIA", "").Replace("/joventut", "").Replace("/lh2010", "").Replace("/museu", "").Replace("/ccbobila", "").Replace("/ccteclasala", "").Replace("/arranzbravo", "").Replace("/EMCA", "").Replace("/seuelectronica", "").Replace("/ccSantJosep", "").Replace("/promocio", "")
+                                'pathDestiArrel = pathDestiArrel.Replace("/ccct", "").Replace("/xarxasida", "").Replace("/cooperacio", "").replace("/pmc","").replace("/pmlh","").replace("/pmsf","") 
+                                'GAIA.bdSR(objConn, "UPDATE METLREI SET REIDSFIT='" & pathDestiArrel & fDesti.replace("\","/").Replace("/webs/auditoribarradas", "").Replace("/webs/teatrejoventut", "").Replace("/lhon", "").replace("/TorreBarrina","").replace("/pmc","").replace("/pmlh","").replace("/pmsf","") & "', REIDSFI2='" & fitxerTMP & "' , REIDSHAS='" & strHash & "' WHERE REIINCOD=" + relIni.incod.ToString() + " AND REIINIDI = " & idioma)
+
+                                GAIA.bdSR(objConn, "UPDATE METLREI SET REIDSFIT='" & fDesti.replace("\", "/").Replace("/webs/teatrejoventut", "") & "', REIDSFI2='" & fitxerTMP & "' , REIDSHAS='" & strHash & "' WHERE REIINCOD=" + relIni.incod.ToString() + " AND REIINIDI = " & idioma)
+                                strErr &= "19"
+                            Else
+
+                                Dim dataIni, dataFi As DateTime
+                                GAIA.datesPublicacio(objConn, relIni, idioma, dataIni, dataFi)
+                                ' GAIA.bdSR(objConn, "INSERT INTO METLREI VALUES(" + relIni.incod.ToString() + "," + idioma.ToString() + ",'" + dataIni.ToString() + "','" + dataFi.ToString() + "','" + (pathDestiArrel.replace("\","/").Replace("/GAIA06", "").Replace("/gaia", "").Replace("/GAIA", "").Replace("/cooperacio", "").Replace("/joventut", "").Replace("/lh2010", "").Replace("/museu", "").Replace("/ccbobila", "").Replace("/ccct", "").Replace("/ccteclasala", "").Replace("/arranzbravo", "").Replace("/EMCA", "").Replace("/seuelectronica", "").Replace("/ccSantJosep", "").Replace("/promocio", "").Replace("/xarxasida", "") + fDesti).Replace("/webs/auditoribarradas", "").Replace("/webs/teatrejoventut", "").Replace("/lhon", "").replace("/TorreBarrina","").replace("/pmc","").replace("/pmlh","").replace("/pmsf","") + "','" + fitxerTMP + "','" & strHash & "')")
+                                strErr &= "20"
+                                Try
+                                    strErr &= "a"
+                                    GAIA.bdSR(objConn, "INSERT INTO METLREI VALUES(" & relIni.incod & "," & idioma & ",'" & dataIni.ToString() & "','" & dataFi.ToString() & "','" & fDesti.Replace("/webs/teatrejoventut", "") & "','" & fitxerTMP & "','" & strHash & "')")
+                                    strErr &= "b"
+                                Catch
+                                    gaia.debug(objconn, "publica: problema al fer aquesta acció: " & "INSERT INTO METLREI VALUES(" & relIni.incod & "," & idioma & ",'" & dataIni.ToString() & "','" & dataFi.ToString() & "','" & fDesti & "','" & fitxerTMP & "','" & strHash & "')")
+                                End Try
+                                strErr &= "21"
+                            End If
+                            If InStr(UCase(pathDestiArrel), "PROVES") > 0 Or servidor = "intranet" Then
+                                file.delete("c:\windows\temp\" + fitxerTMP)
+                            End If
+                        Else
+                            GAIA.debug(objConn, "Hi ha error al publicar la relació: " + relIni.incod.ToString() + ". Nom de fitxer buit")
+                        End If
                     End If
                 End If
-            End If
-			
+
                 'Esborro tots els manteniments de la relacio/node amb data inferior a l'actual, i que no hagin estat publicats (MANDTTEM=0)
-			GAIA.bdsr(objconn, "DELETE FROM METLMAN WHERE MANDTTEM=0 AND (MANCDREL=" & relIni.incod & " OR MANCDNOD=" & relIni.infil & ") AND MANDTDAT<getdate()  AND MANCDIDI=" & idioma )
+                GAIA.bdsr(objconn, "DELETE FROM METLMAN WHERE MANDTTEM=0 AND (MANCDREL=" & relIni.incod & " OR MANCDNOD=" & relIni.infil & ") AND MANDTDAT<getdate()  AND MANCDIDI=" & idioma)
 
-        End If
-		
-	
-        'Si no hem pasat cap servidor destí com a paràmetre és per que és una publicació d'una única pàgina i per tant es pot tancar la sessió
-        If servidor = "" Then
-		
-            ftpSession.Close()
-        Else
-            'no tanco la sessió de FTP. La tancaré dins del procés de manteniment de continguts.
-        End If
+            End If
 
-        ds.Dispose()
-		catch ex As Exception
-			f_logError(objConn, "G01. Publica.", ex.Source,  "error en publica:  " & strErr & "-" & Err.Description)
-            llistatErrors &= "<br/> " & ex.ToString & ". error en publica:  " & strErr & "-" & Err.Description 
-			
-		end Try
+
+            'Si no hem pasat cap servidor destí com a paràmetre és per que és una publicació d'una única pàgina i per tant es pot tancar la sessió
+            If servidor = "" Then
+
+                ftpSession.Close()
+            Else
+                'no tanco la sessió de FTP. La tancaré dins del procés de manteniment de continguts.
+            End If
+
+            ds.Dispose()
+        Catch ex As Exception
+            f_logError(objConn, "G01. Publica.", ex.Source, "error en publica:  " & strErr & "-" & Err.Description)
+            llistatErrors &= "<br/> " & ex.ToString & ". error en publica:  " & strErr & "-" & Err.Description
+
+        End Try
         Return 0
     End Function 'publica
 
@@ -10230,8 +10209,8 @@ strErr &= "(6.3)"
 
             If ds2.Tables(0).Rows.Count = 0 Then
                 'si no existeix l'entrada fem l'insert amb els nous valors
-				
-                sSQL = "INSERT INTO METLREI (REIINCOD,REIINIDI,REIDTPUB,REIDTCAD,REIDSFIT, REIDSFI2,REIDSHAS) VALUES " & _
+
+                sSQL = "INSERT INTO METLREI (REIINCOD,REIINIDI,REIDTPUB,REIDTCAD,REIDSFIT, REIDSFI2,REIDSHAS) VALUES " &
                 "(" & dbRow("RELINCOD") & "," & idioma & "," & dataPublicacio.ToString() & "," & dataCaducitat.ToString() & ",'','','')"
                 GAIA.bdSR(objConn, sSQL)
             Else
@@ -10292,7 +10271,7 @@ strErr &= "(6.3)"
     '	Procés:   Segons el tipus de contingut, el proceso, aplico l'estil css i el retorno
     '						Si l'estil CSS = 0 llavors no retorno el contingut del camp. Sempre ha d'haver un estil associat.
     '************************************************************************************************************	
-    Public Shared Function posaFormat(ByVal objConn As OleDbConnection, ByVal strContingut As String, ByVal css As String, ByVal enllaç As String, ByVal esImatge As String, ByVal width As String, ByVal tamanyH As Integer, ByVal tamanyV As Integer, ByVal estat As Integer, ByVal textalternatiu As String, ByVal tancaEnllaç As boolean, ByVal heretaPropietatsWeb As Integer, ByVal target As Integer, ByVal rel As clsRelacio, ByVal relini As clsRelacio, ByVal idioma As Integer, ByVal esEML As String, ByVal botoMesImatge As String, ByVal titolContingut As String, ByVal plt As clsPlantilla, ByVal pareTeEnllac As Boolean, byRef cssGenerat as string) As String
+    Public Shared Function posaFormat(ByVal objConn As OleDbConnection, ByVal strContingut As String, ByVal css As String, ByVal enllaç As String, ByVal esImatge As String, ByVal width As String, ByVal tamanyH As Integer, ByVal tamanyV As Integer, ByVal estat As Integer, ByVal textalternatiu As String, ByVal tancaEnllaç As Boolean, ByVal heretaPropietatsWeb As Integer, ByVal target As Integer, ByVal rel As clsRelacio, ByVal relini As clsRelacio, ByVal idioma As Integer, ByVal esEML As String, ByVal botoMesImatge As String, ByVal titolContingut As String, ByVal plt As clsPlantilla, ByVal pareTeEnllac As Boolean, ByRef cssGenerat As String) As String
 
 
         Dim strFormat As String
@@ -10307,19 +10286,19 @@ strErr &= "(6.3)"
         Dim posaFormatJS As String = ""
         Dim textAlternatiuImatge As String = ""
         Dim posaWidthGAIA As Integer = 1
-		Dim posaFloatGAIA As Integer = 1
+        Dim posaFloatGAIA As Integer = 1
         Dim posaVoreres As String = ""
         Dim estilsHref As String = ""
-		DIm imatgeSenseRatio as string=""
-		strCss = ""
+        Dim imatgeSenseRatio As String = ""
+        strCss = ""
 
         If width = 0 Then
             posaWidthGAIA = 0
         End If
-		
-        If esImatge = "1" and esEML = "S" Then
+
+        If esImatge = "1" And esEML = "S" Then
             posaWidthGAIA = 0
-		END IF
+        End If
         textAlternatiuImatge = textalternatiu
         'Si és un enllaç el title del <a href ha de tenir el títol del enllaç
         If enllaç.Trim().Length > 0 Then
@@ -10381,14 +10360,14 @@ strErr &= "(6.3)"
                         tancaEnllaç = True
                         'el strcss només l'he de posar si és una imatge (no un swf)					
                     End If
-                     '******************************************************************
-					'és un flash
-					 '******************************************************************
+                    '******************************************************************
+                    'és un flash
+                    '******************************************************************
                     If InStr(strContingut, "swf") > 0 Then
                         posaFormat += "<object classid=""clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"" codebase=""http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,29,0""  " + strCss + " alt=""" & GAIA.netejaHTML(textalternatiu.Replace("""", "´").Trim()) & """><param name=""scale"" value=""ExactFit""/><param name=""movie"" value=""" + strContingut + """><param name=""quality"" value=""high""><embed src=""" + strContingut + """ quality=""high"" pluginspage=""http://www.macromedia.com/go/getflashplayer"" type=""application/x-shockwave-flash"" " + strCss + "><param name=""scale"" value=""ExactFit ""/></embed></object>"
-                    '******************************************************************
-					'  és una imatge														
-                    '******************************************************************					
+                        '******************************************************************
+                        '  és una imatge														
+                        '******************************************************************					
                     Else
                         textalternatiu = textAlternatiuExtes & IIf(target = 1, IIf(idioma = 1, " (nova finestra)", " (nueva ventana) "), "")
 
@@ -10399,16 +10378,16 @@ strErr &= "(6.3)"
                             crida = strContingut.Split("?")
                             Dim oCodParam As New lhCodParam.lhCodParam
                             strContingut = crida(0) & "?" & oCodParam.encriptar(oCodParam.desencriptar(crida(1)) & "&r=" & strCss.Substring(InStr(strCss, "ratio") + 4, 3))
-							imatgeSenseRatio = crida(0) & "?" & oCodParam.encriptar(oCodParam.desencriptar(crida(1))) 
+                            imatgeSenseRatio = crida(0) & "?" & oCodParam.encriptar(oCodParam.desencriptar(crida(1)))
                             'elimino el text de la ratio
-                          
+
                             strCss = strCss.Substring(0, InStr(strCss, "ratio") - 1) & strCss.Substring(InStr(strCss, "ratio") + 7)
-                        else
-							imatgeSenseRatio = strContingut
-						End If
-	                    If (esEML = "N") Then
-					    	posaFormatJS = "<a href=""" & imatgeSenseRatio & """ target=""_blank"" title=""" & GAIA.netejaHTML(textalternatiu) & """ ><img src=""" & strContingut & """ alt=""" & textAlternatiuImatge & """ " & strCss & IIf(width = 0, " width=""" + tamanyH.ToString() + """ height=""" + tamanyV.ToString() + """", "") & "/></a>"
-						END IF
+                        Else
+                            imatgeSenseRatio = strContingut
+                        End If
+                        If (esEML = "N") Then
+                            posaFormatJS = "<a href=""" & imatgeSenseRatio & """ target=""_blank"" title=""" & GAIA.netejaHTML(textalternatiu) & """ ><img src=""" & strContingut & """ alt=""" & textAlternatiuImatge & """ " & strCss & IIf(width = 0, " width=""" + tamanyH.ToString() + """ height=""" + tamanyV.ToString() + """", "") & "/></a>"
+                        End If
                         posaFormat = posaFormat & "<img src=""" + strContingut + """ alt=""" & textAlternatiuImatge & """ " & IIf(esEML = "S", strCss, strCss.Replace("=""", "=""border0 "))
                         If width = 0 Then
                             posaFormat &= " width=""" + tamanyH.ToString() + """ height=""" + tamanyV.ToString() + """"
@@ -10435,7 +10414,7 @@ strErr &= "(6.3)"
                                 End If
                             Catch
 
-                        End Try
+                            End Try
                         End If
                         posaFormat &= "/>"
 
@@ -10444,45 +10423,45 @@ strErr &= "(6.3)"
 
                     If enllaç.Trim().Length > 0 And tancaEnllaç Then
                         posaFormat += botoMesImatge + "</a>"
-						tancaEnllaç = false 
+                        tancaEnllaç = False
                     End If
                 Else
                     'hi ha un document que s'espera com a imatge i no ho és. De moment no el mostro.
-                End If            
+                End If
             Else 'No és una imatge.
                 If enllaç.Trim().Length > 0 Then
-                   
-                        If textalternatiu = "" Then
-                            textalternatiu = GAIA.obtenirTitolContingut(objConn, relini, idioma)
-                        End If
-                        If InStr(enllaç, "obreFitxer") > 0 Or InStr(enllaç, "visorImatges") > 0 Then 'si és un document l'obro en una finestra nova.                           
-                            estilsHref =  strCss
-							
-                        	strCss =""
+
+                    If textalternatiu = "" Then
+                        textalternatiu = GAIA.obtenirTitolContingut(objConn, relini, idioma)
+                    End If
+                    If InStr(enllaç, "obreFitxer") > 0 Or InStr(enllaç, "visorImatges") > 0 Then 'si és un document l'obro en una finestra nova.                           
+                        estilsHref = strCss
+
+                        strCss = ""
                         posaFormat = "<a href=""" & enllaç & """ " & estilsHref & " target=""_blank"" title=""" & GAIA.netejaHTML(textalternatiu) & IIf(idioma = 1, " (nova finestra) ", " (nueva ventana) ") & """>" & strContingut & "</a>"
 
-                        
-                Else
-                    If InStr(enllaç, "<a") > 0 Then
-                        'agafo el href i el tracto
-                        Dim tmpstr As String = enllaç
-                        tmpstr = tmpstr.Substring(InStr(tmpstr, "href=") + 5)
-                        tmpstr = tmpstr.Substring(0, InStr(tmpstr, """") - 1)
-                        enllaç = tmpstr
-                    End If
-                    estilsHref = strCssSenseFons
-                    strCss = ""
+
+                    Else
+                        If InStr(enllaç, "<a") > 0 Then
+                            'agafo el href i el tracto
+                            Dim tmpstr As String = enllaç
+                            tmpstr = tmpstr.Substring(InStr(tmpstr, "href=") + 5)
+                            tmpstr = tmpstr.Substring(0, InStr(tmpstr, """") - 1)
+                            enllaç = tmpstr
+                        End If
+                        estilsHref = strCssSenseFons
+                        strCss = ""
 
                         posaFormat = "<a href=""" & enllaç & """ " & estilsHref & " target=""" & IIf(target = 1, "_blank", "_self") & """ title=""" & GAIA.netejaHTML(textalternatiu) & IIf(target = 1, IIf(idioma = 1, " (nova finestra)", " (nueva ventana) "), "") & """>" & strContingut & "</a>"
-                   
 
-                 
-                End If
+
+
+                    End If
 
                 Else
-                posaFormat = strContingut
+                    posaFormat = strContingut
+                End If
             End If
-			End If
         End If
 
 
@@ -10493,8 +10472,8 @@ strErr &= "(6.3)"
                 posaFormat = posaFormat.Replace("_1.aspx", "_" & idioma & ".aspx")
         End Select
 
-	       'Poso el nou visor d'imatges i el tractament de javascript
-		If esImatge = "1" And pareTeEnllac = False And esEML = "N" Then
+        'Poso el nou visor d'imatges i el tractament de javascript
+        If esImatge = "1" And pareTeEnllac = False And esEML = "N" Then
             'Vaig a buscar totes les imatges del mateix nivell per la galeria
             If plt.vis = 1 Then
                 posaFormat = posaVisorImatges(objConn, plt, rel, idioma, width, posaFormat, posaFormatJS, cssGenerat, strCSS)
@@ -10715,16 +10694,16 @@ strErr &= "(6.3)"
 
     End Function 'posaFormat2
 
-    Public Shared Function posaVisorImatges(ByVal objconn As OleDbConnection, ByVal plt As clsPlantilla, ByVal rel As clsRelacio, ByVal idioma As Integer, ByVal width As Integer, ByVal strHtml As String, ByVal posaFormatJs As String, byref cssGenerat as string, byVal strcss as string) As String
+    Public Shared Function posaVisorImatges(ByVal objconn As OleDbConnection, ByVal plt As clsPlantilla, ByVal rel As clsRelacio, ByVal idioma As Integer, ByVal width As Integer, ByVal strHtml As String, ByVal posaFormatJs As String, ByRef cssGenerat As String, ByVal strcss As String) As String
 
         Dim htmlVisorImatges As String = ""
         Dim sSql As String = ""
         Dim r As New Random()
         Dim num As Integer = r.Next(999999999)
-		if cssGenerat is nothing then
-			cssGenerat=""
-		END IF
-		
+        If cssGenerat Is Nothing Then
+            cssGenerat = ""
+        End If
+
         If plt.vis = 1 Then
             Dim itemActual As Integer = 0
             Dim i As Integer = 0
@@ -10745,8 +10724,8 @@ strErr &= "(6.3)"
                     hsImatges.Add(dbrow("RELINFIL"), "1")
                     If dbrow("RELINFIL") = rel.infil Then
                         'strContingut = "/utils/obrefitxer.ashx?" & HttpUtility.UrlEncode(oCodParam.encriptar("codiNode=" & dbrow("RELINFIL") & "&codiIdioma=" & idioma & mida))
-                        If dt.Tables(0).Rows.Count > 1 Then                           
-							llistaImatges = llistaImatges & "<li>" & posaFormatJs & "</li>"
+                        If dt.Tables(0).Rows.Count > 1 Then
+                            llistaImatges = llistaImatges & "<li>" & posaFormatJs & "</li>"
                         Else
                             llistaImatges = llistaImatges & posaFormatJs
 
@@ -10755,28 +10734,28 @@ strErr &= "(6.3)"
                         'poso les noves imatges
                         Dim fitxer As String = ""
 
-                     '   If width <= 200 And dbrow("DOCWNHOR") <> 0 Then 'el cas de width=0 l'utilitzem només per donar-li mida màxima disponible a la imatge
-                      '      mida = "&t=P100"
-                       '     fitxer = dbrow("DOCDSFIT").replace(".", "P100.")
-                       ' Else
+                        '   If width <= 200 And dbrow("DOCWNHOR") <> 0 Then 'el cas de width=0 l'utilitzem només per donar-li mida màxima disponible a la imatge
+                        '      mida = "&t=P100"
+                        '     fitxer = dbrow("DOCDSFIT").replace(".", "P100.")
+                        ' Else
                         '    If width <= 700 Then
-                                mida = "&t=P"
-                               fitxer = dbrow("DOCDSFIT").replace(".", "P.")
-                         '  ELSE
-						'	   fitxer = dbRow("DOCDSFIT")
-						 '	   mida = "&t=imatgeGran"   
-                           'End If
-                       ' End If
+                        mida = "&t=P"
+                        fitxer = dbrow("DOCDSFIT").replace(".", "P.")
+                        '  ELSE
+                        '	   fitxer = dbRow("DOCDSFIT")
+                        '	   mida = "&t=imatgeGran"   
+                        'End If
+                        ' End If
 
-                      '  If InStr(strcss, "ratio") > 0 Then
-                       '     mida &= "&w=" & dbrow("DOCWNHOR") & "r=" & strcss.Substring(InStr(strcss, "ratio") + 4, 3)
-                       ' End If
+                        '  If InStr(strcss, "ratio") > 0 Then
+                        '     mida &= "&w=" & dbrow("DOCWNHOR") & "r=" & strcss.Substring(InStr(strcss, "ratio") + 4, 3)
+                        ' End If
                         strContingut = "/utils/obrefitxer.ashx?" & HttpUtility.UrlEncode(oCodParam.encriptar("codiNode=" & dbrow("RELINFIL") & "&codiIdioma=" & idioma & mida & "&f=" & fitxer))
 
 
                         If dbrow("docWNHOR") > 700 And width <> 0 Then
-                           llistaImatges = llistaImatges & "<li class=""amaga""><a href=""" & strContingut & """ target=""_blank""><img src=""" & strContingut & """ alt=""" & dbrow("DOCDSTIT") & """" & " width=""700""/></a></li>"
-                       Else
+                            llistaImatges = llistaImatges & "<li class=""amaga""><a href=""" & strContingut & """ target=""_blank""><img src=""" & strContingut & """ alt=""" & dbrow("DOCDSTIT") & """" & " width=""700""/></a></li>"
+                        Else
                             llistaImatges = llistaImatges & "<li class=""amaga""><a href=""" & strContingut & """ target=""_blank""><img src=""" & strContingut & """ alt=""" & dbrow("DOCDSTIT") & """" & IIf(width = 0, " width=""" & dbrow("DOCWNHOR") & """ height=""" & dbrow("DOCWNVER") & """", " width=""700"" ") & "/></a></li>"
                         End If
                     End If
@@ -10787,15 +10766,15 @@ strErr &= "(6.3)"
                 llistaImatges = "<ul>" & llistaImatges & "</ul>"
             End If
             If dt.Tables(0).Rows.Count > 0 Then
-				if instr(cssGenerat,"gallery" & num)<=0  THEN
-					'cssGenerat &= " .gallery" & num & " {margin:0; padding:0; float:left; width:100%; position:relative;} .gallery" & num & " div {position:absolute; left:-9999px; overflow:hidden; display:none} "
-					cssGenerat &= " .gallery" & num & "  {margin:0 !important; padding:0 !important; float:left; width:100%; position:relative;} .gallery" & num & "  div {position:absolute; left:-9999px; overflow:hidden; display:none}"
-					If dt.Tables(0).Rows.Count > 1 Then
-						'cssGenerat &= " .gallery" & num & " ul {list-style: none; margin:0; padding:0} .gallery" & num & " ul li {display: inline; margin:0 !important; padding:0 !important} .gallery" & num & " ul li.amaga {position:absolute; left:-9999px; overflow:hidden; display:none }  .gallery" & num & " ul li:after {content: "".""; display: block; height: 0; clear: both; visibility: hidden;} .gallery" & num & " ul li {display: inline-block;} * html .gallery" & num & " ul li {height: 1%;}  .gallery" & num & " ul li{display: block;}  .gallery" & num & " u li { background:transparent}"
-						cssGenerat &= " .gallery" & num & " {margin:0 !important; padding:0 !important; float:left; width:100%; position:relative;} .gallery" & num & " div {position:absolute; left:-9999px; overflow:hidden; display:none} .gallery" & num & " ul {list-style: none; margin:0 !important; padding:0 !important; } .gallery" & num & " ul li {display: inline; margin:0 !important; padding:0 !important;} .gallery" & num & " ul li.amaga {position:absolute; left:-9999px; overflow:hidden; display:none;}  .gallery" & num & "  ul li:after {content: "".""; display: block; height: 0; clear: both; visibility: hidden;} .gallery" & num & " ul li {display: inline-block;} * html .gallery" & num & "  ul li {height: 1%;} .gallery" & num & "  ul li {display: block;} .gallery" & num & "  ul li { background:transparent}"
-					End If
-				END IF
-				'cssGenerat &= "--></style> "
+                If instr(cssGenerat, "gallery" & num) <= 0 Then
+                    'cssGenerat &= " .gallery" & num & " {margin:0; padding:0; float:left; width:100%; position:relative;} .gallery" & num & " div {position:absolute; left:-9999px; overflow:hidden; display:none} "
+                    cssGenerat &= " .gallery" & num & "  {margin:0 !important; padding:0 !important; float:left; width:100%; position:relative;} .gallery" & num & "  div {position:absolute; left:-9999px; overflow:hidden; display:none}"
+                    If dt.Tables(0).Rows.Count > 1 Then
+                        'cssGenerat &= " .gallery" & num & " ul {list-style: none; margin:0; padding:0} .gallery" & num & " ul li {display: inline; margin:0 !important; padding:0 !important} .gallery" & num & " ul li.amaga {position:absolute; left:-9999px; overflow:hidden; display:none }  .gallery" & num & " ul li:after {content: "".""; display: block; height: 0; clear: both; visibility: hidden;} .gallery" & num & " ul li {display: inline-block;} * html .gallery" & num & " ul li {height: 1%;}  .gallery" & num & " ul li{display: block;}  .gallery" & num & " u li { background:transparent}"
+                        cssGenerat &= " .gallery" & num & " {margin:0 !important; padding:0 !important; float:left; width:100%; position:relative;} .gallery" & num & " div {position:absolute; left:-9999px; overflow:hidden; display:none} .gallery" & num & " ul {list-style: none; margin:0 !important; padding:0 !important; } .gallery" & num & " ul li {display: inline; margin:0 !important; padding:0 !important;} .gallery" & num & " ul li.amaga {position:absolute; left:-9999px; overflow:hidden; display:none;}  .gallery" & num & "  ul li:after {content: "".""; display: block; height: 0; clear: both; visibility: hidden;} .gallery" & num & " ul li {display: inline-block;} * html .gallery" & num & "  ul li {height: 1%;} .gallery" & num & "  ul li {display: block;} .gallery" & num & "  ul li { background:transparent}"
+                    End If
+                End If
+                'cssGenerat &= "--></style> "
                 strtmp &= "<div class=""gallery" & num & """ id=""gal" & num & """  style=""display:none;"">" & llistaImatges & "</div>"
                 llistaImatges = strtmp & "<script type=""text/javascript"">document.getElementById('gal" & num & "').style.display = 'block'; </script>"
             End If
@@ -11105,8 +11084,8 @@ strErr &= "(6.3)"
             End If
             DS.Dispose()
         End If
-		
-		If plantillaPerDefecte = "" Then
+
+        If plantillaPerDefecte = "" Then
             plantillaPerDefecte = 0
         End If
     End Function         'plantillaPerDefecte										
@@ -11169,12 +11148,12 @@ strErr &= "(6.3)"
                 dbRow = DS.Tables(0).Rows(0)
                 'TRACTO AUTOLINK
                 'pot ser que en una cel·la hi hagi més d'una referència igual a una plantilla d'autolink. Agafo la primera. No tractaré el cas de més d'una plantilla diferent!
-				  For Each strTmp In dbRow("plantillaAutolink").split(",")
+                For Each strTmp In dbRow("plantillaAutolink").split(",")
                     If strTmp.Trim().Length > 0 Then
                         Exit For
                     End If
                 Next
-				
+
                 If strTmp.Trim().length > 0 Then
 
                     plantillaAL = strTmp
@@ -11356,7 +11335,7 @@ strErr &= "(6.3)"
                         If dbRow("CSSINTIP") = 24 Then 'css de tipus mida
                             If dbRow("CSSDSTXT").substring(0, 1) = "t" Or dbRow("CSSDSTXT").substring(0, 2) = "sc" Then
                                 strCSSAmbtamanyText += dbRow("CSSDSTXT").Trim() + " "
-'                                strCSSSenseFons += dbRow("CSSDSTXT").Trim() + " "
+                                '                                strCSSSenseFons += dbRow("CSSDSTXT").Trim() + " "
                             Else
                                 If PosaWidthGAIA <> 0 Then
                                     trobaEstilCSS += dbRow("CSSDSTXT").Trim() + " "
@@ -11395,7 +11374,7 @@ strErr &= "(6.3)"
         ' Si es un correu poso style per que tindré totes les descripcions dels estils.
         If esEMl = "S" Then
             trobaEstilCSS = "  style=""" + trobaEstilCSS + """"
-			
+
             If strCSSAmbtamanyText.Length > 0 Then
                 strCSSAmbtamanyText = " style=""" + strCSSAmbtamanyText + """"
             End If
@@ -11403,21 +11382,21 @@ strErr &= "(6.3)"
             If estilsHref.Length > 0 Then
                 estilsHref = " style=""" & estilsHref & """"
             End If
-			
-			If strCSSSenseFons.Length > 0 Then
+
+            If strCSSSenseFons.Length > 0 Then
                 strCSSSenseFons = " style=""" & strCSSSenseFons & """"
             End If
         Else
             trobaEstilCSS = " class=""" + trobaEstilCSS + """"
-			
+
             If strCSSAmbtamanyText.Length > 0 Then
                 strCSSAmbtamanyText = " class=""" + strCSSAmbtamanyText + """"
             End If
-			
+
             If estilsHref.Length > 0 Then
                 estilsHref = " class=""" & estilsHref & """"
             End If
-			
+
             If strCSSSenseFons.Length > 0 Then
                 strCSSSenseFons = " class=""" & strCSSSenseFons & """"
             End If
@@ -11565,7 +11544,7 @@ strErr &= "(6.3)"
         DS.Dispose()
     End Function 'trobaEstilCSS2
 
-Public Shared Function esGAIA2(ByVal objConn As OleDbConnection, ByVal nroNode As Integer) As Boolean
+    Public Shared Function esGAIA2(ByVal objConn As OleDbConnection, ByVal nroNode As Integer) As Boolean
         Dim resultado As Boolean = False
         Dim ds As New DataSet
         Dim query As String
@@ -11579,18 +11558,18 @@ Public Shared Function esGAIA2(ByVal objConn As OleDbConnection, ByVal nroNode A
 
         Return resultado
     End Function
-	
+
     '***************************************************************************************************
     '	Funció: GAIA.GetHTML
     '	Entrada: strPage: URL ("http://servidor/.../pag.html")
     '					Obro la pàgina web i retorno el contingut generat per la pàgina
     '***************************************************************************************************
-    Public Shared Function GetHTML(ByVal objConn As OleDbConnection, ByVal strPage As String, Optional ByVal codiLCW As Integer = 0, Optional ByVal codiIdioma As Integer = 1, Optional ByVal dataLlibreria As DateTime = Nothing, Optional ByRef css As String = "", Optional ByVal relini As clsRelacio = Nothing, optional byVal rel as clsrelacio = nothing, optional byVal est as string = "", optional byval usuari as integer = 0, optional byVal codiplantilla as integer = 0, optional byVal width as integer=0) As String
+    Public Shared Function GetHTML(ByVal objConn As OleDbConnection, ByVal strPage As String, Optional ByVal codiLCW As Integer = 0, Optional ByVal codiIdioma As Integer = 1, Optional ByVal dataLlibreria As DateTime = Nothing, Optional ByRef css As String = "", Optional ByVal relini As clsRelacio = Nothing, Optional ByVal rel As clsrelacio = Nothing, Optional ByVal est As String = "", Optional ByVal usuari As Integer = 0, Optional ByVal codiplantilla As Integer = 0, Optional ByVal width As Integer = 0) As String
 
 
 
 
-		Dim strErr as string=""
+        Dim strErr As String = ""
 
         Dim objResponse As WebResponse = Nothing
         Dim objRequest As WebRequest = Nothing
@@ -11604,151 +11583,151 @@ Public Shared Function esGAIA2(ByVal objConn As OleDbConnection, ByVal nroNode A
         DS = New DataSet()
         Try
             If est = "-1" Then 'estic cercant una fulla sencera
-strErr &= "1"
+                strErr &= "1"
                 GAIA.bdr(objConn, "SELECT * FROM METLCEL WITH(NOLOCK) WHERE CELINREL=" & rel.incod & " AND CELCDEST=" & est & " AND CELCDPLT=" & codiplantilla & " AND CELCDUSU=" & usuari & " AND  CELINIDI=" & codiIdioma, DS)
-strErr &= "2"
+                strErr &= "2"
                 If DS.Tables(0).Rows.Count > 0 Then
-strErr &= "3"				
+                    strErr &= "3"
                     GetHTML = DS.Tables(0).Rows(0)("CELDSEXE") & " " 'afegeixo un " " per que hi ha cel·les sense contingut i ho he de distinguir del cas que no s'ha trobat. Posteriorment eliminaré els espais.
                     css &= DS.Tables(0).Rows(0)("CELDSCSS")
                     Return (GetHTML)
                 End If
-            ELSE
+            Else
 
-strErr &= "4"		
-				If codiLCW <> 0 Then
-					'************************************************************
-					' Busco si la libreria de codi està materialitzada
-					'************************************************************
-					'GAIA.bdR(objConn, "select * FROM METLLCE WITH(NOLOCK) WHERE LCEINNOD=" & codiLCW & " AND LCEINIDI=" & codiIdioma & " AND LCEINLCW like '" & strPage & "'", DS)	
-					strErr &= "5"
-					GAIA.bdr(objConn, "SELECT * FROM METLCEL WITH(NOLOCK) WHERE CELINPAR LIKE '" & strPage & "'", DS)
-					strErr &= "6"
-					If DS.Tables(0).Rows.Count > 0 Then
-					strErr &= "7"					
-						dbRow = DS.Tables(0).Rows(0)
-						'comprovo la data del fitxer, si és més nou que la materialització, esborro totes les LCE i continuo generant la que necessito ara.
-						If dbRow("CELDTCAD") <> "1/1/1900" And Now > dbRow("CELDTCAD") Then
-							If codiLCW <> 0 Then
-								GAIA.esborrarCelles(nothing,"CELINLCW=" & codiLCW)
-								'GAIA.bdSR(objConn, "DELETE FROM METLCEL WHERE CELINLCW=" & codiLCW)
-							End If
-						Else
-	
-							If DateDiff(DateInterval.Second, dbRow("CELDTFEC"), dataLlibreria) < 0 Then
-								GetHTML = dbRow("CELDSEXE")
-								css = dbRow("CELDSCSS")
-								Return (GetHTML)
-							Else
-								If codiLCW <> 0 Then
-									GAIA.esborrarCelles(nothing,"CELINLCW=" & codiLCW)
-									'.bdSR(objConn, "DELETE FROM METLCEL WHERE CELINLCW=" & codiLCW)
-								End If
-							End If
-						End If
-	
-	
-					End If
-				Else
-					'si la crida no ve d'una llibreria de codi web, vindrà d'un dibuixapreviewrec per materialitzar continguts arrossegats
-					strErr &= "8"
-					If InStr(strPage, "contingutCella") > 0 Then
-						strErr &= "9"
-						GAIA.bdr(objConn, "SELECT * FROM METLCEL WITH(NOLOCK) WHERE CELINPAR='" & strPage & "'", DS)
-						strErr &= "a"
-						If DS.Tables(0).Rows.Count > 0 Then
-							dbRow = DS.Tables(0).Rows(0)
-							If dbRow("CELDTCAD") <> "1/1/1900" And Now > dbRow("CELDTCAD") Then
-								If codiLCW <> 0 Then
-									GAIA.esborrarCelles(nothing,"CELINLCW=" & codiLCW)
-									'GAIA.bdSR(objConn, "DELETE FROM METLCEL WHERE CELINLCW=" & codiLCW)
-								End If
-							Else
-	
-								GetHTML = dbRow("CELDSEXE") & " " 'afegeixo un " " per que hi ha cel·les sense contingut i ho he de distinguir del cas que no s'ha trobat. Posteriorment eliminaré els espais.
-								css &= dbRow("CELDSCSS")
-							End If
-						Else
-							GetHTML = ""
-						End If
-	
-						Return (GetHTML)
-					End If
-				End If
-				strErr &= "j"
-				If InStr(strPage, "http") > 0 Then
-					objRequest = System.Net.HttpWebRequest.Create(strPage.Replace("\", "/"))
-				Else
-					objRequest = System.Net.HttpWebRequest.Create("http://lhintranet/GAIA/aspx/llibreriaCodiWeb/" & strPage.Replace("\", "/"))
-	
-				End If
-				strErr &= "k"
-				objRequest.Credentials = System.Net.CredentialCache.DefaultCredentials
-				objRequest.Timeout = 1000000  'mil segons, per defecte eren cent segons
-				try
-					objResponse = objRequest.GetResponse()
-				catch
-					objResponse = nothing
-				end try
-	
-				If Not objResponse Is Nothing Then
-				strErr &= "l"
-					text = objResponse.GetResponseStream()
-					sr = New StreamReader(text)
-					If sr.Peek() <> -1 Then
-						result = sr.ReadToEnd()
-						GetHTML = result 'httpUtility.htmldecode(result)
-					End If
-	
-	strErr &= "m"
-					dataCaducitat = "1/1/1900"
-					'busco la data de caducitat més propera dels continguts afectats
-					IF codiLCW<>0 THEN
-						strErr &= "b"
-						GAIA.bdr(objConn, "select top 1 (CASE WHEN (REIDTCAD>GETDATE() AND REIDTPUB>GETDATE()) THEN CASE WHEN  REIDTCAD<REIDTPUB THEN REIDTCAD ELSE REIDTPUB END  ELSE CASE WHEN  REIDTCAD>GETDATE() THEN REIDTCAD ELSE CASE WHEN  REIDTPUB> getdate() THEN REIDTPUB ELSE GETDATE() END  END  END)  as data  FROM METLASS WITH(NOLOCK),METLREI WITH(NOLOCK),METLREL WITH(NOLOCK) WHERE ASSCDTPA=41 AND ASSCDNOD=" & codiLCW & " AND RELCDHER LIKE ('%' + cast( ASSCDNRL  as varchar(10)) + '%') AND REIINCOD=RELINCOD AND REIINIDI=1  AND REIDTCAD>'1/1/1900' AND RELCDSIT<98 order by data ", DS)
-						strErr &= "c"
-					
-	
-						If DS.Tables(0).Rows.Count > 0 Then
-							dataCaducitat = DS.Tables(0).Rows(0)("data")						
-						End If
-					'guardo el html resultant en METLCEL
-					
-						Dim posini As Integer
-						Dim posfi As Integer
-						'trec els <style type="text/css"><!-- ... del html
-						posini = InStr(GetHTML, "<style type=""text/css""><!--")
-						While posini > 0
-							posfi = InStr(GetHTML, "--></style>") - 1
-	
-							If posfi > 0 Then
-								css &= GetHTML.Substring(posini + 26, posfi - (posini + 26))
-								GetHTML = GetHTML.Substring(0, posini - 1) + GetHTML.Substring(posfi + 11)
-							End If
-							posini = InStr(GetHTML, "<style type=""text/css""><!--")
-						End While
-						If codiplantilla <> 0 Or codiLCW <> 0 Then
-							Try
-strErr &= "d"
-								GAIA.bdSR(objConn, " IF NOT EXISTS (SELECT CELCDNOD FROM METLCEL WITH(NOLOCK) WHERE CELINPAR = '" & strPage & "')   INSERT INTO METLCEL VALUES (" & codiLCW & "," & codiIdioma & "," & relini.incod & "," & rel.incod & "," & est & "," & usuari & "," & rel.infil & "," & codiplantilla & ",getdate(),'" & dataCaducitat & "','" & css & "','" & GetHTML.Replace("'", "''") & "','" & strPage & "') ELSE 	UPDATE METLCEL SET CELDSEXE='" & GetHTML.Replace("'", "''") & "', CELDSCSS='" & css & "' WHERE  CELCDEST=" & est & " AND CELCDUSU=" & usuari & " AND CELINREI=" & relini.incod & " AND CELINREL=" & rel.incod & " AND CELINLCW=" & codiLCW & " AND CELINIDI=" & codiIdioma)
-strErr &= "e"								
-							Catch
-							End Try
-	
-	
-	
-							' Try
-							'GAIA.bdSR(objConn, "INSERT INTO METLCEL VALUES (" & codiLCW & "," & codiIdioma & "," & relini.incod & "," & rel.incod & "," & est & "," & usuari & "," & rel.infil & "," & codiplantilla & ",getdate(),'" & dataCaducitat & "','" & css & "','" & GetHTML.Replace("'", "''") & "','" & strPage & "')")
-							' Catch
-							'ja existia
-							'GAIA.bdSR(objConn, "UPDATE METLCEL SET CELDSEXE='" & GetHTML.Replace("'", "''") & "', CELDSCSS='" & css & "' WHERE CELINPAR like '" & strPage & "'")
-							'End Try
-						End If
-					End If
-				End If
+                strErr &= "4"
+                If codiLCW <> 0 Then
+                    '************************************************************
+                    ' Busco si la libreria de codi està materialitzada
+                    '************************************************************
+                    'GAIA.bdR(objConn, "select * FROM METLLCE WITH(NOLOCK) WHERE LCEINNOD=" & codiLCW & " AND LCEINIDI=" & codiIdioma & " AND LCEINLCW like '" & strPage & "'", DS)	
+                    strErr &= "5"
+                    GAIA.bdr(objConn, "SELECT * FROM METLCEL WITH(NOLOCK) WHERE CELINPAR LIKE '" & strPage & "'", DS)
+                    strErr &= "6"
+                    If DS.Tables(0).Rows.Count > 0 Then
+                        strErr &= "7"
+                        dbRow = DS.Tables(0).Rows(0)
+                        'comprovo la data del fitxer, si és més nou que la materialització, esborro totes les LCE i continuo generant la que necessito ara.
+                        If dbRow("CELDTCAD") <> "1/1/1900" And Now > dbRow("CELDTCAD") Then
+                            If codiLCW <> 0 Then
+                                GAIA.esborrarCelles(Nothing, "CELINLCW=" & codiLCW)
+                                'GAIA.bdSR(objConn, "DELETE FROM METLCEL WHERE CELINLCW=" & codiLCW)
+                            End If
+                        Else
 
-			end if
-			strErr &= "m"
+                            If DateDiff(DateInterval.Second, dbRow("CELDTFEC"), dataLlibreria) < 0 Then
+                                GetHTML = dbRow("CELDSEXE")
+                                css = dbRow("CELDSCSS")
+                                Return (GetHTML)
+                            Else
+                                If codiLCW <> 0 Then
+                                    GAIA.esborrarCelles(Nothing, "CELINLCW=" & codiLCW)
+                                    '.bdSR(objConn, "DELETE FROM METLCEL WHERE CELINLCW=" & codiLCW)
+                                End If
+                            End If
+                        End If
+
+
+                    End If
+                Else
+                    'si la crida no ve d'una llibreria de codi web, vindrà d'un dibuixapreviewrec per materialitzar continguts arrossegats
+                    strErr &= "8"
+                    If InStr(strPage, "contingutCella") > 0 Then
+                        strErr &= "9"
+                        GAIA.bdr(objConn, "SELECT * FROM METLCEL WITH(NOLOCK) WHERE CELINPAR='" & strPage & "'", DS)
+                        strErr &= "a"
+                        If DS.Tables(0).Rows.Count > 0 Then
+                            dbRow = DS.Tables(0).Rows(0)
+                            If dbRow("CELDTCAD") <> "1/1/1900" And Now > dbRow("CELDTCAD") Then
+                                If codiLCW <> 0 Then
+                                    GAIA.esborrarCelles(Nothing, "CELINLCW=" & codiLCW)
+                                    'GAIA.bdSR(objConn, "DELETE FROM METLCEL WHERE CELINLCW=" & codiLCW)
+                                End If
+                            Else
+
+                                GetHTML = dbRow("CELDSEXE") & " " 'afegeixo un " " per que hi ha cel·les sense contingut i ho he de distinguir del cas que no s'ha trobat. Posteriorment eliminaré els espais.
+                                css &= dbRow("CELDSCSS")
+                            End If
+                        Else
+                            GetHTML = ""
+                        End If
+
+                        Return (GetHTML)
+                    End If
+                End If
+                strErr &= "j"
+                If InStr(strPage, "http") > 0 Then
+                    objRequest = System.Net.HttpWebRequest.Create(strPage.Replace("\", "/"))
+                Else
+                    objRequest = System.Net.HttpWebRequest.Create("http://lhintranet/GAIA/aspx/llibreriaCodiWeb/" & strPage.Replace("\", "/"))
+
+                End If
+                strErr &= "k"
+                objRequest.Credentials = System.Net.CredentialCache.DefaultCredentials
+                objRequest.Timeout = 1000000  'mil segons, per defecte eren cent segons
+                Try
+                    objResponse = objRequest.GetResponse()
+                Catch
+                    objResponse = Nothing
+                End Try
+
+                If Not objResponse Is Nothing Then
+                    strErr &= "l"
+                    text = objResponse.GetResponseStream()
+                    sr = New StreamReader(text)
+                    If sr.Peek() <> -1 Then
+                        result = sr.ReadToEnd()
+                        GetHTML = result 'httpUtility.htmldecode(result)
+                    End If
+
+                    strErr &= "m"
+                    dataCaducitat = "1/1/1900"
+                    'busco la data de caducitat més propera dels continguts afectats
+                    If codiLCW <> 0 Then
+                        strErr &= "b"
+                        GAIA.bdr(objConn, "select top 1 (CASE WHEN (REIDTCAD>GETDATE() AND REIDTPUB>GETDATE()) THEN CASE WHEN  REIDTCAD<REIDTPUB THEN REIDTCAD ELSE REIDTPUB END  ELSE CASE WHEN  REIDTCAD>GETDATE() THEN REIDTCAD ELSE CASE WHEN  REIDTPUB> getdate() THEN REIDTPUB ELSE GETDATE() END  END  END)  as data  FROM METLASS WITH(NOLOCK),METLREI WITH(NOLOCK),METLREL WITH(NOLOCK) WHERE ASSCDTPA=41 AND ASSCDNOD=" & codiLCW & " AND RELCDHER LIKE ('%' + cast( ASSCDNRL  as varchar(10)) + '%') AND REIINCOD=RELINCOD AND REIINIDI=1  AND REIDTCAD>'1/1/1900' AND RELCDSIT<98 order by data ", DS)
+                        strErr &= "c"
+
+
+                        If DS.Tables(0).Rows.Count > 0 Then
+                            dataCaducitat = DS.Tables(0).Rows(0)("data")
+                        End If
+                        'guardo el html resultant en METLCEL
+
+                        Dim posini As Integer
+                        Dim posfi As Integer
+                        'trec els <style type="text/css"><!-- ... del html
+                        posini = InStr(GetHTML, "<style type=""text/css""><!--")
+                        While posini > 0
+                            posfi = InStr(GetHTML, "--></style>") - 1
+
+                            If posfi > 0 Then
+                                css &= GetHTML.Substring(posini + 26, posfi - (posini + 26))
+                                GetHTML = GetHTML.Substring(0, posini - 1) + GetHTML.Substring(posfi + 11)
+                            End If
+                            posini = InStr(GetHTML, "<style type=""text/css""><!--")
+                        End While
+                        If codiplantilla <> 0 Or codiLCW <> 0 Then
+                            Try
+                                strErr &= "d"
+                                GAIA.bdSR(objConn, " IF NOT EXISTS (SELECT CELCDNOD FROM METLCEL WITH(NOLOCK) WHERE CELINPAR = '" & strPage & "')   INSERT INTO METLCEL VALUES (" & codiLCW & "," & codiIdioma & "," & relini.incod & "," & rel.incod & "," & est & "," & usuari & "," & rel.infil & "," & codiplantilla & ",getdate(),'" & dataCaducitat & "','" & css & "','" & GetHTML.Replace("'", "''") & "','" & strPage & "') ELSE 	UPDATE METLCEL SET CELDSEXE='" & GetHTML.Replace("'", "''") & "', CELDSCSS='" & css & "' WHERE  CELCDEST=" & est & " AND CELCDUSU=" & usuari & " AND CELINREI=" & relini.incod & " AND CELINREL=" & rel.incod & " AND CELINLCW=" & codiLCW & " AND CELINIDI=" & codiIdioma)
+                                strErr &= "e"
+                            Catch
+                            End Try
+
+
+
+                            ' Try
+                            'GAIA.bdSR(objConn, "INSERT INTO METLCEL VALUES (" & codiLCW & "," & codiIdioma & "," & relini.incod & "," & rel.incod & "," & est & "," & usuari & "," & rel.infil & "," & codiplantilla & ",getdate(),'" & dataCaducitat & "','" & css & "','" & GetHTML.Replace("'", "''") & "','" & strPage & "')")
+                            ' Catch
+                            'ja existia
+                            'GAIA.bdSR(objConn, "UPDATE METLCEL SET CELDSEXE='" & GetHTML.Replace("'", "''") & "', CELDSCSS='" & css & "' WHERE CELINPAR like '" & strPage & "'")
+                            'End Try
+                        End If
+                    End If
+                End If
+
+            End If
+            strErr &= "m"
         Catch ex As Exception
             f_logError(objConn, "G01", ex.Source, strErr & ex.Message & ".Fitxer=" & strPage.ToString())
             llistatErrors &= "<br/> " & ex.ToString & ". <br/> Fitxer=<a href=""" & strPage.ToString() & """>" & strPage & "</a>"
@@ -12163,7 +12142,7 @@ strErr &= "e"
                 Dim estilsCSSSenseFons As String = ""
                 Dim strURL As String = ""
                 'Dim a as new system.web.htpputility
-                tancaEnllaç = false ' si true, tancarem el </a> al final de pintarContingut. Això ho utilitzaré per posar tot el contingut dins d'un ellaç (pels casos d'autolinks).
+                tancaEnllaç = False ' si true, tancarem el </a> al final de pintarContingut. Això ho utilitzaré per posar tot el contingut dins d'un ellaç (pels casos d'autolinks).
                 celdaFormateada = ""
                 cont = 0
                 DS = New DataSet()
@@ -12423,23 +12402,23 @@ strErr &= "e"
                                                 'faig la selecció de la mida de la imatge a visualitzar
                                                 Dim mida As String = ""
                                                 Dim fitxer As String = ""
-												IF width=0 THEN  'el cas de width=0 l'utilitzem només per donar-li mida màxima disponible a la imatge mitjançant el class
-													 mida = "&t=imatgeGran"
-                                                     fitxer = dbRow("DOCDSFIT")
-												ELSE
-														
-                                                	If width <= 100  Then
-                                                    	mida = "&t=P100"
-                                                    	fitxer = dbRow("DOCDSFIT").replace(".", "P100.")
+                                                If width = 0 Then  'el cas de width=0 l'utilitzem només per donar-li mida màxima disponible a la imatge mitjançant el class
+                                                    mida = "&t=imatgeGran"
+                                                    fitxer = dbRow("DOCDSFIT")
+                                                Else
 
-                                                	Else   
-														If width <= 700 Then                                                
-                                                       		mida = "&t=P"
-                                                        	fitxer = dbRow("DOCDSFIT").replace(".", "P.")                                                    
-														ELSE
-															fitxer = dbRow("DOCDSFIT")  
-															mida = "&t=imatgeGran"                         
-														END IF
+                                                    If width <= 100 Then
+                                                        mida = "&t=P100"
+                                                        fitxer = dbRow("DOCDSFIT").replace(".", "P100.")
+
+                                                    Else
+                                                        If width <= 700 Then
+                                                            mida = "&t=P"
+                                                            fitxer = dbRow("DOCDSFIT").replace(".", "P.")
+                                                        Else
+                                                            fitxer = dbRow("DOCDSFIT")
+                                                            mida = "&t=imatgeGran"
+                                                        End If
                                                     End If
                                                 End If
 
@@ -12502,7 +12481,7 @@ strErr &= "e"
                                         If strContingut.Length > 0 Then
                                             strContingut = strContingut.Replace("<p>", "").Replace("</p>", "").Replace("&nbsp;&nbsp;", " ")
                                         End If
-                                        
+
                                     End If
                                 End If
 
@@ -12591,11 +12570,11 @@ strErr &= "e"
                                         If rel.tipintip = "49" Then
                                             target = GAIA.obtenirTarget(objConn, rel)
                                         Else
-											try
-	                                            target = plantilla.arrayALF(index)
-											catch
-												target = 0
-											end try
+                                            Try
+                                                target = plantilla.arrayALF(index)
+                                            Catch
+                                                target = 0
+                                            End Try
                                         End If
                                         If codiRelacioArxiuPerVisorImatges = 0 Then
 
@@ -12608,11 +12587,11 @@ strErr &= "e"
                                         If rel.tipintip = "49" Then
                                             target = GAIA.obtenirTarget(objConn, rel)
                                         Else
-                                           try
-	                                            target = plantilla.arrayALF(index)
-											catch
-												target = 0
-											end try
+                                            Try
+                                                target = plantilla.arrayALF(index)
+                                            Catch
+                                                target = 0
+                                            End Try
 
                                         End If
                                         celdaFormateada += GAIA.posaFormat(objConn, strContingut, plantilla.arrayCSSPlantilla(index), "", esImatge, width, tamanyH, tamanyV, estat, textalternatiu, 1, heretaPropietatsWeb, target, rel, relIni, idioma, esEML, botoMesImatge, titolContingut, plantilla, pareTeEnllac, css)
@@ -12653,7 +12632,7 @@ strErr &= "e"
                                         If codiNodeTMP <> dbrow3("RELINFIL") Then
                                             codiNodeTMP = dbrow3("RELINFIL")
                                             relarxiu.bdget(objConn, dbrow3("RELINCOD"))
-                                            GAIA.dibuixaPreview(objConn, plantillaTMP, plantillaTMP.est, plantillaTMP.arrayAtr, plantillaTMP.hor, plantillaTMP.ver, plantillaTMP.tco, "", celdaFormateada, css, width, 0, "f", relarxiu, 0, fdesti, urlDesti, 1, llistaDocuments, publicar, idioma, plantillaTMP.css, rel, dataSimulacio, codiUsuari, 0, "", 0, plantillaTMP.flw, "", 0, estilbody, llistaCND, esForm, esEML, esSSL, tagsMeta, htmlPeu, strCSSPantalla, strCSSImpressora, plantillaTMP.niv, plantilla.arrayEnllaços(index).trim().length>0)
+                                            GAIA.dibuixaPreview(objConn, plantillaTMP, plantillaTMP.est, plantillaTMP.arrayAtr, plantillaTMP.hor, plantillaTMP.ver, plantillaTMP.tco, "", celdaFormateada, css, width, 0, "f", relarxiu, 0, fdesti, urlDesti, 1, llistaDocuments, publicar, idioma, plantillaTMP.css, rel, dataSimulacio, codiUsuari, 0, "", 0, plantillaTMP.flw, "", 0, estilbody, llistaCND, esForm, esEML, esSSL, tagsMeta, htmlPeu, strCSSPantalla, strCSSImpressora, plantillaTMP.niv, plantilla.arrayEnllaços(index).trim().length > 0)
                                         End If
                                     Next dbrow3
                                 Else
@@ -12817,14 +12796,14 @@ strErr &= "e"
 
                                             strvoid = GAIA.trobaEstilCSS(objConn, plantilla.arrayCSSPlantilla(index), desfaseHoritzontal, heretaPropietatsWeb, strvoid, estilsCSSSenseFons, esEML, posaWidthGAIA, "", posafloatGAIA)
 
-									    If strTMp.Length And celdaFormateada.Length > 0 Then
+                                            If strTMp.Length And celdaFormateada.Length > 0 Then
                                                 If esEML = "N" Then
                                                     celdaFormateada = celdaFormateada.Substring(0, pospunt - 1) & "<a href=""" & GAIA.netejaHTML(strTMp) & """  " & estilsCSSSenseFons & " title=""" & GAIA.netejaHTML(titolContingut) & """>" & celdaFormateada.Substring(pospunt - 1, InStrRev(celdaFormateada, "</div>") - pospunt) & "</a></div>"
                                                 Else
-                                                    celdaFormateada = celdaFormateada.Substring(0, pospunt - 1) & "<a href=""" &  GAIA.netejaHTML(strTMp) & """  " & estilsCSSSenseFons & " title=""" & GAIA.netejaHTML(titolContingut) & """>" & celdaFormateada.Substring(pospunt - 1) & "</a>"
+                                                    celdaFormateada = celdaFormateada.Substring(0, pospunt - 1) & "<a href=""" & GAIA.netejaHTML(strTMp) & """  " & estilsCSSSenseFons & " title=""" & GAIA.netejaHTML(titolContingut) & """>" & celdaFormateada.Substring(pospunt - 1) & "</a>"
                                                 End If
                                             End If
-                                     
+
                                         End If
 
                                     Case "METLINF.INFDSLNK"
@@ -12833,46 +12812,46 @@ strErr &= "e"
                                             dbrow3 = ds3.Tables(0).Rows(0)
                                             'If titolContingut = "" Then
                                             '    titolContingut = GAIA.obtenirTitolContingut(objConn, rel, idioma)
-                                           ' End If
+                                            ' End If
 
                                             'he de netejar el html que pugui haver a INFDSLNK
                                             Dim str As String = dbrow3("INFDSLNK")
-                                            dim strHref as string=""
-											dim strTarget as string=""
-											dim strTmp as string=""
-											Dim strText as string=""
-									
-											IF instr(str,"href")>0 THEN													
-												str= str.replace("href","|href")
-												dim k as string() = str.split("|")																
-												For each strItem as string in k
-													If instr(strItem, "href")>0 THEN
-														
-														strHref=""
-														strTarget=""
-														strText=""
-														strTmp=""
-														strItem = strItem.replace("""","|")
-														'recupero el href 
-														strTmp = strItem.substring(instr(strItem,"href=|")+5)
-														strHref = strTmp.substring(0,instr(strTmp,"|")-1)
-														'recupero target						
-														strTmp = strItem.substring(instr(strItem,"target=|")+7)
-														strTarget = strTmp.substring(0,instr(strTmp,"|")-1)				
-														'recupero text
-														strTmp = strItem.substring(instr(strItem,">"))
-														strText = strTmp.substring(0,instr(strTmp,"<")-1)
-													END IF
-												next strItem
-											ELSE
-												strHref=str
-												strTarget="_self"
-												strText=str
-											END IF
-											
+                                            Dim strHref As String = ""
+                                            Dim strTarget As String = ""
+                                            Dim strTmp As String = ""
+                                            Dim strText As String = ""
+
+                                            If instr(str, "href") > 0 Then
+                                                str = str.replace("href", "|href")
+                                                Dim k As String() = str.split("|")
+                                                For Each strItem As String In k
+                                                    If instr(strItem, "href") > 0 Then
+
+                                                        strHref = ""
+                                                        strTarget = ""
+                                                        strText = ""
+                                                        strTmp = ""
+                                                        strItem = strItem.replace("""", "|")
+                                                        'recupero el href 
+                                                        strTmp = strItem.substring(instr(strItem, "href=|") + 5)
+                                                        strHref = strTmp.substring(0, instr(strTmp, "|") - 1)
+                                                        'recupero target						
+                                                        strTmp = strItem.substring(instr(strItem, "target=|") + 7)
+                                                        strTarget = strTmp.substring(0, instr(strTmp, "|") - 1)
+                                                        'recupero text
+                                                        strTmp = strItem.substring(instr(strItem, ">"))
+                                                        strText = strTmp.substring(0, instr(strTmp, "<") - 1)
+                                                    End If
+                                                Next strItem
+                                            Else
+                                                strHref = str
+                                                strTarget = "_self"
+                                                strText = str
+                                            End If
+
                                             strvoid = GAIA.trobaEstilCSS(objConn, plantilla.arrayCSSPlantilla(index), desfaseHoritzontal, heretaPropietatsWeb, strvoid, estilsCSSSenseFons, esEML, posaWidthGAIA, "", posafloatGAIA)
 
-                                           If strTMp.Length > 0 Then
+                                            If strTMp.Length > 0 Then
                                                 If esEML = "N" Then
                                                     celdaFormateada = celdaFormateada.Substring(0, pospunt - 1) & "<a href=""" & GAIA.netejaHTML(strHref) & """  " & estilsCSSSenseFons & " title=""" & GAIA.netejaHTML(strText) & IIf(target = 0, "", IIf(idioma = 2, " (nueva ventana)", IIf(idioma = 3, " (new window)", " (nova finestra)"))) & """>" & celdaFormateada.Substring(pospunt - 1, InStrRev(celdaFormateada, "</div>") - pospunt) & "</a></div>"
                                                 Else
@@ -12882,41 +12861,41 @@ strErr &= "e"
                                             End If
                                         End If
                                     Case "METLAGD.AGDDSLNK"
-                                            GAIA.bdr(objConn, "SELECT " & plantilla.arrayEnllaços(index) & " FROM METLAGD WITH(NOLOCK) WHERE AGDINNOD=" & rel.infil & " AND AGDINIDI=" & idioma, ds3)
-                                            If ds3.Tables(0).Rows.Count > 0 Then
-                                                dbrow3 = ds3.Tables(0).Rows(0)
-                                                If titolContingut = "" Then
-                                                    titolContingut = GAIA.obtenirTitolContingut(objConn, rel, idioma)
-                                                End If
-                                                Dim strTMp As String = dbrow3("AGDDSLNK")
-                                                If InStr(strTMp, "<a") Then
-                                                    strTMp = strTMp.Substring(InStr(strTMp, "http") - 1)
-                                                    strTMp = strTMp.Substring(0, InStr(strTMp, """") - 1)
-
-                                                End If
-                                                strvoid = GAIA.trobaEstilCSS(objConn, plantilla.arrayCSSPlantilla(index), desfaseHoritzontal, heretaPropietatsWeb, strvoid, estilsCSSSenseFons, esEML, posaWidthGAIA, "", posafloatGAIA)
-
-
-												If esEML = "N" Then
-													celdaFormateada = celdaFormateada.Substring(0, pospunt - 1) & "<a href=""" &  GAIA.netejaHTML(strTMp) & """ " & estilsCSSSenseFons & " title=""" & GAIA.netejaHTML(titolContingut) & """>" & celdaFormateada.Substring(pospunt - 1, InStrRev(celdaFormateada, "</div>") - pospunt) & "</a></div>"
-												Else
-													celdaFormateada = celdaFormateada.Substring(0, pospunt - 1) & "<a href=""" & GAIA.netejaHTML(strTMp) & """ " & estilsCSSSenseFons & " title=""" & GAIA.netejaHTML(titolContingut) & """>" & celdaFormateada.Substring(pospunt - 1) & "</a>"
-	
-												End If
+                                        GAIA.bdr(objConn, "SELECT " & plantilla.arrayEnllaços(index) & " FROM METLAGD WITH(NOLOCK) WHERE AGDINNOD=" & rel.infil & " AND AGDINIDI=" & idioma, ds3)
+                                        If ds3.Tables(0).Rows.Count > 0 Then
+                                            dbrow3 = ds3.Tables(0).Rows(0)
+                                            If titolContingut = "" Then
+                                                titolContingut = GAIA.obtenirTitolContingut(objConn, rel, idioma)
                                             End If
+                                            Dim strTMp As String = dbrow3("AGDDSLNK")
+                                            If InStr(strTMp, "<a") Then
+                                                strTMp = strTMp.Substring(InStr(strTMp, "http") - 1)
+                                                strTMp = strTMp.Substring(0, InStr(strTMp, """") - 1)
+
+                                            End If
+                                            strvoid = GAIA.trobaEstilCSS(objConn, plantilla.arrayCSSPlantilla(index), desfaseHoritzontal, heretaPropietatsWeb, strvoid, estilsCSSSenseFons, esEML, posaWidthGAIA, "", posafloatGAIA)
+
+
+                                            If esEML = "N" Then
+                                                celdaFormateada = celdaFormateada.Substring(0, pospunt - 1) & "<a href=""" & GAIA.netejaHTML(strTMp) & """ " & estilsCSSSenseFons & " title=""" & GAIA.netejaHTML(titolContingut) & """>" & celdaFormateada.Substring(pospunt - 1, InStrRev(celdaFormateada, "</div>") - pospunt) & "</a></div>"
+                                            Else
+                                                celdaFormateada = celdaFormateada.Substring(0, pospunt - 1) & "<a href=""" & GAIA.netejaHTML(strTMp) & """ " & estilsCSSSenseFons & " title=""" & GAIA.netejaHTML(titolContingut) & """>" & celdaFormateada.Substring(pospunt - 1) & "</a>"
+
+                                            End If
+                                        End If
                                     Case "AUTO-ENLLAÇ"
-											target = GAIA.obtenirTarget(objConn, rel)
-                                            If pospunt > 0 Then 'si no hi ha imatge no fem l'autoenllaç
-                                                Dim strTmp As String = obtenirEnllacContingut(objConn, rel, idioma)
-                                                If InStr(UCase(strTmp), "OBREFITXER") > 0 Then
-                                                  '  strTmp = strTmp.Replace("?", "?" & idioma)
-                                                End If                                            
-												If esEML = "N" Then
-                                                celdaFormateada = celdaFormateada.Substring(0, pospunt - 1) & "<a href=""" & GAIA.netejaHTML(strTMp) & """ " & estilsCSSSenseFons & IIf(target = 1, " target=""_blank"" ", " target=""_self"" ") & " title=""" & GAIA.obtenirTitolContingut(objConn, rel, idioma) & """>" & celdaFormateada.Substring(pospunt - 1, InStrRev(celdaFormateada, "</div>") - pospunt) & "</a></div>"
-												Else
-                                                celdaFormateada = celdaFormateada.Substring(0, pospunt - 1) & "<a href=""" & GAIA.netejaHTML(strTMp) & """ " & estilsCSSSenseFons & IIf(target = 1, " target=""_blank"" ", " target=""_self"" ") & " title=""" & GAIA.obtenirTitolContingut(objConn, rel, idioma) & """>" & celdaFormateada.Substring(pospunt - 1) & "</a>"
-												End If
+                                        target = GAIA.obtenirTarget(objConn, rel)
+                                        If pospunt > 0 Then 'si no hi ha imatge no fem l'autoenllaç
+                                            Dim strTmp As String = obtenirEnllacContingut(objConn, rel, idioma)
+                                            If InStr(UCase(strTmp), "OBREFITXER") > 0 Then
+                                                '  strTmp = strTmp.Replace("?", "?" & idioma)
                                             End If
+                                            If esEML = "N" Then
+                                                celdaFormateada = celdaFormateada.Substring(0, pospunt - 1) & "<a href=""" & GAIA.netejaHTML(strTMp) & """ " & estilsCSSSenseFons & IIf(target = 1, " target=""_blank"" ", " target=""_self"" ") & " title=""" & GAIA.obtenirTitolContingut(objConn, rel, idioma) & """>" & celdaFormateada.Substring(pospunt - 1, InStrRev(celdaFormateada, "</div>") - pospunt) & "</a></div>"
+                                            Else
+                                                celdaFormateada = celdaFormateada.Substring(0, pospunt - 1) & "<a href=""" & GAIA.netejaHTML(strTMp) & """ " & estilsCSSSenseFons & IIf(target = 1, " target=""_blank"" ", " target=""_self"" ") & " title=""" & GAIA.obtenirTitolContingut(objConn, rel, idioma) & """>" & celdaFormateada.Substring(pospunt - 1) & "</a>"
+                                            End If
+                                        End If
                                 End Select
                             End If
                         End If
@@ -12972,9 +12951,9 @@ strErr &= "e"
 
 
 
-                If tancaEnllaç  Then
+                If tancaEnllaç Then
                     celdaFormateada += "</a>"
-					tancaEnllaç = false 
+                    tancaEnllaç = False
                 End If
 
                 If codiRelacioArxiuPerVisorImatges <> 0 Then
@@ -13068,70 +13047,70 @@ strErr &= "e"
     End Function
 
 
-    Public Shared Function editarContingut(ByVal objConn As OleDbConnection, ByVal nodo As Integer, ByVal idioma As Integer, ByVal rel1 As Integer, ByVal rel2 As Integer, ByVal relActiva As Integer, Optional ByVal obrirNovaFinestra As boolean = true) As String
+    Public Shared Function editarContingut(ByVal objConn As OleDbConnection, ByVal nodo As Integer, ByVal idioma As Integer, ByVal rel1 As Integer, ByVal rel2 As Integer, ByVal relActiva As Integer, Optional ByVal obrirNovaFinestra As Boolean = True) As String
         Dim descTipus As String = ""
         Dim crida As String = ""
-		
+
         GAIA.tipusNodebyNro(objConn, nodo, descTipus)
         Select Case descTipus
             Case "fulla missatge"
-                crida = "/GAIA/aspx/missatges/obrirmissatge.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString() + "&rel1=" + rel1.ToString() + "&rel2=" + rel2.ToString() 
+                crida = "/GAIA/aspx/missatges/obrirmissatge.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString() + "&rel1=" + rel1.ToString() + "&rel2=" + rel2.ToString()
             Case "fulla catalegServeis"
-                crida = "/GAIA/aspx/catalegServeis/frmCSAccions.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString() 
+                crida = "/GAIA/aspx/catalegServeis/frmCSAccions.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString()
             Case "node catalegServeis"
-                crida = "/GAIA/aspx/catalegServeis/frmNodeAgrupacioServei.aspx?id=" & nodo & "&cr=" & relActiva & "&idiArbre=" & idioma 	
+                crida = "/GAIA/aspx/catalegServeis/frmNodeAgrupacioServei.aspx?id=" & nodo & "&cr=" & relActiva & "&idiArbre=" & idioma
             Case "fulla web"
-                crida = "/GAIA/aspx/web/frmFullaWeb.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString() 
+                crida = "/GAIA/aspx/web/frmFullaWeb.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString()
             Case "node web"
-                crida = "/GAIA/aspx/web/frmNodeWeb.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString() 
+                crida = "/GAIA/aspx/web/frmNodeWeb.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString()
             Case "arbre web"
-                crida = "/GAIA/aspx/web/frmArbreWeb.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString() 
+                crida = "/GAIA/aspx/web/frmArbreWeb.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString()
             Case "fulla plantillaWeb"
-                crida = "/GAIA/aspx/web/frmPlantilla.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString() 
+                crida = "/GAIA/aspx/web/frmPlantilla.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString()
             Case "fulla codiWeb"
-                crida = "/GAIA/aspx/fulles/frmLlibreriaCodiWeb.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString() 
+                crida = "/GAIA/aspx/fulles/frmLlibreriaCodiWeb.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString()
             Case "fulla document"
-                crida = "/GAIA/aspx/documents/CarregaDocuments.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString() 
+                crida = "/GAIA/aspx/documents/CarregaDocuments.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString()
             Case "fulla noticia"
                 crida = "/GAIA/aspx/noticies/CarregaNoticies.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString() + "&cr=" & relActiva.ToString()
             Case "fulla info"
-                crida = "/GAIA/aspx/noticies/CarregaInfo.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString() 
+                crida = "/GAIA/aspx/noticies/CarregaInfo.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString()
             Case "fulla projecte"
 
-                crida = "/GAIA/aspx/projecte/frmProjecte.aspx	?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString() 
+                crida = "/GAIA/aspx/projecte/frmProjecte.aspx	?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString()
             Case "fulla link"
-                crida = "/GAIA/aspx/Links/CarregaLinks.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString() 
+                crida = "/GAIA/aspx/Links/CarregaLinks.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString()
             Case "fulla contractació"
-                crida = "/GAIA/aspx/contractacio/CarregaContractes.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString() 
+                crida = "/GAIA/aspx/contractacio/CarregaContractes.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString()
             Case "node organigrama"
-                crida = "/GAIA/aspx/organigrama/frmNodeOrganigrama.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString() 
+                crida = "/GAIA/aspx/organigrama/frmNodeOrganigrama.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString()
             Case "fulla organigrama"
-                crida = "/GAIA/aspx/organigrama/frmFullaOrganigrama.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString() 
+                crida = "/GAIA/aspx/organigrama/frmFullaOrganigrama.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString()
             Case "fulla circuit"
-                crida = "/GAIA/aspx/circuits/frmCircuits.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString() 
+                crida = "/GAIA/aspx/circuits/frmCircuits.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString()
             Case "node circuit"
-                crida = "/GAIA/aspx/circuits/frmNodeCircuit.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString() 
+                crida = "/GAIA/aspx/circuits/frmNodeCircuit.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString()
             Case "node elMeuEspai"
-                crida = "/GAIA/aspx/elMeuEspai/frmNodeelMeuEspai.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString() 
+                crida = "/GAIA/aspx/elMeuEspai/frmNodeelMeuEspai.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString()
             Case "node document"
-                crida = "/GAIA/aspx/documents/frmNodeDocuments.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString() 
+                crida = "/GAIA/aspx/documents/frmNodeDocuments.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString()
             Case "fulla agenda"
                 crida = "/GAIA/aspx/agenda/frmAgenda.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString() & "&cr=" & relActiva
             Case "fulla tramit"
-                crida = "/GAIA/aspx/tramits/frmTramits.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString() & "&cr=" & relActiva 
+                crida = "/GAIA/aspx/tramits/frmTramits.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString() & "&cr=" & relActiva
 
             Case "fulla directori"
 
-                crida = "/GAIA/aspx/directori/frmDirectori.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString() + "&rel=" + relActiva.ToString() 
+                crida = "/GAIA/aspx/directori/frmDirectori.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString() + "&rel=" + relActiva.ToString()
             Case "node codificacio"
-                crida = "/GAIA/aspx/codificacio/frmNodecodificacio.aspx?id=" & nodo & "&cr=" & relActiva & "&idiArbre=" & idioma 
+                crida = "/GAIA/aspx/codificacio/frmNodecodificacio.aspx?id=" & nodo & "&cr=" & relActiva & "&idiArbre=" & idioma
             Case "fulla projecte"
-                crida = "/GAIA/aspx/projecte/frmProjecte.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString() + "&rel=" + relActiva.ToString() 
-				
-			case else
-				  crida = "/GAIA/aspx/fulles/frmNodes.aspx?id=" + nodo.ToString() + "&cr=" + relActiva.ToString() + "&idiArbre=" + idioma.ToString() 
+                crida = "/GAIA/aspx/projecte/frmProjecte.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString() + "&rel=" + relActiva.ToString()
+
+            Case Else
+                crida = "/GAIA/aspx/fulles/frmNodes.aspx?id=" + nodo.ToString() + "&cr=" + relActiva.ToString() + "&idiArbre=" + idioma.ToString()
         End Select
-if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/javascript"">window.open(""" & crida &  """)</script>"
+        If obrirNovaFinestra Then crida = "<script language=""JavaScript"" type=""text/javascript"">window.open(""" & crida & """)</script>"
         Return (crida)
     End Function 'editarContingut
 
@@ -13403,10 +13382,10 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
                 nomNode = GAIA.obtenirNomNode(objConn, nodeArrel)
 
                 If Trim(nomNode) = "Intranet" Then
-                    GAIA.bdR(objConn, "SELECT DISTINCT PELINORG,isnull(FORDSWIN,'') AS USUARI,MIN(PERCDTIP) AS PERMIS " & _
-                          " FROM METLPER WITH(NOLOCK) LEFT JOIN METLPEL WITH(NOLOCK) ON PERCDREL = METLPEL.PELCDREL LEFT JOIN METLFOR  WITH(NOLOCK) " & _
-                          " ON METLPEL.PELINORG=METLFOR.FORINNOD WHERE PELCDREL=" & relacio & _
-                          " AND (isnull(FORDSWIN,'') <> '' OR PELINORG = 115969) " & _
+                    GAIA.bdR(objConn, "SELECT DISTINCT PELINORG,isnull(FORDSWIN,'') AS USUARI,MIN(PERCDTIP) AS PERMIS " &
+                          " FROM METLPER WITH(NOLOCK) LEFT JOIN METLPEL WITH(NOLOCK) ON PERCDREL = METLPEL.PELCDREL LEFT JOIN METLFOR  WITH(NOLOCK) " &
+                          " ON METLPEL.PELINORG=METLFOR.FORINNOD WHERE PELCDREL=" & relacio &
+                          " AND (isnull(FORDSWIN,'') <> '' OR PELINORG = 115969) " &
                           " GROUP BY PELINORG,isnull(FORDSWIN,'')", ds)
 
 
@@ -13445,7 +13424,7 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
     '	Acció: 		Registra una entrada a la taula de log d'errors (METLERR)
     '***************************************************************************************************
     Public Shared Sub f_logError(ByVal objConn As OleDbConnection, ByVal origen As String, ByVal ex_source As String, ByVal text As String)
-        GAIA.bdSR(objConn, "INSERT INTO METLERR (ERRTPORG,ERRDSSRC,ERRDSDES) VALUES ('" & _
+        GAIA.bdSR(objConn, "INSERT INTO METLERR (ERRTPORG,ERRDSSRC,ERRDSDES) VALUES ('" &
         origen & "','" & Replace(ex_source, "'", "") & "','" & Replace(text, "'", "") & "')")
     End Sub
 
@@ -13477,64 +13456,64 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
     '	Acció: 		
     '***************************************************************************************************
 
-    Public Shared function ftpCopiarFitxer(ByVal objConn As OleDbConnection, ByVal servidor As String, ByVal usuari As String, ByVal pwd As String, ByVal fOrigen As String, ByVal fdesti As String, ByVal relacio As Integer, ByVal thumbnail As String, ByVal ftpsession As Session, Optional ByVal pathDestiArrel As String = "") As String
-		ftpCopiarFitxer=""
+    Public Shared Function ftpCopiarFitxer(ByVal objConn As OleDbConnection, ByVal servidor As String, ByVal usuari As String, ByVal pwd As String, ByVal fOrigen As String, ByVal fdesti As String, ByVal relacio As Integer, ByVal thumbnail As String, ByVal ftpsession As Session, Optional ByVal pathDestiArrel As String = "") As String
+        ftpCopiarFitxer = ""
         Dim bCopiat As Boolean, fitxerServidor As String
-        fOrigen = fOrigen.Replace("\\", "\").Replace("\\", "\").replace("//","/")
-      	dim strErr as string =""
+        fOrigen = fOrigen.Replace("\\", "\").Replace("\\", "\").replace("//", "/")
+        Dim strErr As String = ""
         bCopiat = False
 
         Try
             If servidor = "" Then
-				ftpCopiarFitxer	&= "No he pogut copiar l'arxiu al servidor destí. Comproveu si la pàgina és dins d'una web."
+                ftpCopiarFitxer &= "No he pogut copiar l'arxiu al servidor destí. Comproveu si la pàgina és dins d'una web."
                 GAIA.debug(objConn, "No he pogut copiar l'arxiu al servidor destí. Comproveu si la pàgina és dins d'una web.")
             Else
-          		strErr &= "a"
+                strErr &= "a"
                 Dim directori As FtpDirectory
-				strErr &= "b"
+                strErr &= "b"
                 directori = ftpsession.CurrentDirectory
-				strErr &= "c"
+                strErr &= "c"
                 'IF instr(LCASE(forigen),"/proves")>0 THEN				
                 'no copio a la intranet (websgaia/web/proves)
                 'ELSE
                 Try
-					strErr &= "0"
+                    strErr &= "0"
                     directori.PutFile(fOrigen, fdesti.Replace("\\", "\"))
-					strErr &= "1"
+                    strErr &= "1"
                     bCopiat = True
-				Catch ex As Exception
-       
-                  GAIA.debug(objConn,  "No he pogut copiar l'arxiu: forigen= " & forigen & "- fdesti=" & fdesti & " al servidor destí. Si us plau, prova de publicar de nou." & strErr & "_" & ex.Source  & "--" & ex.Message  )
+                Catch ex As Exception
+
+                    GAIA.debug(objConn, "No he pogut copiar l'arxiu: forigen= " & forigen & "- fdesti=" & fdesti & " al servidor destí. Si us plau, prova de publicar de nou." & strErr & "_" & ex.Source & "--" & ex.Message)
 
                     Try
-						strErr &= "2"
+                        strErr &= "2"
                         directori.PutFile(fOrigen, fdesti)
-						strErr &= "3"
+                        strErr &= "3"
                         bCopiat = True
                     Catch ex2 As Exception
-						strErr &= "5"
-						ftpCopiarFitxer	&= "No he pogut copiar l'arxiu: forigen= " & forigen & "- fdesti=" & fdesti & " al servidor destí. Si us plau, prova de publicar de nou." & strErr & "_" & ex2.Source  & "--" & ex2.Message
-                      
+                        strErr &= "5"
+                        ftpCopiarFitxer &= "No he pogut copiar l'arxiu: forigen= " & forigen & "- fdesti=" & fdesti & " al servidor destí. Si us plau, prova de publicar de nou." & strErr & "_" & ex2.Source & "--" & ex2.Message
+
                     End Try
                 End Try
                 'END IF
                 If bCopiat Then
-					strErr &= "6"
+                    strErr &= "6"
                     fdesti = Replace(fdesti, "/GAIA06", "")
-					strErr &= "7"					
+                    strErr &= "7"
                     fitxerServidor = Replace(fdesti, pathDestiArrel, "")
-					strErr &= "8"
+                    strErr &= "8"
                     'f_establirPermisos(objConn, relacio, thumbnail, fitxerServidor)
                 End If
 
             End If
 
-		Catch ex As Exception
-        	GAIA.debug(objConn, "error al ftp: Forigen=" & forigen  & "--Fdesti=" & fdesti & "-- servidor=" & servidor & "-- dades d'error: " & ex.Source  & "--" & ex.Message & "strERr=" & strErr )
-			return ("error al copiar arxius ")
+        Catch ex As Exception
+            GAIA.debug(objConn, "error al ftp: Forigen=" & forigen & "--Fdesti=" & fdesti & "-- servidor=" & servidor & "-- dades d'error: " & ex.Source & "--" & ex.Message & "strERr=" & strErr)
+            Return ("error al copiar arxius ")
         End Try
 
-    End function 'ftpCopiarFitxer
+    End Function 'ftpCopiarFitxer
 
 
     '***************************************************************************************************
@@ -13552,46 +13531,46 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
         Dim directori As FtpDirectory
         Dim imatgePetita As String
         ftpSession = New Session()
-        
-        
-		Try
 
-			GAIA.log(objConn, rel, codiUsuari, "Fitxer:" + rel.noddstxt + "(" + fitxer + ") esborrat del servidor Intranet", TAESBORRAR)
-			If borrarFitxerDefinitivament = "S" Then
-				File.Delete("e:\docs\GAIA\" & fitxer.Substring(InStrRev(fitxer, "/")))
-				GAIA.bdSR(objConn, "UPDATE METLDOC SET DOCDSFIT='' WHERE DOCINNOD=" & rel.infil.ToString())
-			End If
-			
-		Catch ex As Exception
-			f_logError(objConn, "G01", ex.Source, ex.Message + "Fitxer no trobat. No s'ha pogut esborrar el fitxer:" + fitxer + " del servidor Intranet")
-			'ex.Message
-		End Try
 
-		
-	   
-		Try
-			ftpSession.Server = servidor
-			ftpSession.Connect(usuariFTP, pwdFTP)
-			directori = ftpSession.CurrentDirectory
-		
-			directori.removeFile(fitxer)								
-			GAIA.log(objConn, rel, codiUsuari, "Fitxer:" + rel.noddstxt + "(" + fitxer + ")  esborrat del servidor:" + servidor, TAESBORRAR)
-	
-			'GAIA.log(objConn, rel, codiUsuari, "Fitxer:" + rel.noddstxt + "(" + fitxer + ")  esborrat definitivament de l'úbicació mestre", TAESBORRAR)
-		
-		
-		try
-			 'Esborro la imatge petita (si existeix)            
-			 imatgePetita = fitxer.Substring(0, InStrRev(fitxer, ".") - 1) + "P." + fitxer.Substring(InStrRev(fitxer, "."))    			
-			File.Delete("e:\docs\GAIA\" + imatgePetita.Substring(InStrRev(imatgePetita, "/")))
-			directori.RemoveFile(imatgePetita)
-		catch
-		end try
-		Catch ex As Exception
-			f_logError(objConn, "G01", ex.Source, ex.Message + "Fitxer no trobat. No s'ha pogut esborrar el fitxer:" + fitxer + " del servidor:" + servidor)
-		end try
-		ftpSession.Close()
-      
+        Try
+
+            GAIA.log(objConn, rel, codiUsuari, "Fitxer:" + rel.noddstxt + "(" + fitxer + ") esborrat del servidor Intranet", TAESBORRAR)
+            If borrarFitxerDefinitivament = "S" Then
+                File.Delete("e:\docs\GAIA\" & fitxer.Substring(InStrRev(fitxer, "/")))
+                GAIA.bdSR(objConn, "UPDATE METLDOC SET DOCDSFIT='' WHERE DOCINNOD=" & rel.infil.ToString())
+            End If
+
+        Catch ex As Exception
+            f_logError(objConn, "G01", ex.Source, ex.Message + "Fitxer no trobat. No s'ha pogut esborrar el fitxer:" + fitxer + " del servidor Intranet")
+            'ex.Message
+        End Try
+
+
+
+        Try
+            ftpSession.Server = servidor
+            ftpSession.Connect(usuariFTP, pwdFTP)
+            directori = ftpSession.CurrentDirectory
+
+            directori.removeFile(fitxer)
+            GAIA.log(objConn, rel, codiUsuari, "Fitxer:" + rel.noddstxt + "(" + fitxer + ")  esborrat del servidor:" + servidor, TAESBORRAR)
+
+            'GAIA.log(objConn, rel, codiUsuari, "Fitxer:" + rel.noddstxt + "(" + fitxer + ")  esborrat definitivament de l'úbicació mestre", TAESBORRAR)
+
+
+            Try
+                'Esborro la imatge petita (si existeix)            
+                imatgePetita = fitxer.Substring(0, InStrRev(fitxer, ".") - 1) + "P." + fitxer.Substring(InStrRev(fitxer, "."))
+                File.Delete("e:\docs\GAIA\" + imatgePetita.Substring(InStrRev(imatgePetita, "/")))
+                directori.RemoveFile(imatgePetita)
+            Catch
+            End Try
+        Catch ex As Exception
+            f_logError(objConn, "G01", ex.Source, ex.Message + "Fitxer no trobat. No s'ha pogut esborrar el fitxer:" + fitxer + " del servidor:" + servidor)
+        End Try
+        ftpSession.Close()
+
     End Sub 'ftpEsborrarFitxer
 
     '***************************************************************************************************
@@ -13636,7 +13615,7 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
                 pos = InStrRev(filename, ".")
                 If pos <= 0 Then
                     pos = 0
-                end if 
+                End If
                 If pos = 0 Then
                     sufixVell = ""
                     sufix = ""
@@ -13846,30 +13825,30 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
         DS.Dispose()
     End Sub 'trobaServidorDesti
 
-	' 1-2-2019: adaptada a GAIA2
-	' Se usa para crear la url de destino de las fullas link a partir de una relación
+    ' 1-2-2019: adaptada a GAIA2
+    ' Se usa para crear la url de destino de las fullas link a partir de una relación
     Public Shared Function trobaURLDesti(ByVal objConn As OleDbConnection, ByVal rel As clsRelacio) As String
         Dim DS As DataSet
         DS = New DataSet()
         Dim URL As String = ""
 
         GAIA.bdr(objConn, "SELECT  RELCDHER,SERDSURL FROM METLREL WITH(NOLOCK) INNER JOIN METLAWE WITH(NOLOCK) ON SUBSTRING(METLREL.RELCDHER, 2, CHARINDEX('_',SUBSTRING(METLREL.RELCDHER,2,LEN(METLREL.RELCDHER)))-1) = METLAWE.AWEINNOD INNER JOIN METLSER WITH(NOLOCK) ON METLAWE.AWEDSSER = METLSER.SERINCOD WHERE (METLREL.RELINCOD=" + rel.incod.ToString() + ") UNION SELECT  RELCDHER,SERDSURL FROM METLREL WITH(NOLOCK) INNER JOIN METLAWE2 WITH(NOLOCK) ON SUBSTRING(METLREL.RELCDHER, 2, CHARINDEX('_',SUBSTRING(METLREL.RELCDHER,2,LEN(METLREL.RELCDHER)))-1) = METLAWE2.AWEINNOD INNER JOIN METLSER WITH(NOLOCK) ON METLAWE2.AWEDSSER = METLSER.SERINCOD WHERE (METLREL.RELINCOD=" + rel.incod.ToString() + ")", DS)
-		
+
 
         If DS.Tables(0).Rows.Count > 0 Then
-				'Tracto els webs de barradas i teatre joventut, que tenen domini diferent però són dins de l'arbre de l'aju
-		if instr(DS.Tables(0).Rows(0)("RELCDHER"),"_167397_174103_174959")>0 THEN
-			URL = "www.auditoribarradas.cat"
-		ELSE
-			IF instr(DS.Tables(0).Rows(0)("RELCDHER"),"_167397_174103_176060")>0 THEN
-				URL = "www.teatreJoventut.cat"
-			ELSE
-				URL = DS.Tables(0).Rows(0)("SERDSURL")
-			END IF
-		END IF
+            'Tracto els webs de barradas i teatre joventut, que tenen domini diferent però són dins de l'arbre de l'aju
+            If instr(DS.Tables(0).Rows(0)("RELCDHER"), "_167397_174103_174959") > 0 Then
+                URL = "www.auditoribarradas.cat"
+            Else
+                If instr(DS.Tables(0).Rows(0)("RELCDHER"), "_167397_174103_176060") > 0 Then
+                    URL = "www.teatreJoventut.cat"
+                Else
+                    URL = DS.Tables(0).Rows(0)("SERDSURL")
+                End If
+            End If
 
-		
-            
+
+
         End If
         DS.Dispose()
         Return (URL)
@@ -13878,9 +13857,9 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
 
     'Cerca l'adreça d'un contingut de tipus enllaç METLLNK i retorna l'adreça i el target
     'RelIni : Contingut GAIA que incorpora l'enllaç. Necessari només si l'enllaç no és node relacionat
-	'target
-   Public Shared Function obtenirEnllacSimple(ByVal objconn As OleDbConnection, ByVal codiEnllaç As Integer, ByVal idioma As Integer, ByRef target As Integer, ByVal urlDesti As String) As String
-       Return obtenirEnllaçSimple(objconn, codiEnllaç, idioma, target, urlDesti)
+    'target
+    Public Shared Function obtenirEnllacSimple(ByVal objconn As OleDbConnection, ByVal codiEnllaç As Integer, ByVal idioma As Integer, ByRef target As Integer, ByVal urlDesti As String) As String
+        Return obtenirEnllaçSimple(objconn, codiEnllaç, idioma, target, urlDesti)
 
     End Function
 
@@ -13977,7 +13956,7 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
     '		heretatPropietatsNodesSuperiors: si 1 llavors heretarà les propietats dels nodes "node web" i "arbre web" superiors.
     '							En aquest cas només serà posar-hi <div id="cos">html</div> si s'heretan propietats
     '		urlDesti: string opcional se usa en esEML para el link del cap
-	'	Procés/sortida: 	
+    '	Procés/sortida: 	
     '		Retorna un string que consisteix en una pàgina web ben formada i accessible per que es pugui publicar (gravar)
     '****************************************************************************************************************	
     Public Shared Function preparaPagina(ByVal objConn As OleDbConnection, ByVal html As String, ByVal css As String, ByVal heretatPropietatsNodesSuperiors As Integer, ByVal titol As String, ByVal heretaPropietats As Integer, ByVal estilBody As String, ByVal esForm As String, ByVal esEML As String, ByVal esSSL As String, ByVal tagsMeta As String, ByRef htmlPeu As String, ByVal strCSSPantalla As String, ByVal strCSSImpressora As String, ByVal idioma As Integer, Optional ByVal urlDesti As String = "") As String
@@ -14062,8 +14041,8 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
             tagsMeta = tagsMetaComuns + tagsMeta
 
             'preparaPagina = "<!DOCTYPE html PUBLIC ""-//W3C//DTD XHTML 1.0 Transitional//EN"" ""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd""><html xmlns=""http://www.w3.org/1999/xhtml"" lang=""" + strIdioma + """><head runat=""server"">" + css + "<title>" & titol & "</title>" + tagsMeta
-			
-			preparaPagina = "<!DOCTYPE html PUBLIC ""-//W3C//DTD XHTML 1.0 Transitional//EN"" ""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd""><!--[if lt IE 7]>      <html class=""no-js lt-ie9 lt-ie8 lt-ie7"" lang=""" & strIdioma & """> <![endif]--><!--[if IE 7]>         <html class=""no-js lt-ie9 lt-ie8"" lang=""" & strIdioma & """> <![endif]--><!--[if IE 8]>         <html class=""no-js lt-ie9"" lang=""" & strIdioma & """> <![endif]--><!--[if gt IE 8]><!--><html class=""no-js"" xmlns=""http://www.w3.org/1999/xhtml"" lang=""" & strIdioma & """><!--<![endif]--><head runat=""server"">" + css + "<title>" & titol & "</title>" + tagsMeta
+
+            preparaPagina = "<!DOCTYPE html PUBLIC ""-//W3C//DTD XHTML 1.0 Transitional//EN"" ""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd""><!--[if lt IE 7]>      <html class=""no-js lt-ie9 lt-ie8 lt-ie7"" lang=""" & strIdioma & """> <![endif]--><!--[if IE 7]>         <html class=""no-js lt-ie9 lt-ie8"" lang=""" & strIdioma & """> <![endif]--><!--[if IE 8]>         <html class=""no-js lt-ie9"" lang=""" & strIdioma & """> <![endif]--><!--[if gt IE 8]><!--><html class=""no-js"" xmlns=""http://www.w3.org/1999/xhtml"" lang=""" & strIdioma & """><!--<![endif]--><head runat=""server"">" + css + "<title>" & titol & "</title>" + tagsMeta
             preparaPagina &= textCSS & htmlPeu & "</head><body id=""cosPagina"" " & IIf(estilBody.Trim.Length > 0, " class=""" + estilBody + """", "") & ">" + html + "</body></html>"
         End If
 
@@ -14072,7 +14051,7 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
         If esSSL = "S" Then
             preparaPagina = preparaPagina.Replace("<img src=""http:", "<img src=""https:")
         End If
-		'Que cada butlleti tenga una direccion unica con la fecha de publicación. 'URLDESTIBUTLLETIAMBLADATA' esta en el cap de cada butlleti
+        'Que cada butlleti tenga una direccion unica con la fecha de publicación. 'URLDESTIBUTLLETIAMBLADATA' esta en el cap de cada butlleti
         If esEML = "S" Then
             preparaPagina = preparaPagina.Replace("URLDESTIBUTLLETIAMBLADATA", urlDesti)
         End If
@@ -14146,9 +14125,9 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
             textIniciForm = "<form id=""form1"" runat=""server"">"
             textFiForm = "</form>"
         End If
-        
+
         html = textIniciForm + html + textFiForm
-       
+
         'Si és un correu poso un cap reduït
         If esEML = "S" Then
             preparaPagina2 = "<html><head runat=""server""><asp:Literal id=""lblhead"" runat=""server""></asp:Literal></head><body  id=""cosPagina"" style=""" + estilBody + """>" + html + "</body></html>"
@@ -14170,7 +14149,7 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
             tagsMetaComuns += "<meta name=""Copyright"" content=""http://www.l-h.cat/gdocs/d6779062.pdf""/>"
             tagsMeta = tagsMetaComuns & tagsMeta
 
-            preparaPagina2 = "<!doctype html><html lang=""" & strIdioma & """ ><head runat=""server"">" & css & tagsMeta 
+            preparaPagina2 = "<!doctype html><html lang=""" & strIdioma & """ ><head runat=""server"">" & css & tagsMeta
             preparaPagina2 &= textCSS & "<title>" & titol & "</title></head><body " & IIf(estilBody.Trim.Length > 0, " class=""" & estilBody & """", "") & ">" & html & htmlPeu & "</body></html>"
         End If
 
@@ -14222,37 +14201,37 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
     'Si head = -1 retornaré css+html, en cas contrari, retornaré l'html i el css el posaré a la variable head
     Public Shared Function obreFulla(ByVal objConn As OleDbConnection, ByVal rel As clsRelacio, ByVal plantilla As clsPlantilla, ByVal idioma As Integer, ByVal codiUsuari As Integer, ByVal publicar As Integer, ByVal width As Double, ByVal node As Integer, ByVal dataSimulacio As DateTime, ByRef head As String, ByVal nrocontingut As Integer, ByVal escorreu As String) As String
 
-		obrefulla=""
-		Dim sortida as string=""
-		
-		IF  GAIA.contingutVisibleAInternet(objconn, rel.infil)=0 THEN
-			IF codiUsuari=0 THEN	
-			
-				sortida &= "<div class=""missatgeError""><div class=""icona"">"
-				IF idioma=1 THEN
-					sortida &= "Contingut no disponible<br />" 			
-				ELSE
-					sortida &= "Contenido no disponible<br />" 			
-				END IF
-				sortida &= "</div></div>"																				
-				
-				return (sortida)									
-			ELSE
-				IF rel.tipintip<>51 THEN 'només si no ès de tipus tràmit. En aquests posem l'avís al detall de tràmit
-					sortida &= "<div class=""missatgeAvis""><div class=""icona"">Aquest contingut no és visible per als ciutadans.<br>S'està mostrant per que has accedit des de la xarxa municipal</div></div>"							
-					
-				END IF
-			END IF
-			
-			
-			
-			
-		END IF
-		
-		
+        obrefulla = ""
+        Dim sortida As String = ""
+
+        If GAIA.contingutVisibleAInternet(objconn, rel.infil) = 0 Then
+            If codiUsuari = 0 Then
+
+                sortida &= "<div class=""missatgeError""><div class=""icona"">"
+                If idioma = 1 Then
+                    sortida &= "Contingut no disponible<br />"
+                Else
+                    sortida &= "Contenido no disponible<br />"
+                End If
+                sortida &= "</div></div>"
+
+                Return (sortida)
+            Else
+                If rel.tipintip <> 51 Then 'només si no ès de tipus tràmit. En aquests posem l'avís al detall de tràmit
+                    sortida &= "<div class=""missatgeAvis""><div class=""icona"">Aquest contingut no és visible per als ciutadans.<br>S'està mostrant per que has accedit des de la xarxa municipal</div></div>"
+
+                End If
+            End If
+
+
+
+
+        End If
+
+
         obreFulla = GetHTML(objConn, "obreFulla", 0, idioma, dataSimulacio, head, rel, rel, -1, codiUsuari, plantilla.innod)
         If obreFulla = "" Then
-			obreFulla &= sortida
+            obreFulla &= sortida
 
             Dim estilBody As String = ""
             Dim strCSSPantalla As String = ""
@@ -14349,13 +14328,13 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
             DS.Dispose()
 
             'gravo fulla obtinguda per a posteriors publicacions
-            TRY
-				GAIA.bdSR(objConn, " INSERT INTO METLCEL VALUES (0," & idioma & "," & rel.incod & "," & rel.incod & ",-1," & codiUsuari & "," & rel.infil & "," & plantilla.innod & ",getdate(),'" & dataSimulacio & "','" & css & "','" & obreFulla.Replace("'", "''") & "','obreFulla?" & idioma & "_" & rel.incod & "_" & rel.incod & "_" & codiUsuari & "_" & plantilla.innod & "')")
-			catch
-			end try
-        END IF
+            Try
+                GAIA.bdSR(objConn, " INSERT INTO METLCEL VALUES (0," & idioma & "," & rel.incod & "," & rel.incod & ",-1," & codiUsuari & "," & rel.infil & "," & plantilla.innod & ",getdate(),'" & dataSimulacio & "','" & css & "','" & obreFulla.Replace("'", "''") & "','obreFulla?" & idioma & "_" & rel.incod & "_" & rel.incod & "_" & codiUsuari & "_" & plantilla.innod & "')")
+            Catch
+            End Try
+        End If
 
-		obreFulla = sortida & obreFulla
+        obreFulla = sortida & obreFulla
     End Function 'obreFulla
 
     '****************************************************************************************************************
@@ -14411,22 +14390,22 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
             Next dbRow
         Catch
         End Try
-		'Comprovo si hi ha cap tràmit que no té PDF generat. En aquest cas, el genero. Només en una execució a la nit.
-		IF now.hour()=1 and now.minute()>0 and now.minute < 11 THEN
+        'Comprovo si hi ha cap tràmit que no té PDF generat. En aquest cas, el genero. Només en una execució a la nit.
+        If now.hour() = 1 And now.minute() > 0 And now.minute < 11 Then
 
-			gaia.bdr(objconn, "select DISTINCT RELINFIL FROM METLREL  WITH(NOLOCK),METLFTR WITH(NOLOCK) WHERE RELINFIL=FTRINNOD AND RELCDHER LIKE '%103017%' AND RELCDSIT<98 AND FTRDSEEX like '' AND (FTRSWVSE=1 OR FTRSWVWE=1)",ds)
-			For each dbrow in ds.tables(0).rows 
-				IF  NOT File.Exists("e:\docs\GAIA\contingutsPDF\1_" & dbrow("RELINFIL") & ".pdf")
-					'response.write("falta pdf:" & dbrow("RELINFIL") & "<br />")
-					rel.bdget(objconn, -1,dbrow("RELINFIL"))
-					
-					GAIA.generaPDF(objconn, rel)
-				END IF
-				
-			Next dbrow
-		END IF
-		ds.dispose()
-		
+            gaia.bdr(objconn, "select DISTINCT RELINFIL FROM METLREL  WITH(NOLOCK),METLFTR WITH(NOLOCK) WHERE RELINFIL=FTRINNOD AND RELCDHER LIKE '%103017%' AND RELCDSIT<98 AND FTRDSEEX like '' AND (FTRSWVSE=1 OR FTRSWVWE=1)", ds)
+            For Each dbrow In ds.tables(0).rows
+                If Not File.Exists("e:\docs\GAIA\contingutsPDF\1_" & dbrow("RELINFIL") & ".pdf") Then
+                    'response.write("falta pdf:" & dbrow("RELINFIL") & "<br />")
+                    rel.bdget(objconn, -1, dbrow("RELINFIL"))
+
+                    GAIA.generaPDF(objconn, rel)
+                End If
+
+            Next dbrow
+        End If
+        ds.dispose()
+
         Return (cont)
     End Function
     '****************************************************************************************************************
@@ -14445,7 +14424,7 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
         Dim fDesti, urlDesti As String
         Dim llistaDocuments As String() = {}
         Dim rel As New clsRelacio
-		Dim relOriginal as New clsRelacio
+        Dim relOriginal As New clsRelacio
         Dim relFullaWeb As New clsRelacio
         Dim titol As String = ""
         DS = New DataSet()
@@ -14484,49 +14463,49 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
 
         GAIA.bdSR(objconn, "UPDATE METLREL SET RELCDSIT=98 WHERE RELINCOD IN (	SELECT RELINCOD FROM METLAGD WITH(NOLOCK),METLREL WITH(NOLOCK) WHERE AGDINNOD=RELINFIL  AND RELCDSIT<98 AND ((AGDDTCAD<= getdate() AND AGDDTCAD<>'01/01/1900') OR (AGDDTCAD='01/01/1900' AND (AGDDTFIN<='" + CDate(Today.AddDays(1)).ToString() + "' OR (AGDDTFIN IS NULL AND AGDDTINI<='" + CDate(Today.AddDays(1)).ToString() + "'))))) AND RELCDHER NOT  LIKE '_5286%'")
         GAIA.bdSR(objconn, "UPDATE METLREL SET RELCDSIT=98 WHERE RELINCOD IN (SELECT RELINCOD FROM METLREL WITH(NOLOCK),METLNOT WITH(NOLOCK) WHERE NOTINNOD=RELINFIL  AND RELCDSIT<98 AND ( NOTDTCAD<=getdate()  AND NOTDTCAD<>'01/01/1900') AND RELCDHER NOT  LIKE '_5286%')")
-		
-		
-		'4/6/2015 --> hay que borrar esto cuando esté corregido lo de informar de la libreria de codigo que consume una llamada a wsobrirfulla
-		gaia.bdsr(objconn, "DELETE FROM METLCEL WHERE CELCDPLT=199611")
-		
-		
-		'gaia.bdsr(objconn, "DELETE FROM METLCEL WHERE CELCDPLT=" & 
+
+
+        '4/6/2015 --> hay que borrar esto cuando esté corregido lo de informar de la libreria de codigo que consume una llamada a wsobrirfulla
+        gaia.bdsr(objconn, "DELETE FROM METLCEL WHERE CELCDPLT=199611")
+
+
+        'gaia.bdsr(objconn, "DELETE FROM METLCEL WHERE CELCDPLT=" & 
 
         'Esborro tots els manteniments de nodes i relacions que ja no existeixen per que s'han esborrat manualment
         'GAIA.bdSR(objconn, "DELETE FROM METLMAN WHERE MANDTTEM=0 AND MANCDNOD<>0 AND MANCDNOD NOT IN (SELECT NODINNOD FROM METLNOD)")
         'GAIA.bdSR(objconn, "DELETE FROM  METLMAN  WHERE MANDTTEM=0 AND MANCDREL<>0 AND  MANCDREL NOT IN (SELECT RELINCOD FROM METLREL)")
 
 
-		
-		'Faig el tractament de la CUA de manteniment previ: METLMPA
-		Dim fin As Boolean = False
-		
-		
-		gaia.bdsr(nothing, "delete from METLMPA WHERE  MPADTTEM=0 AND MPACDREL NOT IN (SELECT RELINCOD FROM METLREL) AND MPACDREL<>0")
+
+        'Faig el tractament de la CUA de manteniment previ: METLMPA
+        Dim fin As Boolean = False
 
 
-		While Not fin				
-			GAIA.bdR(objconn, "select top 1 *  FROM METLMPA WHERE MPADTTEM=0 order by MPAINMPA", DS)
-		  	If DS.Tables(0).Rows.Count = 0 Then				
+        gaia.bdsr(Nothing, "delete from METLMPA WHERE  MPADTTEM=0 AND MPACDREL NOT IN (SELECT RELINCOD FROM METLREL) AND MPACDREL<>0")
+
+
+        While Not fin
+            GAIA.bdR(objconn, "select top 1 *  FROM METLMPA WHERE MPADTTEM=0 order by MPAINMPA", DS)
+            If DS.Tables(0).Rows.Count = 0 Then
                 fin = True
             Else
-				dbrow=ds.tables(0).rows(0)
-				dataIni = Now
+                dbrow = ds.tables(0).rows(0)
+                dataIni = Now
                 rel.bdget(objconn, dbRow("MPACDREL"), 0, True)
-				if dbrow("MPACDREO")=0 THEN 
-	                relOriginal.bdget(objconn, dbRow("MPACDREL"), 0, True)
-				ELSE
-	                relOriginal.bdget(objconn, dbRow("MPACDREO"), 0, True)
-				END IF
+                If dbrow("MPACDREO") = 0 Then
+                    relOriginal.bdget(objconn, dbRow("MPACDREL"), 0, True)
+                Else
+                    relOriginal.bdget(objconn, dbRow("MPACDREO"), 0, True)
+                End If
 
-				GAIA.afegeixAccioManteniment(objconn, rel, dbrow("MPACDNOD"), dbrow("MPACDIDI"), dbrow("MPADTPUB"), dbrow("MPADTCAD"), relOriginal, dbrow("MPAWNASC"), dbrow("MPAWNEST"), false)
-				GAIA.bdSR(nothing, "UPDATE METLMPA SET MPADTTEM=(select DATEDIFF(MS, '" & dataIni & "', GETDATE() )) WHERE MPADTTEM=0 AND MPACDREL=" & rel.incod & " AND MPACDNOD=" & dbrow("MPACDNOD") & " AND MPACDIDI=" & dbrow("MPACDIDI") & " AND MPADTPUB='" & dbrow("MPADTPUB") & "' AND MPADTCAD='" & dbrow("MPADTCAD") & "' AND MPAWNASC="  & dbrow("MPAWNASC") & " AND MPAWNEST=" & dbrow("MPAWNEST")) 
-			
-			END IF
-		END WHILE
-		
-		
-		fin=false
+                GAIA.afegeixAccioManteniment(objconn, rel, dbrow("MPACDNOD"), dbrow("MPACDIDI"), dbrow("MPADTPUB"), dbrow("MPADTCAD"), relOriginal, dbrow("MPAWNASC"), dbrow("MPAWNEST"), False)
+                GAIA.bdSR(Nothing, "UPDATE METLMPA SET MPADTTEM=(select DATEDIFF(MS, '" & dataIni & "', GETDATE() )) WHERE MPADTTEM=0 AND MPACDREL=" & rel.incod & " AND MPACDNOD=" & dbrow("MPACDNOD") & " AND MPACDIDI=" & dbrow("MPACDIDI") & " AND MPADTPUB='" & dbrow("MPADTPUB") & "' AND MPADTCAD='" & dbrow("MPADTCAD") & "' AND MPAWNASC=" & dbrow("MPAWNASC") & " AND MPAWNEST=" & dbrow("MPAWNEST"))
+
+            End If
+        End While
+
+
+        fin = False
         While Not fin
             'primer tracto les que tenen MANCDREL>0, normalment apuntaran a fulles/nodes/arbres web. Quan no quedin, tracto els nodes (MANCDNOD>0). Per cadascun hauré de revisar quines pàgines poden estar afectades i/o generar els pdfs associats.
             GAIA.bdr(objconn, "select top 1 * FROM ((SELECT  (1) as ordre, METLMAN.* FROM METLMAN  WITH(NOLOCK) WHERE MANDTTEM=0 AND METLMAN.MANDTDAT <= getdate()  AND MANCDREL=0 ) UNION (SELECT   (2) as ordre, METLMAN.* FROM METLMAN  WITH(NOLOCK) WHERE MANDTTEM=0 AND METLMAN.MANDTDAT <= getdate()  AND MANCDNOD=0)    ) as METLMAN ORDER BY ordre, MANDTTIM", DS)
@@ -14560,7 +14539,7 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
                             GAIA.esborraAccioManteniment(objconn, dbRow("MANINMAN"), dataIni, dbRow("MANCDREL"), dbRow("MANCDNOD"), dbRow("MANCDIDI"))
                             ' End If
                             'Elimino totes les cel·les on apareix aquest contingut
-							GAIA.esborrarCelles(nothing,"CELCDNOD=" & rel.infil)
+                            GAIA.esborrarCelles(Nothing, "CELCDNOD=" & rel.infil)
                             'GAIA.bdSR(objconn, "DELETE FROM METLCEL WHERE CELCDNOD=" & rel.infil)
 
 
@@ -14593,36 +14572,36 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
                                             heretaPropietats = GAIA.heretarPropietatsWeb(objconn, dbRow2("RELINCOD"), width)
                                             strTmp &= GAIA.llistatErrors
                                             GAIA.llistatErrors = ""
-											'Teresa: incluyo GAIA2
-											If dbRow2("versioGAIA") = 2 Then
+                                            'Teresa: incluyo GAIA2
+                                            If dbRow2("versioGAIA") = 2 Then
                                                 html = GAIA.maquetarHTML(objconn, html, relFullaWeb, fDesti, urlDesti, 0, llistaDocuments, 1, dbRow2("WEBINIDI"), relFullaWeb, Now, usuari, tagsMeta, titol, estilbody, esForm, esEML, esSSL, htmlPeu, strCSSPantalla, strCSSImpressora)
                                             Else
-                                            GAIA.obreFullaWeb(objconn, relFullaWeb, html, css, heretaPropietats, width, 500, "", fDesti, urlDesti, 1, llistaDocuments, 1, dbRow2("WEBINIDI"), relFullaWeb, Now, usuari, titol, 1, estilbody, esForm, esEML, esSSL, tagsMeta, htmlPeu, strCSSPantalla, strCSSImpressora, True)
+                                                GAIA.obreFullaWeb(objconn, relFullaWeb, html, css, heretaPropietats, width, 500, "", fDesti, urlDesti, 1, llistaDocuments, 1, dbRow2("WEBINIDI"), relFullaWeb, Now, usuari, titol, 1, estilbody, esForm, esEML, esSSL, tagsMeta, htmlPeu, strCSSPantalla, strCSSImpressora, True)
                                             End If
-											If GAIA.llistatErrors.Length > 0 Then
+                                            If GAIA.llistatErrors.Length > 0 Then
                                                 'he trobat un error i no publico. 												
                                             Else
                                                 If GAIA.contingutEsPublicable(objconn, relFullaWeb, Now, dbRow2("WEBINIDI"), 99) = ctPUBLICAR Then
-												If esEML <> "S" Then  'Que no publique los boletines de manera automática
-                                                    'Poso al paràmetre "servidor"= "Manteniment", només serveix per saber que s'ha de tancar al final de la publicació de tots els documents.Si el destí és un fitxer vb no poso cap format
-                                                    If InStr(fDesti, ".vb") Or InStr(fDesti, ".js") > 0 Then
-                                                        GAIA.publica(objconn, html, fDesti, llistaDocuments, llistaDocumentsEliminar, 1, relFullaWeb, dbRow2("WEBINIDI"), "Manteniment", ftpsession)
-                                                    Else
-													If dbRow2("versioGAIA") = 2 Then
+                                                    If esEML <> "S" Then  'Que no publique los boletines de manera automática
+                                                        'Poso al paràmetre "servidor"= "Manteniment", només serveix per saber que s'ha de tancar al final de la publicació de tots els documents.Si el destí és un fitxer vb no poso cap format
+                                                        If InStr(fDesti, ".vb") Or InStr(fDesti, ".js") > 0 Then
+                                                            GAIA.publica(objconn, html, fDesti, llistaDocuments, llistaDocumentsEliminar, 1, relFullaWeb, dbRow2("WEBINIDI"), "Manteniment", ftpsession)
+                                                        Else
+                                                            If dbRow2("versioGAIA") = 2 Then
                                                                 If GAIA.publica(objconn, GAIA.preparaPagina2(objconn, html, css, 1, titol, heretaPropietats, estilbody, esForm, esEML, esSSL, tagsMeta, htmlPeu, strCSSPantalla, strCSSImpressora, dbRow2("WEBINIDI"), urlDesti), fDesti, llistaDocuments, llistaDocumentsEliminar, 1, relFullaWeb, dbRow2("WEBINIDI"), "Manteniment", ftpsession) Then
                                                                     GAIA.log(objconn, relFullaWeb, 0, "", TAPUBLICAR)
                                                                 End If
-                                                            Else														
-                                                        If GAIA.publica(objconn, GAIA.preparaPagina(objconn, html, css, 1, titol, heretaPropietats, estilbody, esForm, esEML, esSSL, tagsMeta, htmlPeu, strCSSPantalla, strCSSImpressora, dbRow2("WEBINIDI"), urlDesti), fDesti, llistaDocuments, llistaDocumentsEliminar, 1, relFullaWeb, dbRow2("WEBINIDI"), "Manteniment", ftpsession) Then
-                                                            GAIA.log(objconn, relFullaWeb, 0, "", TAPUBLICAR)
+                                                            Else
+                                                                If GAIA.publica(objconn, GAIA.preparaPagina(objconn, html, css, 1, titol, heretaPropietats, estilbody, esForm, esEML, esSSL, tagsMeta, htmlPeu, strCSSPantalla, strCSSImpressora, dbRow2("WEBINIDI"), urlDesti), fDesti, llistaDocuments, llistaDocumentsEliminar, 1, relFullaWeb, dbRow2("WEBINIDI"), "Manteniment", ftpsession) Then
+                                                                    GAIA.log(objconn, relFullaWeb, 0, "", TAPUBLICAR)
+                                                                End If
+                                                            End If
                                                         End If
+                                                        'GAIA.esborraAccioManteniment(objconn, dbRow("MANINMAN"), dataIni)
+                                                        GAIA.esborraAccioManteniment(objconn, dbRow("MANINMAN"), dataIni, dbRow("MANCDREL"), dbRow("MANCDNOD"), dbRow("MANCDIDI"))
                                                     End If
-													End If
-                                                    'GAIA.esborraAccioManteniment(objconn, dbRow("MANINMAN"), dataIni)
-                                                    GAIA.esborraAccioManteniment(objconn, dbRow("MANINMAN"), dataIni, dbRow("MANCDREL"), dbRow("MANCDNOD"), dbRow("MANCDIDI"))
                                                 End If
                                             End If
-											End If
                                         Catch
                                             GAIA.debug(objconn, "MANTENIMENT. PROBLEMES AL PUBLICAR: " + relFullaWeb.incod.ToString() + "(" + relFullaWeb.noddstxt.ToString() + ") a l'adreça " + fDesti.ToString() + "-" + Err.Description)
 
@@ -14645,32 +14624,32 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
                                     strTmp &= GAIA.llistatErrors
                                     GAIA.llistatErrors = ""
                                     tagsMeta = ""
-									'Teresa: incluyo GAIA2
-									If esGAIA2(objconn, rel.infil) Then
+                                    'Teresa: incluyo GAIA2
+                                    If esGAIA2(objconn, rel.infil) Then
                                         html = GAIA.maquetarHTML(objconn, html, rel, fDesti, urlDesti, 0, llistaDocuments, 1, dbRow("MANCDIDI"), rel, Now, usuari, tagsMeta, titol, estilbody, esForm, esEML, esSSL, htmlPeu, strCSSPantalla, strCSSImpressora)
                                     Else
-                                    GAIA.obreFullaWeb(objconn, rel, html, css, heretaPropietats, width, 500, "", fDesti, urlDesti, 1, llistaDocuments, 1, dbRow("MANCDIDI"), rel, Now, usuari, titol, 1, estilbody, esForm, esEML, esSSL, tagsMeta, htmlPeu, strCSSPantalla, strCSSImpressora, True)
+                                        GAIA.obreFullaWeb(objconn, rel, html, css, heretaPropietats, width, 500, "", fDesti, urlDesti, 1, llistaDocuments, 1, dbRow("MANCDIDI"), rel, Now, usuari, titol, 1, estilbody, esForm, esEML, esSSL, tagsMeta, htmlPeu, strCSSPantalla, strCSSImpressora, True)
                                     End If
-									If GAIA.llistatErrors.Length > 0 Then
+                                    If GAIA.llistatErrors.Length > 0 Then
                                         'he trobat un error i no publico. 												
                                     Else
                                         If GAIA.contingutEsPublicable(objconn, rel, Now, dbRow("MANCDIDI"), 99) = ctPUBLICAR Then
-										  If esEML <> "S" Then 'Que no publique los boletines de manera automática
-                                            'Poso al paràmetre "servidor"= "Manteniment", només serveix per saber que s'ha de tancar al final de la publicació de tots els documents.
-                                            'Si el destí és un fitxer vb no poso cap format
-                                            If InStr(fDesti, ".vb") Or InStr(fDesti, ".js") > 0 Then
-                                                GAIA.publica(objconn, html, fDesti, llistaDocuments, llistaDocumentsEliminar, 1, rel, dbRow("MANCDIDI"), "Manteniment", ftpsession)
-                                            Else
-												If esGAIA2(objconn, rel.infil) Then
+                                            If esEML <> "S" Then 'Que no publique los boletines de manera automática
+                                                'Poso al paràmetre "servidor"= "Manteniment", només serveix per saber que s'ha de tancar al final de la publicació de tots els documents.
+                                                'Si el destí és un fitxer vb no poso cap format
+                                                If InStr(fDesti, ".vb") Or InStr(fDesti, ".js") > 0 Then
+                                                    GAIA.publica(objconn, html, fDesti, llistaDocuments, llistaDocumentsEliminar, 1, rel, dbRow("MANCDIDI"), "Manteniment", ftpsession)
+                                                Else
+                                                    If esGAIA2(objconn, rel.infil) Then
                                                         GAIA.publica(objconn, GAIA.preparaPagina2(objconn, html, css, 1, titol, heretaPropietats, estilbody, esForm, esEML, esSSL, tagsMeta, htmlPeu, strCSSPantalla, strCSSImpressora, dbRow("MANCDIDI"), urlDesti), fDesti, llistaDocuments, llistaDocumentsEliminar, 1, rel, dbRow("MANCDIDI"), "Manteniment", ftpsession)
                                                     Else
-                                                GAIA.publica(objconn, GAIA.preparaPagina(objconn, html, css, 1, titol, heretaPropietats, estilbody, esForm, esEML, esSSL, tagsMeta, htmlPeu, strCSSPantalla, strCSSImpressora, dbRow("MANCDIDI"),urlDesti), fDesti, llistaDocuments, llistaDocumentsEliminar, 1, rel, dbRow("MANCDIDI"), "Manteniment", ftpsession)
+                                                        GAIA.publica(objconn, GAIA.preparaPagina(objconn, html, css, 1, titol, heretaPropietats, estilbody, esForm, esEML, esSSL, tagsMeta, htmlPeu, strCSSPantalla, strCSSImpressora, dbRow("MANCDIDI"), urlDesti), fDesti, llistaDocuments, llistaDocumentsEliminar, 1, rel, dbRow("MANCDIDI"), "Manteniment", ftpsession)
+                                                    End If
+                                                End If
+                                                GAIA.log(objconn, rel, 0, "", TAPUBLICAR)
                                             End If
-											End If
-                                            GAIA.log(objconn, rel, 0, "", TAPUBLICAR)
                                         End If
                                     End If
-									End If
                                     '  GAIA.esborraAccioManteniment(objconn, dbRow("MANINMAN"), dataIni)
                                     GAIA.esborraAccioManteniment(objconn, dbRow("MANINMAN"), dataIni, dbRow("MANCDREL"), dbRow("MANCDNOD"), dbRow("MANCDIDI"))
                                 End If
@@ -14687,22 +14666,22 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
                     End If
                 Else 'Tinc un manteniment d'un contingut per MANCDNOD. Aquest manteniment pot ser una caducitat o un canvi del contingut que modifica METLCEL 		
                     'Elimino totes les cel·les on apareix aquest contingut
-					
-					GAIA.esborrarCelles(nothing,"CELCDNOD=" & dbRow("MANCDNOD"))
+
+                    GAIA.esborrarCelles(Nothing, "CELCDNOD=" & dbRow("MANCDNOD"))
                     'GAIA.bdSR(objconn, "DELETE FROM METLCEL WHERE CELCDNOD=" & dbRow("MANCDNOD"))
                     'provoco un manteniment de totes les relacions que utilitzen aquest contingut i esborro cel·les de totes les relacions afectades pel canvi
-                   
-				   
-   
-				   
-				    DS2 = New DataSet()
+
+
+
+
+                    DS2 = New DataSet()
                     GAIA.bdr(objconn, "SELECT RELINCOD FROM METLREL WITH(NOLOCK)  WHERE RELCDSIT<98 AND RELINFIL=" & dbRow("MANCDNOD"), DS2)
                     Dim llistaCanvis As String = ""
                     Dim codirelacio As Integer = 0
                     Dim llistaEsborrar As String = ""
                     For Each dbRow2 In DS2.Tables(0).Rows
                         rel.bdget(objconn, dbRow2("RELINCOD"))
-	                        llistaCanvis = GAIA.obtenirPaginesAfectadesPerCanvi(objconn, rel, 0, 1, Now, Now, rel, 1, "", 0)
+                        llistaCanvis = GAIA.obtenirPaginesAfectadesPerCanvi(objconn, rel, 0, 1, Now, Now, rel, 1, "", 0)
                         For Each item As String In llistaCanvis.Split(",")
                             If Not String.IsNullOrEmpty(item) Then
                                 codirelacio = item.Split("|")(0)
@@ -14719,8 +14698,8 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
                     Next dbRow2
 
                     If llistaEsborrar.Length > 0 Then
-						GAIA.esborrarCelles(nothing," CELINREL IN (" & llistaEsborrar & ")")
-                       ' GAIA.bdSR(objconn, "delete from METLCEL WHERE CELINREL IN (" & llistaEsborrar & ")")
+                        GAIA.esborrarCelles(Nothing, " CELINREL IN (" & llistaEsborrar & ")")
+                        ' GAIA.bdSR(objconn, "delete from METLCEL WHERE CELINREL IN (" & llistaEsborrar & ")")
                     End If
 
 
@@ -14800,128 +14779,128 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
     Public Shared Function afegeixAccioManteniment(ByVal objConn As OleDbConnection, ByVal rel As clsRelacio, ByVal codiNode As Integer, ByVal codiIdioma As Integer, ByRef dataPubOriginal As String, ByRef dataCadOriginal As String, ByVal relOriginal As clsRelacio) As String
         Return (afegeixAccioManteniment(objConn, rel, codiNode, codiIdioma, dataPubOriginal, dataCadOriginal, relOriginal, 1, 0))
     End Function
-    Public Shared Function afegeixAccioManteniment(ByVal objConn As OleDbConnection, ByVal rel As clsRelacio, ByVal codiNode As Integer, ByVal codiIdioma As Integer, ByRef dataPubOriginal As String, ByRef dataCadOriginal As String, ByVal relOriginal As clsRelacio, ByVal mantenirAscendents As Integer, Optional ByVal estructura As Integer = 0, optional byVal endiferit as boolean=false) As String
-		Dim strResultat As String = ""
-		strResultat=""
-		if  endiferit THEN
-			GAIA.bdSR(objconn, "INSERT INTO METLMPA VALUES (" & rel.incod & "," & codiIdioma & ",'" & Cdate(dataPubOriginal) & "','" & cdate(dataCadOriginal) & "'," & codiNode & "," & relOriginal.incod & "," & mantenirAscendents & "," & estructura & ",0)")
-		ELSE
-	
-			
-			Dim strResultatAra As String = ""
-			Dim strResultatDespres As String = ""
-			Dim strPagines As String = ""
-			Dim item As String
-			obtenirPaginesAfectadesPerCanvi(objConn, rel, codiNode, codiIdioma, dataPubOriginal, dataCadOriginal, relOriginal, mantenirAscendents, strPagines, estructura)
-	
-			Dim txt As String = ""
-			Dim ds As DataSet
-			ds = New DataSet
-	
-	
-			'Si és un manteniment per codi node, faig el manteniment del codi node que toca
-			If rel.incod = 0 Then
-				GAIA.creaAccioManteniment(objConn, 0, codiIdioma, dataPubOriginal, codiNode)
-				GAIA.creaAccioManteniment(objConn, 0, codiIdioma, dataCadOriginal, codiNode)
-			End If
-	
-	
-	
-			'Faig el manteniment de totes les pàgines afectades i Calculo el text on es descriuran les pàgines afectades
-			Dim relTemp As New clsRelacio
-			Dim pos As Integer = 0
-			Dim arrValors As String()
-			Dim ant As Integer = -1
-			Dim antfec As Date = Nothing
-			For Each item In strPagines.Split(",")
-				If item.Length > 0 Then
-					arrValors = item.Split("|")
-					GAIA.creaAccioManteniment(objConn, arrValors(0),99, arrValors(2), arrValors(1))
-	
-	
-					If ant <> arrValors(0) + arrValors(1) Then
-						ant = arrValors(0) + arrValors(1)
-						antfec = arrValors(2)
-						relTemp.bdget(objConn, arrValors(0), arrValors(1))
-	
-						If relTemp.tipintip = 8 Or relTemp.tipintip = 9 Or relTemp.tipintip = 10 Then
-							txt = "<li><img class=""valignMiddle"" src=""/img/common/iconografia/" & IIf(relTemp.tipintip = 8, "arbre.png", IIf(relTemp.tipintip = 9, "node_web.png", "ico_web.png")) & """>&nbsp;"
-							'he d'agafar el node arrel per saber l'arbre
-							Dim postmp As Integer = 0
-							If relTemp.cdher.Length > 0 Then
-								  If relTemp.cdrsu <> 0 Then
-									GAIA.bdr(objConn, "select NODDSTXT FROM METLNOD WITH(NOLOCK), METLREL WITH(NOLOCK) WHERE RELINPAR=NODINNOD AND RELINCOD=" & relTemp.cdrsu, ds)
-								End If
-	
-							Else
-								GAIA.bdr(objConn, "SELECT NODDSTXT FROM METLNOD  WITH(NOLOCK) WHERE NODINNOD=" & relTemp.infil, ds)
-							End If
-	
-							If ds.Tables(0).Rows.Count > 0 Then
-								txt &= ds.Tables(0).Rows(0)("NODDSTXT") & "&nbsp;<img src=""http://www.l-h.cat/img/fletxa_gris.gif"" class=""border0 valignMiddle""/>&nbsp;"
-							End If
-							txt &= relTemp.noddstxt
-							If arrValors(2) < Now Then
-								If InStr(strResultatAra, txt) = 0 Then
-									strResultatAra &= txt & "</li>"
-								End If
-	
-							Else
-								If arrValors(2) < DateAdd(DateInterval.Year, 5, Now) Then
-	
-									If InStr(strResultatAra, txt) = 0 Then
-										strResultatDespres &= txt & "," & arrValors(2) & "</li>"
-									End If
-								End If
-							End If
-						End If
-	
-					Else
-						If antfec <> arrValors(2) Then
-							antfec = arrValors(2)
-							relTemp.bdget(objConn, arrValors(0), arrValors(1))
-	
-							If relTemp.tipintip = 8 Or relTemp.tipintip = 9 Or relTemp.tipintip = 10 Then
-								txt = "<li><img class=""valignMiddle"" src=""/img/common/iconografia/" & IIf(relTemp.tipintip = 8, "arbre.png", IIf(relTemp.tipintip = 9, "node-web.png", "fullaweb.png")) & """>&nbsp;"
-								If relTemp.cdrsu <> 0 Then
-									GAIA.bdr(objConn, "select NODDSTXT FROM METLNOD WITH(NOLOCK), METLREL WITH(NOLOCK) WHERE RELINPAR=NODINNOD AND RELINCOD=" & relTemp.cdrsu, ds)
-								End If
-	
-								If ds.Tables(0).Rows.Count > 0 Then
-									txt &= ds.Tables(0).Rows(0)("NODDSTXT") & "&nbsp;<img src=""http://www.l-h.cat/img/fletxa_gris.gif"" class=""border0 valignMiddle""/>&nbsp;"
-								End If
-								txt &= relTemp.noddstxt
-								If arrValors(2) < Now Then
-									If InStr(strResultatAra, txt) = 0 Then
-										strResultatAra &= txt & "</li>"
-									End If
-								Else
-									If arrValors(2) < DateAdd(DateInterval.Year, 5, Now) Then
-										If InStr(strResultatDespres, txt) = 0 Then
-											strResultatDespres &= txt & "," & arrValors(2) & "</li>"
-										End If
-									End If
-								End If
-							End If
-						End If
-	
-					End If
-	
-				End If
-			Next item
-	
-	
-			strResultat = IIf(strResultatAra.Length > 0, "<div class=""arial bold marginEsquerra10"">P&agrave;gines afectades per aquest canvi i que es publicaran automàticament en uns minuts:</div><div class=""llistaSensePunt  marginEsquerra10""><ul>" & strResultatAra & "</ul></div>", "")
-			strResultat &= IIf(strResultatDespres.Length > 0, "<div class=""arial bold  marginEsquerra10"">P&agrave;gines que es publicaran properament de forma autom&agrave;tica per eliminar el contingut que haur&agrave; caducat:</div><div class=""llistaSensePunt  marginEsquerra10""><ul>" & strResultatDespres & "</ul></div>", "")
-	
-	
-	
-	
-	
-	
-			ds.Dispose()
-		END IF
-		Return strResultat
+    Public Shared Function afegeixAccioManteniment(ByVal objConn As OleDbConnection, ByVal rel As clsRelacio, ByVal codiNode As Integer, ByVal codiIdioma As Integer, ByRef dataPubOriginal As String, ByRef dataCadOriginal As String, ByVal relOriginal As clsRelacio, ByVal mantenirAscendents As Integer, Optional ByVal estructura As Integer = 0, Optional ByVal endiferit As Boolean = False) As String
+        Dim strResultat As String = ""
+        strResultat = ""
+        If endiferit Then
+            GAIA.bdSR(objconn, "INSERT INTO METLMPA VALUES (" & rel.incod & "," & codiIdioma & ",'" & CDate(dataPubOriginal) & "','" & CDate(dataCadOriginal) & "'," & codiNode & "," & relOriginal.incod & "," & mantenirAscendents & "," & estructura & ",0)")
+        Else
+
+
+            Dim strResultatAra As String = ""
+            Dim strResultatDespres As String = ""
+            Dim strPagines As String = ""
+            Dim item As String
+            obtenirPaginesAfectadesPerCanvi(objConn, rel, codiNode, codiIdioma, dataPubOriginal, dataCadOriginal, relOriginal, mantenirAscendents, strPagines, estructura)
+
+            Dim txt As String = ""
+            Dim ds As DataSet
+            ds = New DataSet
+
+
+            'Si és un manteniment per codi node, faig el manteniment del codi node que toca
+            If rel.incod = 0 Then
+                GAIA.creaAccioManteniment(objConn, 0, codiIdioma, dataPubOriginal, codiNode)
+                GAIA.creaAccioManteniment(objConn, 0, codiIdioma, dataCadOriginal, codiNode)
+            End If
+
+
+
+            'Faig el manteniment de totes les pàgines afectades i Calculo el text on es descriuran les pàgines afectades
+            Dim relTemp As New clsRelacio
+            Dim pos As Integer = 0
+            Dim arrValors As String()
+            Dim ant As Integer = -1
+            Dim antfec As Date = Nothing
+            For Each item In strPagines.Split(",")
+                If item.Length > 0 Then
+                    arrValors = item.Split("|")
+                    GAIA.creaAccioManteniment(objConn, arrValors(0), 99, arrValors(2), arrValors(1))
+
+
+                    If ant <> arrValors(0) + arrValors(1) Then
+                        ant = arrValors(0) + arrValors(1)
+                        antfec = arrValors(2)
+                        relTemp.bdget(objConn, arrValors(0), arrValors(1))
+
+                        If relTemp.tipintip = 8 Or relTemp.tipintip = 9 Or relTemp.tipintip = 10 Then
+                            txt = "<li><img class=""valignMiddle"" src=""/img/common/iconografia/" & IIf(relTemp.tipintip = 8, "arbre.png", IIf(relTemp.tipintip = 9, "node_web.png", "ico_web.png")) & """>&nbsp;"
+                            'he d'agafar el node arrel per saber l'arbre
+                            Dim postmp As Integer = 0
+                            If relTemp.cdher.Length > 0 Then
+                                If relTemp.cdrsu <> 0 Then
+                                    GAIA.bdr(objConn, "select NODDSTXT FROM METLNOD WITH(NOLOCK), METLREL WITH(NOLOCK) WHERE RELINPAR=NODINNOD AND RELINCOD=" & relTemp.cdrsu, ds)
+                                End If
+
+                            Else
+                                GAIA.bdr(objConn, "SELECT NODDSTXT FROM METLNOD  WITH(NOLOCK) WHERE NODINNOD=" & relTemp.infil, ds)
+                            End If
+
+                            If ds.Tables(0).Rows.Count > 0 Then
+                                txt &= ds.Tables(0).Rows(0)("NODDSTXT") & "&nbsp;<img src=""http://www.l-h.cat/img/fletxa_gris.gif"" class=""border0 valignMiddle""/>&nbsp;"
+                            End If
+                            txt &= relTemp.noddstxt
+                            If arrValors(2) < Now Then
+                                If InStr(strResultatAra, txt) = 0 Then
+                                    strResultatAra &= txt & "</li>"
+                                End If
+
+                            Else
+                                If arrValors(2) < DateAdd(DateInterval.Year, 5, Now) Then
+
+                                    If InStr(strResultatAra, txt) = 0 Then
+                                        strResultatDespres &= txt & "," & arrValors(2) & "</li>"
+                                    End If
+                                End If
+                            End If
+                        End If
+
+                    Else
+                        If antfec <> arrValors(2) Then
+                            antfec = arrValors(2)
+                            relTemp.bdget(objConn, arrValors(0), arrValors(1))
+
+                            If relTemp.tipintip = 8 Or relTemp.tipintip = 9 Or relTemp.tipintip = 10 Then
+                                txt = "<li><img class=""valignMiddle"" src=""/img/common/iconografia/" & IIf(relTemp.tipintip = 8, "arbre.png", IIf(relTemp.tipintip = 9, "node-web.png", "fullaweb.png")) & """>&nbsp;"
+                                If relTemp.cdrsu <> 0 Then
+                                    GAIA.bdr(objConn, "select NODDSTXT FROM METLNOD WITH(NOLOCK), METLREL WITH(NOLOCK) WHERE RELINPAR=NODINNOD AND RELINCOD=" & relTemp.cdrsu, ds)
+                                End If
+
+                                If ds.Tables(0).Rows.Count > 0 Then
+                                    txt &= ds.Tables(0).Rows(0)("NODDSTXT") & "&nbsp;<img src=""http://www.l-h.cat/img/fletxa_gris.gif"" class=""border0 valignMiddle""/>&nbsp;"
+                                End If
+                                txt &= relTemp.noddstxt
+                                If arrValors(2) < Now Then
+                                    If InStr(strResultatAra, txt) = 0 Then
+                                        strResultatAra &= txt & "</li>"
+                                    End If
+                                Else
+                                    If arrValors(2) < DateAdd(DateInterval.Year, 5, Now) Then
+                                        If InStr(strResultatDespres, txt) = 0 Then
+                                            strResultatDespres &= txt & "," & arrValors(2) & "</li>"
+                                        End If
+                                    End If
+                                End If
+                            End If
+                        End If
+
+                    End If
+
+                End If
+            Next item
+
+
+            strResultat = IIf(strResultatAra.Length > 0, "<div class=""arial bold marginEsquerra10"">P&agrave;gines afectades per aquest canvi i que es publicaran automàticament en uns minuts:</div><div class=""llistaSensePunt  marginEsquerra10""><ul>" & strResultatAra & "</ul></div>", "")
+            strResultat &= IIf(strResultatDespres.Length > 0, "<div class=""arial bold  marginEsquerra10"">P&agrave;gines que es publicaran properament de forma autom&agrave;tica per eliminar el contingut que haur&agrave; caducat:</div><div class=""llistaSensePunt  marginEsquerra10""><ul>" & strResultatDespres & "</ul></div>", "")
+
+
+
+
+
+
+            ds.Dispose()
+        End If
+        Return strResultat
     End Function
 
 
@@ -14940,7 +14919,7 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
     '   Es retorna un string amb format  codirelacio1|idioma1|data1|node1,...,codirelacioN|idiomaN|dataN|nodeN
     '****************************************************************************************************************	
 
-    Public Shared Function obtenirPaginesAfectadesPerCanvi(ByVal objConn As OleDbConnection, ByVal rel As clsRelacio, ByVal codiNode As Integer, ByVal codiIdioma As Integer, ByRef dataPubOriginal As String, ByRef dataCadOriginal As String, ByVal relOriginal As clsRelacio, ByVal mantenirAscendents As Integer, ByRef strResultat As String, Optional ByVal estructura As Integer = 0, Optional ByRef relTractades As Hashtable = Nothing, optional byVal esborrarCEL as boolean=true) As String
+    Public Shared Function obtenirPaginesAfectadesPerCanvi(ByVal objConn As OleDbConnection, ByVal rel As clsRelacio, ByVal codiNode As Integer, ByVal codiIdioma As Integer, ByRef dataPubOriginal As String, ByRef dataCadOriginal As String, ByVal relOriginal As clsRelacio, ByVal mantenirAscendents As Integer, ByRef strResultat As String, Optional ByVal estructura As Integer = 0, Optional ByRef relTractades As Hashtable = Nothing, Optional ByVal esborrarCEL As Boolean = True) As String
 
 
         Dim DS, DS2 As DataSet
@@ -14972,9 +14951,9 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
 
         Dim nodesAscendents As String = ""
         Dim elements As String = ""
-       	If codiIdioma = 99 Then
-	   		codiIdioma=1
-		END IF	    
+        If codiIdioma = 99 Then
+            codiIdioma = 1
+        End If
 
         'Si no indiquen data caducitat, poso la data mínima  i no la tractaré
         If dataCadOriginal = "" Then
@@ -15031,7 +15010,7 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
                     End If
                     If InStr(strResultat, rel.incod & "|0|" & CDate(dataCad) & "|" & i) = 0 Then
                         strResultat &= "," & rel.incod & "|0|" & CDate(dataCad) & "|" & i
-                    End If                
+                    End If
                 Else
                     Select Case rel.tipdsdes
                         Case "fulla codiWeb" 'llibreria de codi
@@ -15094,36 +15073,36 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
                             '********************************************************************************************************************
                             ' Esborro totes les cel·les de les pàgines web que utilitzen la llibreria de codi. Només la cel·la on s'utilitza
                             '********************************************************************************************************************
-							IF esborrarCEL THEN
-								Dim item As String
-								Dim relacionsPerEsborrar As String = ""
-								For Each item In strResultat.Split(",")
-									If relacionsPerEsborrar.Length > 0 Then
-										relacionsPerEsborrar &= ","
-									End If
-									relacionsPerEsborrar &= item.Split("|")(0)
-								Next item
-	
-								'msv 3/3/14: hauria d'esborrar només les cel·les afectades però és complex saber si són de fulla web, de plantilla etc.. de moment esborro tot
-								If relacionsPerEsborrar.Length > 0 Then
-									'GAIA.bdSR(objConn, "DELETE FROM METLCEL WHERE CELINREL IN (" & relacionsPerEsborrar & ") ")   'AND CELCDEST IN (" & llistaEstPlantilla & ")")
-									
-									GAIA.esborrarCelles(nothing, "CELINREL IN (" & relacionsPerEsborrar & ") ")
-								End If
-	
-								'********************************************************************************************************************
-								' Esborro totes les cel·les amb llibreria de codi donada.
-								'********************************************************************************************************************
-								GAIA.esborrarCelles(nothing, "CELINLCW =" & rel.infil)
-								'GAIA.bdSR(objConn, "DELETE FROM METLCEL WHERE CELINLCW =" & rel.infil)
-							END IF
+                            If esborrarCEL Then
+                                Dim item As String
+                                Dim relacionsPerEsborrar As String = ""
+                                For Each item In strResultat.Split(",")
+                                    If relacionsPerEsborrar.Length > 0 Then
+                                        relacionsPerEsborrar &= ","
+                                    End If
+                                    relacionsPerEsborrar &= item.Split("|")(0)
+                                Next item
+
+                                'msv 3/3/14: hauria d'esborrar només les cel·les afectades però és complex saber si són de fulla web, de plantilla etc.. de moment esborro tot
+                                If relacionsPerEsborrar.Length > 0 Then
+                                    'GAIA.bdSR(objConn, "DELETE FROM METLCEL WHERE CELINREL IN (" & relacionsPerEsborrar & ") ")   'AND CELCDEST IN (" & llistaEstPlantilla & ")")
+
+                                    GAIA.esborrarCelles(Nothing, "CELINREL IN (" & relacionsPerEsborrar & ") ")
+                                End If
+
+                                '********************************************************************************************************************
+                                ' Esborro totes les cel·les amb llibreria de codi donada.
+                                '********************************************************************************************************************
+                                GAIA.esborrarCelles(Nothing, "CELINLCW =" & rel.infil)
+                                'GAIA.bdSR(objConn, "DELETE FROM METLCEL WHERE CELINLCW =" & rel.infil)
+                            End If
 
 
 
                         Case "fulla tramit"
                             If InStr(strResultat, "0|" & rel.infil & "|" & Now & "|" & i) = 0 Then
                                 strResultat &= "0|" & rel.infil & "|" & Now & "|" & i
-                            End If                    
+                            End If
                         Case "fulla directori"
                             If CDate(dataCad) <> CDate("01/01/1900") Then
                                 If InStr(strResultat, "0|" & rel.infil & "|" & CDate(dataCad) & "|" & i) = 0 Then
@@ -15139,16 +15118,16 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
                                     strResultat &= "," & "0|" & dbRow("FTRINNOD") & "|" & Now & "|" & i
                                 End If
                             Next
-							
-							
-							'cerco els actes d'agenda que utilitzen el directori
-							GAIA.bdr(objConn, "select DISTINCT EQPINACT FROM METLEQP WITH(NOLOCK), METLREL WITH(NOLOCK) WHERE EQPINDIR=" & rel.infil & " AND RELINFIL=EQPINACT AND RELCDSIT<98", DS)
-							For Each dbRow In DS.Tables(0).Rows
-								If InStr(strResultat, "0|" & dbRow("EQPINACT") & "|" & Now & "|" & i) = 0 Then
-									strResultat &= "," & "0|" & dbRow("EQPINACT") & "|" & Now & "|" & i
-								End If
-							Next
-							
+
+
+                            'cerco els actes d'agenda que utilitzen el directori
+                            GAIA.bdr(objConn, "select DISTINCT EQPINACT FROM METLEQP WITH(NOLOCK), METLREL WITH(NOLOCK) WHERE EQPINDIR=" & rel.infil & " AND RELINFIL=EQPINACT AND RELCDSIT<98", DS)
+                            For Each dbRow In DS.Tables(0).Rows
+                                If InStr(strResultat, "0|" & dbRow("EQPINACT") & "|" & Now & "|" & i) = 0 Then
+                                    strResultat &= "," & "0|" & dbRow("EQPINACT") & "|" & Now & "|" & i
+                                End If
+                            Next
+
 
                         Case "fulla document"
                             If CDate(dataCad) <> CDate("01/01/1900") Then
@@ -15189,36 +15168,36 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
 
 
 
-				IF esborrarCEL THEN
-					'********************************************************************************************************************
-					'Esborro totes les entrades de la METLCEL que utilitzin aquest contingut
-					'********************************************************************************************************************
-					strsql = " CELCDNOD=" & relOriginal.infil
-					If codiNode <> 0 Then
-						strsql &= " OR CELCDNOD=" & codiNode
-					End If
-	
-					If estructura <= 0 Then
-						'strsql &= " OR CELINREL=" & relOriginal.cdrsu
-						strsql &= " OR CELINREL=" & relOriginal.incod
-					Else
-						'strsql &= " OR (CELINREL=" & relOriginal.cdrsu & " AND CELCDEST=" & estructura & ")"
-						strsql &= " OR (CELINREL=" & relOriginal.incod & " AND CELCDEST=" & estructura & ")"
-					End If
-					
-					
-					GAIA.esborrarCelles(nothing, strsql)
-					'GAIA.bdSR(objConn, "delete FROM METLCEL WHERE " & strsql)
-	
-					If estructura <= 0 Then
-						strsql = " CELINREL=" & relOriginal.cdrsu
-					Else
-						strsql = "  (CELINREL=" & relOriginal.cdrsu & " AND CELCDEST=" & estructura & ")"
-	
-					End If
-					GAIA.esborrarCelles(nothing, strsql)
-					'GAIA.bdSR(objConn, "delete FROM METLCEL WHERE " & strsql)
-				end if
+                If esborrarCEL Then
+                    '********************************************************************************************************************
+                    'Esborro totes les entrades de la METLCEL que utilitzin aquest contingut
+                    '********************************************************************************************************************
+                    strsql = " CELCDNOD=" & relOriginal.infil
+                    If codiNode <> 0 Then
+                        strsql &= " OR CELCDNOD=" & codiNode
+                    End If
+
+                    If estructura <= 0 Then
+                        'strsql &= " OR CELINREL=" & relOriginal.cdrsu
+                        strsql &= " OR CELINREL=" & relOriginal.incod
+                    Else
+                        'strsql &= " OR (CELINREL=" & relOriginal.cdrsu & " AND CELCDEST=" & estructura & ")"
+                        strsql &= " OR (CELINREL=" & relOriginal.incod & " AND CELCDEST=" & estructura & ")"
+                    End If
+
+
+                    GAIA.esborrarCelles(Nothing, strsql)
+                    'GAIA.bdSR(objConn, "delete FROM METLCEL WHERE " & strsql)
+
+                    If estructura <= 0 Then
+                        strsql = " CELINREL=" & relOriginal.cdrsu
+                    Else
+                        strsql = "  (CELINREL=" & relOriginal.cdrsu & " AND CELCDEST=" & estructura & ")"
+
+                    End If
+                    GAIA.esborrarCelles(Nothing, strsql)
+                    'GAIA.bdSR(objConn, "delete FROM METLCEL WHERE " & strsql)
+                End If
 
                 '********************************************************************************************************************
                 ' Faig el manteniment de les llibreries de codi afectades pel manteniment del contingut
@@ -15229,10 +15208,10 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
 
                 'Esborro totes les execucions de la llibreria afectada per que ja no són vàlides. S'hauran de refer automàticament quan s'hagi de publicar la pàgina al manteniment
 
-				 If esborrarCEL Then
-					GAIA.esborrarCelles(nothing,("CELINLCW IN (select ASSCDNOD FROM METLREL WITH(NOLOCK) ,METLNOD WITH(NOLOCK) ,METLASS WITH(NOLOCK)  WHERE  RELINFIL=NODINNOD AND ASSCDTPA=41 AND ASSCDNRL=RELINFIL AND RELCDSIT<95 AND (RELINFIL=" & rel.infil & " OR RELINFIL IN (" & IIf(rel.cdher = "", rel.infil.ToString(), rel.cdher.Replace("_", ",")) & ")))").replace("(,", "("))
-                   ' GAIA.bdSR(objConn, ("DELETE FROM METLCEL WHERE CELINLCW IN (select ASSCDNOD FROM METLREL WITH(NOLOCK) ,METLNOD WITH(NOLOCK) ,METLASS WITH(NOLOCK)  WHERE  RELINFIL=NODINNOD AND ASSCDTPA=41 AND ASSCDNRL=RELINFIL AND RELCDSIT<95 AND (RELINFIL=" & rel.infil & " OR RELINFIL IN (" & IIf(rel.cdher = "", rel.infil.ToString(), rel.cdher.Replace("_", ",")) & ")))").replace("(,", "("))
-                    GAIA.esborrarCelles(nothing,"CELINLCW IN (select ASSCDNOD FROM METLREL WITH(NOLOCK) ,METLNOD WITH(NOLOCK) ,METLASS WITH(NOLOCK)  WHERE  RELINFIL=NODINNOD AND ASSCDTPA=41 AND ASSCDNRL=RELINFIL AND RELCDSIT<95  AND RELINFIL= " & rel.infil & ")")
+                If esborrarCEL Then
+                    GAIA.esborrarCelles(Nothing, ("CELINLCW IN (select ASSCDNOD FROM METLREL WITH(NOLOCK) ,METLNOD WITH(NOLOCK) ,METLASS WITH(NOLOCK)  WHERE  RELINFIL=NODINNOD AND ASSCDTPA=41 AND ASSCDNRL=RELINFIL AND RELCDSIT<95 AND (RELINFIL=" & rel.infil & " OR RELINFIL IN (" & IIf(rel.cdher = "", rel.infil.ToString(), rel.cdher.Replace("_", ",")) & ")))").replace("(,", "("))
+                    ' GAIA.bdSR(objConn, ("DELETE FROM METLCEL WHERE CELINLCW IN (select ASSCDNOD FROM METLREL WITH(NOLOCK) ,METLNOD WITH(NOLOCK) ,METLASS WITH(NOLOCK)  WHERE  RELINFIL=NODINNOD AND ASSCDTPA=41 AND ASSCDNRL=RELINFIL AND RELCDSIT<95 AND (RELINFIL=" & rel.infil & " OR RELINFIL IN (" & IIf(rel.cdher = "", rel.infil.ToString(), rel.cdher.Replace("_", ",")) & ")))").replace("(,", "("))
+                    GAIA.esborrarCelles(Nothing, "CELINLCW IN (select ASSCDNOD FROM METLREL WITH(NOLOCK) ,METLNOD WITH(NOLOCK) ,METLASS WITH(NOLOCK)  WHERE  RELINFIL=NODINNOD AND ASSCDTPA=41 AND ASSCDNRL=RELINFIL AND RELCDSIT<95  AND RELINFIL= " & rel.infil & ")")
 
                 End If
 
@@ -15240,7 +15219,7 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
 
                 'Busco llibreries de codi afectades pel contingut.
                 'El codi 41 de l'associació, relaciona una llibreria de codi amb un contingut(normalment de tipus "node codificacio")         
-               GAIA.bdr(objConn, ("select ASSCDNOD FROM METLREL WITH(NOLOCK) ,METLNOD WITH(NOLOCK) ,METLASS WITH(NOLOCK)  WHERE  RELINFIL=NODINNOD AND ASSCDTPA=41 AND ASSCDNRL=RELINFIL AND RELCDSIT<95 AND (RELINFIL IN (" & IIf(rel.cdher = "", rel.infil.ToString(), rel.cdher.Replace("_", ",")).replace("(,", "(") & ") OR RELINFIL=" & rel.infil & ")").Replace("(,", "("), DS)
+                GAIA.bdr(objConn, ("select ASSCDNOD FROM METLREL WITH(NOLOCK) ,METLNOD WITH(NOLOCK) ,METLASS WITH(NOLOCK)  WHERE  RELINFIL=NODINNOD AND ASSCDTPA=41 AND ASSCDNRL=RELINFIL AND RELCDSIT<95 AND (RELINFIL IN (" & IIf(rel.cdher = "", rel.infil.ToString(), rel.cdher.Replace("_", ",")).replace("(,", "(") & ") OR RELINFIL=" & rel.infil & ")").Replace("(,", "("), DS)
 
 
 
@@ -15282,7 +15261,7 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
 
                                     strResultat &= "," & relPare.incod & "|0|" & CDate(dataPub) & "|" & i
                                 End If
-                               'tracto si la fulla web té continguts que caduquen
+                                'tracto si la fulla web té continguts que caduquen
                                 If CDate(dataCad) <> CDate("01/01/1900") Then
                                     If InStr(strResultat, relPare.incod & "|0|" & CDate(dataCad) & "|" & i) = 0 Then
                                         strResultat &= "," & relPare.incod & "|0|" & CDate(dataCad) & "|" & i
@@ -15293,7 +15272,7 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
                                 If InStr(strResultat, relPare.incod & "|0|" & CDate(dataPub) & "|" & i) = 0 Then
                                     strResultat &= "," & relPare.incod & "|0|" & CDate(dataPub) & "|" & i
                                 End If
-								If CDate(dataCad) <> CDate("01/01/1900") Then
+                                If CDate(dataCad) <> CDate("01/01/1900") Then
                                     If InStr(strResultat, relPare.incod & "|0|" & CDate(dataCad) & "|" & i) = 0 Then
                                         strResultat &= "," & relPare.incod & "|0|" & CDate(dataCad) & "|" & i
                                     End If
@@ -15343,54 +15322,54 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
 
     Public Shared Sub creaAccioManteniment(ByVal objconn As OleDbConnection, ByVal codiRelacio As Integer, ByVal codiIdioma As Integer, ByVal data As String, ByVal codiNode As Integer)
 
-	
-	'	If codiIdioma=99 THEN
-	'		For cont=1 to 4	
-	'			creaAccioManteniment(objconn, codiRelacio, cont, data, codiNode)
-	'		Next cont
-	'	ELSE
-		
-		Dim rel As New clsRelacio()
-		rel.bdget(objconn, codiRelacio)
-		IF rel.tipintip<> 13 THEN  ' No creo accions manteniment per fulles organigrama
-		
-			If codiIdioma = 0 Then codiIdioma =99
-			Dim valor As Integer = 0		
-			If data < Now Then
-				Dim ds As DataSet
-				ds = New DataSet
-				If codiRelacio <> 0 Then
-					GAIA.bdr(objconn, "SELECT COUNT(*) as valor  FROM METLMAN with(NOLOCK) WHERE MANDTTEM=0 AND MANCDREL=" & codiRelacio & " AND MANDTDAT<getdate() AND MANCDIDI=" & IIf(codiIdioma = 99, 1, codiIdioma), ds)
-				Else
-					GAIA.bdr(objconn, "SELECT COUNT(*) as valor  FROM METLMAN with(NOLOCK)  WHERE MANDTTEM=0 AND  MANCDNOD=" & codiNode & " AND MANDTDAT<getdate() AND MANCDIDI=" & IIf(codiIdioma = 99, 1, codiIdioma), ds)
-				End If
-	
-				valor = ds.Tables(0).Rows(0)("valor")
-				ds.Dispose()
-			End If
-			If valor = 0 Then
-				If CDate(data) <> CDate("01/01/2050") Then
-					if codiIdioma=99 THEN
-						If gaia.existeixContingut(objconn, codiNode, codiRelacio, 1) = 1 Then
-							GAIA.bdSR(objconn, "INSERT INTO METLMAN (MANCDREL, MANCDIDI, MANDTDAT,MANCDNOD, MANDTTIM, MANDTTEM) VALUES (" + codiRelacio.ToString() + ",1,'" + data + "'," + codiNode.ToString() + ", getdate(),0)")
-						END IF
-						If gaia.existeixContingut(objconn, codiNode, codiRelacio, 2) = 1 Then
-							GAIA.bdSR(objconn, "INSERT INTO METLMAN (MANCDREL, MANCDIDI, MANDTDAT,MANCDNOD, MANDTTIM, MANDTTEM) VALUES (" + codiRelacio.ToString() + ",2,'" + data + "'," + codiNode.ToString() + ", getdate(),0)")
-						END IF							
-						If gaia.existeixContingut(objconn, codiNode, codiRelacio, 3) = 1 Then
-							GAIA.bdSR(objconn, "INSERT INTO METLMAN (MANCDREL, MANCDIDI, MANDTDAT,MANCDNOD, MANDTTIM, MANDTTEM) VALUES (" + codiRelacio.ToString() + ",3,'" + data + "'," + codiNode.ToString() + ", getdate(),0)")
-						END IF							
-						If gaia.existeixContingut(objconn, codiNode, codiRelacio, 4) = 1 Then
-							GAIA.bdSR(objconn, "INSERT INTO METLMAN (MANCDREL, MANCDIDI, MANDTDAT,MANCDNOD, MANDTTIM, MANDTTEM) VALUES (" + codiRelacio.ToString() + ",4,'" + data + "'," + codiNode.ToString() + ", getdate(),0)")
-						END IF							
-					ELSE
-						If gaia.existeixContingut(objconn, codiNode, codiRelacio, codiIdioma) = 1 Then
-							GAIA.bdSR(objconn, "INSERT INTO METLMAN (MANCDREL, MANCDIDI, MANDTDAT,MANCDNOD, MANDTTIM, MANDTTEM) VALUES (" + codiRelacio.ToString() + "," & codiIdioma & ",'" + data + "'," + codiNode.ToString() + ", getdate(),0)")
-						END IF
-					END IF
-				End If
-			END IF
-		End If
+
+        '	If codiIdioma=99 THEN
+        '		For cont=1 to 4	
+        '			creaAccioManteniment(objconn, codiRelacio, cont, data, codiNode)
+        '		Next cont
+        '	ELSE
+
+        Dim rel As New clsRelacio()
+        rel.bdget(objconn, codiRelacio)
+        If rel.tipintip <> 13 Then  ' No creo accions manteniment per fulles organigrama
+
+            If codiIdioma = 0 Then codiIdioma = 99
+            Dim valor As Integer = 0
+            If data < Now Then
+                Dim ds As DataSet
+                ds = New DataSet
+                If codiRelacio <> 0 Then
+                    GAIA.bdr(objconn, "SELECT COUNT(*) as valor  FROM METLMAN with(NOLOCK) WHERE MANDTTEM=0 AND MANCDREL=" & codiRelacio & " AND MANDTDAT<getdate() AND MANCDIDI=" & IIf(codiIdioma = 99, 1, codiIdioma), ds)
+                Else
+                    GAIA.bdr(objconn, "SELECT COUNT(*) as valor  FROM METLMAN with(NOLOCK)  WHERE MANDTTEM=0 AND  MANCDNOD=" & codiNode & " AND MANDTDAT<getdate() AND MANCDIDI=" & IIf(codiIdioma = 99, 1, codiIdioma), ds)
+                End If
+
+                valor = ds.Tables(0).Rows(0)("valor")
+                ds.Dispose()
+            End If
+            If valor = 0 Then
+                If CDate(data) <> CDate("01/01/2050") Then
+                    If codiIdioma = 99 Then
+                        If gaia.existeixContingut(objconn, codiNode, codiRelacio, 1) = 1 Then
+                            GAIA.bdSR(objconn, "INSERT INTO METLMAN (MANCDREL, MANCDIDI, MANDTDAT,MANCDNOD, MANDTTIM, MANDTTEM) VALUES (" + codiRelacio.ToString() + ",1,'" + data + "'," + codiNode.ToString() + ", getdate(),0)")
+                        End If
+                        If gaia.existeixContingut(objconn, codiNode, codiRelacio, 2) = 1 Then
+                            GAIA.bdSR(objconn, "INSERT INTO METLMAN (MANCDREL, MANCDIDI, MANDTDAT,MANCDNOD, MANDTTIM, MANDTTEM) VALUES (" + codiRelacio.ToString() + ",2,'" + data + "'," + codiNode.ToString() + ", getdate(),0)")
+                        End If
+                        If gaia.existeixContingut(objconn, codiNode, codiRelacio, 3) = 1 Then
+                            GAIA.bdSR(objconn, "INSERT INTO METLMAN (MANCDREL, MANCDIDI, MANDTDAT,MANCDNOD, MANDTTIM, MANDTTEM) VALUES (" + codiRelacio.ToString() + ",3,'" + data + "'," + codiNode.ToString() + ", getdate(),0)")
+                        End If
+                        If gaia.existeixContingut(objconn, codiNode, codiRelacio, 4) = 1 Then
+                            GAIA.bdSR(objconn, "INSERT INTO METLMAN (MANCDREL, MANCDIDI, MANDTDAT,MANCDNOD, MANDTTIM, MANDTTEM) VALUES (" + codiRelacio.ToString() + ",4,'" + data + "'," + codiNode.ToString() + ", getdate(),0)")
+                        End If
+                    Else
+                        If gaia.existeixContingut(objconn, codiNode, codiRelacio, codiIdioma) = 1 Then
+                            GAIA.bdSR(objconn, "INSERT INTO METLMAN (MANCDREL, MANCDIDI, MANDTDAT,MANCDNOD, MANDTTIM, MANDTTEM) VALUES (" + codiRelacio.ToString() + "," & codiIdioma & ",'" + data + "'," + codiNode.ToString() + ", getdate(),0)")
+                        End If
+                    End If
+                End If
+            End If
+        End If
     End Sub
 
     '****************************************************************************************************************
@@ -15444,7 +15423,7 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
             End If
         Next
         DS = New DataSet()
-        strSQL = "SELECT DISTINCT METLREL.RELINCOD, METLREL.RELINFIL FROM METLREL  WITH(NOLOCK) INNER JOIN (" & selectNodes.ToString() & _
+        strSQL = "SELECT DISTINCT METLREL.RELINCOD, METLREL.RELINFIL FROM METLREL  WITH(NOLOCK) INNER JOIN (" & selectNodes.ToString() &
         ") AS T2 ON T2.CAMPCLAU = METLREL.RELINFIL "
 
         strSQL += " WHERE 1=1 "
@@ -15458,7 +15437,7 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
         'GAIA.BDR(objconn, "SELECT RELINCOD FROM METLREL WHERE RELINFIL IN ("+strCodiNodes.toString() + ")"
         If Trim(strUbicacions) <> "" Or Trim(strUbicacionsFulla) <> "" Then
             If Trim(strUbicacions) = "" Then strUbicacions = "-1"
-            strSQL += " AND RELINCOD IN (SELECT RELINCOD FROM METLREL WITH(NOLOCK) WHERE (RELINCOD IN (" + strUbicacions + ") " & _
+            strSQL += " AND RELINCOD IN (SELECT RELINCOD FROM METLREL WITH(NOLOCK) WHERE (RELINCOD IN (" + strUbicacions + ") " &
                sqlUbicacionsFulla & " )"
 
             If estat <> "" Then
@@ -15480,14 +15459,14 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
         End If
         strSQL += " ORDER BY RELINFIL "
         GAIA.bdr(objconn, strSQL, DS)
-		
+
         Dim llistaPendents As String = "", llistaAmbPermisos As String = "", llistaSensePermisos As String = "", item As String = ""
         If comprobarPermisos = 2 Then
             For Each dbRow In DS.Tables(0).Rows
                 If Not String.IsNullOrEmpty(llistaPendents) Then llistaPendents &= ","
                 llistaPendents &= dbRow("RELINCOD")
             Next dbRow
-			
+
             clsPermisos.trobaPermisLlistaRelacions(objconn, 9, llistaPendents, numNodeOrganigrama, "", "", llistaAmbPermisos, llistaSensePermisos, "")
             For Each item In llistaAmbPermisos.Split(",")
                 ReDim Preserve resultat(cont)
@@ -15531,7 +15510,7 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
             End If
         Next
         DS = New DataSet()
-        strSQL = "SELECT DISTINCT METLREL.RELINCOD, METLREL.RELINFIL FROM METLREL  WITH(NOLOCK) INNER JOIN (" & selectNodes.ToString() & _
+        strSQL = "SELECT DISTINCT METLREL.RELINCOD, METLREL.RELINFIL FROM METLREL  WITH(NOLOCK) INNER JOIN (" & selectNodes.ToString() &
         ") AS T2 ON T2.CAMPCLAU = METLREL.RELINFIL "
 
         strSQL += " WHERE 1=1 "
@@ -15541,7 +15520,7 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
         'GAIA.BDR(objconn, "SELECT RELINCOD FROM METLREL WHERE RELINFIL IN ("+strCodiNodes.toString() + ")"
         If Trim(strUbicacions) <> "" Or Trim(strUbicacionsFulla) <> "" Then
             If Trim(strUbicacions) = "" Then strUbicacions = "-1"
-            strSQL += " AND RELINCOD IN (SELECT RELINCOD FROM METLREL  WITH(NOLOCK) WHERE (RELINCOD IN (" + strUbicacions + ") " & _
+            strSQL += " AND RELINCOD IN (SELECT RELINCOD FROM METLREL  WITH(NOLOCK) WHERE (RELINCOD IN (" + strUbicacions + ") " &
                sqlUbicacionsFulla & " )"
 
             If estat <> "" Then
@@ -15577,7 +15556,7 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
     '								1: l'enllaç serà la descripció
     '								500: en cas de ser una imatge, es retornarà la versió de 500px (amb sufix P)
     '								100: en cas de ser una imatge es retornarà la versió de 100px (amb sufix p100)
-	'						a tipus retorno el codi de tipus de contingut
+    '						a tipus retorno el codi de tipus de contingut
     '						estilEnllaç:  llista d'estils css per representar l'enllaç
     '						target: destí de l'enllaç: 
     '										0: _self
@@ -15600,7 +15579,7 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
         Dim tmp As String
         Dim link As String = ""
         Dim params As String = ""
-		
+
         tmp = obtenirEnllacContingut(objconn, rel, codiIdioma, 0, "", "", 0, 0, "", 0, "", link, params, "")
         Return (link & params)
 
@@ -15611,25 +15590,25 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
 
     Public Shared Function obtenirEnllacContingut(ByVal objconn As OleDbConnection, ByVal rel As clsRelacio, ByVal codiIdioma As Integer, ByRef tipus As Integer, ByVal estilenllaç As String, ByVal estiltext As String, ByVal target As Integer, ByVal icona As Integer, ByVal estilIcona As String, ByVal descripcio As Integer, ByVal estildescripcio As String, ByRef link As String, ByRef params As String) As String
 
-        Return (obtenirEnllacContingut(objconn, rel, codiIdioma, tipus, estilenllaç, estiltext, target, icona, estilIcona, descripcio, estildescripcio, link, params, "",0,0))
+        Return (obtenirEnllacContingut(objconn, rel, codiIdioma, tipus, estilenllaç, estiltext, target, icona, estilIcona, descripcio, estildescripcio, link, params, "", 0, 0))
 
     End Function
 
     Public Shared Function obtenirEnllacContingut(ByVal objconn As OleDbConnection, ByVal rel As clsRelacio, ByVal codiIdioma As Integer, ByRef tipus As Integer, ByVal estilenllaç As String, ByVal estiltext As String, ByVal target As Integer, ByVal icona As Integer, ByVal estilIcona As String, ByVal descripcio As Integer, ByVal estildescripcio As String, ByRef link As String, ByRef params As String, ByVal textEnllaç As String) As String
-        Return (obtenirEnllacContingut(objconn, rel, codiIdioma, tipus, estilenllaç, estiltext, target, icona, estilIcona, descripcio, estildescripcio, link, params, textEnllaç, 0,0))
+        Return (obtenirEnllacContingut(objconn, rel, codiIdioma, tipus, estilenllaç, estiltext, target, icona, estilIcona, descripcio, estildescripcio, link, params, textEnllaç, 0, 0))
 
     End Function
 
 
     Public Shared Function obtenirEnllacContingut(ByVal objconn As OleDbConnection, ByVal rel As clsRelacio, ByVal codiIdioma As Integer, ByRef tipus As Integer, ByVal estilenllaç As String, ByVal estiltext As String, ByVal target As Integer, ByVal icona As Integer, ByVal estilIcona As String, ByVal descripcio As Integer, ByVal estildescripcio As String, ByRef link As String, ByRef params As String, ByVal textEnllaç As String, ByVal plantilla As Integer) As String
-	
-	
-	
-	 Return (obtenirEnllacContingut(objconn, rel, codiIdioma, tipus, estilenllaç, estiltext, target, icona, estilIcona, descripcio, estildescripcio, link, params, textEnllaç, plantilla,0))
-	END function
 
 
-    Public Shared Function obtenirEnllacContingut(ByVal objconn As OleDbConnection, ByVal rel As clsRelacio, ByVal codiIdioma As Integer, ByRef tipus As Integer, ByVal estilenllaç As String, ByVal estiltext As String, ByVal target As Integer, ByVal icona As Integer, ByVal estilIcona As String, ByVal descripcio As Integer, ByVal estildescripcio As String, ByRef link As String, ByRef params As String, ByVal textEnllaç As String, ByVal plantilla As Integer, byVal user as integer) As String
+
+        Return (obtenirEnllacContingut(objconn, rel, codiIdioma, tipus, estilenllaç, estiltext, target, icona, estilIcona, descripcio, estildescripcio, link, params, textEnllaç, plantilla, 0))
+    End Function
+
+
+    Public Shared Function obtenirEnllacContingut(ByVal objconn As OleDbConnection, ByVal rel As clsRelacio, ByVal codiIdioma As Integer, ByRef tipus As Integer, ByVal estilenllaç As String, ByVal estiltext As String, ByVal target As Integer, ByVal icona As Integer, ByVal estilIcona As String, ByVal descripcio As Integer, ByVal estildescripcio As String, ByRef link As String, ByRef params As String, ByVal textEnllaç As String, ByVal plantilla As Integer, ByVal user As Integer) As String
 
         Dim oCodParam As New lhCodParam.lhCodParam
         Dim text As String = ""
@@ -15642,8 +15621,8 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
         Dim strDescripcio As String = ""
         link = ""
         params = ""
-		Dim relLink as new clsRelacio()
-		Dim tipusTMP as integer = rel.tipintip
+        Dim relLink As New clsRelacio()
+        Dim tipusTMP As Integer = rel.tipintip
         Select Case rel.tipdsdes
             Case "fulla link"
                 GAIA.bdr(objconn, "SELECT    isnull(METLLNK.LNKCDREL,-1) as LNKCDREL,METLLNK.LNKDSLNK, METLLNK.LNKDSTXT, METLLNK.LNKDSDES, METLREI.REIDSFIT, METLREL.RELDSFIT, METLREL.RELINCOD FROM   METLLNK  WITH(NOLOCK) INNER JOIN METLREL  WITH(NOLOCK) ON METLLNK.LNKINNOD = METLREL.RELINFIL  AND  (METLREL.RELINCOD = " + rel.incod.ToString() + "  AND (METLREL.RELCDSIT<98)) LEFT JOIN METLREI  WITH(NOLOCK) ON METLREL.RELINCOD = METLREI.REIINCOD AND METLREI.REIINIDI = " + codiIdioma.ToString() + " WHERE    METLLNK.LNKINIDI =" + codiIdioma.ToString(), DS)
@@ -15651,13 +15630,13 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
                     dbRow = DS.Tables(0).Rows(0)
 
                     link = IIf(IsDBNull(dbRow("LNKDSLNK")), IIf(IsDBNull(dbRow("REIDSFIT")), dbRow("RELDSFIT"), dbRow("REIDSFIT")), dbRow("LNKDSLNK").ToString())
-					
-					If link = "" And dbRow("LNKCDREL") <> rel.incod Then
-						relLink.bdget(objconn, dbrow("LNKCDREL"))
-		                Link = GAIA.obtenirEnllacContingut(objConn, relLink, codiIdioma)
-						tipusTmp = relLink.tipintip
-        		    End If
-					
+
+                    If link = "" And dbRow("LNKCDREL") <> rel.incod Then
+                        relLink.bdget(objconn, dbrow("LNKCDREL"))
+                        Link = GAIA.obtenirEnllacContingut(objConn, relLink, codiIdioma)
+                        tipusTmp = relLink.tipintip
+                    End If
+
                     If textEnllaç.Length = 0 Then
                         If tipus = 0 Then
                             text = dbRow("LNKDSTXT")
@@ -15740,7 +15719,7 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
                 End If
 
                 params = codiIdioma & HttpUtility.UrlEncode(oCodParam.encriptar("cr=" & rel.incod & "&pl=" & plantilla & "&id=" & codiIdioma & "&us=" & user & "&n=" & rel.infil))
-                GAIA.bdr(objconn, "SELECT * FROM METLFTR  WITH(NOLOCK) WHERE FTRINNOD=" & rel.infil & " AND FTRINIDI=" & codiIdioma , DS)
+                GAIA.bdr(objconn, "SELECT * FROM METLFTR  WITH(NOLOCK) WHERE FTRINNOD=" & rel.infil & " AND FTRINIDI=" & codiIdioma, DS)
 
                 If DS.Tables(0).Rows.Count > 0 Then
                     dbRow = DS.Tables(0).Rows(0)
@@ -15851,16 +15830,16 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
                 End If
 
                 link = "http://lhintranet/html/informacio.aspx"
-                
+
                 params = codiIdioma & HttpUtility.UrlEncode(oCodParam.encriptar("cr=" & rel.incod & "&pl=" & plantilla & "&id=" & codiIdioma & "&us=" & user & "&n=" & rel.infil))
 
                 GAIA.bdr(objconn, "SELECT * FROM METLINF  WITH(NOLOCK) WHERE INFINNOD=" & rel.infil & " AND INFINIDI=" & codiIdioma, DS)
                 If DS.Tables(0).Rows.Count > 0 Then
                     dbRow = DS.Tables(0).Rows(0)
-					
-					IF dbrow("INFWNBAU")>0 THEN
-						plantilla = 207395
-					END IF
+
+                    If dbrow("INFWNBAU") > 0 Then
+                        plantilla = 207395
+                    End If
                     If textEnllaç.Length = 0 Then
                         text = dbRow("INFDSTIT")
                     Else
@@ -15895,7 +15874,7 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
                         Select Case tipus
                             ' CASE 0 : no cal tractar-ho
                             Case 100
-                                nomFitxer = nomFitxer.Replace("P100.",".").Replace(".", "P100.")
+                                nomFitxer = nomFitxer.Replace("P100.", ".").Replace(".", "P100.")
 
                         End Select
 
@@ -15917,7 +15896,7 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
 
             Case "fulla web"
                 link = "http://www.l-h.cat"
-				'Teresa: Incluyo GAIA2
+                'Teresa: Incluyo GAIA2
                 GAIA.bdr(objconn, "SELECT METLSER.SERDSURL , METLREI.REIDSFIT, WEBDSTIT, METLREL.RELINCOD FROM METLWEB  WITH(NOLOCK) INNER JOIN METLREL  WITH(NOLOCK) ON METLWEB.WEBINNOD = METLREL.RELINFIL INNER JOIN METLREI  WITH(NOLOCK) ON METLREI.REIINCOD = METLREL.RELINCOD INNER JOIN METLAWE  WITH(NOLOCK) ON SUBSTRING(METLREL.RELCDHER, 2, CHARINDEX('_', SUBSTRING(METLREL.RELCDHER, 2, LEN(METLREL.RELCDHER))) - 1) = METLAWE.AWEINNOD INNER JOIN METLSER  WITH(NOLOCK) ON METLAWE.AWEDSSER = METLSER.SERINCOD WHERE     (METLREL.RELINCOD = " + rel.incod.ToString() + ") UNION SELECT METLSER.SERDSURL, METLREI.REIDSFIT, WEBDSTIT, METLREL.RELINCOD FROM METLWEB2  WITH(NOLOCK) INNER JOIN METLREL  WITH(NOLOCK) ON METLWEB2.WEBINNOD = METLREL.RELINFIL INNER JOIN METLREI  WITH(NOLOCK) ON METLREI.REIINCOD = METLREL.RELINCOD INNER JOIN METLAWE2 WITH(NOLOCK) ON SUBSTRING(METLREL.RELCDHER, 2, CHARINDEX('_', SUBSTRING(METLREL.RELCDHER, 2, LEN(METLREL.RELCDHER))) - 1) = METLAWE2.AWEINNOD INNER JOIN METLSER  WITH(NOLOCK) ON METLAWE2.AWEDSSER = METLSER.SERINCOD WHERE (METLREL.RELINCOD =" + rel.incod.ToString() + ") ORDER BY METLREL.RELINCOD DESC", DS)
 
                 If DS.Tables(0).Rows.Count > 0 Then
@@ -15951,7 +15930,7 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
             resultat += "<img src=""http://www.l-h.cat/img/common/mesimg.gif"" class=""mesImatges noImprimible"" alt=""" & IIf(codiIdioma = 1, "Veure imatge de ", IIf(codiIdioma = 2, "Veure imatge de ", "Seeing image of ")) & text & IIf(codiIdioma = 1, " (nova finestra)", IIf(codiIdioma = 2, " (nueva ventana)", " (﻿new window)")) & """/>"
 
         End If
-		tipus = tipusTMP
+        tipus = tipusTMP
         resultat += "</a>"
         DS.Dispose()
         Return (resultat)
@@ -15995,7 +15974,7 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
                 Case 5
                     cons = "select  isnull(DOCDSTIT,'') as titol FROM METLDOC  WITH(NOLOCK) WHERE DOCINNOD=" & rel.infil & " AND DOCINIDI=" & codiIdioma
                  'Teresa: Se incluye GAIA2
-				Case 10
+                Case 10
                     cons = "select  isnull(WEBDSTIT,'') as titol FROM METLWEB  WITH(NOLOCK) WHERE WEBINNOD=" & rel.infil & " AND WEBINIDI=" & codiIdioma & " UNION select isnull(WEBDSTIT,'') as titol FROM METLWEB2 WITH(NOLOCK) WHERE WEBINNOD=" & rel.infil & " AND WEBINIDI=" & codiIdioma
                 Case 40
                     cons = "select  isnull(CONDSDES,'') as titol FROM METLCON  WITH(NOLOCK) WHERE CONINNOD=" & rel.infil & " AND CONINIDI=" & codiIdioma
@@ -16109,16 +16088,16 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
 
 
     Public Shared Sub modificaCodificacions(ByVal objconn As OleDbConnection, ByVal objArbre As RadTreeView, ByVal codiNode As Integer)
-        modificaCodificacions(objconn, objArbre, codiNode, 1, 0,0,false)
+        modificaCodificacions(objconn, objArbre, codiNode, 1, 0, 0, False)
     End Sub
     Public Shared Sub modificaCodificacions(ByVal objconn As OleDbConnection, ByVal objArbre As RadTreeView, ByVal codiNode As Integer, ByVal nodeVisibleInternet As Integer)
         Dim resultat As String = ""
-        resultat = modificaCodificacions(objconn, objArbre, codiNode, nodeVisibleInternet, 0,0,false)
+        resultat = modificaCodificacions(objconn, objArbre, codiNode, nodeVisibleInternet, 0, 0, False)
     End Sub
 
-    Public Shared Function modificaCodificacions(ByVal objconn As OleDbConnection, ByVal objArbre As RadTreeView, ByVal codiNode As Integer, ByVal nodeVisibleInternet As Integer, ByVal usuari As Integer, Optional ByVal codiNodeArbre As integer = 0, optional byval tractaPermisosEnDiferit as Boolean  =false) As String 
-        Dim strerr as string=""
-	    Dim resultat As String = ""
+    Public Shared Function modificaCodificacions(ByVal objconn As OleDbConnection, ByVal objArbre As RadTreeView, ByVal codiNode As Integer, ByVal nodeVisibleInternet As Integer, ByVal usuari As Integer, Optional ByVal codiNodeArbre As Integer = 0, Optional ByVal tractaPermisosEnDiferit As Boolean = False) As String
+        Dim strerr As String = ""
+        Dim resultat As String = ""
         Dim relacionsNoEsborrades As String = ""
         Dim reltmp As New clsRelacio
         Dim tePermis As Boolean = 0
@@ -16126,141 +16105,141 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
 
         Dim llistaAmbPermisos As String = ""
         Dim llistaSensePermisos As String = ""
-       
-	    Dim DS As DataSet
+
+        Dim DS As DataSet
         Dim dbRow As DataRow
         DS = New DataSet()
-		try
-			strErr &= "1"	
-	        Dim	 llistarel As String = ""    		
-			IF codiNodeArbre=0 THEN  
-				codiNodeArbre = GAIA.codiNodeByTxt(objconn, "arbre codificació", "arbre codificació")
-			End IF
-			strErr &= "a"
-			Dim cont As Integer = 0
-			Dim treeNode As RadTreeNode
-			Dim sql As String = ""
-			Dim pathCodificacio As String
-			For Each treeNode In objArbre.CheckedNodes
-				If cont > 0 Then
-					llistarel += ","
-	
-				End If
-				cont += 1
-				llistarel += GAIA.obtenirRelacioPantalla(treeNode).ToString()
-			Next treeNode
-			
-			
-		'	IF llistaRel <> "" THEN
-				strErr &= "b"
-				pathCodificacio = "_" & codiNodeArbre & "%"
-				If objArbre.Nodes.Count > 0 Then
-					If codiNodeArbre <> obtenirNodePantalla(objconn, objArbre.Nodes.Item(0)) Then
-						pathCodificacio = "_" & codiNodeArbre & "%_" & obtenirNodePantalla(objconn, objArbre.Nodes.Item(0)) & "%"
-					Else
-						pathCodificacio = "_" & codiNodeArbre & "%"
-					End If
-				END IF
-				
-				
-				strErr &= "2"
-				
-				'***************************************************************************************
-				' Esborro totes les codificacions no marcades, només les que hi ha permís d'escriptura
-				'***************************************************************************************
-				
-			
-				
-				sql = "SELECT RELINCOD FROM METLREL WITH(NOLOCK) WHERE RELCDHER LIKE '" & pathCodificacio & "' AND RELINFIL=" & codiNode
-				If llistarel.Length > 0 Then
-					sql &= " AND RELCDRSU NOT IN (" & llistarel &  ")"
-				End If
-			
-				
-				GAIA.bdr(objconn, sql, DS)
-				
-				
-				
-				
-				Dim llistarelacionsPerEsborrar As String = ""
-				For Each dbRow In DS.Tables(0).Rows
-					If llistarelacionsPerEsborrar.Length > 0 Then
-						llistarelacionsPerEsborrar &= ","
-					End If
-					llistarelacionsPerEsborrar &= dbRow("RELINCOD")
-				Next dbRow
-				strErr &= "3"
-				
-				If llistarelacionsPerEsborrar.Length > 0 Then
-		
-					Dim relacio As String = ""
-	
-					clsPermisos.trobaPermisLlistaRelacions(objconn, 3, llistarelacionsPerEsborrar, usuari, "", "", llistaAmbPermisos, llistaSensePermisos, "")
-					'Esborro totes les codificacions on hi ha permís
-					If llistaAmbPermisos.Length > 0 Then
-					
-						GAIA.bdSR(objconn, "delete from METLREL WHERE RELINCOD IN (" & llistaAmbPermisos & ")")
-					End If
-				End If
-				
-				
-				
-				strErr &= "4"
-		
-				For Each treeNode In objArbre.CheckedNodes
-					'comprovo permisos d'edició/creació de l'usuari
-					If usuari = 0 Then
-						tePermis = 1
-					Else
-						reltmp.bdget(objconn, GAIA.obtenirRelacioPantalla(treeNode))
-						tePermis = clsPermisos.tepermis(objconn, 7, usuari, usuari, reltmp, heretat, "", "")
-					End If
-		
-					If tePermis Then
-		''''''''arbol=46 es un problema a la hora de borrar contenidos.. me lo tengo que mirar, problemas con el 8
-						GAIA.creaRelacio(objconn, 46, GAIA.obtenirNodePantalla(objconn, treeNode), codiNode, 0, GAIA.obtenirPathRelacioPantalla(objconn, treeNode) & "_" & GAIA.obtenirNodePantalla(objconn, treeNode), -1, 1, -1, nodeVisibleInternet,tractaPermisosEnDiferit,usuari)
-					
-						'si l'objecte té documents i/o notícies les poso també
-						GAIA.bdr(objconn, "SELECT DISTINCT RELINPAR,RELINFIL,RELCDEST, RELCDORD, RELCDSIT FROM METLREL  WITH(NOLOCK) WHERE RELINPAR=" & codiNode, DS)
-						For Each dbRow In DS.Tables(0).Rows
-							GAIA.creaRelacio(objconn, 46, dbRow("RELINPAR"), dbRow("RELINFIL"), 0, GAIA.obtenirPathRelacioPantalla(objconn, treeNode) & "_" & GAIA.obtenirNodePantalla(objconn, treeNode) & "_" & dbRow("RELINPAR"), dbRow("RELCDEST"), dbRow("RELCDSIT"), dbRow("RELCDORD"), nodeVisibleInternet, true, usuari)
-						Next dbRow
-					
-						
-					Else
-						If resultat.Length > 0 Then
-							resultat = ", "
-						End If
-						resultat &= treeNode.Text
-					End If
-				Next treeNode
-				strErr &= "5"
-				If resultat <> "" Then
-					resultat = "No s'ha pogut afegir el contingut, per falta de permisos, en les següents codificacions: " & resultat
-				End If
-		
-				If llistaSensePermisos.Length > 0 Then
-					Dim strError As String = ""
-					If resultat.Length > 0 Then
-						resultat &= "<br />"
-					End If
-					GAIA.bdr(objconn, "SELECT NODDSTXT FROM METLREL with(NOLOCK),METLNOD with(NOLOCK) WHERE NODINNOD=RELINPAR AND RELINCOD IN (" & llistaSensePermisos & ")", DS)
-					For Each dbRow In DS.Tables(0).Rows
-						If strError.Length > 0 Then
-							strError &= ","
-						End If
-						strError &= HttpUtility.HtmlEncode(GAIA.netejaHTML(dbRow("NODDSTXT")))
-					Next dbRow
-		
-					resultat &= "No s'ha pogut eliminar el contingut de les següents codificacions per falta de permisos:" & strError
-				End If
-				strErr &= "6"
-				DS.Dispose()
-		'	End if
-		Catch ex As Exception
-			gaia.debug(objconn,"GAIA.Modifica codificacions." & strerr & ex.Message )
+        Try
+            strErr &= "1"
+            Dim llistarel As String = ""
+            If codiNodeArbre = 0 Then
+                codiNodeArbre = GAIA.codiNodeByTxt(objconn, "arbre codificació", "arbre codificació")
+            End If
+            strErr &= "a"
+            Dim cont As Integer = 0
+            Dim treeNode As RadTreeNode
+            Dim sql As String = ""
+            Dim pathCodificacio As String
+            For Each treeNode In objArbre.CheckedNodes
+                If cont > 0 Then
+                    llistarel += ","
 
-		end try
+                End If
+                cont += 1
+                llistarel += GAIA.obtenirRelacioPantalla(treeNode).ToString()
+            Next treeNode
+
+
+            '	IF llistaRel <> "" THEN
+            strErr &= "b"
+            pathCodificacio = "_" & codiNodeArbre & "%"
+            If objArbre.Nodes.Count > 0 Then
+                If codiNodeArbre <> obtenirNodePantalla(objconn, objArbre.Nodes.Item(0)) Then
+                    pathCodificacio = "_" & codiNodeArbre & "%_" & obtenirNodePantalla(objconn, objArbre.Nodes.Item(0)) & "%"
+                Else
+                    pathCodificacio = "_" & codiNodeArbre & "%"
+                End If
+            End If
+
+
+            strErr &= "2"
+
+            '***************************************************************************************
+            ' Esborro totes les codificacions no marcades, només les que hi ha permís d'escriptura
+            '***************************************************************************************
+
+
+
+            sql = "SELECT RELINCOD FROM METLREL WITH(NOLOCK) WHERE RELCDHER LIKE '" & pathCodificacio & "' AND RELINFIL=" & codiNode
+            If llistarel.Length > 0 Then
+                sql &= " AND RELCDRSU NOT IN (" & llistarel & ")"
+            End If
+
+
+            GAIA.bdr(objconn, sql, DS)
+
+
+
+
+            Dim llistarelacionsPerEsborrar As String = ""
+            For Each dbRow In DS.Tables(0).Rows
+                If llistarelacionsPerEsborrar.Length > 0 Then
+                    llistarelacionsPerEsborrar &= ","
+                End If
+                llistarelacionsPerEsborrar &= dbRow("RELINCOD")
+            Next dbRow
+            strErr &= "3"
+
+            If llistarelacionsPerEsborrar.Length > 0 Then
+
+                Dim relacio As String = ""
+
+                clsPermisos.trobaPermisLlistaRelacions(objconn, 3, llistarelacionsPerEsborrar, usuari, "", "", llistaAmbPermisos, llistaSensePermisos, "")
+                'Esborro totes les codificacions on hi ha permís
+                If llistaAmbPermisos.Length > 0 Then
+
+                    GAIA.bdSR(objconn, "delete from METLREL WHERE RELINCOD IN (" & llistaAmbPermisos & ")")
+                End If
+            End If
+
+
+
+            strErr &= "4"
+
+            For Each treeNode In objArbre.CheckedNodes
+                'comprovo permisos d'edició/creació de l'usuari
+                If usuari = 0 Then
+                    tePermis = 1
+                Else
+                    reltmp.bdget(objconn, GAIA.obtenirRelacioPantalla(treeNode))
+                    tePermis = clsPermisos.tepermis(objconn, 7, usuari, usuari, reltmp, heretat, "", "")
+                End If
+
+                If tePermis Then
+                    ''''''''arbol=46 es un problema a la hora de borrar contenidos.. me lo tengo que mirar, problemas con el 8
+                    GAIA.creaRelacio(objconn, 46, GAIA.obtenirNodePantalla(objconn, treeNode), codiNode, 0, GAIA.obtenirPathRelacioPantalla(objconn, treeNode) & "_" & GAIA.obtenirNodePantalla(objconn, treeNode), -1, 1, -1, nodeVisibleInternet, tractaPermisosEnDiferit, usuari)
+
+                    'si l'objecte té documents i/o notícies les poso també
+                    GAIA.bdr(objconn, "SELECT DISTINCT RELINPAR,RELINFIL,RELCDEST, RELCDORD, RELCDSIT FROM METLREL  WITH(NOLOCK) WHERE RELINPAR=" & codiNode, DS)
+                    For Each dbRow In DS.Tables(0).Rows
+                        GAIA.creaRelacio(objconn, 46, dbRow("RELINPAR"), dbRow("RELINFIL"), 0, GAIA.obtenirPathRelacioPantalla(objconn, treeNode) & "_" & GAIA.obtenirNodePantalla(objconn, treeNode) & "_" & dbRow("RELINPAR"), dbRow("RELCDEST"), dbRow("RELCDSIT"), dbRow("RELCDORD"), nodeVisibleInternet, True, usuari)
+                    Next dbRow
+
+
+                Else
+                    If resultat.Length > 0 Then
+                        resultat = ", "
+                    End If
+                    resultat &= treeNode.Text
+                End If
+            Next treeNode
+            strErr &= "5"
+            If resultat <> "" Then
+                resultat = "No s'ha pogut afegir el contingut, per falta de permisos, en les següents codificacions: " & resultat
+            End If
+
+            If llistaSensePermisos.Length > 0 Then
+                Dim strError As String = ""
+                If resultat.Length > 0 Then
+                    resultat &= "<br />"
+                End If
+                GAIA.bdr(objconn, "SELECT NODDSTXT FROM METLREL with(NOLOCK),METLNOD with(NOLOCK) WHERE NODINNOD=RELINPAR AND RELINCOD IN (" & llistaSensePermisos & ")", DS)
+                For Each dbRow In DS.Tables(0).Rows
+                    If strError.Length > 0 Then
+                        strError &= ","
+                    End If
+                    strError &= HttpUtility.HtmlEncode(GAIA.netejaHTML(dbRow("NODDSTXT")))
+                Next dbRow
+
+                resultat &= "No s'ha pogut eliminar el contingut de les següents codificacions per falta de permisos:" & strError
+            End If
+            strErr &= "6"
+            DS.Dispose()
+            '	End if
+        Catch ex As Exception
+            gaia.debug(objconn, "GAIA.Modifica codificacions." & strerr & ex.Message)
+
+        End Try
 
         Return resultat
     End Function 'modificaCodificacions
@@ -16275,40 +16254,40 @@ if obrirNovaFinestra THEN crida = "<script language=""JavaScript"" type=""text/j
 
 #Region "UTILS"
 
- 
+
     '*******************************************************************************************************
     ' Talla el text "str" a la mida indicada. El text pot venir en html i es tenen en compte les etiquetes
     '*******************************************************************************************************
     Public Shared Function tallaText(ByVal str As String, ByVal mida As Integer) As String
-dim strErr as string=""
-dim midaTmp as integer=0
-        try
-			If mida > str.Length Then
-				Return (str)
-			Else
-				Dim posIni As Integer = 0
-				Dim posFi As Integer = -1
-				Dim strTmp As String
-	
-				
-				midaTmp = mida
-				Do
-					strTmp = str.Substring(0, midaTmp)
-					posIni = InStrRev(strTmp, "<")
-					posFi = InStrRev(strTmp, ">")
-					midaTmp = midaTmp + 1
-				Loop Until posIni = 0 Or posIni < posFi Or midaTmp >= str.Length - 1
-	
-			   
-	
-					'busco el següent espai per fer el tall per evitar tallar en mig d'una paraula
-					If InStr(str.Substring(mida), " ") > 0 Then
-						strTmp = strTmp & str.Substring(mida, InStr(str.Substring(mida), " ") - 1)
-					End If
+        Dim strErr As String = ""
+        Dim midaTmp As Integer = 0
+        Try
+            If mida > str.Length Then
+                Return (str)
+            Else
+                Dim posIni As Integer = 0
+                Dim posFi As Integer = -1
+                Dim strTmp As String
 
-					'busco si he tallat un tag i el tanco. si hi ha tags anidats no funcionarà. En el cas de textos enriquits de gaia només pot passar si hi ha <table o <li> i no és probable dins del resum d'una notícia.
-					posIni = InStrRev(strTmp, "<")
-					posFi = InStrRev(strTmp, ">")
+
+                midaTmp = mida
+                Do
+                    strTmp = str.Substring(0, midaTmp)
+                    posIni = InStrRev(strTmp, "<")
+                    posFi = InStrRev(strTmp, ">")
+                    midaTmp = midaTmp + 1
+                Loop Until posIni = 0 Or posIni < posFi Or midaTmp >= str.Length - 1
+
+
+
+                'busco el següent espai per fer el tall per evitar tallar en mig d'una paraula
+                If InStr(str.Substring(mida), " ") > 0 Then
+                    strTmp = strTmp & str.Substring(mida, InStr(str.Substring(mida), " ") - 1)
+                End If
+
+                'busco si he tallat un tag i el tanco. si hi ha tags anidats no funcionarà. En el cas de textos enriquits de gaia només pot passar si hi ha <table o <li> i no és probable dins del resum d'una notícia.
+                posIni = InStrRev(strTmp, "<")
+                posFi = InStrRev(strTmp, ">")
 
                 If InStrRev(strTmp, "<") > 0 And posIni > posFi Then
                     'trobo un inici d'un tag
@@ -16316,20 +16295,20 @@ dim midaTmp as integer=0
                     strTmp = strTmp & "</" & strTmp.Split(" ")(0).Substring(1) & ">" ' strTmp.Substring(posIni, (posFi - posIni))
                 End If
 
-					Return (strTmp)
-	
-	
-			End If
-		catch
-			gaia.debug(nothing, strErr & "_ "& str & "_" & mida)
-			return(str)
-		end try
+                Return (strTmp)
+
+
+            End If
+        Catch
+            gaia.debug(Nothing, strErr & "_ " & str & "_" & mida)
+            Return (str)
+        End Try
     End Function
 
 
 
-   
-  '*******************************************************************************************************
+
+    '*******************************************************************************************************
     'Convierte un punto en ED50 (UTM o Cartografia) a WGS84 (longitud/latitud) 
     '*******************************************************************************************************
     Public Shared Function DameLonLatDeCoordenada(ByVal punto As String) As String
@@ -16346,7 +16325,7 @@ dim midaTmp as integer=0
         Return ptoRes(1).ToString(numberFormat_EnUS) & "," & ptoRes(0).ToString(numberFormat_EnUS)
     End Function
 
-	
+
 
     Public Shared Function generaPDF(ByVal objConn As OleDbConnection, ByVal rel As clsRelacio) As Integer
         Try
@@ -16426,7 +16405,7 @@ dim midaTmp as integer=0
     'Si cssDiv1 i cssDivN <>"" envolcaré el <ul> en un <div>.  Els estils són per quan només hi ha 1 element i per quan hi ha N respectivament
 
 
-     Public Shared Function menuLinks(ByVal objConn As OleDbConnection, ByVal codiRelacio As Integer, ByVal codiIdioma As Integer, Optional ByVal cssDiv1 As String = "", Optional ByRef cssDivN As String = "", Optional ByVal cssDivFill1 As String = "", Optional ByRef cssDivFillN As String = "", Optional ByVal codiRelacioDestacada As Integer = 0, Optional ByVal cssDestacat As String = "") As String
+    Public Shared Function menuLinks(ByVal objConn As OleDbConnection, ByVal codiRelacio As Integer, ByVal codiIdioma As Integer, Optional ByVal cssDiv1 As String = "", Optional ByRef cssDivN As String = "", Optional ByVal cssDivFill1 As String = "", Optional ByRef cssDivFillN As String = "", Optional ByVal codiRelacioDestacada As Integer = 0, Optional ByVal cssDestacat As String = "") As String
         Dim DS As DataSet
         Dim dbRow As DataRow
         DS = New DataSet()
@@ -16451,16 +16430,16 @@ dim midaTmp as integer=0
             End If
 
             If InStr(Link, ".asp") Then
-				if Instr(link, "?") THEN
-				ELSE
-					If InStr(Link, "#") Then
-						Link = Link.Replace("#", "?id=" & codiIdioma & "#")
-					Else
-						If InStr(Link, "?") <= 0 Then
-							Link += IIf(InStr(Link, ".asp"), "?id=" & codiIdioma, "")
-						End If
-					End If
-				END IF
+                If Instr(link, "?") Then
+                Else
+                    If InStr(Link, "#") Then
+                        Link = Link.Replace("#", "?id=" & codiIdioma & "#")
+                    Else
+                        If InStr(Link, "?") <= 0 Then
+                            Link += IIf(InStr(Link, ".asp"), "?id=" & codiIdioma, "")
+                        End If
+                    End If
+                End If
             End If
 
 
@@ -16472,12 +16451,12 @@ dim midaTmp as integer=0
                 Link = IIf(InStr(Link, "http") <= 0, IIf(dbRow("paginaSegura") = "S", "https://", "http://") & GAIA.trobaURLDesti(objConn, rel), "") & Link
             End If
 
-			if instr(link, "opendata")>0 OR instr(link, "dadesobertes")>0 THEN
-	            strImatgeFinestraNova = "<img class=""finestraNova"" alt=""" & IIf(codiIdioma = 1, "Obrir enllaç dades obertes (finestra nova) ", "Abrir enlace datos abiertos (ventana nueva") & txtNovaFinestra & """ src=""" & IIf(InStr(Link, "https"), "https", "http") & "://www.l-h.cat/img/lh12/common/candau.png""/>"
+            If instr(link, "opendata") > 0 Or instr(link, "dadesobertes") > 0 Then
+                strImatgeFinestraNova = "<img class=""finestraNova"" alt=""" & IIf(codiIdioma = 1, "Obrir enllaç dades obertes (finestra nova) ", "Abrir enlace datos abiertos (ventana nueva") & txtNovaFinestra & """ src=""" & IIf(InStr(Link, "https"), "https", "http") & "://www.l-h.cat/img/lh12/common/candau.png""/>"
 
-			ELSE
-	            strImatgeFinestraNova = "<img class=""finestraNova"" alt=""" & IIf(codiIdioma = 1, "Obrir enllaç", "Abrir enlace (ventana nueva") & txtNovaFinestra & """ src=""" & IIf(InStr(Link, "https"), "https", "http") & "://www.l-h.cat/img/lh12/common/finestra_nova.png""/>"
-			END IF
+            Else
+                strImatgeFinestraNova = "<img class=""finestraNova"" alt=""" & IIf(codiIdioma = 1, "Obrir enllaç", "Abrir enlace (ventana nueva") & txtNovaFinestra & """ src=""" & IIf(InStr(Link, "https"), "https", "http") & "://www.l-h.cat/img/lh12/common/finestra_nova.png""/>"
+            End If
 
 
             strMenu &= IIf(cont > 1, "</li><li" & IIf(codiRelacioDestacada = rel.incod, " class=""" & cssDestacat & """", "") & ">", "") & "<a href=""" & GAIA.netejaHTML(Link) & """ target=""" & IIf(dbRow("LNKWNTIP") = 1, "_blank", "_self") & """ title=""" & IIf(codiIdioma = "1", "Anar a ", "Ir a ") & dbRow("LNKDSTXT") & IIf(dbRow("LNKWNTIP") = 1, txtNovaFinestra, "") & """>" & dbRow("LNKDSTXT") & IIf(dbRow("LNKWNTIP") = 1, strImatgeFinestraNova, "") & "</a>"
@@ -16563,23 +16542,23 @@ dim midaTmp as integer=0
     '''<param name="width">Mida en la que es vol el contingut. Si 0, prenem mida estàndard: 890 px.</param>
     '''<param name="rol">Rol amb el que es vol obrir el contingut: 0:010 | 1:OAC | 2: altres depts</param>
     '''<returns>La crida a llibreria de codi web, només amb el detall del tràmit</returns>
-    Public shared Function csTraduccioLinkTramit( byval linkOrigen as string, byVal width as integer, byVal rol as integer) as string
-	Dim linkTramit as string=""	
-	try	
-	IF width=0 THEN width=890
-    Dim oCodParam As New lhCodParam.lhCodParam
-	Dim params as string=httputility.urldecode(linkOrigen.Split("?")(1).substring(1)) 
-	IF ocodParam.queryString(params,"cr")="" THEN
-		linkTramit=linkOrigen
-	ELSE
-	
-		linkTramit = "/gaia/aspx/llibreriacodiweb/webmunicipal/selectronica/detallTramitSeu.aspx?" & oCodParam.encriptar("codiRelacio=" & ocodParam.querystring(params,"cr")  & "&codiIdioma=" & ocodParam.querystring(params,"id") & "&codiRelacioInicial=" & ocodParam.querystring(params,"cr") & "&est=0&width=" & width & "&node=" & ocodParam.querystring(params,"n") &  "&us="  & ocodParam.querystring(params,"us")  & "&codiPlantilla=" & ocodParam.querystring(params,"pl") & "&rol=" & rol)
-	END IF
-	catch
-		linkTramit = linkOrigen
-	end try
-	return(linkTramit)	
-End Function
+    Public Shared Function csTraduccioLinkTramit(ByVal linkOrigen As String, ByVal width As Integer, ByVal rol As Integer) As String
+        Dim linkTramit As String = ""
+        Try
+            If width = 0 Then width = 890
+            Dim oCodParam As New lhCodParam.lhCodParam
+            Dim params As String = httputility.urldecode(linkOrigen.Split("?")(1).substring(1))
+            If ocodParam.queryString(params, "cr") = "" Then
+                linkTramit = linkOrigen
+            Else
+
+                linkTramit = "/gaia/aspx/llibreriacodiweb/webmunicipal/selectronica/detallTramitSeu.aspx?" & oCodParam.encriptar("codiRelacio=" & ocodParam.querystring(params, "cr") & "&codiIdioma=" & ocodParam.querystring(params, "id") & "&codiRelacioInicial=" & ocodParam.querystring(params, "cr") & "&est=0&width=" & width & "&node=" & ocodParam.querystring(params, "n") & "&us=" & ocodParam.querystring(params, "us") & "&codiPlantilla=" & ocodParam.querystring(params, "pl") & "&rol=" & rol)
+            End If
+        Catch
+            linkTramit = linkOrigen
+        End Try
+        Return (linkTramit)
+    End Function
 
 
 
@@ -16699,17 +16678,17 @@ End Function
         End If
         Return (sortida)
     End Function
-	
 
 
-    Public Shared Function nomTramit(ByVal nom As string, ByVal textAlerta As String, ByVal sdataInici As String, ByVal sdataFi As String, byVal esSSL as boolean) As String
-		
-		
-		IF DateDiff("s", Now,Cdate(sDataInici)) <=0  AND DateDiff("s", Now, Cdate(sdataFi)) >=0 THEN	
-		  nom &= "&nbsp;<img src=""http" & iif(esSSL, "s","") & "://www.l-h.cat/img/ico_tramit_estat.gif"" class=""border0 paddingDretaEsquerra5"" alt=""Av&iacute;s""/><span class=""arial vermell "">" & textAlerta & "</span>"		 
-		END IF
-		return(nom)
-	End function 'nomTramit
+
+    Public Shared Function nomTramit(ByVal nom As String, ByVal textAlerta As String, ByVal sdataInici As String, ByVal sdataFi As String, ByVal esSSL As Boolean) As String
+
+
+        If DateDiff("s", Now, CDate(sDataInici)) <= 0 And DateDiff("s", Now, CDate(sdataFi)) >= 0 Then
+            nom &= "&nbsp;<img src=""http" & iif(esSSL, "s", "") & "://www.l-h.cat/img/ico_tramit_estat.gif"" class=""border0 paddingDretaEsquerra5"" alt=""Av&iacute;s""/><span class=""arial vermell "">" & textAlerta & "</span>"
+        End If
+        Return (nom)
+    End Function 'nomTramit
 #End Region
 
 
@@ -16721,7 +16700,7 @@ End Function
     Public Shared Function RSSInici(ByVal writer As XmlTextWriter, ByVal sTitle As String, ByVal sDescription As String) As XmlTextWriter
         writer.WriteStartDocument()
         writer.WriteStartElement("rss")
-        writer.WriteAttributeString("version", "2.0")  
+        writer.WriteAttributeString("version", "2.0")
         writer.WriteStartElement("channel")
         writer.WriteElementString("title", sTitle)
         writer.WriteElementString("link", "http://www.l-h.cat/")
@@ -17026,7 +17005,7 @@ Public Class clsPlantilla
 
     End Property
 
-   Public Property vis() As Integer
+    Public Property vis() As Integer
         Get
             Return (_vis)
         End Get
@@ -17545,8 +17524,8 @@ Public Class clsRelacio
             End If
         End If
 
-		
-        If ds.tables.count>0 andalso DS.Tables(0).Rows.Count > 0 Then
+
+        If ds.tables.count > 0 AndAlso DS.Tables(0).Rows.Count > 0 Then
             trobat = True
             dbRow = DS.Tables(0).Rows(0)
             _incod = dbRow("RELINCOD")
@@ -17577,7 +17556,7 @@ Public Class clsRelacio
                 _cdrsu = 0
             End If
         End If
-         
+
 
         If Not trobat Then
             _incod = 0
@@ -17605,7 +17584,7 @@ Public Class clsRelacio
         _infil = rel.infil
         _inpar = rel.inpar
         _cdher = rel.cdher
-        _cdarb = rel.cdarb 
+        _cdarb = rel.cdarb
         _cdsit = rel.cdsit
         _dsfit = rel.dsfit
         _cdOrd = rel.cdord
@@ -18174,7 +18153,7 @@ Public Class clsPlantilla2
         _dsalt = pla.dsalt
         _tco = pla.tco
         _plt = pla.plt
-        _
+
         _flw = pla.flw
         _vis = pla.vis
 
