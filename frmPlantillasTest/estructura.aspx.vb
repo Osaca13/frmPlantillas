@@ -24,7 +24,9 @@ Public Class estructura
                 Session("nif") = GAIA.nifUsuari(objconn, HttpContext.Current.User.Identity.Name).Trim()
             End If
             If Session("codiOrg") Is Nothing Then
-                Session("CodiOrg") = GAIA.trobaNodeUsuari(objconn, Session("nif")).ToString().Trim()
+                'Session("CodiOrg") = GAIA.trobaNodeUsuari(objconn, Session("nif")).ToString().Trim()
+                Session("codiOrg") = "346231"
+
             End If
         End If
         'nif = Session("nif").Trim()
@@ -133,9 +135,11 @@ Public Class estructura
     'procediment per carregar el desplegable de plantilles
     Private Sub carrega_plantilles()
 
-        Dim ds As New DataSet, qSQL As String, item As String, aPlantilles As String(), html As String()
+        Dim ds As New DataSet, qSQL As String, item As String, aPlantilles As String()
+        Dim html As String()
         Dim i As Integer, plantillaActual As Integer
         Dim ddlb_plantilla As DropDownList
+
         Dim esGaia2 As Boolean = False
         ''		 gaia.debug(nothing, "aqui")
         qSQL = "SELECT ISNULL(RELINPLA,-1) AS RELINPLA FROM METLREL WITH(NOLOCK) WHERE RELINCOD = " & codiRelacioOrigen.Text
@@ -150,9 +154,16 @@ Public Class estructura
             html = Split(lblEstructura.Text, "id=")
             'gaia.debug(nothing, lblEstructura.text)
             Try
-                If html(1).Substring(1, 1) = "d" Then esGaia2 = True
-            Catch
-                esGaia2 = True
+                If html.Length > 1 Then
+                    If html(1).Substring(1, 1) = "d" Then esGaia2 = True
+                Else
+                    esGaia2 = True
+                End If
+
+            Catch ex As Exception
+                Debug.WriteLine(ex.InnerException.Message)
+
+
             End Try
             'gaia.debug(nothing, esGaia2)
         End If
