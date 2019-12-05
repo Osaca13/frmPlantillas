@@ -485,9 +485,9 @@ Public Class VisorArbres
                 'lblCodi.Text += "<script>window.open(""http://lhintranet/GAIA/aspx/web/estructura.aspx?" + crida + """,""_blank"", ""location=0,height=650,width=500,scrollbars=yes,resizable=yes"");</script>"
                 lblCodi.Text += "<script>window.open(""estructura.aspx?" + crida + """,""_blank"", ""location=0,height=650,width=500,scrollbars=yes,resizable=yes"");</script>"
 
-                'Else
-                '    'lblCodi.Text += "<script>window.open(""web/frmEstructura.aspx?" + crida + """,""_blank"", ""location=0,height=650,width=500,scrollbars=yes,resizable=yes"");</script>"
-                '    lblCodi.Text += "<script>window.open(""frmestructura.aspx?" + crida + """,""_blank"", ""location=0,height=650,width=500,scrollbars=yes,resizable=yes"");</script>"
+            Else
+                'lblCodi.Text += "<script>window.open(""web/frmEstructura.aspx?" + crida + """,""_blank"", ""location=0,height=650,width=500,scrollbars=yes,resizable=yes"");</script>"
+                lblCodi.Text += "<script>window.open(""frmestructura.aspx?" + crida + """,""_blank"", ""location=0,height=650,width=500,scrollbars=yes,resizable=yes"");</script>"
 
             End If
             'Elimino el nodeOrigen de l'arbre origen
