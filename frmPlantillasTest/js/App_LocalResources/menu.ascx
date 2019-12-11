@@ -4,7 +4,7 @@
 <%@ Control Language="vb" AutoEventWireup="false" debug="true" %>
 <%@ OutputCache Duration="100" VaryByParam="none" VaryByCustom="userName" %>
 <asp:panel runat="server" id="pnlMenuGaia" visible="false">
-<script type="text/javascript"><!--//--><![CDATA[//><!--
+<script type="text/javascript">
 
 sfHover = function() {
 	var sfEls = document.getElementById("navegacio").getElementsByTagName("li");
@@ -41,9 +41,9 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 <link href="../../Styles/grey.css" rel="stylesheet" type="text/css" />
 <link href="../../Styles/white.css" rel="stylesheet" type="text/css" />
 <link href="../../Styles/dcmegamenu.css" rel="stylesheet" type="text/css" />
-  <script src="../jquery-1.10.2.js"></script>
-<script type='text/javascript' src="../jquery.hoverIntent.minified.js"></script>
-<script type='text/javascript' src="../jquery.dcmegamenu.1.3.3.js"></script>
+  <script src="js/jquery-1.10.2.js"></script>
+<script type='text/javascript' src="js/jquery.hoverIntent.minified.js"></script>
+<script type='text/javascript' src="js/jquery.dcmegamenu.1.3.3.js"></script>
 <script type="text/javascript">
 $(document).ready(function($){
 	$('#mega-menu-2').dcMegaMenu({
@@ -57,7 +57,8 @@ $(document).ready(function($){
 <div class="demo-container">
 <div class="white">
 <ul id="mega-menu-2" class="mega-menu">	  
-    <li><a href="/gaia/aspx/visorArbres.aspx?arbre1=elMeuEspai" >Arbres GAIA</a>
+    <li>
+        <a href="../../VisorArbres.aspx?arbre1=elMeuEspai" >Arbres GAIA</a>
     </li>
 	<asp:literal runat="server" id="ltMenuContinguts"></asp:literal>
 		<asp:PlaceHolder id="pnlAdm" runat="server" visible="false">
@@ -66,13 +67,13 @@ $(document).ready(function($){
            <asp:literal runat="server" id="ltMenuDissenyWeb"></asp:literal>
            <asp:literal runat="server" id="ltMenuGestio"></asp:literal>
            <asp:literal runat="server" id="ltMenuLlistats"></asp:literal>
-					<asp:literal runat="server" id="ltMenuBackoffice"></asp:literal>
+		   <asp:literal runat="server" id="ltMenuBackoffice"></asp:literal>
          </ul>                                    
 		</li>
     </asp:PlaceHolder>
     <asp:literal runat="server" id="ltUtilitats"></asp:literal>         
     <asp:literal runat="server" id="ltCercadors"></asp:literal>        
-    <li class="logoGaia"><a href="http://intranet/gdocs/232511_1.aspx" title="Anar a inici" class="logo"><img src="/img/gaia/logo_gaia.png" class="border0"/></a></li>
+    <li class="logoGaia"><a href="../../232511_1.aspx" title="Anar a inici" class="logo"><img src="img/logo_gaia.png" class="border0"/></a></li>
 </ul>
 </div>
 </div>
@@ -96,58 +97,59 @@ $(document).ready(function($){
 
     Private Sub Page_Load(sender As Object, e As System.EventArgs) Handles MyBase.Load
         Dim usuariActiu as boolean= False
-        IF session("menuGAIA")="" THEN
-            IF HttpContext.Current.User.Identity.Name.length>0 THEN
-                UsuariXarxa= GAIA.FormatejaUsuari(HttpContext.Current.User.Identity.Name)
+        IF session("menuGAIA")="" Then
+            'IF HttpContext.Current.User.Identity.Name.length>0 THEN
+            '    UsuariXarxa= GAIA.FormatejaUsuari(HttpContext.Current.User.Identity.Name)
 
 
 
-                IF (Session("nif") is nothing) THEN
-                    Session("nif") =GAIA.nifUsuari(objconn,UsuariXarxa,usuariActiu).Trim()
-                END IF
+            If (Session("nif") Is Nothing) Then
+                Session("nif") = GAIA.nifUsuari(objconn, usuariXarxa, usuariActiu).Trim()
+            End If
 
-                IF true then 'usuariActiu THEN
+            If True Then 'usuariActiu THEN
 
-                    IF Session("codiOrg") is nothing THEN
-                        session("CodiOrg")=GAIA.trobaNodeUsuari(objConn, Session("nif")).tostring().Trim()
-                    END IF
-                    idUsuari = Session("CodiOrg")
-                    grupsAD = clsPermisos.getGroupsAD(usuariXarxa)
+                If Session("codiOrg") Is Nothing Then
+                    Session("CodiOrg") = GAIA.trobaNodeUsuari(objconn, Session("nif")).ToString().Trim()
+                End If
+                'idUsuari = Session("CodiOrg")
+                'grupsAD = clsPermisos.getGroupsAD(usuariXarxa)
+                idusuari = "346231"
+                Session("codiOrg") = "346231"
 
-
-                    pnlMenuGaia.visible = true
-
-
-                    Dim ds as dataset
-                    ds = new dataset()
-                    ds = llistaRelacionsAmbPermis()
-                    'ltMenuArbres.text = menuArbres(ds)
-                    ltMenuContinguts.text=  menuLinks(231018, 1, ds)
-                    ltMenuGestio.text = menuLinks(231023, 1,ds)
-                    ltMenuDissenyWeb.text = menuLinks(231022, 1,ds)
-                    ltMenuLlistats.text = menuLinks(231024, 1,ds)
-                    ltMenuBackoffice.text = menulinks(270711, 1, ds)
+                pnlMenuGaia.Visible = True
 
 
-
-                    if (idUsuari=49730 OR idUsuari=49727  OR idUsuari=56935  OR idUsuari=80879  OR idUsuari=144886 OR idUsuari=156704 or idUsuari=297650 or idUsuari=313486 or idUsuari=346231) AND (ltMenuGestio.text.length>0 OR ltMenuDissenyWeb.text.length>0 OR ltMenuLlistats.text.length>0 OR ltMenuBackoffice.text.length>0) THEN
-
-                        pnlAdm.visible=true
-                    else
-
-                        pnlAdm.visible=false
-                    END IF
-
-
-                    ltUtilitats.text = menuLinks(231021, 1,ds)
+                Dim ds As DataSet
+                ds = New DataSet()
+                ds = llistaRelacionsAmbPermis()
+                'ltMenuArbres.text = menuArbres(ds)
+                ltMenuContinguts.Text = menuLinks(231018, 1, ds)
+                ltMenuGestio.Text = menuLinks(231023, 1, ds)
+                ltMenuDissenyWeb.Text = menuLinks(231022, 1, ds)
+                ltMenuLlistats.Text = menuLinks(231024, 1, ds)
+                ltMenuBackoffice.Text = menuLinks(270711, 1, ds)
 
 
 
-                    ds.dispose()
-                END IF
+                If (idusuari = 49730 Or idusuari = 49727 Or idusuari = 56935 Or idusuari = 80879 Or idusuari = 144886 Or idusuari = 156704 Or idusuari = 297650 Or idusuari = 313486 Or idusuari = 346231) And (ltMenuGestio.Text.Length > 0 Or ltMenuDissenyWeb.Text.Length > 0 Or ltMenuLlistats.Text.Length > 0 Or ltMenuBackoffice.Text.Length > 0) Then
 
-            END IF
-        END IF
+                    pnlAdm.Visible = True
+                Else
+
+                    pnlAdm.Visible = False
+                End If
+
+
+                ltUtilitats.Text = menuLinks(231021, 1, ds)
+
+
+
+                ds.Dispose()
+            End If
+
+        End If
+        'End IF
         'END IF
     End sub
 
@@ -189,7 +191,7 @@ $(document).ready(function($){
 
         For Each dbRow In ds.Tables(0).Rows
             IF dbrow("RELINFIL")=dbrow("RELINPAR") Then
-                menuArbresTemp &= "<li><a href=""/gaia/aspx/visorArbres.aspx?ca=" & dbRow("relacio") & """ title=""Anar a " & dbRow("nomMenu") & """>" & dbRow("nomMenu").replace("arbre ", "") & "</a></li>"
+                menuArbresTemp &= "<li><a href=""~/VisorArbres.aspx?ca=" & dbRow("relacio") & """ title=""Anar a " & dbRow("nomMenu") & """>" & dbRow("nomMenu").replace("arbre ", "") & "</a></li>"
             End IF
         Next dbRow
 
@@ -206,8 +208,8 @@ $(document).ready(function($){
         Dim strLink as string
         Dim txtNovaFinestra as string = "nova finestra"
         Dim cont as integer = 0
-        Dim strImatgeFinestraNova as string = " <img class=""finestraNova"" alt=""Obrir enllaç"" src=""/img/common/finestra_nova.png""/>"
-        dim rel as new clsrelacio()
+        Dim strImatgeFinestraNova As String = " <img class=""finestraNova"" alt=""Obrir enllaç"" src=""img/finestra_nova.png""/>"
+        Dim rel as new clsrelacio()
 
         rel.bdget(objconn, codiRelacio)
 
