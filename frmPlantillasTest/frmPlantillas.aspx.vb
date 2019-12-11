@@ -16,6 +16,8 @@ Public Class frmPlantillas
     Public Shared nif As String = ""
     Public Shared objconn As OleDbConnection
     Public codiIdioma As Integer = 1
+    Public tipodePlantilla As String
+
     Private Sub Page_UnLoad(sender As Object, e As System.EventArgs) Handles MyBase.Unload
         GAIA.bdFi(objconn)
     End Sub 'Page_UnLoad
@@ -72,8 +74,12 @@ Public Class frmPlantillas
         Dim arrayTmp As String()
 
         nroId.Value = 0
+        tipodePlantilla = "A"
 
-        Select Case Request("tipus")
+
+        'Select Case Request("tipus")
+        Select Case tipodePlantilla
+
             Case "A"
                 ltTitol.Text = "Arbre web"
                 pnlArbreWeb.Visible = True
@@ -139,7 +145,9 @@ Public Class frmPlantillas
             ltEst.Text = "<div class=""contenidor border border-secondary p-2 pr-4 pl-4""><span class=""contenidorAtributs"" style=""display:none"">###########################|</span><div class=""row border border-secondary p-2""><span class=""rowAtributs"" style=""display:none"">###########################|</span><div class=""col cel border border-secondary p-2"" id=""d0""><span class=""divId"" style=""display:none"">0</span><span class=""divImg""></span><span class=""text"">Cel&middot;la inicial</span><span class=""atributs"" style=""display:none"">0#Cel&middot;la inicial##########################|</span></div></div></div> "
             txtEst.Value = ltEst.Text
         Else
-            Select Case Request("tipus")
+            'Select Case Request("tipus")
+            Select Case tipodePlantilla
+
                 Case "W" 'fulla web
                     qSQL = "select * FROM METLWEB2 WITH(NOLOCK) WHERE WEBINNOD=" & Request("id") & " AND WEBINIDI=" & codiIdioma
                     GAIA.bdr(objconn, qSQL, ds)
@@ -617,9 +625,9 @@ Public Class frmPlantillas
         DS = New DataSet()
 
         GAIA.bdr(objconn, "SELECT TIPINTIP,TIPDSDES,TBLDSTXT FROM  METLTIP WITH(NOLOCK), METLTBL WITH(NOLOCK) WHERE TIPINTIP=TBLINTFU", DS)
+        'If Request("tipus") = "P" Or Request("tipus") = "" Then
 
-
-        If Request("tipus") = "P" Or Request("tipus") = "" Then
+        If tipodePlantilla = "P" Or tipodePlantilla = "" Then
             lblCodi.Text = "<script language=""javascript"">"
 
             lblCodi.Text += "var longitud = document.getElementById('lstTipusFulla').options.length;"
@@ -784,7 +792,7 @@ Public Class frmPlantillas
             cont = cont + 1
         Next cel
 
-        Select Case Request("tipus")
+        Select Case tipodePlantilla
             Case "W"
                 If WEBDTCAD.Text = "" Then dataCaducitat = "01/01/1900" Else dataCaducitat = WEBDTCAD.Text
                 If WEBTPBUS.Checked Then buscar = "S" Else buscar = "N"

@@ -57,16 +57,16 @@ Public Class VisorArbres
         Session("nif") = ""
         Session("codiOrg") = ""
 
-        If HttpContext.Current.User.Identity.Name.Length > 0 Then
-            Session("nif") = GAIA.nifUsuari(objconn, HttpContext.Current.User.Identity.Name).Trim()
-            Session("CodiOrg") = GAIA.trobaNodeUsuari(objconn, Session("nif")).ToString().Trim()
-            idUsuari = Session("CodiOrg")
-        Else
-            'idUsuari = "99999999"
-            'Session("CodiOrg") = "99999999"
-            idUsuari = "346231"
+        'If HttpContext.Current.User.Identity.Name.Length > 0 Then
+        '    Session("nif") = GAIA.nifUsuari(objconn, HttpContext.Current.User.Identity.Name).Trim()
+        '    Session("CodiOrg") = GAIA.trobaNodeUsuari(objconn, Session("nif")).ToString().Trim()
+        '    idUsuari = Session("CodiOrg")
+        'Else
+        'idUsuari = "99999999"
+        'Session("CodiOrg") = "99999999"
+        idUsuari = "346231"
             Session("codiOrg") = "346231"
-        End If
+        'End If
 
         If Session("codiOrg") = "0" Then 'reenvio a la portada de GAIA. No tinc codi d'usuari i no el puc deixar veure els arbres. Cal mostrar missatge!
             Response.Redirect("http://lhintranet/gdocs/232511_1.aspx")

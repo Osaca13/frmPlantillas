@@ -34,7 +34,7 @@
                       </tr>
                     </table>
                   </td>
-                  <td width="30" height="12"><img src="/img/common/g_separador_menutop.gif" width="30" height="24"></td>
+                  <td width="30" height="12"><img src="../../img/g_separador_menutop.gif" width="30" height="24"></td>
                   <td width="148" valign="top" height="12"> 
                     <div align="right"> 
                       <table border="0" cellspacing="0" cellpadding="0" height="24">
@@ -55,14 +55,15 @@
                   <td class="txtGrisCL_MenuTop10px" colspan="9" height="12"><table width="759" border="0" cellspacing="0" cellpadding="0" height="20">
               <tr align="left"> 
                 <td colspan="2" valign="top" > 
-<%--                   #INCLUDE VIRTUAL="ticker.asp" --%>
+                    
+                <!-- #INCLUDE VIRTUAL="ticker.asp" -->
                 </td>
                 <td width="271" valign="top">
-                          <div align="right"><img src="/img/common/g_bullet_flecha_areapersonal.gif" width="7" height="6" hspace="3"><a href="/asp/areaPersonal.asp" class="txtRojo_AreaPersonal9px">Espai 
+                          <div align="right"><img src="../../img/g_bullet_flecha_areapersonal.gif" width="7" height="6" hspace="3"><a href="/asp/areaPersonal.asp" class="txtRojo_AreaPersonal9px">Espai 
                             personal</a> 
 							
                             <% IF Session("login")=TRUE THEN%>
-                            &nbsp;<img src="/img/common/g_bullet_flecha_areapersonal.gif" width="7" height="6" hspace="3"><a href="/asp/areaPersonal.asp?desconectar=1" class="txtRojo_AreaPersonal9px">Desconnectar</a> 
+                            &nbsp;<img src="../../img/g_bullet_flecha_areapersonal.gif" width="7" height="6" hspace="3"><a href="/asp/areaPersonal.asp?desconectar=1" class="txtRojo_AreaPersonal9px">Desconnectar</a> 
                             <%END IF%>
                           </div>
                 </td>

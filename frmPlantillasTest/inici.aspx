@@ -19,13 +19,13 @@
     <meta name="DC.subject" content="educa, cultura"/>
     <meta name="robots" content="INDEX,FOLLOW"/>
     <link rel="stylesheet" type="text/css" href="Styles/default.css" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="Styles/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 <!-- visor imatges -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-tools/1.2.7/jquery.tools.min.js"> </script>
+    <script type="text/javascript" src="js/jquery.tools.min.js"> </script>
     <script type="text/javascript" src="js/visorimatges/jquery.min.js"></script>
     <script type="text/javascript" src="js/visorimatges/jquery-1.6.4.min.js"></script>
 <script type="text/javascript" src="js/visorimatges/jquery.lightbox-0.5CAS.js"></script>
@@ -50,7 +50,7 @@
                 <span class="sr-only">Veure opcions</span>
                 <span class="glyphicon glyphicon-option-horizontal"></span>
               </button>
-              <a class="navbar-brand" href="http://www.l-h.cat/inici.aspx?id=1" target="_blank" title="http://www.l-h.cat/"><img class="header-logo img-responsive" src="https://www.l-h.cat/img/lh12/common/logo_ajuntament_barra.png" alt="Ajuntament de L'Hospitalet"/></a>
+              <a class="navbar-brand" href="~/inici.aspx?id=1" target="_blank" title="http://www.l-h.cat/"><img class="header-logo img-responsive" src="https://www.l-h.cat/img/lh12/common/logo_ajuntament_barra.png" alt="Ajuntament de L'Hospitalet"/></a>
     		</div>
 
     		<div class="collapse navbar-collapse" id="MainMenu">
@@ -102,7 +102,10 @@
 
     <div class="llistatRedsSocials">
         <ul>
-        <li class="youtube"><a href="http://intranet/LHEduca/1710922_1.aspx" target="_blank" title="YouTube" ></a></li><li class="facebook"><a href="https://www.facebook.com/CulturaLH" target="_blank" title="Facebook" ></a></li><li class="twitter"><a href="https://twitter.com/LHCultura" target="_blank" title="Twitter" ></a></li><li class="issuu"><a href="https://issuu.com/culturalh/stacks" target="_blank" title="Issuu" ></a></li>
+        <li class="youtube"><a href="http://intranet/LHEduca/1710922_1.aspx" target="_blank" title="YouTube" ></a></li>
+            <li class="facebook"><a href="https://www.facebook.com/CulturaLH" target="_blank" title="Facebook" ></a></li>
+            <li class="twitter"><a href="https://twitter.com/LHCultura" target="_blank" title="Twitter" ></a></li>
+            <li class="issuu"><a href="https://issuu.com/culturalh/stacks" target="_blank" title="Issuu" ></a></li>
       </ul>
     </div>
     
@@ -121,7 +124,8 @@
  
 
 
-</div></div><div class='row'><div class='col' ><div class='row'><div class='col-md-9 col-lg-9' > <!-- Para que no se mueva solo data-interval="false" -->
+</div></div><div class='row'><div class='col' ><div class='row'><div class='col-md-9 col-lg-9' > 
+    <!-- Para que no se mueva solo data-interval="false" -->
 <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
   <!-- Indicators -->
   <ol class="carousel-indicators" style="bottom:10em;">
@@ -208,7 +212,11 @@ Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs
 <div class="main clearfix">
 	<nav id="menu" class="navPortada">
 
-<ul><li ><a href="http://intranet/LHEduca/1707924_1.aspx?id=1" target="_self" title="Anar a Presentaci&oacute;">Presentaci&oacute;</a></li><li><a href="http://intranet/LHEduca/1708817_1.aspx?id=1" target="_self" title="Anar a Activitats per a les escoles">Activitats per a les escoles</a></li><li><a href="http://intranet/LHEduca/1711234_1.aspx?id=1" target="_self" title="Anar a Cursos i tallers">Cursos i tallers</a></li><li><a href="http://intranet/LHEduca/1711260_1.aspx?id=1" target="_self" title="Anar a Projectes singulars">Projectes singulars</a></li><li><a href="http://intranet/LHEduca/1711268_1.aspx?id=1" target="_self" title="Anar a Fem Tàndem L&rsquo;H">Fem Tàndem L&rsquo;H</a></li></ul>
+<ul><li ><a href="http://intranet/LHEduca/1707924_1.aspx?id=1" target="_self" title="Anar a Presentaci&oacute;">Presentaci&oacute;</a></li>
+    <li><a href="http://intranet/LHEduca/1708817_1.aspx?id=1" target="_self" title="Anar a Activitats per a les escoles">Activitats per a les escoles</a></li>
+    <li><a href="http://intranet/LHEduca/1711234_1.aspx?id=1" target="_self" title="Anar a Cursos i tallers">Cursos i tallers</a></li>
+    <li><a href="http://intranet/LHEduca/1711260_1.aspx?id=1" target="_self" title="Anar a Projectes singulars">Projectes singulars</a></li>
+    <li><a href="http://intranet/LHEduca/1711268_1.aspx?id=1" target="_self" title="Anar a Fem Tàndem L&rsquo;H">Fem Tàndem L&rsquo;H</a></li></ul>
 
   </nav>
 </div>
@@ -244,6 +252,7 @@ Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs
 					changeClass(mobileButton, 'navtoogle active', 'navtoogle');
 				}
 			}
-		</script></div></div> </div></div> </div></div> </div><script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		</script></div></div> </div></div> </div></div> </div>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script></body></html>

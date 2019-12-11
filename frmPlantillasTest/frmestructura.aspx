@@ -259,8 +259,10 @@ body, html {height:100%;}
 	
 	function iniPantalla(aPlantilles) {
 		//var aPlantilles = (document.getElementById('llistaPlantilles').value).split(",");
-		for (i=0;i<aPlantilles.length;i++) {
-				document.getElementById('ddlb_plantillat' + i).style.display='none';
+        for (i = 0; i < aPlantilles.length; i++) {
+            if (document.getElementById('ddlb_plantillat' + i) != null) {
+                document.getElementById('ddlb_plantillat' + i).style.display = 'none';
+            }
 		}
 	}
 	

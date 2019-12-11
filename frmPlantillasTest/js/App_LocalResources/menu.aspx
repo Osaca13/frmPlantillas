@@ -1,4 +1,4 @@
-<%@ Register TagPrefix="menuG" TagName="menuG" Src="/gaia/aspx/llibreriacodiweb/intranet/gaia/menu.ascx" %>
+<%@ Register TagPrefix="menuG" TagName="menuG" Src="~/js/App_LocalResources/menu.ascx" %>
 <%
 if  instr(Request.userAgent, "MSIE")=0 THEN 
 	pnlAvis.visible=TRUE

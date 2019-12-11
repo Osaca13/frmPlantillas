@@ -1,4 +1,4 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="~/frmPlantillas.aspx.vb" Inherits="frmPlantillasTest.frmPlantillas" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="~/frmPlantillas.aspx.vb" Inherits="frmPlantillasTest.frmPlantillas" Debug="true" %>
 
 <!DOCTYPE html>
 
@@ -2041,7 +2041,7 @@ function modificaIcona(element) {
 			}
 		}
 		if (icona!="") {
-			element.find("span.divImg").html("<img src='http://lhintranet/img/common/iconografia/" + icona + "'/>");
+			element.find("span.divImg").html("<img src='img/" + icona + "'/>");
 		}
 		
 	}
