@@ -1,0 +1,27 @@
+﻿CREATE TABLE [dbo].[METLREI] (
+    [REIINCOD] NUMERIC (18)  NOT NULL,
+    [REIINIDI] SMALLINT      NOT NULL,
+    [REIDTPUB] DATETIME      NULL,
+    [REIDTCAD] DATETIME      NULL,
+    [REIDSFIT] VARCHAR (255) NULL,
+    [REIDSFI2] VARCHAR (255) NULL,
+    [REIDSHAS] VARCHAR (200) NULL,
+    CONSTRAINT [PK_METLREI] PRIMARY KEY CLUSTERED ([REIINCOD] ASC, [REIINIDI] ASC) WITH (FILLFACTOR = 90)
+);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IDX_REIINIDI_REIDTPUB_REIDTCAD, sysname,>]
+    ON [dbo].[METLREI]([REIINIDI] ASC, [REIDTPUB] ASC, [REIDTCAD] ASC)
+    INCLUDE([REIINCOD], [REIDSFI2]);
+
+
+GO
+CREATE NONCLUSTERED INDEX [<Name of Missing Index, sysname,>]
+    ON [dbo].[METLREI]([REIDTCAD] ASC)
+    INCLUDE([REIINCOD], [REIDTPUB]);
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = N'Nom del fitxer sense path', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'METLREI', @level2type = N'COLUMN', @level2name = N'REIDSFI2';
+

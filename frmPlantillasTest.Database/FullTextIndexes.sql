@@ -1,0 +1,5 @@
+﻿CREATE FULLTEXT INDEX ON [dbo].[METLREL]
+    ([RELCDHER] LANGUAGE 1033)
+    KEY INDEX [PK_METLREL]
+    ON [Index cercador web];
+

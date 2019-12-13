@@ -1,0 +1,25 @@
+﻿CREATE TABLE [dbo].[Consell de Districtes] (
+    [Id111]                      FLOAT (53)     NULL,
+    [Id]                         INT            IDENTITY (1, 1) NOT NULL,
+    [TORNAT]                     BIT            NULL,
+    [Trat]                       NVARCHAR (255) NULL,
+    [persona]                    INT            NULL,
+    [nom complet]                NVARCHAR (255) NULL,
+    [nom]                        NVARCHAR (255) NULL,
+    [entitat]                    NVARCHAR (255) NULL,
+    [ajuntament de L'Hospitalet] NVARCHAR (255) NULL,
+    [càrrec]                     NVARCHAR (255) NULL,
+    [confirma]                   BIT            NULL,
+    [excusa]                     BIT            NULL,
+    [dat env]                    DATETIME       NULL,
+    [dat conf/exc]               NVARCHAR (255) NULL,
+    [email]                      NVARCHAR (255) NULL,
+    [Mail 2]                     NVARCHAR (255) NULL,
+    [telèfon1]                   NVARCHAR (255) NULL,
+    [telèfon2]                   NVARCHAR (255) NULL,
+    [districte]                  NVARCHAR (255) NULL,
+    [saluda]                     NVARCHAR (255) NULL,
+    [selecció]                   BIT            NULL,
+    [observacions]               NVARCHAR (255) NULL
+);
+

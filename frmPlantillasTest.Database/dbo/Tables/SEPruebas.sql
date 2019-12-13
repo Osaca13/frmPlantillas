@@ -1,0 +1,13 @@
+﻿CREATE TABLE [dbo].[SEPruebas] (
+    [NRO]         SMALLINT      IDENTITY (1, 1) NOT NULL,
+    [TIPO]        CHAR (1)      NOT NULL,
+    [MBINTERNA]   CHAR (1)      NULL,
+    [TITULO]      TEXT          NOT NULL,
+    [DESCRIPCION] TEXT          NULL,
+    [FECHAALTA]   SMALLDATETIME NULL,
+    [FECHACAD]    SMALLDATETIME NULL,
+    [MODEL]       CHAR (100)    NULL,
+    [ONLINEA]     CHAR (1)      NULL,
+    CONSTRAINT [PK_SEPruebas] PRIMARY KEY CLUSTERED ([NRO] ASC) WITH (FILLFACTOR = 90)
+);
+
