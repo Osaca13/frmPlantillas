@@ -1,0 +1,16 @@
+﻿CREATE TABLE [CPDsa].[METLCEL2] (
+    [CELINLCW] INT           NOT NULL,
+    [CELINIDI] INT           NOT NULL,
+    [CELINREI] INT           NOT NULL,
+    [CELINREL] INT           NOT NULL,
+    [CELCDEST] INT           NOT NULL,
+    [CELCDUSU] INT           NOT NULL,
+    [CELCDNOD] INT           NOT NULL,
+    [CELCDPLT] INT           NOT NULL,
+    [CELDTFEC] DATETIME      NOT NULL,
+    [CELDTCAD] DATETIME      NOT NULL,
+    [CELDSCSS] TEXT          NOT NULL,
+    [CELDSEXE] TEXT          NOT NULL,
+    [CELINPAR] VARCHAR (500) NOT NULL
+);
+

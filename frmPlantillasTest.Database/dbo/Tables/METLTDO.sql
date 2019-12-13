@@ -1,0 +1,13 @@
+﻿CREATE TABLE [dbo].[METLTDO] (
+    [TDOCDTDO] SMALLINT      IDENTITY (1, 1) NOT NULL,
+    [TDODSNOM] CHAR (150)    NOT NULL,
+    [TDODSIMG] VARCHAR (100) NULL,
+    [TDOINPLA] INT           CONSTRAINT [DF_METLTDO_TDOINPLA] DEFAULT (0) NOT NULL,
+    [TDODSEXT] VARCHAR (50)  CONSTRAINT [DF_METLTDO_TDODSEXT] DEFAULT ('') NULL,
+    CONSTRAINT [PK_METLTDO] PRIMARY KEY NONCLUSTERED ([TDOCDTDO] ASC) WITH (FILLFACTOR = 90)
+);
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = N'Extensions', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'METLTDO', @level2type = N'COLUMN', @level2name = N'TDODSEXT';
+

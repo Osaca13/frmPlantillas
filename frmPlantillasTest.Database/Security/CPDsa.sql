@@ -1,0 +1,3 @@
+﻿CREATE USER [CPDsa] FOR LOGIN [CPDsa]
+    WITH DEFAULT_SCHEMA = [CPDsa];
+

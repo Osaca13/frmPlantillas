@@ -1,0 +1,17 @@
+﻿CREATE TABLE [dbo].[METLFOR] (
+    [FORINNOD] NUMERIC (18) NOT NULL,
+    [FORINIDI] SMALLINT     NOT NULL,
+    [FORDSCOD] TEXT         NOT NULL,
+    [FORDSNIF] CHAR (9)     NOT NULL,
+    [FORDSTIT] TEXT         NOT NULL,
+    [FORDTANY] ROWVERSION   NOT NULL,
+    [FORDSUSR] CHAR (10)    NOT NULL,
+    [FORDSWIN] CHAR (30)    CONSTRAINT [DF_METLFOR_FORDSWIN] DEFAULT ('') NOT NULL,
+    CONSTRAINT [PK_METLFOR] PRIMARY KEY CLUSTERED ([FORINNOD] ASC),
+    CONSTRAINT [FK_METLFOR_METLNOD] FOREIGN KEY ([FORINNOD]) REFERENCES [dbo].[METLNOD] ([NODINNOD])
+);
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = N'Usuari de windows', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'METLFOR', @level2type = N'COLUMN', @level2name = N'FORDSWIN';
+

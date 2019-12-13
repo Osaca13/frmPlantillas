@@ -1,0 +1,2 @@
+﻿CREATE USER [LH\SQLSilh] FOR LOGIN [LH\SQLSilh];
+
