@@ -1,4 +1,4 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="~/frmPlantillas.aspx.vb" Inherits="frmPlantillasTest.frmPlantillas" Debug="true" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="~/frmPlantillas.aspx.vb" ValidateRequest="false" Inherits="frmPlantillasTest.frmPlantillas" Debug="true" EnableEventValidation="false" %>
 
 <!DOCTYPE html>
 

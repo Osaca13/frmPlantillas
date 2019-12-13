@@ -26,7 +26,7 @@
                     <table width="84%" border="0" cellspacing="0" cellpadding="0">
                       <tr> 
                         <td width="15%"><a href="/html/cgis/llisti/llistialfa.asp"class="txtGrisCL_MenuTop10px" onMouseOver="document.telef.src='/img/common/iconografia/ico_llisti.png'" onMouseOut="document.telef.src='/img/common/iconografia/ico_llisti.png'"> 
-                          <img src="/img/common/iconografia/ic_telefono.gif" name="telef" border="0" onMouseOver="this.src='/img/common/iconografia/ico_llisti.png'" onMouseOut="this.src='/img/common/iconografia/ico_llisti.png'"></a></td>
+                          <img src="../../img/ico_telefon.png" name="telef" border="0" onMouseOver="this.src='/img/ico_llisti.png'" onMouseOut="this.src='/img/common/iconografia/ico_llisti.png'"></a></td>
                         <td width="85%"> 
                           <div align="left"><a href="/html/cgis/llisti/llistialfa.asp"class="txtGrisCL_MenuTop10px" onMouseOver="document.telef.src='/img/common/iconografia/ico_llisti.png'" onMouseOut="document.telef.src='/img/common/iconografia/ico_llisti.png'"> 
                             &nbsp;LLIST&Iacute; TELEF&Ograve;NIC</a></div>
@@ -34,7 +34,7 @@
                       </tr>
                     </table>
                   </td>
-                  <td width="30" height="12"><img src="../../img/g_separador_menutop.gif" width="30" height="24"></td>
+                  <td width="30" height="12"><img src="/img/g_separador_menutop.gif" width="30" height="24"></td>
                   <td width="148" valign="top" height="12"> 
                     <div align="right"> 
                       <table border="0" cellspacing="0" cellpadding="0" height="24">
