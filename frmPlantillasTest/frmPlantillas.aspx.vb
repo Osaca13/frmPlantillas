@@ -791,7 +791,7 @@ Public Class frmPlantillas
             End If
             cont = cont + 1
         Next cel
-
+        tipodePlantilla = "A"
         Select Case tipodePlantilla
             Case "W"
                 If WEBDTCAD.Text = "" Then dataCaducitat = "01/01/1900" Else dataCaducitat = WEBDTCAD.Text
@@ -876,6 +876,7 @@ Public Class frmPlantillas
                     'Creo una relació del node amb si mateix perque és el primer
                     Dim rel As New clsRelacio
                     ' La funcion creaRelacio, crea también los permisos
+                    ' el segundo argumento "8" crea un arbre tipo arbre web 
                     rel = GAIA.creaRelacio(objconn, 8, txtCodiNode.Text, txtCodiNode.Text, 0, "", -1, 1, -1, 1, False, Session("codiOrg"))
                 End If
 

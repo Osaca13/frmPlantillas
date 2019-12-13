@@ -53,13 +53,13 @@ body{
     <link href="Styles/gaiaIntranet.css" rel="stylesheet" type="text/css"/>
 </head>
 <body >
-<!--#INCLUDE VIRTUAL="~/js/App_LocalResources/cap.aspx" -->
+<!--#INCLUDE VIRTUAL="/js/App_LocalResources/cap.aspx" -->
 
  <%  	
     If 2 = 4 And Session("login") <> True Then
 %>
      <script>
-     window.location.href="~/asp/areaPersonal.asp"
+     window.location.href="/asp/areaPersonal.asp"
     </script>
  <%End IF%>
 <script type="text/javascript">
@@ -163,6 +163,7 @@ function abansDrop(Node)
                         <td width="13%" valign="bottom" bgcolor="#E0E0FE"  class="txtNeg14px"  ><img src="img/logoGAIAP.gif" alt="GAIA" hspace="0" vspace="0" border="0">&nbsp;</td>
                         <td width="87%" align="right"  valign="baseline" bgcolor="#E0E0FE"  class="txtNeg12px" style="padding: 10">
                         <div align="right" >
+                            <%--en esta lista se despliegan todos los arboles creados--%>
                             <asp:DropDownList runat='server' ID="llistaArbres" DataTextField="TIPDSDES" DataValueField="TIPINTIP" OnSelectedIndexChanged="llistaArbres_canviArbre" AutoPostBack="true" ></asp:DropDownList>
                             <% If (Request("arbre2") Is Nothing) THEN %>
                             <% IF llistaArbres2_1.SelectedIndex = 0 THEN%>                
