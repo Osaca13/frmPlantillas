@@ -53,13 +53,13 @@ body{
     <link href="Styles/gaiaIntranet.css" rel="stylesheet" type="text/css"/>
 </head>
 <body >
-<!--#INCLUDE VIRTUAL="~/js/App_LocalResources/cap.aspx" -->
+<!--#INCLUDE VIRTUAL="/js/App_LocalResources/cap.aspx" -->
 
  <%  	
     If 2 = 4 And Session("login") <> True Then
 %>
      <script>
-     window.location.href="/asp/areapersonal.asp"
+     window.location.href="/asp/areaPersonal.asp"
     </script>
  <%End IF%>
 <script type="text/javascript">
@@ -163,6 +163,7 @@ function abansDrop(Node)
                         <td width="13%" valign="bottom" bgcolor="#E0E0FE"  class="txtNeg14px"  ><img src="img/logoGAIAP.gif" alt="GAIA" hspace="0" vspace="0" border="0">&nbsp;</td>
                         <td width="87%" align="right"  valign="baseline" bgcolor="#E0E0FE"  class="txtNeg12px" style="padding: 10">
                         <div align="right" >
+                            <%--en esta lista se despliegan todos los arboles creados--%>
                             <asp:DropDownList runat='server' ID="llistaArbres" DataTextField="TIPDSDES" DataValueField="TIPINTIP" OnSelectedIndexChanged="llistaArbres_canviArbre" AutoPostBack="true" ></asp:DropDownList>
                             <% If (Request("arbre2") Is Nothing) THEN %>
                             <% IF llistaArbres2_1.SelectedIndex = 0 THEN%>                
@@ -182,7 +183,7 @@ function abansDrop(Node)
 											RetainScrollPosition="True" 
 											AutoPostBack="false" 
 											CheckBoxes="False" 
-											ImagesBaseDir="img/"										
+											ImagesBaseDir="~/img/"										
 											BeforeClientClick="seleccionaNodes" 
 											BeforeClientDrop="abansDrop" 
 											MultipleSelect="True" 
@@ -216,7 +217,7 @@ function abansDrop(Node)
 											RetainScrollPosition="True" 
 											AutoPostBack="false" 
 											CheckBoxes="False" 
-											ImagesBaseDir="/img/common/iconografia/"
+											ImagesBaseDir="~/img/"
 											BeforeClientClick="seleccionaNodes" 
 											BeforeClientDrop="abansDrop" 
 											MultipleSelect="True" 
@@ -262,7 +263,7 @@ END IF
                       <td><asp:TextBox runat="server"  ID="noddstxt" Columns="30" onKeyDown="
 			if (window.event.keyCode==13) {		
 				event.returnValue=false;
-        event.cancel = true;
+                event.cancel = true;
 				document.getElementById('InsertarNode').click();
 
 			}"></asp:TextBox></td>
@@ -270,7 +271,7 @@ END IF
 </table>
                   <br>   <div align="center">
                   <asp:button runat="server" OnClick="clickInsertarNode" Text="Acceptar" id="InsertarNode"></asp:button>
-                  <input type="submit" onClick="document.getElementById('capaInsertarNode').style.visibility = 'hidden';return false;" value="Tancar" >
+                  <input type="submit" OnClick="document.getElementById('capaInsertarNode').style.visibility = 'hidden';return false;" value="Tancar" >
                 </div>
              
               </div>

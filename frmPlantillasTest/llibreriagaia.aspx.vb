@@ -2853,8 +2853,6 @@ Public Class GAIA
     End Function
     Public Shared Function bdSR_id(ByRef objConn As oleDbConnection, ByVal strSql As String, ByVal dataSource As String, ByVal bd As String) As Integer
 
-
-
         Dim strUsr As String = ""
 
         Dim strPwd As String = ""
@@ -4228,10 +4226,10 @@ Public Class GAIA
         'Si no és una imatge faig copia dels continguts que pengin:
         If Not UCase(rel.tipdsdes) = "FULLA DOCUMENT" Then
             Dim reltmp As New clsRelacio
-            GAIA.bdR(objConn, "SELECT * FROM METLREL  WITH(NOLOCK) WHERE RELCDRSU=" & rel.incod & " AND RELCDSIT <99 ", DS)
+            GAIA.bdr(objConn, "SELECT * FROM METLREL  WITH(NOLOCK) WHERE RELINCOD =" & rel.incod & " AND RELCDSIT <99 ", DS)
             For Each dbRow In DS.Tables(0).Rows
                 reltmp.bdget(objConn, dbRow("RELINCOD"))
-                ferCopiaContingut(objConn, reltmp, codiUsuari, "-1", novaRel)
+                'ferCopiaContingut(objConn, reltmp, codiUsuari, "-1", novaRel)
             Next dbRow
         End If
         ferCopiaContingut = novaRel.incod
@@ -4242,7 +4240,7 @@ Public Class GAIA
 
 
 
-
+    '-------------------------------------
     Public Shared Function FormataCadena(ByVal Text As Object) As String
         If isdbnull(text) Then
             Return "''"

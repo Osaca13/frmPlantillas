@@ -1,10 +1,12 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<%@ Page Language="vb" AutoEventWireup="false" Debug="true" EnableViewStateMac="false"  %>
+
+<!DOCTYPE html>
 <!--[if lt IE 7]>      
     <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="ca"> 
     <![endif]--><!--[if IE 7]>         
         <html class="no-js lt-ie9 lt-ie8" lang="ca"> <![endif]--><!--[if IE 8]>         
             <html class="no-js lt-ie9" lang="ca"> <![endif]--><!--[if gt IE 8]><!-->
-<html class="no-js" xmlns="http://www.w3.org/1999/xhtml" lang="ca">
+<html runat="server" class="no-js" xmlns="http://www.w3.org/1999/xhtml" lang="ca">
     <!--<![endif]-->
     <head runat="server">
         <style type="text/css" media="screen">
@@ -52,12 +54,14 @@
 </script>
 
 
-    </head><body id="cosPagina" > <div id="contenidor"><div class="floatleft wpx800 ">
+</head>
+    <body id="cosPagina" > 
+    <div id="contenidor"><div class="floatleft wpx800 ">
     <%@Register TagPrefix="visor" TagName="Documents" Src="~/js/App_LocalResources/visordocumentshtml.ascx"%>
     <div class="floatleft wpx800 ">
-<%--        #INCLUDE VIRTUAL="/inc/cap.aspx" --%>
+      <!--  #INCLUDE VIRTUAL="~/js/App_LocalResources/cap.aspx" -->
         <div  class="floatleft wpx800 "><div  class="floatleft wpx800 "><div  class="floatleft wpx800 "><div  class="floatleft wpx800 "><div  class="floatleft wpx800 "><div  class="floatleft wpx800 ">
-            <%@ Register TagPrefix="menuG" TagName="menuG" Src="~/js/App_LocalResources/menu.ascx" %>
+   <%@ Register TagPrefix="menuG" TagName="menuG" Src="~/js/App_LocalResources/menu.ascx" %>
 <%
 if  instr(Request.userAgent, "MSIE")=0 THEN 
 	pnlAvis.visible=TRUE
@@ -76,15 +80,38 @@ end if
 </asp:panel>
 
     
-    </div><div  class="floatleft wpx800 "><div  class="floatleft wpx460 paddingDreta20 "><h3 class="titolApartatIntranet">Not&iacute;cies</h3><div class="llistatContinguts"><ul><li><div class="borderRadius10  marginBottom10 border1Bot2Grise7e7e7 relativo fonsblanc displayInlineBlock "><div class="topBloc"></div><div class="contBloc"><div  class="wpx458 "><div  class="floatleft wpx156 "><div  class="floatleft imatgetamanymaximdisponible fotoContingut "><img src="/utils/obreFitxer.ashx?Fw9EVw48XS7I8hEkvZoPDAclqjbZXvRwQwqazCKBHSP720qazCZg81rslnzXBU9tQ9zYpwLglMFHqazC6rzoqazB" alt=""  class="border0 imatgetamanymaximdisponible fotoContingut "/></div></div><div  class="floatleft wpx282 padding10 "><div  class="floatleft wpx282 "><div  class="floatleft wpx282 gris t075 arial ">24/10/2018</div></div><div  class="floatleft wpx282 "><h3 class="floatleft wpx282 negre t12 marginBottom5 arialNarrow bold ">
+    </div>
+            <div  class="floatleft wpx800 ">
+                <div  class="floatleft wpx460 paddingDreta20 ">
+                    <h3 class="titolApartatIntranet">Not&iacute;cies</h3>
+                    <div class="llistatContinguts">
+                        <ul>
+                            <li>
+                                <div class="borderRadius10  marginBottom10 border1Bot2Grise7e7e7 relativo fonsblanc displayInlineBlock ">
+                                    <div class="topBloc"></div>
+                                    <div class="contBloc">
+                                        <div  class="wpx458 ">
+                                            <div  class="floatleft wpx156 ">
+                                                <div  class="floatleft imatgetamanymaximdisponible fotoContingut ">
+                                                    <img src="/utils/obreFitxer.ashx?Fw9EVw48XS7I8hEkvZoPDAclqjbZXvRwQwqazCKBHSP720qazCZg81rslnzXBU9tQ9zYpwLglMFHqazC6rzoqazB" alt=""  class="border0 imatgetamanymaximdisponible fotoContingut "/></div>
+
+                                            </div>
+                                            <div  class="floatleft wpx282 padding10 ">
+                                                <div  class="floatleft wpx282 ">
+                                                    <div  class="floatleft wpx282 gris t075 arial ">24/10/2018</div></div>
+                                                <div  class="floatleft wpx282 ">
+                                                    <h3 class="floatleft wpx282 negre t12 marginBottom5 arialNarrow bold ">
  Nou formulari d&rsquo;agenda
-</h3><div  class="floatleft wpx282 "><div  class="floatleft wpx282 gris t075 paddingBottom5 arial justificat ">S&rsquo;ha redissenyat el&nbsp; formulari d&rsquo;agenda de la intranet, accessible des de el men&uacute; de continguts de GAIA o des de l&rsquo;antic formulari d&rsquo;agenda. S&rsquo;han organitzat els diferents camps del formulari en seccions per aix&iacute; fer el proc&eacute;s d&rsquo;alta m&eacute;s entenedor i senzill.<br />
+</h3>
+                                                    <div  class="floatleft wpx282 ">
+                                                        <div  class="floatleft wpx282 gris t075 paddingBottom5 arial justificat ">S&rsquo;ha redissenyat el&nbsp; formulari d&rsquo;agenda de la intranet, accessible des de el men&uacute; de continguts de GAIA o des de l&rsquo;antic formulari d&rsquo;agenda. S&rsquo;han organitzat els diferents camps del formulari en seccions per aix&iacute; fer el proc&eacute;s d&rsquo;alta m&eacute;s entenedor i senzill.<br />
 <br />
 Aquest nou formulari incorpora noves funcionalitats, com per exemple, la geolocalitzaci&oacute; d&rsquo;activitats i/o cursos o la millora en la traducci&oacute; amb la incorporaci&oacute; de Apertium, que &eacute;s un sistema de traducci&oacute; autom&agrave;tica que fan servir webs com Softcatala. Tamb&eacute; s&rsquo;ha millorat la secci&oacute; de preus i aforaments m&uacute;ltiples.<br />
 <br />
 El nou formulari&nbsp; estar&agrave; durant un temps en per&iacute;ode de proves. Durant aquest per&iacute;ode ser&agrave; possible crear i editar actes d&rsquo;agenda amb el dos formularis, l&rsquo;antic i el nou.</div><div  class="floatleft wpx282 "><div  class="floatleft wpx282 "><div  class="floatleft wpx282 negre t075 paddingTop10 arial dre bold "><a href="/detallNoticia.aspx?1D5C1VqazAYh9X7O9irAd6xk92iziIgwqazCDL9qazAIYEfGBImpgqazB"  class="negre paddingTop10 arial dre bold " target="_self" title="Llegir m&eacute;s de  Nou formulari d&rsquo;agenda">m&eacute;s informaci&oacute; [+]<span class="visibilidadoculta">(Llegir m&eacute;s de  Nou formulari d&rsquo;agenda)</span></a></div></div></div></div></div></div></div></div><div class="botBloc"></div></div></li><li><div class="borderRadius10  marginBottom10 border1Bot2Grise7e7e7 relativo fonsblanc displayInlineBlock "><div class="topBloc"></div><div class="contBloc"><div  class="wpx458 "><div  class="floatleft wpx156 "><div  class="floatleft imatgetamanymaximdisponible fotoContingut "><img src="/utils/obreFitxer.ashx?Fw9EVw48XS4U68d3IbfPG9IFwwdFOV6ja4zv6ppQmbjl1z1ruzp7V10AOzFKDAGTt1yoUwk5qc0qazB" alt=""  class="border0 imatgetamanymaximdisponible fotoContingut "/></div></div><div  class="floatleft wpx282 padding10 "><div  class="floatleft wpx282 "><div  class="floatleft wpx282 gris t075 arial ">12/07/2016</div></div><div  class="floatleft wpx282 "><h3 class="floatleft wpx282 negre t12 marginBottom5 arialNarrow bold ">
  Les Llistes de distribuci&oacute; presenten noves funcionalitats i disseny
-</h3><div  class="floatleft wpx282 "><div  class="floatleft wpx282 gris t075 paddingBottom5 arial justificat ">El sistema de Llistes de distribuci&oacute; ha experimentat una millora important amb la introducci&oacute; d&rsquo;un disseny acurat i de noves funcionalitats, que inclouen un hist&ograve;ric dels enviaments de cada llista de distribuci&oacute;, un hist&ograve;ric dels subscriptors de les llistes (altes i baixes) i un control de la recepci&oacute; dels correus (qui els ha obert i quan).<br />
+</h3>
+    <div  class="floatleft wpx282 "><div  class="floatleft wpx282 gris t075 paddingBottom5 arial justificat ">El sistema de Llistes de distribuci&oacute; ha experimentat una millora important amb la introducci&oacute; d&rsquo;un disseny acurat i de noves funcionalitats, que inclouen un hist&ograve;ric dels enviaments de cada llista de distribuci&oacute;, un hist&ograve;ric dels subscriptors de les llistes (altes i baixes) i un control de la recepci&oacute; dels correus (qui els ha obert i quan).<br />
 <br />
 La p&agrave;gina d&rsquo;entrada mostra les Llistes administrades amb el nom de cada llista, el remitent i les opcions que s&rsquo;hi poden aplicar: gesti&oacute; de la llista, enviar correus, hist&ograve;ric d&rsquo;enviaments i donar de baixa.<br />
 </div><div  class="floatleft wpx282 "><div  class="floatleft wpx282 "><div  class="floatleft wpx282 negre t075 paddingTop10 arial dre bold "><a href="/detallNoticia.aspx?11Hq6yjHNICi1o4ohpavxKFtp4l66pqaLDkqaEp9FqBwqazB"  class="negre paddingTop10 arial dre bold " target="_self" title="Llegir m&eacute;s de  Les Llistes de distribuci&oacute; presenten noves funcionalitats i disseny">m&eacute;s informaci&oacute; [+]<span class="visibilidadoculta">(Llegir m&eacute;s de  Les Llistes de distribuci&oacute; presenten noves funcionalitats i disseny)</span></a></div></div></div></div></div></div></div></div><div class="botBloc"></div></div></li><li><div class="borderRadius10  marginBottom10 border1Bot2Grise7e7e7 relativo fonsblanc displayInlineBlock "><div class="topBloc"></div><div class="contBloc"><div  class="wpx458 "><div  class="floatleft wpx282 padding10 "><div  class="floatleft wpx282 "><div  class="floatleft wpx282 gris t075 arial ">22/04/2016</div></div><div  class="floatleft wpx282 "><h3 class="floatleft wpx282 negre t12 marginBottom5 arialNarrow bold ">
@@ -128,7 +155,7 @@ A m&eacute;s del nombre de visites, al full Propietats d&rsquo;un tr&agrave;mit 
 <img src="img/ico_pdf.png" alt="Document"/>
 
 <a href="/utils/obreFitxer.ashx?Fw9EVw48XS61Qe1WWAhPq1eEt7eeXfL7Vz5yCKMGcqazCe8oYV9Ptq1YC3cFMyzqazARvp"  class="iconaDocument " target="_blank" title="Guia d&rsquo;ús i estil. Categorització i codificació d&rsquo;actes d&rsquo;Agenda als webs municipals  (nova finestra) ">Guia d'ús i estil. Categorització i codificació d'actes d'Agenda als webs municipals </a></div></div></div></div></div></div></div></div></div></div><div class="floatleft wpx800 ">
-<%--    #INCLUDE VIRTUAL="/inc/peu.aspx" --%>
+  <!--  #INCLUDE VIRTUAL="~/js/App_LocalResources/peu.aspx" -->
     </div></div>
  </div>
 </body>
