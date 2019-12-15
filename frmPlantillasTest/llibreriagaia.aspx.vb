@@ -2954,8 +2954,15 @@ Public Class GAIA
 
 
         objConn = New OleDbConnection
+        dataSource = ".\SQLEXPRESS"
+        bd = "hm_prueba"
+
+        'Data Source = Initial Catalog=hm_prueba;Integrated Security=True
+        'Data Source = .\ SQLEXPRESS;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False
         ' objConn.ConnectionString = "Provider=SQLOLEDB;Data Source=" + dataSource + ";Initial Catalog=" + bd + "; pwd=secopc; user id=CPDsa"
-        objConn.ConnectionString = "Provider=SQLOLEDB;Data Source=" + dataSource + ";Initial Catalog=" + bd + "; pwd=" & strPwd & "; user id=" & strUsr
+        'objConn.ConnectionString = "Provider=SQLOLEDB;Data Source=" + dataSource + ";Initial Catalog=" + bd + "; pwd=" & strPwd & "; user id=" & strUsr
+        objConn.ConnectionString = "Provider=SQLOLEDB;Data Source=" + dataSource + ";Initial Catalog=" + bd + "; Integrated Security= True"
+
         objConn.Open()
         Dim MyCommand As New OleDbDataAdapter()
         Try

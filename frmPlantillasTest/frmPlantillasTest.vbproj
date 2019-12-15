@@ -47,28 +47,36 @@
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CSCartografia">
+    <Reference Include="CSCartografia, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\GAIA\bin\CSCartografia.dll</HintPath>
     </Reference>
-    <Reference Include="gaiaws">
+    <Reference Include="gaiaws, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\GAIA\bin\gaiaws.dll</HintPath>
     </Reference>
-    <Reference Include="kcommon">
+    <Reference Include="kcommon, Version=1.0.1404.19646, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\GAIA\bin\kcommon.dll</HintPath>
     </Reference>
-    <Reference Include="lhCodParam">
+    <Reference Include="lhCodParam, Version=1.0.5917.30257, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\GAIA\bin\lhCodParam.dll</HintPath>
     </Reference>
-    <Reference Include="lhUtil">
+    <Reference Include="lhUtil, Version=1.0.6120.24296, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\GAIA\bin\lhUtil.dll</HintPath>
     </Reference>
-    <Reference Include="ProjNET">
+    <Reference Include="ProjNET, Version=1.0.2794.16965, Culture=neutral, PublicKeyToken=a1f5bdcd9c6f5740, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\GAIA\bin\ProjNET.dll</HintPath>
     </Reference>
-    <Reference Include="RadTreeView">
+    <Reference Include="RadTreeView, Version=4.0.4.0, Culture=neutral, PublicKeyToken=dbd98e0feff9f06b">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\GAIA\bin\RadTreeView.DLL</HintPath>
     </Reference>
-    <Reference Include="SharpMap">
+    <Reference Include="SharpMap, Version=0.9.4875.15108, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\GAIA\bin\SharpMap.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -88,7 +96,8 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
-    <Reference Include="VBCartografia">
+    <Reference Include="VBCartografia, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\GAIA\bin\VBCartografia.dll</HintPath>
     </Reference>
   </ItemGroup>
