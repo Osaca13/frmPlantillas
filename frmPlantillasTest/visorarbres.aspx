@@ -91,7 +91,7 @@ function ContextClicked(node, itemText)
 	}
 	if (itemText== "Esborrar tots") 
 	{
-		if (!confirm("S'eliminar� el contingut de totes les ubicacions on es trobi. Segur que ho vols fer?")) 
+		if (!confirm("S'eliminarà el contingut de totes les ubicacions on es trobi. Segur que ho vols fer?")) 
         { 
             return(false); 
            // sender.get_contextMenus()[0].hide(); 
@@ -244,37 +244,39 @@ END IF
                  
                 </tr>
               </table>
-              
-    
-              <div id="capaInsertarNode" style="position:absolute; overflow: hidden; width:500; height:300; z-index:1; left: 100px; top: 300px; background-color: #CCCCCC;  border: 2px outset #990000; visibility: hidden; margin: 20px;">
-             <div style="background-color:#990000" class="txtblanco18px" align="center">Insercio de nodes</div>
+ <div id="capaInsertarNode" style="position:absolute; overflow: hidden; width:500; height:300; z-index:1; left: 100px; top: 300px; background-color: #CCCCCC;  border: 2px outset #990000; visibility: hidden; margin: 20px;">
+     <div style="background-color:#990000" class="txtblanco18px" align="center">Insercio de nodes</div>
  <img src="img/fletxaroj.gif" width="5" height="8"> <span class="txtNeg14px">Escolliu el tipus de node que voleu inserir i poseu el text associat. </span><br>
  <br>
    <table width=100%  border="0" cellpadding="0" cellspacing="0">
-                    <tr bgcolor="#DDDDDD" class="txtNeg14px">
-                      <td width="10%">Tipus</td>
-                      <td width="90%">Text</td>
-     </tr>
-                    <tr bgcolor="#000000" class="txtNeg14px">
-                      <td colspan="2" height="1"></td>
-                    </tr>
-                    <tr>
-                      <td><asp:DropDownList runat='server' ID="tipusNode" DataTextField="TIPDSDES" DataValueField="TIPINTIP"></asp:DropDownList></td>
-                      <td><asp:TextBox runat="server"  ID="noddstxt" Columns="30" onKeyDown="
+        <tr bgcolor="#DDDDDD" class="txtNeg14px">
+          <td width="10%">Tipus</td>
+          <td width="90%">Text</td>
+        </tr>
+        <tr bgcolor="#000000" class="txtNeg14px">
+            <td colspan="2" height="1"></td>
+       </tr>
+       <tr>
+       <td><asp:DropDownList runat='server' ID="tipusNode" DataTextField="TIPDSDES" DataValueField="TIPINTIP"></asp:DropDownList></td>
+       <td><asp:TextBox runat="server"  ID="noddstxt" Columns="30" onKeyDown="
 			if (window.event.keyCode==13) {		
 				event.returnValue=false;
                 event.cancel = true;
 				document.getElementById('InsertarNode').click();
 
-			}"></asp:TextBox></td>
-                    </tr>
-</table>
-                  <br>   <div align="center">
-                  <asp:button runat="server" OnClick="clickInsertarNode" Text="Acceptar" id="InsertarNode"></asp:button>
-                  <input type="submit" OnClick="document.getElementById('capaInsertarNode').style.visibility = 'hidden';return false;" value="Tancar" >
-                </div>
-             
-              </div>
+			}">
+
+         </asp:TextBox>
+
+       </td>
+      </tr>
+      </table>
+                  <br>   
+     <div align="center">
+       <asp:button runat="server" OnClick="clickInsertarNode" Text="Acceptar" id="InsertarNode"></asp:button>
+        <input type="submit" OnClick="document.getElementById('capaInsertarNode').style.visibility = 'hidden';return false;" value="Tancar" >
+      </div>             
+   </div>
 
 <div id="capaCercarNode" style="position:absolute; overflow: hidden; width:500; height:300; z-index:1; left: 100px; top: 300px; background-color: #CCCCCC;  border: 2px outset #990000; visibility: hidden; margin: 20px;" >
              <div style="background-color:#990000" class="txtblanco18px" align="center">Cerca de nodes</div>
@@ -299,7 +301,11 @@ END IF
 								
                 </div>
 						  </div>
-<asp:textbox id="arbreTreeView" runat="server" BorderWidth="0" Width="0"></asp:textbox><asp:textbox id="actualitzaNode" BorderWidth="0" runat="server" width="0"></asp:textbox><asp:textbox id="actualitzaNodeArbre2" runat="server" width="0" BorderWidth="0"></asp:textbox><asp:label id="lblDebug" runat="server"></asp:label><asp:label id="lblCodi" runat="server"></asp:label>
+<asp:textbox id="arbreTreeView" runat="server" BorderWidth="0" Width="0"></asp:textbox>
+     <asp:textbox id="actualitzaNode" BorderWidth="0" runat="server" width="0"></asp:textbox>
+     <asp:textbox id="actualitzaNodeArbre2" runat="server" width="0" BorderWidth="0"></asp:textbox>
+     <asp:label id="lblDebug" runat="server"></asp:label>
+     <asp:label id="lblCodi" runat="server"></asp:label>
 </form>
 
  <!-- #INCLUDE VIRTUAL="~/js/App_LocalResources/peu.aspx" -->

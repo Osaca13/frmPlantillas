@@ -4070,9 +4070,10 @@ Public Class GAIA
                         dbRow = DS.Tables(0).Rows(0)
                         GAIA.bdSR(objConn, "INSERT INTO METLPLT (PLTINNOD, PLTDSTIT,PLTDSOBS, PLTDTANY, PLTDSUSR,PLTDSHOR,PLTDSVER,PLTDSNUM, PLTDSCMP,PLTDSEST,PLTDSATR,PLTDSCSS, PLTDSLNK,PLTDSALT, PLTDSIMG, PLTDSFLW, PLTDSTCO,PLTDSLCW, PLTDSLC2, PLTDSPLT, PLTDSALK, PLTCDPAL, PLTDSAAL,PLTDSALF, PLTDSNIV, PLTSWVIS) VALUES (" & codiNode & ",'" & dbRow("PLTDSTIT") & "','" & dbRow("PLTDSOBS") & "',getdate(),'" & codiUsuari & "','" & dbRow("PLTDSHOR") & "','" & dbRow("PLTDSVER") & "','" & dbRow("PLTDSNUM") & "','" & dbRow("PLTDSCMP") & "','" & dbRow("PLTDSEST") & "','" & dbRow("PLTDSATR") & "','" & dbRow("PLTDSCSS") & "','" & dbRow("PLTDSLNK") & "','" & dbRow("PLTDSALT") & "','" & dbRow("PLTDSIMG") & "','" & dbRow("PLTDSFLW") & "','" & dbRow("PLTDSTCO") & "','" & dbRow("PLTDSLCW") & "','" & dbRow("PLTDSLC2") & "','" & dbRow("PLTDSPLT") & "','" & dbRow("PLTDSALK") & "','" & dbRow("PLTCDPAL") & "','" & dbRow("PLTDSAAL") & "','" & dbRow("PLTDSALF") & "','" & dbRow("PLTDSNIV") & "'," & dbRow("PLTSWVIS") & ")")
                     End If
-                    novaRel = GAIA.creaRelacio(objConn, reldesti.cdarb, reldesti.infil, codiNode, 0, reldesti.cdher & "_" & reldesti.infil, rel.cdest, rel.cdsit, rel.cdord + 1000, 1, False, codiUsuari)
 
                 End If
+                novaRel = GAIA.creaRelacio(objConn, reldesti.cdarb, reldesti.infil, codiNode, 0, reldesti.cdher & "_" & reldesti.infil, rel.cdest, rel.cdsit, rel.cdord + 1000, 1, False, codiUsuari)
+
             Case "FULLA WEB"
                 'Teresa: añado la posibilidad de GAIA2
                 If GAIA.esGAIA2(objConn, rel.infil) Then
@@ -4219,10 +4220,10 @@ Public Class GAIA
         'Si no és una imatge faig copia dels continguts que pengin:
         If Not UCase(rel.tipdsdes) = "FULLA DOCUMENT" Then
             Dim reltmp As New clsRelacio
-            GAIA.bdr(objConn, "SELECT * FROM METLREL  WITH(NOLOCK) WHERE RELINCOD =" & rel.incod & " AND RELCDSIT <99 ", DS)
+            GAIA.bdr(objConn, "SELECT * FROM METLREL  WITH(NOLOCK) WHERE RELCDRSU =" & rel.incod & " AND RELCDSIT <99 ", DS)
             For Each dbRow In DS.Tables(0).Rows
                 reltmp.bdget(objConn, dbRow("RELINCOD"))
-                'ferCopiaContingut(objConn, reltmp, codiUsuari, "-1", novaRel)
+                ferCopiaContingut(objConn, reltmp, codiUsuari, "-1", novaRel)
             Next dbRow
         End If
         ferCopiaContingut = novaRel.incod
