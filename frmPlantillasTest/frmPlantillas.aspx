@@ -112,7 +112,7 @@
                 </div>
                 <div class="form-row mb-3">
                 	<label for="AWEDSNOM" class="col-lg-3 col-md-3 col-sm-5 col-form-label-sm text-lg-right text-md-right text-sm-left">Nom de l'arbre:</label>
-                	<asp:TextBox runat="server" ID="AWEDSNOM" MaxLength="60" class="form-control form-control-sm col-lg-7 col-md-7 col-sm-7" placeholder="Nom de l'arbre"/>
+                	<asp:TextBox runat="server" ID="AWEDSNOM" MaxLength="60" class="form-control form-control-sm col-lg-7 col-md-7 col-sm-7" placeholder="Nom de l'arbre" OnTextChanged="AWEDSNOM_TextChanged"/>
                 </div>
                 <div class="form-row mb-3">
                 	<label for="lstAWEDSSER" class="col-lg-3 col-md-3 col-sm-5 col-form-label-sm text-lg-right text-md-right text-sm-left">* Servidor FTP dest&iacute;:</label>
