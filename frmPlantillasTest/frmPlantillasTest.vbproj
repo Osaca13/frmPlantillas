@@ -753,6 +753,8 @@
     <Content Include="img\g_pixel_trans.gif" />
     <Content Include="img\g_separador_menubottom.gif" />
     <Content Include="img\g_separador_menutop.gif" />
+    <Content Include="img\home\b_tancar.gif" />
+    <Content Include="img\home\b_veure_tots.gif" />
     <Content Include="img\icoinfo.gif" />
     <Content Include="img\icona_ajuntament.png" />
     <Content Include="img\ico_access.png" />
@@ -1235,7 +1237,12 @@
     <Content Include="img\XPWhiteSpace.gif" />
     <Content Include="img\zip.png" />
     <Content Include="inici.aspx" />
+    <Content Include="js\App_LocalResources\cap_intranet.aspx" />
+    <Content Include="js\App_LocalResources\cap_intranet.inc" />
+    <Content Include="js\App_LocalResources\eltemps.aspx" />
     <Content Include="js\App_LocalResources\peu.inc" />
+    <Content Include="js\App_LocalResources\peu_intranet.aspx" />
+    <Content Include="js\App_LocalResources\peu_intranet.inc" />
     <Content Include="js\jquery.tools.min.js" />
     <Content Include="js\App_LocalResources\cap.aspx" />
     <Content Include="js\App_LocalResources\contextmenusNou.xml" />
@@ -1256,6 +1263,7 @@
     <Content Include="js\visorimatges\jquery.min.js" />
     <Content Include="js\visorimatges\noscript.js" />
     <Content Include="frmPlantillas.aspx" />
+    <Content Include="Propietats.aspx" />
     <Content Include="RadControls\TreeView\Scripts\RadTreeView_Client_4_0_4.js" />
     <Content Include="RadControls\TreeView\Skins\BottomLine.gif" />
     <Content Include="RadControls\TreeView\Skins\BottomMinus.gif" />
@@ -1369,6 +1377,13 @@
     </Compile>
     <Compile Include="frmPlantillas.aspx.vb">
       <DependentUpon>frmPlantillas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Propietats.aspx.designer.vb">
+      <DependentUpon>Propietats.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Propietats.aspx.vb">
+      <DependentUpon>Propietats.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="VisorArbres.aspx.designer.vb">

@@ -374,7 +374,7 @@ Public Class VisorArbres
                 End If
 
             Case "Propietats"
-                Response.Write("<script language=""javascript"">window.open(""/GAIA/aspx/propietats/propietats.aspx?relincod=" & codiRelacio.ToString() & """,""_blank"", ""location=0,height=410,width=820,scrollbars=yes,resizable=yes"");</script>")
+                Response.Write("<script language=""javascript"">window.open(""Propietats.aspx?relincod=" & codiRelacio.ToString() & """,""_blank"", ""location=0,height=410,width=820,scrollbars=yes,resizable=yes"");</script>")
             Case "Publicar"
                 If clsPermisos.tepermis2(objconn, 7, idUsuari, idUsuari, rel, permisHeretat, "", "", 0) = 1 Or idUsuari = 297650 Then
                     Response.Write("<script language=""javascript"">window.open(""/GAIA/aspx/fulles/frmObrirFulla.aspx?codiRelacio=" & codiRelacio.ToString() & "&publicar=1&idioma=1"")</script>")
@@ -1079,8 +1079,6 @@ Public Class VisorArbres
             For Each dbRow In DS.Tables(0).Rows
                 If clsPermisos.existeixElement(dbRow("RELINCOD"), llistaAmbPermisos) Then
                     If valorAnt <> dbRow("TIPINTIP") And tipusTmp <> "" Then
-
-
 
                         'tracto llista
                         tractaLlistaArbres(camp, strLlista, valorAnt, tipusTmp)
