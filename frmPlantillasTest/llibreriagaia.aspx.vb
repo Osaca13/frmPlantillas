@@ -2952,14 +2952,14 @@ Public Class GAIA
 
 
         objConn = New OleDbConnection
-        dataSource = ".\SQLEXPRESS"
-        bd = "hm_prueba"
+        'dataSource = ".\SQLEXPRESS"
+        'bd = "hm_prueba"
 
         'Data Source = Initial Catalog=hm_prueba;Integrated Security=True
         'Data Source = .\ SQLEXPRESS;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False
         ' objConn.ConnectionString = "Provider=SQLOLEDB;Data Source=" + dataSource + ";Initial Catalog=" + bd + "; pwd=secopc; user id=CPDsa"
-        'objConn.ConnectionString = "Provider=SQLOLEDB;Data Source=" + dataSource + ";Initial Catalog=" + bd + "; pwd=" & strPwd & "; user id=" & strUsr
-        objConn.ConnectionString = "Provider=SQLOLEDB;Data Source=" + dataSource + ";Initial Catalog=" + bd + "; Integrated Security= True"
+        objConn.ConnectionString = "Provider=SQLOLEDB;Data Source=" + dataSource + ";Initial Catalog=" + bd + "; pwd=" & strPwd & "; user id=" & strUsr
+        'objConn.ConnectionString = "Provider=SQLOLEDB;Data Source=" + dataSource + ";Initial Catalog=" + bd + "; Integrated Security= True"
 
         objConn.Open()
         Dim MyCommand As New OleDbDataAdapter()
@@ -13072,7 +13072,9 @@ Public Class GAIA
             Case "arbre web"
                 crida = "/GAIA/aspx/web/frmArbreWeb.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString()
             Case "fulla plantillaWeb"
-                crida = "/GAIA/aspx/web/frmPlantilla.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString()
+                'crida = "/GAIA/aspx/web/frmPlantilla.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString()
+                crida = "frmPlantillas.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString()
+
             Case "fulla codiWeb"
                 crida = "/GAIA/aspx/fulles/frmLlibreriaCodiWeb.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString()
             Case "fulla document"

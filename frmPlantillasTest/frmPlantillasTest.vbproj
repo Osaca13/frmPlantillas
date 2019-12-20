@@ -138,6 +138,8 @@
     <Content Include="carregaDocuments.aspx" />
     <Content Include="carregaLinks.aspx" />
     <Content Include="constants.inc" />
+    <Content Include="css\intranet_1024.css" />
+    <Content Include="css\jquery-ui.css" />
     <Content Include="estructura.aspx" />
     <Content Include="frmestructura.aspx" />
     <Content Include="img\abajo.gif" />
@@ -1263,6 +1265,7 @@
     <Content Include="js\visorimatges\jquery.min.js" />
     <Content Include="js\visorimatges\noscript.js" />
     <Content Include="frmPlantillas.aspx" />
+    <Content Include="llibreria\UpImgPrev.ascx" />
     <Content Include="Propietats.aspx" />
     <Content Include="RadControls\TreeView\Scripts\RadTreeView_Client_4_0_4.js" />
     <Content Include="RadControls\TreeView\Skins\BottomLine.gif" />
@@ -1301,6 +1304,10 @@
     <Content Include="RadControls\TreeView\Skins\TopMinus.gif" />
     <Content Include="RadControls\TreeView\Skins\TopPlus.gif" />
     <Content Include="RadControls\TreeView\Skins\WhiteSpace.gif" />
+    <Content Include="scripts\jquery-ui.multidatespicker.js" />
+    <Content Include="scripts\jquery.datepick-ca.js" />
+    <Content Include="scripts\jquery.timepicker.css" />
+    <Content Include="scripts\jquery.timepicker.js" />
     <Content Include="Styles\black.css" />
     <Content Include="Styles\blue.css" />
     <Content Include="Styles\bootstrap.min.css" />
@@ -1311,6 +1318,7 @@
     <Content Include="Styles\formularisGaia.css" />
     <Content Include="Styles\gaiaIntranet.css" />
     <Content Include="Styles\gaiaIntranetPrint.css" />
+    <Content Include="css\gaiaIntranet_1024.css" />
     <Content Include="Styles\green.css" />
     <Content Include="Styles\grey.css" />
     <Content Include="Styles\intranet.css" />
@@ -1351,6 +1359,10 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="llibreriagaia.aspx.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="llibreria\UpImgPrev.ascx.vb">
+      <DependentUpon>UpImgPrev.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
