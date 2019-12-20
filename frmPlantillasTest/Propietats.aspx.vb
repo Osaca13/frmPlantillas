@@ -11,7 +11,7 @@ Public Class Propietats
     '**********************************************************************
     '**********************************************************************
 
-
+    Dim session2 As String
     Dim nif As String
     Public Shared objconn As OleDbConnection
 
@@ -22,15 +22,19 @@ Public Class Propietats
     Private Sub Page_Load(sender As Object, e As System.EventArgs) Handles MyBase.Load
 
         objconn = GAIA.bdIni()
-        If HttpContext.Current.User.Identity.Name.Length > 0 Then
-            If (Session("nif") Is Nothing) Then
-                Session("nif") = GAIA.nifUsuari(objconn, HttpContext.Current.User.Identity.Name).Trim()
-            End If
-            If Session("codiOrg") Is Nothing Then
-                Session("CodiOrg") = GAIA.trobaNodeUsuari(objconn, Session("nif")).ToString().Trim()
-            End If
-        End If
-        nif = Session("nif").Trim()
+        'If HttpContext.Current.User.Identity.Name.Length > 0 Then
+        '    If (Session("nif") Is Nothing) Then
+        '        Session("nif") = GAIA.nifUsuari(objconn, HttpContext.Current.User.Identity.Name).Trim()
+        '    End If
+        '    If Session("codiOrg") Is Nothing Then
+        '        Session("CodiOrg") = GAIA.trobaNodeUsuari(objconn, Session("nif")).ToString().Trim()
+        '    End If
+        'End If
+        'nif = Session("nif").Trim()
+
+
+
+        session2 = "346231"
         If Not Page.IsPostBack Then
             dataIni.Text = DateAdd(DateInterval.Day, -30, Now).ToString("dd/MM/yyyy")
             dataFi.Text = Now.ToString("dd/MM/yyyy")
@@ -40,7 +44,7 @@ Public Class Propietats
             carregaUbicacions()
 
 
-            botonsAccions(Request("RELINCOD"), Session("codiOrg"))
+            botonsAccions(Request("RELINCOD"), session2)
 
         End If
 
@@ -58,7 +62,7 @@ Public Class Propietats
         Dim rel As New clsRelacio
         rel.bdget(Nothing, codiRelacio)
 
-        If clsPermisos.tepermis(Nothing, 3, Session("CodiOrg"), Session("CodiOrg"), rel, 0, "", "", 0) Then
+        If clsPermisos.tepermis(Nothing, 3, session2, session2, rel, 0, "", "", 0) Then
             lblEditar.Text = "<a href=""" & GAIA.editarContingut(Nothing, rel.infil, 1, rel.incod, rel.incod, rel.incod, 0) & """ target=""_blank"">Editar</a>"
         End If
 

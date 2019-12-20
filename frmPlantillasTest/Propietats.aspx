@@ -13,7 +13,7 @@
 <link rel="stylesheet" type="text/css" href="/scripts/jquery.timepicker.css" />
 <script src="/js/jquery-1.10.2.js"></script>
 <script src="/js/jquery-ui-1.11.4/jquery-ui.js"></script>
-<script type="text/javascript" src="/Scripts/jquery.datepick-ca.js"></script>
+<script type="text/javascript" src="/scripts/jquery.datepick-ca.js"></script>
 <script type="text/javascript" src="/scripts/jquery.timepicker.js"></script> 
 <script type="text/javascript" src="/scripts/jquery-ui.multidatespicker.js"></script> 
 </head>
@@ -22,20 +22,20 @@
 <script language="javascript">
  $(document).ready(function() {
  	
- 		$("#dataIni").datepicker({
+ 		$('#dataIni').datepicker({
 		  		 showOn: "both",
 	             buttonImage: "/img/common/ico_calendar.png",
 				 buttonImageOnly: true,
 	            changeMonth: true,
 	            changeYear: true
-	        });
-			$("#dataFi").datepicker({
+	    });
+		$('#dataFi').datepicker({
 		  		 showOn: "both",
 	             buttonImage: "/img/common/ico_calendar.png",
 				 buttonImageOnly: true,
 	            changeMonth: true,
 	            changeYear: true
-	        });
+	     });
 	});
 	
 		
@@ -49,7 +49,13 @@
 <table width="100%" border="0" cellpadding="5" cellspacing="0" class="fonsgris05">
   <tr>
     <td bgcolor="#5d5d5d" colspan="2">
-    	<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td><asp:Label ID="lblNode" runat="server" CssClass="t1 blanc arial bold mayusculas"/></td><td align="right"><asp:Label ID="lblEditar" runat="server" CssClass="botoEditar"/></td></tr></table>			
+    	<table width="100%" cellpadding="0" cellspacing="0" border="0">
+            <tr>
+                <td>
+                    <asp:Label ID="lblNode" runat="server" CssClass="t1 blanc arial bold mayusculas"/></td>
+                <td align="right">
+                    <asp:Label ID="lblEditar" runat="server" CssClass="botoEditar"/></td></tr>
+    	</table>			
     </td>    
   </tr>
 	<tr>
@@ -80,9 +86,12 @@
   </tr>
   <asp:panel id="pnlVisites" runat="server" visible="false">
   <tr>
-    <td align="right" valign="top" class="bold arial t075 border1BottomDotted846540">Visites als webs en el període <br />del <asp:textbox runat="server"  id="dataIni" /><br />al <asp:textbox runat="server" id="dataFi"  name="dataFi"/><br />  
-   
-	<button type="submit"  ID="btnCanviarPeriode"   runat="server" onserverclick="btnCanviarPeriode_Click">Calcular</button>
+    <td align="right" valign="top" class="bold arial t075 border1BottomDotted846540">Visites als webs en el període <br />del 
+        <asp:textbox runat="server"  id="dataIni" />
+        <br />al 
+        <asp:textbox runat="server" id="dataFi"  name="dataFi"/>
+        <br />     
+	    <button type="submit"  id="btnCanviarPeriode"   runat="server" onserverclick="btnCanviarPeriode_Click">Calcular</button>
     </td>
     <td class="arial t075 blauTurquesa border1BottomDotted846540"><asp:Label ID="lblVisites" runat="server"/></td>
   </tr>

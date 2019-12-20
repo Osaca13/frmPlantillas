@@ -74,11 +74,11 @@ Public Class frmPlantillas
         Dim arrayTmp As String()
 
         nroId.Value = 0
-        tipodePlantilla = "A"
+        tipodePlantilla = Request("tipus")
 
 
-        'Select Case Request("tipus")
-        Select Case tipodePlantilla
+        Select Case Request("tipus")
+        'Select Case tipodePlantilla
 
             Case "A"
                 ltTitol.Text = "Arbre web"
@@ -145,8 +145,8 @@ Public Class frmPlantillas
             ltEst.Text = "<div class=""contenidor border border-secondary p-2 pr-4 pl-4""><span class=""contenidorAtributs"" style=""display:none"">###########################|</span><div class=""row border border-secondary p-2""><span class=""rowAtributs"" style=""display:none"">###########################|</span><div class=""col cel border border-secondary p-2"" id=""d0""><span class=""divId"" style=""display:none"">0</span><span class=""divImg""></span><span class=""text"">Cel&middot;la inicial</span><span class=""atributs"" style=""display:none"">0#Cel&middot;la inicial##########################|</span></div></div></div> "
             txtEst.Value = ltEst.Text
         Else
-            'Select Case Request("tipus")
-            Select Case tipodePlantilla
+            Select Case Request("tipus")
+            'Select Case tipodePlantilla
 
                 Case "W" 'fulla web
                     qSQL = "select * FROM METLWEB2 WITH(NOLOCK) WHERE WEBINNOD=" & Request("id") & " AND WEBINIDI=" & codiIdioma
@@ -625,37 +625,37 @@ Public Class frmPlantillas
         DS = New DataSet()
 
         GAIA.bdr(objconn, "SELECT TIPINTIP,TIPDSDES,TBLDSTXT FROM  METLTIP WITH(NOLOCK), METLTBL WITH(NOLOCK) WHERE TIPINTIP=TBLINTFU", DS)
-        'If Request("tipus") = "P" Or Request("tipus") = "" Then
+        If Request("tipus") = "P" Or Request("tipus") = "" Then
 
-        If tipodePlantilla = "P" Or tipodePlantilla = "" Then
+            'If tipodePlantilla = "P" Or tipodePlantilla = "" Then
             lblCodi.Text = "<script language=""javascript"">"
 
-            lblCodi.Text += "var longitud = document.getElementById('lstTipusFulla').options.length;"
+                lblCodi.Text += "var longitud = document.getElementById('lstTipusFulla').options.length;"
 
-            lblTipusFulla.Text = "<select name=""lstTipusFulla"" id=""lstTipusFulla"" onChange='canviCampsDB(this[this.selectedIndex].value);'><option value="" ""></option>"
-            For Each dbRow In DS.Tables(0).Rows
-                lblTipusFulla.Text += "<option value=" + dbRow("TIPINTIP").ToString() + ">" + dbRow("TIPDSDES").Trim() + "</option>"
-            Next dbRow
-            lblTipusFulla.Text += "</select>"
+                lblTipusFulla.Text = "<select name=""lstTipusFulla"" id=""lstTipusFulla"" onChange='canviCampsDB(this[this.selectedIndex].value);'><option value="" ""></option>"
+                For Each dbRow In DS.Tables(0).Rows
+                    lblTipusFulla.Text += "<option value=" + dbRow("TIPINTIP").ToString() + ">" + dbRow("TIPDSDES").Trim() + "</option>"
+                Next dbRow
+                lblTipusFulla.Text += "</select>"
 
-            lblCodi.Text += "var taules = new Array(longitud);" & Chr(13) + Chr(10)
-            lblCodi.Text += "var camps = new Array(longitud);" & Chr(13) + Chr(10)
-            lblCodi.Text += "taules[0] = "" "";" & Chr(13) + Chr(10)
+                lblCodi.Text += "var taules = new Array(longitud);" & Chr(13) + Chr(10)
+                lblCodi.Text += "var camps = new Array(longitud);" & Chr(13) + Chr(10)
+                lblCodi.Text += "taules[0] = "" "";" & Chr(13) + Chr(10)
 
-            lblCodi.Text += "for (i=0; i<longitud; i++) " & Chr(13) + Chr(10)
-            lblCodi.Text += "camps[i]=new Array(); " & Chr(13) + Chr(10)
-            lblCodi.Text += "camps[0][0]=new Option("" "","" "");" & Chr(13) + Chr(10)
-            Dim x As Integer = 1
-            For Each dbRow In DS.Tables(0).Rows
-                lblCodi.Text += "taules[" & x.ToString() & "]=""" & dbRow("TIPINTIP") & """;" & Chr(13) + Chr(10)
-                lblCodi.Text += carregaNomCamps(x, dbRow("TBLDSTXT")) & Chr(13) + Chr(10)
-                x = x + 1
-            Next dbRow
+                lblCodi.Text += "for (i=0; i<longitud; i++) " & Chr(13) + Chr(10)
+                lblCodi.Text += "camps[i]=new Array(); " & Chr(13) + Chr(10)
+                lblCodi.Text += "camps[0][0]=new Option("" "","" "");" & Chr(13) + Chr(10)
+                Dim x As Integer = 1
+                For Each dbRow In DS.Tables(0).Rows
+                    lblCodi.Text += "taules[" & x.ToString() & "]=""" & dbRow("TIPINTIP") & """;" & Chr(13) + Chr(10)
+                    lblCodi.Text += carregaNomCamps(x, dbRow("TBLDSTXT")) & Chr(13) + Chr(10)
+                    x = x + 1
+                Next dbRow
 
-            lblCodi.Text += "function canviCampsDB(valor) { var temp=document.getElementById('ddlPLTDSCMP'); var temp2=document.getElementById('ddlPLTDSLNK'); var temp3=document.getElementById('ddlPLTDSALT');temp.options[0]=new Option("" "","" "");temp2.options[0]=new Option("" "","" "");temp3.options[0]=new Option("" "","" "");for (x=0;x<taules.length;x++) {		if (taules[x]==valor) {			break;	}	}	for (m=temp.options.length-1;m>0;m--) {		temp.options[m]=null;temp2.options[m]=null;temp3.options[m]=null;		} 	for (i=1;i<camps[x].length;i++) {		temp.options[i]=new Option(camps[x][i].text,camps[x][i].value);temp2.options[i]=new Option(camps[x][i].text,camps[x][i].value);temp3.options[i]=new Option(camps[x][i].text,camps[x][i].value);	} temp.options[0].selected=true;temp2.options[0].selected=true;temp3.options[0].selected=true;}"
-            lblCodi.Text += "</script>"
-        Else
-            lblTipusFulla.Text = "<select name=""lstTipusFulla"" id=""lstTipusFulla"" ><option value="" ""></option>"
+                lblCodi.Text += "function canviCampsDB(valor) { var temp=document.getElementById('ddlPLTDSCMP'); var temp2=document.getElementById('ddlPLTDSLNK'); var temp3=document.getElementById('ddlPLTDSALT');temp.options[0]=new Option("" "","" "");temp2.options[0]=new Option("" "","" "");temp3.options[0]=new Option("" "","" "");for (x=0;x<taules.length;x++) {		if (taules[x]==valor) {			break;	}	}	for (m=temp.options.length-1;m>0;m--) {		temp.options[m]=null;temp2.options[m]=null;temp3.options[m]=null;		} 	for (i=1;i<camps[x].length;i++) {		temp.options[i]=new Option(camps[x][i].text,camps[x][i].value);temp2.options[i]=new Option(camps[x][i].text,camps[x][i].value);temp3.options[i]=new Option(camps[x][i].text,camps[x][i].value);	} temp.options[0].selected=true;temp2.options[0].selected=true;temp3.options[0].selected=true;}"
+                lblCodi.Text += "</script>"
+            Else
+                lblTipusFulla.Text = "<select name=""lstTipusFulla"" id=""lstTipusFulla"" ><option value="" ""></option>"
             For Each dbRow In DS.Tables(0).Rows
                 lblTipusFulla.Text += "<option value=" + dbRow("TIPINTIP").ToString() + ">" + dbRow("TIPDSDES").Trim() + "</option>"
             Next dbRow
@@ -791,8 +791,9 @@ Public Class frmPlantillas
             End If
             cont = cont + 1
         Next cel
-        tipodePlantilla = "A"
-        Select Case tipodePlantilla
+
+        Select Case Request("tipus")
+
             Case "W"
                 If WEBDTCAD.Text = "" Then dataCaducitat = "01/01/1900" Else dataCaducitat = WEBDTCAD.Text
                 If WEBTPBUS.Checked Then buscar = "S" Else buscar = "N"
@@ -911,6 +912,9 @@ Public Class frmPlantillas
                 'PLTDSALT= PLTDSALT.replace(",","|")		
                 strSql = "DELETE FROM METLPLT2 WHERE PLTINNOD=" & txtCodiNode.Text
                 strSql &= ";INSERT INTO METLPLT2 VALUES(" & txtCodiNode.Text & ",'" & txtPLTDSTIT.Text & "',getdate(), " & Session("codiOrg") & ",'" & PLTDSCMP & "','" & PLTDSEST & "','" & PLTDSCSS & "','" & PLTDSLNK & "','" & PLTDSIMG & "','" & PLTDSTCO & "','" & PLTDSLCW & "','" & PLTDSLC2 & "','" & PLTDSALK & "','" & PLTCDPAL & "','" & PLTDSAAL & "','" & PLTDSALT & "','" & PLTDSPLT & "','" & PLTDSFLW & "','" & txtPLTDSOBS.Text & "'," & PLTSWALT & ",'" & PLTDSNUM & "','" & PLTDSALF & "','" & PLTDSNIV & "'," & IIf(chkPLTSWVIS.Checked, 1, 0) & ",'" & PLTDSHTM & "')"
+
+                strSql &= ";UPDATE METLNOD SET NODDSTXT='" & txtPLTDSTIT.Text.Replace("'", "''").Replace("<p>", "").Replace("</p>", "") & "' WHERE NODINNOD=" & txtCodiNode.Text
+
 
                 lblResultat.Text = "<div class='alert alert-dismissible alert-success mt-2 mb-2'><button type='button' class='close' data-dismiss='alert'>x</button>Plantilla Web modificada amb èxit.<br/><br/><a href=""http://lhintranet/GAIA/aspx/web/frmplantilla.aspx?tipus=P"" class=""txtRojo12Px"">&nbsp;Nova plantilla</a></div>"
                 'GAIA.escriuResultat(objConn,lblResultat , "Plantilla modificada amb èxit.","<a href=""http://lhintranet/GAIA/aspx/web/frmplantilla.aspx?tipus=P"" class=""btn btn-sm btn-primary"">Nova plantilla</a>")			

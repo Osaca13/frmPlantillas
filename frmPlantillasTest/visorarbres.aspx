@@ -24,7 +24,6 @@
 	font-family: Tahoma;
 	font-size: 9pt;
 	color: black;
-
 }
 
 .ContextItemOver
@@ -68,12 +67,11 @@ function ContextClicked(node, itemText)
 { 
 	if (itemText=="Cercar") 
 	{
-		document.getElementById("arbreTreeView").value= node.TreeView.ID;
-		
+		document.getElementById("arbreTreeView").value= node.TreeView.ID;		
 		document.getElementById("capaCercarNode").style.visibility = "visible";
-		document.getElementById("cerca").focus();
-	
-	}
+		document.getElementById("cerca").focus();	
+    }
+
 	if (itemText=="Insertar") 
 	{
 		document.getElementById("arbreTreeView").value= node.TreeView.ID;
@@ -106,7 +104,6 @@ function ContextClicked(node, itemText)
         } 
 	}
 }
-
 
 function seleccionaNodes(Node)
 {			
