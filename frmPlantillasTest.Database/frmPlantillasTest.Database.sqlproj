@@ -105,6 +105,7 @@
     <Folder Include="Security\" />
     <Folder Include="dbo\Functions\" />
     <Folder Include="Assemblies\" />
+    <Folder Include="Data" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\INTTLLFA.sql">
@@ -1278,6 +1279,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assemblies\fuzzystrings.dll" />
+    <None Include="Data\dbo.METLPLT.data.sql" />
+    <None Include="Data\dbo.METLPLT2.data.sql" />
+    <None Include="Data\dbo.METLREL.data.sql" />
+    <None Include="Data\dbo.METLTIP.data.sql" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="fuzzystrings">
