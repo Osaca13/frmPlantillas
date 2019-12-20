@@ -1,8 +1,0 @@
-﻿CREATE TABLE [dbo].[CAIDTLPIN] (
-    [PINDHANY] INT       NULL,
-    [PINDSPRO] CHAR (10) NULL,
-    [PININNUM] INT       NULL,
-    [PINDSPIN] TEXT      NULL,
-    [PINDSPAG] INT       NULL
-);
-
