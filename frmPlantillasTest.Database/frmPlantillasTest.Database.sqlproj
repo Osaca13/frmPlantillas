@@ -598,10 +598,6 @@
     <Build Include="dbo\Functions\DoubleMetaPhone.sql" />
     <Build Include="dbo\Functions\edit_distance.sql" />
     <Build Include="dbo\Functions\fn_LevenshteinDistance.sql" />
-    <Build Include="dbo\Functions\anyAnterior.sql">
-      <AnsiNulls>On</AnsiNulls>
-      <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
     <Build Include="Security\CPDsa_2.sql" />
     <Build Include="Security\LH_msoria_1.sql" />
   </ItemGroup>
@@ -616,6 +612,10 @@
     <None Include="Data\dbo.METLEST.data.sql" />
     <None Include="Data\dbo.METLWEB.data.sql" />
     <None Include="Data\dbo.METLWEB2.data.sql" />
+    <None Include="Data\dbo.METLNOD.data.sql" />
+    <None Include="Data\dbo.METLNES.data.sql" />
+    <None Include="Data\dbo.METLNWE.data.sql" />
+    <None Include="Data\dbo.METLNWE2.data.sql" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="fuzzystrings">
