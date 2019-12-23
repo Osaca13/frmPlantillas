@@ -138,6 +138,7 @@
     <Content Include="carregaDocuments.aspx" />
     <Content Include="carregaLinks.aspx" />
     <Content Include="constants.inc" />
+    <Content Include="css\Ajuda.css" />
     <Content Include="css\intranet_1024.css" />
     <Content Include="css\jquery-ui.css" />
     <Content Include="estructura.aspx" />
@@ -878,6 +879,8 @@
     <Content Include="img\ico_info5.png" />
     <Content Include="img\ico_info98.png" />
     <Content Include="img\ico_infop.png" />
+    <Content Include="img\ico_interrogant.png" />
+    <Content Include="img\ico_interrogante.gif" />
     <Content Include="img\ico_interrogante_p.gif" />
     <Content Include="img\ico_lh.png" />
     <Content Include="img\ico_link.png" />
@@ -1239,6 +1242,8 @@
     <Content Include="img\XPWhiteSpace.gif" />
     <Content Include="img\zip.png" />
     <Content Include="inici.aspx" />
+    <Content Include="js\Ajuda.js" />
+    <Content Include="js\App_LocalResources\Ajuda.ascx" />
     <Content Include="js\App_LocalResources\cap_intranet.aspx" />
     <Content Include="js\App_LocalResources\cap_intranet.inc" />
     <Content Include="js\App_LocalResources\eltemps.aspx" />
@@ -1353,6 +1358,10 @@
     <Compile Include="frmestructura.aspx.vb">
       <DependentUpon>frmestructura.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="js\App_LocalResources\Ajuda.ascx.vb">
+      <DependentUpon>Ajuda.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="js\App_LocalResources\visordocumentshtml.ascx.vb">
       <DependentUpon>visordocumentshtml.ascx</DependentUpon>

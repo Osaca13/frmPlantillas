@@ -903,7 +903,7 @@ Public Class VisorArbres
         Dim ds As New DataSet
         Dim query As String
 
-        query = "SELECT AWEINNOD FROM METLAWE2 WHERE AWEINNOD=" & nroNode & " UNION SELECT NWEINNOD FROM METLNWE2 WHERE NWEINNOD=" & nroNode & " UNION SELECT WEBINNOD FROM METLWEB2 WHERE WEBINNOD=" & nroNode & ""
+        query = "SELECT AWEINNOD FROM METLAWE2 WHERE AWEINNOD=" & nroNode & " UNION SELECT NWEINNOD FROM METLNWE2 WHERE NWEINNOD=" & nroNode & " UNION SELECT WEBINNOD FROM METLWEB2 WHERE WEBINNOD=" & nroNode & " UNION SELECT PLTINNOD FROM METLPLT2 WHERE PLTINNOD =" & nroNode & ""
         GAIA.bdr(objConn, query, ds)
 
         If ds.Tables(0).Rows.Count > 0 Then

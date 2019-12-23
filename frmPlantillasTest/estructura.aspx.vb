@@ -157,7 +157,7 @@ Public Class estructura
                 If html.Length > 1 Then
                     If html(1).Substring(1, 1) = "d" Then esGaia2 = True
                 Else
-                    esGaia2 = True
+                    esGaia2 = False
                 End If
 
             Catch ex As Exception
@@ -307,7 +307,7 @@ Public Class estructura
                     End If
                 Case "node web"
                     lblTitol.Text = "Estructura del node web"
-                    GAIA.bdr(objconn, "SELECT NWEDSPLA,NWEDSEST ,NWEDSATR,NWEDSTVER,NWEDSTHOR,NWEDSTCO FROM METLNWE WITH(NOLOCK) WHERE NWEINNOD=" & nroNodeDesti & " UNION SELECT NWEDSPLA,CAST (NWEDSEST AS VARCHAR(8000)) AS NWEDSEST ,'GAIA2' as NWEDSATR,'0' as NWEDSTVER,'0' as NWEDSTHOR,NWEDSTCO FROM METLNWE2 WITH(NOLOCK) WHERE NWEINNOD=" & nroNodeDesti, DS)
+                    GAIA.bdr(objconn, "SELECT NWEDSPLA,NWEDSEST ,NWEDSATR,NWEDSTVER,NWEDSTHOR,NWEDSTCO FROM METLNWE WITH(NOLOCK) WHERE NWEINNOD=" & nroNodeDesti & " UNION SELECT NWEDSPLA,CAST (NWEDSHTM AS VARCHAR(8000)) AS NWEDSEST ,'GAIA2' as NWEDSATR,'0' as NWEDSTVER,'0' as NWEDSTHOR,NWEDSTCO FROM METLNWE2 WITH(NOLOCK) WHERE NWEINNOD=" & nroNodeDesti, DS)
                     'gaia.debug(nothing, "SELECT NWEDSPLA,NWEDSEST ,NWEDSATR,NWEDSTVER,NWEDSTHOR,NWEDSTCO FROM METLNWE WITH(NOLOCK) WHERE NWEINNOD=" & nroNodeDesti & " UNION SELECT NWEDSPLA,CAST (NWEDSEST AS VARCHAR(8000)) AS NWEDSEST ,'GAIA2' as NWEDSATR,'0' as NWEDSTVER,'0' as NWEDSTHOR,NWEDSTCO FROM METLNWE2 WITH(NOLOCK) WHERE NWEINNOD=" & nroNodeDesti)
                     If DS.Tables(0).Rows.Count > 0 Then
 
@@ -361,7 +361,7 @@ Public Class estructura
                     Dim codiRelacio As Integer
                     'codiRelacio=GAIA.obtenirRelacioSuperior(objConn,valorCodiRelacioOrigen)
                     Dim codiPlantilla As String = GAIA.plantillaPerDefecte(objconn, relDesti, 1)
-                    GAIA.bdr(objconn, "SELECT  CAST(PLTDSEST AS VARCHAR(8000)) AS PLTDSEST,CAST(PLTDSATR AS VARCHAR(8000)) AS PLTDSATR,CAST(PLTDSVER AS VARCHAR(8000)) AS  PLTDSVER,CAST(PLTDSHOR AS VARCHAR(8000)) AS PLTDSHOR,CAST(PLTDSOBS AS VARCHAR(8000)) AS PLTDSOBS, CAST(PLTDSTCO AS VARCHAR(8000)) AS PLTDSTCO FROM METLPLT WITH(NOLOCK) WHERE PLTINNOD=" & codiPlantilla & " UNION SELECT CAST(PLTDSEST AS VARCHAR(8000)) AS PLTDSEST,'GAIA2' as PLTDSATR,'0' as PLTDSVER,'0' as PLTDSHOR,CAST(PLTDSOBS AS VARCHAR(8000)) AS PLTDSOBS,  CAST(PLTDSTCO AS VARCHAR(8000)) AS PLTDSTCO  FROM METLPLT2 WITH(NOLOCK) WHERE PLTINNOD=" & codiPlantilla, DS)
+                    GAIA.bdr(objconn, "SELECT  CAST(PLTDSHTM AS VARCHAR(8000)) AS PLTDSEST,CAST(PLTDSATR AS VARCHAR(8000)) AS PLTDSATR,CAST(PLTDSVER AS VARCHAR(8000)) AS  PLTDSVER,CAST(PLTDSHOR AS VARCHAR(8000)) AS PLTDSHOR,CAST(PLTDSOBS AS VARCHAR(8000)) AS PLTDSOBS, CAST(PLTDSTCO AS VARCHAR(8000)) AS PLTDSTCO FROM METLPLT WITH(NOLOCK) WHERE PLTINNOD=" & codiPlantilla & " UNION SELECT CAST(PLTDSHTM AS VARCHAR(8000)) AS PLTDSEST,'GAIA2' as PLTDSATR,'0' as PLTDSVER,'0' as PLTDSHOR,CAST(PLTDSOBS AS VARCHAR(8000)) AS PLTDSOBS,  CAST(PLTDSTCO AS VARCHAR(8000)) AS PLTDSTCO  FROM METLPLT2 WITH(NOLOCK) WHERE PLTINNOD=" & codiPlantilla, DS)
                     If DS.Tables(0).Rows.Count > 0 Then
                         dbRow = DS.Tables(0).Rows(0)
                         If posicioEstructura < 0 Then
@@ -865,7 +865,7 @@ Public Class estructura
         divs = Split(webdshtm, "id=")
         html = divs(0) & "id="
 
-        celdas = Split(webdshtm, "<span class='atributs' style='display: none;'>")
+        celdas = Split(webdshtm, "<span class='atributs' style='display:none'>")
 
         For Each celda In celdas
             'Saltamos el primero

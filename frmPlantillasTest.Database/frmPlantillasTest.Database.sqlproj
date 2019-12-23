@@ -617,6 +617,14 @@
     <None Include="Data\dbo.METLNWE.data.sql" />
     <None Include="Data\dbo.METLNWE2.data.sql" />
     <None Include="Data\dbo.METLDIR.data.sql" />
+    <None Include="Data\dbo.METLREI.data.sql" />
+    <None Include="Data\dbo.METLCSS.data.sql" />
+    <None Include="Data\dbo.METLCSS2.data.sql" />
+    <None Include="Data\dbo.METLSER.data.sql" />
+    <None Include="Data\dbo.METLMAP.data.sql" />
+    <None Include="Data\dbo.METLPER.data.sql" />
+    <None Include="Data\dbo.METLPER2.data.sql" />
+    <None Include="Data\dbo.METLFOR.data.sql" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="fuzzystrings">
