@@ -616,6 +616,7 @@
     <None Include="Data\dbo.METLNES.data.sql" />
     <None Include="Data\dbo.METLNWE.data.sql" />
     <None Include="Data\dbo.METLNWE2.data.sql" />
+    <None Include="Data\dbo.METLDIR.data.sql" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="fuzzystrings">
