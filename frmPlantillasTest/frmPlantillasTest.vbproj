@@ -1125,6 +1125,7 @@
     <Content Include="img\obrir.png" />
     <Content Include="img\ok.png" />
     <Content Include="img\open-iconic-bootstrap.css" />
+    <Content Include="css\formularisGaia.css" />
     <Content Include="img\paperera.gif" />
     <Content Include="img\paperera.png" />
     <Content Include="img\pdf.png" />
@@ -1428,6 +1429,7 @@
     <Content Include="img\Revisió web CulturaLH educa 10octubre.docx" />
     <Content Include="img\common\imagenTemporal.pdf" />
     <Content Include="img\common\Revisió web CulturaLH educa 10octubre.docx" />
+    <Content Include="img\open-iconic\font\css\open-iconic-bootstrap.scss" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

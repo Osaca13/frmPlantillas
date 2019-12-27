@@ -6,7 +6,7 @@ Public Class estructura
 
     Public Shared nif As String
     Public Shared objconn As OleDbConnection
-
+    Dim esGaia2 As Boolean = False
 
     Private Sub Page_UnLoad(sender As Object, e As System.EventArgs) Handles MyBase.Unload
         GAIA.bdFi(objconn)
@@ -140,7 +140,6 @@ Public Class estructura
         Dim i As Integer, plantillaActual As Integer
         Dim ddlb_plantilla As DropDownList
 
-        Dim esGaia2 As Boolean = False
         ''		 gaia.debug(nothing, "aqui")
         qSQL = "SELECT ISNULL(RELINPLA,-1) AS RELINPLA FROM METLREL WITH(NOLOCK) WHERE RELINCOD = " & codiRelacioOrigen.Text
         GAIA.bdr(objconn, qSQL, ds)
@@ -205,6 +204,8 @@ Public Class estructura
                 End If
             End If
             ddlb_plantilla.Visible = True
+            Page.Controls.Add(ddlb_plantilla)
+            Dim comprobar As Boolean = Page.Controls.Contains(ddlb_plantilla)
             plantillesPH.Controls.Add(ddlb_plantilla)
             i += 1
         Next item
@@ -216,12 +217,23 @@ Public Class estructura
     Protected Sub borra_plantilles()
         Dim aPlantilles As String(), i As Integer, item As String
         Dim ddlb_plantilla As DropDownList
-
+        Dim html As String()
+        Dim control_nombre As String
+        Dim ddlb_plantilla2 As Control
         aPlantilles = Split(llistaPlantilles.Text, ",")
+
         i = 0
         For Each item In aPlantilles
-            ddlb_plantilla = Page.FindControl("ddlb_plantillat" & i)
-            plantillesPH.Controls.Remove(ddlb_plantilla)
+            If esGaia2 Then
+                control_nombre = "ddlb_plantilla" & html(i + 1).Substring(1, html(i + 1).IndexOf("'", 1) - 1)
+
+                ddlb_plantilla = Page.FindControl(control_nombre)
+                If ddlb_plantilla Is Nothing Then
+                    ddlb_plantilla2 = plantillesPH.FindControl(control_nombre)
+
+                End If
+            End If
+            plantillesPH.Controls.Remove(ddlb_plantilla2)
             i += 1
         Next item
     End Sub
@@ -352,6 +364,7 @@ Public Class estructura
                             lblCodi.Text = "<script>document.getElementById(""WEBDSTCO"").value=""" & dbRow("AWEDSTCO").ToString() & """;document.getElementById(""tipusNode"").value=""" & tipusNode.Text.ToString() & """;document.getElementById(""codiRelacioOrigen"").value=""" & codiRelacioOrigen.Text.ToString() & """;document.getElementById(""txtPosicioEstructuraReal"").value=""" & posicioEstructuraReal.ToString() & """;</script> "
                         Else 'Ya tiene una posición asignada
                             If dbRow("AWEDSATR") = "GAIA2" Then   'Teresa
+                                'llistaPlantilles.Text = dbRow("AWEDSPLA")
                                 lblEstructura.Text = maquetaEstructura(dbRow("AWEDSEST"), tipusNodeAMoure)
                             End If
                         End If
@@ -366,6 +379,7 @@ Public Class estructura
                         dbRow = DS.Tables(0).Rows(0)
                         If posicioEstructura < 0 Then
                             If dbRow("PLTDSATR") = "GAIA2" Then  'Teresa
+
                                 lblEstructura.Text = maquetaEstructura(dbRow("PLTDSEST"), tipusNodeAMoure)
                             Else
                                 Dim a As String()

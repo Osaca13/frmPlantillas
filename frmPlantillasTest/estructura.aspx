@@ -262,7 +262,11 @@
       else {
           var ncelda = document.getElementById("txtposicioEstructura").value;
           if (ncelda >= 0 && document.getElementById('llistaPlantilles').value != "") {
-              //document.getElementById("ultimaDivisio").value = "t" + ncelda;
+              if (document.getElementById("ultimaDivisio") != null)
+              {
+
+                  document.getElementById("ultimaDivisio").value = "t" + ncelda;
+              }
               document.getElementById("ultimaPlantilla").value = aPlantilles[ncelda];
               if (aPlantilles[ncelda]) {
                   mostrarDesplegable(aPlantilles[ncelda], "t" + ncelda);
@@ -271,8 +275,12 @@
       }
 
       function iniPantalla(aPlantilles) {
-       for (i = 0; i < $("#trPlantilla2 select").length; i++) {
-             // document.getElementById('ddlb_plantillat' + i).style.display = 'none';
+          for (i = 0; i < $("#trPlantilla2 select").length; i++) {
+              if (document.getElementById('ddlb_plantillat' + i) != null)
+              {
+                 document.getElementById('ddlb_plantillat' + i).style.display = 'none';
+              }
+             
               $("#trPlantilla2 select")[i].style.display='none';
           }
           
