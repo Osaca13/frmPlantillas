@@ -276,9 +276,9 @@
 
       function iniPantalla(aPlantilles) {
           for (i = 0; i < $("#trPlantilla2 select").length; i++) {
-              if (document.getElementById('ddlb_plantillat' + i) != null)
+              if (document.getElementById('ddlb_plantillad' + i) != null)
               {
-                 document.getElementById('ddlb_plantillat' + i).style.display = 'none';
+                 document.getElementById('ddlb_plantillad' + i).style.display = 'none';
               }
              
               $("#trPlantilla2 select")[i].style.display='none';
