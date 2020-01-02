@@ -6,11 +6,17 @@ Public Class estructura
 
     Public Shared nif As String
     Public Shared objconn As OleDbConnection
-
+    Dim esGaia2 As Boolean = True
+    Dim ddlb_plantilla As DropDownList
 
     Private Sub Page_UnLoad(sender As Object, e As System.EventArgs) Handles MyBase.Unload
         GAIA.bdFi(objconn)
     End Sub 'Page_UnLoad
+
+    Protected Sub Page_Init()
+
+    End Sub
+
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Dim relOrigen As New clsRelacio
@@ -73,7 +79,7 @@ Public Class estructura
             'End If
 
         Else
-
+            carrega_plantilles()
             'no hago nada. 
         End If
     End Sub
@@ -157,13 +163,11 @@ Public Class estructura
                 If html.Length > 1 Then
                     If html(1).Substring(1, 1) = "d" Then esGaia2 = True
                 Else
-                    esGaia2 = True
+                    esGaia2 = False
                 End If
 
             Catch ex As Exception
                 Debug.WriteLine(ex.InnerException.Message)
-
-
             End Try
             'gaia.debug(nothing, esGaia2)
         End If
@@ -200,6 +204,8 @@ Public Class estructura
                         Try
                             ddlb_plantilla.SelectedValue = plantillaActual
                         Catch
+                            Debug.WriteLine("selected Value fails")
+
                         End Try
                     End If
                 End If
@@ -215,13 +221,18 @@ Public Class estructura
     'la utilitzarem per poder generar de nou els desplegables quan es canvia de "moure" a "inserir" i vicerversa
     Protected Sub borra_plantilles()
         Dim aPlantilles As String(), i As Integer, item As String
-        Dim ddlb_plantilla As DropDownList
+        Dim html As String() = Split(lblEstructura.Text, "id=")
+        Dim control_nombre As String
+        Dim buscaControl As Control
 
         aPlantilles = Split(llistaPlantilles.Text, ",")
+
         i = 0
         For Each item In aPlantilles
-            ddlb_plantilla = Page.FindControl("ddlb_plantillat" & i)
-            plantillesPH.Controls.Remove(ddlb_plantilla)
+
+            control_nombre = "ddlb_plantilla" & html(i + 1).Substring(1, html(i + 1).IndexOf("'", 1) - 1)
+            buscaControl = Page.FindControl(control_nombre)
+            plantillesPH.Controls.Remove(buscaControl)
             i += 1
         Next item
     End Sub
@@ -307,7 +318,7 @@ Public Class estructura
                     End If
                 Case "node web"
                     lblTitol.Text = "Estructura del node web"
-                    GAIA.bdr(objconn, "SELECT NWEDSPLA,NWEDSEST ,NWEDSATR,NWEDSTVER,NWEDSTHOR,NWEDSTCO FROM METLNWE WITH(NOLOCK) WHERE NWEINNOD=" & nroNodeDesti & " UNION SELECT NWEDSPLA,CAST (NWEDSEST AS VARCHAR(8000)) AS NWEDSEST ,'GAIA2' as NWEDSATR,'0' as NWEDSTVER,'0' as NWEDSTHOR,NWEDSTCO FROM METLNWE2 WITH(NOLOCK) WHERE NWEINNOD=" & nroNodeDesti, DS)
+                    GAIA.bdr(objconn, "SELECT NWEDSPLA,NWEDSEST ,NWEDSATR,NWEDSTVER,NWEDSTHOR,NWEDSTCO FROM METLNWE WITH(NOLOCK) WHERE NWEINNOD=" & nroNodeDesti & " UNION SELECT NWEDSPLA,CAST (NWEDSHTM AS VARCHAR(8000)) AS NWEDSEST ,'GAIA2' as NWEDSATR,'0' as NWEDSTVER,'0' as NWEDSTHOR,NWEDSTCO FROM METLNWE2 WITH(NOLOCK) WHERE NWEINNOD=" & nroNodeDesti, DS)
                     'gaia.debug(nothing, "SELECT NWEDSPLA,NWEDSEST ,NWEDSATR,NWEDSTVER,NWEDSTHOR,NWEDSTCO FROM METLNWE WITH(NOLOCK) WHERE NWEINNOD=" & nroNodeDesti & " UNION SELECT NWEDSPLA,CAST (NWEDSEST AS VARCHAR(8000)) AS NWEDSEST ,'GAIA2' as NWEDSATR,'0' as NWEDSTVER,'0' as NWEDSTHOR,NWEDSTCO FROM METLNWE2 WITH(NOLOCK) WHERE NWEINNOD=" & nroNodeDesti)
                     If DS.Tables(0).Rows.Count > 0 Then
 
@@ -352,6 +363,7 @@ Public Class estructura
                             lblCodi.Text = "<script>document.getElementById(""WEBDSTCO"").value=""" & dbRow("AWEDSTCO").ToString() & """;document.getElementById(""tipusNode"").value=""" & tipusNode.Text.ToString() & """;document.getElementById(""codiRelacioOrigen"").value=""" & codiRelacioOrigen.Text.ToString() & """;document.getElementById(""txtPosicioEstructuraReal"").value=""" & posicioEstructuraReal.ToString() & """;</script> "
                         Else 'Ya tiene una posición asignada
                             If dbRow("AWEDSATR") = "GAIA2" Then   'Teresa
+                                llistaPlantilles.Text = dbRow("AWEDSPLA")
                                 lblEstructura.Text = maquetaEstructura(dbRow("AWEDSEST"), tipusNodeAMoure)
                             End If
                         End If
@@ -361,25 +373,30 @@ Public Class estructura
                     Dim codiRelacio As Integer
                     'codiRelacio=GAIA.obtenirRelacioSuperior(objConn,valorCodiRelacioOrigen)
                     Dim codiPlantilla As String = GAIA.plantillaPerDefecte(objconn, relDesti, 1)
-                    GAIA.bdr(objconn, "SELECT  CAST(PLTDSEST AS VARCHAR(8000)) AS PLTDSEST,CAST(PLTDSATR AS VARCHAR(8000)) AS PLTDSATR,CAST(PLTDSVER AS VARCHAR(8000)) AS  PLTDSVER,CAST(PLTDSHOR AS VARCHAR(8000)) AS PLTDSHOR,CAST(PLTDSOBS AS VARCHAR(8000)) AS PLTDSOBS, CAST(PLTDSTCO AS VARCHAR(8000)) AS PLTDSTCO FROM METLPLT WITH(NOLOCK) WHERE PLTINNOD=" & codiPlantilla & " UNION SELECT CAST(PLTDSEST AS VARCHAR(8000)) AS PLTDSEST,'GAIA2' as PLTDSATR,'0' as PLTDSVER,'0' as PLTDSHOR,CAST(PLTDSOBS AS VARCHAR(8000)) AS PLTDSOBS,  CAST(PLTDSTCO AS VARCHAR(8000)) AS PLTDSTCO  FROM METLPLT2 WITH(NOLOCK) WHERE PLTINNOD=" & codiPlantilla, DS)
-                    If DS.Tables(0).Rows.Count > 0 Then
-                        dbRow = DS.Tables(0).Rows(0)
-                        If posicioEstructura < 0 Then
-                            If dbRow("PLTDSATR") = "GAIA2" Then  'Teresa
-                                lblEstructura.Text = maquetaEstructura(dbRow("PLTDSEST"), tipusNodeAMoure)
-                            Else
-                                Dim a As String()
-                                a = Split(dbRow("PLTDSEST"), ",")
-                                Array.Sort(a)
-                                lblEstructura.Text = GAIA.pintaEstructura(objconn, a, Split(dbRow("PLTDSATR"), ","), Split(dbRow("PLTDSVER"), ","), Split(dbRow("PLTDSHOR"), ","), 1, "", 1, "", arrayDescripcions, arrayBuit, 0)
-                            End If
-                            lblTitol.Text = "Estructura de la plantilla." + dbRow("PLTDSOBS")
-                            lblCodi.Text = "<script>document.getElementById(""WEBDSTCO"").value=""" & dbRow("PLTDSTCO").ToString() & """;document.getElementById(""tipusNode"").value=""" & tipusNode.Text.ToString() & """;document.getElementById(""codiRelacioOrigen"").value=""" & codiRelacioOrigen.Text.ToString() & """;document.getElementById(""txtPosicioEstructuraReal"").value=""" & posicioEstructuraReal.ToString() & """;</script> "
-                        Else 'Ya tiene una posición asignada
-                            If dbRow("PLTDSATR") = "GAIA2" Then   'Teresa
-                                lblEstructura.Text = maquetaEstructura(dbRow("PLTDSEST"), tipusNodeAMoure)
+                    If codiPlantilla <> 0 Then
+                        GAIA.bdr(objconn, "SELECT  CAST(PLTDSEST AS VARCHAR(8000)) AS PLTDSEST,CAST(PLTDSATR AS VARCHAR(8000)) AS PLTDSATR,CAST(PLTDSVER AS VARCHAR(8000)) AS  PLTDSVER,CAST(PLTDSHOR AS VARCHAR(8000)) AS PLTDSHOR,CAST(PLTDSOBS AS VARCHAR(8000)) AS PLTDSOBS, CAST(PLTDSTCO AS VARCHAR(8000)) AS PLTDSTCO FROM METLPLT WITH(NOLOCK) WHERE PLTINNOD=" & codiPlantilla & " UNION SELECT CAST(PLTDSHTM AS VARCHAR(8000)) AS PLTDSEST,'GAIA2' as PLTDSATR,'0' as PLTDSVER,'0' as PLTDSHOR,CAST(PLTDSOBS AS VARCHAR(8000)) AS PLTDSOBS,  CAST(PLTDSTCO AS VARCHAR(8000)) AS PLTDSTCO  FROM METLPLT2 WITH(NOLOCK) WHERE PLTINNOD=" & codiPlantilla, DS)
+                        If DS.Tables(0).Rows.Count > 0 Then
+
+                            dbRow = DS.Tables(0).Rows(0)
+                            If posicioEstructura < 0 Then
+                                If dbRow("PLTDSATR") = "GAIA2" Then  'Teresa
+
+                                    lblEstructura.Text = maquetaEstructura(dbRow("PLTDSEST"), tipusNodeAMoure)
+                                Else
+                                    Dim a As String()
+                                    a = Split(dbRow("PLTDSEST"), ",")
+                                    Array.Sort(a)
+                                    lblEstructura.Text = GAIA.pintaEstructura(objconn, a, Split(dbRow("PLTDSATR"), ","), Split(dbRow("PLTDSVER"), ","), Split(dbRow("PLTDSHOR"), ","), 1, "", 1, "", arrayDescripcions, arrayBuit, 0)
+                                End If
+                                lblTitol.Text = "Estructura de la plantilla." + dbRow("PLTDSOBS")
+                                lblCodi.Text = "<script>document.getElementById(""WEBDSTCO"").value=""" & dbRow("PLTDSTCO").ToString() & """;document.getElementById(""tipusNode"").value=""" & tipusNode.Text.ToString() & """;document.getElementById(""codiRelacioOrigen"").value=""" & codiRelacioOrigen.Text.ToString() & """;document.getElementById(""txtPosicioEstructuraReal"").value=""" & posicioEstructuraReal.ToString() & """;</script> "
+                            Else 'Ya tiene una posición asignada
+                                If dbRow("PLTDSATR") = "GAIA2" Then   'Teresa
+                                    lblEstructura.Text = maquetaEstructura(dbRow("PLTDSEST"), tipusNodeAMoure)
+                                End If
                             End If
                         End If
+
                     End If
             End Select
 
@@ -865,7 +882,7 @@ Public Class estructura
         divs = Split(webdshtm, "id=")
         html = divs(0) & "id="
 
-        celdas = Split(webdshtm, "<span class='atributs' style='display: none;'>")
+        celdas = Split(webdshtm, "<span class='atributs' style='display:none'>")
 
         For Each celda In celdas
             'Saltamos el primero

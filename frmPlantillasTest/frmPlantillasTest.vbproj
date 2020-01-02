@@ -138,6 +138,7 @@
     <Content Include="carregaDocuments.aspx" />
     <Content Include="carregaLinks.aspx" />
     <Content Include="constants.inc" />
+    <Content Include="css\Ajuda.css" />
     <Content Include="css\intranet_1024.css" />
     <Content Include="css\jquery-ui.css" />
     <Content Include="estructura.aspx" />
@@ -877,9 +878,6 @@
     <Content Include="img\ico_info4.png" />
     <Content Include="img\ico_info5.png" />
     <Content Include="img\ico_info98.png" />
-    <Content Include="img\ico_infop.png" />
-    <Content Include="img\ico_interrogante_p.gif" />
-    <Content Include="img\ico_lh.png" />
     <Content Include="img\ico_link.png" />
     <Content Include="img\ico_link1.png" />
     <Content Include="img\ico_link2.png" />
@@ -1122,6 +1120,7 @@
     <Content Include="img\obrir.png" />
     <Content Include="img\ok.png" />
     <Content Include="img\open-iconic-bootstrap.css" />
+    <Content Include="css\formularisGaia.css" />
     <Content Include="img\paperera.gif" />
     <Content Include="img\paperera.png" />
     <Content Include="img\pdf.png" />
@@ -1239,13 +1238,6 @@
     <Content Include="img\XPWhiteSpace.gif" />
     <Content Include="img\zip.png" />
     <Content Include="inici.aspx" />
-    <Content Include="js\App_LocalResources\cap_intranet.aspx" />
-    <Content Include="js\App_LocalResources\cap_intranet.inc" />
-    <Content Include="js\App_LocalResources\eltemps.aspx" />
-    <Content Include="js\App_LocalResources\peu.inc" />
-    <Content Include="js\App_LocalResources\peu_intranet.aspx" />
-    <Content Include="js\App_LocalResources\peu_intranet.inc" />
-    <Content Include="js\jquery.tools.min.js" />
     <Content Include="js\App_LocalResources\cap.aspx" />
     <Content Include="js\App_LocalResources\contextmenusNou.xml" />
     <Content Include="js\App_LocalResources\menu.ascx" />
@@ -1354,6 +1346,10 @@
       <DependentUpon>frmestructura.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="js\App_LocalResources\Ajuda.ascx.vb">
+      <DependentUpon>Ajuda.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="js\App_LocalResources\visordocumentshtml.ascx.vb">
       <DependentUpon>visordocumentshtml.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1419,6 +1415,7 @@
     <Content Include="img\Revisió web CulturaLH educa 10octubre.docx" />
     <Content Include="img\common\imagenTemporal.pdf" />
     <Content Include="img\common\Revisió web CulturaLH educa 10octubre.docx" />
+    <Content Include="img\open-iconic\font\css\open-iconic-bootstrap.scss" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

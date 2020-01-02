@@ -1,0 +1,27 @@
+.TextAjuda {
+	display: none;
+	background-color:#0564E1;
+	border:1px solid #599EFA;
+	padding:5px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:11px;
+	color:#FFFFFF;
+	font-weight:bold;
+}
+
+.Visible {
+	display:block;
+	position:absolute;
+	right:23px;
+	width:500px;
+	text-align:left;
+}
+
+.AjudaVisible {
+	position:relative;
+}
+
+.Ajuda {
+	float:right;
+}
+
