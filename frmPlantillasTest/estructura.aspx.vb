@@ -6,8 +6,20 @@ Public Class estructura
 
     Public Shared nif As String
     Public Shared objconn As OleDbConnection
-    Dim esGaia2 As Boolean = True
     Dim ddlb_plantilla As DropDownList
+    Dim relOrigen As New clsRelacio
+    Dim relDesti As New clsRelacio
+
+    Private esGaia2 As Boolean
+    Public Property EsGaiaDos As Boolean
+        Get
+            Return esGaia2
+        End Get
+        Set(ByVal value As Boolean)
+            esGaia2 = value
+        End Set
+    End Property
+
 
     Private Sub Page_UnLoad(sender As Object, e As System.EventArgs) Handles MyBase.Unload
         GAIA.bdFi(objconn)
@@ -19,8 +31,7 @@ Public Class estructura
 
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        Dim relOrigen As New clsRelacio
-        Dim relDesti As New clsRelacio
+
         Dim dbRow As DataRow
         Dim ds As DataSet, prefix As String
         objconn = GAIA.bdIni()
@@ -154,33 +165,17 @@ Public Class estructura
         plantillaActual = ds.Tables(0).Rows(0).Item("RELINPLA")
 
         aPlantilles = Split(llistaPlantilles.Text, ",")
-
-        If lblEstructura.Text <> "" Then
-            ' Los id de los desplegables de las plantillas en GAIA empiezan por t y en GAIA2 por d
-            html = Split(lblEstructura.Text, "id=")
-            'gaia.debug(nothing, lblEstructura.text)
-            Try
-                If html.Length > 1 Then
-                    If html(1).Substring(1, 1) = "d" Then esGaia2 = True
-                Else
-                    esGaia2 = False
-                End If
-
-            Catch ex As Exception
-                Debug.WriteLine(ex.InnerException.Message)
-            End Try
-            'gaia.debug(nothing, esGaia2)
-        End If
+        html = GetHtmlEstructura()
 
         i = 0
         For Each item In aPlantilles
-            GAIA.debug(Nothing, lblEstructura.Text)
-            GAIA.debug(Nothing, item)
+            ' GAIA.debug(Nothing, lblEstructura.Text)
+            ' GAIA.debug(Nothing, item)
             item = Replace(item, "|", ",")
             item = Trim(item)
             ddlb_plantilla = New DropDownList
             ' GAIA2
-            If esGaia2 Then
+            If esGAIA2Test(objconn, relDesti.infil) Then
                 ddlb_plantilla.ID = "ddlb_plantilla" & html(i + 1).Substring(1, html(i + 1).IndexOf("'", 1) - 1)
             Else
                 ddlb_plantilla.ID = "ddlb_plantillat" & i
@@ -217,11 +212,39 @@ Public Class estructura
         ds.Dispose()
     End Sub
 
+    'Private Function esGaia2() As Boolean
+    '    Dim html As String() = GetHtmlEstructura()
+    '    GAIA.debug(Nothing, html(0))
+    '    Try
+    '        If html.Length > 1 Then
+    '            If html(1).Substring(1, 1) = "d" Then Return True
+    '        Else
+    '            Return False
+    '        End If
+
+    '    Catch ex As Exception
+    '        GAIA.debug(Nothing, ex.InnerException.Message)
+    '    End Try
+    '    'gaia.debug(nothing, esGaia2)
+    '    Return False
+    'End Function
+
+    Private Function GetHtmlEstructura() As String()
+        Dim html As String() = {}
+
+        If lblEstructura.Text <> "" Then
+            ' Los id de los desplegables de las plantillas en GAIA empiezan por t y en GAIA2 por d
+            html = Split(lblEstructura.Text, "id=")
+            'GAIA.debug(Nothing, lblEstructura.Text)
+        End If
+        Return html
+    End Function
+
     'borra els desplegables de plantilles generats dinàmicament
     'la utilitzarem per poder generar de nou els desplegables quan es canvia de "moure" a "inserir" i vicerversa
-    Protected Sub borra_plantilles()
+    Protected Sub borra_plantilles(ByVal nroNode As Integer)
         Dim aPlantilles As String(), i As Integer, item As String
-        Dim html As String() = Split(lblEstructura.Text, "id=")
+        Dim html As String() = GetHtmlEstructura()
         Dim control_nombre As String
         Dim buscaControl As Control
 
@@ -229,13 +252,36 @@ Public Class estructura
 
         i = 0
         For Each item In aPlantilles
+            If esGAIA2Test(objconn, nroNode) Then
 
-            control_nombre = "ddlb_plantilla" & html(i + 1).Substring(1, html(i + 1).IndexOf("'", 1) - 1)
-            buscaControl = Page.FindControl(control_nombre)
-            plantillesPH.Controls.Remove(buscaControl)
+                control_nombre = "ddlb_plantilla" & html(i + 1).Substring(1, html(i + 1).IndexOf("'", 1) - 1)
+            Else
+                control_nombre = "ddlb_plantillat" & i
+            End If
+
+            If Page.Controls.Contains(ddlb_plantilla) Then
+                buscaControl = Page.FindControl(control_nombre)
+                plantillesPH.Controls.Remove(buscaControl)
+            End If
+
             i += 1
         Next item
     End Sub
+
+    Private Function esGAIA2Test(ByVal objConn As OleDbConnection, ByVal nroNode As Integer)
+        Dim resultado As Boolean = False
+        Dim ds As New DataSet
+        Dim query As String
+
+        query = "SELECT AWEINNOD FROM METLAWE2 WHERE AWEINNOD=" & nroNode & " UNION SELECT NWEINNOD FROM METLNWE2 WHERE NWEINNOD=" & nroNode & " UNION SELECT WEBINNOD FROM METLWEB2 WHERE WEBINNOD=" & nroNode & " UNION SELECT PLTINNOD FROM METLPLT2 WHERE PLTINNOD =" & nroNode & ""
+        GAIA.bdr(objConn, query, ds)
+
+        If ds.Tables(0).Rows.Count > 0 Then
+            resultado = True
+        End If
+        Return resultado
+
+    End Function
 
     'Prepara la crida a GAIA.pintaEstructura 
     Protected Sub InicialitzaEstructura(ByVal relOrigen As clsRelacio, ByVal relDesti As clsRelacio, ByVal idioma As Integer)
@@ -445,16 +491,20 @@ Public Class estructura
     'Si l'usuari canvia el tipus de moviment que vol fer, he de trobar el nou node destí per poder oferir-li
     'a quina posició de l'estructura dessitja afegir el node.
     Protected Sub canviarNodeDesti(sender As Object, e As EventArgs)
-        Dim relOrigen As New clsRelacio
-        Dim relDesti As New clsRelacio
-        borra_plantilles()
+        'Dim relOrigen As New clsRelacio
+        'Dim relDesti As New clsRelacio
+
         relOrigen.bdget(objconn, codiRelacioOrigen.Text)
         relDesti.bdget(objconn, codiRelacioDesti.Text)
         ultimaDivisio.Text = ""
         WEBDSTCO.Text = ""
         If accio.SelectedItem.Value = "moure" Then
-            InicialitzaEstructura(relOrigen, GAIA.obtenirRelacioSuperior(objconn, relDesti), 1)
+            Dim relDestiSuperior As clsRelacio = GAIA.obtenirRelacioSuperior(objconn, relDesti)
+            GAIA.debug(Nothing, "Node: " + relDestiSuperior.infil.ToString() + " relacion: " + relDestiSuperior.incod.ToString())
+            borra_plantilles(relDestiSuperior.infil)
+            InicialitzaEstructura(relOrigen, relDestiSuperior, 1)
         Else
+            borra_plantilles(relDesti.infil)
             InicialitzaEstructura(relOrigen, relDesti, 1)
         End If
 
@@ -750,7 +800,8 @@ Public Class estructura
                 Case "fulla web"
                     GAIA.bdr(objConn, "SELECT WEBDSTCO as tipusContingut, ''  as plantillaAutoLink, WEBDSEST as estructura FROM METLWEB2 WITH(NOLOCK)  WHERE WEBINNOD=" + nroNodeDesti.ToString() + " AND WEBINIDI=" + idioma.ToString(), DS)
                 Case Else ' si el destí no és una fulla web serà un objecte amb una plantilla per defecte o bé donada per una pag web.			
-                    GAIA.bdr(objConn, "SELECT PLTDSTCO AS tipusContingut, PLTCDPAL as plantillaAutoLink FROM METLPLT2  WITH(NOLOCK) WHERE PLTINNOD=" + GAIA.plantillaPerDefecte(objConn, rel, idioma).ToString(), DS)
+                    Dim sqlQuery As String = GAIA.plantillaPerDefecte(objConn, rel, idioma).ToString()
+                    GAIA.bdr(objConn, "SELECT PLTDSTCO AS tipusContingut, PLTCDPAL as plantillaAutoLink FROM METLPLT2  WITH(NOLOCK) WHERE PLTINNOD=" + sqlQuery, DS)
             End Select
 
             If DS.Tables(0).Rows.Count > 0 Then
