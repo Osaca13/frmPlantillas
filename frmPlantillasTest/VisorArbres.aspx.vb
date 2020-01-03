@@ -479,6 +479,8 @@ Public Class VisorArbres
             crida = "nroArbreOrigen=" + nroArbreOrigen.ToString() + "&nroArbreDesti=" + nroArbreDesti.ToString() + "&nroNodeOrigen=" + nroNodeOrigen.ToString() + "&nroNodeDesti=" + nroNodeDesti.ToString() + "&nodePathVell=" + nodePathVell.ToString() + "&nodePathNou=" + nodePathNou.ToString() + "&nroNodePareAnterior=" + nroNodePareAnterior.ToString() + "&codiRelacioOrigen=" + codiRelacioOrigen.ToString() + "&codiRelacioDesti=" + codiRelacioDesti.ToString() + "&moureFills=" + (Not sourceNode.Expanded).ToString() + "&dragDrop=1&direccio=" + direccio
             Dim esGAIACompro As Boolean = esGAIA2(objconn, nroNodeDesti)
 
+            GAIA.debug(Nothing, nroNodeDesti.ToString())
+
             'If esGAIACompro And rel.tipintip <> 8 And rel.tipintip <> 9 Then
             If esGAIACompro Then
 
