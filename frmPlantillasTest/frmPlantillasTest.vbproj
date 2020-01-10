@@ -143,6 +143,11 @@
     <Content Include="css\jquery-ui.css" />
     <Content Include="estructura.aspx" />
     <Content Include="frmestructura.aspx" />
+    <Content Include="GAIA2\aspx\web\frmplantilla.aspx" />
+    <Content Include="GAIA\aspx\llibreria\frmObrirFulla.aspx" />
+    <Content Include="GAIA\aspx\visorArbresLite.aspx" />
+    <Content Include="GAIA\aspx\web\frmArbreWeb.aspx" />
+    <Content Include="GAIA\llibreriacodiweb\intranet\gaia\menu2.ascx" />
     <Content Include="img\abajo.gif" />
     <Content Include="img\abajo.png" />
     <Content Include="img\actualitzar.png" />
@@ -1239,6 +1244,7 @@
     <Content Include="img\zip.png" />
     <Content Include="inici.aspx" />
     <Content Include="js\App_LocalResources\cap.aspx" />
+    <Content Include="js\App_LocalResources\cap.inc" />
     <Content Include="js\App_LocalResources\contextmenusNou.xml" />
     <Content Include="js\App_LocalResources\menu.ascx" />
     <Content Include="js\App_LocalResources\menu.aspx" />
@@ -1346,6 +1352,34 @@
       <DependentUpon>frmestructura.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="GAIA2\aspx\web\frmplantilla.aspx.designer.vb">
+      <DependentUpon>frmplantilla.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GAIA2\aspx\web\frmplantilla.aspx.vb">
+      <DependentUpon>frmplantilla.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GAIA\aspx\llibreria\frmObrirFulla.aspx.designer.vb">
+      <DependentUpon>frmObrirFulla.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GAIA\aspx\llibreria\frmObrirFulla.aspx.vb">
+      <DependentUpon>frmObrirFulla.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GAIA\aspx\visorArbresLite.aspx.designer.vb">
+      <DependentUpon>visorArbresLite.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GAIA\aspx\visorArbresLite.aspx.vb">
+      <DependentUpon>visorArbresLite.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GAIA\aspx\web\frmArbreWeb.aspx.designer.vb">
+      <DependentUpon>frmArbreWeb.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GAIA\aspx\web\frmArbreWeb.aspx.vb">
+      <DependentUpon>frmArbreWeb.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="js\App_LocalResources\Ajuda.ascx.vb">
       <DependentUpon>Ajuda.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1433,7 +1467,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="GAIA\aspx\fulles\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

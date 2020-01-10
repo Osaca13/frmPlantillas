@@ -1,4 +1,4 @@
-﻿SET IDENTITY_INSERT [dbo].[METLTIP] ON
+SET IDENTITY_INSERT [dbo].[METLTIP] ON
 INSERT INTO [dbo].[METLTIP] ([TIPINTIP], [TIPCDVER], [TIPDSDES], [TIPCDUSR], [TIPDSIMG]) VALUES (1, 1, N'arbre directori               ', N'38452082S', N'arbre.png')
 INSERT INTO [dbo].[METLTIP] ([TIPINTIP], [TIPCDVER], [TIPDSDES], [TIPCDUSR], [TIPDSIMG]) VALUES (2, -3, N'node equipaments              ', N'38452082S', N'node_directori.png')
 INSERT INTO [dbo].[METLTIP] ([TIPINTIP], [TIPCDVER], [TIPDSDES], [TIPCDUSR], [TIPDSIMG]) VALUES (4, 0, N'fulla noticia                 ', N'38452082S', N'ico_noticia.png')

@@ -4,7 +4,7 @@ Imports System.Web
 
 
 
-Public Class frmPlantillas
+Public Class frmplantilla
     Inherits System.Web.UI.Page
 
 
@@ -715,14 +715,15 @@ Public Class frmPlantillas
         '***************************************************************************************		
         Dim item() As String
         Dim arrCel() As String
-        Dim PLTDSCMP As String = "", PLTDSLNK As String = "", PLTDSALT As String = "", PLTDSEST As String = "", PLTDSCSS As String = "", PLTDSTCO As String = "", PLTDSLCW As String = "", PLTDSLC2 As String = "", PLTDSIMG As String = "", PLTCDPAL As String = "", PLTDSAAL As String = "", PLTDSPLT As String = "", PLTDSALK As String = "", PLTDSFLW As String = "", PLTSWALT As Integer = 1, PLTDSNUM As String = "", PLTDSALF As String = "", PLTDSNIV As String = "", PLTSWVIS As Integer = 0, WEBDSIMP As String = "", WEBDSCND As String = "", PLTDSHTM As String = ""
+        Dim PLTDSCMP As String = String.Empty, PLTDSLNK As String = "", PLTDSALT As String = "", PLTDSEST As String = "", PLTDSCSS As String = "", PLTDSTCO As String = "", PLTDSLCW As String = "", PLTDSLC2 As String = "", PLTDSIMG As String = "", PLTCDPAL As String = "", PLTDSAAL As String = "", PLTDSPLT As String = "", PLTDSALK As String = "", PLTDSFLW As String = "", PLTSWALT As Integer = 1, PLTDSNUM As String = "", PLTDSALF As String = "", PLTDSNIV As String = "", PLTSWVIS As Integer = 0, WEBDSIMP As String = "", WEBDSCND As String = "", PLTDSHTM As String = ""
         codiIdioma = lstCanviIdioma.SelectedValue
 
         txtEstBD.Value = txtEstBD.Value.Replace("""", "'").Replace("''", "'").Replace("'", "''")
         PLTDSHTM = txtEstBD.Value.Replace("celActiva", "").Replace("rowActiva", "").Replace("contenidorActiu", "")
 
         PLTDSEST = txtEst.Value.Replace("""", "'").Replace("''", "'").Replace("'", "''")
-
+        GAIA.debug(Nothing, "plantillaHTM=" & PLTDSHTM)
+        GAIA.debug(Nothing, "plantillaEST=" & PLTDSEST)
         '					GAIA.debug(nothing, "despres=" & PLTDSEST)
         Dim cssTmp As String = ""
         Dim cont As Integer = 0
@@ -880,8 +881,6 @@ Public Class frmPlantillas
                     ' el segundo argumento "8" crea un arbre tipo arbre web 
                     rel = GAIA.creaRelacio(objconn, 8, txtCodiNode.Text, txtCodiNode.Text, 0, "", -1, 1, -1, 1, False, Session("codiOrg"))
                 End If
-
-
 
                 strSql &= "DELETE FROM METLAWE2 WHERE AWEINNOD=" & txtCodiNode.Text & " AND AWEINIDI=" & codiIdioma
 

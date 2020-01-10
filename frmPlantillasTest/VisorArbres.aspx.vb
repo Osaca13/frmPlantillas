@@ -336,7 +336,7 @@ Public Class VisorArbres
                         Case "fulla web"
                             Response.Write("<script language=""javascript"">window.open(""" & GAIA.obtenirEnllacContingut(objconn, rel, 1) & """)</script>")
                         Case Else
-                            Response.Write("<script language=""javascript"">window.open(""/GAIA/aspx/fulles/frmObrirFulla.aspx?codiRelacio=" + codiRelacio.ToString() + "& idioma=1"")</script>")
+                            Response.Write("<script language=""javascript"">window.open(""/GAIA/aspx/llibreria/frmObrirFulla.aspx?codiRelacio=" + codiRelacio.ToString() + "& idioma=1"")</script>")
                     End Select
                 Else
                     Response.Write("<script language='javascript'>alert('L\'usuari \'" + idUsuari.ToString() + "\' no té permisos per realitzar l\'acció seleccionada.');</script>")
@@ -377,7 +377,7 @@ Public Class VisorArbres
                 Response.Write("<script language=""javascript"">window.open(""Propietats.aspx?relincod=" & codiRelacio.ToString() & """,""_blank"", ""location=0,height=410,width=820,scrollbars=yes,resizable=yes"");</script>")
             Case "Publicar"
                 If clsPermisos.tepermis2(objconn, 7, idUsuari, idUsuari, rel, permisHeretat, "", "", 0) = 1 Or idUsuari = 297650 Then
-                    Response.Write("<script language=""javascript"">window.open(""/GAIA/aspx/fulles/frmObrirFulla.aspx?codiRelacio=" & codiRelacio.ToString() & "&publicar=1&idioma=1"")</script>")
+                    Response.Write("<script language=""javascript"">window.open(""/GAIA/aspx/llibreria/frmObrirFulla.aspx?codiRelacio=" & codiRelacio.ToString() & "&publicar=1&idioma=1"")</script>")
                 Else
                     Response.Write("<script language='javascript'>alert('L\'usuari \'" + idUsuari.ToString() + "\' no té permisos per realitzar l\'acció seleccionada.');</script>")
                 End If

@@ -1,21 +1,19 @@
-Imports System.Xml
+Imports System.Convert
 Imports System.Data.OleDb
-Imports Telerik.WebControls
 Imports System.Data.SqlClient
+Imports System.DirectoryServices
+Imports System.Drawing
+Imports System.Drawing.Imaging
 Imports System.IO
 Imports System.Net
+Imports System.Xml
 Imports KCommon.Net.FTP
-Imports System.Drawing.Imaging
-Imports System.DirectoryServices
-
+Imports SharpMap.Converters.WellKnownText
 'Necessari per la funció DameLonLatDeCoordenadals
 
 Imports SharpMap.CoordinateSystems
-Imports SharpMap.Converters.WellKnownText
 Imports SharpMap.CoordinateSystems.Transformations
-
-Imports System.Convert
-Imports System.Drawing
+Imports Telerik.WebControls
 
 
 '******************************************************************************************+

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="~/frmPlantillas.aspx.vb" ValidateRequest="false" Inherits="frmPlantillasTest.frmPlantillas" Debug="true" EnableEventValidation="false" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="frmplantilla.aspx.vb" ValidateRequest="false" Inherits="frmPlantillasTest.frmplantilla" Debug="true" EnableEventValidation="false" %>
 
 <!DOCTYPE html>
 
@@ -10,8 +10,8 @@
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<link rel="stylesheet" href="Styles/formularisGaia.css">
-<link href="img/open-iconic-bootstrap.css" rel="stylesheet">
+<link rel="stylesheet" href="../../../Styles/formularisGaia.css">
+<link href="../../../img/open-iconic-bootstrap.css" rel="stylesheet">
 <!--[if IE]>
       <link href="https://cdn.jsdelivr.net/gh/coliff/bootstrap-ie8/css/bootstrap-ie9.min.css" rel="stylesheet">
       <script src="https://cdn.jsdelivr.net/g/html5shiv@3.7.3"></script>
@@ -47,7 +47,7 @@
         <a class="nav-link" href="https://www.l-h.cat/recullpremsa" target="_blank"><span class="oi oi-rss mr-1" title="oi-rss" aria-hidden="true"></span>Recull de premsa</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/asp/areapersonal.aspx"><span class="oi oi-person mr-1" title="oi-person" aria-hidden="true"></span>Espai personal</a> 
+        <a class="nav-link" href="../../../asp/areapersonal.aspx"><span class="oi oi-person mr-1" title="oi-person" aria-hidden="true"></span>Espai personal</a> 
         <% IF Session("login") THEN
         Response.write("<img src=""/img/common/ico_desconnectar.png"">&nbsp;<a href=""/asp/areapersonal.aspx?desconectar=1""><span class='oi oi-power-standby' title='oi-power-standby' aria-hidden='true'></></span>Desconnectar</a>")
         END IF%>
@@ -64,8 +64,7 @@
  <!-- fi navegacio -->
 
     <!-- container -->
-    <div class="container"> 
-        
+    <div class="container">         
      
         <form runat="server" id="frm">
             <asp:textbox  runat="server" id="txtCodiNode" style="display:none"/>
@@ -297,8 +296,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div id="htmlEst" class="mr-3 ml-3">
-                            <asp:literal runat="server" id="ltEst"/></div>
+                        <div id="htmlEst" class="mr-3 ml-3"><asp:literal runat="server" id="ltEst"/></div>
                     </div>
                     <hr>
                     <div class="card-body text-center pt-0">
@@ -633,6 +631,10 @@
                     </div>
                	</div>
                 </asp:placeholder>
+
+                
+                
+                
                 
                 <div class="row">
                     <div class="col">
@@ -800,7 +802,19 @@
                         </div>
                     </div>
                	</div>
+                
+                
+                
+                
+                
                 </asp:placeholder>	
+                
+                
+                
+                
+                
+                
+                
                 <asp:placeholder runat="server" id="pnlPltCamps3" visible="false">
                 <div class="card bg-light">                
                 	<div class="card-header"><h6 class="font-weight-bold">AUTOENLLA&Ccedil;</h6></div>
@@ -920,6 +934,7 @@ $(function () {
 		//continguts
 		$("#lstTipusFulla").val(arrAtr[7]);
 
+
 		<asp:literal runat="server" id="ltCanviCampsDb"/>
 		
 		$("#ddlPLTDSCMP").val(arrAtr[8]);
@@ -931,6 +946,8 @@ $(function () {
 		$("#gaiaCodiWeb2Txt").val(arrAtr[14]);
 		$("#gaiaCodiWeb2Nodes").val(arrAtr[15]);
 		$("#gaiaPltSecTxt").val(arrAtr[16]);
+
+
 
 		$("#gaiaPltSecNodes").val(arrAtr[17]);
 
@@ -1025,12 +1042,8 @@ $(function () {
 
             //carrego els camps d'atributs de cel·les
             strAtr = element.find("span.rowAtributs").text();
-          var arrAtr = strAtr.substring(0, strAtr.length - 1).split("#");
-          // leer librerias antes y despues
-          $("#gaiaCodiWebTxt").val(arrAtr[12]);
-		  $("#gaiaCodiWebNodes").val(arrAtr[13]);
-		  $("#gaiaCodiWeb2Txt").val(arrAtr[14]);
-		  $("#gaiaCodiWeb2Nodes").val(arrAtr[15]);
+          var arrAtr = strAtr.substring(0, strAtr.length - 1).split("#");         		
+		
 
             //estils
             $("#ddlb_23").val(arrAtr[27]);
@@ -1089,14 +1102,10 @@ $(function () {
             element = $(this);
 
             //carrego els camps d'atributs de cel·les
-            strAtr = element.find("span.contenidorAtributs").text();
+         strAtr = element.find("span.contenidorAtributs").text();
          var arrAtr = strAtr.substring(0, strAtr.length - 1).split("#");
 
-         // leer librerias antes y despues
-          $("#gaiaCodiWebTxt").val(arrAtr[12]);
-		  $("#gaiaCodiWebNodes").val(arrAtr[13]);
-		  $("#gaiaCodiWeb2Txt").val(arrAtr[14]);
-		  $("#gaiaCodiWeb2Nodes").val(arrAtr[15]);
+    	
 
             //estils
             $("#ddlb_23").val(arrAtr[27]);
@@ -1138,7 +1147,6 @@ $(function () {
             $("#ddlb_653").val(arrAtr[63]);
             $("#ddlb_654").val(arrAtr[64]);
             $("#ddlb_655").val(arrAtr[65]);
-
             return false;
         });
 		
@@ -1721,7 +1729,27 @@ $(function () {
 			$("#txtEst").val($("#htmlEst").html());
 
 		}
-	})		
+    })	
+
+      function InsertLlibrerias($param) {
+            var strAtr = "";
+			if ($("#gaiaCodiWebTxt").val()!= null) {
+				strAtr += $("#gaiaCodiWebTxt").val().trim();
+			}
+			strAtr += "#";
+			if ($("#gaiaCodiWebNodes").val()!= null) {
+				strAtr += $("#gaiaCodiWebNodes").val().trim();
+			}
+			strAtr += "#";
+			if ($("#gaiaCodiWeb2Txt").val()!= null) {
+				strAtr += $("#gaiaCodiWeb2Txt").val().trim();
+			}
+			strAtr += "#";
+			if ($("#gaiaCodiWeb2Nodes").val()!= null) {
+				strAtr += $("#gaiaCodiWeb2Nodes").val().trim();
+			}
+          $param.before()
+      }
 
 	$("#btnModificarDades").click(function () {
 
@@ -1734,11 +1762,14 @@ $(function () {
                 }
 				else if (element.attr("class").indexOf('row') > -1) {
                 	element.removeClass();
-                	element.addClass("row rowActiva border border-secondary p-2");
+                    element.addClass("row rowActiva border border-secondary p-2");
+                    
 				}
 				else if (element.attr("class").indexOf('contenidor') > -1) {
                     element.removeClass();
                     element.addClass("contenidor contenidorActiu border border-secondary p-2 pr-4 pl-4");
+                    InsertLlibrerias(element);
+                    
                 }
 				
                 strAtr += "###########################";
