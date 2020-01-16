@@ -11,7 +11,7 @@
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="../../../Styles/formularisGaia.css">
-<link href="../../../img/open-iconic-bootstrap.css" rel="stylesheet">
+<link href="img/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
 <!--[if IE]>
       <link href="https://cdn.jsdelivr.net/gh/coliff/bootstrap-ie8/css/bootstrap-ie9.min.css" rel="stylesheet">
       <script src="https://cdn.jsdelivr.net/g/html5shiv@3.7.3"></script>
@@ -25,7 +25,7 @@
 <!-- navegacio -->
  <nav class="navbar navbar-dark bg-info navbar-expand-lg">
  
-  <a class="navbar-brand" href="/home.asp"><img src="img/logo_hospinet.png"></a>
+  <a class="navbar-brand" href="/home.asp"><img src="../../../img/logo_hospinet.png"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#desplegar" aria-controls="desplegar" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -924,44 +924,28 @@ $(function () {
 		var arrAtr = strAtr.substring(0,strAtr.length-1).split("#");
 		
 		$("#txtIdCel").val(arrAtr[0]);	
-		$("#txtNomCel").val(arrAtr[1]);		
-		//mides 
-		$("#ddlXs").val(arrAtr[2]);
-		$("#ddlSm").val(arrAtr[3]);
-		$("#ddlMd").val(arrAtr[4]);
-		$("#ddlLg").val(arrAtr[5]);
-		$("#ddlXl").val(arrAtr[6]);	
+        $("#txtNomCel").val(arrAtr[1]);
+        DadesMides(arrAtr)
 		//continguts
 		$("#lstTipusFulla").val(arrAtr[7]);
-
 
 		<asp:literal runat="server" id="ltCanviCampsDb"/>
 		
 		$("#ddlPLTDSCMP").val(arrAtr[8]);
 		$("#ddlPLTDSLNK").val(arrAtr[9]);
 		$("#ddlPLTDSALT").val(arrAtr[10]);
-		$("#ddlPLTDSIMG").val(arrAtr[11]);
-		$("#gaiaCodiWebTxt").val(arrAtr[12]);
-		$("#gaiaCodiWebNodes").val(arrAtr[13]);
-		$("#gaiaCodiWeb2Txt").val(arrAtr[14]);
-		$("#gaiaCodiWeb2Nodes").val(arrAtr[15]);
-		$("#gaiaPltSecTxt").val(arrAtr[16]);
-
-
+        $("#ddlPLTDSIMG").val(arrAtr[11]);
+        DadesLlibrerias(arrAtr);
 
 		$("#gaiaPltSecNodes").val(arrAtr[17]);
-
-
-		$("#txtPLTDSNUM").val(arrAtr[18]);	
+        $("#txtPLTDSNUM").val(arrAtr[18]);	
 		$("#ddlPLTDSNIV").val(arrAtr[19]);
-
-		$("#txtPLTDSAAL").val(arrAtr[20]);
+        $("#txtPLTDSAAL").val(arrAtr[20]);
 		$("#ddlb_PLTDSALF").val(arrAtr[21]);
 		$("#txtPLTDSALK").val(arrAtr[22]);
 		$("#gaiaPLTCDPALTxt").val(arrAtr[23]);
 		$("#gaiaPLTCDPALNodes").val(arrAtr[24]);
-		
-		
+				
 		if (arrAtr[25]=="true") {
 			$("#chkWEBDSIMP").attr("checked",true);
 		}
@@ -972,54 +956,11 @@ $(function () {
 			$("#chkWEBDSCND").attr("checked",true);
 		}
 		else {
-		
 			$("#chkWEBDSCND").attr("checked",false);
 		}
-		
 
-
-	
-	    //estils
-		$("#ddlb_23").val(arrAtr[27]);
-		$("#ddlb_25").val(arrAtr[28]);
-		$("#ddlb_26").val(arrAtr[29]);
-		$("#ddlb_27").val(arrAtr[30]);
-		$("#ddlb_28").val(arrAtr[31]);
-		$("#ddlb_103").val(arrAtr[32]);
-		$("#ddlb_105").val(arrAtr[33]);
-		$("#ddlb_108").val(arrAtr[34]);
-		$("#ddlb_110").val(arrAtr[35]);
-		$("#ddlb_111").val(arrAtr[36]);
-		$("#ddlb_112").val(arrAtr[37]);
-		$("#ddlb_122").val(arrAtr[38]);
-		$("#ddlb_114").val(arrAtr[39]);
-		$("#ddlb_115").val(arrAtr[40]);
-		$("#ddlb_123").val(arrAtr[41]);
-		$("#ddlb_117").val(arrAtr[42]);
-		$("#ddlb_118").val(arrAtr[43]);
-		$("#ddlb_119").val(arrAtr[44]);
-		$("#ddlb_124").val(arrAtr[45]);
-		$("#ddlb_630").val(arrAtr[46]);
-		$("#ddlb_631").val(arrAtr[47]);
-		$("#ddlb_632").val(arrAtr[48]);
-		$("#ddlb_633").val(arrAtr[49]);
-		$("#ddlb_634").val(arrAtr[50]);
-		$("#ddlb_635").val(arrAtr[51]);
-		$("#ddlb_636").val(arrAtr[52]);
-		$("#ddlb_637").val(arrAtr[53]);
-		$("#ddlb_638").val(arrAtr[54]);
-		$("#ddlb_639").val(arrAtr[55]);
-		$("#ddlb_641").val(arrAtr[56]);
-		$("#ddlb_642").val(arrAtr[57]);
-		$("#ddlb_648").val(arrAtr[58]);
-        $("#ddlb_649").val(arrAtr[59]);
-        $("#ddlb_650").val(arrAtr[60]);
-        $("#ddlb_651").val(arrAtr[61]);
-		$("#ddlb_652").val(arrAtr[62]);
-        $("#ddlb_653").val(arrAtr[63]);
-		$("#ddlb_654").val(arrAtr[64]);
-		$("#ddlb_655").val(arrAtr[65]);
-		
+        DadesEstils();
+	    
 		var icona="";
 		modificaIcona(element);
 		
@@ -1027,67 +968,92 @@ $(function () {
 	});
 
  	$("div#htmlEst").on("click", ".row", function () {
-            // gravo els cambis
-            $("#btnModificarDades").click();
+        // gravo els cambis
+        $("#btnModificarDades").click();
 
-            //carrego dades en la cel·la nova
-            var strAtr = "";
-			$("div").removeClass("contenidorActiu");
-            $("div").removeClass("rowActiva");
-            $("div").removeClass("celActiva");
+        //carrego dades en la cel·la nova
+        var strAtr = "";
+		$("div").removeClass("contenidorActiu");
+        $("div").removeClass("rowActiva");
+        $("div").removeClass("celActiva");
 
-            $(this).addClass("rowActiva");
+        $(this).addClass("rowActiva");
 
-            element = $(this);
+        element = $(this);
 
-            //carrego els camps d'atributs de cel·les
-            strAtr = element.find("span.rowAtributs").text();
-          var arrAtr = strAtr.substring(0, strAtr.length - 1).split("#");         		
-		
+        //carrego els camps d'atributs de cel·les
+        strAtr = element.find("span.rowAtributs").text();
+        var arrAtr = strAtr.substring(0, strAtr.length - 1).split("#");    
 
-            //estils
-            $("#ddlb_23").val(arrAtr[27]);
-            $("#ddlb_25").val(arrAtr[28]);
-            $("#ddlb_26").val(arrAtr[29]);
-            $("#ddlb_27").val(arrAtr[30]);
-            $("#ddlb_28").val(arrAtr[31]);
-            $("#ddlb_103").val(arrAtr[32]);
-            $("#ddlb_105").val(arrAtr[33]);
-            $("#ddlb_108").val(arrAtr[34]);
-            $("#ddlb_110").val(arrAtr[35]);
-            $("#ddlb_111").val(arrAtr[36]);
-            $("#ddlb_112").val(arrAtr[37]);
-            $("#ddlb_122").val(arrAtr[38]);
-            $("#ddlb_114").val(arrAtr[39]);
-            $("#ddlb_115").val(arrAtr[40]);
-            $("#ddlb_123").val(arrAtr[41]);
-            $("#ddlb_117").val(arrAtr[42]);
-            $("#ddlb_118").val(arrAtr[43]);
-            $("#ddlb_119").val(arrAtr[44]);
-            $("#ddlb_124").val(arrAtr[45]);
-            $("#ddlb_630").val(arrAtr[46]);
-            $("#ddlb_631").val(arrAtr[47]);
-            $("#ddlb_632").val(arrAtr[48]);
-            $("#ddlb_633").val(arrAtr[49]);
-            $("#ddlb_634").val(arrAtr[50]);
-            $("#ddlb_635").val(arrAtr[51]);
-            $("#ddlb_636").val(arrAtr[52]);
-            $("#ddlb_637").val(arrAtr[53]);
-            $("#ddlb_638").val(arrAtr[54]);
-            $("#ddlb_639").val(arrAtr[55]);
-            $("#ddlb_641").val(arrAtr[56]);
-            $("#ddlb_642").val(arrAtr[57]);
-            $("#ddlb_648").val(arrAtr[58]);
-            $("#ddlb_649").val(arrAtr[59]);
-            $("#ddlb_650").val(arrAtr[60]);
-            $("#ddlb_651").val(arrAtr[61]);
-            $("#ddlb_652").val(arrAtr[62]);
-            $("#ddlb_653").val(arrAtr[63]);
-			$("#ddlb_654").val(arrAtr[64]);
-			$("#ddlb_655").val(arrAtr[65]);
+          DadesMides(arrAtr);
+          DadesLlibrerias(arrAtr);
+          DadesEstils(arrAtr);
+
+		   return false;
+      });
+
+      function DadesLlibrerias(arrAtr) {
+        $("#gaiaCodiWebTxt").val(arrAtr[12]);
+		$("#gaiaCodiWebNodes").val(arrAtr[13]);
+		$("#gaiaCodiWeb2Txt").val(arrAtr[14]);
+		$("#gaiaCodiWeb2Nodes").val(arrAtr[15]);
+		$("#gaiaPltSecTxt").val(arrAtr[16]);
+      }
+
+      function DadesMides(arrAtr) {
+           //mides 
+		    $("#ddlXs").val(arrAtr[2]);
+		    $("#ddlSm").val(arrAtr[3]);
+		    $("#ddlMd").val(arrAtr[4]);
+		    $("#ddlLg").val(arrAtr[5]);
+            $("#ddlXl").val(arrAtr[6]);	
+      }
+
+      function DadesEstils(arrAtr) {
+
+          //estils
+          $("#ddlb_23").val(arrAtr[27]);
+          $("#ddlb_25").val(arrAtr[28]);
+          $("#ddlb_26").val(arrAtr[29]);
+          $("#ddlb_27").val(arrAtr[30]);
+          $("#ddlb_28").val(arrAtr[31]);
+          $("#ddlb_103").val(arrAtr[32]);
+          $("#ddlb_105").val(arrAtr[33]);
+          $("#ddlb_108").val(arrAtr[34]);
+          $("#ddlb_110").val(arrAtr[35]);
+          $("#ddlb_111").val(arrAtr[36]);
+          $("#ddlb_112").val(arrAtr[37]);
+          $("#ddlb_122").val(arrAtr[38]);
+          $("#ddlb_114").val(arrAtr[39]);
+          $("#ddlb_115").val(arrAtr[40]);
+          $("#ddlb_123").val(arrAtr[41]);
+          $("#ddlb_117").val(arrAtr[42]);
+          $("#ddlb_118").val(arrAtr[43]);
+          $("#ddlb_119").val(arrAtr[44]);
+          $("#ddlb_124").val(arrAtr[45]);
+          $("#ddlb_630").val(arrAtr[46]);
+          $("#ddlb_631").val(arrAtr[47]);
+          $("#ddlb_632").val(arrAtr[48]);
+          $("#ddlb_633").val(arrAtr[49]);
+          $("#ddlb_634").val(arrAtr[50]);
+          $("#ddlb_635").val(arrAtr[51]);
+          $("#ddlb_636").val(arrAtr[52]);
+          $("#ddlb_637").val(arrAtr[53]);
+          $("#ddlb_638").val(arrAtr[54]);
+          $("#ddlb_639").val(arrAtr[55]);
+          $("#ddlb_641").val(arrAtr[56]);
+          $("#ddlb_642").val(arrAtr[57]);
+          $("#ddlb_648").val(arrAtr[58]);
+          $("#ddlb_649").val(arrAtr[59]);
+          $("#ddlb_650").val(arrAtr[60]);
+          $("#ddlb_651").val(arrAtr[61]);
+          $("#ddlb_652").val(arrAtr[62]);
+          $("#ddlb_653").val(arrAtr[63]);
+          $("#ddlb_654").val(arrAtr[64]);
+          $("#ddlb_655").val(arrAtr[65]);
+      }
 			
-            return false;
-        });
+         
 		
 	 $("div#htmlEst").on("click", ".contenidor", function () {
             // gravo els cambis
@@ -1105,48 +1071,9 @@ $(function () {
          strAtr = element.find("span.contenidorAtributs").text();
          var arrAtr = strAtr.substring(0, strAtr.length - 1).split("#");
 
-    	
-
-            //estils
-            $("#ddlb_23").val(arrAtr[27]);
-            $("#ddlb_25").val(arrAtr[28]);
-            $("#ddlb_26").val(arrAtr[29]);
-            $("#ddlb_27").val(arrAtr[30]);
-            $("#ddlb_28").val(arrAtr[31]);
-            $("#ddlb_103").val(arrAtr[32]);
-            $("#ddlb_105").val(arrAtr[33]);
-            $("#ddlb_108").val(arrAtr[34]);
-            $("#ddlb_110").val(arrAtr[35]);
-            $("#ddlb_111").val(arrAtr[36]);
-            $("#ddlb_112").val(arrAtr[37]);
-            $("#ddlb_122").val(arrAtr[38]);
-            $("#ddlb_114").val(arrAtr[39]);
-            $("#ddlb_115").val(arrAtr[40]);
-            $("#ddlb_123").val(arrAtr[41]);
-            $("#ddlb_117").val(arrAtr[42]);
-            $("#ddlb_118").val(arrAtr[43]);
-            $("#ddlb_119").val(arrAtr[44]);
-            $("#ddlb_124").val(arrAtr[45]);
-            $("#ddlb_630").val(arrAtr[46]);
-            $("#ddlb_631").val(arrAtr[47]);
-            $("#ddlb_632").val(arrAtr[48]);
-            $("#ddlb_633").val(arrAtr[49]);
-            $("#ddlb_634").val(arrAtr[50]);
-            $("#ddlb_635").val(arrAtr[51]);
-            $("#ddlb_636").val(arrAtr[52]);
-            $("#ddlb_637").val(arrAtr[53]);
-            $("#ddlb_638").val(arrAtr[54]);
-            $("#ddlb_639").val(arrAtr[55]);
-            $("#ddlb_641").val(arrAtr[56]);
-            $("#ddlb_642").val(arrAtr[57]);
-            $("#ddlb_648").val(arrAtr[58]);
-            $("#ddlb_649").val(arrAtr[59]);
-            $("#ddlb_650").val(arrAtr[60]);
-            $("#ddlb_651").val(arrAtr[61]);
-            $("#ddlb_652").val(arrAtr[62]);
-            $("#ddlb_653").val(arrAtr[63]);
-            $("#ddlb_654").val(arrAtr[64]);
-            $("#ddlb_655").val(arrAtr[65]);
+         DadesMides(arrAtr);
+         DadesLlibrerias(arrAtr);
+         DadesEstils(arrAtr);
             return false;
         });
 		
@@ -1305,27 +1232,64 @@ $(function () {
             /* Copy the text inside the text field */
             document.execCommand("copy");
           
-        })
+    })
 
-	$("#btnModificarDadesCel").click(function() {
+      function ModificarDadesContenidor() {
+          element.removeClass();
+          element.addClass("contenidor contenidorActiu border border-secondary p-2 pr-4 pl-4");
 
-		var strAtr = "";
-		var contadorMides = 0;
-	
-		if (!jQuery.isEmptyObject(element)) {
-			element.find("span.text").text($("#txtNomCel").val());		
-			strAtr +=  $("#txtIdCel").val() + "#" + $("#txtNomCel").val();
-			//elimino les classes de mida de cel.la
-			//element.removeClass(function (index, className) { return (className.match (/(^|\s)col-\S+/g) || []).join(' ');});
-			element.removeClass();
-			element.addClass("cel celActiva border border-secondary p-2");
-			//afegeixo les classes de bootstrap
-			strAtr += "#";
+          var strAtr = "##";
+
+          strAtr += DadesComunsMides(strAtr);
+          strAtr += DadesComunsLlibrerias(strAtr, element);
+          strAtr += DadesComunsEstils(strAtr, element);
+
+          element.find("span.contenidorAtributs").text(strAtr);
+          
+      }
+
+      function ModificarDadesRow() {
+          element.removeClass();
+          element.addClass("row rowActiva border border-secondary p-2");
+          
+          var strAtr = "##";
+          strAtr += DadesComunsMides(strAtr);
+          strAtr += DadesComunsLlibrerias(strAtr, element);
+          strAtr += DadesComunsEstils(strAtr, element);
+
+          element.find("span.rowAtributs").text(strAtr);
+
+      }
+
+      function DadesComunsLlibrerias(strAtr) {
+
+          strAtr += "#";
+          if ($("#gaiaCodiWebTxt").val() != null) {
+              strAtr += $("#gaiaCodiWebTxt").val().trim();
+          }
+          strAtr += "#";
+          if ($("#gaiaCodiWebNodes").val() != null) {
+              strAtr += $("#gaiaCodiWebNodes").val().trim();
+          }
+          strAtr += "#";
+          if ($("#gaiaCodiWeb2Txt").val() != null) {
+              strAtr += $("#gaiaCodiWeb2Txt").val().trim();
+          }
+          strAtr += "#";
+          if ($("#gaiaCodiWeb2Nodes").val() != null) {
+              strAtr += $("#gaiaCodiWeb2Nodes").val().trim();
+          }
+          return strAtr;
+      }
+
+      function DadesComunsMides(strAtr, element) {
+          
+          strAtr += "#"; 
 			if ($("#ddlXs").val()!='') {
 				contadorMides++;
 				if ($("#ddlXs").val()!='Tot') {
 					element.addClass("col-xs-" + $("#ddlXs").val());
-					strAtr += $("#ddlXs").val()
+					strAtr += $("#ddlXs").val()  //#3
 				}
 				else {
 					element.addClass("col-xs");
@@ -1338,7 +1302,7 @@ $(function () {
 				contadorMides++;
 				if ($("#ddlSm").val()!='Tot') {
 					element.addClass("col-sm-" + $("#ddlSm").val());
-					strAtr += $("#ddlSm").val()
+					strAtr += $("#ddlSm").val() //4
 				}
 				else {
 					element.addClass("col-sm");
@@ -1350,7 +1314,7 @@ $(function () {
 				contadorMides++;
 				if ($("#ddlMd").val()!='Tot') {
 					element.addClass("col-md-" + $("#ddlMd").val());
-					strAtr += $("#ddlMd").val()
+					strAtr += $("#ddlMd").val() //5
 				}
 				else {
 					element.addClass("col-md");
@@ -1362,7 +1326,7 @@ $(function () {
 				contadorMides++;
 				if ($("#ddlLg").val()!='Tot') {
 					element.addClass("col-lg-" + $("#ddlLg").val());
-					strAtr += $("#ddlLg").val()
+					strAtr += $("#ddlLg").val() //6
 				}
 				else {
 					element.addClass("col-lg");
@@ -1374,7 +1338,326 @@ $(function () {
 				contadorMides++;
 				if ($("#ddlXl").val()!='Tot') {
 					element.addClass("col-xl-" + $("#ddlXl").val());
-					strAtr += $("#ddlXl").val()
+					strAtr += $("#ddlXl").val() //7
+				}
+				else {
+					element.addClass("col-xl");
+					strAtr += "0";
+				}				
+          }
+          return strAtr;
+      }
+
+      
+      function DadesComunsEstils(strAtr, element) {
+           
+            strAtr += "#";
+           if ($("#ddlb_23").val() != null) {
+               strAtr += $("#ddlb_23").val();
+               element.addClass($("#ddlb_23 option:selected").text());
+           }
+
+           strAtr += "#";
+           if ($("#ddlb_25").val() != null) {
+               strAtr += $("#ddlb_25").val();
+               element.addClass($("#ddlb_25 option:selected").text());
+           }
+
+           strAtr += "#";
+           if ($("#ddlb_26").val() != null) {
+               strAtr += $("#ddlb_26").val();
+               element.addClass($("#ddlb_26 option:selected").text());
+           }
+
+           strAtr += "#";
+           if ($("#ddlb_27").val() != null) {
+               strAtr += $("#ddlb_27").val();
+               element.addClass($("#ddlb_27 option:selected").text());
+           }
+
+           strAtr += "#";
+           if ($("#ddlb_28").val() != null) {
+               strAtr += $("#ddlb_28").val();
+               element.addClass($("#ddlb_28 option:selected").text());
+           }
+           strAtr += "#";
+           if ($("#ddlb_103").val() != null) {
+               strAtr += $("#ddlb_103").val();
+               element.addClass($("#ddlb_103 option:selected").text());
+           }
+
+           strAtr += "#";
+           if ($("#ddlb_105").val() != null) {
+               strAtr += $("#ddlb_105").val();
+               element.addClass($("#ddlb_105 option:selected").text());
+           }
+
+           strAtr += "#";
+           if ($("#ddlb_108").val() != null) {
+               strAtr += $("#ddlb_108").val();
+               element.addClass($("#ddlb_108 option:selected").text());
+           }
+
+           strAtr += "#";
+           if ($("#ddlb_110").val() != null) {
+               strAtr += $("#ddlb_110").val();
+               element.addClass($("#ddlb_110 option:selected").text());
+           }
+
+           strAtr += "#";
+           if ($("#ddlb_111").val() != null) {
+               strAtr += $("#ddlb_111").val();
+               element.addClass($("#ddlb_111 option:selected").text());
+           }
+           strAtr += "#";
+           if ($("#ddlb_112").val() != null) {
+               strAtr += $("#ddlb_112").val();
+               element.addClass($("#ddlb_112 option:selected").text());
+           }
+
+           strAtr += "#";
+           if ($("#ddlb_122").val() != null) {
+               strAtr += $("#ddlb_122").val();
+               element.addClass($("#ddlb_122 option:selected").text());
+           }
+
+           strAtr += "#";
+           if ($("#ddlb_114").val() != null) {
+               strAtr += $("#ddlb_114").val();
+               element.addClass($("#ddlb_114 option:selected").text());
+           }
+
+           strAtr += "#";
+           if ($("#ddlb_115").val() != null) {
+               strAtr += $("#ddlb_115").val();
+               element.addClass($("#ddlb_115 option:selected").text());
+           }
+
+           strAtr += "#";
+           if ($("#ddlb_123").val() != null) {
+               strAtr += $("#ddlb_123").val();
+               element.addClass($("#ddlb_123 option:selected").text());
+           }
+           strAtr += "#";
+           if ($("#ddlb_117").val() != null) {
+               strAtr += $("#ddlb_117").val();
+               element.addClass($("#ddlb_117 option:selected").text());
+           }
+
+           strAtr += "#";
+           if ($("#ddlb_118").val() != null) {
+               strAtr += $("#ddlb_118").val();
+               element.addClass($("#ddlb_118 option:selected").text());
+           }
+
+           strAtr += "#";
+           if ($("#ddlb_119").val() != null) {
+               strAtr += $("#ddlb_119").val();
+               element.addClass($("#ddlb_119 option:selected").text());
+           }
+
+           strAtr += "#";
+           if ($("#ddlb_124").val() != null) {
+               strAtr += $("#ddlb_124").val();
+               element.addClass($("#ddlb_124 option:selected").text());
+           }
+
+           strAtr += "#";
+           if ($("#ddlb_630").val() != null) {
+               strAtr += $("#ddlb_630").val();
+               element.addClass($("#ddlb_630 option:selected").text());
+           }
+
+           strAtr += "#";
+           if ($("#ddlb_631").val() != null) {
+               strAtr += $("#ddlb_631").val();
+               element.addClass($("#ddlb_631 option:selected").text());
+           }
+
+           strAtr += "#";
+           if ($("#ddlb_632").val() != null) {
+               strAtr += $("#ddlb_632").val();
+               element.addClass($("#ddlb_632 option:selected").text());
+           }
+
+           strAtr += "#";
+           if ($("#ddlb_633").val() != null) {
+               strAtr += $("#ddlb_633").val();
+               element.addClass($("#ddlb_633 option:selected").text());
+           }
+
+           strAtr += "#";
+           if ($("#ddlb_634").val() != null) {
+               strAtr += $("#ddlb_634").val();
+               element.addClass($("#ddlb_634 option:selected").text());
+           }
+
+           strAtr += "#";
+           if ($("#ddlb_635").val() != null) {
+               strAtr += $("#ddlb_635").val();
+               element.addClass($("#ddlb_635 option:selected").text());
+           }
+
+           strAtr += "#";
+           if ($("#ddlb_636").val() != null) {
+               strAtr += $("#ddlb_636").val();
+               element.addClass($("#ddlb_636 option:selected").text());
+           }
+
+           strAtr += "#";
+           if ($("#ddlb_637").val() != null) {
+               strAtr += $("#ddlb_637").val();
+               element.addClass($("#ddlb_637 option:selected").text());
+           }
+
+           strAtr += "#";
+           if ($("#ddlb_638").val() != null) {
+               strAtr += $("#ddlb_638").val();
+               element.addClass($("#ddlb_638 option:selected").text());
+           }
+
+           strAtr += "#";
+           if ($("#ddlb_639").val() != null) {
+               strAtr += $("#ddlb_639").val();
+               element.addClass($("#ddlb_639 option:selected").text());
+           }
+
+           strAtr += "#";
+           if ($("#ddlb_641").val() != null) {
+               strAtr += $("#ddlb_641").val();
+               element.addClass($("#ddlb_641 option:selected").text());
+           }
+
+           strAtr += "#";
+           if ($("#ddlb_642").val() != null) {
+               strAtr += $("#ddlb_642").val();
+               element.addClass($("#ddlb_642 option:selected").text());
+           }
+
+           strAtr += "#";
+           if ($("#ddlb_648").val() != null) {
+               strAtr += $("#ddlb_648").val();
+               element.addClass($("#ddlb_648 option:selected").text());
+           }
+
+           strAtr += "#";
+           if ($("#ddlb_649").val() != null) {
+               strAtr += $("#ddlb_649").val();
+               element.addClass($("#ddlb_649 option:selected").text());
+
+           }
+
+           strAtr += "#";
+           if ($("#ddlb_650").val() != null) {
+               strAtr += $("#ddlb_650").val();
+               element.addClass($("#ddlb_650 option:selected").text());
+           }
+
+           strAtr += "#";
+           if ($("#ddlb_651").val() != null) {
+               strAtr += $("#ddlb_651").val();
+               element.addClass($("#ddlb_651 option:selected").text());
+           }
+
+           strAtr += "#";
+           if ($("#ddlb_652").val() != null) {
+               strAtr += $("#ddlb_652").val();
+               element.addClass($("#ddlb_652 option:selected").text());
+           }
+
+           strAtr += "#";
+           if ($("#ddlb_653").val() != null) {
+               strAtr += $("#ddlb_653").val();
+               element.addClass($("#ddlb_653 option:selected").text());
+           }
+			
+			strAtr += "#";
+           if ($("#ddlb_654").val() != null) {
+               strAtr += $("#ddlb_654").val();
+               element.addClass($("#ddlb_654 option:selected").text());
+           }
+			
+			strAtr += "#";
+           if ($("#ddlb_655").val() != null) {
+               strAtr += $("#ddlb_655").val();
+               element.addClass($("#ddlb_655 option:selected").text());
+           }
+			
+           strAtr += "|"
+          return strAtr;
+          
+      }
+
+
+	$("#btnModificarDadesCel").click(function() {
+
+        var strAtr = "";       
+        debugger;
+        var contadorMides = 0;
+        	
+		if (!jQuery.isEmptyObject(element)) {
+			element.find("span.text").text($("#txtNomCel").val());		
+			strAtr +=  $("#txtIdCel").val() + "#" + $("#txtNomCel").val(); //1#2
+			//elimino les classes de mida de cel.la
+			//element.removeClass(function (index, className) { return (className.match (/(^|\s)col-\S+/g) || []).join(' ');});
+			element.removeClass();
+			element.addClass("cel celActiva border border-secondary p-2");
+			//afegeixo les classes de bootstrap
+			strAtr += "#"; 
+			if ($("#ddlXs").val()!='') {
+				contadorMides++;
+				if ($("#ddlXs").val()!='Tot') {
+					element.addClass("col-xs-" + $("#ddlXs").val());
+					strAtr += $("#ddlXs").val()  //#3
+				}
+				else {
+					element.addClass("col-xs");
+					strAtr += "0";
+
+				}				
+			}
+			strAtr += "#";
+			if ($("#ddlSm").val()!='') {
+				contadorMides++;
+				if ($("#ddlSm").val()!='Tot') {
+					element.addClass("col-sm-" + $("#ddlSm").val());
+					strAtr += $("#ddlSm").val() //4
+				}
+				else {
+					element.addClass("col-sm");
+					strAtr += "0";
+				}				
+			}
+			strAtr += "#";
+			if ($("#ddlMd").val()!='') {
+				contadorMides++;
+				if ($("#ddlMd").val()!='Tot') {
+					element.addClass("col-md-" + $("#ddlMd").val());
+					strAtr += $("#ddlMd").val() //5
+				}
+				else {
+					element.addClass("col-md");
+					strAtr += "0";
+				}				
+			}
+			strAtr += "#";	
+			if ($("#ddlLg").val()!='') {
+				contadorMides++;
+				if ($("#ddlLg").val()!='Tot') {
+					element.addClass("col-lg-" + $("#ddlLg").val());
+					strAtr += $("#ddlLg").val() //6
+				}
+				else {
+					element.addClass("col-lg");
+					strAtr += "0";
+				}				
+			}
+			strAtr += "#";
+			if ($("#ddlXl").val()!='') {
+				contadorMides++;
+				if ($("#ddlXl").val()!='Tot') {
+					element.addClass("col-xl-" + $("#ddlXl").val());
+					strAtr += $("#ddlXl").val() //7
 				}
 				else {
 					element.addClass("col-xl");
@@ -1389,337 +1672,105 @@ $(function () {
 
 			strAtr += "#";			
 			if ($("#lstTipusFulla").val()!= null) {
-				strAtr += $("#lstTipusFulla").val().trim();
+				strAtr += $("#lstTipusFulla").val().trim(); //8
 			}
 			
 
 			strAtr += "#";
-			
 			if ($("#ddlPLTDSCMP").val()!= null) {
-				strAtr += $("#ddlPLTDSCMP").val().trim();
+				strAtr += $("#ddlPLTDSCMP").val().trim(); //9
 			}
 			strAtr += "#";
 			if ($("#ddlPLTDSLNK").val()!= null) {
-				strAtr += $("#ddlPLTDSLNK").val().trim();
+				strAtr += $("#ddlPLTDSLNK").val().trim(); //10
 			}
 			strAtr += "#";
 			if ($("#ddlPLTDSALT").val()!= null) {
-				strAtr += $("#ddlPLTDSALT").val().trim();
+				strAtr += $("#ddlPLTDSALT").val().trim(); //11
 			}
 			
 			strAtr += "#";
 			if ($("#ddlPLTDSIMG").val()!= null) {
-				strAtr += $("#ddlPLTDSIMG").val().trim();
+				strAtr += $("#ddlPLTDSIMG").val().trim(); //12
 			}
 
 			strAtr += "#";
 			if ($("#gaiaCodiWebTxt").val()!= null) {
-				strAtr += $("#gaiaCodiWebTxt").val().trim();
+				strAtr += $("#gaiaCodiWebTxt").val().trim(); //13
 			}
 			strAtr += "#";
 			if ($("#gaiaCodiWebNodes").val()!= null) {
-				strAtr += $("#gaiaCodiWebNodes").val().trim();
+				strAtr += $("#gaiaCodiWebNodes").val().trim(); //14
 			}
 			strAtr += "#";
 			if ($("#gaiaCodiWeb2Txt").val()!= null) {
-				strAtr += $("#gaiaCodiWeb2Txt").val().trim();
+				strAtr += $("#gaiaCodiWeb2Txt").val().trim(); //15
 			}
 			strAtr += "#";
 			if ($("#gaiaCodiWeb2Nodes").val()!= null) {
-				strAtr += $("#gaiaCodiWeb2Nodes").val().trim();
+				strAtr += $("#gaiaCodiWeb2Nodes").val().trim(); //16
 			}
 
 			strAtr += "#";
 			if ($("#gaiaPltSecTxt").val()!= null) {
-				strAtr += $("#gaiaPltSecTxt").val().trim();
+				strAtr += $("#gaiaPltSecTxt").val().trim(); //17
 			}
 			strAtr += "#";
 			if ($("#gaiaPltSecNodes").val()!= null) {
 				
-				strAtr += $("#gaiaPltSecNodes").val().trim();
+				strAtr += $("#gaiaPltSecNodes").val().trim(); //18
 				
 			}
 
 
 			strAtr +=   "#" 
 			if ($("#txtPLTDSNUM").val()!= null) {
-				strAtr += $("#txtPLTDSNUM").val().trim();
+				strAtr += $("#txtPLTDSNUM").val().trim(); //19
 			}
 		
 
 
 			strAtr += "#";
 			if ($("#ddlPLTDSNIV").val()!= null) {
-				strAtr += $("#ddlPLTDSNIV").val().trim();
+				strAtr += $("#ddlPLTDSNIV").val().trim(); //20
 			}
 
 			strAtr += "#";
 			if ($("#txtPLTDSAAL").val()!= null) {
-				strAtr += $("#txtPLTDSAAL").val().trim();
+				strAtr += $("#txtPLTDSAAL").val().trim(); //21
 			}
 			
 			strAtr += "#";
 			if ($("#ddlb_PLTDSALF").val()!= null) {
-				strAtr += $("#ddlb_PLTDSALF").val().trim();
+				strAtr += $("#ddlb_PLTDSALF").val().trim(); //22
 			}
 
 
 			strAtr += "#";
 			if ($("#txtPLTDSALK").val()!= null) {
-				strAtr += $("#txtPLTDSALK").val().trim();
+				strAtr += $("#txtPLTDSALK").val().trim(); //23
 			}
 		
 			strAtr += "#";
 			if ($("#gaiaPLTCDPALTxt").val()!= null) {
-				strAtr += $("#gaiaPLTCDPALTxt").val().trim();
+				strAtr += $("#gaiaPLTCDPALTxt").val().trim(); //24
 			}
 
 			strAtr += "#";
 			if ($("#gaiaPLTCDPALNodes").val()!= null) {
-				strAtr += $("#gaiaPLTCDPALNodes").val().trim();
+				strAtr += $("#gaiaPLTCDPALNodes").val().trim(); //25
 			}
 
 			
 			
 			strAtr += "#";
-			strAtr += $("#chkWEBDSIMP").is(":checked");
+			strAtr += $("#chkWEBDSIMP").is(":checked"); //27
 		
 			
 			strAtr += "#";
-			strAtr += $("#chkWEBDSCND").is(":checked");
+			strAtr += $("#chkWEBDSCND").is(":checked"); //28
 
-			strAtr += "#";
-			if ($("#ddlb_23").val()!= null) {
-				strAtr += $("#ddlb_23").val();
-				element.addClass($("#ddlb_23 option:selected").text());
-			}
-
-			strAtr += "#";
-			if ($("#ddlb_25").val()!= null) {
-			    strAtr += $("#ddlb_25").val();
-			    element.addClass($("#ddlb_25 option:selected").text());
-			}
-			
-			strAtr += "#";
-			if ($("#ddlb_26").val()!= null) {
-			    strAtr += $("#ddlb_26").val();
-			    element.addClass($("#ddlb_26 option:selected").text());
-			}
-			
-			strAtr += "#";
-			if ($("#ddlb_27").val()!= null) {
-			    strAtr += $("#ddlb_27").val();
-			    element.addClass($("#ddlb_27 option:selected").text());
-			}
-			
-			strAtr += "#";
-			if ($("#ddlb_28").val()!= null) {
-			    strAtr += $("#ddlb_28").val();
-			    element.addClass($("#ddlb_28 option:selected").text());
-			}
-			strAtr += "#";
-			if ($("#ddlb_103").val()!= null) {
-			    strAtr += $("#ddlb_103").val();
-			    element.addClass($("#ddlb_103 option:selected").text());
-			}
-			
-			strAtr += "#";
-			if ($("#ddlb_105").val()!= null) {
-			    strAtr += $("#ddlb_105").val();
-			    element.addClass($("#ddlb_105 option:selected").text());
-			}
-			
-			strAtr += "#";
-			if ($("#ddlb_108").val()!= null) {
-			    strAtr += $("#ddlb_108").val();
-			    element.addClass($("#ddlb_108 option:selected").text());
-			}
-			
-			strAtr += "#";
-			if ($("#ddlb_110").val()!= null) {
-			    strAtr += $("#ddlb_110").val();
-			    element.addClass($("#ddlb_110 option:selected").text());
-			}
-			
-			strAtr += "#";
-			if ($("#ddlb_111").val()!= null) {
-			    strAtr += $("#ddlb_111").val();
-			    element.addClass($("#ddlb_111 option:selected").text());
-			}
-			strAtr += "#";
-			if ($("#ddlb_112").val()!= null) {
-			    strAtr += $("#ddlb_112").val();
-			    element.addClass($("#ddlb_112 option:selected").text());
-			}
-			
-			strAtr += "#";
-			if ($("#ddlb_122").val()!= null) {
-			    strAtr += $("#ddlb_122").val();
-			    element.addClass($("#ddlb_122 option:selected").text());
-			}
-			
-			strAtr += "#";
-			if ($("#ddlb_114").val()!= null) {
-			    strAtr += $("#ddlb_114").val();
-			    element.addClass($("#ddlb_114 option:selected").text());
-			}
-			
-			strAtr += "#";
-			if ($("#ddlb_115").val()!= null) {
-			    strAtr += $("#ddlb_115").val();
-			    element.addClass($("#ddlb_115 option:selected").text());
-			}
-			
-			strAtr += "#";
-			if ($("#ddlb_123").val()!= null) {
-			    strAtr += $("#ddlb_123").val();
-			    element.addClass($("#ddlb_123 option:selected").text());
-			}
-			strAtr += "#";
-			if ($("#ddlb_117").val()!= null) {
-			    strAtr += $("#ddlb_117").val();
-			    element.addClass($("#ddlb_117 option:selected").text());
-			}
-			
-			strAtr += "#";
-			if ($("#ddlb_118").val()!= null) {
-			    strAtr += $("#ddlb_118").val();
-			    element.addClass($("#ddlb_118 option:selected").text());
-			}
-			
-			strAtr += "#";
-			if ($("#ddlb_119").val()!= null) {
-			    strAtr += $("#ddlb_119").val();
-			    element.addClass($("#ddlb_119 option:selected").text());
-			}
-			
-			strAtr += "#";
-			if ($("#ddlb_124").val()!= null) {
-			    strAtr += $("#ddlb_124").val();
-			    element.addClass($("#ddlb_124 option:selected").text());
-			}
-			
-			strAtr += "#";
-			if ($("#ddlb_630").val()!= null) {
-			    strAtr += $("#ddlb_630").val();
-			    element.addClass($("#ddlb_630 option:selected").text());
-			}
-			
-			strAtr += "#";
-			if ($("#ddlb_631").val()!= null) {
-			    strAtr += $("#ddlb_631").val();
-			    element.addClass($("#ddlb_631 option:selected").text());
-			}
-			
-			strAtr += "#";
-			if ($("#ddlb_632").val()!= null) {
-			    strAtr += $("#ddlb_632").val();
-			    element.addClass($("#ddlb_632 option:selected").text());
-			}
-			
-			strAtr += "#";
-			if ($("#ddlb_633").val()!= null) {
-			    strAtr += $("#ddlb_633").val();
-			    element.addClass($("#ddlb_633 option:selected").text());
-			}
-			
-			strAtr += "#";
-			if ($("#ddlb_634").val()!= null) {
-			    strAtr += $("#ddlb_634").val();
-			    element.addClass($("#ddlb_634 option:selected").text());
-			}
-			
-			strAtr += "#";
-			if ($("#ddlb_635").val()!= null) {
-			    strAtr += $("#ddlb_635").val();
-			    element.addClass($("#ddlb_635 option:selected").text());
-			}
-						
-			strAtr += "#";
-			if ($("#ddlb_636").val()!= null) {
-			    strAtr += $("#ddlb_636").val();
-			    element.addClass($("#ddlb_636 option:selected").text());
-			}
-			
-			strAtr += "#";
-			if ($("#ddlb_637").val()!= null) {
-			    strAtr += $("#ddlb_637").val();
-			    element.addClass($("#ddlb_637 option:selected").text());
-			}
-			
-			strAtr += "#";
-			if ($("#ddlb_638").val()!= null) {
-			    strAtr += $("#ddlb_638").val();
-			    element.addClass($("#ddlb_638 option:selected").text());
-			}
-			
-			strAtr += "#";
-			if ($("#ddlb_639").val()!= null) {
-			    strAtr += $("#ddlb_639").val();
-			    element.addClass($("#ddlb_639 option:selected").text());
-			}
-			
-			strAtr += "#";
-			if ($("#ddlb_641").val()!= null) {
-			    strAtr += $("#ddlb_641").val();
-			    element.addClass($("#ddlb_641 option:selected").text());
-			}
-			
-			strAtr += "#";
-			if ($("#ddlb_642").val()!= null) {
-			    strAtr += $("#ddlb_642").val();
-			    element.addClass($("#ddlb_642 option:selected").text());
-			}
-			
-			strAtr += "#";
-            if ($("#ddlb_648").val() != null) {
-                strAtr += $("#ddlb_648").val();
-                element.addClass($("#ddlb_648 option:selected").text());
-            }
-
-            strAtr += "#";
-            if ($("#ddlb_649").val() != null) {
-                strAtr += $("#ddlb_649").val();
-                element.addClass($("#ddlb_649 option:selected").text());
-            }
-
-            strAtr += "#";
-            if ($("#ddlb_650").val() != null) {
-                strAtr += $("#ddlb_650").val();
-                element.addClass($("#ddlb_650 option:selected").text());
-            }
-
-            strAtr += "#";
-            if ($("#ddlb_651").val() != null) {
-                strAtr += $("#ddlb_651").val();
-                element.addClass($("#ddlb_651 option:selected").text());
-            }
-
-			strAtr += "#";
-            if ($("#ddlb_652").val() != null) {
-                strAtr += $("#ddlb_652").val();
-                element.addClass($("#ddlb_652 option:selected").text());
-            }
-
-            strAtr += "#";
-            if ($("#ddlb_653").val() != null) {
-                strAtr += $("#ddlb_653").val();
-                element.addClass($("#ddlb_653 option:selected").text());
-            }
-			
-			strAtr += "#";
-                if ($("#ddlb_654").val() != null) {
-                    strAtr += $("#ddlb_654").val();
-                    element.addClass($("#ddlb_654 option:selected").text());
-                }
-				
-			strAtr += "#";
-                if ($("#ddlb_655").val() != null) {
-                    strAtr += $("#ddlb_655").val();
-                    element.addClass($("#ddlb_655 option:selected").text());
-                }
-				
-			strAtr += "|"
+            strAtr += DadesComunsEstils(element);
 
 			modificaIcona(element);
 			//afegeixo els atributs a l'array de propietats
@@ -1731,288 +1782,30 @@ $(function () {
 		}
     })	
 
-      function InsertLlibrerias($param) {
-            var strAtr = "";
-			if ($("#gaiaCodiWebTxt").val()!= null) {
-				strAtr += $("#gaiaCodiWebTxt").val().trim();
-			}
-			strAtr += "#";
-			if ($("#gaiaCodiWebNodes").val()!= null) {
-				strAtr += $("#gaiaCodiWebNodes").val().trim();
-			}
-			strAtr += "#";
-			if ($("#gaiaCodiWeb2Txt").val()!= null) {
-				strAtr += $("#gaiaCodiWeb2Txt").val().trim();
-			}
-			strAtr += "#";
-			if ($("#gaiaCodiWeb2Nodes").val()!= null) {
-				strAtr += $("#gaiaCodiWeb2Nodes").val().trim();
-			}
-          $param.before()
-      }
+     
 
 	$("#btnModificarDades").click(function () {
 
-            var strAtr = "";
+        var strAtr = "";
+       
+
             if (!jQuery.isEmptyObject(element)) {
-			
+               
+
 				if (element.attr("class").indexOf('cel') > -1) {                // element: el ultimo div que se ha clicado
                     $("#btnModificarDadesCel").click();
                     return true;
                 }
 				else if (element.attr("class").indexOf('row') > -1) {
-                	element.removeClass();
-                    element.addClass("row rowActiva border border-secondary p-2");
+                    ModificarDadesRow();
                     
 				}
-				else if (element.attr("class").indexOf('contenidor') > -1) {
-                    element.removeClass();
-                    element.addClass("contenidor contenidorActiu border border-secondary p-2 pr-4 pl-4");
-                    InsertLlibrerias(element);
-                    
+                else if (element.attr("class").indexOf('contenidor') > -1) {
+                    ModificarDadesContenidor();
                 }
 				
-                strAtr += "###########################";
-                if ($("#ddlb_23").val() != null) {
-                    strAtr += $("#ddlb_23").val();
-                    element.addClass($("#ddlb_23 option:selected").text());
-                }
+    //            strAtr += "###########################";   
 
-                strAtr += "#";
-                if ($("#ddlb_25").val() != null) {
-                    strAtr += $("#ddlb_25").val();
-                    element.addClass($("#ddlb_25 option:selected").text());
-                }
-
-                strAtr += "#";
-                if ($("#ddlb_26").val() != null) {
-                    strAtr += $("#ddlb_26").val();
-                    element.addClass($("#ddlb_26 option:selected").text());
-                }
-
-                strAtr += "#";
-                if ($("#ddlb_27").val() != null) {
-                    strAtr += $("#ddlb_27").val();
-                    element.addClass($("#ddlb_27 option:selected").text());
-                }
-
-                strAtr += "#";
-                if ($("#ddlb_28").val() != null) {
-                    strAtr += $("#ddlb_28").val();
-                    element.addClass($("#ddlb_28 option:selected").text());
-                }
-                strAtr += "#";
-                if ($("#ddlb_103").val() != null) {
-                    strAtr += $("#ddlb_103").val();
-                    element.addClass($("#ddlb_103 option:selected").text());
-                }
-
-                strAtr += "#";
-                if ($("#ddlb_105").val() != null) {
-                    strAtr += $("#ddlb_105").val();
-                    element.addClass($("#ddlb_105 option:selected").text());
-                }
-
-                strAtr += "#";
-                if ($("#ddlb_108").val() != null) {
-                    strAtr += $("#ddlb_108").val();
-                    element.addClass($("#ddlb_108 option:selected").text());
-                }
-
-                strAtr += "#";
-                if ($("#ddlb_110").val() != null) {
-                    strAtr += $("#ddlb_110").val();
-                    element.addClass($("#ddlb_110 option:selected").text());
-                }
-
-                strAtr += "#";
-                if ($("#ddlb_111").val() != null) {
-                    strAtr += $("#ddlb_111").val();
-                    element.addClass($("#ddlb_111 option:selected").text());
-                }
-                strAtr += "#";
-                if ($("#ddlb_112").val() != null) {
-                    strAtr += $("#ddlb_112").val();
-                    element.addClass($("#ddlb_112 option:selected").text());
-                }
-
-                strAtr += "#";
-                if ($("#ddlb_122").val() != null) {
-                    strAtr += $("#ddlb_122").val();
-                    element.addClass($("#ddlb_122 option:selected").text());
-                }
-
-                strAtr += "#";
-                if ($("#ddlb_114").val() != null) {
-                    strAtr += $("#ddlb_114").val();
-                    element.addClass($("#ddlb_114 option:selected").text());
-                }
-
-                strAtr += "#";
-                if ($("#ddlb_115").val() != null) {
-                    strAtr += $("#ddlb_115").val();
-                    element.addClass($("#ddlb_115 option:selected").text());
-                }
-
-                strAtr += "#";
-                if ($("#ddlb_123").val() != null) {
-                    strAtr += $("#ddlb_123").val();
-                    element.addClass($("#ddlb_123 option:selected").text());
-                }
-                strAtr += "#";
-                if ($("#ddlb_117").val() != null) {
-                    strAtr += $("#ddlb_117").val();
-                    element.addClass($("#ddlb_117 option:selected").text());
-                }
-
-                strAtr += "#";
-                if ($("#ddlb_118").val() != null) {
-                    strAtr += $("#ddlb_118").val();
-                    element.addClass($("#ddlb_118 option:selected").text());
-                }
-
-                strAtr += "#";
-                if ($("#ddlb_119").val() != null) {
-                    strAtr += $("#ddlb_119").val();
-                    element.addClass($("#ddlb_119 option:selected").text());
-                }
-
-                strAtr += "#";
-                if ($("#ddlb_124").val() != null) {
-                    strAtr += $("#ddlb_124").val();
-                    element.addClass($("#ddlb_124 option:selected").text());
-                }
-
-                strAtr += "#";
-                if ($("#ddlb_630").val() != null) {
-                    strAtr += $("#ddlb_630").val();
-                    element.addClass($("#ddlb_630 option:selected").text());
-                }
-
-                strAtr += "#";
-                if ($("#ddlb_631").val() != null) {
-                    strAtr += $("#ddlb_631").val();
-                    element.addClass($("#ddlb_631 option:selected").text());
-                }
-
-                strAtr += "#";
-                if ($("#ddlb_632").val() != null) {
-                    strAtr += $("#ddlb_632").val();
-                    element.addClass($("#ddlb_632 option:selected").text());
-                }
-
-                strAtr += "#";
-                if ($("#ddlb_633").val() != null) {
-                    strAtr += $("#ddlb_633").val();
-                    element.addClass($("#ddlb_633 option:selected").text());
-                }
-
-                strAtr += "#";
-                if ($("#ddlb_634").val() != null) {
-                    strAtr += $("#ddlb_634").val();
-                    element.addClass($("#ddlb_634 option:selected").text());
-                }
-
-                strAtr += "#";
-                if ($("#ddlb_635").val() != null) {
-                    strAtr += $("#ddlb_635").val();
-                    element.addClass($("#ddlb_635 option:selected").text());
-                }
-
-                strAtr += "#";
-                if ($("#ddlb_636").val() != null) {
-                    strAtr += $("#ddlb_636").val();
-                    element.addClass($("#ddlb_636 option:selected").text());
-                }
-
-                strAtr += "#";
-                if ($("#ddlb_637").val() != null) {
-                    strAtr += $("#ddlb_637").val();
-                    element.addClass($("#ddlb_637 option:selected").text());
-                }
-
-                strAtr += "#";
-                if ($("#ddlb_638").val() != null) {
-                    strAtr += $("#ddlb_638").val();
-                    element.addClass($("#ddlb_638 option:selected").text());
-                }
-
-                strAtr += "#";
-                if ($("#ddlb_639").val() != null) {
-                    strAtr += $("#ddlb_639").val();
-                    element.addClass($("#ddlb_639 option:selected").text());
-                }
-
-                strAtr += "#";
-                if ($("#ddlb_641").val() != null) {
-                    strAtr += $("#ddlb_641").val();
-                    element.addClass($("#ddlb_641 option:selected").text());
-                }
-
-                strAtr += "#";
-                if ($("#ddlb_642").val() != null) {
-                    strAtr += $("#ddlb_642").val();
-                    element.addClass($("#ddlb_642 option:selected").text());
-                }
-
-                strAtr += "#";
-                if ($("#ddlb_648").val() != null) {
-                    strAtr += $("#ddlb_648").val();
-                    element.addClass($("#ddlb_648 option:selected").text());
-                }
-
-                strAtr += "#";
-                if ($("#ddlb_649").val() != null) {
-                    strAtr += $("#ddlb_649").val();
-                    element.addClass($("#ddlb_649 option:selected").text());
-
-                }
-
-                strAtr += "#";
-                if ($("#ddlb_650").val() != null) {
-                    strAtr += $("#ddlb_650").val();
-                    element.addClass($("#ddlb_650 option:selected").text());
-                }
-
-                strAtr += "#";
-                if ($("#ddlb_651").val() != null) {
-                    strAtr += $("#ddlb_651").val();
-                    element.addClass($("#ddlb_651 option:selected").text());
-                }
-
-                strAtr += "#";
-                if ($("#ddlb_652").val() != null) {
-                    strAtr += $("#ddlb_652").val();
-                    element.addClass($("#ddlb_652 option:selected").text());
-                }
-
-                strAtr += "#";
-                if ($("#ddlb_653").val() != null) {
-                    strAtr += $("#ddlb_653").val();
-                    element.addClass($("#ddlb_653 option:selected").text());
-                }
-				
-				strAtr += "#";
-                if ($("#ddlb_654").val() != null) {
-                    strAtr += $("#ddlb_654").val();
-                    element.addClass($("#ddlb_654 option:selected").text());
-                }
-				
-				strAtr += "#";
-                if ($("#ddlb_655").val() != null) {
-                    strAtr += $("#ddlb_655").val();
-                    element.addClass($("#ddlb_655 option:selected").text());
-                }
-				
-                strAtr += "|"
-
-                //afegeixo els atributs a l'array de propietats
-				if (element.attr("class").indexOf('row') > -1) {
-                	element.find("span.rowAtributs").text(strAtr);
-				}
-				else if (element.attr("class").indexOf('contenidor') > -1) {
-                    element.find("span.contenidorAtributs").text(strAtr);
-                }
                 //guardo els canvis 
                 $("#txtEst").val($("#htmlEst").html());
             }
@@ -2080,7 +1873,8 @@ function modificaIcona(element) {
 
 })
 
- function guardar() {
+    function guardar() {
+       
 		//gravo canvis en la cel·la actual
 		$("#btnModificarDades").click();
 

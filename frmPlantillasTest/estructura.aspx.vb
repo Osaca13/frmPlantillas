@@ -230,7 +230,7 @@ Public Class estructura
     'End Function
 
     Private Function GetHtmlEstructura() As String()
-        Dim html As String() = {}
+        Dim html() As String = {}
 
         If lblEstructura.Text <> "" Then
             ' Los id de los desplegables de las plantillas en GAIA empiezan por t y en GAIA2 por d
@@ -409,7 +409,7 @@ Public Class estructura
                             lblCodi.Text = "<script>document.getElementById(""WEBDSTCO"").value=""" & dbRow("AWEDSTCO").ToString() & """;document.getElementById(""tipusNode"").value=""" & tipusNode.Text.ToString() & """;document.getElementById(""codiRelacioOrigen"").value=""" & codiRelacioOrigen.Text.ToString() & """;document.getElementById(""txtPosicioEstructuraReal"").value=""" & posicioEstructuraReal.ToString() & """;</script> "
                         Else 'Ya tiene una posición asignada
                             If dbRow("AWEDSATR") = "GAIA2" Then   'Teresa
-                                llistaPlantilles.Text = dbRow("AWEDSPLA")
+                                'llistaPlantilles.Text = dbRow("AWEDSPLA")
                                 lblEstructura.Text = maquetaEstructura(dbRow("AWEDSEST"), tipusNodeAMoure)
                             End If
                         End If
@@ -933,7 +933,9 @@ Public Class estructura
         divs = Split(webdshtm, "id=")
         html = divs(0) & "id="
 
-        celdas = Split(webdshtm, "<span class='atributs' style='display:none'>")
+        celdas = Split(webdshtm, "<span class='atributs' style='display: none;'>")
+        '  celdas = Split(webdshtm, "<span class='atributs'")
+
 
         For Each celda In celdas
             'Saltamos el primero

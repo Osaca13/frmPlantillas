@@ -881,13 +881,10 @@ Public Class frmPlantillas
                     rel = GAIA.creaRelacio(objconn, 8, txtCodiNode.Text, txtCodiNode.Text, 0, "", -1, 1, -1, 1, False, Session("codiOrg"))
                 End If
 
-
-
                 strSql &= "DELETE FROM METLAWE2 WHERE AWEINNOD=" & txtCodiNode.Text & " AND AWEINIDI=" & codiIdioma
 
-                strSql &= ";INSERT INTO METLAWE2  VALUES (" & txtCodiNode.Text & "," & codiIdioma & ",'" & AWEDSTIT.Text.Replace("'", "''").Replace("<p>", "").Replace("</p>", "") & "'," & lstAWEDSSER.SelectedItem.Value & ",'" & AWEDSROT.Text & "'," & Session("codiOrg") & ",'" & PLTDSTCO & "','" & PLTDSPLT & "','" & PLTDSEST & "','" & PLTDSHTM & "','" & PLTDSLCW & "','" & PLTDSLC2 & "','" & AWEDSDOC.Text & "','" & AWEDSEBO.Text & "','" & AWEDSMET.Text & "','" & AWEDSPEU.Text & "','" & AWEDSCSP.Text & "','" & AWEDSCSI.Text & "','" & AWEDSNOM.Text & "')"
-
-
+                strSql &= "; INSERT INTO METLAWE2 (AWEINNOD, AWEINIDI, AWEDSTIT, AWEDSSER, AWEDSROT, AWEDSUSR, AWEDSTCO, AWEDSPLA, AWEDSEST, AWEDSHTM, AWEDSLCW, AWEDSLC2, AWEDSDOC, AWEDSEBO, AWEDSMET, AWEDSPEU, AWEDSCSP, AWEDSCSI, AWEDSNOM) VALUES (" & txtCodiNode.Text & "," & codiIdioma & ",'" & AWEDSTIT.Text.Replace("'", "''").Replace("<p>", "").Replace("</p>", "") & "'," & lstAWEDSSER.SelectedItem.Value & ",'" & AWEDSROT.Text & "'," & Session("codiOrg") & ",'" & PLTDSTCO & "','" & PLTDSPLT & "','" & PLTDSEST & "','" & PLTDSHTM & "','" & PLTDSLCW & "','" & PLTDSLC2 & "','" & AWEDSDOC.Text & "','" & AWEDSEBO.Text & "','" & AWEDSMET.Text & "','" & AWEDSPEU.Text & "','" & AWEDSCSP.Text & "','" & AWEDSCSI.Text & "','" & AWEDSNOM.Text & "')"
+                '
                 'IF Request("lstIdioma")=1 THEN
                 strSql &= ";UPDATE METLNOD SET NODDSTXT='" & AWEDSTIT.Text.Replace("'", "''").Replace("<p>", "").Replace("</p>", "") & "' WHERE NODINNOD=" & txtCodiNode.Text
                 'Si hi ha p&agrave;gines en altres idiomes, actualitzo tots els valors comuns

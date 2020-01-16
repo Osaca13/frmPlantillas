@@ -144,6 +144,19 @@
     <Content Include="estructura.aspx" />
     <Content Include="frmestructura.aspx" />
     <Content Include="GAIA2\aspx\web\frmplantilla.aspx" />
+    <Content Include="GAIA2\aspx\web\img\columna_abans.png" />
+    <Content Include="GAIA2\aspx\web\img\columna_despres.png" />
+    <Content Include="GAIA2\aspx\web\img\fila_abans.png" />
+    <Content Include="GAIA2\aspx\web\img\fila_abansdins.png" />
+    <Content Include="GAIA2\aspx\web\img\fila_despres.png" />
+    <Content Include="GAIA2\aspx\web\img\fila_despresdins.png" />
+    <Content Include="GAIA2\aspx\web\img\logo_hospinet.png" />
+    <Content Include="GAIA2\aspx\web\img\open-iconic\font\css\open-iconic-bootstrap.css" />
+    <Content Include="GAIA2\aspx\web\img\open-iconic\font\css\open-iconic-bootstrap.min.css" />
+    <Content Include="GAIA2\aspx\web\img\open-iconic\font\css\open-iconic-foundation.css" />
+    <Content Include="GAIA2\aspx\web\img\open-iconic\font\css\open-iconic-foundation.min.css" />
+    <Content Include="GAIA2\aspx\web\img\open-iconic\font\css\open-iconic.css" />
+    <Content Include="GAIA2\aspx\web\img\open-iconic\font\css\open-iconic.min.css" />
     <Content Include="GAIA\aspx\llibreria\frmObrirFulla.aspx" />
     <Content Include="GAIA\aspx\visorArbresLite.aspx" />
     <Content Include="GAIA\aspx\web\frmArbreWeb.aspx" />
@@ -1450,6 +1463,14 @@
     <Content Include="img\common\imagenTemporal.pdf" />
     <Content Include="img\common\Revisió web CulturaLH educa 10octubre.docx" />
     <Content Include="img\open-iconic\font\css\open-iconic-bootstrap.scss" />
+    <Content Include="GAIA2\aspx\web\img\open-iconic\font\css\open-iconic-bootstrap.less" />
+    <Content Include="GAIA2\aspx\web\img\open-iconic\font\css\open-iconic-bootstrap.scss" />
+    <Content Include="GAIA2\aspx\web\img\open-iconic\font\css\open-iconic-bootstrap.styl" />
+    <Content Include="GAIA2\aspx\web\img\open-iconic\font\css\open-iconic-foundation.less" />
+    <Content Include="GAIA2\aspx\web\img\open-iconic\font\css\open-iconic-foundation.scss" />
+    <Content Include="GAIA2\aspx\web\img\open-iconic\font\css\open-iconic.less" />
+    <Content Include="GAIA2\aspx\web\img\open-iconic\font\css\open-iconic.scss" />
+    <Content Include="GAIA2\aspx\web\img\open-iconic\font\css\open-iconic.styl" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

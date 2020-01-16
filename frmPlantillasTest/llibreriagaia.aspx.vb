@@ -9720,6 +9720,7 @@ Public Class GAIA
         Catch ex As Exception
 
             f_logError(objConn, "G01-trobacodiweb", ex.Source, ex.Message)
+            GAIA.debug(Nothing, ex.Message)
             llistatErrors &= "<br/> " & ex.ToString & ". <br/> Codiweb=" & codiWeb
             trobaCodiWeb2 = ""
 
