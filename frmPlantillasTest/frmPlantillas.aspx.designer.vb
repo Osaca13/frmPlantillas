@@ -1092,7 +1092,7 @@ Partial Public Class frmPlantillas
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents btnGuardar As Global.System.Web.UI.HtmlControls.HtmlButton
-    
+
     '''<summary>
     '''Control ltCanviCampsDb.
     '''</summary>

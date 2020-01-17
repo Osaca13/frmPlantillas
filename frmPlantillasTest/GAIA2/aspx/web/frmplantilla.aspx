@@ -901,161 +901,162 @@ $(function () {
 
 
 <script>
-  $( document).ready(function() {
-  	var element;
-  	var nroId=parseInt($("#nroId").val())
-	
-	$("div").on("click",".cel", function() {
-		//gravo canvis en la cel·la actual
-		$("#btnModificarDades").click();
+    $(document).ready(function () {
+        var element;
+        var nroId = parseInt($("#nroId").val())
 
-		//carrego dades en la cel·la nova
-		var strAtr = "";
-		$("div").removeClass("contenidorActiu");
-		$("div").removeClass("rowActiva");
-		$("div").removeClass("celActiva");
-		
-		$(this).addClass("celActiva");
+        $("div").on("click", ".cel", function () {
+            //gravo canvis en la cel·la actual
+            $("#btnModificarDades").click();
 
-		element = $(this);
+            //carrego dades en la cel·la nova
+            var strAtr = "";
+            $("div").removeClass("contenidorActiu");
+            $("div").removeClass("rowActiva");
+            $("div").removeClass("celActiva");
 
-		//carrego els camps d'atributs de cel·les
-		strAtr = element.find("span.atributs").text();
-		var arrAtr = strAtr.substring(0,strAtr.length-1).split("#");
-		
-		$("#txtIdCel").val(arrAtr[0]);	
-        $("#txtNomCel").val(arrAtr[1]);
-        DadesMides(arrAtr)
-		//continguts
-		$("#lstTipusFulla").val(arrAtr[7]);
+            $(this).addClass("celActiva");
 
-		<asp:literal runat="server" id="ltCanviCampsDb"/>
-		
-		$("#ddlPLTDSCMP").val(arrAtr[8]);
-		$("#ddlPLTDSLNK").val(arrAtr[9]);
-		$("#ddlPLTDSALT").val(arrAtr[10]);
-        $("#ddlPLTDSIMG").val(arrAtr[11]);
-        DadesLlibrerias(arrAtr);
+            element = $(this);
 
-		$("#gaiaPltSecNodes").val(arrAtr[17]);
-        $("#txtPLTDSNUM").val(arrAtr[18]);	
-		$("#ddlPLTDSNIV").val(arrAtr[19]);
-        $("#txtPLTDSAAL").val(arrAtr[20]);
-		$("#ddlb_PLTDSALF").val(arrAtr[21]);
-		$("#txtPLTDSALK").val(arrAtr[22]);
-		$("#gaiaPLTCDPALTxt").val(arrAtr[23]);
-		$("#gaiaPLTCDPALNodes").val(arrAtr[24]);
-				
-		if (arrAtr[25]=="true") {
-			$("#chkWEBDSIMP").attr("checked",true);
-		}
-		else {
-			$("#chkWEBDSIMP").attr("checked",false);
-		}
-		if (arrAtr[26]=="true") {
-			$("#chkWEBDSCND").attr("checked",true);
-		}
-		else {
-			$("#chkWEBDSCND").attr("checked",false);
-		}
+            //carrego els camps d'atributs de cel·les
+            strAtr = element.find("span.atributs").text();
+            var arrAtr = strAtr.substring(0, strAtr.length - 1).split("#");
 
-        DadesEstils();
-	    
-		var icona="";
-		modificaIcona(element);
-		
-		return false;
-	});
+            $("#txtIdCel").val(arrAtr[0]);
+            $("#txtNomCel").val(arrAtr[1]);
+            DadesMides(arrAtr)
+            //continguts
+            $("#lstTipusFulla").val(arrAtr[7]);
 
- 	$("div#htmlEst").on("click", ".row", function () {
-        // gravo els cambis
-        $("#btnModificarDades").click();
+            <asp:Literal runat="server" id="ltCanviCampsDb" />
 
-        //carrego dades en la cel·la nova
-        var strAtr = "";
-		$("div").removeClass("contenidorActiu");
-        $("div").removeClass("rowActiva");
-        $("div").removeClass("celActiva");
+            $("#ddlPLTDSCMP").val(arrAtr[8]);
+            $("#ddlPLTDSLNK").val(arrAtr[9]);
+            $("#ddlPLTDSALT").val(arrAtr[10]);
+            $("#ddlPLTDSIMG").val(arrAtr[11]);
+            DadesLlibrerias(arrAtr);
 
-        $(this).addClass("rowActiva");
+           
+            $("#txtPLTDSNUM").val(arrAtr[18]);
+            $("#ddlPLTDSNIV").val(arrAtr[19]);
+            $("#txtPLTDSAAL").val(arrAtr[20]);
+            $("#ddlb_PLTDSALF").val(arrAtr[21]);
+            $("#txtPLTDSALK").val(arrAtr[22]);
+            $("#gaiaPLTCDPALTxt").val(arrAtr[23]);
+            $("#gaiaPLTCDPALNodes").val(arrAtr[24]);
 
-        element = $(this);
+            if (arrAtr[25] == "true") {
+                $("#chkWEBDSIMP").attr("checked", true);
+            }
+            else {
+                $("#chkWEBDSIMP").attr("checked", false);
+            }
+            if (arrAtr[26] == "true") {
+                $("#chkWEBDSCND").attr("checked", true);
+            }
+            else {
+                $("#chkWEBDSCND").attr("checked", false);
+            }
 
-        //carrego els camps d'atributs de cel·les
-        strAtr = element.find("span.rowAtributs").text();
-        var arrAtr = strAtr.substring(0, strAtr.length - 1).split("#");    
+            DadesEstils();
 
-          DadesMides(arrAtr);
-          DadesLlibrerias(arrAtr);
-          DadesEstils(arrAtr);
+            var icona = "";
+            modificaIcona(element);
 
-		   return false;
-      });
+            return false;
+        });
 
-      function DadesLlibrerias(arrAtr) {
-        $("#gaiaCodiWebTxt").val(arrAtr[12]);
-		$("#gaiaCodiWebNodes").val(arrAtr[13]);
-		$("#gaiaCodiWeb2Txt").val(arrAtr[14]);
-		$("#gaiaCodiWeb2Nodes").val(arrAtr[15]);
-		$("#gaiaPltSecTxt").val(arrAtr[16]);
-      }
+        $("div#htmlEst").on("click", ".row", function () {
+            // gravo els cambis
+            $("#btnModificarDades").click();
 
-      function DadesMides(arrAtr) {
-           //mides 
-		    $("#ddlXs").val(arrAtr[2]);
-		    $("#ddlSm").val(arrAtr[3]);
-		    $("#ddlMd").val(arrAtr[4]);
-		    $("#ddlLg").val(arrAtr[5]);
-            $("#ddlXl").val(arrAtr[6]);	
-      }
+            //carrego dades en la cel·la nova
+            var strAtr = "";
+            $("div").removeClass("contenidorActiu");
+            $("div").removeClass("rowActiva");
+            $("div").removeClass("celActiva");
 
-      function DadesEstils(arrAtr) {
+            $(this).addClass("rowActiva");
 
-          //estils
-          $("#ddlb_23").val(arrAtr[27]);
-          $("#ddlb_25").val(arrAtr[28]);
-          $("#ddlb_26").val(arrAtr[29]);
-          $("#ddlb_27").val(arrAtr[30]);
-          $("#ddlb_28").val(arrAtr[31]);
-          $("#ddlb_103").val(arrAtr[32]);
-          $("#ddlb_105").val(arrAtr[33]);
-          $("#ddlb_108").val(arrAtr[34]);
-          $("#ddlb_110").val(arrAtr[35]);
-          $("#ddlb_111").val(arrAtr[36]);
-          $("#ddlb_112").val(arrAtr[37]);
-          $("#ddlb_122").val(arrAtr[38]);
-          $("#ddlb_114").val(arrAtr[39]);
-          $("#ddlb_115").val(arrAtr[40]);
-          $("#ddlb_123").val(arrAtr[41]);
-          $("#ddlb_117").val(arrAtr[42]);
-          $("#ddlb_118").val(arrAtr[43]);
-          $("#ddlb_119").val(arrAtr[44]);
-          $("#ddlb_124").val(arrAtr[45]);
-          $("#ddlb_630").val(arrAtr[46]);
-          $("#ddlb_631").val(arrAtr[47]);
-          $("#ddlb_632").val(arrAtr[48]);
-          $("#ddlb_633").val(arrAtr[49]);
-          $("#ddlb_634").val(arrAtr[50]);
-          $("#ddlb_635").val(arrAtr[51]);
-          $("#ddlb_636").val(arrAtr[52]);
-          $("#ddlb_637").val(arrAtr[53]);
-          $("#ddlb_638").val(arrAtr[54]);
-          $("#ddlb_639").val(arrAtr[55]);
-          $("#ddlb_641").val(arrAtr[56]);
-          $("#ddlb_642").val(arrAtr[57]);
-          $("#ddlb_648").val(arrAtr[58]);
-          $("#ddlb_649").val(arrAtr[59]);
-          $("#ddlb_650").val(arrAtr[60]);
-          $("#ddlb_651").val(arrAtr[61]);
-          $("#ddlb_652").val(arrAtr[62]);
-          $("#ddlb_653").val(arrAtr[63]);
-          $("#ddlb_654").val(arrAtr[64]);
-          $("#ddlb_655").val(arrAtr[65]);
-      }
-			
-         
-		
-	 $("div#htmlEst").on("click", ".contenidor", function () {
+            element = $(this);
+
+            //carrego els camps d'atributs de cel·les
+            strAtr = element.find("span.rowAtributs").text();
+            var arrAtr = strAtr.substring(0, strAtr.length - 1).split("#");
+
+            DadesMides(arrAtr);
+            DadesLlibrerias(arrAtr);
+            DadesEstils(arrAtr);
+
+            return false;
+        });
+
+        function DadesLlibrerias(arrAtr) {
+            $("#gaiaCodiWebTxt").val(arrAtr[12]);
+            $("#gaiaCodiWebNodes").val(arrAtr[13]);
+            $("#gaiaCodiWeb2Txt").val(arrAtr[14]);
+            $("#gaiaCodiWeb2Nodes").val(arrAtr[15]);
+            $("#gaiaPltSecTxt").val(arrAtr[16]);
+            $("#gaiaPltSecNodes").val(arrAtr[17]);
+        }
+
+        function DadesMides(arrAtr) {
+            //mides 
+            $("#ddlXs").val(arrAtr[2]);
+            $("#ddlSm").val(arrAtr[3]);
+            $("#ddlMd").val(arrAtr[4]);
+            $("#ddlLg").val(arrAtr[5]);
+            $("#ddlXl").val(arrAtr[6]);
+        }
+
+        function DadesEstils(arrAtr) {
+
+            //estils
+            $("#ddlb_23").val(arrAtr[27]);
+            $("#ddlb_25").val(arrAtr[28]);
+            $("#ddlb_26").val(arrAtr[29]);
+            $("#ddlb_27").val(arrAtr[30]);
+            $("#ddlb_28").val(arrAtr[31]);
+            $("#ddlb_103").val(arrAtr[32]);
+            $("#ddlb_105").val(arrAtr[33]);
+            $("#ddlb_108").val(arrAtr[34]);
+            $("#ddlb_110").val(arrAtr[35]);
+            $("#ddlb_111").val(arrAtr[36]);
+            $("#ddlb_112").val(arrAtr[37]);
+            $("#ddlb_122").val(arrAtr[38]);
+            $("#ddlb_114").val(arrAtr[39]);
+            $("#ddlb_115").val(arrAtr[40]);
+            $("#ddlb_123").val(arrAtr[41]);
+            $("#ddlb_117").val(arrAtr[42]);
+            $("#ddlb_118").val(arrAtr[43]);
+            $("#ddlb_119").val(arrAtr[44]);
+            $("#ddlb_124").val(arrAtr[45]);
+            $("#ddlb_630").val(arrAtr[46]);
+            $("#ddlb_631").val(arrAtr[47]);
+            $("#ddlb_632").val(arrAtr[48]);
+            $("#ddlb_633").val(arrAtr[49]);
+            $("#ddlb_634").val(arrAtr[50]);
+            $("#ddlb_635").val(arrAtr[51]);
+            $("#ddlb_636").val(arrAtr[52]);
+            $("#ddlb_637").val(arrAtr[53]);
+            $("#ddlb_638").val(arrAtr[54]);
+            $("#ddlb_639").val(arrAtr[55]);
+            $("#ddlb_641").val(arrAtr[56]);
+            $("#ddlb_642").val(arrAtr[57]);
+            $("#ddlb_648").val(arrAtr[58]);
+            $("#ddlb_649").val(arrAtr[59]);
+            $("#ddlb_650").val(arrAtr[60]);
+            $("#ddlb_651").val(arrAtr[61]);
+            $("#ddlb_652").val(arrAtr[62]);
+            $("#ddlb_653").val(arrAtr[63]);
+            $("#ddlb_654").val(arrAtr[64]);
+            $("#ddlb_655").val(arrAtr[65]);
+        }
+
+
+
+        $("div#htmlEst").on("click", ".contenidor", function () {
             // gravo els cambis
             $("#btnModificarDades").click();
 
@@ -1068,156 +1069,176 @@ $(function () {
             element = $(this);
 
             //carrego els camps d'atributs de cel·les
-         strAtr = element.find("span.contenidorAtributs").text();
-         var arrAtr = strAtr.substring(0, strAtr.length - 1).split("#");
+            strAtr = element.find("span.contenidorAtributs").text();
+            var arrAtr = strAtr.substring(0, strAtr.length - 1).split("#");
 
-         DadesMides(arrAtr);
-         DadesLlibrerias(arrAtr);
-         DadesEstils(arrAtr);
+            DadesMides(arrAtr);
+            DadesLlibrerias(arrAtr);
+            DadesEstils(arrAtr);
             return false;
         });
-		
-	  $("#btnAfegirContenidorAbans").click(function () {  
-	  		//gravo canvis en la cel·la actual
-			$("#btnModificarDades").click();
-			         
+
+        $("#btnAfegirContenidorAbans").click(function () {
+            //gravo canvis en la cel·la actual
+            $("#btnModificarDades").click();
+            var texto = "";
             if (!jQuery.isEmptyObject(element)) {
                 nroId++;
-                element.parents(".contenidor").before("<div class='contenidor border border-secondary p-2 pr-4 pl-4'><span class='contenidorAtributs' style='display:none'>###########################|</span><div class='row border border-secondary p-2'><span class='rowAtributs' style='display:none'>###########################|</span><div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display:none'>" + nroId + "#cel##########################|</span></div></div></div>");
+                 
+                if (element.hasClass("contenidor"))
+                {                   
+                    texto = "<div class='contenidor border border-secondary p-2 pr-4 pl-4'><span class='contenidorAtributs' style='display:none'>###########################|</span><div class='row border border-secondary p-2'><span class='rowAtributs' style='display:none'>###########################|</span><div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display:none'>" + nroId + "#cel##########################|</span></div></div></div>";
+                    texto += $("#htmlEst").html();
+                    $("#htmlEst").html(texto);
+                }
+                else
+                {
+                    element.parents(".contenidor").before("<div class='contenidor border border-secondary p-2 pr-4 pl-4'><span class='contenidorAtributs' style='display:none'>###########################|</span><div class='row border border-secondary p-2'><span class='rowAtributs' style='display:none'>###########################|</span><div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display:none'>" + nroId + "#cel##########################|</span></div></div></div>");
+                }
             }
             //guardo els canvis 
             $("#txtEst").val($("#htmlEst").html());
         });
 
         $("#btnAfegirContenidorDespres").click(function () {
-			//gravo canvis en la cel·la actual
-			$("#btnModificarDades").click();
-			
+            //gravo canvis en la cel·la actual
+            $("#btnModificarDades").click();
+             var texto = "";
             if (!jQuery.isEmptyObject(element)) {
+
                 nroId++;
-                element.parents(".contenidor").after("<div class='contenidor border border-secondary p-2 pr-4 pl-4'><span class='contenidorAtributs' style='display:none'>###########################|</span><div class='row border border-secondary p-2'><span class='rowAtributs' style='display:none'>###########################|</span><div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display:none'>" + nroId + "#cel##########################|</span></div></div></div>");
+                if (element.hasClass("contenidor"))
+                {
+                    texto = $("#htmlEst").html();
+                    texto += "<div class='contenidor border border-secondary p-2 pr-4 pl-4'><span class='contenidorAtributs' style='display:none'>###########################|</span><div class='row border border-secondary p-2'><span class='rowAtributs' style='display:none'>###########################|</span><div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display:none'>" + nroId + "#cel##########################|</span></div></div></div>";
+                    $("#htmlEst").html(texto);
+                }
+                else
+                {
+                    element.parents(".contenidor").after("<div class='contenidor border border-secondary p-2 pr-4 pl-4'><span class='contenidorAtributs' style='display:none'>###########################|</span><div class='row border border-secondary p-2'><span class='rowAtributs' style='display:none'>###########################|</span><div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display:none'>" + nroId + "#cel##########################|</span></div></div></div>");
+                }
             }
             //guardo els canvis 
             $("#txtEst").val($("#htmlEst").html());
         });
-	
-	$("#btnAfegirFilaAbans").click(function() {
-		//gravo canvis en la cel·la actual
-		$("#btnModificarDades").click();
 
-		if (!jQuery.isEmptyObject(element)) { 
-			nroId++;
-			element.parent(".row").before("<div class='row border border-secondary p-2'><span class='rowAtributs' style='display:none'>###########################|</span><div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display:none'>" + nroId + "#cel##########################|</span></div></div>");
-			
-		}
-		//guardo els canvis 
-		$("#txtEst").val($("#htmlEst").html());
-	});	
+        $("#btnAfegirFilaAbans").click(function () {
+            //gravo canvis en la cel·la actual
+            $("#btnModificarDades").click();
 
-	$("#btnAfegirFilaDespres").click(function() {
-		//gravo canvis en la cel·la actual
-		$("#btnModificarDadesCel").click();
+            if (!jQuery.isEmptyObject(element)) {
+                nroId++;
+                element.parent(".row").before("<div class='row border border-secondary p-2'><span class='rowAtributs' style='display:none'>###########################|</span><div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display:none'>" + nroId + "#cel##########################|</span></div></div>");
 
-		if (!jQuery.isEmptyObject(element)) {
-			nroId++;
-			element.parent(".row").after("<div class='row border border-secondary p-2'><span class='rowAtributs' style='display:none'>###########################|</span><div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display:none'>" + nroId + "#cel##########################</span></div></div>");
-			}
-		//guardo els canvis 		
-		$("#txtEst").val($("#htmlEst").html());	
-	});
-	
-	//afegir fila en el mateix nivell
-	$("#btnAfegirFilaDinsDespres").click(function() {
-	//gravo canvis en la cel·la actual
-		$("#btnModificarDades").click();
-
-		if (!jQuery.isEmptyObject(element)) {
-			nroId++;
-			var tmp = element.wrap("<p/>").parent().html().trim();			
-			element.parent().html("<div class='col'><div class='row border border-secondary p-2'><span class='rowAtributs' style='display:none'>###########################|</span>" + tmp + "</div><div class='row border border-secondary p-2'><span class='rowAtributs' style='display:none'>###########################|</span><div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display:none'>" + nroId + "#cel##########################|</span></div></div></div>")
-			$("#htmlEst p").replaceWith(function() { return $(this).contents(); });
-		}
-		//guardo els canvis 		
-		$("#txtEst").val($("#htmlEst").html());
-		element = $(".celActiva")		
-	});
-
-	//afegir fila en el mateix nivell
-	$("#btnAfegirFilaDinsAbans").click(function() {	
-	//gravo canvis en la cel·la actual
-		$("#btnModificarDades").click();
-
-		if (!jQuery.isEmptyObject(element)) {
-			nroId++;
-			var tmp = element.wrap("<p/>").parent().html().trim();			
-			element.parent().html("<div class='col'><div class='row border border-secondary p-2'><span class='rowAtributs' style='display:none'>###########################|</span><div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display:none'>" + nroId + "#cel##########################|</span></div></div><div class='row border border-secondary p-2'><span class='rowAtributs' style='display:none'>###########################|</span>" + tmp + "</div></div>")	
-			$("#htmlEst p").replaceWith(function() { return $(this).contents(); });
-		}
-		//guardo els canvis 		
-		$("#txtEst").val($("#htmlEst").html());		
-		element = $(".celActiva")
-	});
-	
-
-	$("#btnAfegirColumnaAbans").click(function() {
-		//gravo canvis en la cel·la actual
-		$("#btnModificarDades").click();
-
-		if (!jQuery.isEmptyObject(element)) {
-			nroId++;
-			if (element.attr("class").indexOf('col') > -1) {
-			element.before("<div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display:none'>" + nroId + "#cel##########################|</span></div>");
-			}
-			else {
-            	   $("#lblResultat").html("<div class='alert alert-dismissible alert-success mt-2 mb-2'><button type='button' class='close' data-dismiss='alert'>x</button>Per inserir columnes cal seleccionar una columna</div>");
             }
-		}
-		//guardo els canvis 
-		$("#txtEst").val($("#htmlEst").html());
-	})
+            //guardo els canvis 
+            $("#txtEst").val($("#htmlEst").html());
+        });
+
+        $("#btnAfegirFilaDespres").click(function () {
+            //gravo canvis en la cel·la actual
+            $("#btnModificarDadesCel").click();
+
+            if (!jQuery.isEmptyObject(element)) {
+                nroId++;
+                element.parent(".row").after("<div class='row border border-secondary p-2'><span class='rowAtributs' style='display:none'>###########################|</span><div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display:none'>" + nroId + "#cel##########################</span></div></div>");
+            }
+            //guardo els canvis 		
+            $("#txtEst").val($("#htmlEst").html());
+        });
+
+        //afegir fila en el mateix nivell
+        $("#btnAfegirFilaDinsDespres").click(function () {
+            //gravo canvis en la cel·la actual
+            $("#btnModificarDades").click();
+
+            if (!jQuery.isEmptyObject(element)) {
+                nroId++;
+                var tmp = element.wrap("<p/>").parent().html().trim();
+                element.parent().html("<div class='col'><div class='row border border-secondary p-2'><span class='rowAtributs' style='display:none'>###########################|</span>" + tmp + "</div><div class='row border border-secondary p-2'><span class='rowAtributs' style='display:none'>###########################|</span><div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display:none'>" + nroId + "#cel##########################|</span></div></div></div>")
+                $("#htmlEst p").replaceWith(function () { return $(this).contents(); });
+            }
+            //guardo els canvis 		
+            $("#txtEst").val($("#htmlEst").html());
+            element = $(".celActiva")
+        });
+
+        //afegir fila en el mateix nivell
+        $("#btnAfegirFilaDinsAbans").click(function () {
+            //gravo canvis en la cel·la actual
+            $("#btnModificarDades").click();
+
+            if (!jQuery.isEmptyObject(element)) {
+                nroId++;
+                var tmp = element.wrap("<p/>").parent().html().trim();
+                element.parent().html("<div class='col'><div class='row border border-secondary p-2'><span class='rowAtributs' style='display:none'>###########################|</span><div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display:none'>" + nroId + "#cel##########################|</span></div></div><div class='row border border-secondary p-2'><span class='rowAtributs' style='display:none'>###########################|</span>" + tmp + "</div></div>")
+                $("#htmlEst p").replaceWith(function () { return $(this).contents(); });
+            }
+            //guardo els canvis 		
+            $("#txtEst").val($("#htmlEst").html());
+            element = $(".celActiva")
+        });
 
 
-	$("#btnAfegirColumnaDespres").click(function() {
-	//gravo canvis en la cel·la actual
-		$("#btnModificarDades").click();
+        $("#btnAfegirColumnaAbans").click(function () {
+            //gravo canvis en la cel·la actual
+            $("#btnModificarDades").click();
 
-		if (!jQuery.isEmptyObject(element)) {
-			nroId++;
-			if (element.attr("class").indexOf('col') > -1) {
-			element.after("<div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display:none'>" + nroId + "#cel##########################|</span></div>");
-			}
-			else {
-                 	$("#lblResultat").html("<div class='alert alert-dismissible alert-success mt-2 mb-2'><button type='button' class='close' data-dismiss='alert'>x</button>Per inserir columnes cal seleccionar una columna</div>");
+            if (!jQuery.isEmptyObject(element)) {
+                nroId++;
+                if (element.attr("class").indexOf('col') > -1) {
+                    element.before("<div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display:none'>" + nroId + "#cel##########################|</span></div>");
                 }
-		}
-		//guardo els canvis 
-		$("#txtEst").val($("#htmlEst").html());		
-	})	
+                else {
+                    $("#lblResultat").html("<div class='alert alert-dismissible alert-success mt-2 mb-2'><button type='button' class='close' data-dismiss='alert'>x</button>Per inserir columnes cal seleccionar una columna</div>");
+                }
+            }
+            //guardo els canvis 
+            $("#txtEst").val($("#htmlEst").html());
+        })
 
-	$("#btnEsborrarCel").click(function() {
-		//gravo canvis en la cel·la actual
-		$("#btnModificarDadesCel").click();
-		
-		if (!jQuery.isEmptyObject(element)) {
-			if (!jQuery.isEmptyObject(element.siblings("div").html())) {
-				 element.remove();
-				}
-			else {		
-				element.parent().remove();		
-			}
-		}
-		//guardo els canvis 
-		$("#txtEst").val($("#htmlEst").html());
-	})
 
-	$("#btnCopiar").click(function () {
+        $("#btnAfegirColumnaDespres").click(function () {
+            //gravo canvis en la cel·la actual
+            $("#btnModificarDades").click();
+
+            if (!jQuery.isEmptyObject(element)) {
+                nroId++;
+                if (element.attr("class").indexOf('col') > -1) {
+                    element.after("<div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display:none'>" + nroId + "#cel##########################|</span></div>");
+                }
+                else {
+                    $("#lblResultat").html("<div class='alert alert-dismissible alert-success mt-2 mb-2'><button type='button' class='close' data-dismiss='alert'>x</button>Per inserir columnes cal seleccionar una columna</div>");
+                }
+            }
+            //guardo els canvis 
+            $("#txtEst").val($("#htmlEst").html());
+        })
+
+        $("#btnEsborrarCel").click(function () {
+            //gravo canvis en la cel·la actual
+            $("#btnModificarDadesCel").click();
+
+            if (!jQuery.isEmptyObject(element)) {
+                if (!jQuery.isEmptyObject(element.siblings("div").html())) {
+                    element.remove();
+                }
+                else {
+                    element.parent().remove();
+                }
+            }
+            //guardo els canvis 
+            $("#txtEst").val($("#htmlEst").html());
+        })
+
+        $("#btnCopiar").click(function () {
 
             $("#divEst").html($("#htmlEst").html());
 
             //// limpio la estructura
             $("#divEst").find("span.divImg").remove();
             $("#divEst").find("span.atributs").remove();
-			$("#divEst").find("span.rowAtributs").remove();
+            $("#divEst").find("span.rowAtributs").remove();
             $("#divEst").find("span.contenidorAtributs").remove();
             $("#divEst").find("div").removeAttr("style");
             $("#divEst").find("div").removeClass("cel celActiva p-2 border border-secondary rowActiva contenidorActiu contenidor");
@@ -1225,653 +1246,573 @@ $(function () {
             $("#txtEstBD").val($("#divEst").html());
 
             var copyText = $("#txtEstBD");
-           
+
             /* Select the text field */
             copyText.select();
 
             /* Copy the text inside the text field */
             document.execCommand("copy");
-          
-    })
 
-      function ModificarDadesContenidor() {
-          element.removeClass();
-          element.addClass("contenidor contenidorActiu border border-secondary p-2 pr-4 pl-4");
+        })
+              
 
-          var strAtr = "##";
+        $("#btnModificarDadesCel").click(function () {
 
-          strAtr += DadesComunsMides(strAtr);
-          strAtr += DadesComunsLlibrerias(strAtr, element);
-          strAtr += DadesComunsEstils(strAtr, element);
-
-          element.find("span.contenidorAtributs").text(strAtr);
-          
-      }
-
-      function ModificarDadesRow() {
-          element.removeClass();
-          element.addClass("row rowActiva border border-secondary p-2");
-          
-          var strAtr = "##";
-          strAtr += DadesComunsMides(strAtr);
-          strAtr += DadesComunsLlibrerias(strAtr, element);
-          strAtr += DadesComunsEstils(strAtr, element);
-
-          element.find("span.rowAtributs").text(strAtr);
-
-      }
-
-      function DadesComunsLlibrerias(strAtr) {
-
-          strAtr += "#";
-          if ($("#gaiaCodiWebTxt").val() != null) {
-              strAtr += $("#gaiaCodiWebTxt").val().trim();
-          }
-          strAtr += "#";
-          if ($("#gaiaCodiWebNodes").val() != null) {
-              strAtr += $("#gaiaCodiWebNodes").val().trim();
-          }
-          strAtr += "#";
-          if ($("#gaiaCodiWeb2Txt").val() != null) {
-              strAtr += $("#gaiaCodiWeb2Txt").val().trim();
-          }
-          strAtr += "#";
-          if ($("#gaiaCodiWeb2Nodes").val() != null) {
-              strAtr += $("#gaiaCodiWeb2Nodes").val().trim();
-          }
-          return strAtr;
-      }
-
-      function DadesComunsMides(strAtr, element) {
-          
-          strAtr += "#"; 
-			if ($("#ddlXs").val()!='') {
-				contadorMides++;
-				if ($("#ddlXs").val()!='Tot') {
-					element.addClass("col-xs-" + $("#ddlXs").val());
-					strAtr += $("#ddlXs").val()  //#3
-				}
-				else {
-					element.addClass("col-xs");
-					strAtr += "0";
-
-				}				
-			}
-			strAtr += "#";
-			if ($("#ddlSm").val()!='') {
-				contadorMides++;
-				if ($("#ddlSm").val()!='Tot') {
-					element.addClass("col-sm-" + $("#ddlSm").val());
-					strAtr += $("#ddlSm").val() //4
-				}
-				else {
-					element.addClass("col-sm");
-					strAtr += "0";
-				}				
-			}
-			strAtr += "#";
-			if ($("#ddlMd").val()!='') {
-				contadorMides++;
-				if ($("#ddlMd").val()!='Tot') {
-					element.addClass("col-md-" + $("#ddlMd").val());
-					strAtr += $("#ddlMd").val() //5
-				}
-				else {
-					element.addClass("col-md");
-					strAtr += "0";
-				}				
-			}
-			strAtr += "#";	
-			if ($("#ddlLg").val()!='') {
-				contadorMides++;
-				if ($("#ddlLg").val()!='Tot') {
-					element.addClass("col-lg-" + $("#ddlLg").val());
-					strAtr += $("#ddlLg").val() //6
-				}
-				else {
-					element.addClass("col-lg");
-					strAtr += "0";
-				}				
-			}
-			strAtr += "#";
-			if ($("#ddlXl").val()!='') {
-				contadorMides++;
-				if ($("#ddlXl").val()!='Tot') {
-					element.addClass("col-xl-" + $("#ddlXl").val());
-					strAtr += $("#ddlXl").val() //7
-				}
-				else {
-					element.addClass("col-xl");
-					strAtr += "0";
-				}				
-          }
-          return strAtr;
-      }
-
-      
-      function DadesComunsEstils(strAtr, element) {
-           
-            strAtr += "#";
-           if ($("#ddlb_23").val() != null) {
-               strAtr += $("#ddlb_23").val();
-               element.addClass($("#ddlb_23 option:selected").text());
-           }
-
-           strAtr += "#";
-           if ($("#ddlb_25").val() != null) {
-               strAtr += $("#ddlb_25").val();
-               element.addClass($("#ddlb_25 option:selected").text());
-           }
-
-           strAtr += "#";
-           if ($("#ddlb_26").val() != null) {
-               strAtr += $("#ddlb_26").val();
-               element.addClass($("#ddlb_26 option:selected").text());
-           }
-
-           strAtr += "#";
-           if ($("#ddlb_27").val() != null) {
-               strAtr += $("#ddlb_27").val();
-               element.addClass($("#ddlb_27 option:selected").text());
-           }
-
-           strAtr += "#";
-           if ($("#ddlb_28").val() != null) {
-               strAtr += $("#ddlb_28").val();
-               element.addClass($("#ddlb_28 option:selected").text());
-           }
-           strAtr += "#";
-           if ($("#ddlb_103").val() != null) {
-               strAtr += $("#ddlb_103").val();
-               element.addClass($("#ddlb_103 option:selected").text());
-           }
-
-           strAtr += "#";
-           if ($("#ddlb_105").val() != null) {
-               strAtr += $("#ddlb_105").val();
-               element.addClass($("#ddlb_105 option:selected").text());
-           }
-
-           strAtr += "#";
-           if ($("#ddlb_108").val() != null) {
-               strAtr += $("#ddlb_108").val();
-               element.addClass($("#ddlb_108 option:selected").text());
-           }
-
-           strAtr += "#";
-           if ($("#ddlb_110").val() != null) {
-               strAtr += $("#ddlb_110").val();
-               element.addClass($("#ddlb_110 option:selected").text());
-           }
-
-           strAtr += "#";
-           if ($("#ddlb_111").val() != null) {
-               strAtr += $("#ddlb_111").val();
-               element.addClass($("#ddlb_111 option:selected").text());
-           }
-           strAtr += "#";
-           if ($("#ddlb_112").val() != null) {
-               strAtr += $("#ddlb_112").val();
-               element.addClass($("#ddlb_112 option:selected").text());
-           }
-
-           strAtr += "#";
-           if ($("#ddlb_122").val() != null) {
-               strAtr += $("#ddlb_122").val();
-               element.addClass($("#ddlb_122 option:selected").text());
-           }
-
-           strAtr += "#";
-           if ($("#ddlb_114").val() != null) {
-               strAtr += $("#ddlb_114").val();
-               element.addClass($("#ddlb_114 option:selected").text());
-           }
-
-           strAtr += "#";
-           if ($("#ddlb_115").val() != null) {
-               strAtr += $("#ddlb_115").val();
-               element.addClass($("#ddlb_115 option:selected").text());
-           }
-
-           strAtr += "#";
-           if ($("#ddlb_123").val() != null) {
-               strAtr += $("#ddlb_123").val();
-               element.addClass($("#ddlb_123 option:selected").text());
-           }
-           strAtr += "#";
-           if ($("#ddlb_117").val() != null) {
-               strAtr += $("#ddlb_117").val();
-               element.addClass($("#ddlb_117 option:selected").text());
-           }
-
-           strAtr += "#";
-           if ($("#ddlb_118").val() != null) {
-               strAtr += $("#ddlb_118").val();
-               element.addClass($("#ddlb_118 option:selected").text());
-           }
-
-           strAtr += "#";
-           if ($("#ddlb_119").val() != null) {
-               strAtr += $("#ddlb_119").val();
-               element.addClass($("#ddlb_119 option:selected").text());
-           }
-
-           strAtr += "#";
-           if ($("#ddlb_124").val() != null) {
-               strAtr += $("#ddlb_124").val();
-               element.addClass($("#ddlb_124 option:selected").text());
-           }
-
-           strAtr += "#";
-           if ($("#ddlb_630").val() != null) {
-               strAtr += $("#ddlb_630").val();
-               element.addClass($("#ddlb_630 option:selected").text());
-           }
-
-           strAtr += "#";
-           if ($("#ddlb_631").val() != null) {
-               strAtr += $("#ddlb_631").val();
-               element.addClass($("#ddlb_631 option:selected").text());
-           }
-
-           strAtr += "#";
-           if ($("#ddlb_632").val() != null) {
-               strAtr += $("#ddlb_632").val();
-               element.addClass($("#ddlb_632 option:selected").text());
-           }
-
-           strAtr += "#";
-           if ($("#ddlb_633").val() != null) {
-               strAtr += $("#ddlb_633").val();
-               element.addClass($("#ddlb_633 option:selected").text());
-           }
-
-           strAtr += "#";
-           if ($("#ddlb_634").val() != null) {
-               strAtr += $("#ddlb_634").val();
-               element.addClass($("#ddlb_634 option:selected").text());
-           }
-
-           strAtr += "#";
-           if ($("#ddlb_635").val() != null) {
-               strAtr += $("#ddlb_635").val();
-               element.addClass($("#ddlb_635 option:selected").text());
-           }
-
-           strAtr += "#";
-           if ($("#ddlb_636").val() != null) {
-               strAtr += $("#ddlb_636").val();
-               element.addClass($("#ddlb_636 option:selected").text());
-           }
-
-           strAtr += "#";
-           if ($("#ddlb_637").val() != null) {
-               strAtr += $("#ddlb_637").val();
-               element.addClass($("#ddlb_637 option:selected").text());
-           }
-
-           strAtr += "#";
-           if ($("#ddlb_638").val() != null) {
-               strAtr += $("#ddlb_638").val();
-               element.addClass($("#ddlb_638 option:selected").text());
-           }
-
-           strAtr += "#";
-           if ($("#ddlb_639").val() != null) {
-               strAtr += $("#ddlb_639").val();
-               element.addClass($("#ddlb_639 option:selected").text());
-           }
-
-           strAtr += "#";
-           if ($("#ddlb_641").val() != null) {
-               strAtr += $("#ddlb_641").val();
-               element.addClass($("#ddlb_641 option:selected").text());
-           }
-
-           strAtr += "#";
-           if ($("#ddlb_642").val() != null) {
-               strAtr += $("#ddlb_642").val();
-               element.addClass($("#ddlb_642 option:selected").text());
-           }
-
-           strAtr += "#";
-           if ($("#ddlb_648").val() != null) {
-               strAtr += $("#ddlb_648").val();
-               element.addClass($("#ddlb_648 option:selected").text());
-           }
-
-           strAtr += "#";
-           if ($("#ddlb_649").val() != null) {
-               strAtr += $("#ddlb_649").val();
-               element.addClass($("#ddlb_649 option:selected").text());
-
-           }
-
-           strAtr += "#";
-           if ($("#ddlb_650").val() != null) {
-               strAtr += $("#ddlb_650").val();
-               element.addClass($("#ddlb_650 option:selected").text());
-           }
-
-           strAtr += "#";
-           if ($("#ddlb_651").val() != null) {
-               strAtr += $("#ddlb_651").val();
-               element.addClass($("#ddlb_651 option:selected").text());
-           }
-
-           strAtr += "#";
-           if ($("#ddlb_652").val() != null) {
-               strAtr += $("#ddlb_652").val();
-               element.addClass($("#ddlb_652 option:selected").text());
-           }
-
-           strAtr += "#";
-           if ($("#ddlb_653").val() != null) {
-               strAtr += $("#ddlb_653").val();
-               element.addClass($("#ddlb_653 option:selected").text());
-           }
-			
-			strAtr += "#";
-           if ($("#ddlb_654").val() != null) {
-               strAtr += $("#ddlb_654").val();
-               element.addClass($("#ddlb_654 option:selected").text());
-           }
-			
-			strAtr += "#";
-           if ($("#ddlb_655").val() != null) {
-               strAtr += $("#ddlb_655").val();
-               element.addClass($("#ddlb_655 option:selected").text());
-           }
-			
-           strAtr += "|"
-          return strAtr;
-          
-      }
-
-
-	$("#btnModificarDadesCel").click(function() {
-
-        var strAtr = "";       
-        debugger;
-        var contadorMides = 0;
-        	
-		if (!jQuery.isEmptyObject(element)) {
-			element.find("span.text").text($("#txtNomCel").val());		
-			strAtr +=  $("#txtIdCel").val() + "#" + $("#txtNomCel").val(); //1#2
-			//elimino les classes de mida de cel.la
-			//element.removeClass(function (index, className) { return (className.match (/(^|\s)col-\S+/g) || []).join(' ');});
-			element.removeClass();
-			element.addClass("cel celActiva border border-secondary p-2");
-			//afegeixo les classes de bootstrap
-			strAtr += "#"; 
-			if ($("#ddlXs").val()!='') {
-				contadorMides++;
-				if ($("#ddlXs").val()!='Tot') {
-					element.addClass("col-xs-" + $("#ddlXs").val());
-					strAtr += $("#ddlXs").val()  //#3
-				}
-				else {
-					element.addClass("col-xs");
-					strAtr += "0";
-
-				}				
-			}
-			strAtr += "#";
-			if ($("#ddlSm").val()!='') {
-				contadorMides++;
-				if ($("#ddlSm").val()!='Tot') {
-					element.addClass("col-sm-" + $("#ddlSm").val());
-					strAtr += $("#ddlSm").val() //4
-				}
-				else {
-					element.addClass("col-sm");
-					strAtr += "0";
-				}				
-			}
-			strAtr += "#";
-			if ($("#ddlMd").val()!='') {
-				contadorMides++;
-				if ($("#ddlMd").val()!='Tot') {
-					element.addClass("col-md-" + $("#ddlMd").val());
-					strAtr += $("#ddlMd").val() //5
-				}
-				else {
-					element.addClass("col-md");
-					strAtr += "0";
-				}				
-			}
-			strAtr += "#";	
-			if ($("#ddlLg").val()!='') {
-				contadorMides++;
-				if ($("#ddlLg").val()!='Tot') {
-					element.addClass("col-lg-" + $("#ddlLg").val());
-					strAtr += $("#ddlLg").val() //6
-				}
-				else {
-					element.addClass("col-lg");
-					strAtr += "0";
-				}				
-			}
-			strAtr += "#";
-			if ($("#ddlXl").val()!='') {
-				contadorMides++;
-				if ($("#ddlXl").val()!='Tot') {
-					element.addClass("col-xl-" + $("#ddlXl").val());
-					strAtr += $("#ddlXl").val() //7
-				}
-				else {
-					element.addClass("col-xl");
-					strAtr += "0";
-				}				
-			}
-			
-			if (contadorMides==0) {
-				element.addClass("col");
-			}
-
-
-			strAtr += "#";			
-			if ($("#lstTipusFulla").val()!= null) {
-				strAtr += $("#lstTipusFulla").val().trim(); //8
-			}
-			
-
-			strAtr += "#";
-			if ($("#ddlPLTDSCMP").val()!= null) {
-				strAtr += $("#ddlPLTDSCMP").val().trim(); //9
-			}
-			strAtr += "#";
-			if ($("#ddlPLTDSLNK").val()!= null) {
-				strAtr += $("#ddlPLTDSLNK").val().trim(); //10
-			}
-			strAtr += "#";
-			if ($("#ddlPLTDSALT").val()!= null) {
-				strAtr += $("#ddlPLTDSALT").val().trim(); //11
-			}
-			
-			strAtr += "#";
-			if ($("#ddlPLTDSIMG").val()!= null) {
-				strAtr += $("#ddlPLTDSIMG").val().trim(); //12
-			}
-
-			strAtr += "#";
-			if ($("#gaiaCodiWebTxt").val()!= null) {
-				strAtr += $("#gaiaCodiWebTxt").val().trim(); //13
-			}
-			strAtr += "#";
-			if ($("#gaiaCodiWebNodes").val()!= null) {
-				strAtr += $("#gaiaCodiWebNodes").val().trim(); //14
-			}
-			strAtr += "#";
-			if ($("#gaiaCodiWeb2Txt").val()!= null) {
-				strAtr += $("#gaiaCodiWeb2Txt").val().trim(); //15
-			}
-			strAtr += "#";
-			if ($("#gaiaCodiWeb2Nodes").val()!= null) {
-				strAtr += $("#gaiaCodiWeb2Nodes").val().trim(); //16
-			}
-
-			strAtr += "#";
-			if ($("#gaiaPltSecTxt").val()!= null) {
-				strAtr += $("#gaiaPltSecTxt").val().trim(); //17
-			}
-			strAtr += "#";
-			if ($("#gaiaPltSecNodes").val()!= null) {
-				
-				strAtr += $("#gaiaPltSecNodes").val().trim(); //18
-				
-			}
-
-
-			strAtr +=   "#" 
-			if ($("#txtPLTDSNUM").val()!= null) {
-				strAtr += $("#txtPLTDSNUM").val().trim(); //19
-			}
-		
-
-
-			strAtr += "#";
-			if ($("#ddlPLTDSNIV").val()!= null) {
-				strAtr += $("#ddlPLTDSNIV").val().trim(); //20
-			}
-
-			strAtr += "#";
-			if ($("#txtPLTDSAAL").val()!= null) {
-				strAtr += $("#txtPLTDSAAL").val().trim(); //21
-			}
-			
-			strAtr += "#";
-			if ($("#ddlb_PLTDSALF").val()!= null) {
-				strAtr += $("#ddlb_PLTDSALF").val().trim(); //22
-			}
-
-
-			strAtr += "#";
-			if ($("#txtPLTDSALK").val()!= null) {
-				strAtr += $("#txtPLTDSALK").val().trim(); //23
-			}
-		
-			strAtr += "#";
-			if ($("#gaiaPLTCDPALTxt").val()!= null) {
-				strAtr += $("#gaiaPLTCDPALTxt").val().trim(); //24
-			}
-
-			strAtr += "#";
-			if ($("#gaiaPLTCDPALNodes").val()!= null) {
-				strAtr += $("#gaiaPLTCDPALNodes").val().trim(); //25
-			}
-
-			
-			
-			strAtr += "#";
-			strAtr += $("#chkWEBDSIMP").is(":checked"); //27
-		
-			
-			strAtr += "#";
-			strAtr += $("#chkWEBDSCND").is(":checked"); //28
-
-            strAtr += DadesComunsEstils(element);
-
-			modificaIcona(element);
-			//afegeixo els atributs a l'array de propietats
-			element.find("span.atributs").text(strAtr);
-
-			//guardo els canvis 
-			$("#txtEst").val($("#htmlEst").html());
-
-		}
-    })	
-
-     
-
-	$("#btnModificarDades").click(function () {
-
-        var strAtr = "";
-       
+            var strAtr = "";
+            debugger;
+            var contadorMides = 0;
 
             if (!jQuery.isEmptyObject(element)) {
+                element.find("span.text").text($("#txtNomCel").val());
+                strAtr += $("#txtIdCel").val() + "#" + $("#txtNomCel").val(); //1#2
+                //elimino les classes de mida de cel.la
+                //element.removeClass(function (index, className) { return (className.match (/(^|\s)col-\S+/g) || []).join(' ');});
+                element.removeClass();
+                element.addClass("cel celActiva border border-secondary p-2");
+                //afegeixo les classes de bootstrap
+
+                strAtr += DadesComunsMides(strAtr, element);
+
+                if (contadorMides == 0) {
+                    element.addClass("col");
+                }
+
+                strAtr += "#";
+                if ($("#lstTipusFulla").val() != null) {
+                    strAtr += $("#lstTipusFulla").val().trim(); //8
+                }
+                
+                strAtr += "#";
+                if ($("#ddlPLTDSCMP").val() != null) {
+                    strAtr += $("#ddlPLTDSCMP").val().trim(); //9
+                }
+                strAtr += "#";
+                if ($("#ddlPLTDSLNK").val() != null) {
+                    strAtr += $("#ddlPLTDSLNK").val().trim(); //10
+                }
+                strAtr += "#";
+                if ($("#ddlPLTDSALT").val() != null) {
+                    strAtr += $("#ddlPLTDSALT").val().trim(); //11
+                }
+
+                strAtr += "#";
+                if ($("#ddlPLTDSIMG").val() != null) {
+                    strAtr += $("#ddlPLTDSIMG").val().trim(); //12
+                }
+
+                strAtr += DadesComunsLlibrerias(strAtr);
+
                
 
-				if (element.attr("class").indexOf('cel') > -1) {                // element: el ultimo div que se ha clicado
+                strAtr += "#"
+                if ($("#txtPLTDSNUM").val() != null) {
+                    strAtr += $("#txtPLTDSNUM").val().trim(); //19
+                }
+
+                strAtr += "#";
+                if ($("#ddlPLTDSNIV").val() != null) {
+                    strAtr += $("#ddlPLTDSNIV").val().trim(); //20
+                }
+
+                strAtr += "#";
+                if ($("#txtPLTDSAAL").val() != null) {
+                    strAtr += $("#txtPLTDSAAL").val().trim(); //21
+                }
+
+                strAtr += "#";
+                if ($("#ddlb_PLTDSALF").val() != null) {
+                    strAtr += $("#ddlb_PLTDSALF").val().trim(); //22
+                }
+
+
+                strAtr += "#";
+                if ($("#txtPLTDSALK").val() != null) {
+                    strAtr += $("#txtPLTDSALK").val().trim(); //23
+                }
+
+                strAtr += "#";
+                if ($("#gaiaPLTCDPALTxt").val() != null) {
+                    strAtr += $("#gaiaPLTCDPALTxt").val().trim(); //24
+                }
+
+                strAtr += "#";
+                if ($("#gaiaPLTCDPALNodes").val() != null) {
+                    strAtr += $("#gaiaPLTCDPALNodes").val().trim(); //25
+                }
+
+                strAtr += "#";
+                strAtr += $("#chkWEBDSIMP").is(":checked"); //26
+
+                strAtr += "#";
+                strAtr += $("#chkWEBDSCND").is(":checked"); //27
+
+                strAtr += DadesComunsEstils(strAtr, element);
+
+                modificaIcona(element);
+                //afegeixo els atributs a l'array de propietats
+                element.find("span.atributs").text(strAtr);
+
+                //guardo els canvis 
+                $("#txtEst").val($("#htmlEst").html());
+            }
+        })
+
+        $("#btnModificarDades").click(function () {
+
+            var strAtr = "";
+
+            if (!jQuery.isEmptyObject(element)) {
+
+                if (element.attr("class").indexOf('cel') > -1) {   // element: el ultimo div que se ha clicado
                     $("#btnModificarDadesCel").click();
                     return true;
                 }
-				else if (element.attr("class").indexOf('row') > -1) {
+                else if (element.attr("class").indexOf('row') > -1) {
                     ModificarDadesRow();
-                    
-				}
+
+                }
                 else if (element.attr("class").indexOf('contenidor') > -1) {
                     ModificarDadesContenidor();
                 }
-				
-    //            strAtr += "###########################";   
+
+                //            strAtr += "###########################";   
 
                 //guardo els canvis 
                 $("#txtEst").val($("#htmlEst").html());
             }
         });
 
-function modificaIcona(element) {
-		var icona=""
-	
-	if ($("#lstTipusFulla").val() != null) {			
-			switch($("#lstTipusFulla").val().trim()) {
-				case "45":			
-					icona = 'ico_agenda.png';
-                    break;
-                case "49":			
-					icona = 'ico_link.png';
-                    break;	
-                case "48":		
-					icona = '';
-					break;
-				case "31":
-					icona = 'ico_catalegserveis.png';
-					break;
-				case "40":
-					icona = 'ico_contractacio.png';
-					break;
-				case "3":
-					icona = 'ico_directori.png';
-					break;	
-				case "5":
-					icona = 'ico_document.png';
-					break;	
-				case "56":
-					icona = 'ico_info.png';
-					break;		
-				case "4":
-					icona = 'ico_noticia.png';
-					break;	
-				case "13":
-					icona = 'ico_organigrama.png';
-					break;						
-				case "55":
-					icona = 'ico_projecte.png';
-					break;						
-				case "51":
-					icona = 'ico_tramit.png';
-					break;						
-				case "10":
-					icona = 'ico_web.png';
-					break;		
-				case "35":
-					icona = 'folder.png';
-					break;
-				case "9":
-					icona = 'node_web.png';
-					break;																
-				default:			
-			}
-		}
-		if (icona!="") {
-			element.find("span.divImg").html("<img src='img/" + icona + "'/>");
-		}
-		
-	}
-	
+        function ModificarDadesContenidor() {
+            
+            element.removeClass();
+            element.addClass("contenidor contenidorActiu border border-secondary p-2 pr-4 pl-4");
+            element.find("span.contenidorAtributs").text("");
 
-})
+            var strAtr = "##";
+            strAtr = DadesComunsMides(strAtr, element);
+            strAtr += "#####";
+            strAtr = DadesComunsLlibrerias(strAtr);
+            strAtr +="#####"
+            strAtr = DadesComunsEstils(strAtr, element);
+
+            element.find("span.contenidorAtributs").text(strAtr);
+            //guardo els canvis 
+            $("#txtEst").val($("#htmlEst").html());
+
+        }
+
+        function ModificarDadesRow() {
+            element.removeClass();
+            element.addClass("row rowActiva border border-secondary p-2");
+            element.find("span.rowAtributs").text("");
+
+            var strAtr = "##";
+            strAtr = DadesComunsMides(strAtr, element);
+            strAtr += "#####";
+            strAtr = DadesComunsLlibrerias(strAtr);
+            strAtr +="#####"
+            strAtr = DadesComunsEstils(strAtr, element);
+
+            element.find("span.rowAtributs").text(strAtr);
+            //guardo els canvis 
+           $("#txtEst").val($("#htmlEst").html());
+
+        }
+
+        function DadesComunsLlibrerias(strAtr) {
+
+            strAtr += "#";
+            if ($("#gaiaCodiWebTxt").val() != null) {
+                strAtr += $("#gaiaCodiWebTxt").val().trim();//13
+            }
+            strAtr += "#";
+            if ($("#gaiaCodiWebNodes").val() != null) {
+                strAtr += $("#gaiaCodiWebNodes").val().trim();//14
+            }
+            strAtr += "#";
+            if ($("#gaiaCodiWeb2Txt").val() != null) {
+                strAtr += $("#gaiaCodiWeb2Txt").val().trim();//15
+            }
+            strAtr += "#";
+            if ($("#gaiaCodiWeb2Nodes").val() != null) {
+                strAtr += $("#gaiaCodiWeb2Nodes").val().trim();//16
+            }
+             strAtr += "#";
+            if ($("#gaiaPltSecTxt").val() != null) {
+               strAtr += $("#gaiaPltSecTxt").val().trim(); //17
+            }
+            strAtr += "#";
+            if ($("#gaiaPltSecNodes").val() != null) {
+               strAtr += $("#gaiaPltSecNodes").val().trim(); //18
+            }
+            return strAtr;
+        }
+
+        function DadesComunsMides(strAtr, element) {
+
+            strAtr += "#";
+            if ($("#ddlXs").val() != '') {
+                contadorMides++;
+                if ($("#ddlXs").val() != 'Tot') {
+                    element.addClass("col-xs-" + $("#ddlXs").val());
+                    strAtr += $("#ddlXs").val()  //#3
+                }
+                else {
+                    element.addClass("col-xs");
+                    strAtr += "0";
+
+                }
+            }
+            strAtr += "#";
+            if ($("#ddlSm").val() != '') {
+                contadorMides++;
+                if ($("#ddlSm").val() != 'Tot') {
+                    element.addClass("col-sm-" + $("#ddlSm").val());
+                    strAtr += $("#ddlSm").val() //4
+                }
+                else {
+                    element.addClass("col-sm");
+                    strAtr += "0";
+                }
+            }
+            strAtr += "#";
+            if ($("#ddlMd").val() != '') {
+                contadorMides++;
+                if ($("#ddlMd").val() != 'Tot') {
+                    element.addClass("col-md-" + $("#ddlMd").val());
+                    strAtr += $("#ddlMd").val() //5
+                }
+                else {
+                    element.addClass("col-md");
+                    strAtr += "0";
+                }
+            }
+            strAtr += "#";
+            if ($("#ddlLg").val() != '') {
+                contadorMides++;
+                if ($("#ddlLg").val() != 'Tot') {
+                    element.addClass("col-lg-" + $("#ddlLg").val());
+                    strAtr += $("#ddlLg").val() //6
+                }
+                else {
+                    element.addClass("col-lg");
+                    strAtr += "0";
+                }
+            }
+            strAtr += "#";
+            if ($("#ddlXl").val() != '') {
+                contadorMides++;
+                if ($("#ddlXl").val() != 'Tot') {
+                    element.addClass("col-xl-" + $("#ddlXl").val());
+                    strAtr += $("#ddlXl").val() //7
+                }
+                else {
+                    element.addClass("col-xl");
+                    strAtr += "0";
+                }
+            }
+            return strAtr;
+        }
+
+
+        function DadesComunsEstils(strAtr, element) {
+
+            strAtr += "#";
+            if ($("#ddlb_23").val() != null) {
+                strAtr += $("#ddlb_23").val();
+                element.addClass($("#ddlb_23 option:selected").text());//28
+            }
+
+            strAtr += "#";
+            if ($("#ddlb_25").val() != null) {
+                strAtr += $("#ddlb_25").val();
+                element.addClass($("#ddlb_25 option:selected").text());//29
+            }
+
+            strAtr += "#";
+            if ($("#ddlb_26").val() != null) {
+                strAtr += $("#ddlb_26").val();
+                element.addClass($("#ddlb_26 option:selected").text());//30
+            }
+
+            strAtr += "#";
+            if ($("#ddlb_27").val() != null) {
+                strAtr += $("#ddlb_27").val();
+                element.addClass($("#ddlb_27 option:selected").text());//31
+            }
+
+            strAtr += "#";
+            if ($("#ddlb_28").val() != null) {
+                strAtr += $("#ddlb_28").val();
+                element.addClass($("#ddlb_28 option:selected").text());//32
+            }
+            strAtr += "#";
+            if ($("#ddlb_103").val() != null) {
+                strAtr += $("#ddlb_103").val();
+                element.addClass($("#ddlb_103 option:selected").text());//33
+            }
+
+            strAtr += "#";
+            if ($("#ddlb_105").val() != null) {
+                strAtr += $("#ddlb_105").val();
+                element.addClass($("#ddlb_105 option:selected").text());//34
+            }
+
+            strAtr += "#";
+            if ($("#ddlb_108").val() != null) {
+                strAtr += $("#ddlb_108").val();
+                element.addClass($("#ddlb_108 option:selected").text());//35
+            }
+
+            strAtr += "#";
+            if ($("#ddlb_110").val() != null) {
+                strAtr += $("#ddlb_110").val();
+                element.addClass($("#ddlb_110 option:selected").text());//36
+            }
+
+            strAtr += "#";
+            if ($("#ddlb_111").val() != null) {
+                strAtr += $("#ddlb_111").val();
+                element.addClass($("#ddlb_111 option:selected").text());//37
+            }
+            strAtr += "#";
+            if ($("#ddlb_112").val() != null) {
+                strAtr += $("#ddlb_112").val();
+                element.addClass($("#ddlb_112 option:selected").text());//38
+            }
+
+            strAtr += "#";
+            if ($("#ddlb_122").val() != null) {
+                strAtr += $("#ddlb_122").val();
+                element.addClass($("#ddlb_122 option:selected").text());//39
+            }
+
+            strAtr += "#";
+            if ($("#ddlb_114").val() != null) {
+                strAtr += $("#ddlb_114").val();
+                element.addClass($("#ddlb_114 option:selected").text());//40
+            }
+
+            strAtr += "#";
+            if ($("#ddlb_115").val() != null) {
+                strAtr += $("#ddlb_115").val();
+                element.addClass($("#ddlb_115 option:selected").text());//41
+            }
+
+            strAtr += "#";
+            if ($("#ddlb_123").val() != null) {
+                strAtr += $("#ddlb_123").val();
+                element.addClass($("#ddlb_123 option:selected").text());//42
+            }
+            strAtr += "#";
+            if ($("#ddlb_117").val() != null) {
+                strAtr += $("#ddlb_117").val();
+                element.addClass($("#ddlb_117 option:selected").text());//43
+            }
+
+            strAtr += "#";
+            if ($("#ddlb_118").val() != null) {
+                strAtr += $("#ddlb_118").val();
+                element.addClass($("#ddlb_118 option:selected").text());//44
+            }
+
+            strAtr += "#";
+            if ($("#ddlb_119").val() != null) {
+                strAtr += $("#ddlb_119").val();
+                element.addClass($("#ddlb_119 option:selected").text());//45
+            }
+
+            strAtr += "#";
+            if ($("#ddlb_124").val() != null) {
+                strAtr += $("#ddlb_124").val();
+                element.addClass($("#ddlb_124 option:selected").text());//46
+            }
+
+            strAtr += "#";
+            if ($("#ddlb_630").val() != null) {
+                strAtr += $("#ddlb_630").val();
+                element.addClass($("#ddlb_630 option:selected").text());//47
+            }
+
+            strAtr += "#";
+            if ($("#ddlb_631").val() != null) {
+                strAtr += $("#ddlb_631").val();
+                element.addClass($("#ddlb_631 option:selected").text());//48
+            }
+
+            strAtr += "#";
+            if ($("#ddlb_632").val() != null) {
+                strAtr += $("#ddlb_632").val();
+                element.addClass($("#ddlb_632 option:selected").text());//49
+            }
+
+            strAtr += "#";
+            if ($("#ddlb_633").val() != null) {
+                strAtr += $("#ddlb_633").val();
+                element.addClass($("#ddlb_633 option:selected").text());//50
+            }
+
+            strAtr += "#";
+            if ($("#ddlb_634").val() != null) {
+                strAtr += $("#ddlb_634").val();
+                element.addClass($("#ddlb_634 option:selected").text());//51
+            }
+
+            strAtr += "#";
+            if ($("#ddlb_635").val() != null) {
+                strAtr += $("#ddlb_635").val();
+                element.addClass($("#ddlb_635 option:selected").text());//52
+            }
+
+            strAtr += "#";
+            if ($("#ddlb_636").val() != null) {
+                strAtr += $("#ddlb_636").val();
+                element.addClass($("#ddlb_636 option:selected").text());//53
+            }
+
+            strAtr += "#";
+            if ($("#ddlb_637").val() != null) {
+                strAtr += $("#ddlb_637").val();
+                element.addClass($("#ddlb_637 option:selected").text());//54
+            }
+
+            strAtr += "#";
+            if ($("#ddlb_638").val() != null) {
+                strAtr += $("#ddlb_638").val();
+                element.addClass($("#ddlb_638 option:selected").text());//55
+            }
+
+            strAtr += "#";
+            if ($("#ddlb_639").val() != null) {
+                strAtr += $("#ddlb_639").val();
+                element.addClass($("#ddlb_639 option:selected").text());//56
+            }
+
+            strAtr += "#";
+            if ($("#ddlb_641").val() != null) {
+                strAtr += $("#ddlb_641").val();
+                element.addClass($("#ddlb_641 option:selected").text());//57
+            }
+
+            strAtr += "#";
+            if ($("#ddlb_642").val() != null) {
+                strAtr += $("#ddlb_642").val();
+                element.addClass($("#ddlb_642 option:selected").text());//58
+            }
+
+            strAtr += "#";
+            if ($("#ddlb_648").val() != null) {
+                strAtr += $("#ddlb_648").val();
+                element.addClass($("#ddlb_648 option:selected").text());//59
+            }
+
+            strAtr += "#";
+            if ($("#ddlb_649").val() != null) {
+                strAtr += $("#ddlb_649").val();
+                element.addClass($("#ddlb_649 option:selected").text());//60
+
+            }
+
+            strAtr += "#";
+            if ($("#ddlb_650").val() != null) {
+                strAtr += $("#ddlb_650").val();
+                element.addClass($("#ddlb_650 option:selected").text());//61
+            }
+
+            strAtr += "#";
+            if ($("#ddlb_651").val() != null) {
+                strAtr += $("#ddlb_651").val();
+                element.addClass($("#ddlb_651 option:selected").text());//62
+            }
+
+            strAtr += "#";
+            if ($("#ddlb_652").val() != null) {
+                strAtr += $("#ddlb_652").val();
+                element.addClass($("#ddlb_652 option:selected").text());//63
+            }
+
+            strAtr += "#";
+            if ($("#ddlb_653").val() != null) {
+                strAtr += $("#ddlb_653").val();
+                element.addClass($("#ddlb_653 option:selected").text());//64
+            }
+
+            strAtr += "#";
+            if ($("#ddlb_654").val() != null) {
+                strAtr += $("#ddlb_654").val();
+                element.addClass($("#ddlb_654 option:selected").text());//65
+            }
+
+            strAtr += "#";
+            if ($("#ddlb_655").val() != null) {
+                strAtr += $("#ddlb_655").val();
+                element.addClass($("#ddlb_655 option:selected").text());//66
+            }
+
+            strAtr += "|"
+            return strAtr;
+
+        }
+
+
+        function modificaIcona(element) {
+            var icona = ""
+
+            if ($("#lstTipusFulla").val() != null) {
+                switch ($("#lstTipusFulla").val().trim()) {
+                    case "45":
+                        icona = 'ico_agenda.png';
+                        break;
+                    case "49":
+                        icona = 'ico_link.png';
+                        break;
+                    case "48":
+                        icona = '';
+                        break;
+                    case "31":
+                        icona = 'ico_catalegserveis.png';
+                        break;
+                    case "40":
+                        icona = 'ico_contractacio.png';
+                        break;
+                    case "3":
+                        icona = 'ico_directori.png';
+                        break;
+                    case "5":
+                        icona = 'ico_document.png';
+                        break;
+                    case "56":
+                        icona = 'ico_info.png';
+                        break;
+                    case "4":
+                        icona = 'ico_noticia.png';
+                        break;
+                    case "13":
+                        icona = 'ico_organigrama.png';
+                        break;
+                    case "55":
+                        icona = 'ico_projecte.png';
+                        break;
+                    case "51":
+                        icona = 'ico_tramit.png';
+                        break;
+                    case "10":
+                        icona = 'ico_web.png';
+                        break;
+                    case "35":
+                        icona = 'folder.png';
+                        break;
+                    case "9":
+                        icona = 'node_web.png';
+                        break;
+                    default:
+                }
+            }
+            if (icona != "") {
+                element.find("span.divImg").html("<img src='img/" + icona + "'/>");
+            }
+        }
+    });
 
     function guardar() {
        
@@ -1884,6 +1825,14 @@ function modificaIcona(element) {
 		$("#divEst").html($("#htmlEst").html());	
       
 		// guardo els atributs
+        $("#divEst").find("span.contenidorAtributs").each(function(index,elem){			
+            atributs += $(this).html();
+            
+        });	
+        $("#divEst").find("span.rowAtributs").each(function(index,elem){			
+            atributs += $(this).html();
+            
+		});	
 		$("#divEst").find("span.atributs").each(function(index,elem){			
 			atributs += $(this).html();
 		});		

@@ -713,8 +713,8 @@ Public Class frmplantilla
         '***************************************************************************************
         ' Faig el tractament dels camps comuns'
         '***************************************************************************************		
-        Dim item() As String
-        Dim arrCel() As String
+        Dim item() As String = {}
+        Dim arrCel() As String = {}
         Dim PLTDSCMP As String = String.Empty, PLTDSLNK As String = "", PLTDSALT As String = "", PLTDSEST As String = "", PLTDSCSS As String = "", PLTDSTCO As String = "", PLTDSLCW As String = "", PLTDSLC2 As String = "", PLTDSIMG As String = "", PLTCDPAL As String = "", PLTDSAAL As String = "", PLTDSPLT As String = "", PLTDSALK As String = "", PLTDSFLW As String = "", PLTSWALT As Integer = 1, PLTDSNUM As String = "", PLTDSALF As String = "", PLTDSNIV As String = "", PLTSWVIS As Integer = 0, WEBDSIMP As String = "", WEBDSCND As String = "", PLTDSHTM As String = ""
         codiIdioma = lstCanviIdioma.SelectedValue
 
@@ -723,79 +723,16 @@ Public Class frmplantilla
 
         PLTDSEST = txtEst.Value.Replace("""", "'").Replace("''", "'").Replace("'", "''")
         GAIA.debug(Nothing, "plantillaHTM=" & PLTDSHTM)
-        GAIA.debug(Nothing, "plantillaEST=" & PLTDSEST)
-        '					GAIA.debug(nothing, "despres=" & PLTDSEST)
+        GAIA.debug(Nothing, "todosAtributos=" & txtAtributs.Value.ToString())
+        'GAIA.debug(nothing, "despres=" & PLTDSEST)
         Dim cssTmp As String = ""
         Dim cont As Integer = 0
-        arrCel = txtAtributs.Value.Split("|")
-        For Each cel As String In arrCel
-            item = cel.Split("#")
-
-            If item.Length > 1 Then
-                If cont > 0 Then
-                    PLTDSTCO &= ","
-                    PLTDSCMP &= ","
-                    PLTDSLNK &= ","
-                    PLTDSALT &= "|"
-                    PLTDSIMG &= ","
-                    PLTDSALK &= "|"
-                    PLTDSAAL &= "|"
-                    PLTCDPAL &= ","
-                    PLTDSFLW &= ","
-                    PLTDSNUM &= ","
-                    PLTDSALF &= ","
-                    PLTDSNIV &= ","
-                    PLTDSLCW &= ","
-                    PLTDSLC2 &= ","
-                    PLTDSPLT &= ","
-                    PLTDSCSS &= "|"
-                    WEBDSIMP &= ","
-                    WEBDSCND &= ","
-                End If
-
-                PLTDSTCO &= item(7)
-                PLTDSCMP &= item(8)
-                PLTDSLNK &= item(9)
-                PLTDSALT &= item(10)
-                PLTDSIMG &= IIf(item(11) = "", 0, item(11))
-
-                PLTDSFLW &= "0"
-
-
-
-                PLTDSLCW &= item(13).Replace(",", "|")
-                PLTDSLC2 &= item(15).Replace(",", "|")
-                PLTDSPLT &= item(17).Replace(",", "|")
-                PLTDSNUM &= IIf(item(18) = "", 0, item(18))
-                PLTDSNIV &= item(19)
-
-                PLTDSAAL &= item(20)
-                PLTDSALF &= item(21)
-                PLTDSALK &= item(22)
-                PLTCDPAL &= item(24)
-
-
-
-                'Camps d'atributs de cel·les de web
-                WEBDSIMP &= item(25)
-                WEBDSCND &= item(26)
-
-                'Estils
-                cssTmp = ""
-                For i As Integer = 27 To 27
-                    If cssTmp.Length > 0 Then cssTmp &= ","
-                    If item(i).Length > 0 Then cssTmp &= item(i)
-
-                Next i
-                PLTDSCSS &= cssTmp
-
-            End If
-            cont = cont + 1
-        Next cel
 
         Select Case Request("tipus")
 
             Case "W"
+                LeerAtributos(arrCel, PLTDSCMP, PLTDSLNK, PLTDSALT, PLTDSCSS, PLTDSTCO, PLTDSLCW, PLTDSLC2, PLTDSIMG, PLTCDPAL, PLTDSAAL, PLTDSPLT, PLTDSALK, PLTDSFLW, PLTDSNUM, PLTDSALF, PLTDSNIV, WEBDSIMP, WEBDSCND, cssTmp, cont)
+
                 If WEBDTCAD.Text = "" Then dataCaducitat = "01/01/1900" Else dataCaducitat = WEBDTCAD.Text
                 If WEBTPBUS.Checked Then buscar = "S" Else buscar = "N"
                 If WEBTPHER.Checked Then heretar = "S" Else heretar = "N"
@@ -927,6 +864,72 @@ Public Class frmplantilla
         carregaCamps()
     End Sub
 
+    Private Sub LeerAtributos(ByRef arrCel() As String, ByRef PLTDSCMP As String, ByRef PLTDSLNK As String, ByRef PLTDSALT As String, ByRef PLTDSCSS As String, ByRef PLTDSTCO As String, ByRef PLTDSLCW As String, ByRef PLTDSLC2 As String, ByRef PLTDSIMG As String, ByRef PLTCDPAL As String, ByRef PLTDSAAL As String, ByRef PLTDSPLT As String, ByRef PLTDSALK As String, ByRef PLTDSFLW As String, ByRef PLTDSNUM As String, ByRef PLTDSALF As String, ByRef PLTDSNIV As String, ByRef WEBDSIMP As String, ByRef WEBDSCND As String, ByRef cssTmp As String, ByRef cont As Integer)
+        Dim item() As String
+        arrCel = txtAtributs.Value.Split("|")
+        For Each cel As String In arrCel
+            item = cel.Split("#")
+
+            If item.Length > 1 Then
+                If cont > 0 Then
+                    PLTDSTCO &= ","
+                    PLTDSCMP &= ","
+                    PLTDSLNK &= ","
+                    PLTDSALT &= "|"
+                    PLTDSIMG &= ","
+                    PLTDSALK &= "|"
+                    PLTDSAAL &= "|"
+                    PLTCDPAL &= ","
+                    PLTDSFLW &= ","
+                    PLTDSNUM &= ","
+                    PLTDSALF &= ","
+                    PLTDSNIV &= ","
+                    PLTDSLCW &= ","
+                    PLTDSLC2 &= ","
+                    PLTDSPLT &= ","
+                    PLTDSCSS &= "|"
+                    WEBDSIMP &= ","
+                    WEBDSCND &= ","
+                End If
+
+                PLTDSTCO &= item(7)
+                PLTDSCMP &= item(8)
+                PLTDSLNK &= item(9)
+                PLTDSALT &= item(10)
+                PLTDSIMG &= IIf(item(11) = "", 0, item(11))
+
+                PLTDSFLW &= "0"
+
+
+
+                PLTDSLCW &= item(13).Replace(",", "|")
+                PLTDSLC2 &= item(15).Replace(",", "|")
+                PLTDSPLT &= item(17).Replace(",", "|")
+                PLTDSNUM &= IIf(item(18) = "", 0, item(18))
+                PLTDSNIV &= item(19)
+
+                PLTDSAAL &= item(20)
+                PLTDSALF &= item(21)
+                PLTDSALK &= item(22)
+                PLTCDPAL &= item(24)
+
+                'Camps d'atributs de cel·les de web
+                WEBDSIMP &= item(25)
+                WEBDSCND &= item(26)
+
+                'Estils
+                cssTmp = ""
+                For i As Integer = 27 To 27
+                    If cssTmp.Length > 0 Then cssTmp &= ","
+                    If item(i).Length > 0 Then cssTmp &= item(i)
+
+                Next i
+                PLTDSCSS &= cssTmp
+
+            End If
+            cont += 1
+        Next cel
+    End Sub
 
     Protected Sub inicialitzaLListaServidors()
 
