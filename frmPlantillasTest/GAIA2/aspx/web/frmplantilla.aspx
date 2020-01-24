@@ -802,19 +802,8 @@
                         </div>
                     </div>
                	</div>
-                
-                
-                
-                
-                
                 </asp:placeholder>	
-                
-                
-                
-                
-                
-                
-                
+        
                 <asp:placeholder runat="server" id="pnlPltCamps3" visible="false">
                 <div class="card bg-light">                
                 	<div class="card-header"><h6 class="font-weight-bold">AUTOENLLA&Ccedil;</h6></div>
@@ -967,7 +956,9 @@ $(function () {
             return false;
         });
 
-        $("div#htmlEst").on("click", ".row", function () {
+                //$("div#htmlEst").on("click", ".row", function () {
+
+        $("div").on("click", ".row", function () {
             // gravo els cambis
             $("#btnModificarDades").click();
 
@@ -1055,8 +1046,9 @@ $(function () {
         }
 
 
+                //$("div#htmlEst").on("click", ".contenidor", function () {
 
-        $("div#htmlEst").on("click", ".contenidor", function () {
+        $("div").on("click", ".contenidor", function () {
             // gravo els cambis
             $("#btnModificarDades").click();
 
@@ -1363,15 +1355,17 @@ $(function () {
 
             if (!jQuery.isEmptyObject(element)) {
 
-                if (element.attr("class").indexOf('cel') > -1) {   // element: el ultimo div que se ha clicado
+                if (element.hasClass('cel')) {   // element: el ultimo div que se ha clicado
                     $("#btnModificarDadesCel").click();
                     return true;
                 }
-                else if (element.attr("class").indexOf('row') > -1) {
+                else if (element.hasClass('row')) {
                     ModificarDadesRow();
 
                 }
-                else if (element.attr("class").indexOf('contenidor') > -1) {
+                                    //else if (element.attr("class").indexOf('contenidor') > -1) {
+
+                else if (element.hasClass('contenidor')) {
                     ModificarDadesContenidor();
                 }
 
@@ -1388,12 +1382,7 @@ $(function () {
             element.addClass("contenidor contenidorActiu border border-secondary p-2 pr-4 pl-4");
             element.find("span.contenidorAtributs").text("");
 
-            var strAtr = "##";
-            strAtr = DadesComunsMides(strAtr, element);
-            strAtr += "#####";
-            strAtr = DadesComunsLlibrerias(strAtr);
-            strAtr +="#####"
-            strAtr = DadesComunsEstils(strAtr, element);
+            var strAtr = ComposicionTextoAtributos();
 
             element.find("span.contenidorAtributs").text(strAtr);
             //guardo els canvis 
@@ -1406,17 +1395,23 @@ $(function () {
             element.addClass("row rowActiva border border-secondary p-2");
             element.find("span.rowAtributs").text("");
 
-            var strAtr = "##";
-            strAtr = DadesComunsMides(strAtr, element);
-            strAtr += "#####";
-            strAtr = DadesComunsLlibrerias(strAtr);
-            strAtr +="#####"
-            strAtr = DadesComunsEstils(strAtr, element);
+            var strAtr = ComposicionTextoAtributos();
 
             element.find("span.rowAtributs").text(strAtr);
             //guardo els canvis 
            $("#txtEst").val($("#htmlEst").html());
 
+        }
+
+        function ComposicionTextoAtributos(){
+            var strAtr = "#";
+            strAtr = DadesComunsMides(strAtr, element);
+            strAtr += "#####";
+            strAtr = DadesComunsLlibrerias(strAtr);
+            strAtr +="#########"
+            strAtr = DadesComunsEstils(strAtr, element);
+
+            return strAtr;
         }
 
         function DadesComunsLlibrerias(strAtr) {

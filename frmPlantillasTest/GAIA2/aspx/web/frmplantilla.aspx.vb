@@ -774,6 +774,7 @@ Public Class frmplantilla
                 GAIA.bdSR(objconn, "BEGIN TRANSACTION " & strSql & "; COMMIT TRANSACTION")
 
             Case "N"
+                LeerAtributos(arrCel, PLTDSCMP, PLTDSLNK, PLTDSALT, PLTDSCSS, PLTDSTCO, PLTDSLCW, PLTDSLC2, PLTDSIMG, PLTCDPAL, PLTDSAAL, PLTDSPLT, PLTDSALK, PLTDSFLW, PLTDSNUM, PLTDSALF, PLTDSNIV, WEBDSIMP, WEBDSCND, cssTmp, cont)
 
                 If Not Request("id") Is Nothing Then  'Tengo el id, modifico el nodo.
                     txtCodiNode.Text = Request("id").ToString()
@@ -806,6 +807,7 @@ Public Class frmplantilla
                 GAIA.bdSR(objconn, "BEGIN TRANSACTION " & strSql & "; COMMIT TRANSACTION")
 
             Case "A"
+                LeerAtributos(arrCel, PLTDSCMP, PLTDSLNK, PLTDSALT, PLTDSCSS, PLTDSTCO, PLTDSLCW, PLTDSLC2, PLTDSIMG, PLTCDPAL, PLTDSAAL, PLTDSPLT, PLTDSALK, PLTDSFLW, PLTDSNUM, PLTDSALF, PLTDSNIV, WEBDSIMP, WEBDSCND, cssTmp, cont)
 
                 If Not Request("id") Is Nothing Then
                     txtCodiNode.Text = Request("id").ToString()

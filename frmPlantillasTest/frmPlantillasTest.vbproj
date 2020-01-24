@@ -51,6 +51,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\GAIA\bin\CSCartografia.dll</HintPath>
     </Reference>
+    <Reference Include="FredCK.FCKeditorV2">
+      <HintPath>..\..\GAIA\bin\FredCK.FCKeditorV2.dll</HintPath>
+    </Reference>
     <Reference Include="gaiaws, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\GAIA\bin\gaiaws.dll</HintPath>
@@ -160,6 +163,7 @@
     <Content Include="GAIA\aspx\llibreria\frmObrirFulla.aspx" />
     <Content Include="GAIA\aspx\visorArbresLite.aspx" />
     <Content Include="GAIA\aspx\web\frmArbreWeb.aspx" />
+    <Content Include="GAIA\aspx\web\frmFullaWeb.aspx" />
     <Content Include="GAIA\llibreriacodiweb\intranet\gaia\menu2.ascx" />
     <Content Include="img\abajo.gif" />
     <Content Include="img\abajo.png" />
@@ -1139,6 +1143,12 @@
     <Content Include="img\ok.png" />
     <Content Include="img\open-iconic-bootstrap.css" />
     <Content Include="css\formularisGaia.css" />
+    <Content Include="img\open-iconic\font\css\open-iconic-bootstrap.css" />
+    <Content Include="img\open-iconic\font\css\open-iconic-bootstrap.min.css" />
+    <Content Include="img\open-iconic\font\css\open-iconic-foundation.css" />
+    <Content Include="img\open-iconic\font\css\open-iconic-foundation.min.css" />
+    <Content Include="img\open-iconic\font\css\open-iconic.css" />
+    <Content Include="img\open-iconic\font\css\open-iconic.min.css" />
     <Content Include="img\paperera.gif" />
     <Content Include="img\paperera.png" />
     <Content Include="img\pdf.png" />
@@ -1256,6 +1266,7 @@
     <Content Include="img\XPWhiteSpace.gif" />
     <Content Include="img\zip.png" />
     <Content Include="inici.aspx" />
+    <Content Include="js\App_LocalResources\Ajuda.ascx" />
     <Content Include="js\App_LocalResources\cap.aspx" />
     <Content Include="js\App_LocalResources\cap.inc" />
     <Content Include="js\App_LocalResources\contextmenusNou.xml" />
@@ -1393,6 +1404,13 @@
       <DependentUpon>frmArbreWeb.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="GAIA\aspx\web\frmFullaWeb.aspx.designer.vb">
+      <DependentUpon>frmFullaWeb.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GAIA\aspx\web\frmFullaWeb.aspx.vb">
+      <DependentUpon>frmFullaWeb.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="js\App_LocalResources\Ajuda.ascx.vb">
       <DependentUpon>Ajuda.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1471,6 +1489,14 @@
     <Content Include="GAIA2\aspx\web\img\open-iconic\font\css\open-iconic.less" />
     <Content Include="GAIA2\aspx\web\img\open-iconic\font\css\open-iconic.scss" />
     <Content Include="GAIA2\aspx\web\img\open-iconic\font\css\open-iconic.styl" />
+    <Content Include="img\open-iconic\font\css\open-iconic-bootstrap.less" />
+    <Content Include="img\open-iconic\font\css\open-iconic-bootstrap.styl" />
+    <Content Include="img\open-iconic\font\css\open-iconic-foundation.less" />
+    <Content Include="img\open-iconic\font\css\open-iconic-foundation.scss" />
+    <Content Include="img\open-iconic\font\css\open-iconic-foundation.styl" />
+    <Content Include="img\open-iconic\font\css\open-iconic.less" />
+    <Content Include="img\open-iconic\font\css\open-iconic.scss" />
+    <Content Include="img\open-iconic\font\css\open-iconic.styl" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

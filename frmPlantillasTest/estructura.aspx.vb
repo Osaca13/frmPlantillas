@@ -155,7 +155,7 @@ Public Class estructura
         Dim ds As New DataSet, qSQL As String, item As String, aPlantilles As String()
         Dim html As String()
         Dim i As Integer, plantillaActual As Integer
-        Dim ddlb_plantilla As DropDownList
+
 
         Dim esGaia2 As Boolean = False
         ''		 gaia.debug(nothing, "aqui")

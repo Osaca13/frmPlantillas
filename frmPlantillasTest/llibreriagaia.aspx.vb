@@ -6588,6 +6588,9 @@ Public Class GAIA
                                     If dbRow("NWEDSCAR").length > 0 Then
                                         fDesti &= "/" & dbRow("NWEDSCAR").Trim()
                                         urlDesti &= "/" & dbRow("NWEDSCAR").Trim().Replace("\", "/")
+                                    Else
+                                        fDesti &= "/"
+                                        urlDesti &= "/"
                                     End If
                                 End If
 
@@ -9665,21 +9668,40 @@ Public Class GAIA
 
                             Case 3 'codi executable després de la publicació                
                                 resultat += llibreria.Trim().Replace("Request(""stridioma"")", codiIdioma.ToString()).Replace("Request(""codiIdioma"")", codiIdioma.ToString())
-                            Case 4 'fitxer executable després de la publicació                                      
-                                Dim fs As New FileStream("c:\inetpub\wwwroot\GAIA\aspx\llibreriacodiweb\" + llibreria.Trim(), FileMode.Open, FileAccess.Read)
-                                Dim sr As StreamReader = New StreamReader(fs, System.Text.Encoding.Default)
-                                trobaCodiWebTMP = sr.ReadToEnd()
-                                trobaCodiWebTMP = trobaCodiWebTMP.Replace("""<IDIOMA>""", codiIdioma)
-                                sr.Close()
-                                fs.Close()
+                            Case 4 'fitxer executable després de la publicació    
+                                Dim ruta As String = "c:\inetpub\wwwroot\GAIA\aspx\llibreriacodiweb\"
+                                If (Directory.Exists(ruta)) Then
 
-                                If trobaCodiWebTMP.Length = 0 And dbRow("LCWTPFOL") = "N" Then
-                                    resultat = ""
-                                    Exit For
+                                    Dim fs As New FileStream(ruta + llibreria.Trim(), FileMode.Open, FileAccess.Read)
+                                    Dim sr As StreamReader = New StreamReader(fs, System.Text.Encoding.Default)
+                                    trobaCodiWebTMP = sr.ReadToEnd()
+                                    trobaCodiWebTMP = trobaCodiWebTMP.Replace("""<IDIOMA>""", codiIdioma)
+                                    sr.Close()
+                                    fs.Close()
+
+                                    If trobaCodiWebTMP.Length = 0 And dbRow("LCWTPFOL") = "N" Then
+                                        resultat = ""
+                                        Exit For
+                                    Else
+                                        resultat += trobaCodiWebTMP
+                                    End If
                                 Else
-                                    resultat += trobaCodiWebTMP
-                                End If
+                                    ruta = "C:\Users\odsanchez\source\repos\GAIA\ASPX\llibreriaCodiWeb\"
+                                    Dim fs As New FileStream(ruta + llibreria.Trim(), FileMode.Open, FileAccess.Read)
+                                    Dim sr As StreamReader = New StreamReader(fs, System.Text.Encoding.Default)
+                                    trobaCodiWebTMP = sr.ReadToEnd()
+                                    trobaCodiWebTMP = trobaCodiWebTMP.Replace("""<IDIOMA>""", codiIdioma)
+                                    sr.Close()
+                                    fs.Close()
 
+                                    If trobaCodiWebTMP.Length = 0 And dbRow("LCWTPFOL") = "N" Then
+                                        resultat = ""
+                                        Exit For
+                                    Else
+                                        resultat += trobaCodiWebTMP
+                                    End If
+
+                                End If
                         End Select
                     Next llibreria
 
@@ -9888,7 +9910,7 @@ Public Class GAIA
             Dim UPD As Integer = 0
             strErr &= "1"
             publica = 1
-            pathDocs = "/gdocs"
+            pathDocs = "/gocs"
             If tipusAccio = 0 Then
                 'esborro la pàgina web
 
@@ -13816,7 +13838,8 @@ Public Class GAIA
         If DS.Tables(0).Rows.Count > 0 Then
             dbRow = DS.Tables(0).Rows(0)
             servidor = dbRow("SERDSDIR").Trim
-            pathDesti = dbRow("SERDSCAM").Trim '+dbRow("AWEDSROT")).Trim
+            'pathDesti = dbRow("SERDSCAM").Trim '+dbRow("AWEDSROT")).Trim
+            pathDesti = dbRow("AWEDSROT").Trim
             pathDocsDesti = (pathDesti + dbRow("AWEDSDOC")).Trim
             usuari = dbRow("SERDSUSR").Trim
             pwd = dbRow("SERDSPWD").Trim

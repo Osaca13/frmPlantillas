@@ -307,8 +307,6 @@ Public Class VisorArbres
             Case "Veure caducats"
                 clickActualitzar(o, e, True, 0, True)
             Case "Editar"
-
-
                 If clsPermisos.tepermis2(objconn, 3, idUsuari, idUsuari, rel, permisHeretat, "", "", 0) = 1 Or idUsuari = 297650 Then
                     Dim val1, val2 As Integer
                     val1 = 0
