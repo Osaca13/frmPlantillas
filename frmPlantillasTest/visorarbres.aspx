@@ -17,7 +17,7 @@
         }
     MM_reloadPage(true);
     </script>
-    <style type="text/css">
+ <style type="text/css">
 
 .ContextItem
 {

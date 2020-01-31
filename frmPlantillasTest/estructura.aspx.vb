@@ -169,16 +169,20 @@ Public Class estructura
 
         i = 0
         For Each item In aPlantilles
-            ' GAIA.debug(Nothing, lblEstructura.Text)
+            GAIA.debug(Nothing, "html :" + html.Length.ToString())
             ' GAIA.debug(Nothing, item)
             item = Replace(item, "|", ",")
             item = Trim(item)
             ddlb_plantilla = New DropDownList
+
             ' GAIA2
             If esGAIA2Test(objconn, relDesti.infil) Then
+                GAIA.debug(Nothing, "i : " + i.ToString())
                 ddlb_plantilla.ID = "ddlb_plantilla" & html(i + 1).Substring(1, html(i + 1).IndexOf("'", 1) - 1)
+
             Else
                 ddlb_plantilla.ID = "ddlb_plantillat" & i
+
             End If
             If Trim(item & "") <> "" Then
                 'he vist que a vegades arriba un element amb format  codiplantilla1|codiplantilla2| (amb la barra al final). L'elimino.
@@ -187,26 +191,29 @@ Public Class estructura
                 qSQL = "SELECT PLTINNOD,CAST(PLTDSOBS AS VARCHAR(8000)) AS PLTDSOBS FROM METLPLT WITH(NOLOCK) WHERE PLTINNOD IN (" & item & ")  UNION SELECT PLTINNOD,CAST(PLTDSOBS AS VARCHAR(8000)) AS PLTDSOBS FROM METLPLT2 WITH(NOLOCK) WHERE PLTINNOD IN (" & item & ") "
                 '				gaia.debug(nothing, qsql)
                 GAIA.bdr(objconn, qSQL, ds)
-                ddlb_plantilla.DataSource = ds
-                ddlb_plantilla.DataTextField = "PLTDSOBS"
-                ddlb_plantilla.DataValueField = "PLTINNOD"
-                ddlb_plantilla.DataBind()
-                If ddlb_plantilla.Items.Count > 1 Then
-                    ddlb_plantilla.Items.Add(New ListItem("Plantilles alternatives", 9))
-                End If
-                If Trim(txtPosicioEstructuraReal.Text) <> "" Then
-                    If i = CInt(txtPosicioEstructuraReal.Text) And plantillaActual <> -1 Then
-                        Try
-                            ddlb_plantilla.SelectedValue = plantillaActual
-                        Catch
-                            Debug.WriteLine("selected Value fails")
-
-                        End Try
+                If (ds.Tables(0).Rows.Count > 0) Then
+                    ddlb_plantilla.DataSource = ds
+                    ddlb_plantilla.DataTextField = "PLTDSOBS"
+                    ddlb_plantilla.DataValueField = "PLTINNOD"
+                    ddlb_plantilla.DataBind()
+                    If ddlb_plantilla.Items.Count > 1 Then
+                        ddlb_plantilla.Items.Add(New ListItem("Plantilles alternatives", 9))
                     End If
+                    If Trim(txtPosicioEstructuraReal.Text) <> "" Then
+                        If i = CInt(txtPosicioEstructuraReal.Text) And plantillaActual <> -1 Then
+                            Try
+                                ddlb_plantilla.SelectedValue = plantillaActual
+                            Catch
+                                Debug.WriteLine("selected Value fails")
+
+                            End Try
+                        End If
+                    End If
+                    plantillesPH.Controls.Add(ddlb_plantilla)
                 End If
+
             End If
-            ddlb_plantilla.Visible = True
-            plantillesPH.Controls.Add(ddlb_plantilla)
+
             i += 1
         Next item
         ds.Dispose()
@@ -341,16 +348,20 @@ Public Class estructura
                         dbRow = DS.Tables(0).Rows(0)
                         '							gaia.debug(nothing, "1")
                         llistaPlantilles.Text = dbRow("WEBDSPLA")
+
+
                         If posicioEstructura < 0 Then
 
                             If dbRow("WEBDSATR") = "GAIA2" Then   'Teresa
                                 lblEstructura.Text = maquetaEstructura(dbRow("WEBDSEST"), tipusNodeAMoure)
+
                             Else ' Gaia anterior
                                 Dim a As String()
                                 a = Split(dbRow("WEBDSEST"), ",")
                                 Array.Sort(a)
                                 'ini codi sara								
                                 lblEstructura.Text = GAIA.pintaEstructura(objconn, a, Split(dbRow("WEBDSATR"), ","), Split(dbRow("WEBDSTVER"), ","), Split(dbRow("WEBDSTHOR"), ","), 1, "", 1, "", Split(dbRow("WEBDSDEC"), "|"), Split(dbRow("WEBDSPLA"), ","), 0)
+
                                 'fi codi sara
                             End If
                             lblCodi.Text = "<script>document.getElementById(""WEBDSTCO"").value=""" & dbRow("WEBDSTCO").ToString() & """;document.getElementById(""tipusNode"").value=""" & tipusNode.Text.ToString() & """;document.getElementById(""codiRelacioOrigen"").value=""" & codiRelacioOrigen.Text.ToString() & """;document.getElementById(""txtPosicioEstructuraReal"").value=""" & posicioEstructuraReal.ToString() & """;</script> "
@@ -390,7 +401,7 @@ Public Class estructura
                     End If
                 Case "arbre web"
                     lblTitol.Text = "Estructura de l'arbre web"
-                    GAIA.bdr(objconn, "SELECT AWEDSEST,AWEDSATR,AWEDSTVER,AWEDSTHOR,AWEDSTCO FROM METLAWE WITH(NOLOCK) WHERE AWEINNOD=" & nroNodeDesti & " UNION SELECT  CAST(AWEDSHTM AS VARCHAR(8000)) AS AWEDSEST,'GAIA2' as AWEDSATR,'0' as AWEDSTVER,'0' as AWEDSTHOR,AWEDSTCO FROM METLAWE2 WITH(NOLOCK) WHERE AWEINNOD=" & nroNodeDesti, DS)
+                    GAIA.bdr(objconn, "SELECT AWEDSEST,AWEDSATR,AWEDSTVER,AWEDSTHOR,AWEDSTCO, '' AS AWEDSPLA FROM METLAWE WITH(NOLOCK) WHERE AWEINNOD=" & nroNodeDesti & " UNION SELECT  CAST(AWEDSHTM AS VARCHAR(8000)) AS AWEDSEST,'GAIA2' as AWEDSATR,'0' as AWEDSTVER,'0' as AWEDSTHOR,AWEDSTCO, AWEDSPLA FROM METLAWE2 WITH(NOLOCK) WHERE AWEINNOD=" & nroNodeDesti, DS)
                     'gaia.debug(nothing,"SELECT AWEDSEST,AWEDSATR,AWEDSTVER,AWEDSTHOR,AWEDSTCO FROM METLAWE WITH(NOLOCK) WHERE AWEINNOD=" & nroNodeDesti & " UNION SELECT  CAST(AWEDSEST AS VARCHAR(8000)) AS AWEDSEST,'GAIA2' as AWEDSATR,'0' as AWEDSTVER,'0' as AWEDSTHOR,AWEDSTCO FROM METLAWE2 WITH(NOLOCK) WHERE AWEINNOD=" & nroNodeDesti )
                     If DS.Tables(0).Rows.Count > 0 Then
                         dbRow = DS.Tables(0).Rows(0)
@@ -409,7 +420,7 @@ Public Class estructura
                             lblCodi.Text = "<script>document.getElementById(""WEBDSTCO"").value=""" & dbRow("AWEDSTCO").ToString() & """;document.getElementById(""tipusNode"").value=""" & tipusNode.Text.ToString() & """;document.getElementById(""codiRelacioOrigen"").value=""" & codiRelacioOrigen.Text.ToString() & """;document.getElementById(""txtPosicioEstructuraReal"").value=""" & posicioEstructuraReal.ToString() & """;</script> "
                         Else 'Ya tiene una posición asignada
                             If dbRow("AWEDSATR") = "GAIA2" Then   'Teresa
-                                'llistaPlantilles.Text = dbRow("AWEDSPLA")
+                                llistaPlantilles.Text = dbRow("AWEDSPLA")
                                 lblEstructura.Text = maquetaEstructura(dbRow("AWEDSEST"), tipusNodeAMoure)
                             End If
                         End If

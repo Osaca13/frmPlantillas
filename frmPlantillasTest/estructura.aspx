@@ -22,15 +22,26 @@
 	  <link href="https://cdn.jsdelivr.net/gh/coliff/bootstrap-ie8/css/bootstrap-ie8.min.css" rel="stylesheet">
 <![endif]-->
 <title>Estructura web</title>
+    <style>        
+        .displayed {
+            display:list-item;
+           
+        }
+        .nodisplayed{
+            display:none;
+        }
+        
+        }
+    </style>
 </head>
        
 <body onLoad="document.getElementById('divMain').style.visibility='visible';
     document.getElementById('divWait').style.visibility='hidden';">
 
 <div id="divWait" style="visibility:hidden; vertical-align:middle; width:100%; margin:0 auto; color:#990000; height:100%; position:absolute; background-color:#fff; top:150px;">
-  <center>
+  <figure class="align-content-center">
     <img src="/img/reloj2.gif"  alt="Treballant">
-  </center>
+  </figure>
 </div>
 <div class="container-fluid" id="divMain" style="visibility:visible">
   <div class="row">
@@ -108,8 +119,8 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-4 col-form-label-sm text-right" for="plantillesPH" id="trPlantilla1" style="display:none">Plantilla a utilizar:</label>	
-                    <div class="col select" id="trPlantilla2" style="display:none">
+                    <label class="col-4 col-form-label-sm text-right nodisplayed" for="plantillesPH" id="trPlantilla1">Plantilla a utilizar:</label>	
+                    <div class="col nodisplayed" id="trPlantilla2">
                          <asp:PlaceHolder runat="server" id="plantillesPH"/>
                     </div>
                 </div>
@@ -225,70 +236,107 @@
 <%--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>--%>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script language="javascript">
+<script type="text/javascript" >
+     function InicioEst(aPlantilles){
+      //if (document.getElementById("WEBDSTCO").value != "") {
+      //    var arrayTCO = document.getElementById("WEBDSTCO").value.split(",");
+          var allDivs = $('div.contenidor').children('div.row');
 
-      var aPlantilles = (document.getElementById('llistaPlantilles').value).split(",");
-      iniPantalla(aPlantilles);
-      if (document.getElementById("WEBDSTCO").value != "") {
-          var arrayTCO = document.getElementById("WEBDSTCO").value.split(",");
-          var cont = 0;
-        
-          // Teresa: las celdas(t..) empiezan en 1 y los arrays (aPlantilles y arrayTCO) en 0.
-          while (cont < arrayTCO.length) {
-            
-              if ((arrayTCO[cont] != document.getElementById("tipusNode").value) && (arrayTCO[cont] != 54)) {
-                  document.getElementById("t" + cont).disabled = true;
-                  document.getElementById("t" + cont).bgColor = "#eeeeee";
-              }
-              else {
-                  document.getElementById("ubicacionsSeleccionables").value = 1;
-                  document.getElementById("t" + cont).disabled = false;
-                  if (document.getElementById("txtPosicioEstructuraReal").value == cont) {
-                      document.getElementById("t" + cont).bgColor = "#CACAAA";
-                      //document.getElementById("ultimaDivisio").value = "t" + cont;
-                      document.getElementById("ultimaPlantilla").value = aPlantilles[cont];
+              $(allDivs).each(function (index1) {
+                  var idCel = $(this).children('div.cel');
+                  console.log('Row  : ' + index1 + $(this).css('background-color'));
+
+                  $(idCel).each(function (index2) {
+                      console.log(' cel : ' + (index2 + 1) * (index1 + 1) + $(this).attr('id'));
+                      var index = (index2 + 1) * (index1 + 1) - 1;
+                          if ($(this).children('span.atributs') != null) {
+                              var spanText = $(this).children('span.atributs').text();
+                              var arraySpanText = spanText.split('#');
+                              if ((arraySpanText[7] != $('#tipusNode').val()) && (arraySpanText[7] != 54)) {
+
+                                  console.log('Tipo de nodo : ' + arraySpanText[7]);
+                                  $(this).disabled = true;
+                                  $(this).css('background-color', 'rgb(238,238,238)');
+                              }
+                              else {
+                                  $(this).disabled = false;
+                                  $(this).css('background-color', 'rgb(255, 255, 255)');
+                                  $('#ultimaDivisio').val( $(this).attr('id')); 
+                                  $('#ultimaPlantilla').val(aPlantilles[index]);
+                              }
+                          };
                       
-                  }
-                  else {
-                      document.getElementById("t" + cont).bgColor = "#ffffff";
-                  }
-              }
-              cont++;
-          }
+                  });
+              });
+          
+
+     //     var cont = 0;
+        
+     //     // Teresa: las celdas(t..) empiezan en 1 y los arrays (aPlantilles y arrayTCO) en 0.
+     //     while (cont < arrayTCO.length) {
+            
+     //         if ((arrayTCO[cont] != document.getElementById("tipusNode").value) && (arrayTCO[cont] != 54)) {
+     //         var allDivs = $('div.contenidor > div.row');
+               
+			  //if ( document.getElementById("t" + cont) != null)
+			  //{
+     //             document.getElementById("t" + cont).disabled = true;
+     //             document.getElementById("t" + cont).bgColor = "#eeeeee";
+			  //}
+     //         }
+     //         else {
+     //             document.getElementById("ubicacionsSeleccionables").value = 1;
+				 // if ( document.getElementById("t" + cont) != null)
+			  //    {
+     //               document.getElementById("t" + cont).disabled = false;
+				 // }
+     //             if (document.getElementById("txtPosicioEstructuraReal").value == cont) {
+				 // if ( document.getElementById("t" + cont) != null)
+			  //        {
+     //                   document.getElementById("t" + cont).bgColor = "#CACAAA";
+					//  }
+     //                 //document.getElementById("ultimaDivisio").value = "t" + cont;
+     //                 document.getElementById("ultimaPlantilla").value = aPlantilles[cont];
+                      
+     //             }
+     //             else {
+				 // if ( document.getElementById("t" + cont) != null)
+			  //       {
+     //                   document.getElementById("t" + cont).bgColor = "#ffffff";
+					// }
+     //             }
+     //         }
+     //         cont++;
+     //     }
            if ($("#ultimaPlantilla").val() != "" && $("#ultimaDivisio").val() != "") {
               mostrarDesplegable($("#ultimaPlantilla").val(), $("#ultimaDivisio").val());
               }
-      }
-      else {
-          var ncelda = document.getElementById("txtposicioEstructura").value;
-          if (ncelda >= 0 && document.getElementById('llistaPlantilles').value != "") {
-              if (document.getElementById("ultimaDivisio") != null)
-              {
-
-                  document.getElementById("ultimaDivisio").value = "t" + ncelda;
-              }
-              document.getElementById("ultimaPlantilla").value = aPlantilles[ncelda];
-              if (aPlantilles[ncelda]) {
-                  mostrarDesplegable(aPlantilles[ncelda], "t" + ncelda);
-              }
-          }
-      }
+      //}
+      //else {
+          //var ncelda = document.getElementById("txtposicioEstructura").value;
+          //if (ncelda >= 0 && document.getElementById('llistaPlantilles').value != "") {
+          //    //document.getElementById("ultimaDivisio").value = "t" + ncelda;
+          //    document.getElementById("ultimaPlantilla").value = aPlantilles[ncelda];
+          //    if (aPlantilles[ncelda]) {
+          //        mostrarDesplegable(aPlantilles[ncelda], "t" + ncelda);
+          //    }
+          //}
+      //}
+	  }
 
       function iniPantalla(aPlantilles) {
-          for (i = 0; i < $("#trPlantilla2 select").length; i++) {
-              if (document.getElementById('ddlb_plantillad' + i) != null)
-              {
-                 document.getElementById('ddlb_plantillad' + i).style.display = 'none';
-              }
-             
-              $("#trPlantilla2 select")[i].style.display='none';
+	    console.log('Numero de plantilla = ' + $("#trPlantilla2 select").children('option').length);
+        if ($("#trPlantilla2 select").children('option').length > 0 ) 
+	      {            
+            
+			$('#trPlantilla2 > select').addClass('form-control form-control-sm');    
           }
           
       }
 
       // aquesta funciï¿½ existeix nomï¿½s per compatibilitat amb frmplantillaV2.asx
       function activaCamps(activar) {
-          return true;
+          return activar;
       }
       function comprovarUbicacioSeleccionada() {
           if ((document.getElementById("ubicacionsSeleccionables").value >= 1) && ((document.getElementById("txtposicioEstructura").value == -1) && (document.getElementById("txtposicioEstructuraReal").value == -1))) {
@@ -310,9 +358,9 @@
 
                   document.getElementById(ultimaDivisio).bgColor = "#FFFFFF";
                   //amaguem el desplegable corresponent a la celï¿½la anterior
-                  if (document.getElementById('ddlb_plantilla' + ultimaDivisio)) {
-                      document.getElementById('ddlb_plantilla' + ultimaDivisio).style.display = 'none';
-                  }
+                  $('#trPlantilla1').hide();
+                  $('#trPlantilla2').hide();
+					
               }
               document.getElementById("txtposicioEstructura").value = celda.substring(1, celda.length);
               document.getElementById(celda).bgColor = "#CACAAA";
@@ -324,49 +372,67 @@
               document.getElementById('ultimaPlantilla').value = aPlantilles[celda.substring(1)];
 
               if (aPlantilles[celda.substring(1)]) {
-                  mostrarDesplegable(aPlantilles[celda.substring(1)], celda);
+                  mostrarDesplegable();
               }
           }
       }
 
       // GAIA2
       function seleccionaDiv(div) {
+         
+		 //marco de color blanco la celda anterior
+          if ($('#ultimaDivisio').val() != "")
+          {
 
-          //marco de color blanco la celda anterior
-          if (document.getElementById("ultimaDivisio").value != "") {
+              var divId = $(div).css('backgroundColor');
 
-              var ultimaDivisio = document.getElementById("ultimaDivisio").value;
-              $("#" + ultimaDivisio).css("background-color", "#FFFFFF");
+			  if (divId != 'rgb(255, 255, 255)')
+			  {
+                   $(div).css({ 'backgroundColor': 'rgb(255, 255, 255)' });
+                  $('#trPlantilla1').hide();
+                  $('#trPlantilla2').hide();
+					
+			   } 
+			   else{
+                  // marco de color verde la nueva celda y cargo sus valores
+                      $(div).css({ 'backgroundColor': 'rgb(230, 249, 251)' });
+					  mostrarDesplegable();
+					  
+                      $("#ultimaDivisio").val(div.attr("id"));
+                      $("#txtposicioEstructura").val( div.attr("id").substring(1, div.attr("id").length));
+                  };  
+          }
+		 
+		 
+        //  //marco de color blanco la celda anterior
+        //  if ($('#ultimaDivisio').val() != "") {
+
+         //     var ultimaDivisio = document.getElementById("ultimaDivisio").value;
+			  
+        //      $("#" + ultimaDivisio).css("background-color", "#FFFFFF");
               
-              //amaguem el desplegable corresponent a la celï¿½la anterior
-              if (document.getElementById('ddlb_plantilla' + ultimaDivisio)) {
-                  document.getElementById('ddlb_plantilla' + ultimaDivisio).style.display = 'none';
-              }
-          }
+         //     //amaguem el desplegable corresponent a la celï¿½la anterior
+		//	  $('#trPlantilla1').css('display', 'none');
+        //      $('#trPlantilla2').css('display', 'none');
+		//	}
 
-          // marco de color verde la nueva celda y cargo sus valores
-          div.css("background-color","#E6F9FB");
-          $("#ultimaDivisio").val(div.attr("id"));
-          $("#txtposicioEstructura").val( div.attr("id").substring(1, div.attr("id").length));
+        //  // marco de color verde la nueva celda y cargo sus valores
+        //  div.css("background-color","#E6F9FB");
+        //  $("#ultimaDivisio").val(div.attr("id"));
+        //  $("#txtposicioEstructura").val( div.attr("id").substring(1, div.attr("id").length));
       }
 
-      function mostrarDesplegable(sPlantilla, celda) {
-          if (sPlantilla.indexOf("|") >= 0) {
-              document.getElementById('trPlantilla1').style.display = '';
-              document.getElementById('trPlantilla2').style.display = '';
-              document.getElementById('ddlb_plantilla' + celda).style.display = '';
-          }
-          else {
-              document.getElementById('trPlantilla1').style.display = 'none';
-              document.getElementById('trPlantilla2').style.display = 'none';
-          }
-      }
+      function mostrarDesplegable() {
+         
+          $('#trPlantilla1').show();
+          $('#trPlantilla2').show();
+        }
 
-      $.fn.multiline = function (text) {
-          this.text(text);
-          this.html(this.html().replace(/\n/g, '<br/>'));
-          return this;
-      }
+      //$.fn.multiline = function (text) {
+      //    this.text(text);
+      //    this.html(this.html().replace(/\n/g, '<br/>'));
+      //    return this;
+      //}
       $(document).ready(function () {
 
           if (document.getElementById('chkVisibleInternet').checked) {
@@ -389,8 +455,13 @@
               }
 
           });
+		  var aPlantilles = (document.getElementById('llistaPlantilles').value).split(",");
+          iniPantalla(aPlantilles);
+
+          InicioEst(aPlantilles);
        
       });
+    
 
 </script> 
 

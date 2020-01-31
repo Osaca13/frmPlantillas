@@ -49,18 +49,19 @@ Public Class frmFullaWeb
         If Session("codiOrg") = 49730 Or Session("codiOrg") = 49727 Or Session("codiOrg") = 56935 Or Session("codiOrg") = 80879 Or Session("codiOrg") = 48729 Or Session("codiOrg") = 144886 Or Session("codiOrg") = 297650 Or Session("codiOrg") = 313486 Or Session("codiOrg") = 346231 Then
 
 
-            If HttpContext.Current.User.Identity.Name.Length > 0 Then
-                If (Session("nif") Is Nothing) Then
-                    Session("nif") = GAIA.nifUsuari(objconn, HttpContext.Current.User.Identity.Name).Trim()
-                End If
-                If Session("codiOrg") Is Nothing Then
+            'If HttpContext.Current.User.Identity.Name.Length > 0 Then
+            '    If (Session("nif") Is Nothing) Then
+            '        Session("nif") = GAIA.nifUsuari(objconn, HttpContext.Current.User.Identity.Name).Trim()
+            '    End If
+            '    If Session("codiOrg") Is Nothing Then
 
-                    Session("CodiOrg") = GAIA.trobaNodeUsuari(objconn, Session("nif")).ToString().Trim()
+            '        Session("CodiOrg") = GAIA.trobaNodeUsuari(objconn, Session("nif")).ToString().Trim()
 
-                End If
+            '    End If
 
-            End If
-            nif = Session("nif").Trim()
+            'End If
+            Session("codiOrg") = 346231
+            ' nif = Session("nif").Trim()
 
             If Not Page.IsPostBack Then
                 carregallistaEstilsCSS()
@@ -725,7 +726,9 @@ Public Class frmFullaWeb
 
                 idiomaNoTrobat = True
             Else
-                Response.Redirect("http://lhintranet/gaia2/aspx/web/frmplantilla.aspx?id=" & codiNode.ToString() & "&tipus=W")
+                Response.Redirect("/GAIA2/aspx/web/frmplantilla.aspx?id=" & codiNode.ToString() & "&tipus=W")
+
+                'Response.Redirect("http://lhintranet/gaia2/aspx/web/frmplantilla.aspx?id=" & codiNode.ToString() & "&tipus=W")
             End If
         End If
         If DS.Tables(0).Rows.Count > 0 Then

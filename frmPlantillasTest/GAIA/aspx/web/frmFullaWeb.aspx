@@ -18,7 +18,7 @@
 
 <%@ Register TagPrefix="FCKeditorV2" Namespace="FredCK.FCKeditorV2" Assembly="FredCK.FCKeditorV2" %>
 <%@ Register TagPrefix="lh" TagName="Ajuda" Src="/js/App_LocalResources/Ajuda.ascx" %>
-<!--#INCLUDE VIRTUAL="../../js/App_LocalResources/cap.inc" -->
+<!--#INCLUDE VIRTUAL="../../../js/App_LocalResources/cap.inc" -->
 
 
   <script type="text/javascript">
@@ -278,7 +278,7 @@
 
 
 <form runat="server" class="padding0 margin0">
-<%@ Register TagPrefix="menuG" TagName="menuG" Src="../../js/App_LocalResources/menu.ascx" %>
+<%@ Register TagPrefix="menuG" TagName="menuG" Src="../../../js/App_LocalResources/menu.ascx" %>
 <menuG:menug ID="menuG" Text="Menú GAIA" runat="server"/> 
 <asp:Label ID="lbldebug" runat="server"/>
 <asp:Label ID="lblResultat" runat="server"/>
@@ -720,7 +720,7 @@
 </form>
 
 
-<!-- #INCLUDE VIRTUAL="js/App_LocalResources/peu.aspx" -->
+<!-- #INCLUDE VIRTUAL="../../../js/App_LocalResources/peu.aspx" -->
 </body>
 
 

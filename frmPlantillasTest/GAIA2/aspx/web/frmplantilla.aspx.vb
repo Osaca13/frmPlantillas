@@ -727,11 +727,12 @@ Public Class frmplantilla
         'GAIA.debug(nothing, "despres=" & PLTDSEST)
         Dim cssTmp As String = ""
         Dim cont As Integer = 0
+        LeerAtributos(arrCel, PLTDSCMP, PLTDSLNK, PLTDSALT, PLTDSCSS, PLTDSTCO, PLTDSLCW, PLTDSLC2, PLTDSIMG, PLTCDPAL, PLTDSAAL, PLTDSPLT, PLTDSALK, PLTDSFLW, PLTDSNUM, PLTDSALF, PLTDSNIV, WEBDSIMP, WEBDSCND, cssTmp, cont)
+
 
         Select Case Request("tipus")
 
             Case "W"
-                LeerAtributos(arrCel, PLTDSCMP, PLTDSLNK, PLTDSALT, PLTDSCSS, PLTDSTCO, PLTDSLCW, PLTDSLC2, PLTDSIMG, PLTCDPAL, PLTDSAAL, PLTDSPLT, PLTDSALK, PLTDSFLW, PLTDSNUM, PLTDSALF, PLTDSNIV, WEBDSIMP, WEBDSCND, cssTmp, cont)
 
                 If WEBDTCAD.Text = "" Then dataCaducitat = "01/01/1900" Else dataCaducitat = WEBDTCAD.Text
                 If WEBTPBUS.Checked Then buscar = "S" Else buscar = "N"
@@ -774,7 +775,6 @@ Public Class frmplantilla
                 GAIA.bdSR(objconn, "BEGIN TRANSACTION " & strSql & "; COMMIT TRANSACTION")
 
             Case "N"
-                LeerAtributos(arrCel, PLTDSCMP, PLTDSLNK, PLTDSALT, PLTDSCSS, PLTDSTCO, PLTDSLCW, PLTDSLC2, PLTDSIMG, PLTCDPAL, PLTDSAAL, PLTDSPLT, PLTDSALK, PLTDSFLW, PLTDSNUM, PLTDSALF, PLTDSNIV, WEBDSIMP, WEBDSCND, cssTmp, cont)
 
                 If Not Request("id") Is Nothing Then  'Tengo el id, modifico el nodo.
                     txtCodiNode.Text = Request("id").ToString()
@@ -807,7 +807,6 @@ Public Class frmplantilla
                 GAIA.bdSR(objconn, "BEGIN TRANSACTION " & strSql & "; COMMIT TRANSACTION")
 
             Case "A"
-                LeerAtributos(arrCel, PLTDSCMP, PLTDSLNK, PLTDSALT, PLTDSCSS, PLTDSTCO, PLTDSLCW, PLTDSLC2, PLTDSIMG, PLTCDPAL, PLTDSAAL, PLTDSPLT, PLTDSALK, PLTDSFLW, PLTDSNUM, PLTDSALF, PLTDSNIV, WEBDSIMP, WEBDSCND, cssTmp, cont)
 
                 If Not Request("id") Is Nothing Then
                     txtCodiNode.Text = Request("id").ToString()
