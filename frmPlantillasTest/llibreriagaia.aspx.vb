@@ -6540,6 +6540,8 @@ Public Class GAIA
                                 arrayLCW = LCW.Split(",")
 
                             End If
+                            estructura = PosoLlibreriaDeCodiWeb(objConn, estructura, arrayLCW, plantilla, idioma, rel, relIni, codiUsuari, tagsMeta)
+
                         Case "node web"
                             'Busco la relacio
                             'DS2 = New DataSet()
@@ -6597,6 +6599,7 @@ Public Class GAIA
                                 LCW = dbRow("NWEDSLCW")
                                 arrayLCW = LCW.Split(",")
                             End If
+                            estructura = PosoLlibreriaDeCodiWeb(objConn, estructura, arrayLCW, plantilla, idioma, rel, relIni, codiUsuari, tagsMeta)
 
                         Case "fulla web"
                             'Busco la relacio
@@ -6673,30 +6676,38 @@ Public Class GAIA
 
                                 'Datas? publicació y caducitat
                             End If
+                            estructura = PosoLlibreriaDeCodiWeb(objConn, estructura, arrayLCW, plantilla, idioma, rel, relIni, codiUsuari, tagsMeta)
+
                     End Select
 
                     '*******************************************************************
                     ' POSO LA LLIBRERIA DE CODI WEB 
                     '*******************************************************************                
-                    'Recorro cada cel·la i la represento
-                    arrayEstructura = Split(estructura, "id='d")
-                    'salto el primer element i per cadascun faig el tractament
-                    estructura = arrayEstructura(0)
+                    'Recorro cada div i inserto antes la llibreria 
+                    'estructura = PosoLlibreriaDeCodiWeb(objConn, estructura, arrayLCW, plantilla, idioma, rel, relIni, codiUsuari, tagsMeta)
+                    ''----------------------------------------------------------------------------------------------------
 
-                    For i As Integer = 1 To arrayEstructura.Length - 1
-                        codiWeb = ""
-                        idCel = arrayEstructura(i).Substring(0, InStr(arrayEstructura(i), "'") - 1)
-                        If arrayLCW.Length > i Then
-                            If (arrayLCW(i - 1).Trim().Length > 0) Then
-                                For Each item In arrayLCW(i - 1).Split("|")
-                                    codiWeb &= GAIA.trobaCodiWeb2(objConn, plantilla, item, idioma, rel, relIni, 1, i - 1, "", 0, codiUsuari, "", tagsMeta)
-                                Next item
-                            End If
-                        End If
+                    ''Recorro cada cel·la i la represento
+                    'arrayEstructura = Split(estructura, "id='d")
+                    ''salto el primer element i per cadascun faig el tractament
+                    'estructura = arrayEstructura(0)
 
-                        estructura &= "id='d" & idCel & "'>" & codiWeb & arrayEstructura(i).Substring(InStr(arrayEstructura(i), ">"))
+                    'For i As Integer = 1 To arrayEstructura.Length - 1
+                    '    codiWeb = ""
+                    '    idCel = arrayEstructura(i).Substring(0, InStr(arrayEstructura(i), "'") - 1)
+                    '    If arrayLCW.Length > i Then
+                    '        If (arrayLCW(i - 1).Trim().Length > 0) Then
+                    '            For Each item In arrayLCW(i - 1).Split("|")
+                    '                codiWeb &= GAIA.trobaCodiWeb2(objConn, plantilla, item, idioma, rel, relIni, 1, i - 1, "", 0, codiUsuari, "", tagsMeta)
+                    '            Next item
+                    '        End If
+                    '    End If
 
-                    Next
+                    '    estructura &= "id='d" & idCel & "'>" & codiWeb & arrayEstructura(i).Substring(InStr(arrayEstructura(i), ">"))
+
+                    'Next
+
+                    '------------------------------------------------------------------------------------------------------
 
                     If cont = 0 Then
                         html = estructura
@@ -6749,6 +6760,32 @@ Public Class GAIA
         End If  'heredar propiedades
 
     End Function 'maquetarHTML
+
+    Private Shared Function PosoLlibreriaDeCodiWeb(ByVal objConn As OleDbConnection, ByRef estructura As String, ByRef arrayLCW As String(), ByVal plantilla As clsPlantilla2, ByVal idioma As Integer, ByVal rel As clsRelacio, ByVal relIni As clsRelacio, ByVal codiUsuari As Integer, ByVal tagsmeta As String) As String
+
+        Dim arrayDiv() As String = Split(estructura, "<div", , CompareMethod.Text)
+        Dim codiWeb As String = ""
+        Dim Resultado As String = ""
+
+        'a partir de aqui inserta las llibrerias
+        For i As Integer = 1 To arrayDiv.Length - 1
+            codiWeb = ""
+
+            If arrayLCW.Length > i Then
+                If (arrayLCW(i - 1).Trim().Length > 0) Then
+                    For Each item In arrayLCW(i - 1).Split("|")
+                        codiWeb &= GAIA.trobaCodiWeb2(objConn, plantilla, item, idioma, rel, relIni, 1, i - 1, "", 0, codiUsuari, "", tagsmeta)
+                    Next item
+                End If
+            End If
+
+            Resultado &= codiWeb + "<div" + arrayDiv(i)
+
+        Next
+
+        Return Resultado
+
+    End Function
 
     'N
     Public Shared Function maquetarPlantilla(ByVal objConn As OleDbConnection, ByVal plantilla As clsPlantilla2, ByVal rel As clsRelacio, ByVal idioma As Integer, ByVal relIni As clsRelacio, ByVal dataSimulacio As DateTime, ByVal codiUsuari As Integer, ByRef llistaDocuments As String(), ByRef urlDesti As String, ByVal fdesti As String, ByVal publicar As Integer, ByVal esEML As String, ByVal tagsMeta As String) As String

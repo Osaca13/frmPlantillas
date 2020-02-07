@@ -22,17 +22,7 @@
 	  <link href="https://cdn.jsdelivr.net/gh/coliff/bootstrap-ie8/css/bootstrap-ie8.min.css" rel="stylesheet">
 <![endif]-->
 <title>Estructura web</title>
-    <style>        
-        .displayed {
-            display:list-item;
-           
-        }
-        .nodisplayed{
-            display:none;
-        }
-        
-        }
-    </style>
+    
 </head>
        
 <body onLoad="document.getElementById('divMain').style.visibility='visible';
@@ -119,8 +109,8 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-4 col-form-label-sm text-right nodisplayed" for="plantillesPH" id="trPlantilla1">Plantilla a utilizar:</label>	
-                    <div class="col nodisplayed" id="trPlantilla2">
+                    <label class="col-4 col-form-label-sm text-right" for="plantillesPH" id="trPlantilla1">Plantilla a utilizar:</label>	
+                    <div class="col" id="trPlantilla2">
                          <asp:PlaceHolder runat="server" id="plantillesPH"/>
                     </div>
                 </div>
@@ -237,32 +227,34 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script type="text/javascript" >
-     function InicioEst(aPlantilles){
+    function InicioEst() {
+        
       //if (document.getElementById("WEBDSTCO").value != "") {
       //    var arrayTCO = document.getElementById("WEBDSTCO").value.split(",");
           var allDivs = $('div.contenidor').children('div.row');
 
               $(allDivs).each(function (index1) {
-                  var idCel = $(this).children('div.cel');
+                  var allCel = $(this).children('div.cel');
                   console.log('Row  : ' + index1 + $(this).css('background-color'));
 
-                  $(idCel).each(function (index2) {
-                      console.log(' cel : ' + (index2 + 1) * (index1 + 1) + $(this).attr('id'));
-                      var index = (index2 + 1) * (index1 + 1) - 1;
+                  $(allCel).each(function (index2) {
+                      console.log(' cel : ' + $(this).attr('id'));
+                      
                           if ($(this).children('span.atributs') != null) {
                               var spanText = $(this).children('span.atributs').text();
                               var arraySpanText = spanText.split('#');
                               if ((arraySpanText[7] != $('#tipusNode').val()) && (arraySpanText[7] != 54)) {
 
                                   console.log('Tipo de nodo : ' + arraySpanText[7]);
-                                  $(this).disabled = true;
-                                  $(this).css('background-color', 'rgb(238,238,238)');
+                                  $(this).prop("disabled", true);
+                                  $(this).css('background-color', 'rgb(238,238,238)'); //color gris claro
                               }
                               else {
-                                  $(this).disabled = false;
-                                  $(this).css('background-color', 'rgb(255, 255, 255)');
+                                  //div.cel que contiene el tipo de hoja que estoy arrastrando, color blanco
+                                  $(this).prop("disabled", false);
+                                  $(this).css('background-color', 'rgb(255, 255, 255)'); 
                                   $('#ultimaDivisio').val( $(this).attr('id')); 
-                                  $('#ultimaPlantilla').val(aPlantilles[index]);
+                                  $('#ultimaPlantilla').val(arraySpanText[17]);
                               }
                           };
                       
@@ -308,9 +300,9 @@
      //         }
      //         cont++;
      //     }
-           if ($("#ultimaPlantilla").val() != "" && $("#ultimaDivisio").val() != "") {
-              mostrarDesplegable($("#ultimaPlantilla").val(), $("#ultimaDivisio").val());
-              }
+           //if ($("#ultimaPlantilla").val() != "" && $("#ultimaDivisio").val() != "") {
+           //   mostrarDesplegable($("#ultimaPlantilla").val(), $("#ultimaDivisio").val());
+           //   }
       //}
       //else {
           //var ncelda = document.getElementById("txtposicioEstructura").value;
@@ -324,14 +316,11 @@
       //}
 	  }
 
-      function iniPantalla(aPlantilles) {
-	    console.log('Numero de plantilla = ' + $("#trPlantilla2 select").children('option').length);
-        if ($("#trPlantilla2 select").children('option').length > 0 ) 
-	      {            
-            
-			$('#trPlantilla2 > select').addClass('form-control form-control-sm');    
-          }
-          
+      function iniPantalla() {
+	   
+            $('#trPlantilla1').css('visibility', 'hidden');
+            $('#trPlantilla2').css('visibility','hidden' );
+			$('#trPlantilla2 > select').addClass('form-control form-control-sm');   
       }
 
       // aquesta funciï¿½ existeix nomï¿½s per compatibilitat amb frmplantillaV2.asx
@@ -380,28 +369,70 @@
       // GAIA2
       function seleccionaDiv(div) {
          
-		 //marco de color blanco la celda anterior
-          if ($('#ultimaDivisio').val() != "")
-          {
+		 
+           var spanText = $(div).children('span.atributs').text();
+          var arraySpanText = spanText.split('#');
+          var plantilla = arraySpanText[17];
+          var allDivs = $('div.contenidor').find('.row');
+          $(allDivs).each(function () {
+              var allCels = $(this).find('.cel');
 
-              var divId = $(div).css('backgroundColor');
+              $(allCels).each(function () {
 
-			  if (divId != 'rgb(255, 255, 255)')
-			  {
-                   $(div).css({ 'backgroundColor': 'rgb(255, 255, 255)' });
-                  $('#trPlantilla1').hide();
-                  $('#trPlantilla2').hide();
+                  if (($(this).attr('id') === div.attr('id'))) {
+
+
+                      if ($(div).css('backgroundColor') != 'rgb(255, 255, 255)') {
+                          $(div).css({ 'backgroundColor': 'rgb(255, 255, 255)' });
+                          var spanText = $(this).children('span.atributs').text();
+                          var arraySpanText = spanText.split('#');
+                          if (plantilla === "") {
+                               $('#trPlantilla1').css('visibility','hidden' );
+                               $('#trPlantilla2').css('visibility','hidden');
+                          }
+
+                      }
+                      else {
+                          // marco de color verde la nueva celda y cargo sus valores
+                          $(div).css({ 'backgroundColor': 'rgb(230, 249, 251)' });
+                          mostrarDesplegable(plantilla, div);
+
+                          $("#ultimaDivisio").val(div.attr("id"));
+                          $("#txtposicioEstructura").val(div.attr("id").substring(1, div.attr("id").length));
+                      };
+                  } else {
+                      //marco de color blanco la celda anterior
+                      if ($(this).prop("disabled") == false) {
+                          $(this).css({ 'backgroundColor': 'rgb(255, 255, 255)' });
+                      }                      
+                  }
+              });
+          });
+          
+
+         
+
+     //     if ($('#ultimaDivisio').val() != "")
+     //     {
+
+     //         var divId = $(div).css('backgroundColor');
+
+			  //if (divId != 'rgb(255, 255, 255)')
+			  //{
+     //              $(div).css({ 'backgroundColor': 'rgb(255, 255, 255)' });
+     //             $('#trPlantilla1').css('visibility','hidden' );
+     //             $('#trPlantilla2').css('visibility','hidden' );
 					
-			   } 
-			   else{
-                  // marco de color verde la nueva celda y cargo sus valores
-                      $(div).css({ 'backgroundColor': 'rgb(230, 249, 251)' });
-					  mostrarDesplegable();
+			  // } 
+			  // else{
+     //             // marco de color verde la nueva celda y cargo sus valores
+     //                 $(div).css({ 'backgroundColor': 'rgb(230, 249, 251)' });
+					//  mostrarDesplegable(plantilla, div);
 					  
-                      $("#ultimaDivisio").val(div.attr("id"));
-                      $("#txtposicioEstructura").val( div.attr("id").substring(1, div.attr("id").length));
-                  };  
-          }
+     //                 $("#ultimaDivisio").val(div.attr("id"));
+     //                 $("#txtposicioEstructura").val( div.attr("id").substring(1, div.attr("id").length));
+     //             };  
+     //     }
 		 
 		 
         //  //marco de color blanco la celda anterior
@@ -422,11 +453,26 @@
         //  $("#txtposicioEstructura").val( div.attr("id").substring(1, div.attr("id").length));
       }
 
-      function mostrarDesplegable() {
-         
-          $('#trPlantilla1').show();
-          $('#trPlantilla2').show();
+    function mostrarDesplegable(plantilla, div) {
+
+        if (plantilla != null) {
+
+            var plant = plantilla.split('|');
+              $('#trPlantilla1').css('visibility','visible' );
+              $('#trPlantilla2').css('visibility','visible');
+              var selecciones = $('#trPlantilla2').children('select')
+            $(selecciones).each(function () {
+                console.log('value =' + $(this).attr('id'));
+                var celdaId = div.attr('id');       //el id del div donde se ha clicado
+                var selectId = $(this).attr('id');  //El id del <select> 
+                if (selectId.includes(celdaId)) {
+                    $(this).css('display', '');
+                } else {
+                    $(this).css('display', 'none');
+                }
+              });
         }
+    }
 
       //$.fn.multiline = function (text) {
       //    this.text(text);
@@ -458,7 +504,7 @@
 		  var aPlantilles = (document.getElementById('llistaPlantilles').value).split(",");
           iniPantalla(aPlantilles);
 
-          InicioEst(aPlantilles);
+          InicioEst();
        
       });
     

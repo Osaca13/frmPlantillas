@@ -169,52 +169,52 @@ Public Class estructura
 
         i = 0
         For Each item In aPlantilles
-            GAIA.debug(Nothing, "html :" + html.Length.ToString())
+            ' GAIA.debug(Nothing, "html :" + html.Length.ToString())
             ' GAIA.debug(Nothing, item)
-            item = Replace(item, "|", ",")
-            item = Trim(item)
-            ddlb_plantilla = New DropDownList
+            If i + 1 < html.Length Then
+                item = Replace(item, "|", ",")
+                item = Trim(item)
+                ddlb_plantilla = New DropDownList
 
-            ' GAIA2
-            If esGAIA2Test(objconn, relDesti.infil) Then
-                GAIA.debug(Nothing, "i : " + i.ToString())
-                ddlb_plantilla.ID = "ddlb_plantilla" & html(i + 1).Substring(1, html(i + 1).IndexOf("'", 1) - 1)
+                ' GAIA2
+                If esGAIA2Test(objconn, relDesti.infil) Then
+                    GAIA.debug(Nothing, "i : " + i.ToString())
+                    ddlb_plantilla.ID = "ddlb_plantilla" & html(i + 1).Substring(1, html(i + 1).IndexOf("'", 1) - 1)
+                Else
+                    ddlb_plantilla.ID = "ddlb_plantillat" & i
+                End If
+                If Trim(item & "") <> "" Then
+                    'he vist que a vegades arriba un element amb format  codiplantilla1|codiplantilla2| (amb la barra al final). L'elimino.
+                    If item.Substring(item.Length - 1) = "," Then item = item.Substring(0, item.Length - 1)
 
-            Else
-                ddlb_plantilla.ID = "ddlb_plantillat" & i
-
-            End If
-            If Trim(item & "") <> "" Then
-                'he vist que a vegades arriba un element amb format  codiplantilla1|codiplantilla2| (amb la barra al final). L'elimino.
-                If item.Substring(item.Length - 1) = "," Then item = item.Substring(0, item.Length - 1)
-
-                qSQL = "SELECT PLTINNOD,CAST(PLTDSOBS AS VARCHAR(8000)) AS PLTDSOBS FROM METLPLT WITH(NOLOCK) WHERE PLTINNOD IN (" & item & ")  UNION SELECT PLTINNOD,CAST(PLTDSOBS AS VARCHAR(8000)) AS PLTDSOBS FROM METLPLT2 WITH(NOLOCK) WHERE PLTINNOD IN (" & item & ") "
-                '				gaia.debug(nothing, qsql)
-                GAIA.bdr(objconn, qSQL, ds)
-                If (ds.Tables(0).Rows.Count > 0) Then
-                    ddlb_plantilla.DataSource = ds
-                    ddlb_plantilla.DataTextField = "PLTDSOBS"
-                    ddlb_plantilla.DataValueField = "PLTINNOD"
-                    ddlb_plantilla.DataBind()
-                    If ddlb_plantilla.Items.Count > 1 Then
-                        ddlb_plantilla.Items.Add(New ListItem("Plantilles alternatives", 9))
-                    End If
-                    If Trim(txtPosicioEstructuraReal.Text) <> "" Then
-                        If i = CInt(txtPosicioEstructuraReal.Text) And plantillaActual <> -1 Then
-                            Try
-                                ddlb_plantilla.SelectedValue = plantillaActual
-                            Catch
-                                Debug.WriteLine("selected Value fails")
-
-                            End Try
+                    qSQL = "SELECT PLTINNOD,CAST(PLTDSOBS AS VARCHAR(8000)) AS PLTDSOBS FROM METLPLT WITH(NOLOCK) WHERE PLTINNOD IN (" & item & ")  UNION SELECT PLTINNOD,CAST(PLTDSOBS AS VARCHAR(8000)) AS PLTDSOBS FROM METLPLT2 WITH(NOLOCK) WHERE PLTINNOD IN (" & item & ") "
+                    '				gaia.debug(nothing, qsql)
+                    GAIA.bdr(objconn, qSQL, ds)
+                    If (ds.Tables(0).Rows.Count > 0) Then
+                        ddlb_plantilla.DataSource = ds
+                        ddlb_plantilla.DataTextField = "PLTDSOBS"
+                        ddlb_plantilla.DataValueField = "PLTINNOD"
+                        ddlb_plantilla.DataBind()
+                        If ddlb_plantilla.Items.Count > 1 Then
+                            ddlb_plantilla.Items.Add(New ListItem("Plantilles alternatives", 9))
                         End If
+                        If Trim(txtPosicioEstructuraReal.Text) <> "" Then
+                            If i = CInt(txtPosicioEstructuraReal.Text) And plantillaActual <> -1 Then
+                                Try
+                                    ddlb_plantilla.SelectedValue = plantillaActual
+                                Catch
+                                    Debug.WriteLine("selected Value fails")
+
+                                End Try
+                            End If
+                        End If
+                        plantillesPH.Controls.Add(ddlb_plantilla)
                     End If
-                    plantillesPH.Controls.Add(ddlb_plantilla)
+
                 End If
 
+                i += 1
             End If
-
-            i += 1
         Next item
         ds.Dispose()
     End Sub
@@ -342,7 +342,7 @@ Public Class estructura
 
                     lblTitol.Text = "Estructura de la pàgina web"
 
-                    GAIA.bdr(objconn, "SELECT WEBDSPLA,WEBDSEST,WEBDSATR,WEBDSTVER,WEBDSTHOR,WEBDSDEC,WEBDSPLA,WEBDSTCO FROM METLWEB WITH(NOLOCK) WHERE WEBINNOD=" & nroNodeDesti & " UNION SELECT WEBDSPLA, CAST (WEBDSHTM AS VARCHAR(8000)) AS WEBDSEST,'GAIA2' as WEBDSATR,'0' as WEBDSTVER,'0' as WEBDSTHOR,'' as WEBDSDEC,WEBDSPLA,WEBDSTCO  FROM METLWEB2 WITH(NOLOCK) WHERE WEBINNOD=" & nroNodeDesti, DS)
+                    GAIA.bdr(objconn, "SELECT WEBDSPLA,WEBDSEST,WEBDSATR,WEBDSTVER,WEBDSTHOR,WEBDSDEC,WEBDSPLA,WEBDSTCO, '' AS WEBDSLCW FROM METLWEB WITH(NOLOCK) WHERE WEBINNOD=" & nroNodeDesti & " UNION SELECT WEBDSPLA, CAST (WEBDSHTM AS VARCHAR(8000)) AS WEBDSEST,'GAIA2' as WEBDSATR,'0' as WEBDSTVER,'0' as WEBDSTHOR,'' as WEBDSDEC,WEBDSPLA,WEBDSTCO, WEBDSLCW  FROM METLWEB2 WITH(NOLOCK) WHERE WEBINNOD=" & nroNodeDesti, DS)
                     '						gaia.debug(nothing, "SELECT WEBDSPLA,WEBDSEST,WEBDSATR,WEBDSTVER,WEBDSTHOR,WEBDSDEC,WEBDSPLA,WEBDSTCO FROM METLWEB WITH(NOLOCK) WHERE WEBINNOD=" & nroNodeDesti  & " UNION SELECT WEBDSPLA, CAST (WEBDSEST AS VARCHAR(8000)) AS WEBDSEST,'' as WEBDSATR,0 as WEBDSTVER,0 as WEBDSTHOR,'' as WEBDSDEC,WEBDSPLA,WEBDSTCO  FROM METLWEB2 WITH(NOLOCK) WHERE WEBINNOD=" & nroNodeDesti)				
                     If DS.Tables(0).Rows.Count > 0 Then
                         dbRow = DS.Tables(0).Rows(0)

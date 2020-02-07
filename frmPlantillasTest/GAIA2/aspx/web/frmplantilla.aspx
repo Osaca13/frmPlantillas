@@ -23,7 +23,7 @@
 </head>
 <body>
 <!-- navegacio -->
- <nav class="navbar navbar-dark bg-info navbar-expand-lg">
+  <nav class="navbar navbar-dark bg-info navbar-expand-lg">
  
   <a class="navbar-brand" href="/home.asp"><img src="../../../img/logo_hospinet.png"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#desplegar" aria-controls="desplegar" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,11 +67,11 @@
     <div class="container">         
      
         <form runat="server" id="frm">
-            <asp:textbox  runat="server" id="txtCodiNode" style="display:none"/>
-            <input type="text" runat="server" id="txtEst" style="display:none" />
+            <asp:textbox  runat="server" id="txtCodiNode" style="display: none;"/>
+            <input type="text" runat="server" id="txtEst" style="display: none;" />
             <input type="hidden" runat="server" id="txtEstBD" />  
-            <input type="text" runat="server" id="txtAtributs"  style="display:none" />
-            <input type="text" runat="server" id="nroId" style="display:none" />
+            <input type="text" runat="server" id="txtAtributs"  style="display: none;" />
+            <input type="text" runat="server" id="nroId" style="display: none;" />
            
           <div class="row"><div class="col-12"><asp:Label ID="lblResultat" runat="server"/></div></div>
           
@@ -290,7 +290,7 @@
                             <div class="col-md-3 col-sm-12">
                                 <div class="form-group m-0">
                                     <h6 class="font-weight-bold" id="nomCel">NOM:</h6>                                    
-                                    <input type="text" class="form-control form-control-sm m-0" id="txtNomCel" placeholder="Nom cel&middot;la"/><input type="text" id="txtIdCel" style="display:none" value="0"/>
+                                    <input type="text" class="form-control form-control-sm m-0" id="txtNomCel" placeholder="Nom cel&middot;la"/><input type="text" id="txtIdCel" style="display: none;" value="0"/>
                                 </div> 
                             </div>
                         </div>
@@ -301,7 +301,7 @@
                     <hr>
                     <div class="card-body text-center pt-0">
                     	<button type="button" class="btn btn-sm btn-success" id="btnModificarDades">Modificar</button>
-                        <button type="button" class="btn btn-sm btn-success" id="btnModificarDadesCel" style="display:none;">Modificar columna</button>
+                        <button type="button" class="btn btn-sm btn-success" id="btnModificarDadesCel" style="display: none;;">Modificar columna</button>
                         <button type="button" class="btn btn-sm btn-danger" id="btnEsborrarCel">Esborrar</button>   
                         <button type="button" class="btn btn-sm btn-info" id="btnCopiar">Copiar estructura</button>     
                     </div>
@@ -892,15 +892,30 @@ $(function () {
 <script>
     $(document).ready(function () {
         var element;
-        var nroId = parseInt($("#nroId").val())
+        var arr =  AppendToArray();
+        var nroId = parseInt($("#nroId").val());       
+
+        function AppendToArray() {
+            var arr0 = jQuery.makeArray();
+            $(arr0).push($("input#txtIdCel"));
+            $(arr0).push($("input#txtNomCel"));
+            return arr0;
+        }
+
+        $("input#txtIdCel").on("change", function () {
+            var allDivs = $('#htmlEst').find('div');
+           $("#btnModificarDadesCel").click();
+        });  
+
+         $("input#txtNomCel").on("change", function () {
+            var allDivs = $('#htmlEst').find('div');
+           $("#btnModificarDadesCel").click();
+        });
 
         $("div").on("click",".cel", function () {
             //gravo canvis en la cel·la actual
             element = $(this);
-            if ($(this).css('background-color') != 'rgba(0, 0, 0, 0)') {
-               $("#btnModificarDades").click();
-            }
-           
+            
 
             //carrego dades en la cel·la nova
             var strAtr = "";
@@ -915,9 +930,11 @@ $(function () {
             //carrego els camps d'atributs de cel·les
             strAtr = element.find("span.atributs").text();
             var arrAtr = strAtr.substring(0, strAtr.length - 1).split("#");
-
+            
             $("#txtIdCel").val(arrAtr[0]);
+            
             $("#txtNomCel").val(arrAtr[1]);
+            
             DadesMides(arrAtr)
             //continguts
             $("#lstTipusFulla").val(arrAtr[7]);
@@ -965,10 +982,7 @@ $(function () {
         $("#htmlEst > div").on("click",".row", function () {
             // gravo els cambis
             element = $(this);
-            if ($(this).css('background-color') != 'rgba(0, 0, 0, 0)') {
-               $("#btnModificarDades").click();
-            }
-
+            
             //carrego dades en la cel·la nova
             var strAtr = "";
             $("div").removeClass("contenidorActiu");
@@ -976,8 +990,6 @@ $(function () {
             $("div").removeClass("celActiva");
 
             $(this).addClass("rowActiva");
-
-            element = $(this);
 
             //carrego els camps d'atributs de cel·les
             strAtr = element.find("span.rowAtributs").text();
@@ -1055,21 +1067,15 @@ $(function () {
 
                 //$("div#htmlEst").on("click", ".contenidor", function () {
 
-        $("#htmlEst > div").on("click",".contenidor", function (div) {
+        $('#htmlEst').children('.contenidor').on("click", function () {
             // gravo els cambis
            element = $(this);
-            if ($(this).css('background-color') != 'rgba(0, 0, 0, 0)') {
-               $("#btnModificarDades").click();
-            }
-
-
-            $(div).removeClass("contenidorActiu");
-            $(div).removeClass("rowActiva");
-            $(div).removeClass("celActiva");
+            
+            $('div').removeClass("contenidorActiu");
+            $('div').removeClass("rowActiva");
+            $('div').removeClass("celActiva");
 
             $(this).addClass("contenidorActiu");
-
-            element = $(this);
 
             //carrego els camps d'atributs de cel·les
             strAtr = element.find("span.contenidorAtributs").text();
@@ -1087,7 +1093,7 @@ $(function () {
             var texto = "";
             if (!jQuery.isEmptyObject(element)) {
                 nroId++;
-                element.parents(".contenidor").before("<div class='contenidor border border-secondary p-2 pr-4 pl-4'><span class='contenidorAtributs' style='display:none'>#################################################################|</span><div class='row border border-secondary p-2'><span class='rowAtributs' style='display:none'>#################################################################|</span><div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display:none'>" + nroId + "#cel################################################################|</span></div></div></div>");
+                element.parents(".contenidor").before("<div class='contenidor border border-secondary p-2 pr-4 pl-4'><span class='contenidorAtributs' style='display: none;'>#################################################################|</span><div class='row border border-secondary p-2'><span class='rowAtributs' style='display: none;'>#################################################################|</span><div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display: none;'>" + nroId + "#cel################################################################|</span></div></div></div>");
                 
             }
             //guardo els canvis 
@@ -1101,7 +1107,7 @@ $(function () {
             if (!jQuery.isEmptyObject(element)) {
 
                 nroId++;
-                element.parents(".contenidor").after("<div class='contenidor border border-secondary p-2 pr-4 pl-4'><span class='contenidorAtributs' style='display:none'>#################################################################|</span><div class='row border border-secondary p-2'><span class='rowAtributs' style='display:none'>#################################################################|</span><div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display:none'>" + nroId + "#cel################################################################|</span></div></div></div>");
+                element.parents(".contenidor").after("<div class='contenidor border border-secondary p-2 pr-4 pl-4'><span class='contenidorAtributs' style='display: none;'>#################################################################|</span><div class='row border border-secondary p-2'><span class='rowAtributs' style='display: none;'>#################################################################|</span><div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display: none;'>" + nroId + "#cel################################################################|</span></div></div></div>");
                 
             }
             //guardo els canvis 
@@ -1114,7 +1120,7 @@ $(function () {
 
             if (!jQuery.isEmptyObject(element)) {
                 nroId++;
-                element.parent(".row").before("<div class='row border border-secondary p-2'><span class='rowAtributs' style='display:none'>#################################################################|</span><div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display:none'>" + nroId + "#cel################################################################|</span></div></div>");
+                element.parent(".row").before("<div class='row border border-secondary p-2'><span class='rowAtributs' style='display: none;'>#################################################################|</span><div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display: none;'>" + nroId + "#cel################################################################|</span></div></div>");
 
             }
             //guardo els canvis 
@@ -1127,7 +1133,7 @@ $(function () {
 
             if (!jQuery.isEmptyObject(element)) {
                 nroId++;
-                element.parent(".row").after("<div class='row border border-secondary p-2'><span class='rowAtributs' style='display:none'>#################################################################|</span><div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display:none'>" + nroId + "#cel################################################################|</span></div></div>");
+                element.parent(".row").after("<div class='row border border-secondary p-2'><span class='rowAtributs' style='display: none;'>#################################################################|</span><div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display: none;'>" + nroId + "#cel################################################################|</span></div></div>");
             }
             //guardo els canvis 		
             $("#txtEst").val($("#htmlEst").html());
@@ -1141,7 +1147,7 @@ $(function () {
             if (!jQuery.isEmptyObject(element)) {
                 nroId++;
                 var tmp = element.wrap("<p/>").parent().html().trim();
-                element.parent().html("<div class='col'><div class='row border border-secondary p-2'><span class='rowAtributs' style='display:none'>#################################################################|</span>" + tmp + "</div><div class='row border border-secondary p-2'><span class='rowAtributs' style='display:none'>#################################################################|</span><div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display:none'>" + nroId + "#cel################################################################|</span></div></div></div>")
+                element.parent().html("<div class='col'><div class='row border border-secondary p-2'><span class='rowAtributs' style='display: none;'>#################################################################|</span>" + tmp + "</div><div class='row border border-secondary p-2'><span class='rowAtributs' style='display: none;'>#################################################################|</span><div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display: none;'>" + nroId + "#cel################################################################|</span></div></div></div>")
                 $("#htmlEst p").replaceWith(function () { return $(this).contents(); });
             }
             //guardo els canvis 		
@@ -1157,7 +1163,7 @@ $(function () {
             if (!jQuery.isEmptyObject(element)) {
                 nroId++;
                 var tmp = element.wrap("<p/>").parent().html().trim();
-                element.parent().html("<div class='col'><div class='row border border-secondary p-2'><span class='rowAtributs' style='display:none'>#################################################################|</span><div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display:none'>" + nroId + "#cel##########################|</span></div></div><div class='row border border-secondary p-2'><span class='rowAtributs' style='display:none'>#################################################################|</span>" + tmp + "</div></div>")
+                element.parent().html("<div class='col'><div class='row border border-secondary p-2'><span class='rowAtributs' style='display: none;'>#################################################################|</span><div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display: none;'>" + nroId + "#cel##########################|</span></div></div><div class='row border border-secondary p-2'><span class='rowAtributs' style='display: none;'>#################################################################|</span>" + tmp + "</div></div>")
                 $("#htmlEst p").replaceWith(function () { return $(this).contents(); });
             }
             //guardo els canvis 		
@@ -1173,7 +1179,7 @@ $(function () {
             if (!jQuery.isEmptyObject(element)) {
                 nroId++;
                 if (element.attr("class").indexOf('col') > -1) {
-                    element.before("<div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display:none'>" + nroId + "#cel################################################################|</span></div>");
+                    element.before("<div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display: none;'>" + nroId + "#cel################################################################|</span></div>");
                 }
                 else {
                     $("#lblResultat").html("<div class='alert alert-dismissible alert-success mt-2 mb-2'><button type='button' class='close' data-dismiss='alert'>x</button>Per inserir columnes cal seleccionar una columna</div>");
@@ -1191,7 +1197,7 @@ $(function () {
             if (!jQuery.isEmptyObject(element)) {
                 nroId++;
                 if (element.attr("class").indexOf('col') > -1) {
-                    element.after("<div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display:none'>" + nroId + "#cel################################################################|</span></div>");
+                    element.after("<div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display: none;'>" + nroId + "#cel################################################################|</span></div>");
                 }
                 else {
                     $("#lblResultat").html("<div class='alert alert-dismissible alert-success mt-2 mb-2'><button type='button' class='close' data-dismiss='alert'>x</button>Per inserir columnes cal seleccionar una columna</div>");
@@ -1245,8 +1251,8 @@ $(function () {
         $("#btnModificarDadesCel").click(function () {
 
             var strAtr = "";
-            debugger;
-            var contadorMides = 0;
+            
+            //var contadorMides = 0;
 
             if (!jQuery.isEmptyObject(element)) {
                 element.find("span.text").text($("#txtNomCel").val());
@@ -1257,11 +1263,11 @@ $(function () {
                 element.addClass("cel celActiva border border-secondary p-2");
                 //afegeixo les classes de bootstrap
 
-                strAtr += DadesComunsMides(strAtr, element);
+                strAtr = DadesComunsMides(strAtr, element);
 
-                if (contadorMides == 0) {
+                //if (contadorMides == 0) {
                     element.addClass("col");
-                }
+                //}
 
                 strAtr += "#";
                 if ($("#lstTipusFulla").val() != null) {
@@ -1286,7 +1292,7 @@ $(function () {
                     strAtr += $("#ddlPLTDSIMG").val().trim(); //12
                 }
 
-                strAtr += DadesComunsLlibrerias(strAtr);
+                strAtr = DadesComunsLlibrerias(strAtr);
 
                
 
@@ -1332,7 +1338,7 @@ $(function () {
                 strAtr += "#";
                 strAtr += $("#chkWEBDSCND").is(":checked"); //27
 
-                strAtr += DadesComunsEstils(strAtr, element);
+                strAtr = DadesComunsEstils(strAtr, element);
 
                 modificaIcona(element);
                 //afegeixo els atributs a l'array de propietats
@@ -1357,7 +1363,7 @@ $(function () {
                     ModificarDadesRow();
 
                 }
-                                    //else if (element.attr("class").indexOf('contenidor') > -1) {
+                 //else if (element.attr("class").indexOf('contenidor') > -1) {
 
                 else if (element.hasClass('contenidor')) {
                     ModificarDadesContenidor();
@@ -1439,7 +1445,7 @@ $(function () {
 
             strAtr += "#";
             if ($("#ddlXs").val() != '') {
-                contadorMides++;
+            //    contadorMides++;
                 if ($("#ddlXs").val() != 'Tot') {
                     element.addClass("col-xs-" + $("#ddlXs").val());
                     strAtr += $("#ddlXs").val()  //#3
@@ -1452,7 +1458,7 @@ $(function () {
             }
             strAtr += "#";
             if ($("#ddlSm").val() != '') {
-                contadorMides++;
+             //   contadorMides++;
                 if ($("#ddlSm").val() != 'Tot') {
                     element.addClass("col-sm-" + $("#ddlSm").val());
                     strAtr += $("#ddlSm").val() //4
@@ -1464,7 +1470,7 @@ $(function () {
             }
             strAtr += "#";
             if ($("#ddlMd").val() != '') {
-                contadorMides++;
+              //  contadorMides++;
                 if ($("#ddlMd").val() != 'Tot') {
                     element.addClass("col-md-" + $("#ddlMd").val());
                     strAtr += $("#ddlMd").val() //5
@@ -1476,7 +1482,7 @@ $(function () {
             }
             strAtr += "#";
             if ($("#ddlLg").val() != '') {
-                contadorMides++;
+              //  contadorMides++;
                 if ($("#ddlLg").val() != 'Tot') {
                     element.addClass("col-lg-" + $("#ddlLg").val());
                     strAtr += $("#ddlLg").val() //6
@@ -1488,7 +1494,7 @@ $(function () {
             }
             strAtr += "#";
             if ($("#ddlXl").val() != '') {
-                contadorMides++;
+              //  contadorMides++;
                 if ($("#ddlXl").val() != 'Tot') {
                     element.addClass("col-xl-" + $("#ddlXl").val());
                     strAtr += $("#ddlXl").val() //7
@@ -1811,18 +1817,30 @@ $(function () {
 		//ho tracto en divEst i ho envio a txtEst, que és el camp que arribar&agrave; a l'vb
 		$("#divEst").html($("#htmlEst").html());	
       
-		// guardo els atributs
-        $("#divEst").find("span.contenidorAtributs").each(function(index,elem){			
-            atributs += $(this).html();
+        // guardo els atributs
+            var div = $("#divEst").find('div.contenidor');
+
+            $.each(div, function (index, value) {
+                atributs += 'Contenidor:';
+                console.log(index + ": " + value);
+                atributs += $(this).find("span.contenidorAtributs").html();
             
+                var fila = $(this).children('div.row');
+
+                $.each(fila, function (index, value) {
+                console.log( index + ": " + value );
+                atributs += 'Row:';
+                atributs += $(this).find("span.rowAtributs").html();
+
+                $(this).children('div.cel').each(function (index, value) {
+                    console.log( index + ": " + value );
+                    atributs += 'Cel:';
+                    atributs += $(this).find("span.atributs").html();
+		        });	            
+		    });	            
         });	
-        $("#divEst").find("span.rowAtributs").each(function(index,elem){			
-            atributs += $(this).html();
-            
-		});	
-		$("#divEst").find("span.atributs").each(function(index,elem){			
-			atributs += $(this).html();
-		});		
+       
+			
 		$("#txtAtributs").val(atributs);
 
 		$("#divEst").find("span").remove();

@@ -32,7 +32,7 @@
 	font-size: 9pt;
 	color: black;
 	background-color: #FF8080;
-	cursor: hand;
+	cursor:grab;
 }
 .unnamed1 {
 	border: 10px outset;

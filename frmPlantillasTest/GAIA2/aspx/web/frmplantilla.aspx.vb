@@ -722,8 +722,8 @@ Public Class frmplantilla
         PLTDSHTM = txtEstBD.Value.Replace("celActiva", "").Replace("rowActiva", "").Replace("contenidorActiu", "")
 
         PLTDSEST = txtEst.Value.Replace("""", "'").Replace("''", "'").Replace("'", "''")
-        GAIA.debug(Nothing, "plantillaHTM=" & PLTDSHTM)
-        GAIA.debug(Nothing, "todosAtributos=" & txtAtributs.Value.ToString())
+        'GAIA.debug(Nothing, "plantillaHTM=" & PLTDSHTM)
+        'GAIA.debug(Nothing, "todosAtributos=" & txtAtributs.Value.ToString())
         'GAIA.debug(nothing, "despres=" & PLTDSEST)
         Dim cssTmp As String = ""
         Dim cont As Integer = 0
@@ -868,68 +868,90 @@ Public Class frmplantilla
     Private Sub LeerAtributos(ByRef arrCel() As String, ByRef PLTDSCMP As String, ByRef PLTDSLNK As String, ByRef PLTDSALT As String, ByRef PLTDSCSS As String, ByRef PLTDSTCO As String, ByRef PLTDSLCW As String, ByRef PLTDSLC2 As String, ByRef PLTDSIMG As String, ByRef PLTCDPAL As String, ByRef PLTDSAAL As String, ByRef PLTDSPLT As String, ByRef PLTDSALK As String, ByRef PLTDSFLW As String, ByRef PLTDSNUM As String, ByRef PLTDSALF As String, ByRef PLTDSNIV As String, ByRef WEBDSIMP As String, ByRef WEBDSCND As String, ByRef cssTmp As String, ByRef cont As Integer)
         Dim item() As String
         arrCel = txtAtributs.Value.Split("|")
+
+        'GAIA.debug(Nothing, "txtAtributs=" + txtAtributs.Value.ToString())
         For Each cel As String In arrCel
-            item = cel.Split("#")
+            If Not String.IsNullOrEmpty(cel) Then
+                Dim temp() As String = cel.Split(":")
+                item = temp(1).Split("#")
+                If (item.Length > 1) Then
 
-            If item.Length > 1 Then
-                If cont > 0 Then
-                    PLTDSTCO &= ","
-                    PLTDSCMP &= ","
-                    PLTDSLNK &= ","
-                    PLTDSALT &= "|"
-                    PLTDSIMG &= ","
-                    PLTDSALK &= "|"
-                    PLTDSAAL &= "|"
-                    PLTCDPAL &= ","
-                    PLTDSFLW &= ","
-                    PLTDSNUM &= ","
-                    PLTDSALF &= ","
-                    PLTDSNIV &= ","
-                    PLTDSLCW &= ","
-                    PLTDSLC2 &= ","
-                    PLTDSPLT &= ","
-                    PLTDSCSS &= "|"
-                    WEBDSIMP &= ","
-                    WEBDSCND &= ","
+                    If ((temp(0).ToString() = "Cel")) Then
+
+                        PLTDSTCO &= item(7)
+                        PLTDSTCO &= ","
+                        PLTDSCMP &= item(8)
+                        PLTDSCMP &= ","
+                        PLTDSLNK &= item(9)
+                        PLTDSLNK &= ","
+                        PLTDSALT &= item(10)
+                        PLTDSALT &= "|"
+                        PLTDSIMG &= IIf(item(11) = "", 0, item(11))
+                        PLTDSIMG &= ","
+                        PLTDSFLW &= "0"
+                        PLTDSFLW &= ","
+
+                        PLTDSLCW &= item(13).Replace(",", "|")
+                        PLTDSLCW &= ","
+                        PLTDSLC2 &= item(15).Replace(",", "|")
+                        PLTDSLC2 &= ","
+                        PLTDSPLT &= item(17).Replace(",", "|")
+                        PLTDSPLT &= ","
+                        PLTDSNUM &= IIf(item(18) = "", 0, item(18))
+                        PLTDSNUM &= ","
+                        PLTDSNIV &= item(19)
+                        PLTDSNIV &= ","
+                        PLTDSAAL &= item(20)
+                        PLTDSAAL &= "|"
+                        PLTDSALF &= item(21)
+                        PLTDSALF &= ","
+                        PLTDSALK &= item(22)
+                        PLTDSALK &= "|"
+                        PLTCDPAL &= item(24)
+                        PLTCDPAL &= ","
+
+                        'Camps d'atributs de cel·les de web
+                        WEBDSIMP &= item(25)
+                        WEBDSIMP &= ","
+                        WEBDSCND &= item(26)
+                        WEBDSCND &= ","
+                        'Estils
+                        cssTmp = ""
+                        For i As Integer = 27 To 27
+                            If cssTmp.Length > 0 Then cssTmp &= ","
+                            If item(i).Length > 0 Then cssTmp &= item(i)
+                        Next i
+                        PLTDSCSS &= cssTmp
+                        PLTDSCSS &= "|"
+
+                    Else
+                        PLTDSLCW &= item(13).Replace(",", "|")
+                        PLTDSLCW &= ","
+                        PLTDSLC2 &= item(15).Replace(",", "|")
+                        PLTDSLC2 &= ","
+                    End If
                 End If
-
-                PLTDSTCO &= item(7)
-                PLTDSCMP &= item(8)
-                PLTDSLNK &= item(9)
-                PLTDSALT &= item(10)
-                PLTDSIMG &= IIf(item(11) = "", 0, item(11))
-
-                PLTDSFLW &= "0"
-
-
-
-                PLTDSLCW &= item(13).Replace(",", "|")
-                PLTDSLC2 &= item(15).Replace(",", "|")
-                PLTDSPLT &= item(17).Replace(",", "|")
-                PLTDSNUM &= IIf(item(18) = "", 0, item(18))
-                PLTDSNIV &= item(19)
-
-                PLTDSAAL &= item(20)
-                PLTDSALF &= item(21)
-                PLTDSALK &= item(22)
-                PLTCDPAL &= item(24)
-
-                'Camps d'atributs de cel·les de web
-                WEBDSIMP &= item(25)
-                WEBDSCND &= item(26)
-
-                'Estils
-                cssTmp = ""
-                For i As Integer = 27 To 27
-                    If cssTmp.Length > 0 Then cssTmp &= ","
-                    If item(i).Length > 0 Then cssTmp &= item(i)
-
-                Next i
-                PLTDSCSS &= cssTmp
-
             End If
-            cont += 1
         Next cel
+        PLTDSLCW = PLTDSLCW.Substring(0, PLTDSLCW.Length - 1)
+        PLTDSLC2 = PLTDSLC2.Substring(0, PLTDSLC2.Length - 1)
+        PLTDSCSS = PLTDSCSS.Substring(0, PLTDSCSS.Length - 1)
+        WEBDSIMP = WEBDSIMP.Substring(0, WEBDSIMP.Length - 1)
+        WEBDSCND = WEBDSCND.Substring(0, WEBDSCND.Length - 1)
+        PLTCDPAL = PLTCDPAL.Substring(0, PLTCDPAL.Length - 1)
+        PLTDSALK = PLTDSALK.Substring(0, PLTDSALK.Length - 1)
+        PLTDSALF = PLTDSALF.Substring(0, PLTDSALF.Length - 1)
+        PLTDSTCO = PLTDSTCO.Substring(0, PLTDSTCO.Length - 1)
+        PLTDSCMP = PLTDSCMP.Substring(0, PLTDSCMP.Length - 1)
+        PLTDSALT = PLTDSALT.Substring(0, PLTDSALT.Length - 1)
+        PLTDSIMG = PLTDSIMG.Substring(0, PLTDSIMG.Length - 1)
+        PLTDSLNK = PLTDSLNK.Substring(0, PLTDSLNK.Length - 1)
+        PLTDSFLW = PLTDSFLW.Substring(0, PLTDSFLW.Length - 1)
+        PLTDSPLT = PLTDSPLT.Substring(0, PLTDSPLT.Length - 1)
+        PLTDSNUM = PLTDSNUM.Substring(0, PLTDSNUM.Length - 1)
+        PLTDSNIV = PLTDSNIV.Substring(0, PLTDSNIV.Length - 1)
+        PLTDSAAL = PLTDSAAL.Substring(0, PLTDSAAL.Length - 1)
+
     End Sub
 
     Protected Sub inicialitzaLListaServidors()
