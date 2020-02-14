@@ -142,9 +142,7 @@ Public Class frmplantilla
 
 
         If Request("id") = "" Then
-            'ltEst.Text = "<div class=""contenidor border border-secondary p-2 pr-4 pl-4""><span class=""contenidorAtributs"" style=""display: none;"">###########################|</span><div class=""row border border-secondary p-2""><span class=""rowAtributs"" style=""display:none"">###########################|</span><div class=""col cel border border-secondary p-2"" id=""d0""><span class=""divId"" style=""display:none"">0</span><span class=""divImg""></span><span class=""text"">Cel&middot;la inicial</span><span class=""atributs"" style=""display:none"">0#Cel&middot;la inicial##########################|</span></div></div></div> "
-
-            ltEst.Text = "<section class="" border border-primary flex-container""><span class=""badge"">Section</span> <span class=""sectionAtributs"" style=""display: none;"">#################################################################|</span></section> "
+            ltEst.Text = "<div class=""contenidor border border-secondary p-2 pr-4 pl-4""><span class=""contenidorAtributs"" style=""display:none"">###########################|</span><div class=""row border border-secondary p-2""><span class=""rowAtributs"" style=""display:none"">###########################|</span><div class=""col cel border border-secondary p-2"" id=""d0""><span class=""divId"" style=""display:none"">0</span><span class=""divImg""></span><span class=""text"">Cel&middot;la inicial</span><span class=""atributs"" style=""display:none"">0#Cel&middot;la inicial##########################|</span></div></div></div> "
             txtEst.Value = ltEst.Text
         Else
             Select Case Request("tipus")

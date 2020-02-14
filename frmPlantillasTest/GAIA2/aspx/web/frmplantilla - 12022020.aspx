@@ -1,4 +1,4 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="frmplantilla.aspx.vb" ValidateRequest="false" Inherits="frmPlantillasTest.frmplantilla" Debug="true" EnableEventValidation="false" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="frmplantilla - 12022020.aspx.vb" ValidateRequest="false" Inherits="frmPlantillasTest.frmplantilla" Debug="true" EnableEventValidation="false" %>
 
 <!DOCTYPE html>
 
@@ -9,8 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <!-- Bootstrap CSS -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-<%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">--%>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="../../../Styles/formularisGaia.css">
 <link href="img/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
 <!--[if IE]>
@@ -21,11 +20,6 @@
 	  <link href="https://cdn.jsdelivr.net/gh/coliff/bootstrap-ie8/css/bootstrap-ie8.min.css" rel="stylesheet">
 <![endif]-->
 <title>Plantilla web - GAIA2</title>
-    <style>
-        .activado{
-            background-color: mediumaquamarine;
-        }
-    </style>
 </head>
 <body>
 <!-- navegacio -->
@@ -280,24 +274,6 @@
                             <h6 class="font-weight-bold">CONTENIDORS:</h6>   
                             <button type="button" class="btn btn-primary btn-sm" id="btnAfegirContenidorAbans"><img src="img/fila_abans.png" class="mr-1">Abans</button>
                             <button type="button" class="btn btn-primary btn-sm" id="btnAfegirContenidorDespres"><img src="img/fila_despres.png" class="mr-1">Despr&eacute;s</button>    
-                            </div>
-                            <div class="col-auto ">
-                            <h6 class="font-weight-bold">TIPUS DE ELEMENT:</h6>   
-                            <select class="custom-select btn-sm" id="selectContingut" >
-                             <option></option>
-                             <option value="div">div</option>                            
-                             <option value="row">row</option>
-                             <option value="column">column</option>
-                             <option value="nav">nav</option>
-                             <option value="header">header</option>
-                             <option value="article">article</option>
-                             <option value="aside">aside</option>
-                             <option value="details">details</option>
-                             <option value="footer">footer</option>
-                             <option value="main">main</option>
-                             <option value="summary">summary</option>
-                            </select>
-                            
                             </div>
                             <div class="col-auto ">                           
                             <h6 class="font-weight-bold">FILES:</h6>
@@ -891,13 +867,10 @@
     
 <!-- Optional JavaScript -->    
 <!-- jQuery first, then Tether, then Bootstrap JS. -->   
-<%--<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>--%>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <%--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>--%>
-<%--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>--%>
-<%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>--%>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script>
 $(function () {
   var nua = navigator.userAgent
@@ -989,31 +962,31 @@ $(function () {
 
                 //$("div#htmlEst").on("click", ".row", function () {
 
-        //$('div').on('click', '.row',  function() {
-        //    // gravo els cambis
-        //    element = $(this);
-        //    if ($(this).parents('div#htmlEst').length > 0) {
-        //        element = $(this);
+        $('div').on('click', '.row',  function() {
+            // gravo els cambis
+            element = $(this);
+            if ($(this).parents('div#htmlEst').length > 0) {
+                element = $(this);
             
-        //    //carrego dades en la cel·la nova
-        //        var strAtr = "";
-        //    $("div").removeClass("contenidorActiu");
-        //    $("div").removeClass("rowActiva");
-        //    $("div").removeClass("celActiva");
+            //carrego dades en la cel·la nova
+                var strAtr = "";
+            $("div").removeClass("contenidorActiu");
+            $("div").removeClass("rowActiva");
+            $("div").removeClass("celActiva");
 
-        //    $(element).addClass("rowActiva");
+            $(element).addClass("rowActiva");
 
-        //    //carrego els camps d'atributs de cel·les
-        //    strAtr = element.find("span.rowAtributs").text();
-        //        var arrAtr = strAtr.substring(0, strAtr.length - 1).split("#");
+            //carrego els camps d'atributs de cel·les
+            strAtr = element.find("span.rowAtributs").text();
+                var arrAtr = strAtr.substring(0, strAtr.length - 1).split("#");
 
-        //    DadesMides(arrAtr);
-        //    DadesLlibrerias(arrAtr);
-        //    DadesEstils(arrAtr);
-        //    }
+            DadesMides(arrAtr);
+            DadesLlibrerias(arrAtr);
+            DadesEstils(arrAtr);
+            }
             
-        //    return false;
-        //});
+            return false;
+        });
 
         function DadesLlibrerias(arrAtr) {
             $("#gaiaCodiWebTxt").val(arrAtr[12]);
@@ -1080,123 +1053,52 @@ $(function () {
 
                 //$("div#htmlEst").on("click", ".contenidor", function () {
 
-        //$('div').on('click', '.contenidor', function () {
-        //    // gravo els cambis
-        //    element = $(this);
-        //    if ($(this).parents('div#htmlEst').length > 0) {
-        //        element = $(this).parent('div#htmlEst');
+        $('div').on('click', '.contenidor', function () {
+            // gravo els cambis
+            element = $(this);
+            if ($(this).parents('div#htmlEst').length > 0) {
+                element = $(this).parent('div#htmlEst');
 
-        //        $('div').removeClass("contenidorActiu");
-        //        $('div').removeClass("rowActiva");
-        //        $('div').removeClass("celActiva");
+                $('div').removeClass("contenidorActiu");
+                $('div').removeClass("rowActiva");
+                $('div').removeClass("celActiva");
 
-        //        $(element).addClass("contenidorActiu");
+                $(element).addClass("contenidorActiu");
 
-        //        //carrego els camps d'atributs de cel·les
-        //        strAtr = element.find("span.contenidorAtributs").text();
-        //        var arrAtr = strAtr.substring(0, strAtr.length - 1).split("#");
+                //carrego els camps d'atributs de cel·les
+                strAtr = element.find("span.contenidorAtributs").text();
+                var arrAtr = strAtr.substring(0, strAtr.length - 1).split("#");
 
-        //        DadesMides(arrAtr);
-        //        DadesLlibrerias(arrAtr);
-        //        DadesEstils(arrAtr);
-        //    }
-        //    return false;
-        //});
+                DadesMides(arrAtr);
+                DadesLlibrerias(arrAtr);
+                DadesEstils(arrAtr);
+            }
+            return false;
+        });
 
         $("#btnAfegirContenidorAbans").click(function () {
             //gravo canvis en la cel·la actual
-            //$("#btnModificarDades").click();
-            
-            nroId++;
-
-            switch ($('#selectContingut').children('option:selected').val()) {
-                case "":
-                    alert("Seleccione un elemento");
-                    break;
-                case "row":
-                    var nombre = '<div class="container"><div class = "row border border-primary" onclick = "activado(this)"><span class="badge">row</span> <span class= "rowAtributs" style="display: none;">#################################################################|</span>' +
-                        '</div></div>';
-                    if ($('section').find('.activado').length > 0) {
-                        $('section').find('.activado').append(nombre);
-
-                    } else {
-                        $('section').append(nombre);
-                    }                    
-                    break;
-                case "column":
-                    var nombre = '<div class = "col border border-primary" onclick = "activado(this)"><span class="badge">column</span> <span class= "rowAtributs" style="display: none;">#################################################################|</span>' +
-                        '</div>';
-                    if ($('section').find('.activado').length > 0) {
-                        $('section').find('.activado').append(nombre);
-
-                    } else {
-                        $('section').append(nombre);
-                    }                    
-                    break;
-                case "nav":
-                    var nombre = '<nav class = "navbar navbar-nav border border-secundary" onclick = "activado(this)"> <span class="badge">nav</span> <span class= "navAtributs" style="display: none;">#################################################################|</span></nav>';
-                    $('section').append(nombre);
-                    break;
-                case "header":
-                    var nombre = '<header class = "page-header border border-secundary" onclick = "activado(this)"> <span class="badge">header</span> <span class= "headerAtributs" style="display: none;">#################################################################|</span></header>';
-                    $('section').append(nombre);
-                    break;
-                case "article":
-                    var nombre = '<article class = "border border-secundary" onclick = "activado(this)"> <span class="badge">article</span> <span class= "articleAtributs" style="display: none;">#################################################################|</span></article>';
-                    $('section').append(nombre);
-                    break;
-                case "aside":
-                    var nombre = '<aside class = "border border-secundary col" onclick = "activado(this)"> <span class="badge">aside</span> <span class= "headerAtributs" style="display: none;">#################################################################|</span></aside>';
-                    $('section').append(nombre);
-                    break;
-                case "details":
-                    var nombre = '<details class = "border border-secundary" onclick = "activado(this)"> <span class="badge">details</span> <span class= "detailsAtributs" style="display: none;">#################################################################|</span></details>';
-                    $('section').append(nombre);
-                    break;
-                case "footer":
-                    var nombre = '<footer class = "border border-secundary row" onclick = "activado(this)"> <span class="badge">footer</span> <span class= "footerAtributs" style="display: none;">#################################################################|</span></footer>';
-                    $('section').append(nombre);
-                    break;
-
+            $("#btnModificarDades").click();
+            var texto = "";
+            if (!jQuery.isEmptyObject(element)) {
+                nroId++;
+                element.parents("#htmlEst").prepend("<div class='contenidor border border-secondary p-2 pr-4 pl-4'><span class='contenidorAtributs' style='display: none;'>#################################################################|</span><div class='row border border-secondary p-2'><span class='rowAtributs' style='display: none;'>#################################################################|</span><div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display: none;'>" + nroId + "#cel################################################################|</span></div></div></div>");
+                
             }
-
-
-            //if (jQuery.isEmptyObject()) {
-                
-            // }
-            //else {
-            //    var elementoNuevo = $('#selectContingut').children('option:selected').val();
-
-            //     var nombre = '<' +  elementoNuevo + ' class = "border border-primary" onclick = "activado(this)"> <span class="badge">' + elementoNuevo + '</span> <span class= "'+  elementoNuevo +'Atributs" style="display: none;">#################################################################|</span>' +
-            //         '</' +  elementoNuevo + '>';
-            //    $('section').append(nombre);
-            //    $('section').css('align-items', 'center');
-            //     var cambiaElemento = $('section').find(elementoNuevo);
-            //     $(cambiaElemento).css('margin', '5%');
-            // }         
-                
-            
             //guardo els canvis 
             $("#txtEst").val($("#htmlEst").html());
         });
 
         $("#btnAfegirContenidorDespres").click(function () {
             //gravo canvis en la cel·la actual
-            nroId++;
-            
-             if (jQuery.isEmptyObject( $('#selectContingut').children('option:selected').val())) {
-                 alert("Seleccione un elemento");
-             }
-             else {
-                 var elementoNuevo = $('#selectContingut').children('option:selected').val();
-                 var nombre = '<' + elementoNuevo + ' class = "border border-primary" onclick = "activado(this)"><span class="badge">' + elementoNuevo + '</span> <span class= "'+ elementoNuevo +'Atributs" style="display: none;">#################################################################|</span>' +
-                     '</' +  elementoNuevo + '>';
-                 $('section').append(nombre);
-                 $('section').css('align-items', 'center');
-                 var cambiaElemento = $('section').find(elementoNuevo);
-                 $(cambiaElemento).css('margin', '5%');
+            $("#btnModificarDades").click();
+             var texto = "";
+            if (!jQuery.isEmptyObject(element)) {
 
-             }   
+                nroId++;
+                element.parents("#htmlEst").append("<div class='contenidor border border-secondary p-2 pr-4 pl-4'><span class='contenidorAtributs' style='display: none;'>#################################################################|</span><div class='row border border-secondary p-2'><span class='rowAtributs' style='display: none;'>#################################################################|</span><div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display: none;'>" + nroId + "#cel################################################################|</span></div></div></div>");
+                
+            }
             //guardo els canvis 
             $("#txtEst").val($("#htmlEst").html());
         });
@@ -1893,16 +1795,6 @@ $(function () {
             }
         }
     });
-
-    function activado(element) {
-        $('section').children().each(function () { 
-            if (!$(this).is(element)) {
-              $(this).removeClass('activado');    
-            }                                  
-         });
-        $(element).toggleClass('activado');
-
-     };
 
     function guardar() {
        
