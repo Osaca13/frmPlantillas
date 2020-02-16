@@ -286,8 +286,8 @@
                             <select class="custom-select btn-sm" id="selectContingut" >
                              <option></option>
                              <option value="div">div</option>                            
-                             <option value="row">row</option>
-                             <option value="column">column</option>
+                             <option value="section">section</option>
+                             <%--<option value="column">column</option>--%>
                              <option value="nav">nav</option>
                              <option value="header">header</option>
                              <option value="article">article</option>
@@ -1108,57 +1108,46 @@ $(function () {
             //$("#btnModificarDades").click();
             
             nroId++;
+            if ($('#htmlEst').find('.activado').length > 0) {
+                var element = $('#htmlEst').find('.activado');
 
-            switch ($('#selectContingut').children('option:selected').val()) {
-                case "":
-                    alert("Seleccione un elemento");
-                    break;
-                case "row":
-                    var nombre = '<div class="container"><div class = "row border border-primary" onclick = "activado(this)"><span class="badge">row</span> <span class= "rowAtributs" style="display: none;">#################################################################|</span>' +
-                        '</div></div>';
-                    if ($('section').find('.activado').length > 0) {
-                        $('section').find('.activado').append(nombre);
+                switch ($('#selectContingut').children('option:selected').val()) {
+                    case "":
+                        alert("Seleccione un elemento");
+                        break;
 
-                    } else {
-                        $('section').append(nombre);
-                    }                    
-                    break;
-                case "column":
-                    var nombre = '<div class = "col border border-primary" onclick = "activado(this)"><span class="badge">column</span> <span class= "rowAtributs" style="display: none;">#################################################################|</span>' +
-                        '</div>';
-                    if ($('section').find('.activado').length > 0) {
-                        $('section').find('.activado').append(nombre);
+                    case "section":
+                        var nombre = '<section class = "border   p-2 pr-4 pl-4" onclick = "activado(this)"><span class="badge">section</span> <span class= "sectionAtributs" style="display: none;">#################################################################|</span>' +
+                            '</section>';
+                        $(element).before(nombre);
+                        break;
+                    case "nav":
+                        var nombre = '<nav class = "navbar border  p-2 pr-4 pl-4" onclick = "activado(this)"> <span class="badge">nav</span> <span class= "navAtributs" style="display: none;">#################################################################|</span></nav>';
+                       $(element).before(nombre);
+                        break;
+                    case "header":
+                        var nombre = '<header class = "page-header border   p-2 pr-4 pl-4" onclick = "activado(this)"> <span class="badge">header</span> <span class= "headerAtributs" style="display: none;">#################################################################|</span></header>';
+                        $(element).befgore(nombre);
+                        break;
+                    case "article":
+                        var nombre = '<article class = "border   p-2 pr-4 pl-4" onclick = "activado(this)"> <span class="badge">article</span> <span class= "articleAtributs" style="display: none;">#################################################################|</span></article>';
+                        $(element).before(nombre);
+                        break;
+                    case "aside":
+                        var nombre = '<aside class = "border   p-2  pr-4 pl-4" onclick = "activado(this)"> <span class="badge">aside</span> <span class= "headerAtributs" style="display: none;">#################################################################|</span></aside>';
+                        $(element).before(nombre);
+                        break;
+                    case "details":
+                        var nombre = '<details class = "border   p-2  pr-4 pl-4" onclick = "activado(this)"> <span class="badge">details</span> <span class= "detailsAtributs" style="display: none;">#################################################################|</span></details>';
+                       $(element).before(nombre);
+                        break;
+                    case "footer":
+                        var nombre = '<footer class = "border   p-2 pr-4 pl-4" onclick = "activado(this)"> <span class="badge">footer</span> <span class= "footerAtributs" style="display: none;">#################################################################|</span></footer>';
+                        $(element).before(nombre);
+                        break;
 
-                    } else {
-                        $('section').append(nombre);
-                    }                    
-                    break;
-                case "nav":
-                    var nombre = '<nav class = "navbar navbar-nav border border-secundary" onclick = "activado(this)"> <span class="badge">nav</span> <span class= "navAtributs" style="display: none;">#################################################################|</span></nav>';
-                    $('section').append(nombre);
-                    break;
-                case "header":
-                    var nombre = '<header class = "page-header border border-secundary" onclick = "activado(this)"> <span class="badge">header</span> <span class= "headerAtributs" style="display: none;">#################################################################|</span></header>';
-                    $('section').append(nombre);
-                    break;
-                case "article":
-                    var nombre = '<article class = "border border-secundary" onclick = "activado(this)"> <span class="badge">article</span> <span class= "articleAtributs" style="display: none;">#################################################################|</span></article>';
-                    $('section').append(nombre);
-                    break;
-                case "aside":
-                    var nombre = '<aside class = "border border-secundary col" onclick = "activado(this)"> <span class="badge">aside</span> <span class= "headerAtributs" style="display: none;">#################################################################|</span></aside>';
-                    $('section').append(nombre);
-                    break;
-                case "details":
-                    var nombre = '<details class = "border border-secundary" onclick = "activado(this)"> <span class="badge">details</span> <span class= "detailsAtributs" style="display: none;">#################################################################|</span></details>';
-                    $('section').append(nombre);
-                    break;
-                case "footer":
-                    var nombre = '<footer class = "border border-secundary row" onclick = "activado(this)"> <span class="badge">footer</span> <span class= "footerAtributs" style="display: none;">#################################################################|</span></footer>';
-                    $('section').append(nombre);
-                    break;
-
-            }
+                };
+            };
 
 
             //if (jQuery.isEmptyObject()) {
@@ -1184,19 +1173,60 @@ $(function () {
             //gravo canvis en la cel·la actual
             nroId++;
             
-             if (jQuery.isEmptyObject( $('#selectContingut').children('option:selected').val())) {
-                 alert("Seleccione un elemento");
-             }
-             else {
-                 var elementoNuevo = $('#selectContingut').children('option:selected').val();
-                 var nombre = '<' + elementoNuevo + ' class = "border border-primary" onclick = "activado(this)"><span class="badge">' + elementoNuevo + '</span> <span class= "'+ elementoNuevo +'Atributs" style="display: none;">#################################################################|</span>' +
-                     '</' +  elementoNuevo + '>';
-                 $('section').append(nombre);
-                 $('section').css('align-items', 'center');
-                 var cambiaElemento = $('section').find(elementoNuevo);
-                 $(cambiaElemento).css('margin', '5%');
+             //if (jQuery.isEmptyObject( $('#selectContingut').children('option:selected').val())) {
+             //    alert("Seleccione un elemento");
+             //}
+             //else {
+             //    var elementoNuevo = $('#selectContingut').children('option:selected').val();
+             //    var nombre = '<' + elementoNuevo + ' class = "border border-primary" onclick = "activado(this)"><span class="badge">' + elementoNuevo + '</span> <span class= "'+ elementoNuevo +'Atributs" style="display: none;">#################################################################|</span>' +
+             //        '</' +  elementoNuevo + '>';
+             //    $('section').append(nombre);
+             //    $('section').css('align-items', 'center');
+             //    var cambiaElemento = $('section').find(elementoNuevo);
+             //    $(cambiaElemento).css('margin', '5%');
 
-             }   
+             //}   
+            
+            if ($('#htmlEst').find('.activado').length > 0) {
+                var element = $('#htmlEst').find('.activado');
+
+                switch ($('#selectContingut').children('option:selected').val()) {
+                    case "":
+                        alert("Seleccione un elemento");
+                        break;
+
+                    case "section":
+                        var nombre = '<section class = "border p-2 pr-4 pl-4" onclick = "activado(this)"><span class="badge">section</span> <span class= "sectionAtributs" style="display: none;">#################################################################|</span>' +
+                            '</section>';
+                        $(element).after(nombre);
+                        break;
+                    case "nav":
+                        var nombre = '<nav class = "navbar border  p-2 pr-4 pl-4" onclick = "activado(this)"> <span class="badge">nav</span> <span class= "navAtributs" style="display: none;">#################################################################|</span></nav>';
+                       $(element).after(nombre);
+                        break;
+                    case "header":
+                        var nombre = '<header class = "page-header border  p-2 pr-4 pl-4" onclick = "activado(this)"> <span class="badge">header</span> <span class= "headerAtributs" style="display: none;">#################################################################|</span></header>';
+                        $(element).befgore(nombre);
+                        break;
+                    case "article":
+                        var nombre = '<article class = "border  p-2 pr-4 pl-4" onclick = "activado(this)"> <span class="badge">article</span> <span class= "articleAtributs" style="display: none;">#################################################################|</span></article>';
+                        $(element).after(nombre);
+                        break;
+                    case "aside":
+                        var nombre = '<aside class = "border   p-2" onclick = "activado(this)"> <span class="badge">aside</span> <span class= "headerAtributs" style="display: none;">#################################################################|</span></aside>';
+                        $(element).after(nombre);
+                        break;
+                    case "details":
+                        var nombre = '<details class = "border   p-2" onclick = "activado(this)"> <span class="badge">details</span> <span class= "detailsAtributs" style="display: none;">#################################################################|</span></details>';
+                       $(element).after(nombre);
+                        break;
+                    case "footer":
+                        var nombre = '<footer class = "border   p-2 pr-4 pl-4" onclick = "activado(this)"> <span class="badge">footer</span> <span class= "footerAtributs" style="display: none;">#################################################################|</span></footer>';
+                        $(element).after(nombre);
+                        break;
+
+                };
+            };
             //guardo els canvis 
             $("#txtEst").val($("#htmlEst").html());
         });
@@ -1895,7 +1925,7 @@ $(function () {
     });
 
     function activado(element) {
-        $('section').children().each(function () { 
+        $('#htmlEst').children().each(function () { 
             if (!$(this).is(element)) {
               $(this).removeClass('activado');    
             }                                  
