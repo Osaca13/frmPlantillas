@@ -23,8 +23,13 @@
 <title>Plantilla web - GAIA2</title>
     <style>
         .activado{
-            background-color: mediumaquamarine;
+            
+            background-color: rgb(227, 252, 255);
         }
+        .noactivado{
+            background-color: rgb(255, 255, 255);
+        }
+
     </style>
 </head>
 <body>
@@ -276,41 +281,44 @@
 				<div class="card text-dark mb-3">
                     <div class="card-header">
                     	<div class="row"> 
-                        	<div class="col-auto ">
-                            <h6 class="font-weight-bold">CONTENIDORS:</h6>   
-                            <button type="button" class="btn btn-primary btn-sm" id="btnAfegirContenidorAbans"><img src="img/fila_abans.png" class="mr-1">Abans</button>
-                            <button type="button" class="btn btn-primary btn-sm" id="btnAfegirContenidorDespres"><img src="img/fila_despres.png" class="mr-1">Despr&eacute;s</button>    
+                        	<div class="col-sm-6 ">
+                                <h6 class="font-weight-bold">CONTENIDORS:</h6>   
+                                <button type="button" class="btn btn-primary btn-sm" id="btnAfegirContenidorAbans"><img src="img/fila_abans.png" class="mr-1">Abans</button>
+                                <button type="button" class="btn btn-primary btn-sm" id="btnAfegirContenidorDespres"><img src="img/fila_despres.png" class="mr-1">Despr&eacute;s</button>    
+                                <button type="button" class="btn btn-primary btn-sm" id="btnAfegirContenidorAbansAdins"><img src="img/fila_abans.png" class="mr-1">Abans, a dins</button>
+                                <button type="button" class="btn btn-primary btn-sm" id="btnAfegirContenidorDespresAdins"><img src="img/fila_despres.png" class="mr-1">Despr&eacute;s, a dins</button>
                             </div>
-                            <div class="col-auto ">
-                            <h6 class="font-weight-bold">TIPUS DE ELEMENT:</h6>   
-                            <select class="custom-select btn-sm" id="selectContingut" >
-                             <option></option>
-                             <option value="div">div</option>                            
-                             <option value="section">section</option>
-                             <%--<option value="column">column</option>--%>
-                             <option value="nav">nav</option>
-                             <option value="header">header</option>
-                             <option value="article">article</option>
-                             <option value="aside">aside</option>
-                             <option value="details">details</option>
-                             <option value="footer">footer</option>
-                             <option value="main">main</option>
-                             <option value="summary">summary</option>
-                            </select>
-                            
+                            <div class="col-sm-6 ">
+                                <h6 class="font-weight-bold">TIPUS CONTENIDOR:</h6>   
+                                <select class="custom-select custom-select-sm" id="selectContingut" >
+                                 <option></option>
+                                 <option value="div">div</option>                            
+                                 <option value="section">section</option>
+                                 <%--<option value="column">column</option>--%>
+                                 <option value="nav">nav</option>
+                                 <option value="header">header</option>
+                                 <option value="article">article</option>
+                                 <option value="aside">aside</option>
+                                 <option value="details">details</option>
+                                 <option value="footer">footer</option>
+                                 <option value="main">main</option>
+                                 <option value="summary">summary</option>
+                                </select>
                             </div>
-                            <div class="col-auto ">                           
-                            <h6 class="font-weight-bold">FILES:</h6>
-                            <button type="button" class="btn btn-primary btn-sm" id="btnAfegirFilaAbans"><img src="img/fila_abans.png" class="mr-1">Abans</button>
-                            <button type="button" class="btn btn-primary btn-sm" id="btnAfegirFilaDespres"><img src="img/fila_despres.png" class="mr-1">Despr&eacute;s</button>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6 ">                           
+                            <h6 class="font-weight-bold">FILES:</h6>                            
                             <button type="button" class="btn btn-primary btn-sm" id="btnAfegirFilaDinsAbans"><img src="img/fila_abansdins.png" class="mr-1">Abans, a dins</button>
                             <button type="button" class="btn btn-primary btn-sm" id="btnAfegirFilaDinsDespres"><img src="img/fila_despresdins.png" class="mr-1">Despr&eacute;s, a dins</button>
                             </div>
-                            <div class="col-auto">
+                            <div class="col-sm-6">
                             <h6 class="font-weight-bold">COLUMNES:</h6>
-                            <button type="button" class="btn btn-primary btn-sm" id="btnAfegirColumnaAbans"><img src="img/columna_abans.png" class="mr-1">Abans</button>
-                            <button type="button" class="btn btn-primary btn-sm" id="btnAfegirColumnaDespres"><img src="img/columna_despres.png" class="mr-1">Despr&eacute;s</button>
+                            <button type="button" class="btn btn-primary btn-sm" id="btnAfegirColumnaDinsAbans"><img src="img/columna_abans.png" class="mr-1">Abans, a dins</button>
+                            <button type="button" class="btn btn-primary btn-sm" id="btnAfegirColumnaDinsDespres"><img src="img/columna_despres.png" class="mr-1">Despr&eacute;s, a dins</button>
                             </div>
+                        </div> 
+                        <div class="row">
                             <div class="col-md-3 col-sm-12">
                                 <div class="form-group m-0">
                                     <h6 class="font-weight-bold" id="nomCel">NOM:</h6>                                    
@@ -433,14 +441,7 @@
                             </div>
                         </div>
                     </div>                           
-                </div>                        
-
-
-             
-                
-                
-                
-
+                </div>  
                 
                 <div class="card bg-light mb-4">                	
                 	<div class="card-header">
@@ -1108,14 +1109,27 @@ $(function () {
             //$("#btnModificarDades").click();
             
             nroId++;
-            if ($('#htmlEst').find('.activado').length > 0) {
-                var element = $('#htmlEst').find('.activado');
-                $(element).before(Tipus()); 
-                
-              
+            
+            element = $('#htmlEst').find('*').filter(function () {                
+                if (this.style.backgroundColor == 'rgb(227, 252, 255)') {
+                    return this;
+                }
+            });
+            if (!jQuery.isEmptyObject(element)) {                 
+                $(element).before(Tipus(nroId));   
+                $(element).css('background-color', function () { return 'rgb(255, 255, 255)';}); 
             }else{
                 alert("Active un contenidor");
             };
+
+
+            //if (element.length > 0) {
+            //    var element = $('#htmlEst').find('.activado');
+            //     $(element).after(Tipus());                        
+                
+            //}else{
+            //    alert("Active un contenidor");
+            //};
 
 
             //if (jQuery.isEmptyObject()) {
@@ -1124,7 +1138,7 @@ $(function () {
             //else {
             //    var elementoNuevo = $('#selectContingut').children('option:selected').val();
 
-            //     var nombre = '<' +  elementoNuevo + ' class = "border border-primary" onclick = "activado(this)"> <span class="badge">' + elementoNuevo + '</span> <span class= "'+  elementoNuevo +'Atributs" style="display: none;">#################################################################|</span>' +
+            //     var nombre = '<' +  elementoNuevo + ' class = "border border-primary" onclick = "activado(this)"> <span class="badge-light">' + elementoNuevo + '</span> <span class= "'+  elementoNuevo +'Atributs" style="display: none;">#################################################################|</span>' +
             //         '</' +  elementoNuevo + '>';
             //    $('section').append(nombre);
             //    $('section').css('align-items', 'center');
@@ -1137,42 +1151,63 @@ $(function () {
             $("#txtEst").val($("#htmlEst").html());
         });
 
-       function Tipus(){
+        function RowsAndColumns(type) {
+            var contenidor = ""; 
+            var id = type + $('#htmlEst').find('.' + type).length; 
+            switch (type) {
+                case true, "row":                   
+                    contenidor = '<div class= "row border p-2" id="' + id + '" style="background-color: rgb(255, 255, 255);" >row<span class= "rowAtributs" style="display: none;">#################################################################|</span></div>';                   
+                    break;
+                case "col":                    
+                    contenidor = '<div class= "col border p-2" id="' + id + '" style="background-color: rgb(255, 255, 255);">col<span class= "colAtributs" style="display: none;">#################################################################|</span></div>';                    
+                    break;            
+            };           
+            return contenidor;
+        };
+
+       function Tipus(nroId){
                var nombre = "";
-               var id = "";
+               var id = $('#selectContingut').children('option:selected').val() + nroId;
+               $('#txtNomCel').val(id);
                switch ($('#selectContingut').children('option:selected').val()) {
-                    id = $('#selectContingut').children('option:selected').val() + $('#htmlEst').children().length;
                     case "":
                         alert("Seleccione un elemento");
-                        break;
+                       break;
+                   case "div":
+                       var nombre = '<div class = "container border p-2 pr-4 pl-4" id=' + id + ' >div <span class= "divAtributs" style="display: none;">#################################################################|</span>' +
+                           '</div>';
+                       break;
                     case "section":
-                        var nombre = '<section class = "border   p-2 pr-4 pl-4" onclick = "activado(this)"><span class="badge">section</span> <span class= "sectionAtributs" style="display: none;">#################################################################|</span>' +
-                            '</section>';
-                       
+                        var nombre = '<section class = "container border p-2 pr-4 pl-4" id='+id+' ><span class="badge-light small">section</span> <span class= "sectionAtributs" style="display: none;">#################################################################|</span>' +
+                            '</section>';                       
                         break;
                     case "nav":
-                        var nombre = '<nav class = "navbar border  p-2 pr-4 pl-4" onclick = "activado(this)"> <span class="badge">nav</span> <span class= "navAtributs" style="display: none;">#################################################################|</span></nav>';
+                        var nombre = '<nav class = "container navbar border p-2 pr-4 pl-4" id='+id+' > <span class="badge-light small">nav</span> <span class= "navAtributs" style="display: none;">#################################################################|</span></nav>';
                       
                         break;
                     case "header":
-                        var nombre = '<header class = "page-header border   p-2 pr-4 pl-4" onclick = "activado(this)"> <span class="badge">header</span> <span class= "headerAtributs" style="display: none;">#################################################################|</span></header>';
+                        var nombre = '<header class = "container page-header border p-2 pr-4 pl-4" id='+id+' onclick = "activado(this.id)"> <span class="badge-light small">header</span> <span class= "headerAtributs" style="display: none;">#################################################################|</span></header>';
                       
                         break;
                     case "article":
-                        var nombre = '<article class = "border   p-2 pr-4 pl-4" onclick = "activado(this)"> <span class="badge">article</span> <span class= "articleAtributs" style="display: none;">#################################################################|</span></article>';
+                        var nombre = '<article class = "container col-md-4 border p-2 pr-4 pl-4" id='+id+' onclick = "activado(this.id)"> <span class="badge-light small">article</span> <span class= "articleAtributs" style="display: none;">#################################################################|</span></article>';
                       
                         break;
                     case "aside":
-                        var nombre = '<aside class = "border   p-2  pr-4 pl-4" onclick = "activado(this)"> <span class="badge">aside</span> <span class= "headerAtributs" style="display: none;">#################################################################|</span></aside>';
+                        var nombre = '<aside class = "container col-md-4 border p-2  pr-4 pl-4" id='+id+' onclick = "activado(this.id)"> <span class="badge-light small">aside</span> <span class= "headerAtributs" style="display: none;">#################################################################|</span></aside>';
                    
                         break;
                     case "details":
-                        var nombre = '<details class = "border   p-2  pr-4 pl-4" onclick = "activado(this)"> <span class="badge">details</span> <span class= "detailsAtributs" style="display: none;">#################################################################|</span></details>';
-                   
+                        var nombre = '<details class = "container border p-2  pr-4 pl-4" id='+id+' onclick = "activado(this.id)"> <span class="badge-light small">details</span> <span class= "detailsAtributs" style="display: none;">#################################################################|</span></details>';                   
                         break;
                     case "footer":
-                        var nombre = '<footer class = "border   p-2 pr-4 pl-4" onclick = "activado(this)"> <span class="badge">footer</span> <span class= "footerAtributs" style="display: none;">#################################################################|</span></footer>';
-                      
+                        var nombre = '<footer class = "container border p-2 pr-4 pl-4" id='+id+' onclick = "activado(this.id)"> <span class="badge-light small">footer</span> <span class= "footerAtributs" style="display: none;">#################################################################|</span></footer>';                      
+                       break;
+                   case "main":
+                        var nombre = '<main class = "container border p-2 pr-4 pl-4" id='+id+' onclick = "activado(this.id)"> <span class="badge-light small">main</span> <span class= "footerAtributs" style="display: none;">#################################################################|</span></main>';                      
+                       break;
+                   case "summary":
+                        var nombre = '<summary class = "container border p-2 pr-4 pl-4" id='+id+' onclick = "activado(this.id)"> <span class="badge-light small">summary</span> <span class= "footerAtributs" style="display: none;">#################################################################|</span></summary>';                      
                         break;
                 };
             return nombre;
@@ -1188,7 +1223,7 @@ $(function () {
              //}
              //else {
              //    var elementoNuevo = $('#selectContingut').children('option:selected').val();
-             //    var nombre = '<' + elementoNuevo + ' class = "border border-primary" onclick = "activado(this)"><span class="badge">' + elementoNuevo + '</span> <span class= "'+ elementoNuevo +'Atributs" style="display: none;">#################################################################|</span>' +
+             //    var nombre = '<' + elementoNuevo + ' class = "border border-primary" onclick = "activado(this)"><span class="badge-light">' + elementoNuevo + '</span> <span class= "'+ elementoNuevo +'Atributs" style="display: none;">#################################################################|</span>' +
              //        '</' +  elementoNuevo + '>';
              //    $('section').append(nombre);
              //    $('section').css('align-items', 'center');
@@ -1196,11 +1231,15 @@ $(function () {
              //    $(cambiaElemento).css('margin', '5%');
 
              //}   
-            
-            if ($('#htmlEst').find('.activado').length > 0) {
-                var element = $('#htmlEst').find('.activado');
-                 $(element).after(Tipus());                        
-                };
+            element = $('#htmlEst').find('*').filter(function () {                
+                if (this.style.backgroundColor == 'rgb(227, 252, 255)') {
+                    return this;
+                }
+            });
+
+            if (!jQuery.isEmptyObject(element)) {
+                $(element).after(Tipus( nroId));                        
+                $(element).css('background-color', function () { return 'rgb(255, 255, 255)';}); 
             }else{
                 alert("Active un contenidor");
             };
@@ -1209,111 +1248,251 @@ $(function () {
             $("#txtEst").val($("#htmlEst").html());
         });
 
-        $("#btnAfegirFilaAbans").click(function () {
+        $("#btnAfegirContenidorAbansAdins").click(function () {
+            nroId++;
             //gravo canvis en la cel·la actual
-            $("#btnModificarDades").click();
+            //$("#btnModificarDades").click();
+            element = $('#htmlEst').find('*').filter(function () {                
+                if (this.style.backgroundColor == 'rgb(227, 252, 255)') {
+                    return this;
+                }
+            });
 
             if (!jQuery.isEmptyObject(element)) {
-                nroId++;
-                element.parent(".contenidor").prepend("<div class='row border border-secondary p-2'><span class='rowAtributs' style='display: none;'>#################################################################|</span><div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display: none;'>" + nroId + "#cel################################################################|</span></div></div>");
+                var lastSpan = $(element).children('span').last();
+                $(lastSpan).after(Tipus(nroId));                       
+                $(element).css('background-color', function () { return 'rgb(255, 255, 255)';}); 
+            }else{
+                alert("Active un contenidor");
+            };
 
-            }
+            //if (!jQuery.isEmptyObject(element)) {
+            //    nroId++;
+            //    element.parent(".contenidor").prepend("<div class='row border border-secondary p-2'><span class='rowAtributs' style='display: none;'>#################################################################|</span><div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display: none;'>" + nroId + "#cel################################################################|</span></div></div>");
+
+            //}
             //guardo els canvis 
             $("#txtEst").val($("#htmlEst").html());
         });
 
-        $("#btnAfegirFilaDespres").click(function () {
+        $("#btnAfegirContenidorDespresAdins").click(function () {
+            nroId++;
             //gravo canvis en la cel·la actual
-            $("#btnModificarDadesCel").click();
+            //$("#btnModificarDadesCel").click();
+
+            //if (!jQuery.isEmptyObject(element)) {
+            //    nroId++;
+            //    element.parent(".contenidor").append("<div class='row border border-secondary p-2'><span class='rowAtributs' style='display: none;'>#################################################################|</span><div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display: none;'>" + nroId + "#cel################################################################|</span></div></div>");
+            //}
+            element = $('#htmlEst').find('*').filter(function () {                
+                if (this.style.backgroundColor == 'rgb(227, 252, 255)') {
+                    return this;
+                }
+            });
 
             if (!jQuery.isEmptyObject(element)) {
-                nroId++;
-                element.parent(".contenidor").append("<div class='row border border-secondary p-2'><span class='rowAtributs' style='display: none;'>#################################################################|</span><div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display: none;'>" + nroId + "#cel################################################################|</span></div></div>");
-            }
+                $(element).append(Tipus(nroId));                        
+                 $(element).css('background-color', function () { return 'rgb(255, 255, 255)';}); 
+            }else{
+                alert("Active un contenidor");
+            };
             //guardo els canvis 		
             $("#txtEst").val($("#htmlEst").html());
         });
 
         //afegir fila en el mateix nivell
         $("#btnAfegirFilaDinsDespres").click(function () {
+            nroId++;
             //gravo canvis en la cel·la actual
-            $("#btnModificarDades").click();
+            //$("#btnModificarDades").click();
 
-            if (!jQuery.isEmptyObject(element)) {
-                nroId++;
-                var tmp = element.wrap("<p/>").parent().html().trim();
-                element.parent().html("<div class='col'><div class='row border border-secondary p-2'><span class='rowAtributs' style='display: none;'>#################################################################|</span>" + tmp + "</div><div class='row border border-secondary p-2'><span class='rowAtributs' style='display: none;'>#################################################################|</span><div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display: none;'>" + nroId + "#cel################################################################|</span></div></div></div>")
-                $("#htmlEst p").replaceWith(function () { return $(this).contents(); });
-            }
+            //if (!jQuery.isEmptyObject(element)) {
+            //    nroId++;
+            //    var tmp = element.wrap("<p/>").parent().html().trim();
+            //    element.parent().html("<div class='col'><div class='row border border-secondary p-2'><span class='rowAtributs' style='display: none;'>#################################################################|</span>" + tmp + "</div><div class='row border border-secondary p-2'><span class='rowAtributs' style='display: none;'>#################################################################|</span><div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display: none;'>" + nroId + "#cel################################################################|</span></div></div></div>")
+            //    $("#htmlEst p").replaceWith(function () { return $(this).contents(); });
+            //}
+           element = $('#htmlEst').find('*').filter(function () {                
+                if (this.style.backgroundColor == 'rgb(227, 252, 255)') {
+                   return this;
+                }
+            });
+
+            if (!jQuery.isEmptyObject(element)) {                
+                var elementToInsert = RowsAndColumns('row');
+                $(element).append(elementToInsert); 
+                $(element).css('background-color', function () { return 'rgb(255, 255, 255)';});                              
+            }else{
+                alert("Active un contenidor");
+            };
             //guardo els canvis 		
-            $("#txtEst").val($("#htmlEst").html());
-            element = $(".celActiva")
+            $("#txtEst").val($("#htmlEst").html());            
         });
 
         //afegir fila en el mateix nivell
         $("#btnAfegirFilaDinsAbans").click(function () {
+            nroId++;
             //gravo canvis en la cel·la actual
-            $("#btnModificarDades").click();
+            //$("#btnModificarDades").click();
 
-            if (!jQuery.isEmptyObject(element)) {
-                nroId++;
-                var tmp = element.wrap("<p/>").parent().html().trim();
-                element.parent().html("<div class='col'><div class='row border border-secondary p-2'><span class='rowAtributs' style='display: none;'>#################################################################|</span><div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display: none;'>" + nroId + "#cel##########################|</span></div></div><div class='row border border-secondary p-2'><span class='rowAtributs' style='display: none;'>#################################################################|</span>" + tmp + "</div></div>")
-                $("#htmlEst p").replaceWith(function () { return $(this).contents(); });
-            }
+            //if (!jQuery.isEmptyObject(element)) {
+            //    nroId++;
+            //    var tmp = element.wrap("<p/>").parent().html().trim();
+            //    element.parent().html("<div class='col'><div class='row border border-secondary p-2'><span class='rowAtributs' style='display: none;'>#################################################################|</span><div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display: none;'>" + nroId + "#cel##########################|</span></div></div><div class='row border border-secondary p-2'><span class='rowAtributs' style='display: none;'>#################################################################|</span>" + tmp + "</div></div>")
+            //    $("#htmlEst p").replaceWith(function () { return $(this).contents(); });
+            //}
+            element = $('#htmlEst').find('*').filter(function () {                
+                if (this.style.backgroundColor == 'rgb(227, 252, 255)') {
+                    return this;
+                }
+            });
+              
+            if (!jQuery.isEmptyObject(element)) {                
+                var elementToInsert = RowsAndColumns('row');
+                var lastSpan = $(element).children('span').last();
+                $(lastSpan).after(elementToInsert); 
+              
+                $(element).css('background-color', function () { return 'rgb(255, 255, 255)';});                              
+            }else{
+                alert("Active un contenidor");
+            };
             //guardo els canvis 		
             $("#txtEst").val($("#htmlEst").html());
-            element = $(".celActiva")
+            //element = $(".celActiva")
         });
 
-
-        $("#btnAfegirColumnaAbans").click(function () {
+        $("#btnAfegirColumnaDinsAbans").click(function () {
+            nroId++;
             //gravo canvis en la cel·la actual
-            $("#btnModificarDades").click();
+            //$("#btnModificarDades").click();
 
-            if (!jQuery.isEmptyObject(element)) {
-                nroId++;
-                if (element.attr("class").indexOf('col') > -1) {
-                    element.before("<div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display: none;'>" + nroId + "#cel################################################################|</span></div>");
+            //if (!jQuery.isEmptyObject(element)) {
+            //    nroId++;
+            //    if (element.attr("class").indexOf('col') > -1) {
+            //        element.before("<div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display: none;'>" + nroId + "#cel################################################################|</span></div>");
+            //    }
+            //    else {
+            //        $("#lblResultat").html("<div class='alert alert-dismissible alert-success mt-2 mb-2'><button type='button' class='close' data-dismiss='alert'>x</button>Per inserir columnes cal seleccionar una columna</div>");
+            //    }
+            //}
+
+            element = $('#htmlEst').find('*').filter(function () {                
+                if (this.style.backgroundColor == 'rgb(227, 252, 255)') {
+                    return this;
                 }
-                else {
-                    $("#lblResultat").html("<div class='alert alert-dismissible alert-success mt-2 mb-2'><button type='button' class='close' data-dismiss='alert'>x</button>Per inserir columnes cal seleccionar una columna</div>");
+            });
+
+            if (!jQuery.isEmptyObject(element)) {  
+                var elementToInsert = RowsAndColumns('col');
+                if (element.hasClass('col')) {
+                    $(element).before(elementToInsert);                    
+                } else {
+                    if (element.hasClass('row')) {
+                        var lastSpan = $(element).children('span').last();
+                        $(lastSpan).after(elementToInsert);
+                    } else {
+                        alert('primero inserte una fila');
+                    }
                 }
-            }
+                $(element).css('background-color', function () { return 'rgb(255, 255, 255)'; });                                    
+            }else{
+                alert("Active un contenidor");
+            };
+
+            //if ($('#htmlEst').find('.activado').length > 0) {
+            //     var element = $('#htmlEst').find('.activado');
+            //     var elementToInsert = RowsAndColumns(element, 'col');
+            //     $(element).before(elementToInsert);                        
+                
+            //}else{
+            //    alert("Active un contenidor");
+            //};
             //guardo els canvis 
             $("#txtEst").val($("#htmlEst").html());
         })
 
 
-        $("#btnAfegirColumnaDespres").click(function () {
+        $("#btnAfegirColumnaDinsDespres").click(function () {
+            nroId++;
             //gravo canvis en la cel·la actual
-            $("#btnModificarDades").click();
+            //$("#btnModificarDades").click();
 
-            if (!jQuery.isEmptyObject(element)) {
-                nroId++;
-                if (element.attr("class").indexOf('col') > -1) {
-                    element.after("<div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display: none;'>" + nroId + "#cel################################################################|</span></div>");
+            //if (!jQuery.isEmptyObject(element)) {
+            //    nroId++;
+            //    if (element.attr("class").indexOf('col') > -1) {
+            //        element.after("<div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display: none;'>" + nroId + "#cel################################################################|</span></div>");
+            //    }
+            //    else {
+            //        $("#lblResultat").html("<div class='alert alert-dismissible alert-success mt-2 mb-2'><button type='button' class='close' data-dismiss='alert'>x</button>Per inserir columnes cal seleccionar una columna</div>");
+            //    }
+            //}
+            element = $('#htmlEst').find('*').filter(function () {                
+                if (this.style.backgroundColor == 'rgb(227, 252, 255)') {
+                    return this;
                 }
-                else {
-                    $("#lblResultat").html("<div class='alert alert-dismissible alert-success mt-2 mb-2'><button type='button' class='close' data-dismiss='alert'>x</button>Per inserir columnes cal seleccionar una columna</div>");
+            });
+
+            if (!jQuery.isEmptyObject(element)) {                
+                var elementToInsert = RowsAndColumns('col');
+                if (element.hasClass('col')) {
+                    $(element).after(elementToInsert);                    
+                } else {
+                    if (element.hasClass('row')) {
+                        var lastSpan = $(element).children('span').last();
+                        $(lastSpan).after(elementToInsert);
+                    } else {
+                        alert('primero inserte una fila');
+                    }
                 }
-            }
+                $(element).css('background-color', function () { return 'rgb(255, 255, 255)';});                              
+            }else{
+                alert("Active un contenidor");
+            };
+            // if ($('#htmlEst').find('.activado').length > 0) {
+            //     var element = $('#htmlEst').find('.activado');
+            //     var elementToInsert = RowsAndColumns(element, 'col');
+            //     $(element).after(elementToInsert);                        
+                
+            //}else{
+            //    alert("Active un contenidor");
+            //};
             //guardo els canvis 
             $("#txtEst").val($("#htmlEst").html());
         })
 
         $("#btnEsborrarCel").click(function () {
+            nroId++;
             //gravo canvis en la cel·la actual
-            $("#btnModificarDadesCel").click();
+           // $("#btnModificarDadesCel").click();
 
-            if (!jQuery.isEmptyObject(element)) {
-                if (!jQuery.isEmptyObject(element.siblings("div").html())) {
-                    element.remove();
+            //if (!jQuery.isEmptyObject(element)) {
+            //    if (!jQuery.isEmptyObject(element.siblings("div").html())) {
+            //        element.remove();
+            //    }
+            //    else {
+            //        element.parent().remove();
+            //    }
+            //}
+            element = $('#htmlEst').find('*').filter(function () {                
+                if (this.style.backgroundColor == 'rgb(227, 252, 255)') {
+                    return this;
                 }
-                else {
-                    element.parent().remove();
-                }
-            }
+            });
+            if (!jQuery.isEmptyObject(element)) {                
+               
+                $(element).remove();                          
+            }else{
+                alert("No hay elemento activado");
+            };
+
+            //if ($('#htmlEst').find('.activado').length > 0) {
+            //    var element = $('#htmlEst').find('.activado');
+            //    $(element).remove();                      
+                
+            //}else{
+            //    alert("Active un contenidor");
+            //};
+
             //guardo els canvis 
             $("#txtEst").val($("#htmlEst").html());
         })
@@ -1899,18 +2078,36 @@ $(function () {
             if (icona != "") {
                 element.find("span.divImg").html("<img src='img/" + icona + "'/>");
             }
-        }
+        };    
+
+        document.addEventListener('click', function (event) {
+            element = event.toElement;           
+            if ($(element).parents('#htmlEst').length > 0) {
+                activado($(element).attr('id'));
+                event.stopPropagation();
+                 //$(hijos).css('background-color', 'rgb(255, 255, 255)');
+                var hijos = $(element).find('.row', '.col');
+                $(hijos).css('background-color', 'rgb(255, 255, 255)');
+            };           
+        }, true);
     });
 
     function activado(element) {
-        $('#htmlEst').children().each(function () { 
-            if (!$(this).is(element)) {
-              $(this).removeClass('activado');    
-            }                                  
-         });
-        $(element).toggleClass('activado');
-
-     };
+         
+        $('#htmlEst').find('*').each(function () {
+            if ($(this).attr('id') == element) {
+                if ( $(this).css('background-color') == 'rgb(255, 255, 255)') {
+                    this.style.backgroundColor ='rgb(227, 252, 255)';
+                } else {
+                    this.style.backgroundColor ='rgb(255, 2555, 255)'; 
+                }                
+                $('#selectContingut').children('option').find(this.tagName);
+            } else {
+                this.style.backgroundColor = 'rgb(255, 255, 255)';  
+            }
+        }); 
+          return false;
+     };   
 
     function guardar() {
        
