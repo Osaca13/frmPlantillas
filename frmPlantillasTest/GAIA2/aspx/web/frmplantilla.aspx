@@ -290,11 +290,10 @@
                             </div>
                             <div class="col-sm-6 ">
                                 <h6 class="font-weight-bold">TIPUS CONTENIDOR:</h6>   
-                                <select class="custom-select custom-select-sm" id="selectContingut" >
+                                <select class="custom-select custom-select-sm" id="selectContingut">
                                  <option></option>
                                  <option value="div">div</option>                            
                                  <option value="section">section</option>
-                                 <%--<option value="column">column</option>--%>
                                  <option value="nav">nav</option>
                                  <option value="header">header</option>
                                  <option value="article">article</option>
@@ -307,19 +306,18 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-6 ">                           
+                            <div class="col-sm-4 ">                           
                             <h6 class="font-weight-bold">FILES:</h6>                            
                             <button type="button" class="btn btn-primary btn-sm" id="btnAfegirFilaDinsAbans"><img src="img/fila_abansdins.png" class="mr-1">Abans, a dins</button>
                             <button type="button" class="btn btn-primary btn-sm" id="btnAfegirFilaDinsDespres"><img src="img/fila_despresdins.png" class="mr-1">Despr&eacute;s, a dins</button>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                             <h6 class="font-weight-bold">COLUMNES:</h6>
                             <button type="button" class="btn btn-primary btn-sm" id="btnAfegirColumnaDinsAbans"><img src="img/columna_abans.png" class="mr-1">Abans, a dins</button>
                             <button type="button" class="btn btn-primary btn-sm" id="btnAfegirColumnaDinsDespres"><img src="img/columna_despres.png" class="mr-1">Despr&eacute;s, a dins</button>
                             </div>
-                        </div> 
-                        <div class="row">
-                            <div class="col-md-3 col-sm-12">
+                        
+                            <div class="col-md-3 col-sm-4">
                                 <div class="form-group m-0">
                                     <h6 class="font-weight-bold" id="nomCel">NOM:</h6>                                    
                                     <input type="text" class="form-control form-control-sm m-0" id="txtNomCel" placeholder="Nom cel&middot;la"/><input type="text" id="txtIdCel" style="display: none;" value="0"/>
@@ -333,7 +331,7 @@
                     <hr>
                     <div class="card-body text-center pt-0">
                     	<button type="button" class="btn btn-sm btn-success" id="btnModificarDades">Modificar</button>
-                        <button type="button" class="btn btn-sm btn-success" id="btnModificarDadesCel" style="display: none;;">Modificar columna</button>
+                        <button type="button" class="btn btn-sm btn-success" id="btnModificarDadesCel" style="display: none;">Modificar columna</button>
                         <button type="button" class="btn btn-sm btn-danger" id="btnEsborrarCel">Esborrar</button>   
                         <button type="button" class="btn btn-sm btn-info" id="btnCopiar">Copiar estructura</button>     
                     </div>
@@ -548,11 +546,11 @@
                         <div class="col-4 align-self-start">	
                             <div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="ddlb_648" class="input-group-text">Alineaci&oacute; H.:</label></div>
-                                <asp:DropDownList  ID="ddlb_648"  runat="server" CssClass="custom-select custom-select-sm"></asp:DropDownList>
+                                <asp:DropDownList  ID="ddlb_648"  runat="server" CssClass="custom-select custom-select-sm" multiple="multiple"></asp:DropDownList>
                             </div>
                             <div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="ddlb_636" class="input-group-text">Alineaci&oacute; V.:</label></div>
-                                <asp:DropDownList  ID="ddlb_636"  runat="server" CssClass="custom-select custom-select-sm"></asp:DropDownList>
+                                <asp:DropDownList  ID="ddlb_636"  runat="server" CssClass="custom-select custom-select-sm" multiple="multiple"></asp:DropDownList>
                             </div>
                            
                         </div>
@@ -561,7 +559,7 @@
                         	 	
                             <div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="ddlb_630" class="input-group-text">Flex:</label></div>
-                                <asp:DropDownList  ID="ddlb_630"  runat="server" CssClass="custom-select custom-select-sm"></asp:DropDownList>
+                                <asp:DropDownList  ID="ddlb_630"  runat="server" CssClass="custom-select custom-select-sm" multiple="multiple"></asp:DropDownList>
                             </div>
                             <div class="input-group input-group-sm mr-2 mb-3">
                             	<div class="input-group-prepend"><label for="ddlb_653" class="input-group-text">Alertes:</label></div>
@@ -591,11 +589,11 @@
                         <div class="col-4 align-self-start">
                         	 <div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="ddlb_632" class="input-group-text">Alineaci&oacute; H.:</label></div>
-                                <asp:DropDownList  ID="ddlb_632"  runat="server" CssClass="custom-select custom-select-sm"></asp:DropDownList>
+                                <asp:DropDownList  ID="ddlb_632"  runat="server" CssClass="custom-select custom-select-sm" multiple="multiple"></asp:DropDownList>
                             </div>                             
                             <div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="ddlb_650" class="input-group-text">Alineaci&oacute; V.:</label></div>
-                                <asp:DropDownList  ID="ddlb_650"  runat="server" CssClass="custom-select custom-select-sm"></asp:DropDownList>
+                                <asp:DropDownList  ID="ddlb_650"  runat="server" CssClass="custom-select custom-select-sm" multiple="multiple"></asp:DropDownList>
                             </div>                           
 						</div>
                         
@@ -615,7 +613,7 @@
                         <div class="col-4 align-self-start">  
                         	<div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="ddlb_651" class="input-group-text">Voreres:</label></div>
-                                <asp:DropDownList  ID="ddlb_651"  runat="server" CssClass="custom-select custom-select-sm"></asp:DropDownList>
+                                <asp:DropDownList  ID="ddlb_651"  runat="server" CssClass="custom-select custom-select-sm" multiple="multiple"></asp:DropDownList>
                             </div>                      
                             <div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="ddlb_641" class="input-group-text">Tipus voreres:</label></div>
@@ -624,14 +622,14 @@
                             <asp:placeholder runat="server" id="pnlEstilsDefinits">
                             <div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="ddlb_117" class="input-group-text">Estils definits:</label></div>
-                                <asp:DropDownList ID="ddlb_117" runat="server" CssClass="custom-select custom-select-sm"></asp:DropDownList>
+                                <asp:DropDownList ID="ddlb_117" runat="server" CssClass="custom-select custom-select-sm" multiple="multiple"></asp:DropDownList>
                             </div>
                             </asp:placeholder>
                          </div>
                          <div class="col-4 align-self-start">
                             <div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="ddlb_639" class="input-group-text">Marge exterior:</label></div>
-                                <asp:DropDownList  ID="ddlb_639"  runat="server" CssClass="custom-select custom-select-sm"></asp:DropDownList>
+                                <asp:DropDownList  ID="ddlb_639"  runat="server" CssClass="custom-select custom-select-sm" multiple="multiple"></asp:DropDownList>
                             </div>
                             <div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="ddlb_635" class="input-group-text">Height:</label></div>
@@ -645,11 +643,11 @@
                         <div class="col-4 align-self-start">  
                             <div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="ddlb_631" class="input-group-text">Marge interior:</label></div>
-                                <asp:DropDownList  ID="ddlb_631"  runat="server" CssClass="custom-select custom-select-sm"></asp:DropDownList>
+                                <asp:DropDownList  ID="ddlb_631"  runat="server" CssClass="custom-select custom-select-sm" multiple="multiple"></asp:DropDownList>
                             </div>  
                             <div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="ddlb_634" class="input-group-text">Width:</label></div>
-                                <asp:DropDownList  ID="ddlb_634"  runat="server" CssClass="custom-select custom-select-sm"></asp:DropDownList>
+                                <asp:DropDownList  ID="ddlb_634"  runat="server" CssClass="custom-select custom-select-sm" multiple="multiple"></asp:DropDownList>
                             </div>                                                    
                         </div>
                     </div>
@@ -657,10 +655,6 @@
                	</div>
                 </asp:placeholder>
 
-                
-                
-                
-                
                 <div class="row">
                     <div class="col">
                         <div class="card bg-light mb-4">
@@ -922,99 +916,61 @@ $(function () {
         var element;
        
         var nroId = parseInt($("#nroId").val()); 
-
-        $("div").on("click",".cel", function () {
-            //gravo canvis en la cel·la actual
-            element = $(this);
-            
-
-            //carrego dades en la cel·la nova
-            var strAtr = "";
-            $("div").removeClass("contenidorActiu");
-            $("div").removeClass("rowActiva");
-            $("div").removeClass("celActiva");
-
-            $(this).addClass("celActiva");
-
-            element = $(this);
-
-            //carrego els camps d'atributs de cel·les
-            strAtr = element.find("span.atributs").text();
-            var arrAtr = strAtr.substring(0, strAtr.length - 1).split("#");
-            
-            $("#txtIdCel").val(arrAtr[0]);
-            
-            $("#txtNomCel").val(arrAtr[1]);
-            
-            DadesMides(arrAtr)
-            //continguts
-            $("#lstTipusFulla").val(arrAtr[7]);
-
-            //<asp:Literal runat="server" id="ltCanviCampsDb" />
-
-            $("#ddlPLTDSCMP").val(arrAtr[8]);
-            $("#ddlPLTDSLNK").val(arrAtr[9]);
-            $("#ddlPLTDSALT").val(arrAtr[10]);
-            $("#ddlPLTDSIMG").val(arrAtr[11]);
-            DadesLlibrerias(arrAtr);
-
+        
+       // $("div").on("click",".cel", function () {
+        function readValues(valor) {
            
-            $("#txtPLTDSNUM").val(arrAtr[18]);
-            $("#ddlPLTDSNIV").val(arrAtr[19]);
-            $("#txtPLTDSAAL").val(arrAtr[20]);
-            $("#ddlb_PLTDSALF").val(arrAtr[21]);
-            $("#txtPLTDSALK").val(arrAtr[22]);
-            $("#gaiaPLTCDPALTxt").val(arrAtr[23]);
-            $("#gaiaPLTCDPALNodes").val(arrAtr[24]);
+             var strAtr = "";
+           
+            strAtr = $(valor).find("*").filter(function () { return $(this).css("display") == "none" }).text();
+            if (!jQuery.isEmptyObject(strAtr)) {
 
-            if (arrAtr[25] == "true") {
-                $("#chkWEBDSIMP").attr("checked", true);
-            }
-            else {
-                $("#chkWEBDSIMP").attr("checked", false);
-            }
-            if (arrAtr[26] == "true") {
-                $("#chkWEBDSCND").attr("checked", true);
-            }
-            else {
-                $("#chkWEBDSCND").attr("checked", false);
-            }
+                var arrAtr = strAtr.substring(0, strAtr.length - 1).split("#");
 
-            DadesEstils(arrAtr);
+                $("#txtIdCel").val(arrAtr[0]);
 
+                $("#txtNomCel").val(arrAtr[1]);
+
+                DadesMides(arrAtr)
+                //continguts
+                $("#lstTipusFulla").val(arrAtr[7]);
+
+                //<asp:Literal runat="server" id="ltCanviCampsDb" />
+                $("#ddlPLTDSCMP").val(arrAtr[8]);
+                $("#ddlPLTDSLNK").val(arrAtr[9]);
+                $("#ddlPLTDSALT").val(arrAtr[10]);
+                $("#ddlPLTDSIMG").val(arrAtr[11]);
+                DadesLlibrerias(arrAtr);
+
+                $("#txtPLTDSNUM").val(arrAtr[18]);
+                $("#ddlPLTDSNIV").val(arrAtr[19]);
+                $("#txtPLTDSAAL").val(arrAtr[20]);
+                $("#ddlb_PLTDSALF").val(arrAtr[21]);
+                $("#txtPLTDSALK").val(arrAtr[22]);
+                $("#gaiaPLTCDPALTxt").val(arrAtr[23]);
+                $("#gaiaPLTCDPALNodes").val(arrAtr[24]);
+
+                if (arrAtr[25] == "true") {
+                    $("#chkWEBDSIMP").attr("checked", true);
+                }
+                else {
+                    $("#chkWEBDSIMP").attr("checked", false);
+                }
+                if (arrAtr[26] == "true") {
+                    $("#chkWEBDSCND").attr("checked", true);
+                }
+                else {
+                    $("#chkWEBDSCND").attr("checked", false);
+                }
+
+                DadesEstils(arrAtr);
+
+            }
             var icona = "";
-            modificaIcona(element);
+                modificaIcona(valor);           
 
             return false;
-        });
-
-                //$("div#htmlEst").on("click", ".row", function () {
-
-        //$('div').on('click', '.row',  function() {
-        //    // gravo els cambis
-        //    element = $(this);
-        //    if ($(this).parents('div#htmlEst').length > 0) {
-        //        element = $(this);
-            
-        //    //carrego dades en la cel·la nova
-        //        var strAtr = "";
-        //    $("div").removeClass("contenidorActiu");
-        //    $("div").removeClass("rowActiva");
-        //    $("div").removeClass("celActiva");
-
-        //    $(element).addClass("rowActiva");
-
-        //    //carrego els camps d'atributs de cel·les
-        //    strAtr = element.find("span.rowAtributs").text();
-        //        var arrAtr = strAtr.substring(0, strAtr.length - 1).split("#");
-
-        //    DadesMides(arrAtr);
-        //    DadesLlibrerias(arrAtr);
-        //    DadesEstils(arrAtr);
-        //    }
-            
-        //    return false;
-        //});
+        };
 
         function DadesLlibrerias(arrAtr) {
             $("#gaiaCodiWebTxt").val(arrAtr[12]);
@@ -1023,7 +979,7 @@ $(function () {
             $("#gaiaCodiWeb2Nodes").val(arrAtr[15]);
             $("#gaiaPltSecTxt").val(arrAtr[16]);
             $("#gaiaPltSecNodes").val(arrAtr[17]);
-        }
+        };
 
         function DadesMides(arrAtr) {
             //mides 
@@ -1032,7 +988,7 @@ $(function () {
             $("#ddlMd").val(arrAtr[4]);
             $("#ddlLg").val(arrAtr[5]);
             $("#ddlXl").val(arrAtr[6]);
-        }
+        };
 
         function DadesEstils(arrAtr) {
 
@@ -1076,48 +1032,94 @@ $(function () {
             $("#ddlb_653").val(arrAtr[63]);
             $("#ddlb_654").val(arrAtr[64]);
             $("#ddlb_655").val(arrAtr[65]);
-        }
+        };
 
 
-                //$("div#htmlEst").on("click", ".contenidor", function () {
+        function RowsAndColumns(type) {
+            
+            var contenidor = ""; 
+            var id = type + nroId.toString();
+                // $('#htmlEst').find('.' + type).length; 
+            switch (type) {
+                case true, "row":                   
+                    contenidor = '<div class= "row border border-secondary p-2 " id="' + id + '" style="background-color: rgb(255, 255, 255);"><span class="atributs" style="display: none;">#################################################################|</span></div>';                   
+                    break;
+                case "col":                    
+                    contenidor = '<div class= "col border border-secondary p-2 " id="' + id + '" style="background-color: rgb(255, 255, 255);"><span class="atributs" style="display: none;">#################################################################|</span></div>';                    
+                    break;            
+            };           
+            return contenidor;
+        };
 
-        //$('div').on('click', '.contenidor', function () {
-        //    // gravo els cambis
-        //    element = $(this);
-        //    if ($(this).parents('div#htmlEst').length > 0) {
-        //        element = $(this).parent('div#htmlEst');
-
-        //        $('div').removeClass("contenidorActiu");
-        //        $('div').removeClass("rowActiva");
-        //        $('div').removeClass("celActiva");
-
-        //        $(element).addClass("contenidorActiu");
-
-        //        //carrego els camps d'atributs de cel·les
-        //        strAtr = element.find("span.contenidorAtributs").text();
-        //        var arrAtr = strAtr.substring(0, strAtr.length - 1).split("#");
-
-        //        DadesMides(arrAtr);
-        //        DadesLlibrerias(arrAtr);
-        //        DadesEstils(arrAtr);
-        //    }
-        //    return false;
-        //});
+         function Tipus(nroId){
+               var nombre = "";
+               var id = $('#selectContingut').children('option:selected').val() + nroId;
+              
+               switch ($('#selectContingut').children('option:selected').val()) {
+                    case "":
+                        alert("Seleccione un elemento");
+                       break;
+                   case "div":
+                       var nombre = '<div class = "border border-secondary p-2 pr-4 pl-4" id=' + id + '> <span class="atributs" style="display: none;">#################################################################|</span>' +
+                           '</div>';
+                       break;
+                    case "section":
+                       var nombre = '<section class = "border border-secondary p-2 pr-4 pl-4" id=' + id +'> <span class="atributs" style="display: none;">#################################################################|</span>' +
+                            '</section>';                       
+                        break;
+                    case "nav":
+                       var nombre = '<nav class = "border border-secondary p-2 pr-4 pl-4" id=' + id +'> <span class="atributs" style="display: none;">#################################################################|</span></nav>';
+                      
+                        break;
+                    case "header":
+                       var nombre = '<header class = "border border-secondary p-2 pr-4 pl-4" id=' + id +'><span class="atributs" style="display: none;">#################################################################|</span></header>';
+                      
+                        break;
+                    case "article":
+                       var nombre = '<article class = "border border-secondary p-2 pr-4 pl-4" id=' + id +'> <span class="atributs" style="display: none;">#################################################################|</span></article>';
+                      
+                        break;
+                    case "aside":
+                       var nombre = '<aside class = "border border-secondary p-2 pr-4 pl-4" id=' + id +'> <span class="atributs" style="display: none;">#################################################################|</span></aside>';
+                   
+                        break;
+                    case "details":
+                       var nombre = '<details class = "border border-secondary p-2 pr-4 pl-4" id=' + id +' > <span class="atributs" style="display: none;">#################################################################|</span></details>';                   
+                        break;
+                    case "footer":
+                       var nombre = '<footer class = "border border-secondary p-2 pr-4 pl-4" id=' + id +' > <span class="atributs" style="display: none;">#################################################################|</span></footer>';                      
+                       break;
+                   case "main":
+                       var nombre = '<main class = "border border-secondary p-2 pr-4 pl-4" id=' + id +' > <span class="atributs" style="display: none;">#################################################################|</span></main>';                      
+                       break;
+                   case "summary":
+                       var nombre = '<summary class = "border border-secondary p-2 pr-4 pl-4" id=' + id +'> <span class="atributs" style="display: none;">#################################################################|</span></summary>';                      
+                        break;
+                };
+            return nombre;
+       };
 
         $("#btnAfegirContenidorAbans").click(function () {
             //gravo canvis en la cel·la actual
             //$("#btnModificarDades").click();
             
             nroId++;
-            
+        
             element = $('#htmlEst').find('*').filter(function () {                
                 if (this.style.backgroundColor == 'rgb(227, 252, 255)') {
                     return this;
                 }
             });
-            if (!jQuery.isEmptyObject(element)) {                 
-                $(element).before(Tipus(nroId));   
-                $(element).css('background-color', function () { return 'rgb(255, 255, 255)';}); 
+            if (!jQuery.isEmptyObject(element)) {  
+                var valor = Tipus(nroId);
+                $(element).before(valor);   
+                $(element).css("background-color", "rgb(255, 255, 255)");
+                readValues(valor);
+                var IdValor = $(valor).attr('id');
+                $('#txtIdCel').removeAttr('value');
+                $('#txtIdCel').val(IdValor);
+                $('#'+IdValor).css("background-color", "rgb(227, 252, 255)" );
+                $('#btnModificarDades').click();
             }else{
                 alert("Active un contenidor");
             };
@@ -1149,88 +1151,12 @@ $(function () {
             
             //guardo els canvis 
             $("#txtEst").val($("#htmlEst").html());
-        });
-
-        function RowsAndColumns(type) {
-            var contenidor = ""; 
-            var id = type + $('#htmlEst').find('.' + type).length; 
-            switch (type) {
-                case true, "row":                   
-                    contenidor = '<div class= "row border p-2" id="' + id + '" style="background-color: rgb(255, 255, 255);" >row<span class= "rowAtributs" style="display: none;">#################################################################|</span></div>';                   
-                    break;
-                case "col":                    
-                    contenidor = '<div class= "col border p-2" id="' + id + '" style="background-color: rgb(255, 255, 255);">col<span class= "colAtributs" style="display: none;">#################################################################|</span></div>';                    
-                    break;            
-            };           
-            return contenidor;
-        };
-
-       function Tipus(nroId){
-               var nombre = "";
-               var id = $('#selectContingut').children('option:selected').val() + nroId;
-               $('#txtNomCel').val(id);
-               switch ($('#selectContingut').children('option:selected').val()) {
-                    case "":
-                        alert("Seleccione un elemento");
-                       break;
-                   case "div":
-                       var nombre = '<div class = "container border p-2 pr-4 pl-4" id=' + id + ' >div <span class= "divAtributs" style="display: none;">#################################################################|</span>' +
-                           '</div>';
-                       break;
-                    case "section":
-                        var nombre = '<section class = "container border p-2 pr-4 pl-4" id='+id+' ><span class="badge-light small">section</span> <span class= "sectionAtributs" style="display: none;">#################################################################|</span>' +
-                            '</section>';                       
-                        break;
-                    case "nav":
-                        var nombre = '<nav class = "container navbar border p-2 pr-4 pl-4" id='+id+' > <span class="badge-light small">nav</span> <span class= "navAtributs" style="display: none;">#################################################################|</span></nav>';
-                      
-                        break;
-                    case "header":
-                        var nombre = '<header class = "container page-header border p-2 pr-4 pl-4" id='+id+' onclick = "activado(this.id)"> <span class="badge-light small">header</span> <span class= "headerAtributs" style="display: none;">#################################################################|</span></header>';
-                      
-                        break;
-                    case "article":
-                        var nombre = '<article class = "container col-md-4 border p-2 pr-4 pl-4" id='+id+' onclick = "activado(this.id)"> <span class="badge-light small">article</span> <span class= "articleAtributs" style="display: none;">#################################################################|</span></article>';
-                      
-                        break;
-                    case "aside":
-                        var nombre = '<aside class = "container col-md-4 border p-2  pr-4 pl-4" id='+id+' onclick = "activado(this.id)"> <span class="badge-light small">aside</span> <span class= "headerAtributs" style="display: none;">#################################################################|</span></aside>';
-                   
-                        break;
-                    case "details":
-                        var nombre = '<details class = "container border p-2  pr-4 pl-4" id='+id+' onclick = "activado(this.id)"> <span class="badge-light small">details</span> <span class= "detailsAtributs" style="display: none;">#################################################################|</span></details>';                   
-                        break;
-                    case "footer":
-                        var nombre = '<footer class = "container border p-2 pr-4 pl-4" id='+id+' onclick = "activado(this.id)"> <span class="badge-light small">footer</span> <span class= "footerAtributs" style="display: none;">#################################################################|</span></footer>';                      
-                       break;
-                   case "main":
-                        var nombre = '<main class = "container border p-2 pr-4 pl-4" id='+id+' onclick = "activado(this.id)"> <span class="badge-light small">main</span> <span class= "footerAtributs" style="display: none;">#################################################################|</span></main>';                      
-                       break;
-                   case "summary":
-                        var nombre = '<summary class = "container border p-2 pr-4 pl-4" id='+id+' onclick = "activado(this.id)"> <span class="badge-light small">summary</span> <span class= "footerAtributs" style="display: none;">#################################################################|</span></summary>';                      
-                        break;
-                };
-            return nombre;
-       };
-
+        });             
 
         $("#btnAfegirContenidorDespres").click(function () {
             //gravo canvis en la cel·la actual
-            nroId++;
+            nroId++;          
             
-             //if (jQuery.isEmptyObject( $('#selectContingut').children('option:selected').val())) {
-             //    alert("Seleccione un elemento");
-             //}
-             //else {
-             //    var elementoNuevo = $('#selectContingut').children('option:selected').val();
-             //    var nombre = '<' + elementoNuevo + ' class = "border border-primary" onclick = "activado(this)"><span class="badge-light">' + elementoNuevo + '</span> <span class= "'+ elementoNuevo +'Atributs" style="display: none;">#################################################################|</span>' +
-             //        '</' +  elementoNuevo + '>';
-             //    $('section').append(nombre);
-             //    $('section').css('align-items', 'center');
-             //    var cambiaElemento = $('section').find(elementoNuevo);
-             //    $(cambiaElemento).css('margin', '5%');
-
-             //}   
             element = $('#htmlEst').find('*').filter(function () {                
                 if (this.style.backgroundColor == 'rgb(227, 252, 255)') {
                     return this;
@@ -1238,8 +1164,15 @@ $(function () {
             });
 
             if (!jQuery.isEmptyObject(element)) {
-                $(element).after(Tipus( nroId));                        
-                $(element).css('background-color', function () { return 'rgb(255, 255, 255)';}); 
+                var valor = Tipus(nroId);
+                $(element).after(valor);                        
+                $(element).css('background-color', function () { return 'rgb(255, 255, 255)'; });
+                readValues(valor);
+                var IdValor = $(valor).attr('id');
+                $('#txtIdCel').removeAttr('value');
+                $('#txtIdCel').val(IdValor);
+                $('#'+IdValor).css("background-color", "rgb(227, 252, 255)" );
+                $('#btnModificarDades').click();
             }else{
                 alert("Active un contenidor");
             };
@@ -1260,17 +1193,21 @@ $(function () {
 
             if (!jQuery.isEmptyObject(element)) {
                 var lastSpan = $(element).children('span').last();
-                $(lastSpan).after(Tipus(nroId));                       
-                $(element).css('background-color', function () { return 'rgb(255, 255, 255)';}); 
+                var valor = Tipus(nroId);
+                $(lastSpan).after(valor);                       
+                $(element).css('background-color', function () { return 'rgb(255, 255, 255)'; }); 
+
+                readValues(valor);
+                var IdValor = $(valor).attr('id');
+                $('#txtIdCel').removeAttr('value');
+                $('#txtIdCel').val(IdValor);
+                $('#'+IdValor).css("background-color", "rgb(227, 252, 255)" );
+                $('#btnModificarDades').click();
+                
             }else{
                 alert("Active un contenidor");
             };
 
-            //if (!jQuery.isEmptyObject(element)) {
-            //    nroId++;
-            //    element.parent(".contenidor").prepend("<div class='row border border-secondary p-2'><span class='rowAtributs' style='display: none;'>#################################################################|</span><div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display: none;'>" + nroId + "#cel################################################################|</span></div></div>");
-
-            //}
             //guardo els canvis 
             $("#txtEst").val($("#htmlEst").html());
         });
@@ -1291,8 +1228,15 @@ $(function () {
             });
 
             if (!jQuery.isEmptyObject(element)) {
-                $(element).append(Tipus(nroId));                        
-                 $(element).css('background-color', function () { return 'rgb(255, 255, 255)';}); 
+                var valor = Tipus(nroId);
+                $(element).append(valor);                        
+                $(element).css('background-color', function () { return 'rgb(255, 255, 255)'; }); 
+                readValues(valor);
+                var IdValor = $(valor).attr('id');
+                $('#txtIdCel').removeAttr('value');
+                $('#txtIdCel').val(IdValor);
+                $('#'+IdValor).css("background-color", "rgb(227, 252, 255)" );
+                $('#btnModificarDades').click();
             }else{
                 alert("Active un contenidor");
             };
@@ -1300,18 +1244,11 @@ $(function () {
             $("#txtEst").val($("#htmlEst").html());
         });
 
-        //afegir fila en el mateix nivell
+        //afegir fila en el nivell adins
         $("#btnAfegirFilaDinsDespres").click(function () {
             nroId++;
             //gravo canvis en la cel·la actual
-            //$("#btnModificarDades").click();
-
-            //if (!jQuery.isEmptyObject(element)) {
-            //    nroId++;
-            //    var tmp = element.wrap("<p/>").parent().html().trim();
-            //    element.parent().html("<div class='col'><div class='row border border-secondary p-2'><span class='rowAtributs' style='display: none;'>#################################################################|</span>" + tmp + "</div><div class='row border border-secondary p-2'><span class='rowAtributs' style='display: none;'>#################################################################|</span><div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display: none;'>" + nroId + "#cel################################################################|</span></div></div></div>")
-            //    $("#htmlEst p").replaceWith(function () { return $(this).contents(); });
-            //}
+           
            element = $('#htmlEst').find('*').filter(function () {                
                 if (this.style.backgroundColor == 'rgb(227, 252, 255)') {
                    return this;
@@ -1321,7 +1258,13 @@ $(function () {
             if (!jQuery.isEmptyObject(element)) {                
                 var elementToInsert = RowsAndColumns('row');
                 $(element).append(elementToInsert); 
-                $(element).css('background-color', function () { return 'rgb(255, 255, 255)';});                              
+                $(element).css('background-color', function () { return 'rgb(255, 255, 255)'; });    
+                readValues(elementToInsert);
+                var IdValor = $(elementToInsert).attr('id');
+                $('#txtIdCel').removeAttr('value');
+                $('#txtIdCel').val(IdValor);
+                $('#'+IdValor).css("background-color", "rgb(227, 252, 255)" );
+                $('#btnModificarDades').click();
             }else{
                 alert("Active un contenidor");
             };
@@ -1329,18 +1272,11 @@ $(function () {
             $("#txtEst").val($("#htmlEst").html());            
         });
 
-        //afegir fila en el mateix nivell
+        //afegir fila en el nivell adins
         $("#btnAfegirFilaDinsAbans").click(function () {
             nroId++;
             //gravo canvis en la cel·la actual
-            //$("#btnModificarDades").click();
-
-            //if (!jQuery.isEmptyObject(element)) {
-            //    nroId++;
-            //    var tmp = element.wrap("<p/>").parent().html().trim();
-            //    element.parent().html("<div class='col'><div class='row border border-secondary p-2'><span class='rowAtributs' style='display: none;'>#################################################################|</span><div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display: none;'>" + nroId + "#cel##########################|</span></div></div><div class='row border border-secondary p-2'><span class='rowAtributs' style='display: none;'>#################################################################|</span>" + tmp + "</div></div>")
-            //    $("#htmlEst p").replaceWith(function () { return $(this).contents(); });
-            //}
+            
             element = $('#htmlEst').find('*').filter(function () {                
                 if (this.style.backgroundColor == 'rgb(227, 252, 255)') {
                     return this;
@@ -1350,9 +1286,14 @@ $(function () {
             if (!jQuery.isEmptyObject(element)) {                
                 var elementToInsert = RowsAndColumns('row');
                 var lastSpan = $(element).children('span').last();
-                $(lastSpan).after(elementToInsert); 
-              
-                $(element).css('background-color', function () { return 'rgb(255, 255, 255)';});                              
+                $(lastSpan).after(elementToInsert);               
+                $(element).css('background-color', function () { return 'rgb(255, 255, 255)'; });   
+                readValues(elementToInsert);
+                var IdValor = $(elementToInsert).attr('id');
+                $('#txtIdCel').removeAttr('value');
+                $('#txtIdCel').val(IdValor);
+                $('#'+IdValor).css("background-color", "rgb(227, 252, 255)" );
+                $('#btnModificarDades').click();
             }else{
                 alert("Active un contenidor");
             };
@@ -1364,38 +1305,33 @@ $(function () {
         $("#btnAfegirColumnaDinsAbans").click(function () {
             nroId++;
             //gravo canvis en la cel·la actual
-            //$("#btnModificarDades").click();
-
-            //if (!jQuery.isEmptyObject(element)) {
-            //    nroId++;
-            //    if (element.attr("class").indexOf('col') > -1) {
-            //        element.before("<div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display: none;'>" + nroId + "#cel################################################################|</span></div>");
-            //    }
-            //    else {
-            //        $("#lblResultat").html("<div class='alert alert-dismissible alert-success mt-2 mb-2'><button type='button' class='close' data-dismiss='alert'>x</button>Per inserir columnes cal seleccionar una columna</div>");
-            //    }
-            //}
-
-            element = $('#htmlEst').find('*').filter(function () {                
+           
+            element = $('#htmlEst').find('*').filter(function () {
                 if (this.style.backgroundColor == 'rgb(227, 252, 255)') {
                     return this;
                 }
             });
 
-            if (!jQuery.isEmptyObject(element)) {  
+            if (!jQuery.isEmptyObject(element)) {
                 var elementToInsert = RowsAndColumns('col');
-                if (element.hasClass('col')) {
-                    $(element).before(elementToInsert);                    
+                if ($(element).hasClass('col')) {
+                    $(element).before(elementToInsert);
                 } else {
-                    if (element.hasClass('row')) {
+                    if ($(element).hasClass('row')) {
                         var lastSpan = $(element).children('span').last();
                         $(lastSpan).after(elementToInsert);
                     } else {
                         alert('primero inserte una fila');
                     }
                 }
-                $(element).css('background-color', function () { return 'rgb(255, 255, 255)'; });                                    
-            }else{
+                $(element).css('background-color', function () { return 'rgb(255, 255, 255)'; });
+                readValues(elementToInsert);
+                var IdValor = $(elementToInsert).attr('id');
+                $('#txtIdCel').removeAttr('value');
+                $('#txtIdCel').val(IdValor);
+                $('#'+IdValor).css("background-color", "rgb(227, 252, 255)" );
+                $('#btnModificarDades').click();
+            } else {
                 alert("Active un contenidor");
             };
 
@@ -1403,39 +1339,28 @@ $(function () {
             //     var element = $('#htmlEst').find('.activado');
             //     var elementToInsert = RowsAndColumns(element, 'col');
             //     $(element).before(elementToInsert);                        
-                
+
             //}else{
             //    alert("Active un contenidor");
             //};
             //guardo els canvis 
             $("#txtEst").val($("#htmlEst").html());
-        })
-
+        });
 
         $("#btnAfegirColumnaDinsDespres").click(function () {
             nroId++;
             //gravo canvis en la cel·la actual
-            //$("#btnModificarDades").click();
-
-            //if (!jQuery.isEmptyObject(element)) {
-            //    nroId++;
-            //    if (element.attr("class").indexOf('col') > -1) {
-            //        element.after("<div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display: none;'>" + nroId + "#cel################################################################|</span></div>");
-            //    }
-            //    else {
-            //        $("#lblResultat").html("<div class='alert alert-dismissible alert-success mt-2 mb-2'><button type='button' class='close' data-dismiss='alert'>x</button>Per inserir columnes cal seleccionar una columna</div>");
-            //    }
-            //}
-            element = $('#htmlEst').find('*').filter(function () {                
+            
+            element = $('#htmlEst').find('*').filter(function () {
                 if (this.style.backgroundColor == 'rgb(227, 252, 255)') {
                     return this;
                 }
             });
 
-            if (!jQuery.isEmptyObject(element)) {                
+            if (!jQuery.isEmptyObject(element)) {
                 var elementToInsert = RowsAndColumns('col');
                 if (element.hasClass('col')) {
-                    $(element).after(elementToInsert);                    
+                    $(element).after(elementToInsert);
                 } else {
                     if (element.hasClass('row')) {
                         var lastSpan = $(element).children('span').last();
@@ -1444,58 +1369,41 @@ $(function () {
                         alert('primero inserte una fila');
                     }
                 }
-                $(element).css('background-color', function () { return 'rgb(255, 255, 255)';});                              
-            }else{
+                $(element).css('background-color', function () { return 'rgb(255, 255, 255)'; });
+                readValues(elementToInsert);
+                var IdValor = $(elementToInsert).attr('id');
+                $('#txtIdCel').removeAttr('value');
+                $('#txtIdCel').val(IdValor);
+                $('#'+IdValor).css("background-color", "rgb(227, 252, 255)" );
+                $('#btnModificarDades').click();
+            } else {
                 alert("Active un contenidor");
             };
-            // if ($('#htmlEst').find('.activado').length > 0) {
-            //     var element = $('#htmlEst').find('.activado');
-            //     var elementToInsert = RowsAndColumns(element, 'col');
-            //     $(element).after(elementToInsert);                        
-                
-            //}else{
-            //    alert("Active un contenidor");
-            //};
+            
             //guardo els canvis 
             $("#txtEst").val($("#htmlEst").html());
-        })
+        });
 
-        $("#btnEsborrarCel").click(function () {
-            nroId++;
-            //gravo canvis en la cel·la actual
-           // $("#btnModificarDadesCel").click();
-
-            //if (!jQuery.isEmptyObject(element)) {
-            //    if (!jQuery.isEmptyObject(element.siblings("div").html())) {
-            //        element.remove();
-            //    }
-            //    else {
-            //        element.parent().remove();
-            //    }
-            //}
-            element = $('#htmlEst').find('*').filter(function () {                
+        $("#btnEsborrarCel").click(function () {            
+            //buscar elemento activo para borrar
+            element = $('#htmlEst').find('*').filter(function () {
                 if (this.style.backgroundColor == 'rgb(227, 252, 255)') {
                     return this;
                 }
             });
-            if (!jQuery.isEmptyObject(element)) {                
-               
-                $(element).remove();                          
-            }else{
+            if (!jQuery.isEmptyObject(element)) {
+                if ($(element).prop('tagName').toLowerCase() == 'span' && $(element).hasClass('text')) {
+                    $(element).siblings('.divImg').remove();
+                    $(element).remove();
+                } else {
+                    $(element).remove();
+                }                
+            } else {
                 alert("No hay elemento activado");
-            };
-
-            //if ($('#htmlEst').find('.activado').length > 0) {
-            //    var element = $('#htmlEst').find('.activado');
-            //    $(element).remove();                      
-                
-            //}else{
-            //    alert("Active un contenidor");
-            //};
-
+            };            
             //guardo els canvis 
             $("#txtEst").val($("#htmlEst").html());
-        })
+        });
 
         $("#btnCopiar").click(function () {
 
@@ -1507,7 +1415,7 @@ $(function () {
             $("#divEst").find("span.rowAtributs").remove();
             $("#divEst").find("span.contenidorAtributs").remove();
             $("#divEst").find("div").removeAttr("style");
-            $("#divEst").find("div").removeClass("cel celActiva p-2 border border-secondary rowActiva contenidorActiu contenidor");
+            $("#divEst").find("div").removeClass("col celActiva p-2 border border-secondary rowActiva contenidorActiu contenidor");
 
             $("#txtEstBD").val($("#divEst").html());
 
@@ -1518,36 +1426,30 @@ $(function () {
 
             /* Copy the text inside the text field */
             document.execCommand("copy");
-
-        })
-              
+        });              
 
         $("#btnModificarDadesCel").click(function () {
 
             var strAtr = "";
-            
-            //var contadorMides = 0;
+
+            element = $('#htmlEst').find('*').filter(function () {
+                if (this.style.backgroundColor == 'rgb(227, 252, 255)') {
+                    return this;
+                }
+            });
 
             if (!jQuery.isEmptyObject(element)) {
-                element.find("span.text").text($("#txtNomCel").val());
+                //element.find("span.text").text($("#txtNomCel").val());
+                
                 strAtr += $("#txtIdCel").val() + "#" + $("#txtNomCel").val(); //1#2
-                //elimino les classes de mida de cel.la
-                //element.removeClass(function (index, className) { return (className.match (/(^|\s)col-\S+/g) || []).join(' ');});
-                element.removeClass();
-                element.addClass("cel celActiva border border-secondary p-2");
-                //afegeixo les classes de bootstrap
-
+               
                 strAtr = DadesComunsMides(strAtr, element);
-
-                //if (contadorMides == 0) {
-                    element.addClass("col");
-                //}
 
                 strAtr += "#";
                 if ($("#lstTipusFulla").val() != null) {
                     strAtr += $("#lstTipusFulla").val().trim(); //8
                 }
-                
+
                 strAtr += "#";
                 if ($("#ddlPLTDSCMP").val() != null) {
                     strAtr += $("#ddlPLTDSCMP").val().trim(); //9
@@ -1567,8 +1469,6 @@ $(function () {
                 }
 
                 strAtr = DadesComunsLlibrerias(strAtr);
-
-               
 
                 strAtr += "#"
                 if ($("#txtPLTDSNUM").val() != null) {
@@ -1616,12 +1516,14 @@ $(function () {
 
                 modificaIcona(element);
                 //afegeixo els atributs a l'array de propietats
-                element.find("span.atributs").text(strAtr);
+                $(element).find("span").filter(function () { return $(this).css("display") == "none" }).text(strAtr);
 
                 //guardo els canvis 
                 $("#txtEst").val($("#htmlEst").html());
+            } else {
+                alert('Selecciones un elemento');
             }
-        })
+        });
 
         $("#btnModificarDades").click(function () {
 
@@ -1629,19 +1531,19 @@ $(function () {
 
             if (!jQuery.isEmptyObject(element)) {
 
-                if (element.hasClass('cel')) {   // element: el ultimo div que se ha clicado
+                //if (element.hasClass('cel')) {   // element: el ultimo div que se ha clicado
                     $("#btnModificarDadesCel").click();
                     return true;
-                }
-                else if (element.hasClass('row')) {
-                    ModificarDadesRow();
+                //}
+                //else if (element.hasClass('row')) {
+                //    ModificarDadesRow();
 
-                }
-                 //else if (element.attr("class").indexOf('contenidor') > -1) {
+                //}
+                // //else if (element.attr("class").indexOf('contenidor') > -1) {
 
-                else if (element.hasClass('contenidor')) {
-                    ModificarDadesContenidor();
-                }
+                //else if (element.hasClass('contenidor')) {
+                //    ModificarDadesContenidor();
+                //}
 
                //guardo els canvis 
                 $("#txtEst").val($("#htmlEst").html());
@@ -1674,6 +1576,23 @@ $(function () {
            $("#txtEst").val($("#htmlEst").html());
 
         }
+
+        function RemoveClassInElement(valor, patron) {
+            $(valor).removeClass(function (index, classNames) {
+                var current_classes = classNames.split(" "), // change the list into an array
+                    classes_to_remove = []; // array of classes which are to be removed
+
+                $.each(current_classes, function (index, class_name) {
+                    // if the classname begins with bg add it to the classes_to_remove array
+                    if (patron.test(class_name)) {
+                        classes_to_remove.push(class_name);
+                    }
+                });
+                // turn the array back into a string
+                return classes_to_remove.join(" ");
+            });
+
+        };
 
         function ComposicionTextoAtributos(){
             var strAtr = "#";
@@ -1718,63 +1637,69 @@ $(function () {
         function DadesComunsMides(strAtr, element) {
 
             strAtr += "#";
-            if ($("#ddlXs").val() != '') {
+            if (!jQuery.isEmptyObject($("#ddlXs option:selected").text()) ) {
             //    contadorMides++;
-                if ($("#ddlXs").val() != 'Tot') {
-                    element.addClass("col-xs-" + $("#ddlXs").val());
+                RemoveClassInElement(element, new RegExp("col-xs"));
+                if ($("#ddlXs").val() != 'Tot') {                    
+                    $(element).addClass("col-xs-" + $("#ddlXs").text());
                     strAtr += $("#ddlXs").val()  //#3
                 }
                 else {
-                    element.addClass("col-xs");
+                    $(element).addClass("col-xs");
                     strAtr += "0";
 
                 }
             }
             strAtr += "#";
-            if ($("#ddlSm").val() != '') {
+            if (!jQuery.isEmptyObject($("#ddlSm option:selected").text())) {
+                //$("#ddlSm").val() != '') {
+                RemoveClassInElement(element, new RegExp("col-sm"));
              //   contadorMides++;
                 if ($("#ddlSm").val() != 'Tot') {
-                    element.addClass("col-sm-" + $("#ddlSm").val());
+                    $(element).addClass("col-sm-" + $("#ddlSm").text());
                     strAtr += $("#ddlSm").val() //4
                 }
                 else {
-                    element.addClass("col-sm");
+                    $(element).addClass("col-sm");
                     strAtr += "0";
                 }
             }
             strAtr += "#";
             if ($("#ddlMd").val() != '') {
+                RemoveClassInElement(element, new RegExp("col-md"));
               //  contadorMides++;
                 if ($("#ddlMd").val() != 'Tot') {
-                    element.addClass("col-md-" + $("#ddlMd").val());
+                    $(element).addClass("col-md-" + $("#ddlMd").val());
                     strAtr += $("#ddlMd").val() //5
                 }
                 else {
-                    element.addClass("col-md");
+                    $(element).addClass("col-md");
                     strAtr += "0";
                 }
             }
             strAtr += "#";
             if ($("#ddlLg").val() != '') {
+                RemoveClassInElement(element, new RegExp("col-lg"));
               //  contadorMides++;
                 if ($("#ddlLg").val() != 'Tot') {
-                    element.addClass("col-lg-" + $("#ddlLg").val());
+                    $(element).addClass("col-lg-" + $("#ddlLg").val());
                     strAtr += $("#ddlLg").val() //6
                 }
                 else {
-                    element.addClass("col-lg");
+                    $(element).addClass("col-lg");
                     strAtr += "0";
                 }
             }
             strAtr += "#";
             if ($("#ddlXl").val() != '') {
+                RemoveClassInElement(element, new RegExp("col-xl"));
               //  contadorMides++;
                 if ($("#ddlXl").val() != 'Tot') {
-                    element.addClass("col-xl-" + $("#ddlXl").val());
+                    $(element).addClass("col-xl-" + $("#ddlXl").val());
                     strAtr += $("#ddlXl").val() //7
                 }
                 else {
-                    element.addClass("col-xl");
+                    $(element).addClass("col-xl");
                     strAtr += "0";
                 }
             }
@@ -1783,237 +1708,394 @@ $(function () {
 
 
         function DadesComunsEstils(strAtr, element) {
-
+            
             strAtr += "#";
             if ($("#ddlb_23").val() != null) {
+                $.map($('#ddlb_23 option'), function (e) {
+                    if (!jQuery.isEmptyObject($(e).text())) {
+                        RemoveClassInElement(element, new RegExp($(e).text()));
+                    };
+                });
                 strAtr += $("#ddlb_23").val();
-                element.addClass($("#ddlb_23 option:selected").text());//28
+                $(element).addClass($("#ddlb_23 option:selected").text());//28
             }
 
             strAtr += "#";
             if ($("#ddlb_25").val() != null) {
+                $.map($('#ddlb_25 option'), function (e) {
+                    if (!jQuery.isEmptyObject($(e).text())) {
+                        RemoveClassInElement(element, new RegExp($(e).text()));
+                    };
+                });
                 strAtr += $("#ddlb_25").val();
-                element.addClass($("#ddlb_25 option:selected").text());//29
+                $(element).addClass($("#ddlb_25 option:selected").text());//29
             }
 
             strAtr += "#";
             if ($("#ddlb_26").val() != null) {
+                $.map($('#ddlb_26 option'), function (e) {
+                    if (!jQuery.isEmptyObject($(e).text())) {
+                        RemoveClassInElement(element, new RegExp($(e).text()));
+                    };
+                });
                 strAtr += $("#ddlb_26").val();
-                element.addClass($("#ddlb_26 option:selected").text());//30
+                $(element).addClass($("#ddlb_26 option:selected").text());//30
             }
 
             strAtr += "#";
             if ($("#ddlb_27").val() != null) {
+                $.map($('#ddlb_27 option'), function (e) {
+                    if (!jQuery.isEmptyObject($(e).text())) {
+                        RemoveClassInElement(element, new RegExp($(e).text()));
+                    };
+                });
                 strAtr += $("#ddlb_27").val();
-                element.addClass($("#ddlb_27 option:selected").text());//31
+                $(element).addClass($("#ddlb_27 option:selected").text());//31
             }
 
             strAtr += "#";
             if ($("#ddlb_28").val() != null) {
+                $.map($('#ddlb_28 option'), function (e) {
+                    if (!jQuery.isEmptyObject($(e).text())) {
+                        RemoveClassInElement(element, new RegExp($(e).text()));
+                    };
+                });
                 strAtr += $("#ddlb_28").val();
-                element.addClass($("#ddlb_28 option:selected").text());//32
+                $(element).addClass($("#ddlb_28 option:selected").text());//32
             }
             strAtr += "#";
             if ($("#ddlb_103").val() != null) {
+                $.map($('#ddlb_634 option'), function (e) {
+                    if (!jQuery.isEmptyObject($(e).text())) {
+                        RemoveClassInElement(element, new RegExp($(e).text()));
+                    };
+                });
                 strAtr += $("#ddlb_103").val();
-                element.addClass($("#ddlb_103 option:selected").text());//33
+                $(element).addClass($("#ddlb_103 option:selected").text());//33
             }
 
             strAtr += "#";
             if ($("#ddlb_105").val() != null) {
+                $.map($('#ddlb_105 option'), function (e) {
+                    if (!jQuery.isEmptyObject($(e).text())) {
+                        RemoveClassInElement(element, new RegExp($(e).text()));
+                    };
+                });
                 strAtr += $("#ddlb_105").val();
-                element.addClass($("#ddlb_105 option:selected").text());//34
+                $(element).addClass($("#ddlb_105 option:selected").text());//34
             }
 
             strAtr += "#";
             if ($("#ddlb_108").val() != null) {
+                $.map($('#ddlb_108 option'), function (e) {
+                    if (!jQuery.isEmptyObject($(e).text())) {
+                        RemoveClassInElement(element, new RegExp($(e).text()));
+                    };
+                });
                 strAtr += $("#ddlb_108").val();
-                element.addClass($("#ddlb_108 option:selected").text());//35
+                $(element).addClass($("#ddlb_108 option:selected").text());//35
             }
 
             strAtr += "#";
             if ($("#ddlb_110").val() != null) {
+                $.map($('#ddlb_110 option'), function (e) {
+                    if (!jQuery.isEmptyObject($(e).text())) {
+                        RemoveClassInElement(element, new RegExp($(e).text()));
+                    };
+                });
                 strAtr += $("#ddlb_110").val();
-                element.addClass($("#ddlb_110 option:selected").text());//36
+                $(element).addClass($("#ddlb_110 option:selected").text());//36
             }
 
             strAtr += "#";
             if ($("#ddlb_111").val() != null) {
+                $.map($('#ddlb_111 option'), function (e) {
+                    if (!jQuery.isEmptyObject($(e).text())) {
+                        RemoveClassInElement(element, new RegExp($(e).text()));
+                    };
+                });
                 strAtr += $("#ddlb_111").val();
-                element.addClass($("#ddlb_111 option:selected").text());//37
+                $(element).addClass($("#ddlb_111 option:selected").text());//37
             }
             strAtr += "#";
             if ($("#ddlb_112").val() != null) {
+                $.map($('#ddlb_112 option'), function (e) {
+                    if (!jQuery.isEmptyObject($(e).text())) {
+                        RemoveClassInElement(element, new RegExp($(e).text()));
+                    };
+                });
                 strAtr += $("#ddlb_112").val();
-                element.addClass($("#ddlb_112 option:selected").text());//38
+                $(element).addClass($("#ddlb_112 option:selected").text());//38
             }
 
             strAtr += "#";
             if ($("#ddlb_122").val() != null) {
+                $.map($('#ddlb_122 option'), function (e) {
+                    if (!jQuery.isEmptyObject($(e).text())) {
+                        RemoveClassInElement(element, new RegExp($(e).text()));
+                    };
+                });
                 strAtr += $("#ddlb_122").val();
-                element.addClass($("#ddlb_122 option:selected").text());//39
+                $(element).addClass($("#ddlb_122 option:selected").text());//39
             }
 
             strAtr += "#";
             if ($("#ddlb_114").val() != null) {
+                $.map($('#ddlb_114 option'), function (e) {
+                    if (!jQuery.isEmptyObject($(e).text())) {
+                        RemoveClassInElement(element, new RegExp($(e).text()));
+                    };
+                });
+                
                 strAtr += $("#ddlb_114").val();
-                element.addClass($("#ddlb_114 option:selected").text());//40
+                $(element).addClass($("#ddlb_114 option:selected").text());//40
             }
 
             strAtr += "#";
             if ($("#ddlb_115").val() != null) {
+                $.map($('#ddlb_115 option'), function (e) {
+                    if (!jQuery.isEmptyObject($(e).text())) {
+                        RemoveClassInElement(element, new RegExp($(e).text()));
+                    };
+                });
                 strAtr += $("#ddlb_115").val();
-                element.addClass($("#ddlb_115 option:selected").text());//41
+                $(element).addClass($("#ddlb_115 option:selected").text());//41
             }
 
             strAtr += "#";
             if ($("#ddlb_123").val() != null) {
+                $.map($('#ddlb_123 option'), function (e) {
+                    if (!jQuery.isEmptyObject($(e).text())) {
+                        RemoveClassInElement(element, new RegExp($(e).text()));
+                    };
+                });
                 strAtr += $("#ddlb_123").val();
-                element.addClass($("#ddlb_123 option:selected").text());//42
+                $(element).addClass($("#ddlb_123 option:selected").text());//42
             }
             strAtr += "#";
             if ($("#ddlb_117").val() != null) {
+                $.map($('#ddlb_117 option'), function (e) {
+                    if (!jQuery.isEmptyObject($(e).text())) {
+                        RemoveClassInElement(element, new RegExp($(e).text()));
+                    };
+                });
                 strAtr += $("#ddlb_117").val();
-                element.addClass($("#ddlb_117 option:selected").text());//43
+                $(element).addClass($("#ddlb_117 option:selected").text());//43
             }
 
             strAtr += "#";
             if ($("#ddlb_118").val() != null) {
+                $.map($('#ddlb_118 option'), function (e) {
+                    if (!jQuery.isEmptyObject($(e).text())) {
+                        RemoveClassInElement(element, new RegExp($(e).text()));
+                    };
+                });
                 strAtr += $("#ddlb_118").val();
-                element.addClass($("#ddlb_118 option:selected").text());//44
+                $(element).addClass($("#ddlb_118 option:selected").text());//44
             }
 
             strAtr += "#";
             if ($("#ddlb_119").val() != null) {
+                $.map($('#ddlb_119 option'), function (e) {
+                    if (!jQuery.isEmptyObject($(e).text())) {
+                        RemoveClassInElement(element, new RegExp($(e).text()));
+                    };
+                });
                 strAtr += $("#ddlb_119").val();
-                element.addClass($("#ddlb_119 option:selected").text());//45
+                $(element).addClass($("#ddlb_119 option:selected").text());//45
             }
 
             strAtr += "#";
             if ($("#ddlb_124").val() != null) {
+                $.map($('#ddlb_124 option'), function (e) {
+                    if (!jQuery.isEmptyObject($(e).text())) {
+                        RemoveClassInElement(element, new RegExp($(e).text()));
+                    };
+                });
                 strAtr += $("#ddlb_124").val();
-                element.addClass($("#ddlb_124 option:selected").text());//46
+                $(element).addClass($("#ddlb_124 option:selected").text());//46
             }
 
             strAtr += "#";
             if ($("#ddlb_630").val() != null) {
+                $.map($('#ddlb_630 option'), function (e) {
+                    if (!jQuery.isEmptyObject($(e).text())) {
+                        RemoveClassInElement(element, new RegExp($(e).text()));
+                    };
+                });
                 strAtr += $("#ddlb_630").val();
-                element.addClass($("#ddlb_630 option:selected").text());//47
+                $(element).addClass($("#ddlb_630 option:selected").text());//47
             }
 
             strAtr += "#";
             if ($("#ddlb_631").val() != null) {
+                $.map($('#ddlb_631 option'), function (e) {
+                    if (!jQuery.isEmptyObject($(e).text())) {
+                        RemoveClassInElement(element, new RegExp($(e).text()));
+                    };
+                });
                 strAtr += $("#ddlb_631").val();
-                element.addClass($("#ddlb_631 option:selected").text());//48
+                $(element).addClass($("#ddlb_631 option:selected").text());//48
             }
 
             strAtr += "#";
             if ($("#ddlb_632").val() != null) {
+                $.map($('#ddlb_632 option'), function (e) {
+                    if (!jQuery.isEmptyObject($(e).text())) {
+                        RemoveClassInElement(element, new RegExp($(e).text()));
+                    };
+                });
                 strAtr += $("#ddlb_632").val();
-                element.addClass($("#ddlb_632 option:selected").text());//49
+                $(element).addClass($("#ddlb_632 option:selected").text());//49
             }
 
             strAtr += "#";
             if ($("#ddlb_633").val() != null) {
+                $.map($('#ddlb_633 option'), function (e) {
+                    if (!jQuery.isEmptyObject($(e).text())) {
+                        RemoveClassInElement(element, new RegExp($(e).text()));
+                    };
+                });
                 strAtr += $("#ddlb_633").val();
-                element.addClass($("#ddlb_633 option:selected").text());//50
+                $(element).addClass($("#ddlb_633 option:selected").text());//50
             }
 
             strAtr += "#";
             if ($("#ddlb_634").val() != null) {
+                $.map($('#ddlb_634 option'), function (e) {
+                    if (!jQuery.isEmptyObject($(e).text()) ) {
+                      RemoveClassInElement(element, new RegExp( $(e).text())); 
+                    };                    
+                });
+                 
                 strAtr += $("#ddlb_634").val();
-                element.addClass($("#ddlb_634 option:selected").text());//51
+                $(element).addClass($("#ddlb_634 option:selected").text());//51
             }
 
             strAtr += "#";
             if ($("#ddlb_635").val() != null) {
+                $.map($('#ddlb_635 option'), function (e) {
+                   if (!jQuery.isEmptyObject($(e).text()) ) {
+                       RemoveClassInElement(element, new RegExp($(e).text())); 
+                    }; 
+                });
                 strAtr += $("#ddlb_635").val();
-                element.addClass($("#ddlb_635 option:selected").text());//52
+                $(element).addClass($("#ddlb_635 option:selected").text());//52
             }
 
             strAtr += "#";
             if ($("#ddlb_636").val() != null) {
+                $.map($('#ddlb_636 option'), function (e) {
+                    if (!jQuery.isEmptyObject($(e).text()) ) {
+                        RemoveClassInElement(element, new RegExp($(e).text())); 
+                    }; 
+                });
                 strAtr += $("#ddlb_636").val();
-                element.addClass($("#ddlb_636 option:selected").text());//53
+                $(element).addClass($("#ddlb_636 option:selected").text());//53
             }
 
             strAtr += "#";
             if ($("#ddlb_637").val() != null) {
+                $.map($('#ddlb_637 option'), function (e) {
+                    if (!jQuery.isEmptyObject($(e).text()) ) {
+                        RemoveClassInElement(element, new RegExp($(e).text())); 
+                    }; 
+                });
                 strAtr += $("#ddlb_637").val();
-                element.addClass($("#ddlb_637 option:selected").text());//54
+                $(element).addClass($("#ddlb_637 option:selected").text());//54
             }
 
             strAtr += "#";
             if ($("#ddlb_638").val() != null) {
+                $.map($('#ddlb_638 option'), function (e) {
+                    if (!jQuery.isEmptyObject($(e).text()) ) {
+                        RemoveClassInElement(element, new RegExp($(e).text())); 
+                    }; 
+                });
                 strAtr += $("#ddlb_638").val();
-                element.addClass($("#ddlb_638 option:selected").text());//55
+                $(element).addClass($("#ddlb_638 option:selected").text());//55
             }
 
             strAtr += "#";
             if ($("#ddlb_639").val() != null) {
+                $.map($('#ddlb_639 option'), function (e) {
+                    if (!jQuery.isEmptyObject($(e).text()) ) {
+                        RemoveClassInElement(element, new RegExp($(e).text())); 
+                    };  
+                });
                 strAtr += $("#ddlb_639").val();
-                element.addClass($("#ddlb_639 option:selected").text());//56
+                $(element).addClass($("#ddlb_639 option:selected").text());//56
             }
 
             strAtr += "#";
             if ($("#ddlb_641").val() != null) {
+                $.map($('#ddlb_641 option'), function (e) {
+                   if (!jQuery.isEmptyObject($(e).text()) ) {
+                       RemoveClassInElement(element, new RegExp($(e).text())); 
+                    };  
+                });
                 strAtr += $("#ddlb_641").val();
-                element.addClass($("#ddlb_641 option:selected").text());//57
+                $(element).addClass($("#ddlb_641 option:selected").text());//57
             }
 
             strAtr += "#";
             if ($("#ddlb_642").val() != null) {
+                $.map($('#ddlb_642 option'), function (e) {
+                   if (!jQuery.isEmptyObject($(e).text()) ) {
+                       RemoveClassInElement(element, new RegExp($(e).text())); 
+                    }; 
+                });
                 strAtr += $("#ddlb_642").val();
-                element.addClass($("#ddlb_642 option:selected").text());//58
+                $(element).addClass($("#ddlb_642 option:selected").text());//58
             }
 
             strAtr += "#";
             if ($("#ddlb_648").val() != null) {
                 strAtr += $("#ddlb_648").val();
-                element.addClass($("#ddlb_648 option:selected").text());//59
+                $(element).addClass($("#ddlb_648 option:selected").text());//59
             }
 
             strAtr += "#";
             if ($("#ddlb_649").val() != null) {
                 strAtr += $("#ddlb_649").val();
-                element.addClass($("#ddlb_649 option:selected").text());//60
+                $(element).addClass($("#ddlb_649 option:selected").text());//60
 
             }
 
             strAtr += "#";
             if ($("#ddlb_650").val() != null) {
                 strAtr += $("#ddlb_650").val();
-                element.addClass($("#ddlb_650 option:selected").text());//61
+                $(element).addClass($("#ddlb_650 option:selected").text());//61
             }
 
             strAtr += "#";
             if ($("#ddlb_651").val() != null) {
                 strAtr += $("#ddlb_651").val();
-                element.addClass($("#ddlb_651 option:selected").text());//62
+                $(element).addClass($("#ddlb_651 option:selected").text());//62
             }
 
             strAtr += "#";
             if ($("#ddlb_652").val() != null) {
                 strAtr += $("#ddlb_652").val();
-                element.addClass($("#ddlb_652 option:selected").text());//63
+                $(element).addClass($("#ddlb_652 option:selected").text());//63
             }
 
             strAtr += "#";
             if ($("#ddlb_653").val() != null) {
                 strAtr += $("#ddlb_653").val();
-                element.addClass($("#ddlb_653 option:selected").text());//64
+                $(element).addClass($("#ddlb_653 option:selected").text());//64
             }
 
             strAtr += "#";
             if ($("#ddlb_654").val() != null) {
                 strAtr += $("#ddlb_654").val();
-                element.addClass($("#ddlb_654 option:selected").text());//65
+                $(element).addClass($("#ddlb_654 option:selected").text());//65
             }
 
             strAtr += "#";
             if ($("#ddlb_655").val() != null) {
                 strAtr += $("#ddlb_655").val();
-                element.addClass($("#ddlb_655 option:selected").text());//66
+                $(element).addClass($("#ddlb_655 option:selected").text());//66
             }
 
             strAtr += "|"
@@ -2074,45 +2156,91 @@ $(function () {
                         break;
                     default:
                 }
+            } else {
+
             }
-            if (icona != "") {
-                element.find("span.divImg").html("<img src='img/" + icona + "'/>");
-            }
+            //if (icona != "") {
+            //    element.find("span.divImg").html("<img src='img/" + icona + "'/>");
+            //}
         };    
 
         document.addEventListener('click', function (event) {
             element = event.toElement;           
             if ($(element).parents('#htmlEst').length > 0) {
                 activado($(element).attr('id'));
-                event.stopPropagation();
-                 //$(hijos).css('background-color', 'rgb(255, 255, 255)');
-                var hijos = $(element).find('.row', '.col');
-                $(hijos).css('background-color', 'rgb(255, 255, 255)');
+                $(element).find('*').css('background-color', 'rgb(255, 255, 255)');
+                readValues(element);
+                event.stopPropagation();                
             };           
         }, true);
+
+        $("input#txtNomCel").change(function () {
+            element = $('#htmlEst').find('*').filter(function () {
+                if (this.style.backgroundColor == 'rgb(227, 252, 255)') {
+                    return this;
+                }
+            });                                 
+                     
+            if (!jQuery.isEmptyObject(element)) {
+                if ($(element).is('span.text')) {
+                    $(element).text($(this).val());
+                } else {
+                    if ($(element).find('span.text').length == 0) {
+                        $(element).append('<span class="divImg" id="spandivImg'+$(element).attr('id') +'"></span>');
+                        $(element).append('<span class="text" id="spantext' + $(element).attr('id') +'"></span>');
+                        $(element).children('span.text').text($(this).val());
+                        $(element).children('span.text').css("background-color", "rgb(255, 255, 255)");
+                        $(element).children('span.divImg').css("background-color", "rgb(255, 255, 255)");
+                    } else {
+                        $(element).children('span.text').text($(this).val());
+                    }
+                }                
+            }
+            $("#txtEst").val($("#htmlEst").html());
+        });
+
+        $('select').on('change', function () {
+            if (this != $('select').attr('id', 'selectContingut')){
+                element = $('#htmlEst').find('*').filter(function () {
+                    if (this.style.backgroundColor == 'rgb(227, 252, 255)') {
+                        return this;
+                    }
+                });
+                if (!jQuery.isEmptyObject(element)) {
+                    if ($(element).prop('tagName').toLowerCase() != 'span') {
+
+                        $('#btnModificarDades').click();
+                    }
+                }
+            }      
+                    
+        });
+        
     });
 
-    function activado(element) {
+    function activado(valor) {
          
         $('#htmlEst').find('*').each(function () {
-            if ($(this).attr('id') == element) {
+            if ($(this).attr('id') == valor) {
                 if ( $(this).css('background-color') == 'rgb(255, 255, 255)') {
                     this.style.backgroundColor ='rgb(227, 252, 255)';
                 } else {
+                    $("#btnModificarDades").click();
                     this.style.backgroundColor ='rgb(255, 2555, 255)'; 
                 }                
-                $('#selectContingut').children('option').find(this.tagName);
+                $('select#selectContingut').val(this.tagName.toLowerCase());
             } else {
                 this.style.backgroundColor = 'rgb(255, 255, 255)';  
             }
         }); 
+        $("#txtEst").val($("#htmlEst").html());
           return false;
      };   
 
     function guardar() {
        
 		//gravo canvis en la cel·la actual
-		$("#btnModificarDades").click();
+		//$("#btnModificarDades").click();
 
 		var atributs="";
 		//poso i tracto en divEst l'estructura de la p&agrave;gina que guardaré en METLPLT.PLTDSEST
@@ -2120,34 +2248,47 @@ $(function () {
 		$("#divEst").html($("#htmlEst").html());	
       
         // guardo els atributs
-            var div = $("#divEst").find('div.contenidor');
+        element = $('#divEst').find('*');
+        //    .filter(function () {                
+        //        if (this.style.backgroundColor == 'rgb(227, 252, 255)') {
+        //            return this;
+        //        }
+        //});
 
-            $.each(div, function (index, value) {
-                atributs += 'Contenidor:';
-                console.log(index + ": " + value);
-                atributs += $(this).find("span.contenidorAtributs").html();
+        $(element).each(function () {
+            if (this.tagName.toLowerCase() != 'span') {
+               atributs += $(this).children('span.atributs').text();
+            }
+        });
+
+      //      var div = $("#divEst").find('div.contenidor');
+
+      //      $.each(div, function (index, value) {
+      //          atributs += 'Contenidor:';
+      //          console.log(index + ": " + value);
+      //          atributs += $(this).find("span.contenidorAtributs").html();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
             
-                var fila = $(this).children('div.row');
+      //          var fila = $(this).children('div.row');
 
-                $.each(fila, function (index, value) {
-                console.log( index + ": " + value );
-                atributs += 'Row:';
-                atributs += $(this).find("span.rowAtributs").html();
+      //          $.each(fila, function (index, value) {
+      //          console.log( index + ": " + value );
+      //          atributs += 'Row:';
+      //          atributs += $(this).find("span.rowAtributs").html();
 
-                $(this).children('div.cel').each(function (index, value) {
-                    console.log( index + ": " + value );
-                    atributs += 'Cel:';
-                    atributs += $(this).find("span.atributs").html();
-		        });	            
-		    });	            
-        });	
+      //          $(this).children('div.cel').each(function (index, value) {
+      //              console.log( index + ": " + value );
+      //              atributs += 'Cel:';
+      //              atributs += $(this).find("span.atributs").html();
+		    //    });	            
+		    //});	            
+      //  });	
        
 			
 		$("#txtAtributs").val(atributs);
 
 		$("#divEst").find("span").remove();
-		$("#divEst").find("div").removeAttr("style");
-		$("#divEst").find("div").removeClass("cel celActiva p-2 pr-4 pl-4 border border-secondary rowActiva contenidor contenidorActiu");
+		//$("#divEst").find("div").removeAttr("style");
+		//$("#divEst").find("div").removeClass("cel celActiva p-2 pr-4 pl-4 border border-secondary rowActiva contenidor contenidorActiu");
 
 		$("#txtEstBD").val($("#txtEst").val()); 
 
