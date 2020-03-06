@@ -13,6 +13,9 @@
 <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">--%>
 <link rel="stylesheet" href="../../../Styles/formularisGaia.css">
 <link href="img/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
+    <%--<link href="../../../Styles/bootstrap-3.3.2.min.css" rel="stylesheet" />--%>
+    <link href="../../../Styles/bootstrap-example.min.css" rel="stylesheet" />
+    <link href="../../../Styles/prettify.min.css" rel="stylesheet" />
     <link href="../../../Styles/bootstrap-multiselect.css" rel="stylesheet" />
 <!--[if IE]>
       <link href="https://cdn.jsdelivr.net/gh/coliff/bootstrap-ie8/css/bootstrap-ie9.min.css" rel="stylesheet">
@@ -894,6 +897,7 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="../../../js/prettify.min.js" type="text/javascript"></script>
     <script src="../../../js/bootstrap-multiselect.js"></script>
 <script>
 $(function () {
@@ -1639,12 +1643,13 @@ $(function () {
         function DadesComunsMides(strAtr, element) {
 
             strAtr += "#";
-            if (!jQuery.isEmptyObject($("#ddlXs option:selected").text()) ) {
+            var data = $("#ddlXs").children("option:selected").text();
+            if (!jQuery.isEmptyObject(data) ) {
             //    contadorMides++;
                 RemoveClassInElement(element, new RegExp("col-xs"));
-                if ($("#ddlXs").val() != 'Tot') {                    
-                    $(element).addClass("col-xs-" + $("#ddlXs").text());
-                    strAtr += $("#ddlXs").val()  //#3
+                if (data!= 'Tot') {                    
+                    $(element).addClass("col-xs-" + data);
+                    strAtr += data;  //#3
                 }
                 else {
                     $(element).addClass("col-xs");
@@ -1653,13 +1658,14 @@ $(function () {
                 }
             }
             strAtr += "#";
-            if (!jQuery.isEmptyObject($("#ddlSm option:selected").text())) {
+            var data = $("#ddlSm").children("option:selected").text();
+            if (!jQuery.isEmptyObject(data)) {
                 //$("#ddlSm").val() != '') {
                 RemoveClassInElement(element, new RegExp("col-sm"));
              //   contadorMides++;
-                if ($("#ddlSm").val() != 'Tot') {
-                    $(element).addClass("col-sm-" + $("#ddlSm").text());
-                    strAtr += $("#ddlSm").val() //4
+                if (data != 'Tot') {
+                    $(element).addClass("col-sm-" + data);
+                    strAtr += data; //4
                 }
                 else {
                     $(element).addClass("col-sm");
@@ -1667,12 +1673,13 @@ $(function () {
                 }
             }
             strAtr += "#";
-            if ($("#ddlMd").val() != '') {
+            var data = $("#ddlMd").children("option:selected").text();
+            if (!jQuery.isEmptyObject(data)) {
                 RemoveClassInElement(element, new RegExp("col-md"));
               //  contadorMides++;
-                if ($("#ddlMd").val() != 'Tot') {
-                    $(element).addClass("col-md-" + $("#ddlMd").val());
-                    strAtr += $("#ddlMd").val() //5
+                if (data != 'Tot') {
+                    $(element).addClass("col-md-" + data);
+                    strAtr += data; //5
                 }
                 else {
                     $(element).addClass("col-md");
@@ -1680,12 +1687,13 @@ $(function () {
                 }
             }
             strAtr += "#";
-            if ($("#ddlLg").val() != '') {
+            var data = $("#ddlLg").children("option:selected").text();
+            if (!jQuery.isEmptyObject(data)) {
                 RemoveClassInElement(element, new RegExp("col-lg"));
               //  contadorMides++;
-                if ($("#ddlLg").val() != 'Tot') {
-                    $(element).addClass("col-lg-" + $("#ddlLg").val());
-                    strAtr += $("#ddlLg").val() //6
+                if (data != 'Tot') {
+                    $(element).addClass("col-lg-" + data);
+                    strAtr += data; //6
                 }
                 else {
                     $(element).addClass("col-lg");
@@ -1693,12 +1701,13 @@ $(function () {
                 }
             }
             strAtr += "#";
-            if ($("#ddlXl").val() != '') {
+            var data = $("#ddlXl").children("option:selected").text();
+            if (!jQuery.isEmptyObject(data)) {
                 RemoveClassInElement(element, new RegExp("col-xl"));
               //  contadorMides++;
-                if ($("#ddlXl").val() != 'Tot') {
-                    $(element).addClass("col-xl-" + $("#ddlXl").val());
-                    strAtr += $("#ddlXl").val() //7
+                if (data != 'Tot') {
+                    $(element).addClass("col-xl-" + data);
+                    strAtr += data; //7
                 }
                 else {
                     $(element).addClass("col-xl");
@@ -1712,51 +1721,56 @@ $(function () {
         function DadesComunsEstils(strAtr, element) {
             
             strAtr += "#";
-            if ($("#ddlb_23").val() != null) {
+            var data = $("#ddl_23").children("option:selected").text();
+            if (!jQuery.isEmptyObject(data)) {
                 $.map($('#ddlb_23 option'), function (e) {
                     if (!jQuery.isEmptyObject($(e).text())) {
                         RemoveClassInElement(element, new RegExp($(e).text()));
                     };
                 });
-                strAtr += $("#ddlb_23").val();
-                $(element).addClass($("#ddlb_23 option:selected").text());//28
+                strAtr += data;
+                $(element).addClass(data);//28
             }
 
             strAtr += "#";
-            if ($("#ddlb_25").val() != null) {
+            var data = $("#ddl_25").children("option:selected").text();
+            if (!jQuery.isEmptyObject(data)) {
                 $.map($('#ddlb_25 option'), function (e) {
                     if (!jQuery.isEmptyObject($(e).text())) {
                         RemoveClassInElement(element, new RegExp($(e).text()));
                     };
                 });
-                strAtr += $("#ddlb_25").val();
-                $(element).addClass($("#ddlb_25 option:selected").text());//29
+                strAtr += data;
+                $(element).addClass(data);//29
             }
 
             strAtr += "#";
-            if ($("#ddlb_26").val() != null) {
+            var data = $("#ddl_26").children("option:selected").text();
+            if (!jQuery.isEmptyObject(data)) {
                 $.map($('#ddlb_26 option'), function (e) {
                     if (!jQuery.isEmptyObject($(e).text())) {
                         RemoveClassInElement(element, new RegExp($(e).text()));
                     };
                 });
-                strAtr += $("#ddlb_26").val();
-                $(element).addClass($("#ddlb_26 option:selected").text());//30
+                strAtr += data;
+                $(element).addClass(data);//30
             }
 
             strAtr += "#";
-            if ($("#ddlb_27").val() != null) {
+            var data = $("#ddl_27").children("option:selected").text();
+            if (!jQuery.isEmptyObject(data)) {
                 $.map($('#ddlb_27 option'), function (e) {
                     if (!jQuery.isEmptyObject($(e).text())) {
                         RemoveClassInElement(element, new RegExp($(e).text()));
                     };
                 });
-                strAtr += $("#ddlb_27").val();
-                $(element).addClass($("#ddlb_27 option:selected").text());//31
+                strAtr += data;
+                $(element).addClass(data);//31
             }
 
             strAtr += "#";
-            if ($("#ddlb_28").val() != null) {
+            var data = $("#ddl_28").children("option:selected").text();
+            if (!jQuery.isEmptyObject(data)) {
                 $.map($('#ddlb_28 option'), function (e) {
                     if (!jQuery.isEmptyObject($(e).text())) {
                         RemoveClassInElement(element, new RegExp($(e).text()));
@@ -1766,8 +1780,9 @@ $(function () {
                 $(element).addClass($("#ddlb_28 option:selected").text());//32
             }
             strAtr += "#";
-            if ($("#ddlb_103").val() != null) {
-                $.map($('#ddlb_634 option'), function (e) {
+            var data = $("#ddl_103").children("option:selected").text();
+            if (!jQuery.isEmptyObject(data)) {
+                $.map($('#ddlb_103 option'), function (e) {
                     if (!jQuery.isEmptyObject($(e).text())) {
                         RemoveClassInElement(element, new RegExp($(e).text()));
                     };
@@ -1777,7 +1792,9 @@ $(function () {
             }
 
             strAtr += "#";
-            if ($("#ddlb_105").val() != null) {
+            var data = $("#ddl_105").children("option:selected").text();
+
+            if (!jQuery.isEmptyObject(data)) {
                 $.map($('#ddlb_105 option'), function (e) {
                     if (!jQuery.isEmptyObject($(e).text())) {
                         RemoveClassInElement(element, new RegExp($(e).text()));
@@ -1788,7 +1805,9 @@ $(function () {
             }
 
             strAtr += "#";
-            if ($("#ddlb_108").val() != null) {
+            var data = $("#ddl_108").children("option:selected").text();
+
+            if (!jQuery.isEmptyObject(data)) {
                 $.map($('#ddlb_108 option'), function (e) {
                     if (!jQuery.isEmptyObject($(e).text())) {
                         RemoveClassInElement(element, new RegExp($(e).text()));
@@ -1799,7 +1818,9 @@ $(function () {
             }
 
             strAtr += "#";
-            if ($("#ddlb_110").val() != null) {
+            var data = $("#ddl_110").children("option:selected").text();
+
+            if (!jQuery.isEmptyObject(data)) {
                 $.map($('#ddlb_110 option'), function (e) {
                     if (!jQuery.isEmptyObject($(e).text())) {
                         RemoveClassInElement(element, new RegExp($(e).text()));
@@ -1810,7 +1831,9 @@ $(function () {
             }
 
             strAtr += "#";
-            if ($("#ddlb_111").val() != null) {
+            var data = $("#ddl_111").children("option:selected").text();
+
+            if (!jQuery.isEmptyObject(data)) {
                 $.map($('#ddlb_111 option'), function (e) {
                     if (!jQuery.isEmptyObject($(e).text())) {
                         RemoveClassInElement(element, new RegExp($(e).text()));
@@ -1820,7 +1843,9 @@ $(function () {
                 $(element).addClass($("#ddlb_111 option:selected").text());//37
             }
             strAtr += "#";
-            if ($("#ddlb_112").val() != null) {
+            var data = $("#ddl_112").children("option:selected").text();
+
+            if (!jQuery.isEmptyObject(data)) {
                 $.map($('#ddlb_112 option'), function (e) {
                     if (!jQuery.isEmptyObject($(e).text())) {
                         RemoveClassInElement(element, new RegExp($(e).text()));
@@ -1831,7 +1856,9 @@ $(function () {
             }
 
             strAtr += "#";
-            if ($("#ddlb_122").val() != null) {
+            var data = $("#ddl_122").children("option:selected").text();
+
+            if (!jQuery.isEmptyObject(data)) {
                 $.map($('#ddlb_122 option'), function (e) {
                     if (!jQuery.isEmptyObject($(e).text())) {
                         RemoveClassInElement(element, new RegExp($(e).text()));
@@ -1842,7 +1869,9 @@ $(function () {
             }
 
             strAtr += "#";
-            if ($("#ddlb_114").val() != null) {
+            var data = $("#ddl_114").children("option:selected").text();
+
+            if (!jQuery.isEmptyObject(data)) {
                 $.map($('#ddlb_114 option'), function (e) {
                     if (!jQuery.isEmptyObject($(e).text())) {
                         RemoveClassInElement(element, new RegExp($(e).text()));
@@ -1854,7 +1883,9 @@ $(function () {
             }
 
             strAtr += "#";
-            if ($("#ddlb_115").val() != null) {
+            var data = $("#ddl_115").children("option:selected").text();
+
+            if (!jQuery.isEmptyObject(data)) {
                 $.map($('#ddlb_115 option'), function (e) {
                     if (!jQuery.isEmptyObject($(e).text())) {
                         RemoveClassInElement(element, new RegExp($(e).text()));
@@ -1865,7 +1896,9 @@ $(function () {
             }
 
             strAtr += "#";
-            if ($("#ddlb_123").val() != null) {
+            var data = $("#ddl_123").children("option:selected").text();
+
+            if (!jQuery.isEmptyObject(data)) {
                 $.map($('#ddlb_123 option'), function (e) {
                     if (!jQuery.isEmptyObject($(e).text())) {
                         RemoveClassInElement(element, new RegExp($(e).text()));
@@ -1875,7 +1908,9 @@ $(function () {
                 $(element).addClass($("#ddlb_123 option:selected").text());//42
             }
             strAtr += "#";
-            if ($("#ddlb_117").val() != null) {
+            var data = $("#ddl_117").children("option:selected").text();
+
+            if (!jQuery.isEmptyObject(data)) {
                 $.map($('#ddlb_117 option'), function (e) {
                     if (!jQuery.isEmptyObject($(e).text())) {
                         RemoveClassInElement(element, new RegExp($(e).text()));
@@ -1886,7 +1921,9 @@ $(function () {
             }
 
             strAtr += "#";
-            if ($("#ddlb_118").val() != null) {
+            var data = $("#ddl_118").children("option:selected").text();
+
+            if (!jQuery.isEmptyObject(data)) {
                 $.map($('#ddlb_118 option'), function (e) {
                     if (!jQuery.isEmptyObject($(e).text())) {
                         RemoveClassInElement(element, new RegExp($(e).text()));
@@ -1897,7 +1934,9 @@ $(function () {
             }
 
             strAtr += "#";
-            if ($("#ddlb_119").val() != null) {
+            var data = $("#ddl_119").children("option:selected").text();
+
+            if (!jQuery.isEmptyObject(data)) {
                 $.map($('#ddlb_119 option'), function (e) {
                     if (!jQuery.isEmptyObject($(e).text())) {
                         RemoveClassInElement(element, new RegExp($(e).text()));
@@ -1908,7 +1947,9 @@ $(function () {
             }
 
             strAtr += "#";
-            if ($("#ddlb_124").val() != null) {
+            var data = $("#ddl_124").children("option:selected").text();
+
+            if (!jQuery.isEmptyObject(data)) {
                 $.map($('#ddlb_124 option'), function (e) {
                     if (!jQuery.isEmptyObject($(e).text())) {
                         RemoveClassInElement(element, new RegExp($(e).text()));
@@ -1919,7 +1960,9 @@ $(function () {
             }
 
             strAtr += "#";
-            if ($("#ddlb_630").val() != null) {
+            var data = $("#ddl_630").children("option:selected").text();
+
+            if (!jQuery.isEmptyObject(data)) {
                 $.map($('#ddlb_630 option'), function (e) {
                     if (!jQuery.isEmptyObject($(e).text())) {
                         RemoveClassInElement(element, new RegExp($(e).text()));
@@ -1930,7 +1973,9 @@ $(function () {
             }
 
             strAtr += "#";
-            if ($("#ddlb_631").val() != null) {
+            var data = $("#ddl_631").children("option:selected").text();
+
+            if (!jQuery.isEmptyObject(data)) {
                 $.map($('#ddlb_631 option'), function (e) {
                     if (!jQuery.isEmptyObject($(e).text())) {
                         RemoveClassInElement(element, new RegExp($(e).text()));
@@ -1941,7 +1986,9 @@ $(function () {
             }
 
             strAtr += "#";
-            if ($("#ddlb_632").val() != null) {
+            var data = $("#ddl_632").children("option:selected").text();
+
+            if (!jQuery.isEmptyObject(data)) {
                 $.map($('#ddlb_632 option'), function (e) {
                     if (!jQuery.isEmptyObject($(e).text())) {
                         RemoveClassInElement(element, new RegExp($(e).text()));
@@ -1952,7 +1999,9 @@ $(function () {
             }
 
             strAtr += "#";
-            if ($("#ddlb_633").val() != null) {
+            var data = $("#ddl_633").children("option:selected").text();
+
+            if (!jQuery.isEmptyObject(data)) {
                 $.map($('#ddlb_633 option'), function (e) {
                     if (!jQuery.isEmptyObject($(e).text())) {
                         RemoveClassInElement(element, new RegExp($(e).text()));
@@ -1963,7 +2012,9 @@ $(function () {
             }
 
             strAtr += "#";
-            if ($("#ddlb_634").val() != null) {
+            var data = $("#ddl_634").children("option:selected").text();
+
+            if (!jQuery.isEmptyObject(data)) {
                 $.map($('#ddlb_634 option'), function (e) {
                     if (!jQuery.isEmptyObject($(e).text()) ) {
                       RemoveClassInElement(element, new RegExp( $(e).text())); 
@@ -1975,7 +2026,9 @@ $(function () {
             }
 
             strAtr += "#";
-            if ($("#ddlb_635").val() != null) {
+            var data = $("#ddl_635").children("option:selected").text();
+
+            if (!jQuery.isEmptyObject(data)) {
                 $.map($('#ddlb_635 option'), function (e) {
                    if (!jQuery.isEmptyObject($(e).text()) ) {
                        RemoveClassInElement(element, new RegExp($(e).text())); 
@@ -1986,7 +2039,9 @@ $(function () {
             }
 
             strAtr += "#";
-            if ($("#ddlb_636").val() != null) {
+            var data = $("#ddl_636").children("option:selected").text();
+
+            if (!jQuery.isEmptyObject(data)) {
                 $.map($('#ddlb_636 option'), function (e) {
                     if (!jQuery.isEmptyObject($(e).text()) ) {
                         RemoveClassInElement(element, new RegExp($(e).text())); 
@@ -1997,29 +2052,33 @@ $(function () {
             }
 
             strAtr += "#";
-            if ($("#ddlb_637").val() != null) {
+            var data = $("#ddl_637").children("option:selected").text();
+            if (!jQuery.isEmptyObject(data)) {
                 $.map($('#ddlb_637 option'), function (e) {
                     if (!jQuery.isEmptyObject($(e).text()) ) {
                         RemoveClassInElement(element, new RegExp($(e).text())); 
                     }; 
                 });
                 strAtr += $("#ddlb_637").val();
-                $(element).addClass($("#ddlb_637 option:selected").text());//54
+                $(element).addClass(data);//54
             }
 
             strAtr += "#";
-            if ($("#ddlb_638").val() != null) {
+            var data = $("#ddl_638").children("option:selected").text();
+            if (!jQuery.isEmptyObject(data)) {
                 $.map($('#ddlb_638 option'), function (e) {
                     if (!jQuery.isEmptyObject($(e).text()) ) {
                         RemoveClassInElement(element, new RegExp($(e).text())); 
                     }; 
                 });
                 strAtr += $("#ddlb_638").val();
-                $(element).addClass($("#ddlb_638 option:selected").text());//55
+                $(element).addClass(data);//55
             }
 
             strAtr += "#";
-            if ($("#ddlb_639").val() != null) {
+            var data = $("#ddl_639").children("option:selected").text();
+
+            if (!jQuery.isEmptyObject(data)) {
                 $.map($('#ddlb_639 option'), function (e) {
                     if (!jQuery.isEmptyObject($(e).text()) ) {
                         RemoveClassInElement(element, new RegExp($(e).text())); 
@@ -2030,74 +2089,91 @@ $(function () {
             }
 
             strAtr += "#";
-            if ($("#ddlb_641").val() != null) {
+            var data = $("#ddl_641").children("option:selected").text();
+            if (!jQuery.isEmptyObject(data)) {
                 $.map($('#ddlb_641 option'), function (e) {
                    if (!jQuery.isEmptyObject($(e).text()) ) {
                        RemoveClassInElement(element, new RegExp($(e).text())); 
                     };  
                 });
                 strAtr += $("#ddlb_641").val();
-                $(element).addClass($("#ddlb_641 option:selected").text());//57
+                $(element).addClass(data);//57
             }
 
             strAtr += "#";
-            if ($("#ddlb_642").val() != null) {
+            var data = $("#ddl_642").children("option:selected").text();
+
+            if (!jQuery.isEmptyObject(data)) {
                 $.map($('#ddlb_642 option'), function (e) {
                    if (!jQuery.isEmptyObject($(e).text()) ) {
                        RemoveClassInElement(element, new RegExp($(e).text())); 
                     }; 
                 });
                 strAtr += $("#ddlb_642").val();
-                $(element).addClass($("#ddlb_642 option:selected").text());//58
+                $(element).addClass(data);//58
             }
 
             strAtr += "#";
-            if ($("#ddlb_648").val() != null) {
+            var data = $("#ddl_648").children("option:selected").text();
+
+            if (!jQuery.isEmptyObject(data)) {
                 strAtr += $("#ddlb_648").val();
-                $(element).addClass($("#ddlb_648 option:selected").text());//59
+                $(element).addClass(data);//59
             }
 
             strAtr += "#";
-            if ($("#ddlb_649").val() != null) {
+            var data = $("#ddl_649").children("option:selected").text();
+
+            if (!jQuery.isEmptyObject(data)) {
                 strAtr += $("#ddlb_649").val();
-                $(element).addClass($("#ddlb_649 option:selected").text());//60
+                $(element).addClass(data);//60
 
             }
 
             strAtr += "#";
-            if ($("#ddlb_650").val() != null) {
+            var data = $("#ddl_650").children("option:selected").text();
+
+            if (!jQuery.isEmptyObject(data)) {
                 strAtr += $("#ddlb_650").val();
-                $(element).addClass($("#ddlb_650 option:selected").text());//61
+                $(element).addClass(data);//61
             }
 
             strAtr += "#";
-            if ($("#ddlb_651").val() != null) {
+            var data = $("#ddl_651").children("option:selected").text();
+
+            if (!jQuery.isEmptyObject(data)) {
                 strAtr += $("#ddlb_651").val();
-                $(element).addClass($("#ddlb_651 option:selected").text());//62
+                $(element).addClass(data);//62
             }
 
             strAtr += "#";
-            if ($("#ddlb_652").val() != null) {
+            var data = $("#ddl_652").children("option:selected").text();
+
+            if (!jQuery.isEmptyObject(data)) {
                 strAtr += $("#ddlb_652").val();
-                $(element).addClass($("#ddlb_652 option:selected").text());//63
+                $(element).addClass(data);//63
             }
 
             strAtr += "#";
-            if ($("#ddlb_653").val() != null) {
+            var data = $("#ddl_653").children("option:selected").text();
+
+            if (!jQuery.isEmptyObject(data)) {
                 strAtr += $("#ddlb_653").val();
-                $(element).addClass($("#ddlb_653 option:selected").text());//64
+                $(element).addClass(data);//64
             }
 
             strAtr += "#";
-            if ($("#ddlb_654").val() != null) {
+            var data = $("#ddl_654").children("option:selected").text();
+            if (!jQuery.isEmptyObject(data)) {
                 strAtr += $("#ddlb_654").val();
-                $(element).addClass($("#ddlb_654 option:selected").text());//65
+                $(element).addClass(data);//65
             }
 
             strAtr += "#";
-            if ($("#ddlb_655").val() != null) {
+            var data = $("#ddl_655").children("option:selected").text();
+            if (!jQuery.isEmptyObject(data)) {
                 strAtr += $("#ddlb_655").val();
-                $(element).addClass($("#ddlb_655 option:selected").text());//66
+                $(element).addClass(data);//66
             }
 
             strAtr += "|"
@@ -2223,7 +2299,8 @@ $(function () {
         $('select#ddlb_634').multiselect({
             buttonWidth: '180px',
             disableIfEmpty: true,
-            buttonClass: 'custom-select',
+            buttonClass: 'custom-select custom-select-sm',           
+            
             maxHeight: 200,
             onChange: function (option, checked) {
                 if (checked === true) {
@@ -2232,7 +2309,7 @@ $(function () {
                
             },
             checkboxName: function (option) {
-                $('select#ddlb_634').val(option);
+               
                 return 'multiselect[]';
             },
             onDropdownHide: function (event) {
@@ -2240,7 +2317,7 @@ $(function () {
                  var seleccion = $(this).$select;
 
                  var valor = $(data).children('span.multiselect-selected-text').text();
-                $('#btnModificarDades').click();
+               
             }           
             
         });
