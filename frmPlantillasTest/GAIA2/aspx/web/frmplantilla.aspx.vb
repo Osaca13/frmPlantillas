@@ -144,7 +144,7 @@ Public Class frmplantilla
         If Request("id") = "" Then
             'ltEst.Text = "<div class=""contenidor border border-secondary p-2 pr-4 pl-4""><span class=""contenidorAtributs"" style=""display: none;"">#################################################################|</span><div class=""row border border-secondary p-2""><span class=""rowAtributs"" style=""display:none"">###########################|</span><div class=""col cel border border-secondary p-2"" id=""d0""><span class=""divId"" style=""display:none"">0</span><span class=""divImg""></span><span class=""text"">Cel&middot;la inicial</span><span class=""atributs"" style=""display:none"">0#Cel&middot;la inicial##########################|</span></div></div></div> "<span class=""badge-light small"" >section</span>
 
-            ltEst.Text = "<div class=""border border-secondary p-2 pr-4 pl-4"" id=""div0"" style=""background-color: rgb(255, 255, 255);""><span class=""atributs"" style=""display: none;"">div0#Inicio################################################################|</span></div>"
+            ltEst.Text = "<div class=""border border-secondary p-4"" id=""div0"" style=""background-color: rgb(255, 255, 255);""><span class=""atributs"" style=""display: none;"">div0#Inicio################################################################|</span></div>"
             txtEst.Value = ltEst.Text
         Else
             Select Case Request("tipus")

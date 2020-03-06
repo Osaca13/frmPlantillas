@@ -13,6 +13,7 @@
 <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">--%>
 <link rel="stylesheet" href="../../../Styles/formularisGaia.css">
 <link href="img/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
+    <link href="../../../Styles/bootstrap-multiselect.css" rel="stylesheet" />
 <!--[if IE]>
       <link href="https://cdn.jsdelivr.net/gh/coliff/bootstrap-ie8/css/bootstrap-ie9.min.css" rel="stylesheet">
       <script src="https://cdn.jsdelivr.net/g/html5shiv@3.7.3"></script>
@@ -546,11 +547,11 @@
                         <div class="col-4 align-self-start">	
                             <div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="ddlb_648" class="input-group-text">Alineaci&oacute; H.:</label></div>
-                                <asp:DropDownList  ID="ddlb_648"  runat="server" CssClass="custom-select custom-select-sm" multiple="multiple"></asp:DropDownList>
+                                <asp:DropDownList  ID="ddlb_648"  runat="server" CssClass="custom-select custom-select-sm" ></asp:DropDownList>
                             </div>
                             <div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="ddlb_636" class="input-group-text">Alineaci&oacute; V.:</label></div>
-                                <asp:DropDownList  ID="ddlb_636"  runat="server" CssClass="custom-select custom-select-sm" multiple="multiple"></asp:DropDownList>
+                                <asp:DropDownList  ID="ddlb_636"  runat="server" CssClass="custom-select custom-select-sm" ></asp:DropDownList>
                             </div>
                            
                         </div>
@@ -559,7 +560,7 @@
                         	 	
                             <div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="ddlb_630" class="input-group-text">Flex:</label></div>
-                                <asp:DropDownList  ID="ddlb_630"  runat="server" CssClass="custom-select custom-select-sm" multiple="multiple"></asp:DropDownList>
+                                <asp:DropDownList  ID="ddlb_630"  runat="server" CssClass="custom-select custom-select-sm"></asp:DropDownList>
                             </div>
                             <div class="input-group input-group-sm mr-2 mb-3">
                             	<div class="input-group-prepend"><label for="ddlb_653" class="input-group-text">Alertes:</label></div>
@@ -589,11 +590,11 @@
                         <div class="col-4 align-self-start">
                         	 <div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="ddlb_632" class="input-group-text">Alineaci&oacute; H.:</label></div>
-                                <asp:DropDownList  ID="ddlb_632"  runat="server" CssClass="custom-select custom-select-sm" multiple="multiple"></asp:DropDownList>
+                                <asp:DropDownList  ID="ddlb_632"  runat="server" CssClass="custom-select custom-select-sm" ></asp:DropDownList>
                             </div>                             
                             <div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="ddlb_650" class="input-group-text">Alineaci&oacute; V.:</label></div>
-                                <asp:DropDownList  ID="ddlb_650"  runat="server" CssClass="custom-select custom-select-sm" multiple="multiple"></asp:DropDownList>
+                                <asp:DropDownList  ID="ddlb_650"  runat="server" CssClass="custom-select custom-select-sm" ></asp:DropDownList>
                             </div>                           
 						</div>
                         
@@ -613,7 +614,7 @@
                         <div class="col-4 align-self-start">  
                         	<div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="ddlb_651" class="input-group-text">Voreres:</label></div>
-                                <asp:DropDownList  ID="ddlb_651"  runat="server" CssClass="custom-select custom-select-sm" multiple="multiple"></asp:DropDownList>
+                                <asp:DropDownList  ID="ddlb_651"  runat="server" CssClass="custom-select custom-select-sm" ></asp:DropDownList>
                             </div>                      
                             <div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="ddlb_641" class="input-group-text">Tipus voreres:</label></div>
@@ -622,14 +623,14 @@
                             <asp:placeholder runat="server" id="pnlEstilsDefinits">
                             <div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="ddlb_117" class="input-group-text">Estils definits:</label></div>
-                                <asp:DropDownList ID="ddlb_117" runat="server" CssClass="custom-select custom-select-sm" multiple="multiple"></asp:DropDownList>
+                                <asp:DropDownList ID="ddlb_117" runat="server" CssClass="custom-select custom-select-sm" ></asp:DropDownList>
                             </div>
                             </asp:placeholder>
                          </div>
                          <div class="col-4 align-self-start">
                             <div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="ddlb_639" class="input-group-text">Marge exterior:</label></div>
-                                <asp:DropDownList  ID="ddlb_639"  runat="server" CssClass="custom-select custom-select-sm" multiple="multiple"></asp:DropDownList>
+                                <asp:DropDownList  ID="ddlb_639"  runat="server" CssClass="custom-select custom-select-sm" ></asp:DropDownList>
                             </div>
                             <div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="ddlb_635" class="input-group-text">Height:</label></div>
@@ -643,11 +644,11 @@
                         <div class="col-4 align-self-start">  
                             <div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="ddlb_631" class="input-group-text">Marge interior:</label></div>
-                                <asp:DropDownList  ID="ddlb_631"  runat="server" CssClass="custom-select custom-select-sm" multiple="multiple"></asp:DropDownList>
+                                <asp:DropDownList  ID="ddlb_631"  runat="server" CssClass="custom-select custom-select-sm" ></asp:DropDownList>
                             </div>  
                             <div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="ddlb_634" class="input-group-text">Width:</label></div>
-                                <asp:DropDownList  ID="ddlb_634"  runat="server" CssClass="custom-select custom-select-sm" multiple="multiple"></asp:DropDownList>
+                                <asp:DropDownList  ID="ddlb_634"  runat="server" CssClass="custom-select custom-select-sm" ></asp:DropDownList>
                             </div>                                                    
                         </div>
                     </div>
@@ -893,6 +894,7 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="../../../js/bootstrap-multiselect.js"></script>
 <script>
 $(function () {
   var nua = navigator.userAgent
@@ -911,7 +913,7 @@ $(function () {
 
 
 
-<script>
+<script type="text/javascript">
     $(document).ready(function () {
         var element;
        
@@ -1060,40 +1062,40 @@ $(function () {
                         alert("Seleccione un elemento");
                        break;
                    case "div":
-                       var nombre = '<div class = "border border-secondary p-2 pr-4 pl-4" id=' + id + '> <span class="atributs" style="display: none;">#################################################################|</span>' +
+                       var nombre = '<div class = "border border-secondary p-4" id=' + id + '> <span class="atributs" style="display: none;">#################################################################|</span>' +
                            '</div>';
                        break;
                     case "section":
-                       var nombre = '<section class = "border border-secondary p-2 pr-4 pl-4" id=' + id +'> <span class="atributs" style="display: none;">#################################################################|</span>' +
+                       var nombre = '<section class = "border border-secondary p-4" id=' + id +'> <span class="atributs" style="display: none;">#################################################################|</span>' +
                             '</section>';                       
                         break;
                     case "nav":
-                       var nombre = '<nav class = "border border-secondary p-2 pr-4 pl-4" id=' + id +'> <span class="atributs" style="display: none;">#################################################################|</span></nav>';
+                       var nombre = '<nav class = "border border-secondary p-4" id=' + id +'> <span class="atributs" style="display: none;">#################################################################|</span></nav>';
                       
                         break;
                     case "header":
-                       var nombre = '<header class = "border border-secondary p-2 pr-4 pl-4" id=' + id +'><span class="atributs" style="display: none;">#################################################################|</span></header>';
+                       var nombre = '<header class = "border border-secondary p-4" id=' + id +'><span class="atributs" style="display: none;">#################################################################|</span></header>';
                       
                         break;
                     case "article":
-                       var nombre = '<article class = "border border-secondary p-2 pr-4 pl-4" id=' + id +'> <span class="atributs" style="display: none;">#################################################################|</span></article>';
+                       var nombre = '<article class = "border border-secondary p-4" id=' + id +'> <span class="atributs" style="display: none;">#################################################################|</span></article>';
                       
                         break;
                     case "aside":
-                       var nombre = '<aside class = "border border-secondary p-2 pr-4 pl-4" id=' + id +'> <span class="atributs" style="display: none;">#################################################################|</span></aside>';
+                       var nombre = '<aside class = "border border-secondary p-4" id=' + id +'> <span class="atributs" style="display: none;">#################################################################|</span></aside>';
                    
                         break;
                     case "details":
-                       var nombre = '<details class = "border border-secondary p-2 pr-4 pl-4" id=' + id +' > <span class="atributs" style="display: none;">#################################################################|</span></details>';                   
+                       var nombre = '<details class = "border border-secondary p-4" id=' + id +' > <span class="atributs" style="display: none;">#################################################################|</span></details>';                   
                         break;
                     case "footer":
-                       var nombre = '<footer class = "border border-secondary p-2 pr-4 pl-4" id=' + id +' > <span class="atributs" style="display: none;">#################################################################|</span></footer>';                      
+                       var nombre = '<footer class = "border border-secondary p-4" id=' + id +' > <span class="atributs" style="display: none;">#################################################################|</span></footer>';                      
                        break;
                    case "main":
-                       var nombre = '<main class = "border border-secondary p-2 pr-4 pl-4" id=' + id +' > <span class="atributs" style="display: none;">#################################################################|</span></main>';                      
+                       var nombre = '<main class = "border border-secondary p-4" id=' + id +' > <span class="atributs" style="display: none;">#################################################################|</span></main>';                      
                        break;
                    case "summary":
-                       var nombre = '<summary class = "border border-secondary p-2 pr-4 pl-4" id=' + id +'> <span class="atributs" style="display: none;">#################################################################|</span></summary>';                      
+                       var nombre = '<summary class = "border border-secondary p-4" id=' + id +'> <span class="atributs" style="display: none;">#################################################################|</span></summary>';                      
                         break;
                 };
             return nombre;
@@ -2200,20 +2202,47 @@ $(function () {
         });
 
         $('select').on('change', function () {
-            if (this != $('select').attr('id', 'selectContingut')){
+            if ($(this).attr('id') != 'selectContingut'){
                 element = $('#htmlEst').find('*').filter(function () {
                     if (this.style.backgroundColor == 'rgb(227, 252, 255)') {
                         return this;
                     }
                 });
                 if (!jQuery.isEmptyObject(element)) {
-                    if ($(element).prop('tagName').toLowerCase() != 'span') {
+                    if ($(element).prop('tagName') != 'span') {
 
                         $('#btnModificarDades').click();
                     }
                 }
             }      
                     
+        });
+
+        $('select#ddlb_634').attr('multiple', 'multiple');
+        $('select#ddlb_634').css('display', 'none');
+        $('select#ddlb_634').multiselect({
+            buttonWidth: '180px',
+            disableIfEmpty: true,
+            buttonClass: 'custom-select',
+            maxHeight: 200,
+            onChange: function (option, checked) {
+                if (checked === true) {
+                   // alert(option.length + ' options ' + (checked ? 'selected' : 'deselected'));
+                }
+               
+            },
+            checkboxName: function (option) {
+                $('select#ddlb_634').val(option);
+                return 'multiselect[]';
+            },
+            onDropdownHide: function (event) {
+                var data = event.relatedTarget;                   
+                 var seleccion = $(this).$select;
+
+                 var valor = $(data).children('span.multiselect-selected-text').text();
+                $('#btnModificarDades').click();
+            }           
+            
         });
         
     });
@@ -2299,4 +2328,3 @@ $(function () {
 	};	
 
 </script> 
-
