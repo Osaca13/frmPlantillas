@@ -743,22 +743,40 @@ Partial Public Class frmplantilla
     Protected WithEvents ddlb_634 As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''gaiaCodiWebTxt control.
+    '''gaiaCodiWebTxtAbans control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gaiaCodiWebTxt As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents gaiaCodiWebTxtAbans As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''gaiaCodiWebNodes control.
+    '''gaiaCodiWebNodesAbans control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gaiaCodiWebNodes As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents gaiaCodiWebNodesAbans As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''TextBox1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents TextBox1 As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''TextBox2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents TextBox2 As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
     '''pnlLCW2 control.
@@ -770,22 +788,22 @@ Partial Public Class frmplantilla
     Protected WithEvents pnlLCW2 As Global.System.Web.UI.WebControls.PlaceHolder
 
     '''<summary>
-    '''gaiaCodiWeb2Txt control.
+    '''TextBox3 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gaiaCodiWeb2Txt As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents TextBox3 As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''gaiaCodiWeb2Nodes control.
+    '''TextBox4 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gaiaCodiWeb2Nodes As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents TextBox4 As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
     '''pnlPlt control.
@@ -806,22 +824,22 @@ Partial Public Class frmplantilla
     Protected WithEvents pnlPltCamps2 As Global.System.Web.UI.WebControls.PlaceHolder
 
     '''<summary>
-    '''gaiaPltSecTxt control.
+    '''TextBox5 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gaiaPltSecTxt As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents TextBox5 As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''gaiaPltSecNodes control.
+    '''TextBox6 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gaiaPltSecNodes As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents TextBox6 As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
     '''pnlGeneric control.

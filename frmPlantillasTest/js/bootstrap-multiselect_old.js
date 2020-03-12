@@ -1,7 +1,7 @@
 /**
  * Bootstrap Multiselect (http://davidstutz.de/bootstrap-multiselect/)
  *
- * Apache License, Version 2.0:
+ * Apache License, Version 2.0
  * Copyright (c) 2012 - 2018 David Stutz
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -186,6 +186,7 @@
     function Multiselect(select, options) {
 
         this.$select = $(select);
+        //this.$select.find("option:selected").prop("selected", false);
         this.options = this.mergeOptions($.extend({}, options, this.$select.data()));
 
         // Placeholder via data attributes
@@ -389,7 +390,7 @@
              * @param {jQuery} $container
              */
             onInitialized: function($select, $container) {
-
+               var selectedOptions = this.$select.clone()[0].options;
             },
             /**
              * Triggered on filtering.
@@ -403,7 +404,7 @@
             buttonClass: 'btn btn-default',
             inheritClass: false,
             buttonWidth: 'auto',
-            buttonContainer: '<div class="btn-group" />',
+            buttonContainer: '<div class="" />',
             dropRight: false,
             dropUp: false,
             selectedClass: 'active',
@@ -439,7 +440,7 @@
             includeResetDivider: false,
             resetText: 'Reset',
             templates: {
-                button: '<button type="button" class="multiselect dropdown-toggle" data-toggle="dropdown"><span class="multiselect-selected-text"></span> <b class="caret"></b></button>',
+                button: '<button type="button" class="multiselect dropdown-toggle" data-toggle="dropdown"><span class="multiselect-selected-text"></span></button>',
                 ul: '<ul class="multiselect-container dropdown-menu"></ul>',
                 filter: '<li class="multiselect-item multiselect-filter"><div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span><input class="form-control multiselect-search" type="text" /></div></li>',
                 filterClearBtn: '<span class="input-group-btn"><button class="btn btn-default multiselect-clear-filter" type="button"><i class="glyphicon glyphicon-remove-circle"></i></button></span>',
@@ -482,9 +483,11 @@
             // Manually add button width if set.
             if (this.options.buttonWidth && this.options.buttonWidth !== 'auto') {
                 this.$button.css({
-                    'width' : '100%', //this.options.buttonWidth,
+                    'width': '100%', //this.options.buttonWidth,
+                    'font- size': '12px',
                     'overflow' : 'hidden',
-                    'text-overflow' : 'ellipsis'
+                    'text-overflow': 'ellipsis',
+                    'background-color': 'white'
                 });
                 this.$container.css({
                     'width': this.options.buttonWidth
@@ -548,6 +551,7 @@
             this.$select.children().each($.proxy(function(index, element) {
 
                 var $element = $(element);
+               
                 // Support optgroups and options without a group simultaneously.
                 var tag = $element.prop('tagName')
                     .toLowerCase();
@@ -859,7 +863,10 @@
          */
         createOptionValue: function(element) {
             var $element = $(element);
-            if ($element.is(':selected')) {
+            var sisi = $element.prop('defaultSelected');
+
+            //if ($element.is(':defaultSelected')) {
+            if ($element.prop('defaultSelected')) {
                 $element.prop('selected', true);
             }
 
@@ -958,8 +965,9 @@
             }
 
             if (this.options.enableCollapsibleOptGroups && this.options.multiple) {
-                $('a', $li).append('<span class="caret-container"><b class="caret"></b></span>');
+                $('a', $li).append('<span class="caret-container"></span>');
             }
+            //<b class="caret"></b>
 
             if (this.options.enableClickableOptGroups && this.options.multiple) {
                 $('a label', $li).prepend('<input type="checkbox" value="' + value + '"/>');

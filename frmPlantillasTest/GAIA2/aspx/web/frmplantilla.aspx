@@ -26,13 +26,14 @@
 <![endif]-->
 <title>Plantilla web - GAIA2</title>
     <style>
-        .activado{
+        .activo{
             
-            background-color: rgb(227, 252, 255);
+            background:repeating-linear-gradient(45deg, #bbbbbb, #ffffff 10px);
         }
-        .noactivado{
-            background-color: rgb(255, 255, 255);
+        .inactivo{
+            background:none;
         }
+        
 
     </style>
 </head>
@@ -294,7 +295,8 @@
                             </div>
                             <div class="col-sm-6 ">
                                 <h6 class="font-weight-bold">TIPUS CONTENIDOR:</h6>   
-                                <select class="custom-select custom-select-sm" id="selectContingut">
+                                <select class="custom-select custom-select-sm" id="selectContingut" >     
+                                   
                                  <option></option>
                                  <option value="div">div</option>                            
                                  <option value="section">section</option>
@@ -660,6 +662,83 @@
                 </asp:placeholder>
 
                 <div class="row">
+                
+                	<div class="col">
+                        <div class="card bg-light mb-4">
+                            <div class="card-header"><h6 class="font-weight-bold">LLIBRERIA (ABANS DEL CONTINGUT)</h6></div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                <div class="bs-component text-center">
+                                <input type="button"  onClick="window.open('/GAIA/aspx/visorArbresLite.aspx?arbre1=codiWeb&c=gaiaCodiWeb&separador=|&nodesSeleccionats=' + document.getElementById('gaiaCodiWebNodesAbans').value, '_blank', 'location=0,height=800,width=460,scrollbars=yes,resizable=yes'); return false;" value="Seleccionar" id="btnCodisAbans" class="btn btn-sm btn-primary mb-2">
+                                <input type="button" id="eliminarCodiAbans" value="Esborrar" onClick="document.getElementById('gaiaCodiWebNodesAbans').value = ''; document.getElementById('gaiaCodiWebTxtAbans').value = ''; return false;" class="btn btn-sm btn-danger mb-2">
+                                <input type="button"  onClick="window.open('/GAIA/aspx/fulles/editaLCW.htm?nodesSeleccionats=' + document.getElementById('gaiaCodiWebNodesAbans').value, '_blank', 'location=0,height=800,width=400,scrollbars=yes,resizable=yes'); return false;" value="Edita Llibreria" id="btnEditaCodisAbans" class="btn btn-sm btn-success mb-2" >
+                                </div>
+                                <asp:TextBox ID="gaiaCodiWebTxtAbans" runat="server" AutoPostBack="False"  Rows="4" ContentEditable="false" TextMode="MultiLine"  CssClass="form-control form-control-sm mb-3"/>
+                                <asp:TextBox ID="gaiaCodiWebNodesAbans" runat="server"  CssClass="form-control form-control-sm" placeholder="Codi node de la llibreria"/>
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+                
+                    <div class="col">
+                        <div class="card bg-light mb-4">
+                            <div class="card-header"><h6 class="font-weight-bold">LLIBRERIA (DINS DEL CONTINGUT)</h6></div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                <div class="bs-component text-center">
+                                <input type="button"  onClick="window.open('/GAIA/aspx/visorArbresLite.aspx?arbre1=codiWeb&c=gaiaCodiWeb&separador=|&nodesSeleccionats=' + document.getElementById('gaiaCodiWebNodes').value, '_blank', 'location=0,height=800,width=460,scrollbars=yes,resizable=yes'); return false;" value="Seleccionar" id="btnCodisDins" class="btn btn-sm btn-primary mb-2">
+                                <input type="button" id="eliminarCodiDins" value="Esborrar" onClick="document.getElementById('gaiaCodiWebNodes').value = ''; document.getElementById('gaiaCodiWebTxt').value = ''; return false;" class="btn btn-sm btn-danger mb-2">
+                                <input type="button"  onClick="window.open('/GAIA/aspx/fulles/editaLCW.htm?nodesSeleccionats=' + document.getElementById('gaiaCodiWebNodes').value, '_blank', 'location=0,height=800,width=400,scrollbars=yes,resizable=yes'); return false;" value="Edita Llibreria" id="btnEditaCodisDins" class="btn btn-sm btn-success mb-2" >
+                                </div>
+                                <asp:TextBox ID="TextBox1" runat="server" AutoPostBack="False"  Rows="4" ContentEditable="false" TextMode="MultiLine"  CssClass="form-control form-control-sm mb-3"/>
+                                <asp:TextBox ID="TextBox2" runat="server"  CssClass="form-control form-control-sm" placeholder="Codi node de la llibreria"/>
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+                    
+                    <asp:placeholder runat="server" id="pnlLCW2">
+                    <div class="col">
+                        <div class="card bg-light mb-4">                
+                            <div class="card-header"><h6 class="font-weight-bold">LLIBRERIA (DESPR&Eacute;S DEL CONTINGUT)</h6></div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <div class="bs-component text-center">
+                                    <input type="button"  onClick="window.open('/GAIA/aspx/visorArbresLite.aspx?arbre1=codiWeb&c=gaiaCodiWeb2&separador=|&nodesSeleccionats=' + document.getElementById('gaiaCodiWeb2Nodes').value, '_blank', 'location=0,height=800,width=460,scrollbars=yes,resizable=yes'); return false;" value="Seleccionar" id="btnCodis2" class="btn btn-sm btn-primary mb-2">
+                                    <input type="button" id="eliminarCodiDespres" value="Esborrar" onClick="document.getElementById('gaiaCodiWeb2Nodes').value = ''; document.getElementById('gaiaCodiWeb2Txt').value = ''; return false;" class="btn btn-sm btn-danger mb-2">
+                                    <input type="button"  onClick="window.open('/GAIA/aspx/fulles/editaLCW.htm?nodesSeleccionats=' + document.getElementById('gaiaCodiWeb2Nodes').value, '_blank', 'location=0,height=800,width=400,scrollbars=yes,resizable=yes'); return false;" value="Edita Llibreria" id="btnEditaCodis2" class="btn btn-sm btn-success mb-2">
+                                    </div>
+                                    <div class="form-group">
+                                    <asp:TextBox ID="TextBox3" runat="server" AutoPostBack="False" Rows="4" ContentEditable="false" TextMode="MultiLine" CssClass="form-control form-control-sm mb-3"/>
+                                    <asp:TextBox ID="TextBox4" runat="server" CssClass="form-control form-control-sm" placeholder="Codi node de la llibreria"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </asp:placeholder>
+                    
+                    <asp:placeholder runat="server" id="pnlPlt">
+                    <div class="col">
+                        <div class="card bg-light mb-4">
+                            <div class="card-header"><h6 class="font-weight-bold">PLANTILLA <asp:placeholder runat="server" id="pnlPltCamps2" visible="false">SECUND&Agrave;RIA</asp:placeholder></h6></div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <div class="bs-component text-center">
+                                    <input type="button"  onClick="window.open('/GAIA/aspx/visorArbresLite.aspx?arbre1=plantillaWeb&c=gaiaPltSec&nodesSeleccionats=' + document.getElementById('gaiaPltSecNodes').value, '_blank', 'location=0,height=800,width=460,scrollbars=yes,resizable=yes'); return false;" value="Seleccionar" id="btnCodis3" class="btn btn-sm btn-primary mb-2" >
+                                    <input type="button" id="btnEliminarPltSec" value="Esborrar" onClick="document.getElementById('gaiaPltSecNodes').value = ''; document.getElementById('gaiaPltSecTxt').value = ''; return false;"  class="btn btn-sm btn-danger mb-2">
+                                    <input type="button"  onClick="window.open('/GAIA/aspx/web/editaPlantilla.htm?nodesSeleccionats=' + document.getElementById('gaiaPltSecNodes').value, '_blank', 'location=0,height=800,width=400,scrollbars=yes,resizable=yes'); return false;" value="Edita Plantilla" id="btnEditaPlt2"  class="btn btn-sm btn-success mb-2" >
+                                    </div>
+                                    <asp:TextBox ID="TextBox5" runat="server" AutoPostBack="False" Rows="4" ContentEditable="false" TextMode="MultiLine"  CssClass="form-control form-control-sm mb-3"/>
+                                    <asp:TextBox ID="TextBox6" runat="server" CssClass="form-control form-control-sm" placeholder="Codi node de la llibreria"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </asp:placeholder> 
+                </div>
+
+                <%--<div class="row">
                     <div class="col">
                         <div class="card bg-light mb-4">
                             <div class="card-header"><h6 class="font-weight-bold">LLIBRERIA (ABANS DEL CONTINGUT)</h6></div>
@@ -676,7 +755,7 @@
                              </div>
                         </div>
                     </div>
-                    
+               
                     <asp:placeholder runat="server" id="pnlLCW2">
                     <div class="col">
                         <div class="card bg-light mb-4">                
@@ -716,7 +795,7 @@
                         </div>
                     </div>
                     </asp:placeholder> 
-                </div>
+                </div>--%>
 
                 <asp:placeholder runat="server" id="pnlGeneric">
                 <div class="card bg-light mb-4">                	
@@ -920,27 +999,25 @@ $(function () {
 <script type="text/javascript">
     $(document).ready(function () {
         var element;
-       
-        var nroId = parseInt($("#nroId").val()); 
-        
-       // $("div").on("click",".cel", function () {
+
+        var nroId = parseInt($("#nroId").val());
+
+        // $("div").on("click",".cel", function () {
         function readValues(valor) {
-           
-             var strAtr = "";
-           
-            strAtr = $(valor).find("*").filter(function () { return $(this).css("display") == "none" }).text();
+
+            var strAtr = "";
+
+            strAtr = $(valor).children("span.atributs").text();
+
             if (!jQuery.isEmptyObject(strAtr)) {
 
                 var arrAtr = strAtr.substring(0, strAtr.length - 1).split("#");
-
                 $("#txtIdCel").val(arrAtr[0]);
-
                 $("#txtNomCel").val(arrAtr[1]);
 
                 DadesMides(arrAtr)
                 //continguts
                 $("#lstTipusFulla").val(arrAtr[7]);
-
                 //<asp:Literal runat="server" id="ltCanviCampsDb" />
                 $("#ddlPLTDSCMP").val(arrAtr[8]);
                 $("#ddlPLTDSLNK").val(arrAtr[9]);
@@ -973,7 +1050,7 @@ $(function () {
 
             }
             var icona = "";
-                modificaIcona(valor);           
+            modificaIcona(valor);
 
             return false;
         };
@@ -1022,7 +1099,8 @@ $(function () {
             $("#ddlb_631").val(arrAtr[47]);
             $("#ddlb_632").val(arrAtr[48]);
             $("#ddlb_633").val(arrAtr[49]);
-            $("#ddlb_634").val(arrAtr[50]);
+            // $("#ddlb_634").val(arrAtr[50]);
+            setSelectedOptions('ddlb_634', arrAtr[50]);
             $("#ddlb_635").val(arrAtr[51]);
             $("#ddlb_636").val(arrAtr[52]);
             $("#ddlb_637").val(arrAtr[53]);
@@ -1040,149 +1118,140 @@ $(function () {
             $("#ddlb_655").val(arrAtr[65]);
         };
 
+        function setSelectedOptions(id, options) {
+            var arregloDeOpciones = options.split(',');
+            if (arregloDeOpciones.length > 1) {
+                $.each(arregloDeOpciones, function (index, item) {
+                    $('#' + id).children('option[value=' + item + ']').attr("selected", "selected");
+                });
+            } else {
+                $('#' + id).val(options);
+            }
+            if ($('#' + id).prop('tagName') == 'SELECT') {
+                selectClick(id);
+            }
+        };
 
         function RowsAndColumns(type) {
-            
-            var contenidor = ""; 
+
+            var contenidor = "";
             var id = type + nroId.toString();
-                // $('#htmlEst').find('.' + type).length; 
+            // $('#htmlEst').find('.' + type).length; 
             switch (type) {
-                case true, "row":                   
-                    contenidor = '<div class= "row border border-secondary p-2 " id="' + id + '" style="background-color: rgb(255, 255, 255);"><span class="atributs" style="display: none;">#################################################################|</span></div>';                   
+                case true, "row":
+                    contenidor = '<div class= "row border border-secondary p-2 inactivo " id="' + id + '"><span class="atributs" style="display: none;">#################################################################|</span></div>';
                     break;
-                case "col":                    
-                    contenidor = '<div class= "col border border-secondary p-2 " id="' + id + '" style="background-color: rgb(255, 255, 255);"><span class="atributs" style="display: none;">#################################################################|</span></div>';                    
-                    break;            
-            };           
+                case "col":
+                    contenidor = '<div class= "col border border-secondary p-2 inactivo" id="' + id + '"><span class="atributs" style="display: none;">#################################################################|</span></div>';
+                    break;
+            };
             return contenidor;
         };
 
-         function Tipus(nroId){
-               var nombre = "";
-               var id = $('#selectContingut').children('option:selected').val() + nroId;
-              
-               switch ($('#selectContingut').children('option:selected').val()) {
-                    case "":
-                        alert("Seleccione un elemento");
-                       break;
-                   case "div":
-                       var nombre = '<div class = "border border-secondary p-4" id=' + id + '> <span class="atributs" style="display: none;">#################################################################|</span>' +
-                           '</div>';
-                       break;
-                    case "section":
-                       var nombre = '<section class = "border border-secondary p-4" id=' + id +'> <span class="atributs" style="display: none;">#################################################################|</span>' +
-                            '</section>';                       
-                        break;
-                    case "nav":
-                       var nombre = '<nav class = "border border-secondary p-4" id=' + id +'> <span class="atributs" style="display: none;">#################################################################|</span></nav>';
-                      
-                        break;
-                    case "header":
-                       var nombre = '<header class = "border border-secondary p-4" id=' + id +'><span class="atributs" style="display: none;">#################################################################|</span></header>';
-                      
-                        break;
-                    case "article":
-                       var nombre = '<article class = "border border-secondary p-4" id=' + id +'> <span class="atributs" style="display: none;">#################################################################|</span></article>';
-                      
-                        break;
-                    case "aside":
-                       var nombre = '<aside class = "border border-secondary p-4" id=' + id +'> <span class="atributs" style="display: none;">#################################################################|</span></aside>';
-                   
-                        break;
-                    case "details":
-                       var nombre = '<details class = "border border-secondary p-4" id=' + id +' > <span class="atributs" style="display: none;">#################################################################|</span></details>';                   
-                        break;
-                    case "footer":
-                       var nombre = '<footer class = "border border-secondary p-4" id=' + id +' > <span class="atributs" style="display: none;">#################################################################|</span></footer>';                      
-                       break;
-                   case "main":
-                       var nombre = '<main class = "border border-secondary p-4" id=' + id +' > <span class="atributs" style="display: none;">#################################################################|</span></main>';                      
-                       break;
-                   case "summary":
-                       var nombre = '<summary class = "border border-secondary p-4" id=' + id +'> <span class="atributs" style="display: none;">#################################################################|</span></summary>';                      
-                        break;
-                };
+        function Tipus(nroId) {
+            var nombre = "";
+            var id = $('#selectContingut').children('option:selected').val() + nroId;
+
+            switch ($('#selectContingut').children('option:selected').val()) {
+                case "":
+                    alert("Seleccione un elemento");
+                    break;
+                case "div":
+                    var nombre = '<div class = "border border-secondary p-4 inactivo" id=' + id + '> <span class="atributs" style="display: none;">#################################################################|</span>' +
+                        '</div>';
+                    break;
+                case "section":
+                    var nombre = '<section class = "border border-secondary p-4 inactivo" id=' + id + '> <span class="atributs" style="display: none;">#################################################################|</span>' +
+                        '</section>';
+                    break;
+                case "nav":
+                    var nombre = '<nav class = "border border-secondary p-4 inactivo" id=' + id + '> <span class="atributs" style="display: none;">#################################################################|</span></nav>';
+
+                    break;
+                case "header":
+                    var nombre = '<header class = "border border-secondary p-4 inactivo" id=' + id + '><span class="atributs" style="display: none;">#################################################################|</span></header>';
+
+                    break;
+                case "article":
+                    var nombre = '<article class = "border border-secondary p-4 inactivo" id=' + id + '> <span class="atributs" style="display: none;">#################################################################|</span></article>';
+
+                    break;
+                case "aside":
+                    var nombre = '<aside class = "border border-secondary p-4 inactivo" id=' + id + '> <span class="atributs" style="display: none;">#################################################################|</span></aside>';
+
+                    break;
+                case "details":
+                    var nombre = '<details class = "border border-secondary p-4 inactivo" id=' + id + ' > <span class="atributs" style="display: none;">#################################################################|</span></details>';
+                    break;
+                case "footer":
+                    var nombre = '<footer class = "border border-secondary p-4 inactivo" id=' + id + ' > <span class="atributs" style="display: none;">#################################################################|</span></footer>';
+                    break;
+                case "main":
+                    var nombre = '<main class = "border border-secondary p-4 inactivo" id=' + id + ' > <span class="atributs" style="display: none;">#################################################################|</span></main>';
+                    break;
+                case "summary":
+                    var nombre = '<summary class = "border border-secondary p-4 inactivo" id=' + id + '> <span class="atributs" style="display: none;">#################################################################|</span></summary>';
+                    break;
+            };
             return nombre;
-       };
+        };
 
         $("#btnAfegirContenidorAbans").click(function () {
             //gravo canvis en la cel·la actual
             //$("#btnModificarDades").click();
-            
+
             nroId++;
-        
-            element = $('#htmlEst').find('*').filter(function () {                
-                if (this.style.backgroundColor == 'rgb(227, 252, 255)') {
+
+            element = $('#htmlEst').find('*').filter(function () {
+                if ($(this).hasClass('activo')) {
                     return this;
+                } else {
+                    return null;
                 }
             });
-            if (!jQuery.isEmptyObject(element)) {  
+            if (!jQuery.isEmptyObject(element)) {
                 var valor = Tipus(nroId);
-                $(element).before(valor);   
-                $(element).css("background-color", "rgb(255, 255, 255)");
+                $(element).before(valor);
+                $(element).removeClass('activo').addClass('inactivo');
                 readValues(valor);
                 var IdValor = $(valor).attr('id');
                 $('#txtIdCel').removeAttr('value');
                 $('#txtIdCel').val(IdValor);
-                $('#'+IdValor).css("background-color", "rgb(227, 252, 255)" );
+                $('#' + IdValor).removeClass('inactivo').addClass('activo');
                 $('#btnModificarDades').click();
-            }else{
+            } else {
                 alert("Active un contenidor");
             };
-
-
-            //if (element.length > 0) {
-            //    var element = $('#htmlEst').find('.activado');
-            //     $(element).after(Tipus());                        
-                
-            //}else{
-            //    alert("Active un contenidor");
-            //};
-
-
-            //if (jQuery.isEmptyObject()) {
-                
-            // }
-            //else {
-            //    var elementoNuevo = $('#selectContingut').children('option:selected').val();
-
-            //     var nombre = '<' +  elementoNuevo + ' class = "border border-primary" onclick = "activado(this)"> <span class="badge-light">' + elementoNuevo + '</span> <span class= "'+  elementoNuevo +'Atributs" style="display: none;">#################################################################|</span>' +
-            //         '</' +  elementoNuevo + '>';
-            //    $('section').append(nombre);
-            //    $('section').css('align-items', 'center');
-            //     var cambiaElemento = $('section').find(elementoNuevo);
-            //     $(cambiaElemento).css('margin', '5%');
-            // }         
-                
-            
             //guardo els canvis 
             $("#txtEst").val($("#htmlEst").html());
-        });             
+        });
 
         $("#btnAfegirContenidorDespres").click(function () {
             //gravo canvis en la cel·la actual
-            nroId++;          
-            
-            element = $('#htmlEst').find('*').filter(function () {                
-                if (this.style.backgroundColor == 'rgb(227, 252, 255)') {
+            nroId++;
+
+            element = $('#htmlEst').find('*').filter(function () {
+                if ($(this).hasClass('activo')) {
                     return this;
+                } else {
+                    return null;
                 }
             });
 
             if (!jQuery.isEmptyObject(element)) {
                 var valor = Tipus(nroId);
-                $(element).after(valor);                        
-                $(element).css('background-color', function () { return 'rgb(255, 255, 255)'; });
+                $(element).after(valor);
+                $(element).removeClass('activo').addClass('inactivo');
                 readValues(valor);
                 var IdValor = $(valor).attr('id');
                 $('#txtIdCel').removeAttr('value');
                 $('#txtIdCel').val(IdValor);
-                $('#'+IdValor).css("background-color", "rgb(227, 252, 255)" );
+                $('#' + IdValor).removeClass('inactivo').addClass('activo');
                 $('#btnModificarDades').click();
-            }else{
+            } else {
                 alert("Active un contenidor");
             };
-            
+
             //guardo els canvis 
             $("#txtEst").val($("#htmlEst").html());
         });
@@ -1191,26 +1260,28 @@ $(function () {
             nroId++;
             //gravo canvis en la cel·la actual
             //$("#btnModificarDades").click();
-            element = $('#htmlEst').find('*').filter(function () {                
-                if (this.style.backgroundColor == 'rgb(227, 252, 255)') {
+            element = $('#htmlEst').find('*').filter(function () {
+                if ($(this).hasClass('activo')) {
                     return this;
+                } else {
+                    return null;
                 }
             });
 
             if (!jQuery.isEmptyObject(element)) {
                 var lastSpan = $(element).children('span').last();
                 var valor = Tipus(nroId);
-                $(lastSpan).after(valor);                       
-                $(element).css('background-color', function () { return 'rgb(255, 255, 255)'; }); 
+                $(lastSpan).after(valor);
+                $(element).removeClass('activo').addClass('inactivo');
 
                 readValues(valor);
                 var IdValor = $(valor).attr('id');
                 $('#txtIdCel').removeAttr('value');
                 $('#txtIdCel').val(IdValor);
-                $('#'+IdValor).css("background-color", "rgb(227, 252, 255)" );
+                $('#' + IdValor).removeClass('inactivo').addClass('activo');
                 $('#btnModificarDades').click();
-                
-            }else{
+
+            } else {
                 alert("Active un contenidor");
             };
 
@@ -1227,23 +1298,25 @@ $(function () {
             //    nroId++;
             //    element.parent(".contenidor").append("<div class='row border border-secondary p-2'><span class='rowAtributs' style='display: none;'>#################################################################|</span><div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display: none;'>" + nroId + "#cel################################################################|</span></div></div>");
             //}
-            element = $('#htmlEst').find('*').filter(function () {                
-                if (this.style.backgroundColor == 'rgb(227, 252, 255)') {
+            element = $('#htmlEst').find('*').filter(function () {
+                if ($(this).hasClass('activo')) {
                     return this;
+                } else {
+                    return null;
                 }
             });
 
             if (!jQuery.isEmptyObject(element)) {
                 var valor = Tipus(nroId);
-                $(element).append(valor);                        
-                $(element).css('background-color', function () { return 'rgb(255, 255, 255)'; }); 
+                $(element).append(valor);
+                $(element).removeClass('activo').addClass('inactivo');
                 readValues(valor);
                 var IdValor = $(valor).attr('id');
                 $('#txtIdCel').removeAttr('value');
                 $('#txtIdCel').val(IdValor);
-                $('#'+IdValor).css("background-color", "rgb(227, 252, 255)" );
+                $('#' + IdValor).removeClass('inactivo').addClass('activo');
                 $('#btnModificarDades').click();
-            }else{
+            } else {
                 alert("Active un contenidor");
             };
             //guardo els canvis 		
@@ -1254,53 +1327,57 @@ $(function () {
         $("#btnAfegirFilaDinsDespres").click(function () {
             nroId++;
             //gravo canvis en la cel·la actual
-           
-           element = $('#htmlEst').find('*').filter(function () {                
-                if (this.style.backgroundColor == 'rgb(227, 252, 255)') {
-                   return this;
+
+            element = $('#htmlEst').find('*').filter(function () {
+                if ($(this).hasClass('activo')) {
+                    return this;
+                } else {
+                    return null;
                 }
             });
 
-            if (!jQuery.isEmptyObject(element)) {                
+            if (!jQuery.isEmptyObject(element)) {
                 var elementToInsert = RowsAndColumns('row');
-                $(element).append(elementToInsert); 
-                $(element).css('background-color', function () { return 'rgb(255, 255, 255)'; });    
+                $(element).append(elementToInsert);
+                $(element).removeClass('activo').addClass('inactivo');
                 readValues(elementToInsert);
                 var IdValor = $(elementToInsert).attr('id');
                 $('#txtIdCel').removeAttr('value');
                 $('#txtIdCel').val(IdValor);
-                $('#'+IdValor).css("background-color", "rgb(227, 252, 255)" );
+                $('#' + IdValor).removeClass('inactivo').addClass('activo');
                 $('#btnModificarDades').click();
-            }else{
+            } else {
                 alert("Active un contenidor");
             };
             //guardo els canvis 		
-            $("#txtEst").val($("#htmlEst").html());            
+            $("#txtEst").val($("#htmlEst").html());
         });
 
         //afegir fila en el nivell adins
         $("#btnAfegirFilaDinsAbans").click(function () {
             nroId++;
             //gravo canvis en la cel·la actual
-            
-            element = $('#htmlEst').find('*').filter(function () {                
-                if (this.style.backgroundColor == 'rgb(227, 252, 255)') {
+
+            element = $('#htmlEst').find('*').filter(function () {
+                if ($(this).hasClass('activo')) {
                     return this;
+                } else {
+                    return null;
                 }
             });
-              
-            if (!jQuery.isEmptyObject(element)) {                
+
+            if (!jQuery.isEmptyObject(element)) {
                 var elementToInsert = RowsAndColumns('row');
                 var lastSpan = $(element).children('span').last();
-                $(lastSpan).after(elementToInsert);               
-                $(element).css('background-color', function () { return 'rgb(255, 255, 255)'; });   
+                $(lastSpan).after(elementToInsert);
+                $(element).removeClass('activo').addClass('inactivo');
                 readValues(elementToInsert);
                 var IdValor = $(elementToInsert).attr('id');
                 $('#txtIdCel').removeAttr('value');
                 $('#txtIdCel').val(IdValor);
-                $('#'+IdValor).css("background-color", "rgb(227, 252, 255)" );
+                $('#' + IdValor).removeClass('inactivo').addClass('activo');
                 $('#btnModificarDades').click();
-            }else{
+            } else {
                 alert("Active un contenidor");
             };
             //guardo els canvis 		
@@ -1311,10 +1388,12 @@ $(function () {
         $("#btnAfegirColumnaDinsAbans").click(function () {
             nroId++;
             //gravo canvis en la cel·la actual
-           
+
             element = $('#htmlEst').find('*').filter(function () {
-                if (this.style.backgroundColor == 'rgb(227, 252, 255)') {
+                if ($(this).hasClass('activo')) {
                     return this;
+                } else {
+                    return null;
                 }
             });
 
@@ -1330,12 +1409,12 @@ $(function () {
                         alert('primero inserte una fila');
                     }
                 }
-                $(element).css('background-color', function () { return 'rgb(255, 255, 255)'; });
+                $(element).removeClass('activo').addClass('inactivo');
                 readValues(elementToInsert);
                 var IdValor = $(elementToInsert).attr('id');
                 $('#txtIdCel').removeAttr('value');
                 $('#txtIdCel').val(IdValor);
-                $('#'+IdValor).css("background-color", "rgb(227, 252, 255)" );
+                $('#' + IdValor).removeClass('inactivo').addClass('activo');
                 $('#btnModificarDades').click();
             } else {
                 alert("Active un contenidor");
@@ -1356,10 +1435,12 @@ $(function () {
         $("#btnAfegirColumnaDinsDespres").click(function () {
             nroId++;
             //gravo canvis en la cel·la actual
-            
+
             element = $('#htmlEst').find('*').filter(function () {
-                if (this.style.backgroundColor == 'rgb(227, 252, 255)') {
+                if ($(this).hasClass('activo')) {
                     return this;
+                } else {
+                    return null;
                 }
             });
 
@@ -1375,38 +1456,41 @@ $(function () {
                         alert('primero inserte una fila');
                     }
                 }
-                $(element).css('background-color', function () { return 'rgb(255, 255, 255)'; });
+                $(element).removeClass('activo').addClass('inactivo');
                 readValues(elementToInsert);
                 var IdValor = $(elementToInsert).attr('id');
                 $('#txtIdCel').removeAttr('value');
                 $('#txtIdCel').val(IdValor);
-                $('#'+IdValor).css("background-color", "rgb(227, 252, 255)" );
+                $('#' + IdValor).removeClass('inactivo').addClass('activo');
                 $('#btnModificarDades').click();
             } else {
                 alert("Active un contenidor");
             };
-            
+
             //guardo els canvis 
             $("#txtEst").val($("#htmlEst").html());
         });
 
-        $("#btnEsborrarCel").click(function () {            
+        $("#btnEsborrarCel").click(function () {
             //buscar elemento activo para borrar
             element = $('#htmlEst').find('*').filter(function () {
-                if (this.style.backgroundColor == 'rgb(227, 252, 255)') {
+                if ($(this).hasClass('activo')) {
                     return this;
+                } else {
+                    return null;
                 }
             });
+
             if (!jQuery.isEmptyObject(element)) {
                 if ($(element).prop('tagName').toLowerCase() == 'span' && $(element).hasClass('text')) {
                     $(element).siblings('.divImg').remove();
                     $(element).remove();
                 } else {
                     $(element).remove();
-                }                
+                }
             } else {
                 alert("No hay elemento activado");
-            };            
+            };
             //guardo els canvis 
             $("#txtEst").val($("#htmlEst").html());
         });
@@ -1432,23 +1516,25 @@ $(function () {
 
             /* Copy the text inside the text field */
             document.execCommand("copy");
-        });              
+        });
 
         $("#btnModificarDadesCel").click(function () {
 
             var strAtr = "";
 
             element = $('#htmlEst').find('*').filter(function () {
-                if (this.style.backgroundColor == 'rgb(227, 252, 255)') {
+                if ($(this).hasClass('activo')) {
                     return this;
+                } else {
+                    return null;
                 }
             });
 
             if (!jQuery.isEmptyObject(element)) {
                 //element.find("span.text").text($("#txtNomCel").val());
-                
+
                 strAtr += $("#txtIdCel").val() + "#" + $("#txtNomCel").val(); //1#2
-               
+
                 strAtr = DadesComunsMides(strAtr, element);
 
                 strAtr += "#";
@@ -1522,7 +1608,7 @@ $(function () {
 
                 modificaIcona(element);
                 //afegeixo els atributs a l'array de propietats
-                $(element).find("span").filter(function () { return $(this).css("display") == "none" }).text(strAtr);
+                $(element).children("span").filter(function () { return $(this).css("display") == "none" }).text(strAtr);
 
                 //guardo els canvis 
                 $("#txtEst").val($("#htmlEst").html());
@@ -1538,8 +1624,8 @@ $(function () {
             if (!jQuery.isEmptyObject(element)) {
 
                 //if (element.hasClass('cel')) {   // element: el ultimo div que se ha clicado
-                    $("#btnModificarDadesCel").click();
-                    return true;
+                $("#btnModificarDadesCel").click();
+                return true;
                 //}
                 //else if (element.hasClass('row')) {
                 //    ModificarDadesRow();
@@ -1551,13 +1637,13 @@ $(function () {
                 //    ModificarDadesContenidor();
                 //}
 
-               //guardo els canvis 
+                //guardo els canvis 
                 $("#txtEst").val($("#htmlEst").html());
             }
         });
 
         function ModificarDadesContenidor() {
-            
+
             element.removeClass();
             element.addClass("contenidor contenidorActiu border border-secondary p-2 pr-4 pl-4");
             element.find("span.contenidorAtributs").text("");
@@ -1579,7 +1665,7 @@ $(function () {
 
             element.find("span.rowAtributs").text(strAtr);
             //guardo els canvis 
-           $("#txtEst").val($("#htmlEst").html());
+            $("#txtEst").val($("#htmlEst").html());
 
         }
 
@@ -1600,16 +1686,16 @@ $(function () {
 
         };
 
-        function ComposicionTextoAtributos(){
+        function ComposicionTextoAtributos() {
             var strAtr = "#";
             strAtr = DadesComunsMides(strAtr, element);
             strAtr += "#####";
             strAtr = DadesComunsLlibrerias(strAtr);
-            strAtr +="#########"
+            strAtr += "#########"
             strAtr = DadesComunsEstils(strAtr, element);
 
             return strAtr;
-        }
+        };
 
         function DadesComunsLlibrerias(strAtr) {
 
@@ -1629,25 +1715,25 @@ $(function () {
             if ($("#gaiaCodiWeb2Nodes").val() != null) {
                 strAtr += $("#gaiaCodiWeb2Nodes").val().trim();//16
             }
-             strAtr += "#";
+            strAtr += "#";
             if ($("#gaiaPltSecTxt").val() != null) {
-               strAtr += $("#gaiaPltSecTxt").val().trim(); //17
+                strAtr += $("#gaiaPltSecTxt").val().trim(); //17
             }
             strAtr += "#";
             if ($("#gaiaPltSecNodes").val() != null) {
-               strAtr += $("#gaiaPltSecNodes").val().trim(); //18
+                strAtr += $("#gaiaPltSecNodes").val().trim(); //18
             }
             return strAtr;
-        }
+        };
 
         function DadesComunsMides(strAtr, element) {
 
             strAtr += "#";
             var data = $("#ddlXs").children("option:selected").text();
-            if (!jQuery.isEmptyObject(data) ) {
-            //    contadorMides++;
+            if (!jQuery.isEmptyObject(data)) {
+                //    contadorMides++;
                 RemoveClassInElement(element, new RegExp("col-xs"));
-                if (data!= 'Tot') {                    
+                if (data != 'Tot') {
                     $(element).addClass("col-xs-" + data);
                     strAtr += data;  //#3
                 }
@@ -1662,7 +1748,7 @@ $(function () {
             if (!jQuery.isEmptyObject(data)) {
                 //$("#ddlSm").val() != '') {
                 RemoveClassInElement(element, new RegExp("col-sm"));
-             //   contadorMides++;
+                //   contadorMides++;
                 if (data != 'Tot') {
                     $(element).addClass("col-sm-" + data);
                     strAtr += data; //4
@@ -1676,7 +1762,7 @@ $(function () {
             var data = $("#ddlMd").children("option:selected").text();
             if (!jQuery.isEmptyObject(data)) {
                 RemoveClassInElement(element, new RegExp("col-md"));
-              //  contadorMides++;
+                //  contadorMides++;
                 if (data != 'Tot') {
                     $(element).addClass("col-md-" + data);
                     strAtr += data; //5
@@ -1690,7 +1776,7 @@ $(function () {
             var data = $("#ddlLg").children("option:selected").text();
             if (!jQuery.isEmptyObject(data)) {
                 RemoveClassInElement(element, new RegExp("col-lg"));
-              //  contadorMides++;
+                //  contadorMides++;
                 if (data != 'Tot') {
                     $(element).addClass("col-lg-" + data);
                     strAtr += data; //6
@@ -1704,7 +1790,7 @@ $(function () {
             var data = $("#ddlXl").children("option:selected").text();
             if (!jQuery.isEmptyObject(data)) {
                 RemoveClassInElement(element, new RegExp("col-xl"));
-              //  contadorMides++;
+                //  contadorMides++;
                 if (data != 'Tot') {
                     $(element).addClass("col-xl-" + data);
                     strAtr += data; //7
@@ -1715,472 +1801,152 @@ $(function () {
                 }
             }
             return strAtr;
-        }
+        };
 
 
         function DadesComunsEstils(strAtr, element) {
-            
-            strAtr += "#";
-            var data = $("#ddl_23").children("option:selected").text();
-            if (!jQuery.isEmptyObject(data)) {
-                $.map($('#ddlb_23 option'), function (e) {
-                    if (!jQuery.isEmptyObject($(e).text())) {
-                        RemoveClassInElement(element, new RegExp($(e).text()));
-                    };
-                });
-                strAtr += data;
-                $(element).addClass(data);//28
-            }
 
             strAtr += "#";
-            var data = $("#ddl_25").children("option:selected").text();
-            if (!jQuery.isEmptyObject(data)) {
-                $.map($('#ddlb_25 option'), function (e) {
-                    if (!jQuery.isEmptyObject($(e).text())) {
-                        RemoveClassInElement(element, new RegExp($(e).text()));
-                    };
-                });
-                strAtr += data;
-                $(element).addClass(data);//29
-            }
+            strAtr = getSelectedOptions(strAtr, 'ddlb_23', element);//51
 
             strAtr += "#";
-            var data = $("#ddl_26").children("option:selected").text();
-            if (!jQuery.isEmptyObject(data)) {
-                $.map($('#ddlb_26 option'), function (e) {
-                    if (!jQuery.isEmptyObject($(e).text())) {
-                        RemoveClassInElement(element, new RegExp($(e).text()));
-                    };
-                });
-                strAtr += data;
-                $(element).addClass(data);//30
-            }
+            strAtr = getSelectedOptions(strAtr, 'ddlb_25', element);//29
 
             strAtr += "#";
-            var data = $("#ddl_27").children("option:selected").text();
-            if (!jQuery.isEmptyObject(data)) {
-                $.map($('#ddlb_27 option'), function (e) {
-                    if (!jQuery.isEmptyObject($(e).text())) {
-                        RemoveClassInElement(element, new RegExp($(e).text()));
-                    };
-                });
-                strAtr += data;
-                $(element).addClass(data);//31
-            }
+            strAtr = getSelectedOptions(strAtr, 'ddlb_26', element);//30
 
             strAtr += "#";
-            var data = $("#ddl_28").children("option:selected").text();
-            if (!jQuery.isEmptyObject(data)) {
-                $.map($('#ddlb_28 option'), function (e) {
-                    if (!jQuery.isEmptyObject($(e).text())) {
-                        RemoveClassInElement(element, new RegExp($(e).text()));
-                    };
-                });
-                strAtr += $("#ddlb_28").val();
-                $(element).addClass($("#ddlb_28 option:selected").text());//32
-            }
-            strAtr += "#";
-            var data = $("#ddl_103").children("option:selected").text();
-            if (!jQuery.isEmptyObject(data)) {
-                $.map($('#ddlb_103 option'), function (e) {
-                    if (!jQuery.isEmptyObject($(e).text())) {
-                        RemoveClassInElement(element, new RegExp($(e).text()));
-                    };
-                });
-                strAtr += $("#ddlb_103").val();
-                $(element).addClass($("#ddlb_103 option:selected").text());//33
-            }
+            strAtr = getSelectedOptions(strAtr, 'ddlb_27', element);//31
 
             strAtr += "#";
-            var data = $("#ddl_105").children("option:selected").text();
-
-            if (!jQuery.isEmptyObject(data)) {
-                $.map($('#ddlb_105 option'), function (e) {
-                    if (!jQuery.isEmptyObject($(e).text())) {
-                        RemoveClassInElement(element, new RegExp($(e).text()));
-                    };
-                });
-                strAtr += $("#ddlb_105").val();
-                $(element).addClass($("#ddlb_105 option:selected").text());//34
-            }
+            strAtr = getSelectedOptions(strAtr, 'ddlb_28', element);//32
 
             strAtr += "#";
-            var data = $("#ddl_108").children("option:selected").text();
-
-            if (!jQuery.isEmptyObject(data)) {
-                $.map($('#ddlb_108 option'), function (e) {
-                    if (!jQuery.isEmptyObject($(e).text())) {
-                        RemoveClassInElement(element, new RegExp($(e).text()));
-                    };
-                });
-                strAtr += $("#ddlb_108").val();
-                $(element).addClass($("#ddlb_108 option:selected").text());//35
-            }
+            strAtr = getSelectedOptions(strAtr, 'ddlb_103', element);//33
 
             strAtr += "#";
-            var data = $("#ddl_110").children("option:selected").text();
-
-            if (!jQuery.isEmptyObject(data)) {
-                $.map($('#ddlb_110 option'), function (e) {
-                    if (!jQuery.isEmptyObject($(e).text())) {
-                        RemoveClassInElement(element, new RegExp($(e).text()));
-                    };
-                });
-                strAtr += $("#ddlb_110").val();
-                $(element).addClass($("#ddlb_110 option:selected").text());//36
-            }
+            strAtr = getSelectedOptions(strAtr, 'ddlb_105', element);//34
 
             strAtr += "#";
-            var data = $("#ddl_111").children("option:selected").text();
-
-            if (!jQuery.isEmptyObject(data)) {
-                $.map($('#ddlb_111 option'), function (e) {
-                    if (!jQuery.isEmptyObject($(e).text())) {
-                        RemoveClassInElement(element, new RegExp($(e).text()));
-                    };
-                });
-                strAtr += $("#ddlb_111").val();
-                $(element).addClass($("#ddlb_111 option:selected").text());//37
-            }
-            strAtr += "#";
-            var data = $("#ddl_112").children("option:selected").text();
-
-            if (!jQuery.isEmptyObject(data)) {
-                $.map($('#ddlb_112 option'), function (e) {
-                    if (!jQuery.isEmptyObject($(e).text())) {
-                        RemoveClassInElement(element, new RegExp($(e).text()));
-                    };
-                });
-                strAtr += $("#ddlb_112").val();
-                $(element).addClass($("#ddlb_112 option:selected").text());//38
-            }
+            strAtr = getSelectedOptions(strAtr, 'ddlb_108', element);//35
 
             strAtr += "#";
-            var data = $("#ddl_122").children("option:selected").text();
-
-            if (!jQuery.isEmptyObject(data)) {
-                $.map($('#ddlb_122 option'), function (e) {
-                    if (!jQuery.isEmptyObject($(e).text())) {
-                        RemoveClassInElement(element, new RegExp($(e).text()));
-                    };
-                });
-                strAtr += $("#ddlb_122").val();
-                $(element).addClass($("#ddlb_122 option:selected").text());//39
-            }
+            strAtr = getSelectedOptions(strAtr, 'ddlb_110', element);//36
 
             strAtr += "#";
-            var data = $("#ddl_114").children("option:selected").text();
-
-            if (!jQuery.isEmptyObject(data)) {
-                $.map($('#ddlb_114 option'), function (e) {
-                    if (!jQuery.isEmptyObject($(e).text())) {
-                        RemoveClassInElement(element, new RegExp($(e).text()));
-                    };
-                });
-                
-                strAtr += $("#ddlb_114").val();
-                $(element).addClass($("#ddlb_114 option:selected").text());//40
-            }
+            strAtr = getSelectedOptions(strAtr, 'ddlb_111', element);//37
 
             strAtr += "#";
-            var data = $("#ddl_115").children("option:selected").text();
-
-            if (!jQuery.isEmptyObject(data)) {
-                $.map($('#ddlb_115 option'), function (e) {
-                    if (!jQuery.isEmptyObject($(e).text())) {
-                        RemoveClassInElement(element, new RegExp($(e).text()));
-                    };
-                });
-                strAtr += $("#ddlb_115").val();
-                $(element).addClass($("#ddlb_115 option:selected").text());//41
-            }
+            strAtr = getSelectedOptions(strAtr, 'ddlb_112', element);//38
 
             strAtr += "#";
-            var data = $("#ddl_123").children("option:selected").text();
-
-            if (!jQuery.isEmptyObject(data)) {
-                $.map($('#ddlb_123 option'), function (e) {
-                    if (!jQuery.isEmptyObject($(e).text())) {
-                        RemoveClassInElement(element, new RegExp($(e).text()));
-                    };
-                });
-                strAtr += $("#ddlb_123").val();
-                $(element).addClass($("#ddlb_123 option:selected").text());//42
-            }
-            strAtr += "#";
-            var data = $("#ddl_117").children("option:selected").text();
-
-            if (!jQuery.isEmptyObject(data)) {
-                $.map($('#ddlb_117 option'), function (e) {
-                    if (!jQuery.isEmptyObject($(e).text())) {
-                        RemoveClassInElement(element, new RegExp($(e).text()));
-                    };
-                });
-                strAtr += $("#ddlb_117").val();
-                $(element).addClass($("#ddlb_117 option:selected").text());//43
-            }
+            strAtr = getSelectedOptions(strAtr, 'ddlb_122', element);//39
 
             strAtr += "#";
-            var data = $("#ddl_118").children("option:selected").text();
-
-            if (!jQuery.isEmptyObject(data)) {
-                $.map($('#ddlb_118 option'), function (e) {
-                    if (!jQuery.isEmptyObject($(e).text())) {
-                        RemoveClassInElement(element, new RegExp($(e).text()));
-                    };
-                });
-                strAtr += $("#ddlb_118").val();
-                $(element).addClass($("#ddlb_118 option:selected").text());//44
-            }
+            strAtr = getSelectedOptions(strAtr, 'ddlb_114', element);//40
 
             strAtr += "#";
-            var data = $("#ddl_119").children("option:selected").text();
-
-            if (!jQuery.isEmptyObject(data)) {
-                $.map($('#ddlb_119 option'), function (e) {
-                    if (!jQuery.isEmptyObject($(e).text())) {
-                        RemoveClassInElement(element, new RegExp($(e).text()));
-                    };
-                });
-                strAtr += $("#ddlb_119").val();
-                $(element).addClass($("#ddlb_119 option:selected").text());//45
-            }
+            strAtr = getSelectedOptions(strAtr, 'ddlb_115', element);//41
 
             strAtr += "#";
-            var data = $("#ddl_124").children("option:selected").text();
-
-            if (!jQuery.isEmptyObject(data)) {
-                $.map($('#ddlb_124 option'), function (e) {
-                    if (!jQuery.isEmptyObject($(e).text())) {
-                        RemoveClassInElement(element, new RegExp($(e).text()));
-                    };
-                });
-                strAtr += $("#ddlb_124").val();
-                $(element).addClass($("#ddlb_124 option:selected").text());//46
-            }
+            strAtr = getSelectedOptions(strAtr, 'ddlb_123', element);//42
 
             strAtr += "#";
-            var data = $("#ddl_630").children("option:selected").text();
-
-            if (!jQuery.isEmptyObject(data)) {
-                $.map($('#ddlb_630 option'), function (e) {
-                    if (!jQuery.isEmptyObject($(e).text())) {
-                        RemoveClassInElement(element, new RegExp($(e).text()));
-                    };
-                });
-                strAtr += $("#ddlb_630").val();
-                $(element).addClass($("#ddlb_630 option:selected").text());//47
-            }
+            strAtr = getSelectedOptions(strAtr, 'ddlb_117', element);//43
 
             strAtr += "#";
-            var data = $("#ddl_631").children("option:selected").text();
-
-            if (!jQuery.isEmptyObject(data)) {
-                $.map($('#ddlb_631 option'), function (e) {
-                    if (!jQuery.isEmptyObject($(e).text())) {
-                        RemoveClassInElement(element, new RegExp($(e).text()));
-                    };
-                });
-                strAtr += $("#ddlb_631").val();
-                $(element).addClass($("#ddlb_631 option:selected").text());//48
-            }
+            strAtr = getSelectedOptions(strAtr, 'ddlb_118', element);//44
 
             strAtr += "#";
-            var data = $("#ddl_632").children("option:selected").text();
-
-            if (!jQuery.isEmptyObject(data)) {
-                $.map($('#ddlb_632 option'), function (e) {
-                    if (!jQuery.isEmptyObject($(e).text())) {
-                        RemoveClassInElement(element, new RegExp($(e).text()));
-                    };
-                });
-                strAtr += $("#ddlb_632").val();
-                $(element).addClass($("#ddlb_632 option:selected").text());//49
-            }
+            strAtr = getSelectedOptions(strAtr, 'ddlb_119', element);//45
 
             strAtr += "#";
-            var data = $("#ddl_633").children("option:selected").text();
-
-            if (!jQuery.isEmptyObject(data)) {
-                $.map($('#ddlb_633 option'), function (e) {
-                    if (!jQuery.isEmptyObject($(e).text())) {
-                        RemoveClassInElement(element, new RegExp($(e).text()));
-                    };
-                });
-                strAtr += $("#ddlb_633").val();
-                $(element).addClass($("#ddlb_633 option:selected").text());//50
-            }
+            strAtr = getSelectedOptions(strAtr, 'ddlb_124', element);//46
 
             strAtr += "#";
-            var data = $("#ddl_634").children("option:selected").text();
-
-            if (!jQuery.isEmptyObject(data)) {
-                $.map($('#ddlb_634 option'), function (e) {
-                    if (!jQuery.isEmptyObject($(e).text()) ) {
-                      RemoveClassInElement(element, new RegExp( $(e).text())); 
-                    };                    
-                });
-                 
-                strAtr += $("#ddlb_634").val();
-                $(element).addClass($("#ddlb_634 option:selected").text());//51
-            }
+            strAtr = getSelectedOptions(strAtr, 'ddlb_630', element);//47
 
             strAtr += "#";
-            var data = $("#ddl_635").children("option:selected").text();
-
-            if (!jQuery.isEmptyObject(data)) {
-                $.map($('#ddlb_635 option'), function (e) {
-                   if (!jQuery.isEmptyObject($(e).text()) ) {
-                       RemoveClassInElement(element, new RegExp($(e).text())); 
-                    }; 
-                });
-                strAtr += $("#ddlb_635").val();
-                $(element).addClass($("#ddlb_635 option:selected").text());//52
-            }
+            strAtr = getSelectedOptions(strAtr, 'ddlb_631', element);//48
 
             strAtr += "#";
-            var data = $("#ddl_636").children("option:selected").text();
-
-            if (!jQuery.isEmptyObject(data)) {
-                $.map($('#ddlb_636 option'), function (e) {
-                    if (!jQuery.isEmptyObject($(e).text()) ) {
-                        RemoveClassInElement(element, new RegExp($(e).text())); 
-                    }; 
-                });
-                strAtr += $("#ddlb_636").val();
-                $(element).addClass($("#ddlb_636 option:selected").text());//53
-            }
+            strAtr = getSelectedOptions(strAtr, 'ddlb_632', element);//49
 
             strAtr += "#";
-            var data = $("#ddl_637").children("option:selected").text();
-            if (!jQuery.isEmptyObject(data)) {
-                $.map($('#ddlb_637 option'), function (e) {
-                    if (!jQuery.isEmptyObject($(e).text()) ) {
-                        RemoveClassInElement(element, new RegExp($(e).text())); 
-                    }; 
-                });
-                strAtr += $("#ddlb_637").val();
-                $(element).addClass(data);//54
-            }
+            strAtr = getSelectedOptions(strAtr, 'ddlb_633', element);//50
 
             strAtr += "#";
-            var data = $("#ddl_638").children("option:selected").text();
-            if (!jQuery.isEmptyObject(data)) {
-                $.map($('#ddlb_638 option'), function (e) {
-                    if (!jQuery.isEmptyObject($(e).text()) ) {
-                        RemoveClassInElement(element, new RegExp($(e).text())); 
-                    }; 
-                });
-                strAtr += $("#ddlb_638").val();
-                $(element).addClass(data);//55
-            }
+            strAtr = getSelectedOptions(strAtr, 'ddlb_634', element);//51
 
             strAtr += "#";
-            var data = $("#ddl_639").children("option:selected").text();
-
-            if (!jQuery.isEmptyObject(data)) {
-                $.map($('#ddlb_639 option'), function (e) {
-                    if (!jQuery.isEmptyObject($(e).text()) ) {
-                        RemoveClassInElement(element, new RegExp($(e).text())); 
-                    };  
-                });
-                strAtr += $("#ddlb_639").val();
-                $(element).addClass($("#ddlb_639 option:selected").text());//56
-            }
+            strAtr = getSelectedOptions(strAtr, 'ddlb_635', element);//52
 
             strAtr += "#";
-            var data = $("#ddl_641").children("option:selected").text();
-            if (!jQuery.isEmptyObject(data)) {
-                $.map($('#ddlb_641 option'), function (e) {
-                   if (!jQuery.isEmptyObject($(e).text()) ) {
-                       RemoveClassInElement(element, new RegExp($(e).text())); 
-                    };  
-                });
-                strAtr += $("#ddlb_641").val();
-                $(element).addClass(data);//57
-            }
+            strAtr = getSelectedOptions(strAtr, 'ddlb_636', element);//53
 
             strAtr += "#";
-            var data = $("#ddl_642").children("option:selected").text();
-
-            if (!jQuery.isEmptyObject(data)) {
-                $.map($('#ddlb_642 option'), function (e) {
-                   if (!jQuery.isEmptyObject($(e).text()) ) {
-                       RemoveClassInElement(element, new RegExp($(e).text())); 
-                    }; 
-                });
-                strAtr += $("#ddlb_642").val();
-                $(element).addClass(data);//58
-            }
+            strAtr = getSelectedOptions(strAtr, 'ddlb_637', element);//54
 
             strAtr += "#";
-            var data = $("#ddl_648").children("option:selected").text();
-
-            if (!jQuery.isEmptyObject(data)) {
-                strAtr += $("#ddlb_648").val();
-                $(element).addClass(data);//59
-            }
+            strAtr = getSelectedOptions(strAtr, 'ddlb_638', element);//55
 
             strAtr += "#";
-            var data = $("#ddl_649").children("option:selected").text();
-
-            if (!jQuery.isEmptyObject(data)) {
-                strAtr += $("#ddlb_649").val();
-                $(element).addClass(data);//60
-
-            }
+            strAtr = getSelectedOptions(strAtr, 'ddlb_639', element);//56
 
             strAtr += "#";
-            var data = $("#ddl_650").children("option:selected").text();
-
-            if (!jQuery.isEmptyObject(data)) {
-                strAtr += $("#ddlb_650").val();
-                $(element).addClass(data);//61
-            }
+            strAtr = getSelectedOptions(strAtr, 'ddlb_641', element);//57
 
             strAtr += "#";
-            var data = $("#ddl_651").children("option:selected").text();
-
-            if (!jQuery.isEmptyObject(data)) {
-                strAtr += $("#ddlb_651").val();
-                $(element).addClass(data);//62
-            }
+            strAtr = getSelectedOptions(strAtr, 'ddlb_642', element);//58
 
             strAtr += "#";
-            var data = $("#ddl_652").children("option:selected").text();
-
-            if (!jQuery.isEmptyObject(data)) {
-                strAtr += $("#ddlb_652").val();
-                $(element).addClass(data);//63
-            }
+            strAtr = getSelectedOptions(strAtr, 'ddlb_648', element);//59
 
             strAtr += "#";
-            var data = $("#ddl_653").children("option:selected").text();
-
-            if (!jQuery.isEmptyObject(data)) {
-                strAtr += $("#ddlb_653").val();
-                $(element).addClass(data);//64
-            }
+            strAtr = getSelectedOptions(strAtr, 'ddlb_649', element);//60
 
             strAtr += "#";
-            var data = $("#ddl_654").children("option:selected").text();
-            if (!jQuery.isEmptyObject(data)) {
-                strAtr += $("#ddlb_654").val();
-                $(element).addClass(data);//65
-            }
+            strAtr = getSelectedOptions(strAtr, 'ddlb_650', element);//61
 
             strAtr += "#";
-            var data = $("#ddl_655").children("option:selected").text();
-            if (!jQuery.isEmptyObject(data)) {
-                strAtr += $("#ddlb_655").val();
-                $(element).addClass(data);//66
-            }
+            strAtr = getSelectedOptions(strAtr, 'ddlb_651', element);//62
+
+            strAtr += "#";
+            strAtr = getSelectedOptions(strAtr, 'ddlb_652', element);//63
+
+            strAtr += "#";
+            strAtr = getSelectedOptions(strAtr, 'ddlb_653', element);//64
+
+            strAtr += "#";
+            strAtr = getSelectedOptions(strAtr, 'ddlb_654', element);//65
+
+            strAtr += "#";
+            strAtr = getSelectedOptions(strAtr, 'ddlb_655', element);//66
 
             strAtr += "|"
             return strAtr;
 
-        }
+        };
 
+        function getSelectedOptions(strAtr, id, element) {
+            var clase = [];
+            var valor = [];
+            var IdSelect = '#' + id;
+            $(IdSelect).children('option:selected').map(function (index, item) {
+                clase.push(item.text);
+                valor.push(item.value);
+            });
+            if (!jQuery.isEmptyObject(valor)) {
+                $.map($(IdSelect).children('option'), function (e) {
+                    if (!jQuery.isEmptyObject($(e).text())) {
+                        RemoveClassInElement(element, new RegExp($(e).text()));
+                    };
+                });
+                strAtr += valor.join(",");
+                $.each(clase, function (i, item) { $(element).addClass(item); });//51
+            }
+            return strAtr;
+        };
 
         function modificaIcona(element) {
             var icona = ""
@@ -2240,108 +2006,111 @@ $(function () {
             //if (icona != "") {
             //    element.find("span.divImg").html("<img src='img/" + icona + "'/>");
             //}
-        };    
+        };
 
         document.addEventListener('click', function (event) {
-            element = event.toElement;           
+            element = event.toElement;
             if ($(element).parents('#htmlEst').length > 0) {
                 activado($(element).attr('id'));
-                $(element).find('*').css('background-color', 'rgb(255, 255, 255)');
+
                 readValues(element);
-                event.stopPropagation();                
-            };           
+                event.stopPropagation();
+            };
+            if ($(element).prop('tagName') == 'SELECT') {
+                selectClick($(element).attr('id'));
+            }
         }, true);
 
         $("input#txtNomCel").change(function () {
             element = $('#htmlEst').find('*').filter(function () {
-                if (this.style.backgroundColor == 'rgb(227, 252, 255)') {
+                if ($(this).hasClass('activo')) {
                     return this;
+                } else {
+                    return null;
                 }
-            });                                 
-                     
+            });
+
             if (!jQuery.isEmptyObject(element)) {
                 if ($(element).is('span.text')) {
                     $(element).text($(this).val());
                 } else {
                     if ($(element).find('span.text').length == 0) {
-                        $(element).append('<span class="divImg" id="spandivImg'+$(element).attr('id') +'"></span>');
-                        $(element).append('<span class="text" id="spantext' + $(element).attr('id') +'"></span>');
+                        $(element).append('<span class="divImg" id="spandivImg' + $(element).attr('id') + '"></span>');
+                        $(element).append('<span class="text" id="spantext' + $(element).attr('id') + '"></span>');
                         $(element).children('span.text').text($(this).val());
-                        $(element).children('span.text').css("background-color", "rgb(255, 255, 255)");
-                        $(element).children('span.divImg').css("background-color", "rgb(255, 255, 255)");
+                        $(element).children('span.text').addClass('inactivo');
+                        $(element).children('span.divImg').addClass('inactivo');
                     } else {
                         $(element).children('span.text').text($(this).val());
                     }
-                }                
+                }
             }
             $("#txtEst").val($("#htmlEst").html());
         });
 
-        $('select').on('change', function () {
-            if ($(this).attr('id') != 'selectContingut'){
+        function selectClick(id) {
+            
+            if (id != 'selectContingut') {
+
                 element = $('#htmlEst').find('*').filter(function () {
-                    if (this.style.backgroundColor == 'rgb(227, 252, 255)') {
+                    if ($(this).hasClass('activo')) {
                         return this;
+                    } else {
+                        return null;
                     }
                 });
-                if (!jQuery.isEmptyObject(element)) {
-                    if ($(element).prop('tagName') != 'span') {
 
-                        $('#btnModificarDades').click();
-                    }
+                if (element.length > 0) {
+                    var selectedElement = document.getElementById(id);
+                    $(selectedElement).attr('multiple', 'multiple');
+                    $(selectedElement).css('display', 'none');
+                    $(selectedElement).multiselect({
+                        buttonWidth: 'auto',
+                        disableIfEmpty: true,
+                        //buttonClass: 'custom-select custom-select-sm',
+                        maxHeight: 200,
+                        onChange: function (option, checked) {
+                            if (checked === true) {
+                                // alert(option.length + ' options ' + (checked ? 'selected' : 'deselected'));
+                            }
+                        },
+                        onDropdownHidden: function (event) {
+                            var lista = [];
+                            var data = event.relatedTarget;
+                            var allActives = $(data).siblings('ul').find('li.active');
+                            $.each(allActives, function (index, item) { lista.push(item.value); });
+                            setSelectedOptions(id, lista.join(','));
+                            var valor = $('select#'+id).children('option:selected');
+                            $('#btnModificarDades').click();
+                        }
+                    });
                 }
-            }      
-                    
-        });
 
-        $('select#ddlb_634').attr('multiple', 'multiple');
-        $('select#ddlb_634').css('display', 'none');
-        $('select#ddlb_634').multiselect({
-            buttonWidth: '180px',
-            disableIfEmpty: true,
-            buttonClass: 'custom-select custom-select-sm',           
-            
-            maxHeight: 200,
-            onChange: function (option, checked) {
-                if (checked === true) {
-                   // alert(option.length + ' options ' + (checked ? 'selected' : 'deselected'));
-                }
-               
-            },
-            checkboxName: function (option) {
-               
-                return 'multiselect[]';
-            },
-            onDropdownHide: function (event) {
-                var data = event.relatedTarget;                   
-                 var seleccion = $(this).$select;
-
-                 var valor = $(data).children('span.multiselect-selected-text').text();
-               
-            }           
-            
-        });
-        
+            };
+        };
     });
+    
 
     function activado(valor) {
-         
-        $('#htmlEst').find('*').each(function () {
-            if ($(this).attr('id') == valor) {
-                if ( $(this).css('background-color') == 'rgb(255, 255, 255)') {
-                    this.style.backgroundColor ='rgb(227, 252, 255)';
+
+            $('#htmlEst').find('*').each(function () {
+                if ($(this).attr('id') == valor) {
+                    if ($(this).hasClass('inactivo')) {
+                        $(this).removeClass('inactivo').addClass('activo');
+
+                    } else {
+                        //$("#btnModificarDades").click();
+                        $(this).removeClass('activo').addClass('inactivo');
+                    }
+                    $('select#selectContingut').val(this.tagName.toLowerCase());
                 } else {
-                    $("#btnModificarDades").click();
-                    this.style.backgroundColor ='rgb(255, 2555, 255)'; 
-                }                
-                $('select#selectContingut').val(this.tagName.toLowerCase());
-            } else {
-                this.style.backgroundColor = 'rgb(255, 255, 255)';  
-            }
-        }); 
-        $("#txtEst").val($("#htmlEst").html());
-          return false;
-     };   
+                    $(this).removeClass('activo').addClass('inactivo');
+                }
+            });
+            $("#txtEst").val($("#htmlEst").html());
+            return false;
+
+        }; 
 
     function guardar() {
        
@@ -2402,6 +2171,6 @@ $(function () {
 		
 		// $("#frm").submit();  Esto es lo que provocava que se insertasen 2 registros cada vez.
 
-	};	
+    };
 
 </script> 
