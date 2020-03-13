@@ -12,14 +12,16 @@ span.multiselect-native-select {
         position: absolute !important;
         width: 1px !important;
         left: 50%;
-        top: 30px
+        top: 30px;
+        display:none
     }
 
 .multiselect-container {
     position: absolute;
     list-style-type: none;
     margin: 0;
-    padding: 0
+    padding: 0;
+    float:left;
 }
 
     .multiselect-container .input-group {
@@ -31,18 +33,19 @@ span.multiselect-native-select {
     }
 
     .multiselect-container > li {
-        padding: 0
+        padding: 0;
+        display:block;
     }
 
         .multiselect-container > li > a.multiselect-all label {
-            font-weight: 700
+            font-weight: 500
         }
 
         .multiselect-container > li.multiselect-group label {
             margin: 0;
             padding: 3px 20px;
             height: 100%;
-            font-weight: 700
+            font-weight: 500
         }
 
         .multiselect-container > li.multiselect-group-clickable label {
@@ -62,11 +65,15 @@ span.multiselect-native-select {
             }
 
                 .multiselect-container > li > a > label.checkbox, .multiselect-container > li > a > label.radio {
-                    margin: 0
+                    margin-left: 20px;
+                    margin-right:20px;
+                    text-align: left;
+                    justify-content: left;
+                    align-content:center;
                 }
 
                 .multiselect-container > li > a > label > input[type=checkbox] {
-                    margin-bottom: 5px
+                    margin: 0
                 }
 
 .btn-group > .btn-group:nth-child(2) > .multiselect.btn {
@@ -75,10 +82,53 @@ span.multiselect-native-select {
 }
 
 .form-inline .multiselect-container label.checkbox, .form-inline .multiselect-container label.radio {
-    padding: 3px 20px 3px 40px
+    padding: 3px 20px 3px 10px
 }
 
 .form-inline .multiselect-container li a label.checkbox input[type=checkbox], .form-inline .multiselect-container li a label.radio input[type=radio] {
     margin-left: -20px;
     margin-right: 0
 }
+.btn-default {
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc
+}
+
+    .btn-default:focus, .btn-default.focus {
+        color: #333;
+        background-color: #e6e6e6;
+        border-color: #8c8c8c
+    }
+
+    .btn-default:hover {
+        color: #333;
+        background-color: #e6e6e6;
+        border-color: #adadad
+    }
+
+    .btn-default:active, .btn-default.active, .open > .dropdown-toggle.btn-default {
+        color: #333;
+        background-color: #e6e6e6;
+        border-color: #adadad
+    }
+
+        .btn-default:active:hover, .btn-default.active:hover, .open > .dropdown-toggle.btn-default:hover, .btn-default:active:focus, .btn-default.active:focus, .open > .dropdown-toggle.btn-default:focus, .btn-default:active.focus, .btn-default.active.focus, .open > .dropdown-toggle.btn-default.focus {
+            color: #333;
+            background-color: #d4d4d4;
+            border-color: #8c8c8c
+        }
+
+    .btn-default:active, .btn-default.active, .open > .dropdown-toggle.btn-default {
+        background-image: none
+    }
+
+    .btn-default.disabled:hover, .btn-default[disabled]:hover, fieldset[disabled] .btn-default:hover, .btn-default.disabled:focus, .btn-default[disabled]:focus, fieldset[disabled] .btn-default:focus, .btn-default.disabled.focus, .btn-default[disabled].focus, fieldset[disabled] .btn-default.focus {
+        background-color: #fff;
+        border-color: #ccc
+    }
+
+    .btn-default .badge {
+        color: #fff;
+        background-color: #333
+    }

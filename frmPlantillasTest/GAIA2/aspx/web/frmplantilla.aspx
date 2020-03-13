@@ -13,7 +13,7 @@
 <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">--%>
 <link rel="stylesheet" href="../../../Styles/formularisGaia.css">
 <link href="img/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
-    <%--<link href="../../../Styles/bootstrap-3.3.2.min.css" rel="stylesheet" />--%>
+   <%-- <link href="../../../Styles/bootstrap.min.css" rel="stylesheet" />--%>
     <link href="../../../Styles/bootstrap-example.min.css" rel="stylesheet" />
     <link href="../../../Styles/prettify.min.css" rel="stylesheet" />
     <link href="../../../Styles/bootstrap-multiselect.css" rel="stylesheet" />
@@ -26,8 +26,7 @@
 <![endif]-->
 <title>Plantilla web - GAIA2</title>
     <style>
-        .activo{
-            
+        .activo{            
             background:repeating-linear-gradient(45deg, #bbbbbb, #ffffff 10px);
         }
         .inactivo{
@@ -1076,8 +1075,8 @@ $(function () {
         function DadesEstils(arrAtr) {
 
             //estils
-            $("#ddlb_23").val(arrAtr[27]);
-            $("#ddlb_25").val(arrAtr[28]);
+            $("#ddlb_23").val(arrAtr[27]);           
+            setSelectedOptions('ddlb_25', arrAtr[28]);
             $("#ddlb_26").val(arrAtr[29]);
             $("#ddlb_27").val(arrAtr[30]);
             $("#ddlb_28").val(arrAtr[31]);
@@ -1089,7 +1088,7 @@ $(function () {
             $("#ddlb_112").val(arrAtr[37]);
             $("#ddlb_122").val(arrAtr[38]);
             $("#ddlb_114").val(arrAtr[39]);
-            $("#ddlb_115").val(arrAtr[40]);
+            setSelectedOptions('ddlb_115', arrAtr[40]);           
             $("#ddlb_123").val(arrAtr[41]);
             $("#ddlb_117").val(arrAtr[42]);
             $("#ddlb_118").val(arrAtr[43]);
@@ -1098,8 +1097,7 @@ $(function () {
             $("#ddlb_630").val(arrAtr[46]);
             $("#ddlb_631").val(arrAtr[47]);
             $("#ddlb_632").val(arrAtr[48]);
-            $("#ddlb_633").val(arrAtr[49]);
-            // $("#ddlb_634").val(arrAtr[50]);
+            $("#ddlb_633").val(arrAtr[49]);           
             setSelectedOptions('ddlb_634', arrAtr[50]);
             $("#ddlb_635").val(arrAtr[51]);
             $("#ddlb_636").val(arrAtr[52]);
@@ -1111,7 +1109,7 @@ $(function () {
             $("#ddlb_648").val(arrAtr[58]);
             $("#ddlb_649").val(arrAtr[59]);
             $("#ddlb_650").val(arrAtr[60]);
-            $("#ddlb_651").val(arrAtr[61]);
+            setSelectedOptions('ddlb_651', arrAtr[61]);           
             $("#ddlb_652").val(arrAtr[62]);
             $("#ddlb_653").val(arrAtr[63]);
             $("#ddlb_654").val(arrAtr[64]);
@@ -1119,17 +1117,22 @@ $(function () {
         };
 
         function setSelectedOptions(id, options) {
+            $('#' + id).removeAttr('selected');
             var arregloDeOpciones = options.split(',');
             if (arregloDeOpciones.length > 1) {
                 $.each(arregloDeOpciones, function (index, item) {
-                    $('#' + id).children('option[value=' + item + ']').attr("selected", "selected");
+                    if (!jQuery.isEmptyObject(item)) {
+                        $('#' + id).children('option[text=' + item + ']').attr("selected", "selected");
+                        $('#' + id).children('option[value=' + item + ']').attr("selected", "selected");
+                    }                   
                 });
+                if ($('#' + id).prop('tagName') == 'SELECT') {
+                    selectClick(id);
+                }
             } else {
                 $('#' + id).val(options);
             }
-            if ($('#' + id).prop('tagName') == 'SELECT') {
-                selectClick(id);
-            }
+            
         };
 
         function RowsAndColumns(type) {
@@ -2078,7 +2081,7 @@ $(function () {
                             var lista = [];
                             var data = event.relatedTarget;
                             var allActives = $(data).siblings('ul').find('li.active');
-                            $.each(allActives, function (index, item) { lista.push(item.value); });
+                            $.each(allActives, function (index, item) { lista.push($(item).text()); });
                             setSelectedOptions(id, lista.join(','));
                             var valor = $('select#'+id).children('option:selected');
                             $('#btnModificarDades').click();
