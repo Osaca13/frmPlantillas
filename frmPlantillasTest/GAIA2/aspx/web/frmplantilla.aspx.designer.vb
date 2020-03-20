@@ -761,22 +761,22 @@ Partial Public Class frmplantilla
     Protected WithEvents gaiaCodiWebNodesAbans As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''TextBox1 control.
+    '''gaiaCodiWebTxtDins control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents TextBox1 As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents gaiaCodiWebTxtDins As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''TextBox2 control.
+    '''gaiaCodiWebNodesDins control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents TextBox2 As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents gaiaCodiWebNodesDins As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
     '''pnlLCW2 control.
@@ -788,22 +788,22 @@ Partial Public Class frmplantilla
     Protected WithEvents pnlLCW2 As Global.System.Web.UI.WebControls.PlaceHolder
 
     '''<summary>
-    '''TextBox3 control.
+    '''gaiaCodiWebTxtDespres control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents TextBox3 As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents gaiaCodiWebTxtDespres As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''TextBox4 control.
+    '''gaiaCodiWebNodesDespres control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents TextBox4 As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents gaiaCodiWebNodesDespres As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
     '''pnlPlt control.

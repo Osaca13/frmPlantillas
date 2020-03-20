@@ -259,3 +259,6 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/frmPlantillasTest/frmplantillaActual.aspx
+/frmPlantillasTest/frmplantillaActual.aspx.designer.vb
+/frmPlantillasTest/frmplantillaActual.aspx.vb

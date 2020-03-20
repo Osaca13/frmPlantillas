@@ -132,3 +132,6 @@ span.multiselect-native-select {
         color: #fff;
         background-color: #333
     }
+    button.multiselect{
+        width:13rem;
+    }

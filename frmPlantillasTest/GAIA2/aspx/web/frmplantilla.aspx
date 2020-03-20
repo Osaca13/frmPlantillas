@@ -9,10 +9,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <!-- Bootstrap CSS -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
 <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">--%>
-<link rel="stylesheet" href="../../../Styles/formularisGaia.css">
-<link href="img/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
+<link rel="stylesheet" href="../../../Styles/formularisGaia.css"/>
+<link href="img/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet"/>
    <%-- <link href="../../../Styles/bootstrap.min.css" rel="stylesheet" />--%>
     <link href="../../../Styles/bootstrap-example.min.css" rel="stylesheet" />
     <link href="../../../Styles/prettify.min.css" rel="stylesheet" />
@@ -27,10 +27,18 @@
 <title>Plantilla web - GAIA2</title>
     <style>
         .activo{            
-            background:repeating-linear-gradient(45deg, #bbbbbb, #ffffff 10px);
+            background-color: #BBBBBB!important;             
+           
         }
         .inactivo{
-            background:none;
+            background-color:white;
+           
+        }
+        .b-inicial{
+            border: 1px solid gray!important;
+        }
+        .p-inicial{
+             padding:1.5rem!important;
         }
         
 
@@ -685,12 +693,12 @@
                             <div class="card-body">
                                 <div class="form-group">
                                 <div class="bs-component text-center">
-                                <input type="button"  onClick="window.open('/GAIA/aspx/visorArbresLite.aspx?arbre1=codiWeb&c=gaiaCodiWeb&separador=|&nodesSeleccionats=' + document.getElementById('gaiaCodiWebNodes').value, '_blank', 'location=0,height=800,width=460,scrollbars=yes,resizable=yes'); return false;" value="Seleccionar" id="btnCodisDins" class="btn btn-sm btn-primary mb-2">
-                                <input type="button" id="eliminarCodiDins" value="Esborrar" onClick="document.getElementById('gaiaCodiWebNodes').value = ''; document.getElementById('gaiaCodiWebTxt').value = ''; return false;" class="btn btn-sm btn-danger mb-2">
-                                <input type="button"  onClick="window.open('/GAIA/aspx/fulles/editaLCW.htm?nodesSeleccionats=' + document.getElementById('gaiaCodiWebNodes').value, '_blank', 'location=0,height=800,width=400,scrollbars=yes,resizable=yes'); return false;" value="Edita Llibreria" id="btnEditaCodisDins" class="btn btn-sm btn-success mb-2" >
+                                <input type="button"  onClick="window.open('/GAIA/aspx/visorArbresLite.aspx?arbre1=codiWeb&c=gaiaCodiWeb&separador=|&nodesSeleccionats=' + document.getElementById('gaiaCodiWebNodesDins').value, '_blank', 'location=0,height=800,width=460,scrollbars=yes,resizable=yes'); return false;" value="Seleccionar" id="btnCodisDins" class="btn btn-sm btn-primary mb-2">
+                                <input type="button" id="eliminarCodiDins" value="Esborrar" onClick="document.getElementById('gaiaCodiWebNodesDins').value = ''; document.getElementById('gaiaCodiWebTxtDins').value = ''; return false;" class="btn btn-sm btn-danger mb-2">
+                                <input type="button"  onClick="window.open('/GAIA/aspx/fulles/editaLCW.htm?nodesSeleccionats=' + document.getElementById('gaiaCodiWebNodesDins').value, '_blank', 'location=0,height=800,width=400,scrollbars=yes,resizable=yes'); return false;" value="Edita Llibreria" id="btnEditaCodisDins" class="btn btn-sm btn-success mb-2" >
                                 </div>
-                                <asp:TextBox ID="TextBox1" runat="server" AutoPostBack="False"  Rows="4" ContentEditable="false" TextMode="MultiLine"  CssClass="form-control form-control-sm mb-3"/>
-                                <asp:TextBox ID="TextBox2" runat="server"  CssClass="form-control form-control-sm" placeholder="Codi node de la llibreria"/>
+                                <asp:TextBox ID="gaiaCodiWebTxtDins" runat="server" AutoPostBack="False"  Rows="4" ContentEditable="false" TextMode="MultiLine"  CssClass="form-control form-control-sm mb-3"/>
+                                <asp:TextBox ID="gaiaCodiWebNodesDins" runat="server"  CssClass="form-control form-control-sm" placeholder="Codi node de la llibreria"/>
                                 </div>
                              </div>
                         </div>
@@ -704,12 +712,12 @@
                                 <div class="form-group">
                                     <div class="bs-component text-center">
                                     <input type="button"  onClick="window.open('/GAIA/aspx/visorArbresLite.aspx?arbre1=codiWeb&c=gaiaCodiWeb2&separador=|&nodesSeleccionats=' + document.getElementById('gaiaCodiWeb2Nodes').value, '_blank', 'location=0,height=800,width=460,scrollbars=yes,resizable=yes'); return false;" value="Seleccionar" id="btnCodis2" class="btn btn-sm btn-primary mb-2">
-                                    <input type="button" id="eliminarCodiDespres" value="Esborrar" onClick="document.getElementById('gaiaCodiWeb2Nodes').value = ''; document.getElementById('gaiaCodiWeb2Txt').value = ''; return false;" class="btn btn-sm btn-danger mb-2">
-                                    <input type="button"  onClick="window.open('/GAIA/aspx/fulles/editaLCW.htm?nodesSeleccionats=' + document.getElementById('gaiaCodiWeb2Nodes').value, '_blank', 'location=0,height=800,width=400,scrollbars=yes,resizable=yes'); return false;" value="Edita Llibreria" id="btnEditaCodis2" class="btn btn-sm btn-success mb-2">
+                                    <input type="button" id="eliminarCodiDespres" value="Esborrar" onClick="document.getElementById('gaiaCodiWebNodesDespres').value = ''; document.getElementById('gaiaCodiWebTxtDespres').value = ''; return false;" class="btn btn-sm btn-danger mb-2">
+                                    <input type="button"  onClick="window.open('/GAIA/aspx/fulles/editaLCW.htm?nodesSeleccionats=' + document.getElementById('gaiaCodiWebNodesDespres').value, '_blank', 'location=0,height=800,width=400,scrollbars=yes,resizable=yes'); return false;" value="Edita Llibreria" id="btnEditaCodis2" class="btn btn-sm btn-success mb-2">
                                     </div>
                                     <div class="form-group">
-                                    <asp:TextBox ID="TextBox3" runat="server" AutoPostBack="False" Rows="4" ContentEditable="false" TextMode="MultiLine" CssClass="form-control form-control-sm mb-3"/>
-                                    <asp:TextBox ID="TextBox4" runat="server" CssClass="form-control form-control-sm" placeholder="Codi node de la llibreria"/>
+                                    <asp:TextBox ID="gaiaCodiWebTxtDespres" runat="server" AutoPostBack="False" Rows="4" ContentEditable="false" TextMode="MultiLine" CssClass="form-control form-control-sm mb-3"/>
+                                    <asp:TextBox ID="gaiaCodiWebNodesDespres" runat="server" CssClass="form-control form-control-sm" placeholder="Codi node de la llibreria"/>
                                     </div>
                                 </div>
                             </div>
@@ -1000,6 +1008,13 @@ $(function () {
         var element;
 
         var nroId = parseInt($("#nroId").val());
+        $('#ddlb_25').attr('title', 'multiselect');
+        $('#ddlb_634').attr('title', 'multiselect');
+        $('#ddlb_631').attr('title', 'multiselect');
+        $('#ddlb_651').attr('title', 'multiselect');
+        $('#ddlb_115').attr('title', 'multiselect');
+        activado('div0');
+        readValues(document.getElementById('div0'));
 
         // $("div").on("click",".cel", function () {
         function readValues(valor) {
@@ -1014,7 +1029,7 @@ $(function () {
                 $("#txtIdCel").val(arrAtr[0]);
                 $("#txtNomCel").val(arrAtr[1]);
 
-                DadesMides(arrAtr)
+                ReadFromSpanDadesMides(arrAtr)
                 //continguts
                 $("#lstTipusFulla").val(arrAtr[7]);
                 //<asp:Literal runat="server" id="ltCanviCampsDb" />
@@ -1022,30 +1037,30 @@ $(function () {
                 $("#ddlPLTDSLNK").val(arrAtr[9]);
                 $("#ddlPLTDSALT").val(arrAtr[10]);
                 $("#ddlPLTDSIMG").val(arrAtr[11]);
-                DadesLlibrerias(arrAtr);
+                ReadFromSpanDadesLlibrerias(arrAtr);
 
-                $("#txtPLTDSNUM").val(arrAtr[18]);
-                $("#ddlPLTDSNIV").val(arrAtr[19]);
-                $("#txtPLTDSAAL").val(arrAtr[20]);
-                $("#ddlb_PLTDSALF").val(arrAtr[21]);
-                $("#txtPLTDSALK").val(arrAtr[22]);
-                $("#gaiaPLTCDPALTxt").val(arrAtr[23]);
-                $("#gaiaPLTCDPALNodes").val(arrAtr[24]);
+                $("#txtPLTDSNUM").val(arrAtr[20]);
+                $("#ddlPLTDSNIV").val(arrAtr[21]);
+                $("#txtPLTDSAAL").val(arrAtr[22]);
+                $("#ddlb_PLTDSALF").val(arrAtr[23]);
+                $("#txtPLTDSALK").val(arrAtr[24]);
+                $("#gaiaPLTCDPALTxt").val(arrAtr[25]);
+                $("#gaiaPLTCDPALNodes").val(arrAtr[26]);
 
-                if (arrAtr[25] == "true") {
+                if (arrAtr[27] == "true") {
                     $("#chkWEBDSIMP").attr("checked", true);
                 }
                 else {
                     $("#chkWEBDSIMP").attr("checked", false);
                 }
-                if (arrAtr[26] == "true") {
+                if (arrAtr[28] == "true") {
                     $("#chkWEBDSCND").attr("checked", true);
                 }
                 else {
                     $("#chkWEBDSCND").attr("checked", false);
                 }
 
-                DadesEstils(arrAtr);
+                ReadFromSpanDadesEstils(arrAtr);
 
             }
             var icona = "";
@@ -1054,16 +1069,18 @@ $(function () {
             return false;
         };
 
-        function DadesLlibrerias(arrAtr) {
-            $("#gaiaCodiWebTxt").val(arrAtr[12]);
-            $("#gaiaCodiWebNodes").val(arrAtr[13]);
-            $("#gaiaCodiWeb2Txt").val(arrAtr[14]);
-            $("#gaiaCodiWeb2Nodes").val(arrAtr[15]);
-            $("#gaiaPltSecTxt").val(arrAtr[16]);
-            $("#gaiaPltSecNodes").val(arrAtr[17]);
+        function ReadFromSpanDadesLlibrerias(arrAtr) {
+            $("#gaiaCodiWebTxtAbans").val(arrAtr[12]);
+            $("#gaiaCodiWebNodesAbans").val(arrAtr[13]);
+            $("#gaiaCodiWebTxtDins").val(arrAtr[14]);
+            $("#gaiaCodiWebNodesDins").val(arrAtr[15]);
+            $("#gaiaCodiWebTxtDespres").val(arrAtr[16]);
+            $("#gaiaCodiWebNodesDespres").val(arrAtr[17]);
+            $("#gaiaPltSecTxt").val(arrAtr[18]);
+            $("#gaiaPltSecNodes").val(arrAtr[19]);
         };
 
-        function DadesMides(arrAtr) {
+        function ReadFromSpanDadesMides(arrAtr) {
             //mides 
             $("#ddlXs").val(arrAtr[2]);
             $("#ddlSm").val(arrAtr[3]);
@@ -1072,65 +1089,87 @@ $(function () {
             $("#ddlXl").val(arrAtr[6]);
         };
 
-        function DadesEstils(arrAtr) {
+        function ReadFromSpanDadesEstils(arrAtr) {
 
             //estils
-            $("#ddlb_23").val(arrAtr[27]);           
-            setSelectedOptions('ddlb_25', arrAtr[28]);
-            $("#ddlb_26").val(arrAtr[29]);
-            $("#ddlb_27").val(arrAtr[30]);
-            $("#ddlb_28").val(arrAtr[31]);
-            $("#ddlb_103").val(arrAtr[32]);
-            $("#ddlb_105").val(arrAtr[33]);
-            $("#ddlb_108").val(arrAtr[34]);
-            $("#ddlb_110").val(arrAtr[35]);
-            $("#ddlb_111").val(arrAtr[36]);
-            $("#ddlb_112").val(arrAtr[37]);
-            $("#ddlb_122").val(arrAtr[38]);
-            $("#ddlb_114").val(arrAtr[39]);
-            setSelectedOptions('ddlb_115', arrAtr[40]);           
-            $("#ddlb_123").val(arrAtr[41]);
-            $("#ddlb_117").val(arrAtr[42]);
-            $("#ddlb_118").val(arrAtr[43]);
-            $("#ddlb_119").val(arrAtr[44]);
-            $("#ddlb_124").val(arrAtr[45]);
-            $("#ddlb_630").val(arrAtr[46]);
-            $("#ddlb_631").val(arrAtr[47]);
-            $("#ddlb_632").val(arrAtr[48]);
-            $("#ddlb_633").val(arrAtr[49]);           
-            setSelectedOptions('ddlb_634', arrAtr[50]);
-            $("#ddlb_635").val(arrAtr[51]);
-            $("#ddlb_636").val(arrAtr[52]);
-            $("#ddlb_637").val(arrAtr[53]);
-            $("#ddlb_638").val(arrAtr[54]);
-            $("#ddlb_639").val(arrAtr[55]);
-            $("#ddlb_641").val(arrAtr[56]);
-            $("#ddlb_642").val(arrAtr[57]);
-            $("#ddlb_648").val(arrAtr[58]);
-            $("#ddlb_649").val(arrAtr[59]);
-            $("#ddlb_650").val(arrAtr[60]);
-            setSelectedOptions('ddlb_651', arrAtr[61]);           
-            $("#ddlb_652").val(arrAtr[62]);
-            $("#ddlb_653").val(arrAtr[63]);
-            $("#ddlb_654").val(arrAtr[64]);
-            $("#ddlb_655").val(arrAtr[65]);
+            $("#ddlb_23").val(arrAtr[29]);           
+            setSelectedOptions('ddlb_25', arrAtr[30], 'value');
+            $("#ddlb_26").val(arrAtr[31]);
+            $("#ddlb_27").val(arrAtr[32]);
+            $("#ddlb_28").val(arrAtr[33]);
+            $("#ddlb_103").val(arrAtr[34]);
+            $("#ddlb_105").val(arrAtr[35]);
+            $("#ddlb_108").val(arrAtr[36]);
+            $("#ddlb_110").val(arrAtr[37]);
+            $("#ddlb_111").val(arrAtr[38]);
+            $("#ddlb_112").val(arrAtr[39]);
+            $("#ddlb_122").val(arrAtr[40]);
+            $("#ddlb_114").val(arrAtr[41]);
+            setSelectedOptions('ddlb_115', arrAtr[42], 'value');           
+            $("#ddlb_123").val(arrAtr[43]);
+            $("#ddlb_117").val(arrAtr[44]);
+            $("#ddlb_118").val(arrAtr[45]);
+            $("#ddlb_119").val(arrAtr[46]);
+            $("#ddlb_124").val(arrAtr[47]);
+            $("#ddlb_630").val(arrAtr[48]);
+            setSelectedOptions('ddlb_631', arrAtr[49], 'value');
+            $("#ddlb_632").val(arrAtr[50]);
+            $("#ddlb_633").val(arrAtr[51]);           
+            setSelectedOptions('ddlb_634', arrAtr[52], 'value');
+            $("#ddlb_635").val(arrAtr[53]);
+            $("#ddlb_636").val(arrAtr[54]);
+            $("#ddlb_637").val(arrAtr[55]);
+            $("#ddlb_638").val(arrAtr[56]);
+            $("#ddlb_639").val(arrAtr[57]);
+            $("#ddlb_641").val(arrAtr[58]);
+            $("#ddlb_642").val(arrAtr[59]);
+            $("#ddlb_648").val(arrAtr[60]);
+            $("#ddlb_649").val(arrAtr[61]);
+            $("#ddlb_650").val(arrAtr[62]);
+            setSelectedOptions('ddlb_651', arrAtr[63], 'value');           
+            $("#ddlb_652").val(arrAtr[64]);
+            $("#ddlb_653").val(arrAtr[65]);
+            $("#ddlb_654").val(arrAtr[66]);
+            $("#ddlb_655").val(arrAtr[67]);
         };
 
-        function setSelectedOptions(id, options) {
-            $('#' + id).removeAttr('selected');
-            var arregloDeOpciones = options.split(',');
-            if (arregloDeOpciones.length > 1) {
+        function setSelectedOptions(id, options, selectValue) {
+            $.map($('#' + id).children('option'), function (item) { $(item).removeAttr('selected') });
+            if (options.length > 0) {
+                var arregloDeOpciones = options.split(',');
+                //if (arregloDeOpciones.length > 1) {
                 $.each(arregloDeOpciones, function (index, item) {
                     if (!jQuery.isEmptyObject(item)) {
-                        $('#' + id).children('option[text=' + item + ']').attr("selected", "selected");
-                        $('#' + id).children('option[value=' + item + ']').attr("selected", "selected");
-                    }                   
+                        switch (selectValue) {
+                            case 'value':
+                                $('#' + id).children('option[value=' + item + ']').attr("selected", "selected");
+                                break;
+                            case 'text':
+                                var textSelectedOption = $('#' + id).children('option').filter(function () { return $(this).text().toLowerCase() === $.trim(item); });
+                                $(textSelectedOption).attr("selected", "selected");
+                                break;
+                        }
+                    }
+                });               
+            }
+            if ($('#' + id).prop('tagName') === 'SELECT' && $('#' + id).attr('title') === 'multiselect') {
+                selectClick(id);
+            }
+            
+        };
+
+        function setActiveLiToSelectedOption(id, options) {
+            $.map($('#' + id).children('option'), function (item) { $(item).removeAttr('selected') });
+            if (options.length > 0) {
+                var arregloDeOpciones = options.split(',');
+                //if (arregloDeOpciones.length > 1) {
+                $.each(arregloDeOpciones, function (index, item) {
+                    if (!jQuery.isEmptyObject(item)) {                        
+                       var textSelectedOption = $('#' + id).children('option').filter(function () { return $(this).text().toLowerCase() === $.trim(item); });
+                       $(textSelectedOption).attr("selected", "selected");
+                                        
+                    }
                 });
-                if ($('#' + id).prop('tagName') == 'SELECT') {
-                    selectClick(id);
-                }
-            } else {
-                $('#' + id).val(options);
             }
             
         };
@@ -1142,10 +1181,10 @@ $(function () {
             // $('#htmlEst').find('.' + type).length; 
             switch (type) {
                 case true, "row":
-                    contenidor = '<div class= "row border border-secondary p-2 inactivo " id="' + id + '"><span class="atributs" style="display: none;">#################################################################|</span></div>';
+                    contenidor = '<div class= "row b-inicial p-inicial inactivo" id="' + id + '"><span class="atributs" style="display: none;">'+id+'#'+type+'################################################################|</span></div>';
                     break;
                 case "col":
-                    contenidor = '<div class= "col border border-secondary p-2 inactivo" id="' + id + '"><span class="atributs" style="display: none;">#################################################################|</span></div>';
+                    contenidor = '<div class= "col b-inicial p-inicial inactivo" id="' + id + '"><span class="atributs" style="display: none;">'+id+'#'+type+'################################################################|</span></div>';
                     break;
             };
             return contenidor;
@@ -1153,47 +1192,49 @@ $(function () {
 
         function Tipus(nroId) {
             var nombre = "";
-            var id = $('#selectContingut').children('option:selected').val() + nroId;
-
-            switch ($('#selectContingut').children('option:selected').val()) {
+            var tipus = $('#selectContingut').children('option:selected').val();
+            var id = tipus + nroId;
+            var innerSpan = id + '#' + tipus + '##########################false#false#######################################|';
+            switch (tipus) {
                 case "":
                     alert("Seleccione un elemento");
                     break;
                 case "div":
-                    var nombre = '<div class = "border border-secondary p-4 inactivo" id=' + id + '> <span class="atributs" style="display: none;">#################################################################|</span>' +
-                        '</div>';
+                    var nombre = '<div class = "b-inicial p-inicial inactivo" id=' + id + '> <span class="atributs" style="display: none;">'+innerSpan+'</span></div>';
                     break;
                 case "section":
-                    var nombre = '<section class = "border border-secondary p-4 inactivo" id=' + id + '> <span class="atributs" style="display: none;">#################################################################|</span>' +
-                        '</section>';
+                    var nombre = '<section class = "b-inicial p-inicial inactivo" id=' + id + '> <span class="atributs" style="display: none;">'+innerSpan+'</span></section>';
                     break;
                 case "nav":
-                    var nombre = '<nav class = "border border-secondary p-4 inactivo" id=' + id + '> <span class="atributs" style="display: none;">#################################################################|</span></nav>';
+                    var nombre = '<nav class = "b-inicial p-inicial inactivo" id=' + id + '> <span class="atributs" style="display: none;">'+innerSpan+'</span></nav>';
 
                     break;
                 case "header":
-                    var nombre = '<header class = "border border-secondary p-4 inactivo" id=' + id + '><span class="atributs" style="display: none;">#################################################################|</span></header>';
+                    var nombre = '<header class = "b-inicial p-inicial inactivo" id=' + id + '><span class="atributs" style="display: none;">'+innerSpan+'</span></header>';
 
                     break;
                 case "article":
-                    var nombre = '<article class = "border border-secondary p-4 inactivo" id=' + id + '> <span class="atributs" style="display: none;">#################################################################|</span></article>';
+                    var nombre = '<article class = "b-inicial p-inicial inactivo" id=' + id + '> <span class="atributs" style="display: none;">'+innerSpan+'</span></article>';
 
                     break;
-                case "aside":
-                    var nombre = '<aside class = "border border-secondary p-4 inactivo" id=' + id + '> <span class="atributs" style="display: none;">#################################################################|</span></aside>';
+                case "iframe":
+                    var nombre = '<iframe class = "b-inicial p-inicial inactivo" id=' + id + '> <span class="atributs" style="display: none;">' + innerSpan + '</span></iframe>';
+
+                case "video":
+                    var nombre = '<video class = "b-inicial p-inicial inactivo" id=' + id + '> <span class="atributs" style="display: none;">' + innerSpan + '</span></video>';
 
                     break;
                 case "details":
-                    var nombre = '<details class = "border border-secondary p-4 inactivo" id=' + id + ' > <span class="atributs" style="display: none;">#################################################################|</span></details>';
+                    var nombre = '<details class = "b-inicial p-inicial inactivo" id=' + id + ' > <span class="atributs" style="display: none;">'+innerSpan+'</span></details>';
                     break;
                 case "footer":
-                    var nombre = '<footer class = "border border-secondary p-4 inactivo" id=' + id + ' > <span class="atributs" style="display: none;">#################################################################|</span></footer>';
+                    var nombre = '<footer class = "b-inicial p-inicial inactivo" id=' + id + ' > <span class="atributs" style="display: none;">'+innerSpan+'</span></footer>';
                     break;
                 case "main":
-                    var nombre = '<main class = "border border-secondary p-4 inactivo" id=' + id + ' > <span class="atributs" style="display: none;">#################################################################|</span></main>';
+                    var nombre = '<main class = "b-inicial p-inicial inactivo" id=' + id + ' > <span class="atributs" style="display: none;">'+innerSpan+'</span></main>';
                     break;
                 case "summary":
-                    var nombre = '<summary class = "border border-secondary p-4 inactivo" id=' + id + '> <span class="atributs" style="display: none;">#################################################################|</span></summary>';
+                    var nombre = '<summary class = "b-inicial p-inicial inactivo" id=' + id + '> <span class="atributs" style="display: none;">'+innerSpan+'</span></summary>';
                     break;
             };
             return nombre;
@@ -1542,63 +1583,63 @@ $(function () {
 
                 strAtr += "#";
                 if ($("#lstTipusFulla").val() != null) {
-                    strAtr += $("#lstTipusFulla").val().trim(); //8
+                    strAtr += $.trim($("#lstTipusFulla").val()); //8
                 }
 
                 strAtr += "#";
                 if ($("#ddlPLTDSCMP").val() != null) {
-                    strAtr += $("#ddlPLTDSCMP").val().trim(); //9
+                    strAtr += $.trim($("#ddlPLTDSCMP").val()); //9
                 }
                 strAtr += "#";
                 if ($("#ddlPLTDSLNK").val() != null) {
-                    strAtr += $("#ddlPLTDSLNK").val().trim(); //10
+                    strAtr += $.trim($("#ddlPLTDSLNK").val()); //10
                 }
                 strAtr += "#";
                 if ($("#ddlPLTDSALT").val() != null) {
-                    strAtr += $("#ddlPLTDSALT").val().trim(); //11
+                    strAtr += $.trim($("#ddlPLTDSALT").val()); //11
                 }
 
                 strAtr += "#";
                 if ($("#ddlPLTDSIMG").val() != null) {
-                    strAtr += $("#ddlPLTDSIMG").val().trim(); //12
+                    strAtr += $.trim($("#ddlPLTDSIMG").val()); //12
                 }
 
                 strAtr = DadesComunsLlibrerias(strAtr);
 
                 strAtr += "#"
                 if ($("#txtPLTDSNUM").val() != null) {
-                    strAtr += $("#txtPLTDSNUM").val().trim(); //19
+                    strAtr += $.trim($("#txtPLTDSNUM").val()); //19
                 }
 
                 strAtr += "#";
                 if ($("#ddlPLTDSNIV").val() != null) {
-                    strAtr += $("#ddlPLTDSNIV").val().trim(); //20
+                    strAtr += $.trim($("#ddlPLTDSNIV").val()); //20
                 }
 
                 strAtr += "#";
                 if ($("#txtPLTDSAAL").val() != null) {
-                    strAtr += $("#txtPLTDSAAL").val().trim(); //21
+                    strAtr += $.trim($("#txtPLTDSAAL").val()); //21
                 }
 
                 strAtr += "#";
                 if ($("#ddlb_PLTDSALF").val() != null) {
-                    strAtr += $("#ddlb_PLTDSALF").val().trim(); //22
+                    strAtr += $.trim($("#ddlb_PLTDSALF").val()); //22
                 }
 
 
                 strAtr += "#";
                 if ($("#txtPLTDSALK").val() != null) {
-                    strAtr += $("#txtPLTDSALK").val().trim(); //23
+                    strAtr += $.trim($("#txtPLTDSALK").val()); //23
                 }
 
                 strAtr += "#";
                 if ($("#gaiaPLTCDPALTxt").val() != null) {
-                    strAtr += $("#gaiaPLTCDPALTxt").val().trim(); //24
+                    strAtr += $.trim($("#gaiaPLTCDPALTxt").val()); //24
                 }
 
                 strAtr += "#";
                 if ($("#gaiaPLTCDPALNodes").val() != null) {
-                    strAtr += $("#gaiaPLTCDPALNodes").val().trim(); //25
+                    strAtr += $.trim($("#gaiaPLTCDPALNodes").val()); //25
                 }
 
                 strAtr += "#";
@@ -1657,7 +1698,7 @@ $(function () {
             //guardo els canvis 
             $("#txtEst").val($("#htmlEst").html());
 
-        }
+        };
 
         function ModificarDadesRow() {
             element.removeClass();
@@ -1670,7 +1711,7 @@ $(function () {
             //guardo els canvis 
             $("#txtEst").val($("#htmlEst").html());
 
-        }
+        };
 
         function RemoveClassInElement(valor, patron) {
             $(valor).removeClass(function (index, classNames) {
@@ -1703,28 +1744,36 @@ $(function () {
         function DadesComunsLlibrerias(strAtr) {
 
             strAtr += "#";
-            if ($("#gaiaCodiWebTxt").val() != null) {
-                strAtr += $("#gaiaCodiWebTxt").val().trim();//13
+            if ($("#gaiaCodiWebTxtAbans").val() != null) {
+                strAtr += $.trim($("#gaiaCodiWebTxtAbans").val());//12
             }
             strAtr += "#";
-            if ($("#gaiaCodiWebNodes").val() != null) {
-                strAtr += $("#gaiaCodiWebNodes").val().trim();//14
+            if ($("#gaiaCodiWebNodesAbans").val() != null) {
+                strAtr += $.trim($("#gaiaCodiWebNodesAbans").val());//13
             }
             strAtr += "#";
-            if ($("#gaiaCodiWeb2Txt").val() != null) {
-                strAtr += $("#gaiaCodiWeb2Txt").val().trim();//15
+            if ($("#gaiaCodiWebTxtDins").val() != null) {
+                strAtr += $.trim($("#gaiaCodiWebTxtDins").val());//14
             }
             strAtr += "#";
-            if ($("#gaiaCodiWeb2Nodes").val() != null) {
-                strAtr += $("#gaiaCodiWeb2Nodes").val().trim();//16
+            if ($("#gaiaCodiWebNodesDins").val() != null) {
+                strAtr += $.trim($("#gaiaCodiWebNodesDins").val());//15
+            }
+            strAtr += "#";
+            if ($("#gaiaCodiWebTxtDespres").val() != null) {
+                strAtr += $.trim($("#gaiaCodiWebTxtDespres").val());//16
+            }
+            strAtr += "#";
+            if ($("#gaiaCodiWebNodesDespres").val() != null) {
+                strAtr += $.trim($("#gaiaCodiWebNodesDespres").val());//17
             }
             strAtr += "#";
             if ($("#gaiaPltSecTxt").val() != null) {
-                strAtr += $("#gaiaPltSecTxt").val().trim(); //17
+                strAtr += $.trim($("#gaiaPltSecTxt").val()); //18
             }
             strAtr += "#";
             if ($("#gaiaPltSecNodes").val() != null) {
-                strAtr += $("#gaiaPltSecNodes").val().trim(); //18
+                strAtr += $.trim($("#gaiaPltSecNodes").val()); //19
             }
             return strAtr;
         };
@@ -1939,7 +1988,7 @@ $(function () {
                 clase.push(item.text);
                 valor.push(item.value);
             });
-            if (!jQuery.isEmptyObject(valor)) {
+            if (!jQuery.isEmptyObject(element)) {
                 $.map($(IdSelect).children('option'), function (e) {
                     if (!jQuery.isEmptyObject($(e).text())) {
                         RemoveClassInElement(element, new RegExp($(e).text()));
@@ -2012,44 +2061,76 @@ $(function () {
         };
 
         document.addEventListener('click', function (event) {
-            element = event.toElement;
-            if ($(element).parents('#htmlEst').length > 0) {
-                activado($(element).attr('id'));
+            var elementInicial = event.toElement;
+           
+            var tagNameElement = $(elementInicial).prop('tagName');
+            var multiselect = $(elementInicial).attr('title') == 'multiselect' ? true : false;
+            if ($(elementInicial).parents('#htmlEst').length > 0) {
+                activado($(elementInicial).attr('id'));
 
-                readValues(element);
+                readValues(elementInicial);
                 event.stopPropagation();
             };
-            if ($(element).prop('tagName') == 'SELECT') {
-                selectClick($(element).attr('id'));
-            }
+            //if ( tagNameElement == 'SELECT' && multiselect) {
+            //    selectClick($(elementInicial).attr('id'));
+            //}
+            //if (tagNameElement == 'button' && $(elementInicial).hasClass('multiselect')) {
+            //    var quienEs = $(elementInicial).parent().siblings('select');
+            //    selectClick($(quienEs).attr('id'));
+            //}
+            
         }, true);
 
-        $("input#txtNomCel").change(function () {
-            element = $('#htmlEst').find('*').filter(function () {
-                if ($(this).hasClass('activo')) {
-                    return this;
-                } else {
-                    return null;
-                }
-            });
+        //$('select').on('change', function (event) {
+        //    var thisSelect = event.currentTarget;
+        //    if ($(this).attr('title') != 'multiselect' && $(this).attr('id') != 'selectContingut') {
+        //        $('#btnModificarDades').click();
+        //        $("#txtEst").val($("#htmlEst").html());
+        //    }
+            
+        //});
 
-            if (!jQuery.isEmptyObject(element)) {
-                if ($(element).is('span.text')) {
-                    $(element).text($(this).val());
-                } else {
-                    if ($(element).find('span.text').length == 0) {
-                        $(element).append('<span class="divImg" id="spandivImg' + $(element).attr('id') + '"></span>');
-                        $(element).append('<span class="text" id="spantext' + $(element).attr('id') + '"></span>');
-                        $(element).children('span.text').text($(this).val());
-                        $(element).children('span.text').addClass('inactivo');
-                        $(element).children('span.divImg').addClass('inactivo');
-                    } else {
-                        $(element).children('span.text').text($(this).val());
-                    }
-                }
-            }
-            $("#txtEst").val($("#htmlEst").html());
-        });
+        //$('textarea').on('change', function () {
+
+           
+        //        $('#btnModificarDades').click();
+        //        $("#txtEst").val($("#htmlEst").html());
+        //    return false;
+        //});
+
+        //$("input").change(function () {
+
+        //    element = $('#htmlEst').find('*').filter(function () {
+        //        if ($(this).hasClass('activo')) {
+        //            return this;
+        //        } else {
+        //            return null;
+        //        }
+        //    });
+
+        //    if (!jQuery.isEmptyObject(element)) {
+        //        if ($(this).attr('id') == '#txtNomCel') {
+               
+        //            if ($(element).is('span.text')) {
+        //                $(element).text($(this).val());
+        //            } else {
+        //                if ($(element).find('span.text').length == 0) {
+        //                    $(element).append('<span class="divImg" id="spandivImg' + $(element).attr('id') + '"></span>');
+        //                    $(element).append('<span class="text" id="spantext' + $(element).attr('id') + '"></span>');
+        //                    $(element).children('span.text').text($(this).val());
+        //                    $(element).children('span.text').addClass('inactivo');
+        //                    $(element).children('span.divImg').addClass('inactivo');
+        //                } else {
+        //                    $(element).children('span.text').text($(this).val());
+        //                }
+        //            }
+        //        }
+        //        $('#btnModificarDades').click();
+
+        //        $("#txtEst").val($("#htmlEst").html());
+        //    }            
+        //    return false;
+        //});
 
         function selectClick(id) {
             
@@ -2065,12 +2146,16 @@ $(function () {
 
                 if (element.length > 0) {
                     var selectedElement = document.getElementById(id);
-                    $(selectedElement).attr('multiple', 'multiple');
-                    $(selectedElement).css('display', 'none');
+                    if ($(selectedElement).attr('multiple') != 'multiple') {
+                        $(selectedElement).attr('multiple', 'multiple');
+                    }
+                    if ($(selectedElement).css('display') != 'none') {
+                        $(selectedElement).css('display', 'none');
+                    }            
+                    
                     $(selectedElement).multiselect({
-                        buttonWidth: 'auto',
-                        disableIfEmpty: true,
-                        //buttonClass: 'custom-select custom-select-sm',
+                        
+                        disableIfEmpty: true,                        
                         maxHeight: 200,
                         onChange: function (option, checked) {
                             if (checked === true) {
@@ -2082,8 +2167,7 @@ $(function () {
                             var data = event.relatedTarget;
                             var allActives = $(data).siblings('ul').find('li.active');
                             $.each(allActives, function (index, item) { lista.push($(item).text()); });
-                            setSelectedOptions(id, lista.join(','));
-                            var valor = $('select#'+id).children('option:selected');
+                            setActiveLiToSelectedOption(id, lista.join(','));                            
                             $('#btnModificarDades').click();
                         }
                     });
@@ -2096,24 +2180,26 @@ $(function () {
 
     function activado(valor) {
 
-            $('#htmlEst').find('*').each(function () {
-                if ($(this).attr('id') == valor) {
-                    if ($(this).hasClass('inactivo')) {
-                        $(this).removeClass('inactivo').addClass('activo');
+        $('#htmlEst').find('*').each(function () {
+            if ($(this).attr('id') == valor) {
+                if ($(this).hasClass('inactivo')) {
+                    $(this).removeClass('inactivo').addClass('activo');
+                    $(this).find('*').each(function () { $(this).removeClass('activo').addClass('inactivo') });
 
-                    } else {
-                        //$("#btnModificarDades").click();
-                        $(this).removeClass('activo').addClass('inactivo');
-                    }
+                    //} else {
+                    //    //$("#btnModificarDades").click();
+                    //    $(this).removeClass('activo').addClass('inactivo');
+                    //}
                     $('select#selectContingut').val(this.tagName.toLowerCase());
-                } else {
-                    $(this).removeClass('activo').addClass('inactivo');
-                }
-            });
+                } 
+            } else {
+                $(this).removeClass('activo').addClass('inactivo');
+            }
+        });
             $("#txtEst").val($("#htmlEst").html());
             return false;
 
-        }; 
+    }; 
 
     function guardar() {
        
@@ -2134,7 +2220,7 @@ $(function () {
         //});
 
         $(element).each(function () {
-            if (this.tagName.toLowerCase() != 'span') {
+            if ($(this).prop('tagName').toLowerCase() != 'span') {
                atributs += $(this).children('span.atributs').text();
             }
         });

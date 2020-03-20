@@ -143,8 +143,9 @@ Public Class frmplantilla
 
         If Request("id") = "" Then
             'ltEst.Text = "<div class=""contenidor border border-secondary p-2 pr-4 pl-4""><span class=""contenidorAtributs"" style=""display: none;"">#################################################################|</span><div class=""row border border-secondary p-2""><span class=""rowAtributs"" style=""display:none"">###########################|</span><div class=""col cel border border-secondary p-2"" id=""d0""><span class=""divId"" style=""display:none"">0</span><span class=""divImg""></span><span class=""text"">Cel&middot;la inicial</span><span class=""atributs"" style=""display:none"">0#Cel&middot;la inicial##########################|</span></div></div></div> "<span class=""badge-light small"" >section</span>
-
-            ltEst.Text = "<div class=""border border-secondary p-4 inactivo"" id=""div0""><span class=""atributs"" style=""display: none;"">div0#Inicio########################false#false########################1759,1760,1666###############|</span></div>"
+            'div0#div############297693##############false#false##0############0#######1720###1759,1760###########1763####|
+            ltEst.Text = "<div class=""b-inicial p-inicial inactivo"" id=""div0""><span class=""atributs"" style=""display: none;"">div0#div############297693##############false#false##0############0#######1720###1759,1760###########1763####|</span></div>"
+            'div0#div##################################################################|
             txtEst.Value = ltEst.Text
         Else
             Select Case Request("tipus")
@@ -325,7 +326,7 @@ Public Class frmplantilla
         Next item
         'ddlb_23.Items.Insert(0, new ListItem("",""))
         ddlb_23.Items.Insert(0, New ListItem("", ""))
-        ddlb_23.Items(0).Selected = True
+        ' ddlb_23.Items(0).Selected = True
 
 
         dv.RowFilter = "CSSINTIP=25"
@@ -397,6 +398,7 @@ Public Class frmplantilla
         ddlb_110.DataValueField = "CSSINCOD"
         ddlb_110.DataBind()
         ddlb_110.Items.Insert(0, New ListItem("", 0))
+
         dv.RowFilter = "CSSINTIP=111"
         ddlb_111.DataSource = dv
         ddlb_111.DataTextField = "CSSDSTXT"
@@ -445,8 +447,6 @@ Public Class frmplantilla
         ddlb_117.DataValueField = "CSSINCOD"
         ddlb_117.DataBind()
         ddlb_117.Items.Insert(0, New ListItem("", 0))
-
-
 
         'fons
 

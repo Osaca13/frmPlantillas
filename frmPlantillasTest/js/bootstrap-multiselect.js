@@ -401,10 +401,10 @@
 
             },
             enableHTML: false,
-            buttonClass: 'btn btn-default',
+            buttonClass: '',
             inheritClass: false,
-            buttonWidth: 'auto',
-            buttonContainer: '<div class="" />',
+            buttonWidth: '13rem',
+            buttonContainer: '<div class="input-group input-group-append" />',
             dropRight: false,
             dropUp: false,
             selectedClass: 'active',
@@ -440,7 +440,7 @@
             includeResetDivider: false,
             resetText: 'Reset',
             templates: {
-                button: '<button type="button" class="multiselect dropdown-toggle border" data-toggle="dropdown"><span class="multiselect-selected-text"></span></button>',
+                button: '<button type="button" class="multiselect border custom-select custom-select-sm" data-toggle="dropdown"><span class="multiselect-selected-text"></span></button>',
                 ul: '<ul class="multiselect-container dropdown-menu"></ul>',
                 filter: '<li class="multiselect-item multiselect-filter"><div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span><input class="form-control multiselect-search" type="text" /></div></li>',
                 filterClearBtn: '<span class="input-group-btn"><button class="btn btn-default multiselect-clear-filter" type="button"><i class="glyphicon glyphicon-remove-circle"></i></button></span>',
@@ -483,7 +483,7 @@
             // Manually add button width if set.
             if (this.options.buttonWidth && this.options.buttonWidth !== 'auto') {
                 this.$button.css({
-                    'width': '100%', //this.options.buttonWidth,
+                    'width': '13rem', //this.options.buttonWidth,
                     'font- size': '12px',
                     'overflow' : 'hidden',
                     'text-overflow': 'ellipsis',
@@ -863,11 +863,13 @@
          */
         createOptionValue: function(element) {
             var $element = $(element);
-            var sisi = $element.prop('defaultSelected');
+            //var sisi = $element.prop('defaultSelected');
 
             //if ($element.is(':defaultSelected')) {
             if ($element.prop('defaultSelected')) {
                 $element.prop('selected', true);
+            } else {
+                $element.prop('selected', false);
             }
 
             // Support the label attribute on options.

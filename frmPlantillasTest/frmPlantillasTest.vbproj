@@ -70,6 +70,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\GAIA\bin\lhUtil.dll</HintPath>
     </Reference>
+    <Reference Include="llibreriagaia, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Z:\GAIA\ASPX\llibreria\Teresa\llibreriagaia.dll</HintPath>
+    </Reference>
     <Reference Include="ProjNET, Version=1.0.2794.16965, Culture=neutral, PublicKeyToken=a1f5bdcd9c6f5740, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\GAIA\bin\ProjNET.dll</HintPath>
