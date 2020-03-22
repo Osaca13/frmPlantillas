@@ -602,7 +602,7 @@
                         <div class="col-4 align-self-start">
                         	 <div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="ddlb_632" class="input-group-text">Alineaci&oacute; H.:</label></div>
-                                <asp:DropDownList  ID="ddlb_632"  runat="server" CssClass="custom-select custom-select-sm" ></asp:DropDownList>
+                                <asp:DropDownList  ID="ddlb_632"  runat="server" CssClass="custom-select custom-select-sm"  ></asp:DropDownList>
                             </div>                             
                             <div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="ddlb_650" class="input-group-text">Alineaci&oacute; V.:</label></div>
@@ -1009,10 +1009,15 @@ $(function () {
 
         var nroId = parseInt($("#nroId").val());
         $('#ddlb_25').attr('title', 'multiselect');
+        $('#ddlb_25').attr('multiple', 'multiple');
         $('#ddlb_634').attr('title', 'multiselect');
+        $('#ddlb_634').attr('multiple', 'multiple');
         $('#ddlb_631').attr('title', 'multiselect');
+        $('#ddlb_631').attr('multiple', 'multiple');
+        $('#ddlb_651').attr('multiple', 'multiple');
         $('#ddlb_651').attr('title', 'multiselect');
         $('#ddlb_115').attr('title', 'multiselect');
+        $('#ddlb_115').attr('multiple', 'multiple');
         activado('div0');
         readValues(document.getElementById('div0'));
 
@@ -1092,7 +1097,7 @@ $(function () {
         function ReadFromSpanDadesEstils(arrAtr) {
 
             //estils
-            $("#ddlb_23").val(arrAtr[29]);           
+            $("#ddlb_23").val(arrAtr[29]);
             setSelectedOptions('ddlb_25', arrAtr[30], 'value');
             $("#ddlb_26").val(arrAtr[31]);
             $("#ddlb_27").val(arrAtr[32]);
@@ -1105,7 +1110,7 @@ $(function () {
             $("#ddlb_112").val(arrAtr[39]);
             $("#ddlb_122").val(arrAtr[40]);
             $("#ddlb_114").val(arrAtr[41]);
-            setSelectedOptions('ddlb_115', arrAtr[42], 'value');           
+            setSelectedOptions('ddlb_115', arrAtr[42], 'value');
             $("#ddlb_123").val(arrAtr[43]);
             $("#ddlb_117").val(arrAtr[44]);
             $("#ddlb_118").val(arrAtr[45]);
@@ -1114,7 +1119,7 @@ $(function () {
             $("#ddlb_630").val(arrAtr[48]);
             setSelectedOptions('ddlb_631', arrAtr[49], 'value');
             $("#ddlb_632").val(arrAtr[50]);
-            $("#ddlb_633").val(arrAtr[51]);           
+            $("#ddlb_633").val(arrAtr[51]);
             setSelectedOptions('ddlb_634', arrAtr[52], 'value');
             $("#ddlb_635").val(arrAtr[53]);
             $("#ddlb_636").val(arrAtr[54]);
@@ -1126,35 +1131,37 @@ $(function () {
             $("#ddlb_648").val(arrAtr[60]);
             $("#ddlb_649").val(arrAtr[61]);
             $("#ddlb_650").val(arrAtr[62]);
-            setSelectedOptions('ddlb_651', arrAtr[63], 'value');           
+            setSelectedOptions('ddlb_651', arrAtr[63], 'value');
             $("#ddlb_652").val(arrAtr[64]);
             $("#ddlb_653").val(arrAtr[65]);
             $("#ddlb_654").val(arrAtr[66]);
             $("#ddlb_655").val(arrAtr[67]);
         };
 
-        function setSelectedOptions(id, options, selectValue) {
-            $.map($('#' + id).children('option'), function (item) { $(item).removeAttr('selected') });
+        function setSelectedOptions(id, valores, selectValue) {
+            $.map($('#' + id).children('option'), function (item) { $(item).removeAttr('selected').prop('selected', false); });
+            var options = [];
+            if (valores.indexOf(',') > -1) {
+               options = valores.split(',');
+            }
+            
             if (options.length > 0) {
-                var arregloDeOpciones = options.split(',');
+
                 //if (arregloDeOpciones.length > 1) {
-                $.each(arregloDeOpciones, function (index, item) {
-                    if (!jQuery.isEmptyObject(item)) {
-                        switch (selectValue) {
-                            case 'value':
-                                $('#' + id).children('option[value=' + item + ']').attr("selected", "selected");
-                                break;
-                            case 'text':
-                                var textSelectedOption = $('#' + id).children('option').filter(function () { return $(this).text().toLowerCase() === $.trim(item); });
-                                $(textSelectedOption).attr("selected", "selected");
-                                break;
-                        }
-                    }
-                });               
+                // $('option[value="1"]', $('#example-refresh')).prop('selected', true);
+                $.each(options, function (index, item) {
+                    $('option[value="' + item + '"]', $('#' + id)).attr('selected', 'selected').prop('selected', true);
+                    $('option[value="' + item + '"]', $('#' + id)).attr('selected', 'selected').prop('defaultSelected', true);
+                 //   $('#' + id).children('option[value=' + item + ']').attr("selected", "selected");
+                });                
+            } else {
+                $('option[value="' + valores + '"]', $('#' + id)).attr('selected', 'selected').prop('selected', true);
+                $('option[value="' + valores + '"]', $('#' + id)).attr('selected', 'selected').prop('defaultSelected', true);
+              //  $('#' + id).children('option[value=' + valores + ']').attr("selected", "selected");
             }
-            if ($('#' + id).prop('tagName') === 'SELECT' && $('#' + id).attr('title') === 'multiselect') {
-                selectClick(id);
-            }
+            
+           $('#' + id).multiselect('refresh');           
+            selectClick(id);         
             
         };
 
@@ -1180,7 +1187,7 @@ $(function () {
             var id = type + nroId.toString();
             // $('#htmlEst').find('.' + type).length; 
             switch (type) {
-                case true, "row":
+                case "row":
                     contenidor = '<div class= "row b-inicial p-inicial inactivo" id="' + id + '"><span class="atributs" style="display: none;">'+id+'#'+type+'################################################################|</span></div>';
                     break;
                 case "col":
@@ -1256,18 +1263,18 @@ $(function () {
             if (!jQuery.isEmptyObject(element)) {
                 var valor = Tipus(nroId);
                 $(element).before(valor);
-                $(element).removeClass('activo').addClass('inactivo');
-                readValues(valor);
+                $(element).removeClass('activo').addClass('inactivo');               
                 var IdValor = $(valor).attr('id');
                 $('#txtIdCel').removeAttr('value');
                 $('#txtIdCel').val(IdValor);
                 $('#' + IdValor).removeClass('inactivo').addClass('activo');
+                readValues(valor);
                 $('#btnModificarDades').click();
             } else {
                 alert("Active un contenidor");
             };
             //guardo els canvis 
-            $("#txtEst").val($("#htmlEst").html());
+           
         });
 
         $("#btnAfegirContenidorDespres").click(function () {
@@ -1286,18 +1293,19 @@ $(function () {
                 var valor = Tipus(nroId);
                 $(element).after(valor);
                 $(element).removeClass('activo').addClass('inactivo');
-                readValues(valor);
+                
                 var IdValor = $(valor).attr('id');
                 $('#txtIdCel').removeAttr('value');
                 $('#txtIdCel').val(IdValor);
                 $('#' + IdValor).removeClass('inactivo').addClass('activo');
+                readValues(valor);
                 $('#btnModificarDades').click();
             } else {
                 alert("Active un contenidor");
             };
 
             //guardo els canvis 
-            $("#txtEst").val($("#htmlEst").html());
+            
         });
 
         $("#btnAfegirContenidorAbansAdins").click(function () {
@@ -1317,12 +1325,11 @@ $(function () {
                 var valor = Tipus(nroId);
                 $(lastSpan).after(valor);
                 $(element).removeClass('activo').addClass('inactivo');
-
-                readValues(valor);
                 var IdValor = $(valor).attr('id');
                 $('#txtIdCel').removeAttr('value');
                 $('#txtIdCel').val(IdValor);
                 $('#' + IdValor).removeClass('inactivo').addClass('activo');
+                readValues(document.getElementById(IdValor));
                 $('#btnModificarDades').click();
 
             } else {
@@ -1330,18 +1337,12 @@ $(function () {
             };
 
             //guardo els canvis 
-            $("#txtEst").val($("#htmlEst").html());
+            
         });
 
         $("#btnAfegirContenidorDespresAdins").click(function () {
             nroId++;
-            //gravo canvis en la cel·la actual
-            //$("#btnModificarDadesCel").click();
-
-            //if (!jQuery.isEmptyObject(element)) {
-            //    nroId++;
-            //    element.parent(".contenidor").append("<div class='row border border-secondary p-2'><span class='rowAtributs' style='display: none;'>#################################################################|</span><div class='col cel border border-secondary p-2' id='d" + nroId + "'><span class='divImg'></span><span class='text'>cel</span><span class='atributs' style='display: none;'>" + nroId + "#cel################################################################|</span></div></div>");
-            //}
+            
             element = $('#htmlEst').find('*').filter(function () {
                 if ($(this).hasClass('activo')) {
                     return this;
@@ -1354,17 +1355,18 @@ $(function () {
                 var valor = Tipus(nroId);
                 $(element).append(valor);
                 $(element).removeClass('activo').addClass('inactivo');
-                readValues(valor);
+               
                 var IdValor = $(valor).attr('id');
                 $('#txtIdCel').removeAttr('value');
                 $('#txtIdCel').val(IdValor);
                 $('#' + IdValor).removeClass('inactivo').addClass('activo');
+                readValues(valor);
                 $('#btnModificarDades').click();
             } else {
                 alert("Active un contenidor");
             };
             //guardo els canvis 		
-            $("#txtEst").val($("#htmlEst").html());
+            
         });
 
         //afegir fila en el nivell adins
@@ -1384,17 +1386,18 @@ $(function () {
                 var elementToInsert = RowsAndColumns('row');
                 $(element).append(elementToInsert);
                 $(element).removeClass('activo').addClass('inactivo');
-                readValues(elementToInsert);
+                
                 var IdValor = $(elementToInsert).attr('id');
                 $('#txtIdCel').removeAttr('value');
                 $('#txtIdCel').val(IdValor);
                 $('#' + IdValor).removeClass('inactivo').addClass('activo');
+                readValues(elementToInsert);
                 $('#btnModificarDades').click();
             } else {
                 alert("Active un contenidor");
             };
             //guardo els canvis 		
-            $("#txtEst").val($("#htmlEst").html());
+            
         });
 
         //afegir fila en el nivell adins
@@ -1415,18 +1418,17 @@ $(function () {
                 var lastSpan = $(element).children('span').last();
                 $(lastSpan).after(elementToInsert);
                 $(element).removeClass('activo').addClass('inactivo');
-                readValues(elementToInsert);
+                
                 var IdValor = $(elementToInsert).attr('id');
                 $('#txtIdCel').removeAttr('value');
                 $('#txtIdCel').val(IdValor);
                 $('#' + IdValor).removeClass('inactivo').addClass('activo');
+                readValues(elementToInsert);
                 $('#btnModificarDades').click();
             } else {
                 alert("Active un contenidor");
             };
-            //guardo els canvis 		
-            $("#txtEst").val($("#htmlEst").html());
-            //element = $(".celActiva")
+            
         });
 
         $("#btnAfegirColumnaDinsAbans").click(function () {
@@ -1454,26 +1456,17 @@ $(function () {
                     }
                 }
                 $(element).removeClass('activo').addClass('inactivo');
-                readValues(elementToInsert);
+               
                 var IdValor = $(elementToInsert).attr('id');
                 $('#txtIdCel').removeAttr('value');
                 $('#txtIdCel').val(IdValor);
                 $('#' + IdValor).removeClass('inactivo').addClass('activo');
+                readValues(elementToInsert);
                 $('#btnModificarDades').click();
             } else {
                 alert("Active un contenidor");
             };
 
-            //if ($('#htmlEst').find('.activado').length > 0) {
-            //     var element = $('#htmlEst').find('.activado');
-            //     var elementToInsert = RowsAndColumns(element, 'col');
-            //     $(element).before(elementToInsert);                        
-
-            //}else{
-            //    alert("Active un contenidor");
-            //};
-            //guardo els canvis 
-            $("#txtEst").val($("#htmlEst").html());
         });
 
         $("#btnAfegirColumnaDinsDespres").click(function () {
@@ -1501,18 +1494,17 @@ $(function () {
                     }
                 }
                 $(element).removeClass('activo').addClass('inactivo');
-                readValues(elementToInsert);
+             
                 var IdValor = $(elementToInsert).attr('id');
                 $('#txtIdCel').removeAttr('value');
                 $('#txtIdCel').val(IdValor);
                 $('#' + IdValor).removeClass('inactivo').addClass('activo');
+                readValues(elementToInsert);
                 $('#btnModificarDades').click();
             } else {
                 alert("Active un contenidor");
             };
 
-            //guardo els canvis 
-            $("#txtEst").val($("#htmlEst").html());
         });
 
         $("#btnEsborrarCel").click(function () {
@@ -1579,7 +1571,7 @@ $(function () {
 
                 strAtr += $("#txtIdCel").val() + "#" + $("#txtNomCel").val(); //1#2
 
-                strAtr = DadesComunsMides(strAtr, element);
+                strAtr = ReadFromSelectDadesMides(strAtr, element);
 
                 strAtr += "#";
                 if ($("#lstTipusFulla").val() != null) {
@@ -1604,7 +1596,7 @@ $(function () {
                     strAtr += $.trim($("#ddlPLTDSIMG").val()); //12
                 }
 
-                strAtr = DadesComunsLlibrerias(strAtr);
+                strAtr = ReadFromSelectDadesLlibrerias(strAtr);
 
                 strAtr += "#"
                 if ($("#txtPLTDSNUM").val() != null) {
@@ -1648,7 +1640,7 @@ $(function () {
                 strAtr += "#";
                 strAtr += $("#chkWEBDSCND").is(":checked"); //27
 
-                strAtr = DadesComunsEstils(strAtr, element);
+                strAtr = ReadFromSelectDadesEstils(strAtr, element);
 
                 modificaIcona(element);
                 //afegeixo els atributs a l'array de propietats
@@ -1732,16 +1724,16 @@ $(function () {
 
         function ComposicionTextoAtributos() {
             var strAtr = "#";
-            strAtr = DadesComunsMides(strAtr, element);
+            strAtr = ReadFromSelectDadesMides(strAtr, element);
             strAtr += "#####";
-            strAtr = DadesComunsLlibrerias(strAtr);
+            strAtr = ReadFromSelectDadesLlibrerias(strAtr);
             strAtr += "#########"
-            strAtr = DadesComunsEstils(strAtr, element);
+            strAtr = ReadFromSelectDadesEstils(strAtr, element);
 
             return strAtr;
         };
 
-        function DadesComunsLlibrerias(strAtr) {
+        function ReadFromSelectDadesLlibrerias(strAtr) {
 
             strAtr += "#";
             if ($("#gaiaCodiWebTxtAbans").val() != null) {
@@ -1778,7 +1770,7 @@ $(function () {
             return strAtr;
         };
 
-        function DadesComunsMides(strAtr, element) {
+        function ReadFromSelectDadesMides(strAtr, element) {
 
             strAtr += "#";
             var data = $("#ddlXs").children("option:selected").text();
@@ -1856,7 +1848,7 @@ $(function () {
         };
 
 
-        function DadesComunsEstils(strAtr, element) {
+        function ReadFromSelectDadesEstils(strAtr, element) {
 
             strAtr += "#";
             strAtr = getSelectedOptions(strAtr, 'ddlb_23', element);//51
@@ -2071,9 +2063,12 @@ $(function () {
                 readValues(elementInicial);
                 event.stopPropagation();
             };
-            //if ( tagNameElement == 'SELECT' && multiselect) {
+            
+            //if ( tagNameElement == 'SELECT') {
             //    selectClick($(elementInicial).attr('id'));
             //}
+
+
             //if (tagNameElement == 'button' && $(elementInicial).hasClass('multiselect')) {
             //    var quienEs = $(elementInicial).parent().siblings('select');
             //    selectClick($(quienEs).attr('id'));
@@ -2081,14 +2076,19 @@ $(function () {
             
         }, true);
 
-        //$('select').on('change', function (event) {
-        //    var thisSelect = event.currentTarget;
-        //    if ($(this).attr('title') != 'multiselect' && $(this).attr('id') != 'selectContingut') {
-        //        $('#btnModificarDades').click();
-        //        $("#txtEst").val($("#htmlEst").html());
-        //    }
-            
-        //});
+        document.addEventListener('change', function (event) {
+            var elementInicial = event.target;
+            GuardaValoresDeSelectCuandoCambien(elementInicial);
+
+        });
+
+
+        function GuardaValoresDeSelectCuandoCambien(valor) {
+            var thisSelect = $(valor).attr('id');
+            if ($(valor).attr('id') != 'selectContingut' && $(valor).prop('title') == '') {
+                $('#btnModificarDades').click();              
+            }
+        }
 
         //$('textarea').on('change', function () {
 
@@ -2133,34 +2133,32 @@ $(function () {
         //});
 
         function selectClick(id) {
-            
-            if (id != 'selectContingut') {
-
-                element = $('#htmlEst').find('*').filter(function () {
+            element = $('#htmlEst').find('*').filter(function () {
                     if ($(this).hasClass('activo')) {
                         return this;
                     } else {
                         return null;
                     }
-                });
-
-                if (element.length > 0) {
+            });
+            if (element.length > 0) {
                     var selectedElement = document.getElementById(id);
                     if ($(selectedElement).attr('multiple') != 'multiple') {
                         $(selectedElement).attr('multiple', 'multiple');
                     }
-                    if ($(selectedElement).css('display') != 'none') {
-                        $(selectedElement).css('display', 'none');
-                    }            
+                    //if ($(selectedElement).css('display') != 'none') {
+                    //    $(selectedElement).css('display', 'none');
+                    //}            
                     
-                    $(selectedElement).multiselect({
-                        
+                $(selectedElement).multiselect({
                         disableIfEmpty: true,                        
                         maxHeight: 200,
-                        onChange: function (option, checked) {
-                            if (checked === true) {
-                                // alert(option.length + ' options ' + (checked ? 'selected' : 'deselected'));
-                            }
+                        onChange: function (option, checked) {                            
+                            if (checked) {
+                                $(selectedElement).multiselect('select', option.val());
+                            } else {
+                                $(selectedElement).multiselect('deselect', option.val());
+                            }                          
+                            
                         },
                         onDropdownHidden: function (event) {
                             var lista = [];
@@ -2173,7 +2171,7 @@ $(function () {
                     });
                 }
 
-            };
+            
         };
     });
     
