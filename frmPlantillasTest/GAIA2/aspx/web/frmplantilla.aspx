@@ -96,7 +96,7 @@
             <input type="text" runat="server" id="txtAtributs"  style="display: none;" />
             <input type="text" runat="server" id="nroId" style="display: none;" />
            
-          <div class="row"><div class="col-12"><asp:Label ID="lblResultat" runat="server"/></div></div>
+          <div class="row"><div class="col-12"><asp:Label ID="lblResultat" runat="server" /> </div></div>
           
           <div id="divEst" style="visibility:hidden; position:absolute;"></div>
           <div class="row mb-3">
@@ -1008,175 +1008,51 @@ $(function () {
         var element;
 
         var nroId = parseInt($("#nroId").val());
-        $('#ddlb_25').attr('title', 'multiselect');
-        $('#ddlb_25').attr('multiple', 'multiple');
-        $('#ddlb_634').attr('title', 'multiselect');
-        $('#ddlb_634').attr('multiple', 'multiple');
-        $('#ddlb_631').attr('title', 'multiselect');
-        $('#ddlb_631').attr('multiple', 'multiple');
-        $('#ddlb_651').attr('multiple', 'multiple');
-        $('#ddlb_651').attr('title', 'multiselect');
-        $('#ddlb_115').attr('title', 'multiselect');
-        $('#ddlb_115').attr('multiple', 'multiple');
-        activado('div0');
-        readValues(document.getElementById('div0'));
+        $('#ddlb_25').attr('title', 'multiselect').attr('multiple', 'multiple');      
+        $('#ddlb_28').attr('title', 'multiselect').attr('multiple', 'multiple');   
+        $('#ddlb_634').attr('title', 'multiselect').attr('multiple', 'multiple');
+        $('#ddlb_631').attr('title', 'multiselect').attr('multiple', 'multiple');
+        $('#ddlb_639').attr('title', 'multiselect').attr('multiple', 'multiple');
+        $('#ddlb_641').attr('title', 'multiselect').attr('multiple', 'multiple');
+        $('#ddlb_651').attr('title', 'multiselect').attr('multiple', 'multiple');
+        $('#ddlb_115').attr('title', 'multiselect').attr('multiple', 'multiple');
+        $('#ddlb_108').attr('title', 'multiselect').attr('multiple', 'multiple');
+        $('#ddlb_103').attr('title', 'multiselect').attr('multiple', 'multiple');
+        $('#ddlb_122').attr('title', 'multiselect').attr('multiple', 'multiple');
+        $('#ddlb_642').attr('title', 'multiselect').attr('multiple', 'multiple');
+        $('#ddlb_648').attr('title', 'multiselect').attr('multiple', 'multiple');
+        $('#ddlb_632').attr('title', 'multiselect').attr('multiple', 'multiple');
+        $('#ddlb_637').attr('title', 'multiselect').attr('multiple', 'multiple');
+        $('#ddlb_636').attr('title', 'multiselect').attr('multiple', 'multiple');
+        $('#ddlb_650').attr('title', 'multiselect').attr('multiple', 'multiple');
+        $('#ddlb_649').attr('title', 'multiselect').attr('multiple', 'multiple');
+        var primerFil = $('#htmlEst').children().first();
+        activado($(primerFil).attr('id'));
+        readValues(primerFil);
 
-        // $("div").on("click",".cel", function () {
-        function readValues(valor) {
+        
 
-            var strAtr = "";
+       
 
-            strAtr = $(valor).children("span.atributs").text();
-
-            if (!jQuery.isEmptyObject(strAtr)) {
-
-                var arrAtr = strAtr.substring(0, strAtr.length - 1).split("#");
-                $("#txtIdCel").val(arrAtr[0]);
-                $("#txtNomCel").val(arrAtr[1]);
-
-                ReadFromSpanDadesMides(arrAtr)
-                //continguts
-                $("#lstTipusFulla").val(arrAtr[7]);
-                //<asp:Literal runat="server" id="ltCanviCampsDb" />
-                $("#ddlPLTDSCMP").val(arrAtr[8]);
-                $("#ddlPLTDSLNK").val(arrAtr[9]);
-                $("#ddlPLTDSALT").val(arrAtr[10]);
-                $("#ddlPLTDSIMG").val(arrAtr[11]);
-                ReadFromSpanDadesLlibrerias(arrAtr);
-
-                $("#txtPLTDSNUM").val(arrAtr[20]);
-                $("#ddlPLTDSNIV").val(arrAtr[21]);
-                $("#txtPLTDSAAL").val(arrAtr[22]);
-                $("#ddlb_PLTDSALF").val(arrAtr[23]);
-                $("#txtPLTDSALK").val(arrAtr[24]);
-                $("#gaiaPLTCDPALTxt").val(arrAtr[25]);
-                $("#gaiaPLTCDPALNodes").val(arrAtr[26]);
-
-                if (arrAtr[27] == "true") {
-                    $("#chkWEBDSIMP").attr("checked", true);
-                }
-                else {
-                    $("#chkWEBDSIMP").attr("checked", false);
-                }
-                if (arrAtr[28] == "true") {
-                    $("#chkWEBDSCND").attr("checked", true);
-                }
-                else {
-                    $("#chkWEBDSCND").attr("checked", false);
-                }
-
-                ReadFromSpanDadesEstils(arrAtr);
-
-            }
-            var icona = "";
-            modificaIcona(valor);
-
-            return false;
-        };
-
-        function ReadFromSpanDadesLlibrerias(arrAtr) {
-            $("#gaiaCodiWebTxtAbans").val(arrAtr[12]);
-            $("#gaiaCodiWebNodesAbans").val(arrAtr[13]);
-            $("#gaiaCodiWebTxtDins").val(arrAtr[14]);
-            $("#gaiaCodiWebNodesDins").val(arrAtr[15]);
-            $("#gaiaCodiWebTxtDespres").val(arrAtr[16]);
-            $("#gaiaCodiWebNodesDespres").val(arrAtr[17]);
-            $("#gaiaPltSecTxt").val(arrAtr[18]);
-            $("#gaiaPltSecNodes").val(arrAtr[19]);
-        };
-
-        function ReadFromSpanDadesMides(arrAtr) {
-            //mides 
-            $("#ddlXs").val(arrAtr[2]);
-            $("#ddlSm").val(arrAtr[3]);
-            $("#ddlMd").val(arrAtr[4]);
-            $("#ddlLg").val(arrAtr[5]);
-            $("#ddlXl").val(arrAtr[6]);
-        };
-
-        function ReadFromSpanDadesEstils(arrAtr) {
-
-            //estils
-            $("#ddlb_23").val(arrAtr[29]);
-            setSelectedOptions('ddlb_25', arrAtr[30], 'value');
-            $("#ddlb_26").val(arrAtr[31]);
-            $("#ddlb_27").val(arrAtr[32]);
-            $("#ddlb_28").val(arrAtr[33]);
-            $("#ddlb_103").val(arrAtr[34]);
-            $("#ddlb_105").val(arrAtr[35]);
-            $("#ddlb_108").val(arrAtr[36]);
-            $("#ddlb_110").val(arrAtr[37]);
-            $("#ddlb_111").val(arrAtr[38]);
-            $("#ddlb_112").val(arrAtr[39]);
-            $("#ddlb_122").val(arrAtr[40]);
-            $("#ddlb_114").val(arrAtr[41]);
-            setSelectedOptions('ddlb_115', arrAtr[42], 'value');
-            $("#ddlb_123").val(arrAtr[43]);
-            $("#ddlb_117").val(arrAtr[44]);
-            $("#ddlb_118").val(arrAtr[45]);
-            $("#ddlb_119").val(arrAtr[46]);
-            $("#ddlb_124").val(arrAtr[47]);
-            $("#ddlb_630").val(arrAtr[48]);
-            setSelectedOptions('ddlb_631', arrAtr[49], 'value');
-            $("#ddlb_632").val(arrAtr[50]);
-            $("#ddlb_633").val(arrAtr[51]);
-            setSelectedOptions('ddlb_634', arrAtr[52], 'value');
-            $("#ddlb_635").val(arrAtr[53]);
-            $("#ddlb_636").val(arrAtr[54]);
-            $("#ddlb_637").val(arrAtr[55]);
-            $("#ddlb_638").val(arrAtr[56]);
-            $("#ddlb_639").val(arrAtr[57]);
-            $("#ddlb_641").val(arrAtr[58]);
-            $("#ddlb_642").val(arrAtr[59]);
-            $("#ddlb_648").val(arrAtr[60]);
-            $("#ddlb_649").val(arrAtr[61]);
-            $("#ddlb_650").val(arrAtr[62]);
-            setSelectedOptions('ddlb_651', arrAtr[63], 'value');
-            $("#ddlb_652").val(arrAtr[64]);
-            $("#ddlb_653").val(arrAtr[65]);
-            $("#ddlb_654").val(arrAtr[66]);
-            $("#ddlb_655").val(arrAtr[67]);
-        };
-
-        function setSelectedOptions(id, valores, selectValue) {
-            $.map($('#' + id).children('option'), function (item) { $(item).removeAttr('selected').prop('selected', false); });
+        function setActiveLiToSelectedOption(id, valores) {
+            $.map($('#' + id).children('option'), function (item) { $(item).removeAttr('selected').prop('selected', false) });
             var options = [];
             if (valores.indexOf(',') > -1) {
-               options = valores.split(',');
-            }
-            
-            if (options.length > 0) {
-
-                //if (arregloDeOpciones.length > 1) {
-                // $('option[value="1"]', $('#example-refresh')).prop('selected', true);
-                $.each(options, function (index, item) {
-                    $('option[value="' + item + '"]', $('#' + id)).attr('selected', 'selected').prop('selected', true);
-                    $('option[value="' + item + '"]', $('#' + id)).attr('selected', 'selected').prop('defaultSelected', true);
-                 //   $('#' + id).children('option[value=' + item + ']').attr("selected", "selected");
-                });                
+                options = valores.split(',');
             } else {
-                $('option[value="' + valores + '"]', $('#' + id)).attr('selected', 'selected').prop('selected', true);
-                $('option[value="' + valores + '"]', $('#' + id)).attr('selected', 'selected').prop('defaultSelected', true);
-              //  $('#' + id).children('option[value=' + valores + ']').attr("selected", "selected");
+                $(options).push(valores);
             }
-            
-           $('#' + id).multiselect('refresh');           
-            selectClick(id);         
-            
-        };
-
-        function setActiveLiToSelectedOption(id, options) {
-            $.map($('#' + id).children('option'), function (item) { $(item).removeAttr('selected') });
-            if (options.length > 0) {
-                var arregloDeOpciones = options.split(',');
-                //if (arregloDeOpciones.length > 1) {
-                $.each(arregloDeOpciones, function (index, item) {
-                    if (!jQuery.isEmptyObject(item)) {                        
-                       var textSelectedOption = $('#' + id).children('option').filter(function () { return $(this).text().toLowerCase() === $.trim(item); });
-                       $(textSelectedOption).attr("selected", "selected");
-                                        
+            if (options.length > 1) {              
+                
+                $.each(options, function (index, item) {
+                    if (!jQuery.isEmptyObject(item)) {
+                        var textSelectedOption = $('#' + id).children('option').filter(function () { return $(this).text().toLowerCase() === $.trim(item); });
+                        $(textSelectedOption).attr("selected", "selected").prop('selected', true);
                     }
                 });
+            } else {
+                var textSelectedOption = $('#' + id).children('option').filter(function () { return $(this).text().toLowerCase() === $.trim(valores); });
+                $(textSelectedOption).attr("selected", "selected").prop('selected', true);
             }
             
         };
@@ -1184,7 +1060,7 @@ $(function () {
         function RowsAndColumns(type) {
 
             var contenidor = "";
-            var id = type + nroId.toString();
+            var id = 'd' + nroId.toString();
             // $('#htmlEst').find('.' + type).length; 
             switch (type) {
                 case "row":
@@ -1200,7 +1076,7 @@ $(function () {
         function Tipus(nroId) {
             var nombre = "";
             var tipus = $('#selectContingut').children('option:selected').val();
-            var id = tipus + nroId;
+            var id = 'd' + nroId.toString();
             var innerSpan = id + '#' + tipus + '##########################false#false#######################################|';
             switch (tipus) {
                 case "":
@@ -1274,7 +1150,7 @@ $(function () {
                 alert("Active un contenidor");
             };
             //guardo els canvis 
-           
+            $("#txtEst").val($("#htmlEst").html());
         });
 
         $("#btnAfegirContenidorDespres").click(function () {
@@ -1305,7 +1181,7 @@ $(function () {
             };
 
             //guardo els canvis 
-            
+            $("#txtEst").val($("#htmlEst").html());
         });
 
         $("#btnAfegirContenidorAbansAdins").click(function () {
@@ -1337,7 +1213,7 @@ $(function () {
             };
 
             //guardo els canvis 
-            
+            $("#txtEst").val($("#htmlEst").html());
         });
 
         $("#btnAfegirContenidorDespresAdins").click(function () {
@@ -1366,7 +1242,7 @@ $(function () {
                 alert("Active un contenidor");
             };
             //guardo els canvis 		
-            
+            $("#txtEst").val($("#htmlEst").html());
         });
 
         //afegir fila en el nivell adins
@@ -1396,8 +1272,7 @@ $(function () {
             } else {
                 alert("Active un contenidor");
             };
-            //guardo els canvis 		
-            
+            $("#txtEst").val($("#htmlEst").html());
         });
 
         //afegir fila en el nivell adins
@@ -1428,7 +1303,7 @@ $(function () {
             } else {
                 alert("Active un contenidor");
             };
-            
+            $("#txtEst").val($("#htmlEst").html());
         });
 
         $("#btnAfegirColumnaDinsAbans").click(function () {
@@ -1466,7 +1341,7 @@ $(function () {
             } else {
                 alert("Active un contenidor");
             };
-
+            $("#txtEst").val($("#htmlEst").html());
         });
 
         $("#btnAfegirColumnaDinsDespres").click(function () {
@@ -1504,7 +1379,7 @@ $(function () {
             } else {
                 alert("Active un contenidor");
             };
-
+            $("#txtEst").val($("#htmlEst").html());
         });
 
         $("#btnEsborrarCel").click(function () {
@@ -1538,10 +1413,9 @@ $(function () {
             //// limpio la estructura
             $("#divEst").find("span.divImg").remove();
             $("#divEst").find("span.atributs").remove();
-            $("#divEst").find("span.rowAtributs").remove();
-            $("#divEst").find("span.contenidorAtributs").remove();
-            $("#divEst").find("div").removeAttr("style");
-            $("#divEst").find("div").removeClass("col celActiva p-2 border border-secondary rowActiva contenidorActiu contenidor");
+            $("#divEst").find("span.text").remove();
+                        
+            $("#divEst").find("*").not('span').removeClass("p-inicial b-inicial activo inactivo");
 
             $("#txtEstBD").val($("#divEst").html());
 
@@ -1644,7 +1518,7 @@ $(function () {
 
                 modificaIcona(element);
                 //afegeixo els atributs a l'array de propietats
-                $(element).children("span").filter(function () { return $(this).css("display") == "none" }).text(strAtr);
+                $(element).children("span.atributs").text(strAtr);
 
                 //guardo els canvis 
                 $("#txtEst").val($("#htmlEst").html());
@@ -1654,27 +1528,10 @@ $(function () {
         });
 
         $("#btnModificarDades").click(function () {
-
-            var strAtr = "";
-
-            if (!jQuery.isEmptyObject(element)) {
-
-                //if (element.hasClass('cel')) {   // element: el ultimo div que se ha clicado
+            
+            if (!jQuery.isEmptyObject(element)) {                
                 $("#btnModificarDadesCel").click();
-                return true;
-                //}
-                //else if (element.hasClass('row')) {
-                //    ModificarDadesRow();
-
-                //}
-                // //else if (element.attr("class").indexOf('contenidor') > -1) {
-
-                //else if (element.hasClass('contenidor')) {
-                //    ModificarDadesContenidor();
-                //}
-
-                //guardo els canvis 
-                $("#txtEst").val($("#htmlEst").html());
+                return true;                
             }
         });
 
@@ -1729,7 +1586,6 @@ $(function () {
             strAtr = ReadFromSelectDadesLlibrerias(strAtr);
             strAtr += "#########"
             strAtr = ReadFromSelectDadesEstils(strAtr, element);
-
             return strAtr;
         };
 
@@ -1784,7 +1640,6 @@ $(function () {
                 else {
                     $(element).addClass("col-xs");
                     strAtr += "0";
-
                 }
             }
             strAtr += "#";
@@ -1969,7 +1824,6 @@ $(function () {
 
             strAtr += "|"
             return strAtr;
-
         };
 
         function getSelectedOptions(strAtr, id, element) {
@@ -1987,70 +1841,10 @@ $(function () {
                     };
                 });
                 strAtr += valor.join(",");
-                $.each(clase, function (i, item) { $(element).addClass(item); });//51
+                $.each(clase, function (i, item) { $(element).addClass(item); });
             }
             return strAtr;
-        };
-
-        function modificaIcona(element) {
-            var icona = ""
-
-            if ($("#lstTipusFulla").val() != null) {
-                switch ($("#lstTipusFulla").val().trim()) {
-                    case "45":
-                        icona = 'ico_agenda.png';
-                        break;
-                    case "49":
-                        icona = 'ico_link.png';
-                        break;
-                    case "48":
-                        icona = '';
-                        break;
-                    case "31":
-                        icona = 'ico_catalegserveis.png';
-                        break;
-                    case "40":
-                        icona = 'ico_contractacio.png';
-                        break;
-                    case "3":
-                        icona = 'ico_directori.png';
-                        break;
-                    case "5":
-                        icona = 'ico_document.png';
-                        break;
-                    case "56":
-                        icona = 'ico_info.png';
-                        break;
-                    case "4":
-                        icona = 'ico_noticia.png';
-                        break;
-                    case "13":
-                        icona = 'ico_organigrama.png';
-                        break;
-                    case "55":
-                        icona = 'ico_projecte.png';
-                        break;
-                    case "51":
-                        icona = 'ico_tramit.png';
-                        break;
-                    case "10":
-                        icona = 'ico_web.png';
-                        break;
-                    case "35":
-                        icona = 'folder.png';
-                        break;
-                    case "9":
-                        icona = 'node_web.png';
-                        break;
-                    default:
-                }
-            } else {
-
-            }
-            //if (icona != "") {
-            //    element.find("span.divImg").html("<img src='img/" + icona + "'/>");
-            //}
-        };
+        };       
 
         document.addEventListener('click', function (event) {
             var elementInicial = event.toElement;
@@ -2058,123 +1852,313 @@ $(function () {
             var tagNameElement = $(elementInicial).prop('tagName');
             var multiselect = $(elementInicial).attr('title') == 'multiselect' ? true : false;
             if ($(elementInicial).parents('#htmlEst').length > 0) {
-                activado($(elementInicial).attr('id'));
+                switch ($(elementInicial).prop('tagName').toLowerCase()) {
+                    case 'span':
+                        break;
+                    case 'img':
+                        break;
+                    default:
+                        activado($(elementInicial).attr('id'));
+                        readValues(elementInicial);
+                        event.stopPropagation();
+                        break;
+                }
+                
+            };         
 
-                readValues(elementInicial);
-                event.stopPropagation();
-            };
-            
-            //if ( tagNameElement == 'SELECT') {
-            //    selectClick($(elementInicial).attr('id'));
-            //}
-
-
-            //if (tagNameElement == 'button' && $(elementInicial).hasClass('multiselect')) {
-            //    var quienEs = $(elementInicial).parent().siblings('select');
-            //    selectClick($(quienEs).attr('id'));
-            //}
-            
         }, true);
 
         document.addEventListener('change', function (event) {
             var elementInicial = event.target;
-            GuardaValoresDeSelectCuandoCambien(elementInicial);
-
+            
+            if ($(elementInicial).prop('tagName') == 'INPUT' && $(elementInicial).attr('id') == 'txtNomCel') {
+                UpdateInput($(elementInicial).val());
+            }else{
+                GuardaValoresDeSelectCuandoCambien(elementInicial);
+            }
         });
-
 
         function GuardaValoresDeSelectCuandoCambien(valor) {
             var thisSelect = $(valor).attr('id');
-            if ($(valor).attr('id') != 'selectContingut' && $(valor).prop('title') == '') {
+            if ($(valor).attr('id') != 'selectContingut' && (typeof $(valor).prop('title') == typeof undefined || $(valor).prop('title') == '')) {
                 $('#btnModificarDades').click();              
             }
         }
 
-        //$('textarea').on('change', function () {
-
-           
-        //        $('#btnModificarDades').click();
-        //        $("#txtEst").val($("#htmlEst").html());
-        //    return false;
-        //});
-
-        //$("input").change(function () {
-
-        //    element = $('#htmlEst').find('*').filter(function () {
-        //        if ($(this).hasClass('activo')) {
-        //            return this;
-        //        } else {
-        //            return null;
-        //        }
-        //    });
-
-        //    if (!jQuery.isEmptyObject(element)) {
-        //        if ($(this).attr('id') == '#txtNomCel') {
-               
-        //            if ($(element).is('span.text')) {
-        //                $(element).text($(this).val());
-        //            } else {
-        //                if ($(element).find('span.text').length == 0) {
-        //                    $(element).append('<span class="divImg" id="spandivImg' + $(element).attr('id') + '"></span>');
-        //                    $(element).append('<span class="text" id="spantext' + $(element).attr('id') + '"></span>');
-        //                    $(element).children('span.text').text($(this).val());
-        //                    $(element).children('span.text').addClass('inactivo');
-        //                    $(element).children('span.divImg').addClass('inactivo');
-        //                } else {
-        //                    $(element).children('span.text').text($(this).val());
-        //                }
-        //            }
-        //        }
-        //        $('#btnModificarDades').click();
-
-        //        $("#txtEst").val($("#htmlEst").html());
-        //    }            
-        //    return false;
-        //});
-
-        function selectClick(id) {
+        $('textarea').change(function () {           
+                $('#btnModificarDades').click();
+                $("#txtEst").val($("#htmlEst").html());
+            return false;
+        });
+       
+        function UpdateInput(e) {
             element = $('#htmlEst').find('*').filter(function () {
-                    if ($(this).hasClass('activo')) {
-                        return this;
-                    } else {
-                        return null;
-                    }
-            });
-            if (element.length > 0) {
-                    var selectedElement = document.getElementById(id);
-                    if ($(selectedElement).attr('multiple') != 'multiple') {
-                        $(selectedElement).attr('multiple', 'multiple');
-                    }
-                    //if ($(selectedElement).css('display') != 'none') {
-                    //    $(selectedElement).css('display', 'none');
-                    //}            
-                    
-                $(selectedElement).multiselect({
-                        disableIfEmpty: true,                        
-                        maxHeight: 200,
-                        onChange: function (option, checked) {                            
-                            if (checked) {
-                                $(selectedElement).multiselect('select', option.val());
-                            } else {
-                                $(selectedElement).multiselect('deselect', option.val());
-                            }                          
-                            
-                        },
-                        onDropdownHidden: function (event) {
-                            var lista = [];
-                            var data = event.relatedTarget;
-                            var allActives = $(data).siblings('ul').find('li.active');
-                            $.each(allActives, function (index, item) { lista.push($(item).text()); });
-                            setActiveLiToSelectedOption(id, lista.join(','));                            
-                            $('#btnModificarDades').click();
-                        }
-                    });
+                if ($(this).hasClass('activo')) {
+                    return this;
+                } else {
+                    return null;
                 }
-
+            });
             
+            if (!jQuery.isEmptyObject(element)) {
+                
+               
+                    if ($(element).is('span.text')) {
+                        $(element).text(e);
+                    } else {
+                        if ($(element).children('span.text').length == 0) {
+                            $(element).append('<span class="divImg" ></span>');
+                            $(element).append('<span class="text" ></span>');
+                            $(element).children('span.text').text(e);
+                            $(element).children('span.text').addClass('inactivo');
+                            $(element).children('span.divImg').addClass('inactivo');
+                        } else {
+                            $(element).children('span.text').text(e);
+                        }
+                    }                
+                $('#btnModificarDades').click();
+                $("#txtEst").val($("#htmlEst").html());
+            }            
+            return false;
         };
-    });
-    
+
+      
+    });  
+
+    function selectClick(id) {
+        element = $('#htmlEst').find('*').filter(function () {
+            if ($(this).hasClass('activo')) {
+                return this;
+            } else {
+                return null;
+            }
+        });
+        if (element.length > 0) {
+            var selectedElement = document.getElementById(id);
+            $(selectedElement).multiselect({
+                disableIfEmpty: true,
+                maxHeight: 200,
+                onChange: function (option, checked) {
+                    if (checked) {
+                        $(selectedElement).multiselect('select', option.val());
+                    } else {
+                        $(selectedElement).multiselect('deselect', option.val());
+                    }
+                },
+                onDropdownHidden: function (event) {
+                    var lista = [];
+                    var data = event.relatedTarget;
+                    var allActives = $(data).siblings('ul').find('li.active');
+                    $.each(allActives, function (index, item) { lista.push($(item).text()); });
+                    setActiveLiToSelectedOption(id, lista.join(','));
+                    $('#btnModificarDades').click();
+                }
+            });
+        };
+    };
+
+    function setSelectedOptions(id, valores, selectValue) {
+        $.map($('#' + id).children('option'), function (item) { $(item).removeAttr('selected').prop('selected', false); });
+        var options = [];
+        if (valores.indexOf(',') > -1) {
+            options = valores.split(',');
+        } else {
+            $(options).push(valores);
+        }
+
+        if (options.length > 1) {
+            //if (arregloDeOpciones.length > 1) {
+            // $('option[value="1"]', $('#example-refresh')).prop('selected', true);
+            $.each(options, function (index, item) {
+                $('option[value="' + item + '"]', $('#' + id)).attr('selected', 'selected').prop('selected', true);
+                $('option[value="' + item + '"]', $('#' + id)).attr('selected', 'selected').prop('defaultSelected', true);
+                //   $('#' + id).children('option[value=' + item + ']').attr("selected", "selected");
+            });
+        } else {
+            $('option[value="' + valores + '"]', $('#' + id)).attr('selected', 'selected').prop('selected', true);
+            $('option[value="' + valores + '"]', $('#' + id)).attr('selected', 'selected').prop('defaultSelected', true);
+            //  $('#' + id).children('option[value=' + valores + ']').attr("selected", "selected");
+        }
+
+        $('#' + id).multiselect('refresh');
+        selectClick(id);
+    };
+
+    function readValues(valor) {
+
+        var strAtr = "";
+
+        strAtr = $(valor).children("span.atributs").text();
+
+        if (!jQuery.isEmptyObject(strAtr)) {
+
+            var arrAtr = strAtr.substring(0, strAtr.length - 1).split("#");
+            $("#txtIdCel").val(arrAtr[0]);
+            $("#txtNomCel").val(arrAtr[1]);
+
+            ReadFromSpanDadesMides(arrAtr)
+            //continguts
+            $("#lstTipusFulla").val(arrAtr[7]);
+            //<asp:Literal runat="server" id="ltCanviCampsDb" />
+            $("#ddlPLTDSCMP").val(arrAtr[8]);
+            $("#ddlPLTDSLNK").val(arrAtr[9]);
+            $("#ddlPLTDSALT").val(arrAtr[10]);
+            $("#ddlPLTDSIMG").val(arrAtr[11]);
+            ReadFromSpanDadesLlibrerias(arrAtr);
+
+            $("#txtPLTDSNUM").val(arrAtr[20]);
+            $("#ddlPLTDSNIV").val(arrAtr[21]);
+            $("#txtPLTDSAAL").val(arrAtr[22]);
+            $("#ddlb_PLTDSALF").val(arrAtr[23]);
+            $("#txtPLTDSALK").val(arrAtr[24]);
+            $("#gaiaPLTCDPALTxt").val(arrAtr[25]);
+            $("#gaiaPLTCDPALNodes").val(arrAtr[26]);
+
+            if (arrAtr[27] == "true") {
+                $("#chkWEBDSIMP").attr("checked", true);
+            }
+            else {
+                $("#chkWEBDSIMP").attr("checked", false);
+            }
+            if (arrAtr[28] == "true") {
+                $("#chkWEBDSCND").attr("checked", true);
+            }
+            else {
+                $("#chkWEBDSCND").attr("checked", false);
+            }
+
+            ReadFromSpanDadesEstils(arrAtr);
+
+        }
+        var icona = "";
+        modificaIcona(valor);
+
+        return false;
+    };
+
+    function modificaIcona(element) {
+        var icona = ""
+
+        if ($("#lstTipusFulla").val() != null) {
+            switch ($("#lstTipusFulla").val().trim()) {
+                case "45":
+                    icona = 'ico_agenda.png';
+                    break;
+                case "49":
+                    icona = 'ico_link.png';
+                    break;
+                case "48":
+                    icona = '';
+                    break;
+                case "31":
+                    icona = 'ico_catalegserveis.png';
+                    break;
+                case "40":
+                    icona = 'ico_contractacio.png';
+                    break;
+                case "3":
+                    icona = 'ico_directori.png';
+                    break;
+                case "5":
+                    icona = 'ico_document.png';
+                    break;
+                case "56":
+                    icona = 'ico_info.png';
+                    break;
+                case "4":
+                    icona = 'ico_noticia.png';
+                    break;
+                case "13":
+                    icona = 'ico_organigrama.png';
+                    break;
+                case "55":
+                    icona = 'ico_projecte.png';
+                    break;
+                case "51":
+                    icona = 'ico_tramit.png';
+                    break;
+                case "10":
+                    icona = 'ico_web.png';
+                    break;
+                case "35":
+                    icona = 'folder.png';
+                    break;
+                case "9":
+                    icona = 'node_web.png';
+                    break;
+                default:
+            }
+        } else {
+
+        }
+        if (icona != "") {
+            $(element).find("span.divImg").html("<img src='img/" + icona + "'/>");
+        }
+    };
+
+    function ReadFromSpanDadesMides(arrAtr) {
+        //mides 
+        $("#ddlXs").val(arrAtr[2]);
+        $("#ddlSm").val(arrAtr[3]);
+        $("#ddlMd").val(arrAtr[4]);
+        $("#ddlLg").val(arrAtr[5]);
+        $("#ddlXl").val(arrAtr[6]);
+    };
+
+    function ReadFromSpanDadesLlibrerias(arrAtr) {
+        $("#gaiaCodiWebTxtAbans").val(arrAtr[12]);
+        $("#gaiaCodiWebNodesAbans").val(arrAtr[13]);
+        $("#gaiaCodiWebTxtDins").val(arrAtr[14]);
+        $("#gaiaCodiWebNodesDins").val(arrAtr[15]);
+        $("#gaiaCodiWebTxtDespres").val(arrAtr[16]);
+        $("#gaiaCodiWebNodesDespres").val(arrAtr[17]);
+        $("#gaiaPltSecTxt").val(arrAtr[18]);
+        $("#gaiaPltSecNodes").val(arrAtr[19]);
+    };
+
+    function ReadFromSpanDadesEstils(arrAtr) {
+        //estils
+        $("#ddlb_23").val(arrAtr[29]);
+        setSelectedOptions('ddlb_25', arrAtr[30], 'value');
+        $("#ddlb_26").val(arrAtr[31]);
+        $("#ddlb_27").val(arrAtr[32]);
+        setSelectedOptions('ddlb_28', arrAtr[33], 'value');
+        setSelectedOptions('ddlb_103', arrAtr[34], 'value');
+        $("#ddlb_105").val(arrAtr[35]);
+        setSelectedOptions('ddlb_108', arrAtr[36], 'value');
+        $("#ddlb_110").val(arrAtr[37]);
+        $("#ddlb_111").val(arrAtr[38]);
+        $("#ddlb_112").val(arrAtr[39]);
+        setSelectedOptions('ddlb_122', arrAtr[40], 'value');
+        $("#ddlb_114").val(arrAtr[41]);
+        setSelectedOptions('ddlb_115', arrAtr[42], 'value');
+        $("#ddlb_123").val(arrAtr[43]);
+        $("#ddlb_117").val(arrAtr[44]);
+        $("#ddlb_118").val(arrAtr[45]);
+        $("#ddlb_119").val(arrAtr[46]);
+        $("#ddlb_124").val(arrAtr[47]);
+        $("#ddlb_630").val(arrAtr[48]);
+        setSelectedOptions('ddlb_631', arrAtr[49], 'value');
+        setSelectedOptions('ddlb_632', arrAtr[50], 'value');
+        $("#ddlb_633").val(arrAtr[51]);
+        setSelectedOptions('ddlb_634', arrAtr[52], 'value');
+        $("#ddlb_635").val(arrAtr[53]);
+        setSelectedOptions('ddlb_636', arrAtr[54], 'value');
+        setSelectedOptions('ddlb_637', arrAtr[55], 'value');
+
+        $("#ddlb_638").val(arrAtr[56]);
+        setSelectedOptions('ddlb_639', arrAtr[57], 'value');
+        setSelectedOptions('ddlb_641', arrAtr[58], 'value');
+        setSelectedOptions('ddlb_642', arrAtr[59], 'value');
+        setSelectedOptions('ddlb_648', arrAtr[60], 'value');
+        setSelectedOptions('ddlb_649', arrAtr[61], 'value');
+        setSelectedOptions('ddlb_650', arrAtr[62], 'value');
+        setSelectedOptions('ddlb_651', arrAtr[63], 'value');
+        $("#ddlb_652").val(arrAtr[64]);
+        $("#ddlb_653").val(arrAtr[65]);
+        $("#ddlb_654").val(arrAtr[66]);
+        $("#ddlb_655").val(arrAtr[67]);
+    };
 
     function activado(valor) {
 
@@ -2183,11 +2167,6 @@ $(function () {
                 if ($(this).hasClass('inactivo')) {
                     $(this).removeClass('inactivo').addClass('activo');
                     $(this).find('*').each(function () { $(this).removeClass('activo').addClass('inactivo') });
-
-                    //} else {
-                    //    //$("#btnModificarDades").click();
-                    //    $(this).removeClass('activo').addClass('inactivo');
-                    //}
                     $('select#selectContingut').val(this.tagName.toLowerCase());
                 } 
             } else {
@@ -2196,67 +2175,42 @@ $(function () {
         });
             $("#txtEst").val($("#htmlEst").html());
             return false;
-
     }; 
 
     function guardar() {
        
-		//gravo canvis en la cel·la actual
-		//$("#btnModificarDades").click();
-
+        var i = 0;
 		var atributs="";
 		//poso i tracto en divEst l'estructura de la p&agrave;gina que guardaré en METLPLT.PLTDSEST
 		//ho tracto en divEst i ho envio a txtEst, que és el camp que arribar&agrave; a l'vb
+        var elementos = $('#htmlEst').find('*').not('span').not('img');
+        $(elementos).each(function (index, item) {
+            activado($(item).attr('id'));
+            readValues(item);
+            
+            if (i < 10) {
+                $("#txtIdCel").val('d0' + i++);
+                
+            } else {
+                $("#txtIdCel").val('d' + i++);
+            }
+            $(item).attr('id', $("#txtIdCel").val());
+            $("#btnModificarDadesCel").click();
+        });
+
 		$("#divEst").html($("#htmlEst").html());	
       
         // guardo els atributs
-        element = $('#divEst').find('*');
-        //    .filter(function () {                
-        //        if (this.style.backgroundColor == 'rgb(227, 252, 255)') {
-        //            return this;
-        //        }
-        //});
-
-        $(element).each(function () {
-            if ($(this).prop('tagName').toLowerCase() != 'span') {
-               atributs += $(this).children('span.atributs').text();
-            }
+        $('#divEst').find('*').not('span').each(function () {
+            atributs += $(this).children('span.atributs').text();             
         });
 
-      //      var div = $("#divEst").find('div.contenidor');
-
-      //      $.each(div, function (index, value) {
-      //          atributs += 'Contenidor:';
-      //          console.log(index + ": " + value);
-      //          atributs += $(this).find("span.contenidorAtributs").html();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
-            
-      //          var fila = $(this).children('div.row');
-
-      //          $.each(fila, function (index, value) {
-      //          console.log( index + ": " + value );
-      //          atributs += 'Row:';
-      //          atributs += $(this).find("span.rowAtributs").html();
-
-      //          $(this).children('div.cel').each(function (index, value) {
-      //              console.log( index + ": " + value );
-      //              atributs += 'Cel:';
-      //              atributs += $(this).find("span.atributs").html();
-		    //    });	            
-		    //});	            
-      //  });	
-       
-			
 		$("#txtAtributs").val(atributs);
-
-		$("#divEst").find("span").remove();
-		//$("#divEst").find("div").removeAttr("style");
-		//$("#divEst").find("div").removeClass("cel celActiva p-2 pr-4 pl-4 border border-secondary rowActiva contenidor contenidorActiu");
+        $("#divEst").find("span").remove();
+        $('#divEst').find('*').removeClass('b-inicial p-inicial activo inactivo');
 
 		$("#txtEstBD").val($("#txtEst").val()); 
-
-		$("#txtEst").val($("#divEst").html());
-		
-		// $("#frm").submit();  Esto es lo que provocava que se insertasen 2 registros cada vez.
+		$("#txtEst").val($("#divEst").html());	
 
     };
 

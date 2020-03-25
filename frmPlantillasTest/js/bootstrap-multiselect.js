@@ -866,7 +866,7 @@
             //var sisi = $element.prop('defaultSelected');
 
             //if ($element.is(':defaultSelected')) {
-            if ($element.prop('defaultSelected')) {
+            if ($element.is(':selected')) {
                 $element.prop('selected', true);
             } else {
                 $element.prop('selected', false);

@@ -16,7 +16,10 @@ Public Class frmplantilla
     Public Shared nif As String = ""
     Public Shared objconn As OleDbConnection
     Public codiIdioma As Integer = 1
-    Public tipodePlantilla As String
+    Public tipodePlantilla As String = "P"
+    Public idPlantilla As String = "354860"
+    ' idPlantilla corresponde a la variable Request("id")
+
 
     Private Sub Page_UnLoad(sender As Object, e As System.EventArgs) Handles MyBase.Unload
         GAIA.bdFi(objconn)
@@ -74,11 +77,13 @@ Public Class frmplantilla
         Dim arrayTmp As String()
 
         nroId.Value = 0
-        tipodePlantilla = Request("tipus")
+        tipodePlantilla = "P"
+        'Request("tipus")
 
 
-        Select Case Request("tipus")
-        'Select Case tipodePlantilla
+
+        'Select Case Request("tipus")
+        Select Case tipodePlantilla
 
             Case "A"
                 ltTitol.Text = "Arbre web"
@@ -141,18 +146,15 @@ Public Class frmplantilla
         End Select
 
 
-        If Request("id") = "" Then
-            'ltEst.Text = "<div class=""contenidor border border-secondary p-2 pr-4 pl-4""><span class=""contenidorAtributs"" style=""display: none;"">#################################################################|</span><div class=""row border border-secondary p-2""><span class=""rowAtributs"" style=""display:none"">###########################|</span><div class=""col cel border border-secondary p-2"" id=""d0""><span class=""divId"" style=""display:none"">0</span><span class=""divImg""></span><span class=""text"">Cel&middot;la inicial</span><span class=""atributs"" style=""display:none"">0#Cel&middot;la inicial##########################|</span></div></div></div> "<span class=""badge-light small"" >section</span>
-            'div0#div############297693##############false#false##0############0#######1720###1759,1760###########1763####|
-            ltEst.Text = "<div class=""b-inicial p-inicial inactivo"" id=""div0""><span class=""atributs"" style=""display: none;"">div0#div############297693##############false#false##0############0#######1720###1759,1760###########1763####|</span></div>"
-            'div0#div##################################################################|
+        If idPlantilla = "" Then
+            ltEst.Text = "<div class=""b-inicial p-inicial inactivo"" id=""d00""><span class=""atributs"" style=""display: none;"">div0#div############297693##############false#false#####################1720###1759,1760###########1763####|</span></div>"
             txtEst.Value = ltEst.Text
         Else
-            Select Case Request("tipus")
-            'Select Case tipodePlantilla
+            'Select Case Request("tipus")
+            Select Case tipodePlantilla
 
                 Case "W" 'fulla web
-                    qSQL = "select * FROM METLWEB2 WITH(NOLOCK) WHERE WEBINNOD=" & Request("id") & " AND WEBINIDI=" & codiIdioma
+                    qSQL = "select * FROM METLWEB2 WITH(NOLOCK) WHERE WEBINNOD=" & idPlantilla & " AND WEBINIDI=" & codiIdioma
                     GAIA.bdr(objconn, qSQL, ds)
                     If ds.Tables(0).Rows.Count > 0 Then
                         dbRow = ds.Tables(0).Rows(0)
@@ -163,7 +165,7 @@ Public Class frmplantilla
                         'busco el nroId més gran			
                         Dim cont As Integer = 0
                         Dim idTmp As Integer = 0
-                        arrayTmp = Regex.Split(dbRow("WEBDSHTM"), "id='d")
+                        arrayTmp = Regex.Split(dbRow("WEBDSHTM"), "id=")
                         For Each item As String In arrayTmp
                             If cont > 0 Then
                                 idTmp = item.Substring(0, InStr(item, "'") - 1)
@@ -192,7 +194,7 @@ Public Class frmplantilla
                         WEBWNMTH.Text = dbRow("WEBWNMTH")
 
                     Else 'No he trobat l'idioma demanat i busco un altre
-                        qSQL = "select * FROM METLWEB2 WITH(NOLOCK) WHERE WEBINNOD=" & Request("id") & " ORDER BY WEBINIDI ASC "
+                        qSQL = "select * FROM METLWEB2 WITH(NOLOCK) WHERE WEBINNOD=" & idPlantilla & " ORDER BY WEBINIDI ASC "
                         GAIA.bdr(objconn, qSQL, ds)
                         If ds.Tables(0).Rows.Count > 0 Then
                             carregaCamps(ds.Tables(0).Rows(0)("WEBINIDI"))
@@ -200,7 +202,7 @@ Public Class frmplantilla
                     End If
 
                 Case "N" 'node web
-                    qSQL = "select * FROM METLNWE2 WITH(NOLOCK) WHERE NWEINNOD=" & Request("id") & " AND NWEINIDI=" & codiIdioma
+                    qSQL = "select * FROM METLNWE2 WITH(NOLOCK) WHERE NWEINNOD=" & idPlantilla & " AND NWEINIDI=" & codiIdioma
                     GAIA.bdr(objconn, qSQL, ds)
                     If ds.Tables(0).Rows.Count > 0 Then
                         dbRow = ds.Tables(0).Rows(0)
@@ -210,7 +212,7 @@ Public Class frmplantilla
                         'busco el nroId més gran			
                         Dim cont As Integer = 0
                         Dim idTmp As Integer = 0
-                        arrayTmp = Regex.Split(dbRow("NWEDSHTM"), "id='d")
+                        arrayTmp = Regex.Split(dbRow("NWEDSHTM"), "id=")
                         For Each item As String In arrayTmp
                             If cont > 0 Then
                                 idTmp = item.Substring(0, InStr(item, "'") - 1)
@@ -227,7 +229,7 @@ Public Class frmplantilla
                         NWEDSCSI.Text = dbRow("NWEDSCSI")
 
                     Else 'No he trobat l'idioma demanat i busco un altre
-                        qSQL = "select * FROM METLNWE2 WITH(NOLOCK) WHERE NWEINNOD=" & Request("id") & " ORDER BY NWEINIDI ASC "
+                        qSQL = "select * FROM METLNWE2 WITH(NOLOCK) WHERE NWEINNOD=" & idPlantilla & " ORDER BY NWEINIDI ASC "
                         GAIA.bdr(objconn, qSQL, ds)
                         If ds.Tables(0).Rows.Count > 0 Then
                             carregaCamps(ds.Tables(0).Rows(0)("NWEINIDI"))
@@ -236,7 +238,7 @@ Public Class frmplantilla
 
                 Case "A" 'arbre web
 
-                    qSQL = "select * FROM METLAWE2 WITH(NOLOCK) WHERE AWEINNOD=" & Request("id") & " AND AWEINIDI=" & codiIdioma
+                    qSQL = "select * FROM METLAWE2 WITH(NOLOCK) WHERE AWEINNOD=" & idPlantilla & " AND AWEINIDI=" & codiIdioma
                     GAIA.bdr(objconn, qSQL, ds)
                     If ds.Tables(0).Rows.Count > 0 Then
                         dbRow = ds.Tables(0).Rows(0)
@@ -246,7 +248,7 @@ Public Class frmplantilla
                         'busco el nroId més gran			
                         Dim cont As Integer = 0
                         Dim idTmp As Integer = 0
-                        arrayTmp = Regex.Split(dbRow("AWEDSHTM"), "id='d")
+                        arrayTmp = Regex.Split(dbRow("AWEDSHTM"), "id=")
                         For Each item As String In arrayTmp
                             If cont > 0 Then
                                 idTmp = item.Substring(0, InStr(item, "'") - 1)
@@ -267,7 +269,7 @@ Public Class frmplantilla
                         lstAWEDSSER.Items.FindByValue(dbRow("AWEDSSER")).Selected = True
 
                     Else 'No he trobat l'idioma demanat i busco un altre
-                        qSQL = "select * FROM METLAWE2 WITH(NOLOCK) WHERE AWEINNOD=" & Request("id") & " ORDER BY AWEINIDI ASC "
+                        qSQL = "select * FROM METLAWE2 WITH(NOLOCK) WHERE AWEINNOD=" & idPlantilla & " ORDER BY AWEINIDI ASC "
                         GAIA.bdr(objconn, qSQL, ds)
                         If ds.Tables(0).Rows.Count > 0 Then
                             carregaCamps(ds.Tables(0).Rows(0)("AWEINIDI"))
@@ -275,7 +277,7 @@ Public Class frmplantilla
                     End If
 
                 Case Else   'plantilla
-                    qSQL = "select * FROM METLPLT2 WITH(NOLOCK) WHERE PLTINNOD=" & Request("id")
+                    qSQL = "select * FROM METLPLT2 WITH(NOLOCK) WHERE PLTINNOD=" & idPlantilla
                     GAIA.bdr(objconn, qSQL, ds)
                     If ds.Tables(0).Rows.Count > 0 Then
                         dbRow = ds.Tables(0).Rows(0)
@@ -285,13 +287,11 @@ Public Class frmplantilla
                         'busco el nroId més gran			
                         Dim cont As Integer = 0
                         Dim idTmp As Integer = 0
-                        arrayTmp = Regex.Split(dbRow("PLTDSHTM"), "id='d")
-                        For Each item As String In arrayTmp
-                            If cont > 0 Then
-                                idTmp = item.Substring(0, InStr(item, "'") - 1)
-                                If idTmp >= nroId.Value Then nroId.Value = idTmp
-                            End If
-                            cont += 1
+                        arrayTmp = Regex.Split(dbRow("PLTDSHTM"), "id=d")
+
+                        For Each item As String In arrayTmp.Skip(1)
+                            idTmp = Integer.Parse(item.Substring(0, 2))
+                            If idTmp >= nroId.Value Then nroId.Value = idTmp
                         Next item
 
                         txtPLTDSTIT.Text = dbRow("PLTDSTIT")
@@ -627,7 +627,7 @@ Public Class frmplantilla
         DS = New DataSet()
 
         GAIA.bdr(objconn, "SELECT TIPINTIP,TIPDSDES,TBLDSTXT FROM  METLTIP WITH(NOLOCK), METLTBL WITH(NOLOCK) WHERE TIPINTIP=TBLINTFU", DS)
-        If Request("tipus") = "P" Or Request("tipus") = "" Then
+        If tipodePlantilla = "P" Or tipodePlantilla = "" Then
 
             'If tipodePlantilla = "P" Or tipodePlantilla = "" Then
             lblCodi.Text = "<script language=""javascript"">"
@@ -715,9 +715,9 @@ Public Class frmplantilla
         '***************************************************************************************
         ' Faig el tractament dels camps comuns'
         '***************************************************************************************		
-        Dim item() As String = {}
-        Dim arrCel() As String = {}
-        Dim PLTDSCMP As String = String.Empty, PLTDSLNK As String = "", PLTDSALT As String = "", PLTDSEST As String = "", PLTDSCSS As String = "", PLTDSTCO As String = "", PLTDSLCW As String = "", PLTDSLC2 As String = "", PLTDSIMG As String = "", PLTCDPAL As String = "", PLTDSAAL As String = "", PLTDSPLT As String = "", PLTDSALK As String = "", PLTDSFLW As String = "", PLTSWALT As Integer = 1, PLTDSNUM As String = "", PLTDSALF As String = "", PLTDSNIV As String = "", PLTSWVIS As Integer = 0, WEBDSIMP As String = "", WEBDSCND As String = "", PLTDSHTM As String = ""
+
+
+        Dim PLTDSCMP As String = String.Empty, PLTDSLNK As String = "", PLTDSALT As String = "", PLTDSEST As String = "", PLTDSCSS As String = "", PLTDSTCO As String = "", PLTDSLCA As String = "", PLTDSLCW As String = "", PLTDSLC2 As String = "", PLTDSIMG As String = "", PLTCDPAL As String = "", PLTDSAAL As String = "", PLTDSPLT As String = "", PLTDSALK As String = "", PLTDSFLW As String = "", PLTSWALT As Integer = 1, PLTDSNUM As String = "", PLTDSALF As String = "", PLTDSNIV As String = "", PLTSWVIS As Integer = 0, WEBDSIMP As String = "", WEBDSCND As String = "", PLTDSHTM As String = ""
         codiIdioma = lstCanviIdioma.SelectedValue
 
         txtEstBD.Value = txtEstBD.Value.Replace("""", "'").Replace("''", "'").Replace("'", "''")
@@ -729,10 +729,10 @@ Public Class frmplantilla
         'GAIA.debug(nothing, "despres=" & PLTDSEST)
         Dim cssTmp As String = ""
         Dim cont As Integer = 0
-        LeerAtributos(arrCel, PLTDSCMP, PLTDSLNK, PLTDSALT, PLTDSCSS, PLTDSTCO, PLTDSLCW, PLTDSLC2, PLTDSIMG, PLTCDPAL, PLTDSAAL, PLTDSPLT, PLTDSALK, PLTDSFLW, PLTDSNUM, PLTDSALF, PLTDSNIV, WEBDSIMP, WEBDSCND, cssTmp, cont)
+        LeerAtributos(PLTDSCMP, PLTDSLNK, PLTDSALT, PLTDSCSS, PLTDSTCO, PLTDSLCA, PLTDSLCW, PLTDSLC2, PLTDSIMG, PLTCDPAL, PLTDSAAL, PLTDSPLT, PLTDSALK, PLTDSFLW, PLTDSNUM, PLTDSALF, PLTDSNIV, WEBDSIMP, WEBDSCND, cssTmp, cont)
 
 
-        Select Case Request("tipus")
+        Select Case tipodePlantilla
 
             Case "W"
 
@@ -744,8 +744,8 @@ Public Class frmplantilla
                 If WEBSWSSL.Checked Then esSSL = "S" Else esSSL = "N"
 
 
-                If Not Request("id") Is Nothing Then
-                    txtCodiNode.Text = Request("id").ToString()
+                If Not idPlantilla Is Nothing Then
+                    txtCodiNode.Text = idPlantilla.ToString()
                 Else
                     'Inserto el node fulla web
                     txtCodiNode.Text = GAIA.insertarNode(objconn, 10, WEBDSTIT.Text.Replace("<p>", "").Replace("</p>", ""), Session("codiOrg"))
@@ -776,10 +776,11 @@ Public Class frmplantilla
                 GAIA.debug(Nothing, strSql)
                 GAIA.bdSR(objconn, "BEGIN TRANSACTION " & strSql & "; COMMIT TRANSACTION")
 
+
             Case "N"
 
-                If Not Request("id") Is Nothing Then  'Tengo el id, modifico el nodo.
-                    txtCodiNode.Text = Request("id").ToString()
+                If Not idPlantilla Is Nothing Then  'Tengo el id, modifico el nodo.
+                    txtCodiNode.Text = idPlantilla.ToString()
                 Else ' No tengo id, inserto un nuevo nodo.
                     'Inserto el node web    '9 node web
                     txtCodiNode.Text = GAIA.insertarNode(objconn, 9, NWEDSTIT.Text.Replace("<p>", "").Replace("</p>", ""), Session("codiOrg"))
@@ -810,8 +811,8 @@ Public Class frmplantilla
 
             Case "A"
 
-                If Not Request("id") Is Nothing Then
-                    txtCodiNode.Text = Request("id").ToString()
+                If Not idPlantilla Is Nothing Then
+                    txtCodiNode.Text = idPlantilla.ToString()
                 Else
                     'Inserto el node web    '8 arbre web
                     txtCodiNode.Text = GAIA.insertarNode(objconn, 8, AWEDSTIT.Text.Replace("<p>", "").Replace("</p>", ""), Session("codiOrg"))
@@ -841,8 +842,8 @@ Public Class frmplantilla
                 GAIA.bdSR(objconn, "BEGIN TRANSACTION " & strSql & "; COMMIT TRANSACTION")
 
             Case Else 'plantilla
-                If Not Request("id") Is Nothing Then
-                    txtCodiNode.Text = Request("id").ToString()
+                If Not idPlantilla Is Nothing Then
+                    txtCodiNode.Text = idPlantilla.ToString()
                 Else
                     'Inserto el node fulla web
                     txtCodiNode.Text = GAIA.insertarNode(objconn, 24, txtPLTDSTIT.Text.Replace("<p>", "").Replace("</p>", ""), Session("codiOrg"))
@@ -867,74 +868,49 @@ Public Class frmplantilla
         carregaCamps()
     End Sub
 
-    Private Sub LeerAtributos(ByRef arrCel() As String, ByRef PLTDSCMP As String, ByRef PLTDSLNK As String, ByRef PLTDSALT As String, ByRef PLTDSCSS As String, ByRef PLTDSTCO As String, ByRef PLTDSLCW As String, ByRef PLTDSLC2 As String, ByRef PLTDSIMG As String, ByRef PLTCDPAL As String, ByRef PLTDSAAL As String, ByRef PLTDSPLT As String, ByRef PLTDSALK As String, ByRef PLTDSFLW As String, ByRef PLTDSNUM As String, ByRef PLTDSALF As String, ByRef PLTDSNIV As String, ByRef WEBDSIMP As String, ByRef WEBDSCND As String, ByRef cssTmp As String, ByRef cont As Integer)
-        Dim item() As String
+    Private Sub LeerAtributos(ByRef PLTDSCMP As String, ByRef PLTDSLNK As String, ByRef PLTDSALT As String, ByRef PLTDSCSS As String, ByRef PLTDSTCO As String, ByRef PLTDSLCA As String, ByRef PLTDSLCW As String, ByRef PLTDSLC2 As String, ByRef PLTDSIMG As String, ByRef PLTCDPAL As String, ByRef PLTDSAAL As String, ByRef PLTDSPLT As String, ByRef PLTDSALK As String, ByRef PLTDSFLW As String, ByRef PLTDSNUM As String, ByRef PLTDSALF As String, ByRef PLTDSNIV As String, ByRef WEBDSIMP As String, ByRef WEBDSCND As String, ByRef cssTmp As String, ByRef cont As Integer)
+        Dim item As String()
+        Dim arrCel As String()
         arrCel = txtAtributs.Value.Split("|")
-
+        Array.Resize(arrCel, arrCel.Length - 1)
         'GAIA.debug(Nothing, "txtAtributs=" + txtAtributs.Value.ToString())
         For Each cel As String In arrCel
             If Not String.IsNullOrEmpty(cel) Then
-                Dim temp() As String = cel.Split(":")
-                item = temp(1).Split("#")
+
+                item = cel.Split("#")
                 If (item.Length > 1) Then
+                    PLTDSTCO &= item(7) & "," 'Tipus de fulla
+                    PLTDSCMP &= item(8) & ","
+                    PLTDSLNK &= item(9) & ","
+                    PLTDSALT &= item(10) & "|"
+                    PLTDSIMG &= IIf(item(11) = "", 0, item(11)) & ","
+                    PLTDSFLW &= "0" & ","
+                    PLTDSLCA &= item(13).Replace(",", "|") & ","
+                    PLTDSLCW &= item(15).Replace(",", "|") & ","
+                    PLTDSLC2 &= item(17).Replace(",", "|") & ","
+                    PLTDSPLT &= item(19).Replace(",", "|") & ","
+                    PLTDSNUM &= IIf(item(20) = "", 0, item(20)) & ","
+                    PLTDSNIV &= item(21) & ","
+                    PLTDSAAL &= item(22) & "|"
+                    PLTDSALF &= item(23) & ","
+                    PLTDSALK &= item(24) & "|"
+                    PLTCDPAL &= item(26) & ","
 
-                    If ((temp(0).ToString() = "Cel")) Then
+                    'Camps d'atributs de cel·les de web
+                    WEBDSIMP &= item(27) & ","
+                    WEBDSCND &= item(28) & ","
+                    'Estils
+                    cssTmp = ""
+                    For i As Integer = 29 To 29
+                        If cssTmp.Length > 0 Then cssTmp &= ","
+                        If item(i).Length > 0 Then cssTmp &= item(i)
+                    Next i
+                    PLTDSCSS &= cssTmp & "|"
 
-                        PLTDSTCO &= item(7)
-                        PLTDSTCO &= ","
-                        PLTDSCMP &= item(8)
-                        PLTDSCMP &= ","
-                        PLTDSLNK &= item(9)
-                        PLTDSLNK &= ","
-                        PLTDSALT &= item(10)
-                        PLTDSALT &= "|"
-                        PLTDSIMG &= IIf(item(11) = "", 0, item(11))
-                        PLTDSIMG &= ","
-                        PLTDSFLW &= "0"
-                        PLTDSFLW &= ","
-
-                        PLTDSLCW &= item(13).Replace(",", "|")
-                        PLTDSLCW &= ","
-                        PLTDSLC2 &= item(15).Replace(",", "|")
-                        PLTDSLC2 &= ","
-                        PLTDSPLT &= item(17).Replace(",", "|")
-                        PLTDSPLT &= ","
-                        PLTDSNUM &= IIf(item(18) = "", 0, item(18))
-                        PLTDSNUM &= ","
-                        PLTDSNIV &= item(19)
-                        PLTDSNIV &= ","
-                        PLTDSAAL &= item(20)
-                        PLTDSAAL &= "|"
-                        PLTDSALF &= item(21)
-                        PLTDSALF &= ","
-                        PLTDSALK &= item(22)
-                        PLTDSALK &= "|"
-                        PLTCDPAL &= item(24)
-                        PLTCDPAL &= ","
-
-                        'Camps d'atributs de cel·les de web
-                        WEBDSIMP &= item(25)
-                        WEBDSIMP &= ","
-                        WEBDSCND &= item(26)
-                        WEBDSCND &= ","
-                        'Estils
-                        cssTmp = ""
-                        For i As Integer = 27 To 27
-                            If cssTmp.Length > 0 Then cssTmp &= ","
-                            If item(i).Length > 0 Then cssTmp &= item(i)
-                        Next i
-                        PLTDSCSS &= cssTmp
-                        PLTDSCSS &= "|"
-
-                    Else
-                        PLTDSLCW &= item(13).Replace(",", "|")
-                        PLTDSLCW &= ","
-                        PLTDSLC2 &= item(15).Replace(",", "|")
-                        PLTDSLC2 &= ","
-                    End If
                 End If
             End If
         Next cel
+        PLTDSLCA = PLTDSLCA.Substring(0, PLTDSLCA.Length - 1)
         PLTDSLCW = PLTDSLCW.Substring(0, PLTDSLCW.Length - 1)
         PLTDSLC2 = PLTDSLC2.Substring(0, PLTDSLC2.Length - 1)
         PLTDSCSS = PLTDSCSS.Substring(0, PLTDSCSS.Length - 1)
