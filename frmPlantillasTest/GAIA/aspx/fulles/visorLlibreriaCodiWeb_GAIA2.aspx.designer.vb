@@ -11,167 +11,176 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class visorArbresLite
+Partial Public Class visorLlibreriaCodiWeb_GAIA2
 
     '''<summary>
-    '''lblDebug control.
+    '''lbldebug control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblDebug As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lbldebug As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''lblCodi control.
+    '''lblResultat control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblCodi As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblResultat As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''arbreTreeView control.
+    '''txtCodiNode control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents arbreTreeView As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents txtCodiNode As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''actualitzaNode control.
+    '''LCWDSTIT control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents actualitzaNode As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents LCWDSTIT As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''actualitzaNodeArbre2 control.
+    '''lblIdioma control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents actualitzaNodeArbre2 As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents lblIdioma As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''idioma control.
+    '''LCWTPFOR control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents idioma As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents LCWTPFOR As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''llistaArbres control.
+    '''LCWTPFOL control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents llistaArbres As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents LCWTPFOL As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''RadTree1 control.
+    '''LCWCDTIP control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadTree1 As Global.Telerik.WebControls.RadTreeView
+    Protected WithEvents LCWCDTIP As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''RetornarNodes2 control.
+    '''LCWDSTXT control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RetornarNodes2 As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents LCWDSTXT As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''labelNodes control.
+    '''lblEditarFitxer control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents labelNodes As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblEditarFitxer As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''labelNroNodes control.
+    '''LCWDSHLP control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents labelNroNodes As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents LCWDSHLP As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''retornarNodesChecked control.
+    '''RelacionsTxt control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents retornarNodesChecked As Global.System.Web.UI.WebControls.CheckBox
+    Protected WithEvents RelacionsTxt As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''cerca control.
+    '''RelacionsNodes control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cerca As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents RelacionsNodes As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''RadTree2 control.
+    '''RelacionsPlantillesTxt control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadTree2 As Global.Telerik.WebControls.RadTreeView
+    Protected WithEvents RelacionsPlantillesTxt As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''tipusNode control.
+    '''RelacionsPlantillesNodes control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents tipusNode As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents RelacionsPlantillesNodes As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''noddstxt control.
+    '''pnlCel control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents noddstxt As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents pnlCel As Global.System.Web.UI.WebControls.PlaceHolder
 
     '''<summary>
-    '''llistaArbres2_1 control.
+    '''ltCEL control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents llistaArbres2_1 As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents ltCEL As Global.System.Web.UI.WebControls.Literal
 
     '''<summary>
-    '''llistaArbres2_2 control.
+    '''btnInsert control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents llistaArbres2_2 As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents btnInsert As Global.System.Web.UI.HtmlControls.HtmlInputButton
+
+    '''<summary>
+    '''checkedAfegirCodi control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents checkedAfegirCodi As Global.System.Web.UI.WebControls.CheckBox
 End Class

@@ -1,12 +1,6 @@
-.input-group > span.multiselect-native-select
-{
-  position: relative;
-  -ms-flex: 1 1 0%;
-  flex: 1 1 0%;
-  min-width: 0;
-  margin-bottom: 0;
+span.multiselect-native-select {
+    position: relative
 }
-
 
     span.multiselect-native-select select {
         border: 0 !important;
@@ -29,8 +23,6 @@
     padding: 0;
     float:left;
 }
-
-	.multiselect-container.dropdown-menu { font-size:0.8rem}
 
     .multiselect-container .input-group {
         margin: 5px
@@ -61,8 +53,7 @@
         }
 
         .multiselect-container > li > a {
-            padding: 0;
-			color:#000;
+            padding: 0
         }
 
             .multiselect-container > li > a > label {
@@ -70,8 +61,7 @@
                 height: 100%;
                 cursor: pointer;
                 font-weight: 400;
-                padding: 3px 20px 3px 40px;
-				display:block !important;
+                padding: 3px 20px 3px 40px
             }
 
                 .multiselect-container > li > a > label.checkbox, .multiselect-container > li > a > label.radio {
@@ -142,44 +132,6 @@
         color: #fff;
         background-color: #333
     }
-    button.multiselect {
-		height: calc(1.5em + 0.5rem + 2px);
-  		font-size: 0.875rem;  
-	  display: inline-block;	
-	  width:100% !important;
-	  max-width: 100%;
-	  padding: 0.25rem 1.75rem 0.25rem 0.25rem;
-	  line-height: 1.25;
-	  color: #464a4c;
-	  vertical-align: middle;
-	  background: #fff url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23333' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E") no-repeat right 0.75rem center;
-	  -webkit-background-size: 8px 10px;
-			  background-size: 8px 10px;
-	  border: 1px solid rgba(0, 0, 0, 0.15);
-	  border-radius: 0.25rem;
-	  border-bottom-left-radius:0;
-	  border-top-left-radius:0;
-	  -moz-appearance: none;
-	  -webkit-appearance: none;
-	}
-	
-	button.multiselect:focus {
-	  border-color: #5cb3fd;
-	  outline: none;
-	}
-	
-	button.multiselect:focus::-ms-value {
-	  color: #464a4c;
-	  background-color: #fff;
-	}
-	
-	button.multiselect:disabled {
-	  color: #636c72;
-	  cursor: not-allowed;
-	  background-color: #eceeef;
-	}
-	
-	button.multiselect::-ms-expand {
-	  opacity: 0;
-	}
-	
+    button.multiselect{
+        width:13rem;
+    }

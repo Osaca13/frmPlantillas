@@ -54,6 +54,9 @@
     <Reference Include="FredCK.FCKeditorV2">
       <HintPath>..\..\GAIA\bin\FredCK.FCKeditorV2.dll</HintPath>
     </Reference>
+    <Reference Include="gaia2">
+      <HintPath>..\packages\gaia2.dll</HintPath>
+    </Reference>
     <Reference Include="gaiaws, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\GAIA\bin\gaiaws.dll</HintPath>
@@ -165,6 +168,8 @@
     <Content Include="GAIA2\aspx\web\img\open-iconic\font\css\open-iconic-foundation.min.css" />
     <Content Include="GAIA2\aspx\web\img\open-iconic\font\css\open-iconic.css" />
     <Content Include="GAIA2\aspx\web\img\open-iconic\font\css\open-iconic.min.css" />
+    <Content Include="GAIA\aspx\contextmenusNou.xml" />
+    <Content Include="GAIA\aspx\fulles\visorLlibreriaCodiWeb_GAIA2.aspx" />
     <Content Include="GAIA\aspx\llibreria\frmObrirFulla.aspx" />
     <Content Include="GAIA\aspx\visorArbresLite.aspx" />
     <Content Include="GAIA\aspx\web\frmArbreWeb.aspx" />
@@ -1699,6 +1704,13 @@
       <DependentUpon>frmplantilla.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="GAIA\aspx\fulles\visorLlibreriaCodiWeb_GAIA2.aspx.designer.vb">
+      <DependentUpon>visorLlibreriaCodiWeb_GAIA2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GAIA\aspx\fulles\visorLlibreriaCodiWeb_GAIA2.aspx.vb">
+      <DependentUpon>visorLlibreriaCodiWeb_GAIA2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="GAIA\aspx\llibreria\frmObrirFulla.aspx.designer.vb">
       <DependentUpon>frmObrirFulla.aspx</DependentUpon>
     </Compile>
@@ -1824,7 +1836,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="GAIA\aspx\fulles\" />
+    <Folder Include="GAIA\aspx\Examples\Advanced\LoadOnDemand\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -1857,8 +1869,6 @@
           <DevelopmentServerPort>54412</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:54412/</IISUrl>
-          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
-          <IISAppRootUrl>http://localhost:54412/GAIA2/aspx/web/frmplantilla.aspx?id=354860</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

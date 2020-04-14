@@ -369,7 +369,7 @@
              * @param {jQuery} event
              */
             onDropdownHidden: function(event) {
-
+                var itemtarget = event.relatedTarget;
             },
             /**
              * Triggered on select all.
@@ -403,14 +403,14 @@
             enableHTML: false,
             buttonClass: '',
             inheritClass: false,
-            buttonWidth: '13rem',
-            buttonContainer: '<div class="input-group input-group-append" />',
+            buttonWidth: '100%',
+            buttonContainer: '<div class="m-0 p-0 d-block position-relative mydropdown" />',
             dropRight: false,
             dropUp: false,
             selectedClass: 'active',
             // Maximum height of the dropdown menu.
             // If maximum height is exceeded a scrollbar will be displayed.
-            maxHeight: false,
+            maxHeight: 400,
             includeSelectAllOption: false,
             includeSelectAllIfMoreThan: 0,
             selectAllText: ' Select all',
@@ -428,8 +428,8 @@
             // possible options: 'text', 'value', 'both'
             filterBehavior: 'text',
             includeFilterClearBtn: true,
-            preventInputChangeEvent: false,
-            nonSelectedText: 'None selected',
+            preventInputChangeEvent: true,
+            nonSelectedText: '',
             nSelectedText: 'selected',
             allSelectedText: 'All selected',
             numberDisplayed: 3,
@@ -440,7 +440,7 @@
             includeResetDivider: false,
             resetText: 'Reset',
             templates: {
-                button: '<button type="button" class="multiselect border custom-select custom-select-sm" data-toggle="dropdown"><span class="multiselect-selected-text"></span></button>',
+                button: '<button type="button" class="multiselect" data-toggle="dropdown"><span class="multiselect-selected-text"></span></button>',
                 ul: '<ul class="multiselect-container dropdown-menu"></ul>',
                 filter: '<li class="multiselect-item multiselect-filter"><div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span><input class="form-control multiselect-search" type="text" /></div></li>',
                 filterClearBtn: '<span class="input-group-btn"><button class="btn btn-default multiselect-clear-filter" type="button"><i class="glyphicon glyphicon-remove-circle"></i></button></span>',
@@ -483,7 +483,7 @@
             // Manually add button width if set.
             if (this.options.buttonWidth && this.options.buttonWidth !== 'auto') {
                 this.$button.css({
-                    'width': '13rem', //this.options.buttonWidth,
+                    'width': '100%', //this.options.buttonWidth,
                     'font- size': '12px',
                     'overflow' : 'hidden',
                     'text-overflow': 'ellipsis',
@@ -616,10 +616,12 @@
                 else {
                     if (checked) {
                         $option.prop('selected', true);
+                        $option.attr('selected', 'selected');
 
                         if (this.options.multiple) {
                             // Simply select additional option.
                             $option.prop('selected', true);
+                            $option.attr('selected', 'selected');
                         }
                         else {
                             // Unselect all other options and corresponding checkboxes.
@@ -641,6 +643,11 @@
                     else {
                         // Unselect option.
                         $option.prop('selected', false);
+                        if ($option.attr('selected'))
+                        {
+                            $option.removeAttr('selected');
+                        }
+                       
                     }
 
                     // To prevent select all from firing onChange: #575

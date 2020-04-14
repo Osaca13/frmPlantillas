@@ -1,0 +1,346 @@
+<ContextMenus>
+ <Menu Name="menuA">
+	<Item Image="cercar.png"  Text="Cercar" PostBack="false"  />
+	<Item Image="actualitzar.png"  Text="Actualitzar" PostBack="True" />
+	<Item Image="propietats.png"  Text="Propietats"  PostBack="True" />
+	<Item Image="afegir.png"  Text="Insertar" PostBack="False" />
+	<Item Image="editar.png"  Text="Editar" PostBack="True"/>
+	<Item Image="obrir.png"  Text="Obrir" PostBack="True"/>
+	<Item Image="permisos.png"  Text="Permisos"  PostBack="True" />
+	<Item Image="copiar.png"  Text="Duplicar"  PostBack="True" />
+	<Item Image="cercar.png"  Text="Veure caducats"  PostBack="True" />
+	<Item Text="_______________" PostBack="false"/>
+	<Item Image="esborrar.png" Text="Esborrar"  PostBack="True" />
+	<Item Image="esborrarTots.png" Text="Esborrar tots"  PostBack="True" />
+	<Item Image="caducar.png" Text="Caducar"  PostBack="True" />		
+ </Menu>
+  <Menu Name="menuAP">
+	<Item Image="cercar.png"  Text="Cercar" PostBack="false"  />
+	<Item Image="actualitzar.png"  Text="Actualitzar" PostBack="True" />
+	<Item Image="propietats.png"  Text="Propietats"  PostBack="True" />
+	<Item Image="afegir.png"  Text="Insertar" PostBack="False" />
+	<Item Image="editar.png"  Text="Editar" PostBack="True"/>
+	<Item Image="obrir.png"  Text="Obrir" PostBack="True"/>
+	<Item Image="publicar.png"  Text="Publicar" PostBack="True"/>
+	<Item Image="permisos.png"  Text="Permisos"  PostBack="True" />
+	<Item Image="copiar.png"  Text="Duplicar"  PostBack="True" />
+	<Item Image="cercar.png"  Text="Veure caducats"  PostBack="True" />
+	<Item Text="_______________" PostBack="false"/>
+	<Item Image="esborrar.png" Text="Esborrar"  PostBack="True" />
+	<Item Image="esborrarTots.png" Text="Esborrar tots"  PostBack="True" />
+	<Item Image="caducar.png" Text="Caducar"  PostBack="True" />			
+ </Menu>
+  <Menu Name="menuAW">
+	<Item Image="cercar.png"  Text="Cercar" PostBack="false"  />
+	<Item Image="actualitzar.png"  Text="Actualitzar" PostBack="True" />
+	<Item Image="propietats.png"  Text="Propietats"  PostBack="True" />
+	<Item Image="afegir.png"  Text="Insertar" PostBack="False" />
+	<Item Image="editar.png"  Text="Editar" PostBack="True"/>
+	<Item Image="obrir.png"  Text="Obrir" PostBack="True"/>
+	<Item Image="publicar.png"  Text="Publicar" PostBack="True"/>
+	<Item Image="permisos.png"  Text="Permisos"  PostBack="True" />
+	<Item Image="copiar.png"  Text="Duplicar"  PostBack="True" />	
+	<Item Image="cercar.png"  Text="Veure caducats"  PostBack="True" />
+	<Item Text="_______________" PostBack="false"/>
+	<Item Image="esborrar.png" Text="Esborrar"  PostBack="True" />
+	<Item Image="esborrarTots.png" Text="Esborrar tots"  PostBack="True" />
+	<Item Image="caducar.png" Text="Caducar"  PostBack="True" />			
+ </Menu>
+  <Menu Name="menuAD">
+	<Item Image="cercar.png"  Text="Cercar" PostBack="false"  />
+	<Item Image="actualitzar.png"  Text="Actualitzar" PostBack="True" />
+	<Item Image="propietats.png"  Text="Propietats"  PostBack="True" />
+	<Item Image="afegir.png"  Text="Insertar" PostBack="False" />
+	<Item Image="editar.png"  Text="Editar" PostBack="True"/>
+	<Item Image="obrir.png"  Text="Obrir" PostBack="True"/>
+	<Item Image="permisos.png"  Text="Permisos"  PostBack="True" />
+	<Item Image="copiar.png"  Text="Duplicar"  PostBack="True" />	
+	<Item Image="cercar.png"  Text="Veure caducats"  PostBack="True" />
+	<Item Text="_______________" PostBack="false"/>
+	<Item Image="esborrar.png" Text="Esborrar"  PostBack="True" />
+	<Item Image="esborrarTots.png" Text="Esborrar tots"  PostBack="True" />
+	<Item Image="caducar.png" Text="Caducar"  PostBack="True" />			
+ </Menu>
+ <Menu Name="menuOP">
+	<Item Image="cercar.png"  Text="Cercar" PostBack="false"  />
+	<Item Image="actualitzar.png"  Text="Actualitzar" PostBack="True" />
+	<Item Image="propietats.png"  Text="Propietats"  PostBack="True" />
+	<Item Image="publicar.png"  Text="Publicar" PostBack="True"/>
+	<Item Image="obrir.png"  Text="Obrir" PostBack="True"/>	
+	<Item Image="esborrarTots.png" Text="Esborrar tots"  PostBack="True" />
+	<Item Image="caducar.png" Text="Caducar"  PostBack="True" />			
+ </Menu>
+
+ 					
+<Menu Name="menuOEP">
+	<Item Image="cercar.png"  Text="Cercar" PostBack="false"  />
+	<Item Image="actualitzar.png"  Text="Actualitzar" PostBack="True" />
+	<Item Image="propietats.png"  Text="Propietats"  PostBack="True" />
+	<Item Image="publicar.png"  Text="Publicar" PostBack="True"/>
+	<Item Image="obrir.png"  Text="Obrir" PostBack="True"/>	
+	<Item Text="_______________" PostBack="false"/>
+	<Item Image="esborrar.png" Text="Esborrar"  PostBack="True" />
+	<Item Image="esborrarTots.png" Text="Esborrar tots"  PostBack="True" />
+	<Item Image="caducar.png" Text="Caducar"  PostBack="True" />			
+ </Menu>
+<Menu Name="menuOCP">
+	<Item Image="cercar.png"  Text="Cercar" PostBack="false"  />
+	<Item Image="actualitzar.png"  Text="Actualitzar" PostBack="True" />
+	<Item Image="propietats.png"  Text="Propietats"  PostBack="True" />
+	<Item Image="publicar.png"  Text="Publicar" PostBack="True"/>
+	<Item Image="obrir.png"  Text="Obrir" PostBack="True"/>	
+	<Item Image="afegir.png"  Text="Insertar" PostBack="False" />
+	<Item Image="editar.png"  Text="Editar" PostBack="True"/>
+	<Item Image="esborrarTots.png" Text="Esborrar tots"  PostBack="True" />
+	<Item Image="caducar.png" Text="Caducar"  PostBack="True" />			
+ </Menu>
+
+<Menu Name="menuOECP">
+	<Item Image="cercar.png"  Text="Cercar" PostBack="false"  />
+	<Item Image="actualitzar.png"  Text="Actualitzar" PostBack="True" />
+	<Item Image="propietats.png"  Text="Propietats"  PostBack="True" />
+	<Item Image="publicar.png"  Text="Publicar" PostBack="True"/>
+	<Item Image="obrir.png"  Text="Obrir" PostBack="True"/>
+	<Item Image="afegir.png"  Text="Insertar" PostBack="False" />
+	<Item Image="editar.png"  Text="Editar" PostBack="True"/>
+	<Item Image="cercar.png"  Text="Veure caducats"  PostBack="True" />
+	<Item Text="_______________" PostBack="false"/>
+	<Item Image="esborrar.png" Text="Esborrar"  PostBack="True" />
+	<Item Image="esborrarTots.png" Text="Esborrar tots"  PostBack="True" />
+	<Item Image="caducar.png" Text="Caducar"  PostBack="True" />				
+ </Menu> 					
+
+  <Menu Name="menuOE">
+	<Item Image="cercar.png"  Text="Cercar" PostBack="false"  />
+	<Item Image="actualitzar.png"  Text="Actualitzar" PostBack="True" />
+	<Item Image="propietats.png"  Text="Propietats"  PostBack="True" />
+	<Item Image="obrir.png"  Text="Obrir" PostBack="True"/>
+	<Item Image="cercar.png"  Text="Veure caducats"  PostBack="True" />
+	<Item Text="_______________" PostBack="false"/>
+	<Item Image="esborrar.png" Text="Esborrar"  PostBack="True" />
+	<Item Image="esborrarTots.png" Text="Esborrar tots"  PostBack="True" />
+	<Item Image="caducar.png" Text="Caducar"  PostBack="True" />			
+ </Menu>
+	<Menu Name="menuOBC">
+		<Item Image="cercar.png"  Text="Cercar" PostBack="false"  />
+		<Item Image="actualitzar.png"  Text="Actualitzar" PostBack="True" />
+		<Item Image="propietats.png"  Text="Propietats"  PostBack="True" />
+		<Item Image="obrir.png"  Text="Obrir" PostBack="True"/>
+		<Item Image="afegir.png"  Text="Insertar" PostBack="False" />
+		<Item Image="editar.png"  Text="Editar" PostBack="True"/>	
+		<Item Image="cercar.png"  Text="Veure caducats"  PostBack="True" />
+		<Item Text="_______________" PostBack="false"/>
+		<Item Image="esborrar.png" Text="Esborrar"  PostBack="True" />
+	<Item Image="esborrarTots.png" Text="Esborrar tots"  PostBack="True" />
+	<Item Image="caducar.png" Text="Caducar"  PostBack="True" />				
+	</Menu>
+  <Menu Name="menuOEC">
+	<Item Image="cercar.png"  Text="Cercar" PostBack="false"  />
+	<Item Image="actualitzar.png"  Text="Actualitzar" PostBack="True" />
+	<Item Image="propietats.png"  Text="Propietats"  PostBack="True" />
+	<Item Image="afegir.png"  Text="Insertar" PostBack="False" />
+	<Item Image="editar.png"  Text="Editar" PostBack="True"/>	
+	<Item Image="obrir.png"  Text="Obrir" PostBack="True"/>
+	<Item Image="cercar.png"  Text="Veure caducats"  PostBack="True" />
+	<Item Text="_______________" PostBack="false"/>
+	<Item Image="esborrar.png" Text="Esborrar"  PostBack="True" />
+	<Item Image="esborrarTots.png" Text="Esborrar tots"  PostBack="True" />
+	<Item Image="caducar.png" Text="Caducar"  PostBack="True" />			
+ </Menu>
+ <Menu Name="menuOC">
+	<Item Image="cercar.png"  Text="Cercar" PostBack="false"  />
+	<Item Image="actualitzar.png"  Text="Actualitzar" PostBack="True" />
+	<Item Image="propietats.png"  Text="Propietats"  PostBack="True" />
+	<Item Image="afegir.png"  Text="Insertar" PostBack="False" />
+	<Item Image="editar.png"  Text="Editar" PostBack="True"/>	
+	<Item Image="obrir.png"  Text="Obrir" PostBack="True"/>
+ </Menu>
+ <Menu Name="menuO">
+	<Item Image="cercar.png"  Text="Cercar" PostBack="false"  />
+	<Item Image="actualitzar.png"  Text="Actualitzar" PostBack="True" />
+	<Item Image="propietats.png"  Text="Propietats"  PostBack="True" />
+	<Item Image="obrir.png"  Text="Obrir" PostBack="True"/>
+ </Menu>
+ <Menu Name="menuBuit">
+	<Item Image="cercar.png"  Text="Cercar" PostBack="false"  />
+	<Item Image="actualitzar.png"  Text="Actualitzar" PostBack="True" />
+ </Menu>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <Menu Name="menuA+">
+	<Item Image="cercar.png"  Text="Cercar" PostBack="false"  />
+	<Item Image="actualitzar.png"  Text="Actualitzar" PostBack="True" />
+	<Item Image="obrir.png"    Text="Veure Tots" PostBack="True" />
+	<Item Image="propietats.png"  Text="Propietats"  PostBack="True" />
+	<Item Image="afegir.png"  Text="Insertar" PostBack="False" />
+	<Item Image="editar.png"  Text="Editar" PostBack="True"/>
+	<Item Image="obrir.png"  Text="Obrir" PostBack="True"/>
+	<Item Image="permisos.png"  Text="Permisos"  PostBack="True" />
+	<Item Text="_______________" PostBack="false"/>
+	<Item Image="esborrar.png" Text="Esborrar"  PostBack="True" />
+	<Item Image="esborrarTots.png" Text="Esborrar tots"  PostBack="True" />
+	<Item Image="caducar.png" Text="Caducar"  PostBack="True" />			
+ </Menu>
+  <Menu Name="menuAP+">
+	<Item Image="cercar.png"  Text="Cercar" PostBack="false"  />
+	<Item Image="actualitzar.png"  Text="Actualitzar" PostBack="True" />
+	<Item Image="obrir.png"    Text="Veure Tots" PostBack="True" />
+	<Item Image="propietats.png"  Text="Propietats"  PostBack="True" />
+	<Item Image="afegir.png"  Text="Insertar" PostBack="False" />
+	<Item Image="editar.png"  Text="Editar" PostBack="True"/>
+	<Item Image="obrir.png"  Text="Obrir" PostBack="True"/>
+	<Item Image="publicar.png"  Text="Publicar" PostBack="True"/>
+	<Item Image="permisos.png"  Text="Permisos"  PostBack="True" />
+	<Item Text="_______________" PostBack="false"/>
+	<Item Image="esborrar.png" Text="Esborrar"  PostBack="True" />
+	<Item Image="esborrarTots.png" Text="Esborrar tots"  PostBack="True" />
+	<Item Image="caducar.png" Text="Caducar"  PostBack="True" />			
+ </Menu>
+  <Menu Name="menuAW+">
+	<Item Image="cercar.png"  Text="Cercar" PostBack="false"  />
+	<Item Image="actualitzar.png"  Text="Actualitzar" PostBack="True" />
+	<Item Image="obrir.png"    Text="Veure Tots" PostBack="True" />
+	<Item Image="propietats.png"  Text="Propietats"  PostBack="True" />
+	<Item Image="afegir.png"  Text="Insertar" PostBack="False" />
+	<Item Image="editar.png"  Text="Editar" PostBack="True"/>
+	<Item Image="obrir.png"  Text="Obrir" PostBack="True"/>
+	<Item Image="publicar.png"  Text="Publicar" PostBack="True"/>
+	<Item Image="permisos.png"  Text="Permisos"  PostBack="True" />
+	<Item Image="copiar.png"  Text="Duplicar"  PostBack="True" />	
+	<Item Text="_______________" PostBack="false"/>
+	<Item Image="esborrar.png" Text="Esborrar"  PostBack="True" />
+	<Item Image="esborrarTots.png" Text="Esborrar tots"  PostBack="True" />
+	<Item Image="caducar.png" Text="Caducar"  PostBack="True" />			
+ </Menu>
+  <Menu Name="menuAD+">
+	<Item Image="cercar.png"  Text="Cercar" PostBack="false"  />
+	<Item Image="actualitzar.png"  Text="Actualitzar" PostBack="True" />
+	<Item Image="obrir.png"    Text="Veure Tots" PostBack="True" />
+	<Item Image="propietats.png"  Text="Propietats"  PostBack="True" />
+	<Item Image="afegir.png"  Text="Insertar" PostBack="False" />
+	<Item Image="editar.png"  Text="Editar" PostBack="True"/>
+	<Item Image="obrir.png"  Text="Obrir" PostBack="True"/>
+	<Item Image="permisos.png"  Text="Permisos"  PostBack="True" />
+	<Item Image="copiar.png"  Text="Duplicar"  PostBack="True" />	
+	<Item Text="_______________" PostBack="false"/>
+	<Item Image="esborrar.png" Text="Esborrar"  PostBack="True" />
+	<Item Image="esborrarTots.png" Text="Esborrar tots"  PostBack="True" />
+	<Item Image="caducar.png" Text="Caducar"  PostBack="True" />			
+ </Menu>
+ <Menu Name="menuOP+">
+	<Item Image="cercar.png"  Text="Cercar" PostBack="false"  />
+	<Item Image="actualitzar.png"  Text="Actualitzar" PostBack="True" />
+	<Item Image="obrir.png"    Text="Veure Tots" PostBack="True" />
+	<Item Image="propietats.png"  Text="Propietats"  PostBack="True" />
+	<Item Image="publicar.png"  Text="Publicar" PostBack="True"/>
+	<Item Image="obrir.png"  Text="Obrir" PostBack="True"/>
+	<Item Image="esborrarTots.png" Text="Esborrar tots"  PostBack="True" />
+	<Item Image="caducar.png" Text="Caducar"  PostBack="True" />			
+ </Menu>
+
+ 					
+<Menu Name="menuOEP+">
+	<Item Image="cercar.png"  Text="Cercar" PostBack="false"  />
+	<Item Image="actualitzar.png"  Text="Actualitzar" PostBack="True" />
+	<Item Image="obrir.png"    Text="Veure Tots" PostBack="True" />
+	<Item Image="propietats.png"  Text="Propietats"  PostBack="True" />
+	<Item Image="publicar.png"  Text="Publicar" PostBack="True"/>
+	<Item Image="obrir.png"  Text="Obrir" PostBack="True"/>	
+	<Item Text="_______________" PostBack="false"/>
+	<Item Image="esborrar.png" Text="Esborrar"  PostBack="True" />
+	<Item Image="esborrarTots.png" Text="Esborrar tots"  PostBack="True" />
+	<Item Image="caducar.png" Text="Caducar"  PostBack="True" />			
+ </Menu>
+<Menu Name="menuOCP+">
+	<Item Image="cercar.png"  Text="Cercar" PostBack="false"  />
+	<Item Image="actualitzar.png"  Text="Actualitzar" PostBack="True" />
+	<Item Image="obrir.png"    Text="Veure Tots" PostBack="True" />
+	<Item Image="propietats.png"  Text="Propietats"  PostBack="True" />
+	<Item Image="publicar.png"  Text="Publicar" PostBack="True"/>
+	<Item Image="obrir.png"  Text="Obrir" PostBack="True"/>	
+	<Item Image="afegir.png"  Text="Insertar" PostBack="False" />
+	<Item Image="editar.png"  Text="Editar" PostBack="True"/>
+
+ </Menu>
+
+<Menu Name="menuOECP+">
+	<Item Image="cercar.png"  Text="Cercar" PostBack="false"  />
+	<Item Image="actualitzar.png"  Text="Actualitzar" PostBack="True" />
+	<Item Image="obrir.png"    Text="Veure Tots" PostBack="True" />
+	<Item Image="propietats.png"  Text="Propietats"  PostBack="True" />
+	<Item Image="publicar.png"  Text="Publicar" PostBack="True"/>
+	<Item Image="obrir.png"  Text="Obrir" PostBack="True"/>
+	<Item Image="afegir.png"  Text="Insertar" PostBack="False" />
+	<Item Image="editar.png"  Text="Editar" PostBack="True"/>
+	<Item Text="_______________" PostBack="false"/>
+	<Item Image="esborrar.png" Text="Esborrar"  PostBack="True" />	
+	<Item Image="esborrarTots.png" Text="Esborrar tots"  PostBack="True" />
+	<Item Image="caducar.png" Text="Caducar"  PostBack="True" />			
+ </Menu> 					
+
+  <Menu Name="menuOE+">
+	<Item Image="cercar.png"  Text="Cercar" PostBack="false"  />
+	<Item Image="actualitzar.png"  Text="Actualitzar" PostBack="True" />
+	<Item Image="obrir.png"    Text="Veure Tots" PostBack="True" />
+	<Item Image="propietats.png"  Text="Propietats"  PostBack="True" />
+	<Item Image="obrir.png"  Text="Obrir" PostBack="True"/>
+	<Item Text="_______________" PostBack="false"/>
+	<Item Image="esborrar.png" Text="Esborrar"  PostBack="True" />
+	<Item Image="esborrarTots.png" Text="Esborrar tots"  PostBack="True" />
+	<Item Image="caducar.png" Text="Caducar"  PostBack="True" />			
+ </Menu>
+	<Menu Name="menuOBC+">
+		<Item Image="cercar.png"  Text="Cercar" PostBack="false"  />
+		<Item Image="actualitzar.png"  Text="Actualitzar" PostBack="True" />
+		<Item Image="obrir.png"    Text="Veure Tots" PostBack="True" />
+		<Item Image="propietats.png"  Text="Propietats"  PostBack="True" />
+		<Item Image="obrir.png"  Text="Obrir" PostBack="True"/>
+		<Item Image="afegir.png"  Text="Insertar" PostBack="False" />
+		<Item Image="editar.png"  Text="Editar" PostBack="True"/>	
+		<Item Text="_______________" PostBack="false"/>
+		<Item Image="esborrar.png" Text="Esborrar"  PostBack="True" />
+		<Item Image="esborrarTots.png" Text="Esborrar tots"  PostBack="True" />
+		<Item Image="caducar.png" Text="Caducar"  PostBack="True" />				
+	</Menu>
+  <Menu Name="menuOEC+">
+	<Item Image="cercar.png"  Text="Cercar" PostBack="false"  />
+	<Item Image="actualitzar.png"  Text="Actualitzar" PostBack="True" />
+	<Item Image="obrir.png"    Text="Veure Tots" PostBack="True" />
+	<Item Image="propietats.png"  Text="Propietats"  PostBack="True" />
+	<Item Image="afegir.png"  Text="Insertar" PostBack="False" />
+	<Item Image="editar.png"  Text="Editar" PostBack="True"/>	
+	<Item Image="obrir.png"  Text="Obrir" PostBack="True"/>
+	<Item Text="_______________" PostBack="false"/>
+	<Item Image="esborrar.png" Text="Esborrar"  PostBack="True" />
+	<Item Image="esborrarTots.png" Text="Esborrar tots"  PostBack="True" />
+	<Item Image="caducar.png" Text="Caducar"  PostBack="True" />			
+ </Menu>
+ <Menu Name="menuOC+">
+	<Item Image="cercar.png"  Text="Cercar" PostBack="false"  />
+	<Item Image="actualitzar.png"  Text="Actualitzar" PostBack="True" />
+	<Item Image="obrir.png"    Text="Veure Tots" PostBack="True" />
+	<Item Image="propietats.png"  Text="Propietats"  PostBack="True" />
+	<Item Image="afegir.png"  Text="Insertar" PostBack="False" />
+	<Item Image="editar.png"  Text="Editar" PostBack="True"/>	
+	<Item Image="obrir.png"  Text="Obrir" PostBack="True"/>
+ </Menu>
+ <Menu Name="menuO+">
+	<Item Image="cercar.png"  Text="Cercar" PostBack="false"  />
+	<Item Image="actualitzar.png"  Text="Actualitzar" PostBack="True" />
+	<Item Image="obrir.png"    Text="Veure Tots" PostBack="True" />
+	<Item Image="propietats.png"  Text="Propietats"  PostBack="True" />
+	<Item Image="obrir.png"  Text="Obrir" PostBack="True"/>
+ </Menu>
+ <Menu Name="menuBuit+">
+	<Item Image="cercar.png"  Text="Cercar" PostBack="false"  />
+	<Item Image="actualitzar.png"  Text="Actualitzar" PostBack="True" />
+	<Item Image="obrir.png"    Text="Veure Tots" PostBack="True" />
+ </Menu>
+  
+</ContextMenus>
+

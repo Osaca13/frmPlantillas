@@ -473,13 +473,103 @@ Partial Public Class frmplantilla
     Protected WithEvents ltEst As Global.System.Web.UI.WebControls.Literal
 
     '''<summary>
-    '''lblTipusFulla control.
+    '''btnGuardar control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblTipusFulla As Global.System.Web.UI.WebControls.Literal
+    Protected WithEvents btnGuardar As Global.System.Web.UI.HtmlControls.HtmlButton
+
+    '''<summary>
+    '''pnlLCWA control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlLCWA As Global.System.Web.UI.WebControls.PlaceHolder
+
+    '''<summary>
+    '''gaiaCodiWebTxtAbans control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents gaiaCodiWebTxtAbans As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''gaiaCodiWebNodesAbans control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents gaiaCodiWebNodesAbans As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''pnlLCW control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlLCW As Global.System.Web.UI.WebControls.PlaceHolder
+
+    '''<summary>
+    '''gaiaCodiWebTxtDins control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents gaiaCodiWebTxtDins As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''gaiaCodiWebNodesDins control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents gaiaCodiWebNodesDins As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''pnlLCW2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlLCW2 As Global.System.Web.UI.WebControls.PlaceHolder
+
+    '''<summary>
+    '''gaiaCodiWebTxtDespres control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents gaiaCodiWebTxtDespres As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''gaiaCodiWebNodesDespres control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents gaiaCodiWebNodesDespres As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''lstTipusFulla control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lstTipusFulla As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
     '''pnlPltCamps1 control.
@@ -498,15 +588,6 @@ Partial Public Class frmplantilla
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtPLTDSNUM As Global.System.Web.UI.HtmlControls.HtmlInputText
-
-    '''<summary>
-    '''ddlPLTDSNIV control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ddlPLTDSNIV As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
     '''pnlWebCamps1 control.
@@ -534,6 +615,42 @@ Partial Public Class frmplantilla
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents chkWEBDSCND As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''pnlPlt control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlPlt As Global.System.Web.UI.WebControls.PlaceHolder
+
+    '''<summary>
+    '''pnlPltCamps2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlPltCamps2 As Global.System.Web.UI.WebControls.PlaceHolder
+
+    '''<summary>
+    '''TextBox5 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents TextBox5 As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''TextBox6 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents TextBox6 As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
     '''pnlBootstrap control.
@@ -644,6 +761,15 @@ Partial Public Class frmplantilla
     Protected WithEvents ddlb_650 As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
+    '''ddlb_673 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ddlb_673 As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
     '''ddlb_649 control.
     '''</summary>
     '''<remarks>
@@ -660,6 +786,15 @@ Partial Public Class frmplantilla
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ddlb_652 As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''ddlPLTDSNIV control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ddlPLTDSNIV As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
     '''ddlb_651 control.
@@ -680,24 +815,6 @@ Partial Public Class frmplantilla
     Protected WithEvents ddlb_641 As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''pnlEstilsDefinits control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents pnlEstilsDefinits As Global.System.Web.UI.WebControls.PlaceHolder
-
-    '''<summary>
-    '''ddlb_117 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ddlb_117 As Global.System.Web.UI.WebControls.DropDownList
-
-    '''<summary>
     '''ddlb_639 control.
     '''</summary>
     '''<remarks>
@@ -714,15 +831,6 @@ Partial Public Class frmplantilla
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ddlb_635 As Global.System.Web.UI.WebControls.DropDownList
-
-    '''<summary>
-    '''ddlb_654 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ddlb_654 As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
     '''ddlb_631 control.
@@ -743,103 +851,49 @@ Partial Public Class frmplantilla
     Protected WithEvents ddlb_634 As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''gaiaCodiWebTxtAbans control.
+    '''ddlb_654 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gaiaCodiWebTxtAbans As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents ddlb_654 As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''gaiaCodiWebNodesAbans control.
+    '''ddlb_674 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gaiaCodiWebNodesAbans As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents ddlb_674 As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''gaiaCodiWebTxtDins control.
+    '''ddlb_675 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gaiaCodiWebTxtDins As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents ddlb_675 As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''gaiaCodiWebNodesDins control.
+    '''pnlEstilsDefinits control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gaiaCodiWebNodesDins As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents pnlEstilsDefinits As Global.System.Web.UI.WebControls.PlaceHolder
 
     '''<summary>
-    '''pnlLCW2 control.
+    '''ddlb_117 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents pnlLCW2 As Global.System.Web.UI.WebControls.PlaceHolder
-
-    '''<summary>
-    '''gaiaCodiWebTxtDespres control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents gaiaCodiWebTxtDespres As Global.System.Web.UI.WebControls.TextBox
-
-    '''<summary>
-    '''gaiaCodiWebNodesDespres control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents gaiaCodiWebNodesDespres As Global.System.Web.UI.WebControls.TextBox
-
-    '''<summary>
-    '''pnlPlt control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents pnlPlt As Global.System.Web.UI.WebControls.PlaceHolder
-
-    '''<summary>
-    '''pnlPltCamps2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents pnlPltCamps2 As Global.System.Web.UI.WebControls.PlaceHolder
-
-    '''<summary>
-    '''TextBox5 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents TextBox5 As Global.System.Web.UI.WebControls.TextBox
-
-    '''<summary>
-    '''TextBox6 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents TextBox6 As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents ddlb_117 As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
     '''pnlGeneric control.
@@ -1101,15 +1155,6 @@ Partial Public Class frmplantilla
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblCodi As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''btnGuardar control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnGuardar As Global.System.Web.UI.HtmlControls.HtmlButton
 
     '''<summary>
     '''ltCanviCampsDb control.

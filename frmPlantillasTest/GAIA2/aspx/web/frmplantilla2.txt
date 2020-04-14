@@ -24,7 +24,23 @@
 	  <link href="https://cdn.jsdelivr.net/gh/coliff/bootstrap-ie8/css/bootstrap-ie8.min.css" rel="stylesheet">
 <![endif]-->
 <title>Plantilla web - GAIA2</title>
-   
+    <style>
+        .activo{            
+            background-color: #BBBBBB!important;             
+           
+        }
+        .inactivo{
+            background-color:white;
+           
+        }
+        .b-inicial{
+            border: 1px solid gray!important;
+        }
+        .p-inicial{
+             padding:1.5rem!important;
+        }
+
+    </style>
 </head>
 <body>
 <!-- navegacio -->
@@ -53,9 +69,9 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="../../../asp/areapersonal.aspx"><span class="oi oi-person mr-1" title="oi-person" aria-hidden="true"></span>Espai personal</a> 
-        <%-- If Session("login") Then
-                Response.Write("<img src=""/img/common/ico_desconnectar.png"">&nbsp;<a href=""/asp/areapersonal.aspx?desconectar=1""><span class='oi oi-power-standby' title='oi-power-standby' aria-hidden='true'></></span>Desconnectar</a>")
-            End IF--%>
+        <% IF Session("login") THEN
+        Response.write("<img src=""/img/common/ico_desconnectar.png"">&nbsp;<a href=""/asp/areapersonal.aspx?desconectar=1""><span class='oi oi-power-standby' title='oi-power-standby' aria-hidden='true'></></span>Desconnectar</a>")
+        END IF%>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0" name="busqueda" action="/utils/cercador/cercador.aspx" method="post">
@@ -67,7 +83,8 @@
   </div>
 </nav>
  <!-- fi navegacio -->
- <!-- container -->
+
+    <!-- container -->
     <div class="container">         
      
         <form runat="server" id="frm">
@@ -77,17 +94,17 @@
             <input type="text" runat="server" id="txtAtributs"  style="display: none;" />
             <input type="text" runat="server" id="nroId" style="display: none;" />
            
-          <div class="row no-gutters"><div class="col-12"><asp:Label ID="lblResultat" runat="server"/></div></div>
+          <div class="row"><div class="col-12"><asp:Label ID="lblResultat" runat="server"/></div></div>
           
           <div id="divEst" style="visibility:hidden; position:absolute;"></div>
-          <div class="row mb-3 no-gutters">
+          <div class="row mb-3">
               <h1 class="col-6"><asp:literal runat="server" id="ltTitol"/></h1>
               <div class="form-inline col-6 justify-content-end">
-              	<div class="input-group input-group-sm">
+              	<div class="input-group input-group-sm select">
                 	<div class="input-group-prepend">
                   	<label runat="server" id="pnlcanviIdioma" for="lstCanviIdioma" class="input-group-text">Canvi d'idioma: </label>
                   	</div>
-                      <asp:DropDownList ID="lstCanviIdioma" runat="server" AutoPostBack="true" OnSelectedIndexChanged="canviIdioma" CssClass="custom-select custom-select-sm">
+                      <asp:DropDownList ID="lstCanviIdioma" runat="server" AutoPostBack="true" OnSelectedIndexChanged="canviIdioma">
                           <asp:ListItem Value="1">Catal&agrave;</asp:ListItem>
                           <asp:ListItem Value="2">Castell&agrave;</asp:ListItem>
                           <asp:ListItem Value="3">Angl&egrave;s</asp:ListItem>
@@ -270,49 +287,71 @@
                 ESTRUCTURA DE LA p&agrave;gina
             *******************************************************************************************-->
             <div class="tab-pane fade pt-4 pb-4" id="dis" role="tabpanel" aria-labelledby="disseny">
-				<div class="card bg-light mb-4">
+				<div class="card text-dark mb-3">
                     <div class="card-header">
-                    	<div class="row no-gutters"> 
-                        	<div class="col-6 ">
+                    	<div class="row"> 
+                        	<div class="col-sm-6 ">
                             <h6 class="font-weight-bold">CONTENIDORS:</h6>   
                             <button type="button" class="btn btn-primary btn-sm" id="btnAfegirContenidorAbans"><img src="img/fila_abans.png" class="mr-1">Abans</button>
                             <button type="button" class="btn btn-primary btn-sm" id="btnAfegirContenidorDespres"><img src="img/fila_despres.png" class="mr-1">Despr&eacute;s</button>    
                             <button type="button" class="btn btn-primary btn-sm" id="btnAfegirContenidorAbansAdins"><img src="img/fila_abans.png" class="mr-1">Abans, a dins</button>
                             <button type="button" class="btn btn-primary btn-sm" id="btnAfegirContenidorDespresAdins"><img src="img/fila_despres.png" class="mr-1">Despr&eacute;s, a dins</button>
                             </div>
-						<div class="col-3">
-                                <h6 class="font-weight-bold">ROWS:</h6>
-                                <button type="button" class="btn btn-primary btn-sm" id="btnAfegirFilaDinsAbans"><img src="img/fila_abansdins.png" class="mr-1">Abans</button>
-                                <button type="button" class="btn btn-primary btn-sm" id="btnAfegirFilaDinsDespres"><img src="img/fila_despresdins.png" class="mr-1">Despr&eacute;s</button>
+                            <div class="col-sm-6 ">
+                             <h6 class="font-weight-bold">TIPUS CONTENIDOR:</h6>   
+                                <select class="custom-select custom-select-sm" id="selectContingut" >     
+                                   
+                                 <option></option>
+                                 <option value="div">div</option>                            
+                                 <option value="section">section</option>
+                                 <option value="nav">nav</option>
+                                 <option value="header">header</option>
+                                 <option value="article">article</option>
+                                 <option value="aside">aside</option>
+                                 <option value="details">details</option>
+                                 <option value="footer">footer</option>
+                                 <option value="main">main</option>
+                                 <option value="summary">summary</option>
+                                </select>
                             </div>
-                            <div class="col-3">
-                                <h6 class="font-weight-bold">COLS:</h6>
-                                <button type="button" class="btn btn-primary btn-sm" id="btnAfegirColumnaDinsAbans"><img src="img/columna_abans.png" class="mr-1">Abans</button>
-                                <button type="button" class="btn btn-primary btn-sm" id="btnAfegirColumnaDinsDespres"><img src="img/columna_despres.png" class="mr-1">Despr&eacute;s</button>
-                            </div>    
+							</div>
+                        <div class="row">
+						<div class="col-sm-4 ">
+                            <h6 class="font-weight-bold">FILES:</h6>
+							<button type="button" class="btn btn-primary btn-sm" id="btnAfegirFilaDinsAbans"><img src="img/fila_abansdins.png" class="mr-1">Abans, a dins</button>
+                            <button type="button" class="btn btn-primary btn-sm" id="btnAfegirFilaDinsDespres"><img src="img/fila_despresdins.png" class="mr-1">Despr&eacute;s, a dins</button>
+                            </div>
+                            <div class="col-sm-4">
+                            <h6 class="font-weight-bold">COLUMNES:</h6>
+                            <button type="button" class="btn btn-primary btn-sm" id="btnAfegirColumnaDinsAbans"><img src="img/columna_abans.png" class="mr-1">Abans, a dins</button>
+                            <button type="button" class="btn btn-primary btn-sm" id="btnAfegirColumnaDinsDespres"><img src="img/columna_despres.png" class="mr-1">Despr&eacute;s, a dins</button>
+                            </div>
+                            <div class="col-md-3 col-sm-4">
+                                <div class="form-group m-0">
+                                    <h6 class="font-weight-bold" id="nomCel">NOM:</h6>                                    
+                                    <input type="text" class="form-control form-control-sm m-0" id="txtNomCel" placeholder="Nom cel&middot;la"/><input type="text" id="txtIdCel" style="display: none;" value="0"/>
+                                </div> 
+                            </div>
+                        </div>
                     </div>
-                    <div class="row no-gutters">
-						 <div class="col-12 mt-3 mb-3">								  
-                        <div id="htmlEst"><asp:literal runat="server" id="ltEst"/></div>
+                    <div class="card-body">
+                        <div id="htmlEst" class="mr-3 ml-3"><asp:literal runat="server" id="ltEst"/></div>
                     </div>
-                    <div class="col-12 card-text text-center pt-0">
-                    	<button type="button" class="btn btn-sm btn-primary" id="btnModificarDades">Modificar</button>
+                    <hr>
+                    <div class="card-body text-center pt-0">
+                    	<button type="button" class="btn btn-sm btn-success" id="btnModificarDades">Modificar</button>
                         <button type="button" class="btn btn-sm btn-success" id="btnModificarDadesCel" style="display: none;">Modificar columna</button>
                         <button type="button" class="btn btn-sm btn-danger" id="btnEsborrarCel">Esborrar</button>   
                         <button type="button" class="btn btn-sm btn-info" id="btnCopiar">Copiar estructura</button>     
-						<button type="button" class="btn btn-sm btn-success" id="btnGuardar" runat="server" onClick="guardar();" onserverclick="btnGuardar_ServerClick">Guardar</button>   																																										   
                     </div>
-                 </div>					
-				</div>					  
                     <div class="card-footer">
-					<div class="row no-gutters">
-					<hr>
-						<div class="col-7">					   
-                    	<h6 class="font-weight-bold">MIDES CEL&middot;LA:</h6>        
-                        <div class="form-inline">
+                    	<h6 class="font-weight-bold">MIDES</h6>                        
+                        <div class="row">
+                            <div class="col text-center">
+                                <div class="form-inline">
                                     <div class="input-group input-group-sm mr-1 mb-2">
-                                        <div class="input-group-prepend"><label for="ddlXs" class="input-group-text" id="inputGroup-sizing-xs">xs:</label></div>
-                                        <select id="ddlXs" class="custom-select custom-select-sm" aria-label="xs:" aria-describedby="inputGroup-sizing-xs">
+                                        <div class="input-group-prepend"><label for="ddlXs" class="input-group-text" id="inputGroup-sizing-sm">xs:</label></div>
+                                        <select id="ddlXs" class="custom-select custom-select-sm" aria-label="xs:" aria-describedby="inputGroup-sizing-sm">
                                         <option></option>
                                         <option>1</option>
                                         <option>2</option>
@@ -349,8 +388,8 @@
                                         </select>
                                     </div>
                                     <div class="input-group input-group-sm mr-1 mb-2">
-                                        <div class="input-group-prepend"><label for="ddlMd" class="input-group-text" id="inputGroup-sizing-md">md:</label></div>
-                                        <select  id="ddlMd" class="custom-select custom-select-sm" aria-label="md:" aria-describedby="inputGroup-sizing-md">
+                                        <div class="input-group-prepend"><label for="ddlMd" class="input-group-text" id="inputGroup-sizing-sm">md:</label></div>
+                                        <select  id="ddlMd" class="custom-select custom-select-sm" aria-label="md:" aria-describedby="inputGroup-sizing-sm">
                                         <option></option>
                                         <option>1</option>
                                         <option>2</option>
@@ -368,8 +407,8 @@
                                         </select>
                                    </div>
                                    <div class="input-group input-group-sm mr-1 mb-2">
-                                        <div class="input-group-prepend"><label for="ddlLg" class="input-group-text" id="inputGroup-sizing-lg">lg:</label></div>
-                                        <select  id="ddlLg" class="custom-select custom-select-sm" aria-label="lg:" aria-describedby="inputGroup-sizing-lg">
+                                        <div class="input-group-prepend"><label for="ddlLg" class="input-group-text" id="inputGroup-sizing-sm">lg:</label></div>
+                                        <select  id="ddlLg" class="custom-select custom-select-sm" aria-label="lg:" aria-describedby="inputGroup-sizing-sm">
                                         <option></option>
                                         <option>1</option>
                                         <option>2</option>
@@ -387,8 +426,8 @@
                                         </select>
                                    </div>
                                    <div class="input-group input-group-sm mr-1 mb-2">
-                                        <div class="input-group-prepend"><label for="ddlXl" class="input-group-text" id="inputGroup-sizing-xl">xl:</label></div>
-                                        <select  id="ddlXl" class="custom-select custom-select-sm" aria-label="xl:" aria-describedby="inputGroup-sizing-xl">
+                                        <div class="input-group-prepend"><label for="ddlXl" class="input-group-text" id="inputGroup-sizing-sm">xl:</label></div>
+                                        <select  id="ddlXl" class="custom-select custom-select-sm" aria-label="xl:" aria-describedby="inputGroup-sizing-sm">
                                         <option></option>
                                         <option>1</option>
                                         <option>2</option>
@@ -407,133 +446,25 @@
                                     </div>
                                 </div>
                             </div>
-                            
-							<div class="col-2">                            
-                                <div class="form-group mr-2">
-                                	<h6 class="font-weight-bold mb-0"><label for="selectContingut" id="inputGroup-tipusCella">TIPUS CEL&middot;LA:</label></h6>
-                                    <select class="custom-select custom-select-sm" id="selectContingut" aria-describedby="inputGroup-tipusCella">                                 
-                                         <option></option>
-                                         <option value="div">div</option>                            
-                                         <option value="section">section</option>
-                                         <option value="nav">nav</option>
-                                         <option value="header">header</option>
-                                         <option value="article">article</option>
-                                         <option value="aside">aside</option>
-                                         <option value="details">details</option>
-                                         <option value="footer">footer</option>
-                                         <option value="main">main</option>
-                                         <option value="summary">summary</option>
-                                         <option value="hr">hr</option>
-                                    </select>   							
                         </div>
                     </div>                           
-			                            <div class="col-3">
-                                <div class="form-group">
-                                    <h6 class="font-weight-bold" id="nomCel">NOM CEL&middot;LA:</h6>                                    
-                                    <input type="text" class="form-control form-control-sm" id="txtNomCel" placeholder="Nom cel&middot;la"/>
-                                    <input type="text" id="txtIdCel" style="display: none;" value="0"/>
-                                </div> 
-                            </div>
-                            
-                           <div class="card-footer">                    	                        
-                    	<div class="row no-gutters">
-                            <div class="col-12">
-                            
-                           
-
-                            
-                            	<h6 class="font-weight-bold d-inline-flex">LLIBRERIES</h6><a data-toggle="collapse" class="float-right" href="#collapseLlibreries" role="button" aria-expanded="true" aria-controls="collapseLlibreries"><i class="oi oi-caret-top text-dark"></i></a></div>
-                        	                     
-                            <div class="collapse show col-12" id="collapseLlibreries">
-                            	<div class="row no-gutters mt-3">
-                                    <asp:placeholder runat="server" id="pnlLCWA">
-                                    <div class="col-4">
-                                        <div class="card bg-light mr-2">
-                                            <div class="card-header"><h6 class="font-weight-bold mb-0">ABANS DEL CONTINGUT</h6></div>
-                                            <div class="card-body p-2">
-                                                <div class="form-group mb-0">
-                                                <div class="bs-component text-center">
-                                                
-                                                
-                                                <input type="button" data-toggle="modal" data-target="#visorArbres" id="inputIframeAbans" value="Seleccionar" class="btn btn-sm btn-primary mb-2">
-                                                
-                                                
-                                                <input type="button" onClick="document.getElementById('gaiaCodiWebNodesAbans').value = ''; document.getElementById('gaiaCodiWebTxtAbans').value = ''; return false;" id="eliminarCodiAbans" value="Esborrar"  class="btn btn-sm btn-danger mb-2">
-
-<%--                                                <input type="button" data-toggle="modal" data-target="#editarLlibreries" id="btnEditaCodisAbans" value="Odalys" class="btn btn-sm btn-success mb-2">--%>
-                                                <input type="button" id="btnEditaCodisAbans" value="Odalys" class="btn btn-sm btn-success mb-2">
-
-                                                <input type="button"  onClick="window.open('/GAIA/aspx/fulles/editaLCW.htm?nodesSeleccionats=' + document.getElementById('gaiaCodiWebNodesAbans').value, '_blank', 'location=0,height=800,width=400,scrollbars=yes,resizable=yes'); return false;" value="Edita Llibreria" id="btnEditaCodisAbans_old" class="btn btn-sm btn-success mb-2">
-                                                </div>
-                                                <asp:TextBox ID="gaiaCodiWebTxtAbans" runat="server" AutoPostBack="False"  Rows="3" ContentEditable="false" TextMode="MultiLine"  CssClass="form-control form-control-sm mb-2"/>
-                                                <asp:TextBox ID="gaiaCodiWebNodesAbans" runat="server"  CssClass="form-control form-control-sm" placeholder="Codi node de la llibreria"/>
-                                                </div>
-                                             </div>
-                                        </div>
-                                    </div>
-                                    </asp:placeholder>
-                                    <asp:placeholder runat="server" id="pnlLCW">
-                                    <div class="col-4">
-                                        <div class="card bg-light mx-2">
-                                            <div class="card-header"><h6 class="font-weight-bold mb-0">DINS DEL CONTINGUT</h6></div>
-                                            <div class="card-body p-2">
-                                                <div class="form-group mb-0">
-                                                <div class="bs-component text-center">
-                                                <input type="button" data-toggle="modal" data-target="#visorArbres" id="inputIframeDins" value="Seleccionar" class="btn btn-sm btn-primary mb-2" >
-                                                <%--<input type="button"  onClick="window.open('/GAIA/aspx/visorArbresLite_GAIA2.aspx?arbre1=codiWeb&c=gaiaCodiWeb&separador=|&nodesSeleccionats=' + document.getElementById('gaiaCodiWebNodesDins').value, '_blank', 'location=0,height=800,width=460,scrollbars=yes,resizable=yes'); return false;" value="Seleccionar" id="btnCodisDins" class="btn btn-sm btn-primary mb-2">--%>
-                                                <input type="button" id="eliminarCodiDins" value="Esborrar" onClick="document.getElementById('gaiaCodiWebNodesDins').value = ''; document.getElementById('gaiaCodiWebTxtDins').value = ''; return false;" class="btn btn-sm btn-danger mb-2">
-                                                <input type="button"  onClick="window.open('/GAIA/aspx/fulles/editaLCW.htm?nodesSeleccionats=' + document.getElementById('gaiaCodiWebNodesDins').value, '_blank', 'location=0,height=800,width=400,scrollbars=yes,resizable=yes'); return false;" value="Edita Llibreria" id="btnEditaCodisDins" class="btn btn-sm btn-success mb-2" >
-                                                </div>
-                                                <asp:TextBox ID="gaiaCodiWebTxtDins" runat="server" AutoPostBack="False"  Rows="3" ContentEditable="false" TextMode="MultiLine"  CssClass="form-control form-control-sm mb-2"/>
-                                                <asp:TextBox ID="gaiaCodiWebNodesDins" runat="server"  CssClass="form-control form-control-sm" placeholder="Codi node de la llibreria"/>
-                                                </div>
-                                             </div>
-                                        </div>
-                                    </div>
-                                    </asp:placeholder>
-                                    <asp:placeholder runat="server" id="pnlLCW2">
-                                    <div class="col-4">
-                                        <div class="card bg-light ml-2">                
-                                            <div class="card-header"><h6 class="font-weight-bold mb-0">DESPR&Eacute;S DEL CONTINGUT</h6></div>
-                                            <div class="card-body p-2">
-                                                <div class="form-group mb-0">
-                                                    <div class="bs-component text-center">
-                                                    <input type="button" data-toggle="modal" data-target="#visorArbres" id="inputIframeDespres" value="Seleccionar" class="btn btn-sm btn-primary mb-2" >
-
-                                                    <%--<input type="button"  onClick="window.open('/GAIA/aspx/visorArbresLite_GAIA2.aspx?arbre1=codiWeb&c=gaiaCodiWeb2&separador=|&nodesSeleccionats=' + document.getElementById('gaiaCodiWeb2Nodes').value, '_blank', 'location=0,height=800,width=460,scrollbars=yes,resizable=yes'); return false;" value="Seleccionar" id="btnCodis2" class="btn btn-sm btn-primary mb-2">--%>
-                                                    <input type="button" id="eliminarCodiDespres" value="Esborrar" onClick="document.getElementById('gaiaCodiWebNodesDespres').value = ''; document.getElementById('gaiaCodiWebTxtDespres').value = ''; return false;" class="btn btn-sm btn-danger mb-2">
-                                                    <input type="button"  onClick="window.open('/GAIA/aspx/fulles/editaLCW.htm?nodesSeleccionats=' + document.getElementById('gaiaCodiWebNodesDespres').value, '_blank', 'location=0,height=800,width=400,scrollbars=yes,resizable=yes'); return false;" value="Edita Llibreria" id="btnEditaCodis2" class="btn btn-sm btn-success mb-2">
-                                                    </div>
-                                                    <asp:TextBox ID="gaiaCodiWebTxtDespres" runat="server" AutoPostBack="False" Rows="3" ContentEditable="false" TextMode="MultiLine" CssClass="form-control form-control-sm mb-2"/>
-                                                    <asp:TextBox ID="gaiaCodiWebNodesDespres" runat="server" CssClass="form-control form-control-sm" placeholder="Codi node de la llibreria"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    </asp:placeholder>      
-                                </div>             
-                            </div>                    
-						</div>
-                    </div>                        
-                        </div>
-                        																															
                 </div>
     
                 <div class="card bg-light mb-4">                	
                 	<div class="card-header">
-                    	<h6 class="font-weight-bold d-inline-flex mr-2 mb-0">FULLA</h6>
+                    	<h6 class="font-weight-bold d-inline-flex mr-2">CONTINGUT</h6>
                         <div class="form d-inline-flex">
-                            <div class="input-group input-group-sm">                            	
+                            <div class="input-group input-group-sm select">                            	
                                 <div class="input-group-prepend"><label for="lstTipusFulla" class="input-group-text">Tipus de fulla:</label></div>
                                 <asp:DropDownList ID="lstTipusFulla" runat="server" CssClass="custom-select custom-select-sm"> </asp:DropDownList>
-                                <%--<asp:literal ID="lstTipusFulla" runat="server"></asp:literal>--%>
+                                <%--<asp:literal ID="lslTipusFulla" runat="server"></asp:literal>--%>
                             </div>
                         </div>                      
                     </div> 
                         	
                     <asp:placeholder runat="server" id="pnlPltCamps1" visible="false">
                     <div class="card-body">
-                        <div class="form-inline row no-gutters align-items-start">
+                        <div class="form-inline">
                             <div class="col-4">
                                 <div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="ddlPLTDSCMP" class="input-group-text">Camp:</label></div>
@@ -542,7 +473,7 @@
                                 </select>
                                 </div>
                                 
-                                <div class="input-group input-group-sm mr-2">
+                                <div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="ddlPLTDSLNK" class="input-group-text">Enlla&ccedil;:</label></div>            
                                 <select name="ddlPLTDSLNK"  id="ddlPLTDSLNK" class="custom-select custom-select-sm">
                                   <option value=""></option>
@@ -557,7 +488,7 @@
                                 </select>
                                 </div>
                                 
-                                <div class="input-group input-group-sm mr-2">
+                                <div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="ddlPLTDSIMG" class="input-group-text">&Eacute;s imatge?:</label></div>               
                                 <select name="ddlPLTDSIMG"  id="ddlPLTDSIMG" class="custom-select custom-select-sm">
                                   <option value="0" selected>No</option>
@@ -565,20 +496,24 @@
                                 </select>
                                 </div>
                              </div>
-                             <div class="col-4">                                
+                             <div class="col-4">
+                                
                                 <div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="txtPLTDSNUM" class="input-group-text">N&ordm; elements</label></div>
                                 <input name="txtPLTDSNUM" runat="server" id="txtPLTDSNUM" type="text" value="0" maxlength="3" class="form-control form-control-sm">
-                                </div>                                
+                                </div>
                                 
+                                <div class="input-group input-group-sm mr-2 mb-3">
+                                <div class="input-group-prepend"><label for="ddlPLTDSNIV" class="input-group-text">Nivell:</label></div>
+                                <asp:DropDownList ID="ddlPLTDSNIV" runat="server" CssClass="custom-select custom-select-sm"></asp:DropDownList>
+                                </div>
                              </div>
                         </div>                    	
                     </div>  
                     </asp:placeholder>
-					<div class="card-body">					   
-                        <asp:placeholder runat="server" id="pnlWebCamps1" visible="false">
-                   
-                        <div class="form-inline row no-gutters align-items-start">
+                    <asp:placeholder runat="server" id="pnlWebCamps1" visible="false">
+                    <div class="card-body">
+                        <div class="form-inline">
                              <div class="col-4 form-group">
                                 <div class="input-group input-group-sm mb-3">
                                     <label for="chkWEBDSIMP" class="form-check-label col-form-label-sm mr-2">Imprimir cel&middot;la?:</label>
@@ -590,43 +525,27 @@
                                 </div>
                              </div>
                         </div>
-						 </asp:placeholder> 
-                        
-                        <asp:placeholder runat="server" id="pnlPlt">
-                                <div class="card bg-light">
-                                    <div class="card-header"><h6 class="font-weight-bold mb-0">PLANTILLA <asp:placeholder runat="server" id="pnlPltCamps2" visible="false">SECUND&Agrave;RIA</asp:placeholder></h6></div>
-                                    <div class="card-body">
-                                        <div class="form-group">
-                                            <div class="bs-component text-center">
-                                            <input type="button"  onClick="window.open('/GAIA/aspx/visorArbresLite.aspx?arbre1=plantillaWeb&c=gaiaPltSec&nodesSeleccionats=' + document.getElementById('gaiaPltSecNodes').value, '_blank', 'location=0,height=800,width=460,scrollbars=yes,resizable=yes'); return false;" value="Seleccionar" id="btnCodis3" class="btn btn-sm btn-primary mb-2" >
-                                            <input type="button" id="btnEliminarPltSec" value="Esborrar" onClick="document.getElementById('gaiaPltSecNodes').value = ''; document.getElementById('gaiaPltSecTxt').value = ''; return false;"  class="btn btn-sm btn-danger mb-2">
-                                            <input type="button"  onClick="window.open('/GAIA/aspx/web/editaPlantilla.htm?nodesSeleccionats=' + document.getElementById('gaiaPltSecNodes').value, '_blank', 'location=0,height=800,width=400,scrollbars=yes,resizable=yes'); return false;" value="Edita Plantilla" id="btnEditaPlt2"  class="btn btn-sm btn-success mb-2" >
-                                            </div>
-                                            <asp:TextBox ID="TextBox5" runat="server" AutoPostBack="False" Rows="4" ContentEditable="false" TextMode="MultiLine"  CssClass="form-control form-control-sm mb-3"/>
-                                            <asp:TextBox ID="TextBox6" runat="server" CssClass="form-control form-control-sm" placeholder="Codi node de la plantilla"/>
-                                        </div>
-                                    </div>
-                               </div>
+                     </div>
                     </asp:placeholder>                                          
-                    </div>
                 </div>
+
                 <asp:placeholder runat="server" id="pnlBootstrap">
                 <div class="card bg-light mb-4">                	
-                	<div class="card-header"><h6 class="font-weight-bold mb-0">ESTILS</h6></div>
+                	<div class="card-header"><h6 class="font-weight-bold">ESTILS GAIA2</h6></div>
                     <div class="card-body">
-                    	<div class="form-inline row no-gutters align-items-start">
+                    	<div class="form-inline">
                         
-                        <h6 class="col-12 font-weight-bold">REIXETA</h6>
+                        <h6 class="col-12 font-weight-bold text-uppercase">Reixeta</h6>
                         
 						<div class="col-4 align-self-start">
                             
                             <div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="ddlb_642" class="input-group-text">Disposici&oacute;:</label></div>
-                                <asp:DropDownList  ID="ddlb_642"  runat="server"></asp:DropDownList>
+                                <asp:DropDownList  ID="ddlb_642"  runat="server" CssClass="custom-select custom-select-sm"></asp:DropDownList>
                             </div>
                              <div class="input-group input-group-sm mr-2 mb-3">
-                                <div class="input-group-prepend"><label for="ddlb_637" class="input-group-text">Posici&oacute;:</label></div>
-                                <asp:DropDownList  ID="ddlb_637"  runat="server"></asp:DropDownList>
+                                <div class="input-group-prepend"><label for="ddlb_637" class="input-group-text">Posici&oacute; i comportament:</label></div>
+                                <asp:DropDownList  ID="ddlb_637"  runat="server" CssClass="custom-select custom-select-sm"></asp:DropDownList>
                             </div>
                                                        
                                                  
@@ -635,11 +554,11 @@
                         <div class="col-4 align-self-start">	
                             <div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="ddlb_648" class="input-group-text">Alineaci&oacute; H.:</label></div>
-                                <asp:DropDownList  ID="ddlb_648"  runat="server"></asp:DropDownList>
+                                <asp:DropDownList  ID="ddlb_648"  runat="server" CssClass="custom-select custom-select-sm"></asp:DropDownList>
                             </div>
                             <div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="ddlb_636" class="input-group-text">Alineaci&oacute; V.:</label></div>
-                                <asp:DropDownList  ID="ddlb_636"  runat="server"></asp:DropDownList>
+                                <asp:DropDownList  ID="ddlb_636"  runat="server" CssClass="custom-select custom-select-sm"></asp:DropDownList>
                             </div>
                            
                         </div>
@@ -652,7 +571,7 @@
                             </div>
                             <div class="input-group input-group-sm mr-2 mb-3">
                             	<div class="input-group-prepend"><label for="ddlb_653" class="input-group-text">Alertes:</label></div>
-                            	<asp:DropDownList  ID="ddlb_653"  runat="server"></asp:DropDownList>
+                            	<asp:DropDownList  ID="ddlb_653"  runat="server" CssClass="custom-select custom-select-sm"></asp:DropDownList>
                         	</div>
                                                       
                             
@@ -678,31 +597,27 @@
                         <div class="col-4 align-self-start">
                         	 <div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="ddlb_632" class="input-group-text">Alineaci&oacute; H.:</label></div>
-                                <asp:DropDownList  ID="ddlb_632"  runat="server"></asp:DropDownList>
+                                <asp:DropDownList  ID="ddlb_632"  runat="server" CssClass="custom-select custom-select-sm"></asp:DropDownList>
                             </div>                             
                             <div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="ddlb_650" class="input-group-text">Alineaci&oacute; V.:</label></div>
-                                <asp:DropDownList  ID="ddlb_650"  runat="server"></asp:DropDownList>
+                                <asp:DropDownList  ID="ddlb_650"  runat="server" CssClass="custom-select custom-select-sm"></asp:DropDownList>
                             </div>
 							<div class="input-group input-group-sm mr-2 mb-3">
                             	<div class="input-group-prepend"><label for="ddlb_673" class="input-group-text">Decoraci&oacute;:</label></div>
-                            	<asp:DropDownList  ID="ddlb_673"  runat="server"></asp:DropDownList>
+                            	<asp:DropDownList  ID="ddlb_673"  runat="server" CssClass="custom-select custom-select-sm"></asp:DropDownList>
                         	</div>
 						</div>
                         
                         <div class="col-4 align-self-start">                            
                             <div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="ddlb_649" class="input-group-text">Estil font:</label></div>
-                                <asp:DropDownList  ID="ddlb_649"  runat="server"></asp:DropDownList>
+                                <asp:DropDownList  ID="ddlb_649"  runat="server" CssClass="custom-select custom-select-sm"></asp:DropDownList>
                             </div>
                             <div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="ddlb_652" class="input-group-text">Tamany font:</label></div>
                                 <asp:DropDownList  ID="ddlb_652"  runat="server" CssClass="custom-select custom-select-sm"></asp:DropDownList>
                             </div>
-							<div class="input-group input-group-sm mr-2 mb-3">
-                                <div class="input-group-prepend"><label for="ddlPLTDSNIV" class="input-group-text">Nivell:</label></div>
-                                <asp:DropDownList ID="ddlPLTDSNIV" runat="server" CssClass="custom-select custom-select-sm"></asp:DropDownList>
-                             </div>									  
                         </div>
                         
                         <h6 class="col-12 font-weight-bold text-uppercase">Estils comuns</h6>	
@@ -710,27 +625,27 @@
                         <div class="col-4 align-self-start">  
                         	<div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="ddlb_651" class="input-group-text">Voreres:</label></div>
-                                <asp:DropDownList  ID="ddlb_651"  runat="server"></asp:DropDownList>
+                                <asp:DropDownList  ID="ddlb_651"  runat="server" CssClass="custom-select custom-select-sm"></asp:DropDownList>
                             </div>                      
                             <div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="ddlb_641" class="input-group-text">Efectes:</label></div>
-                                <asp:DropDownList  ID="ddlb_641"  runat="server"></asp:DropDownList>
+                                <asp:DropDownList  ID="ddlb_641"  runat="server" CssClass="custom-select custom-select-sm"></asp:DropDownList>
                             </div>
                          </div>
                         <div class="col-4 align-self-start">
                             <div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="ddlb_639" class="input-group-text">Marge exterior:</label></div>
-                                <asp:DropDownList  ID="ddlb_639"  runat="server"></asp:DropDownList>
+                                <asp:DropDownList  ID="ddlb_639"  runat="server" CssClass="custom-select custom-select-sm"></asp:DropDownList>
                             </div>
                             <div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="ddlb_635" class="input-group-text">Al&ccedil;ada:</label></div>
-                                <asp:DropDownList  ID="ddlb_635"  runat="server"></asp:DropDownList>
+                                <asp:DropDownList  ID="ddlb_635"  runat="server" CssClass="custom-select custom-select-sm"></asp:DropDownList>
                             </div>
                         </div>
                         <div class="col-4 align-self-start">  
                             <div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="ddlb_631" class="input-group-text">Marge interior:</label></div>
-                                <asp:DropDownList  ID="ddlb_631"  runat="server"></asp:DropDownList>
+                                <asp:DropDownList  ID="ddlb_631"  runat="server" CssClass="custom-select custom-select-sm"></asp:DropDownList>
                             </div>  
                             <div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="ddlb_634" class="input-group-text">Amplada:</label></div>
@@ -748,18 +663,17 @@
                         <div class="col-6 align-self-start">
                             <div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="ddlb_674" class="input-group-text">Videos:</label></div>
-								<asp:DropDownList  ID="ddlb_674"  runat="server"></asp:DropDownList>
-						    </div>
-                        </div>
+								<asp:DropDownList  ID="ddlb_674"  runat="server" CssClass="custom-select custom-select-sm" ></asp:DropDownList>
+							</div>
 						<div class="col-6 align-self-start">
 							<div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="ddlb_675" class="input-group-text">Imatges:</label></div>
-                                <asp:DropDownList  ID="ddlb_675"  runat="server"></asp:DropDownList>
-                            </div>                             
-                       </div>
-                        <h6 class="col-12 font-weight-bold text-uppercase">ALTRES ESTILS</h6>
+                                <asp:DropDownList  ID="ddlb_675"  runat="server" CssClass="custom-select custom-select-sm" ></asp:DropDownList>
+                            </div>                           
                         
-                        <div class="col-12 align-self-start">
+						<h6 class="col-12 font-weight-bold text-uppercase">CSS GAIA2</h6>
+                        
+                        <div class="col-4 align-self-start">
 						<asp:placeholder runat="server" id="pnlEstilsDefinits">
                             <div class="input-group input-group-sm mr-2 mb-3">
                                 <div class="input-group-prepend"><label for="ddlb_117" class="input-group-text">Estils definits:</label></div>
@@ -771,9 +685,8 @@
                     </div>
                	</div>
                 </asp:placeholder>
-                    <%--hasta aqui-- %>
-                <%--<div class="row">
-                       <asp:Placeholder runat="server" id="pnlLCWA">
+                <div class="row">
+                
                 	<div class="col">
                         <div class="card bg-light mb-4">
                             <div class="card-header"><h6 class="font-weight-bold">LLIBRERIA (ABANS DEL CONTINGUT)</h6></div>
@@ -790,7 +703,7 @@
                              </div>
                         </div>
                     </div>
-                  </asp:Placeholder>
+                
                     <div class="col">
                         <div class="card bg-light mb-4">
                             <div class="card-header"><h6 class="font-weight-bold">LLIBRERIA (DINS DEL CONTINGUT)</h6></div>
@@ -847,8 +760,7 @@
                         </div>
                     </div>
                     </asp:placeholder> 
-                </div>--%>
-<%--hasta aqui-- %>
+                </div>
 
                 <%--<div class="row">
                     <div class="col">
@@ -908,7 +820,7 @@
                     </asp:placeholder> 
                <%-- </div>--%>
 
-               <!-- <asp:placeholder runat="server" id="pnlGeneric">
+                <asp:placeholder runat="server" id="pnlGeneric">
                 <div class="card bg-light mb-4">                	
                 	<div class="card-header"><h6 class="font-weight-bold">ESTILS GAIA I</h6></div>
                     <div class="card-body">
@@ -1015,10 +927,10 @@
                         </div>
                     </div>
                	</div>
-				<!--</asp:placeholder>	-->
+				</asp:placeholder>	
                 <asp:placeholder runat="server" id="pnlPltCamps3" visible="false">
                 <div class="card bg-light">                
-                	<div class="card-header"><h6 class="font-weight-bold mb-0">AUTOENLLA&Ccedil;</h6></div>
+                	<div class="card-header"><h6 class="font-weight-bold">AUTOENLLA&Ccedil;</h6></div>
                     <div class="card-body">
                     	<div class="row">      	
                             <div class="col-8">
@@ -1045,7 +957,7 @@
                             </div>                            
                             <div class="col-4">
                             	<div class="form-group">
-                                    <h6 class="font-weight-bold mb-0"><label for="btnCodis5">PLANTILLA:</label></h6>
+                                    <label for="btnCodis5">Plantilla:</label>
                                     <div class="bs-component mb-3 text-center">
                                     <input name="button" type="button" id="btnCodis5" onClick="window.open('/GAIA/aspx/visorArbresLite.aspx?arbre1=plantillaWeb&c=gaiaPLTCDPAL&nodesSeleccionats='+document.getElementById('gaiaPLTCDPALNodes').value,'_blank', 'location=0,height=800,width=460,scrollbars=yes,resizable=yes');return false;" value="Seleccionar" class="btn btn-sm btn-primary">
                                     <input name="button" type="button" id="btnEliminarPLTCDPAL" onClick="document.getElementById('gaiaPLTCDPALNodes').value='';document.getElementById('gaiaPLTCDPALTxt').value=''; return false;" value="Esborrar" class="btn btn-sm btn-danger">
@@ -1068,64 +980,14 @@
             <div class="tab-pane fade" id="k"></div>
           </div>           
           <asp:Label ID="lblCodi" runat="server"/>       
-        </form>		
+        </form>
+		<div class="form-group">
+            <div class="bs-component mb-3 text-center">
+            <button type="button" class="btn btn-success" id="btnGuardar" runat="server" onClick="guardar();" onserverclick="btnGuardar_ServerClick">Guardar</button>
+            </div>
+        </div>
      
     </div><!-- fi container -->
-
-   <!-- Modal visor arbres-->
-<div class="modal fade" id="visorArbres" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="proteccioDadesTitle">Visor d'arbres</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeButton">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" style="height:800px">      	
-        <iframe id="iframeLlibreria" class="w-100 border-0" scrolling="no"></iframe>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Fi Modal visor arbres -->
-
-   
-    <!-- Modal editar llibreries-->
-<div class="modal fade" id="editarLlibreries" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title m-4">Editar LLibreries</h5>  <select id="selectLlibreria" class="custom-select-sm">  </select>   
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" style="height:85vh; min-height:85vh;"> 
-         <h5>Elige LLibreria a editar</h5>         
-        <iframe id="iframeEditarLlibreries" class="w-100 h-100 border-0" src="/GAIA/aspx/fulles/visorLlibreriaCodiWeb_GAIA2.aspx" scrolling="no"></iframe>
-      </div>      
-    </div>
-  </div>
-</div>
-<!-- Fi Modal editar llibreries-->
-     <!-- Modal editar llibreries-->
-<%--<div class="modal fade" id="seleccionarLlibreriaModal" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Elige LLibreria a editar</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" >      	
-        <select id="selectLlibreria">  </select>        
-      </div>      
-    </div>
-  </div>
-</div>--%>
-<!-- Fi Modal editar llibreries-->
     
 <!-- Optional JavaScript -->    
 <!-- jQuery first, then Tether, then Bootstrap JS. -->   
@@ -1175,7 +1037,6 @@ $(function () {
         $('#ddlb_642').attr('title', 'multiselect').attr('multiple', 'multiple');
         $('#ddlb_648').attr('title', 'multiselect').attr('multiple', 'multiple');
         $('#ddlb_632').attr('title', 'multiselect').attr('multiple', 'multiple');
-        $('#ddlb_635').attr('title', 'multiselect').attr('multiple', 'multiple');
         $('#ddlb_637').attr('title', 'multiselect').attr('multiple', 'multiple');
         $('#ddlb_636').attr('title', 'multiselect').attr('multiple', 'multiple');
         $('#ddlb_650').attr('title', 'multiselect').attr('multiple', 'multiple');
@@ -1187,139 +1048,18 @@ $(function () {
         
         var primerFil = $('#htmlEst').children().first();
         activado($(primerFil).attr('id'));
-        readValues(primerFil);   
-        var botonAccion;
-       
+        readValues(primerFil);       
 
-        $('#inputIframeAbans').click(function (event) {
-            AbrirIFrameVisor(event);
-        });
-        $('#inputIframeDins').click(function (event) {
-            AbrirIFrameVisor(event);
-        });
-        $('#inputIframeDespres').click(function (event) {
-            AbrirIFrameVisor(event);
-        });
-
-        $('#btnEditaCodisAbans').click(function (event) {
-            
-            AbrirIFrameEditor(event);
-        });
-
-        function AbrirIFrameEditor(event) {
-            botonAccion = event.target; //qué boton dió la orden de abrir modal           
-            var idiArbre = 1; //parametro de idioma
-            var LlibreriasTxt = "";
-            var LlibreriasNod = "";
-            var arrayLlibreriasTxt = [];
-            var arrayLlibreriasNod = [];
-            $('select', 'div#editarLlibreries').find('option').remove();
-           
-            switch ($(botonAccion).attr('id')) {
-                case 'btnEditaCodisAbans':
-                    LlibreriasTxt += $('#gaiaCodiWebTxtAbans').val(); 
-                    LlibreriasNod += $('#gaiaCodiWebNodesAbans').val(); //id de la llibreria para editar
-                    if (LlibreriasTxt.indexOf(',') >= 0) {
-                        arrayLlibreriasTxt = LlibreriasTxt.split(',');
-                        arrayLlibreriasNod = LlibreriasNod.split(',');
-                        $('select', 'div#editarLlibreries').css('display', ''); 
-                        $('select', 'div#editarLlibreries').append(new Option('Elige una llibreria', '', true, true));
-                        arrayLlibreriasTxt.forEach(function (item, index) {
-                            if (item != "") {
-                                $('select', 'div#editarLlibreries').append(new Option(item, arrayLlibreriasNod[index]));
-                            }
-                        });
-                        $('#editarLlibreries').modal('show');
-                    } else {  
-                        
-                        $('select', 'div#editarLlibreries').css('display', 'none');                        
-                        $('#iframeEditarLlibreries').attr('src', "../../../GAIA/aspx/fulles/visorLlibreriaCodiWeb_GAIA2.aspx" + "?id=" + LlibreriasNod + "&idiArbre=" + idiArbre);
-                        $('#editarLlibreries').modal('show');                      
-                    }                    
-                    break;               
-            }
-        };
-        
-        $( "#selectLlibreria" ).change(function() {
-            var sel = $("#selectLlibreria option:selected").val();          
-            if (sel == "") { sel = 0; };
-            var idiArbre = 1; //parametro de idioma
-            var urlIFrame = $('#iframeEditarLlibreries'); //iframe
-            $(urlIFrame).attr('src', "../../../GAIA/aspx/fulles/visorLlibreriaCodiWeb_GAIA2.aspx" + "?id=" + sel + "&idiArbre=" + idiArbre);                    
-        });
-
-        function AbrirIFrameVisor(event) {
-            botonAccion = event.target;
-            var urlIFrame = $('#iframeLlibreria');
-            var arbre1 = "codiWeb";
-            var c = "gaiaCodiWeb";
-            var separator = ",";
-            switch ($(botonAccion).attr('id')) {
-                case 'inputIframeAbans':
-                    var nodesSeleccionats = $('#gaiaCodiWebNodesAbans').val();
-                    break;
-                case 'inputIframeDins':
-                    var nodesSeleccionats = $('#gaiaCodiWebNodesDins').val();
-                    break;
-                case 'inputIframeDespres':
-                    var nodesSeleccionats = $('#gaiaCodiWebNodesDespres').val();
-                    break;
-            }             
-            var urlIFra = "../../../GAIA/aspx/visorArbresLite.aspx" + "?arbre1=" + arbre1 + "&c=" + c + "&separator=" + separator + "&nodesSeleccionats=" + nodesSeleccionats;
-            $(urlIFrame).attr('src', urlIFra);
-            $(urlIFrame).attr('height', '800px');
-            $(urlIFrame).attr('scrolling', 'yes');
-            
-        };
-
-
-        $('#iframeLlibreria').on('load', function (event) {
-            var frame = this.contentDocument;
-           
-            var doc = $(frame).find('body');
-            var val01 = $(doc).children('form');
-            var textNodes = $(val01).find('#labelNodes').text();
-            var nroNodes = $(val01).find('#labelNroNodes').text();
-            var retornarNodesButton = $(val01).find('#retornarNodesChecked');
-            switch ($(botonAccion).attr('id')) {
-                case 'inputIframeAbans':
-                    $('#gaiaCodiWebTxtAbans').val(textNodes);
-                    $('#gaiaCodiWebNodesAbans').val(nroNodes);
-                    break;
-                case 'inputIframeDins':
-                    $('#gaiaCodiWebTxtDins').val(textNodes);
-                    $('#gaiaCodiWebNodesDins').val(nroNodes);
-                    break;
-                case 'inputIframeDespres':
-                    $('#gaiaCodiWebTxtDespres').val(textNodes);
-                    $('#gaiaCodiWebNodesDespres').val(nroNodes);
-                    break;
-            }    
-            if ($(retornarNodesButton).attr('Checked')) { 
-                $('#closeButton').click();
-                $('textarea').change();
-            }
-        });     
-
-        $('#iframeEditarLlibreries').on('load', function (event) {            
-            var frame = this.contentDocument;
-            var doc = $(frame).find('body').find('form');            
-            if ($(doc).find('#checkedAfegirCodi').attr('checked')) {
-                $('button', 'div#editarLlibreries').click();
-                $('textarea').change();
-            }   
-        });
-       
         function RowsAndColumns(type) {
             var contenidor = "";
             var id = 'd' + nroId.toString();
             // $('#htmlEst').find('.' + type).length; 
             switch (type) {
                 case "row":
-                    contenidor = '<div class= "row b-inicial  inactivo" id="' + id + '"><span class="atributs" style="display: none;">'+id+'#'+type+'####################################################################|</span></div>';
+                    contenidor = '<div class= "row b-inicial p-inicial inactivo" id="' + id + '"><span class="atributs" style="display: none;">'+id+'#'+type+'################################################################|</span></div>';
                     break;
                 case "col":
-                    contenidor = '<div class= "col b-inicial  inactivo" id="' + id + '"><span class="atributs" style="display: none;">'+id+'#'+type+'####################################################################|</span></div>';
+                    contenidor = '<div class= "col b-inicial p-inicial inactivo" id="' + id + '"><span class="atributs" style="display: none;">'+id+'#'+type+'################################################################|</span></div>';
                     break;
             };
             return contenidor;
@@ -1327,73 +1067,50 @@ $(function () {
 
         function Tipus(nroId) {
             var nombre = "";
-            var tipus = $('#selectContingut').val();
+            var tipus = $('#selectContingut').children('option:selected').val();
             var id = 'd' + nroId.toString();
-            var innerSpan = id + '#' + tipus + '##########################false#false################################################|';
+            var innerSpan = id + '#' + tipus + '##########################false#false########################################|';
             switch (tipus) {
                 case "":
                     alert("Seleccione un elemento");
                     break;
                 case "div":
-                     nombre = '<div class = "b-inicial inactivo" id=' + id + '> <span class="atributs" style="display: none;">'+innerSpan+'</span></div>';
+                    var nombre = '<div class = "b-inicial p-inicial inactivo" id=' + id + '> <span class="atributs" style="display: none;">'+innerSpan+'</span></div>';
                     break;
                 case "section":
-                    nombre = '<section class = "b-inicial inactivo" id=' + id + '> <span class="atributs" style="display: none;">'+innerSpan+'</span></section>';
+                    var nombre = '<section class = "b-inicial p-inicial inactivo" id=' + id + '> <span class="atributs" style="display: none;">'+innerSpan+'</span></section>';
                     break;
                 case "nav":
-                    nombre = '<nav class = "b-inicial inactivo" id=' + id + '> <span class="atributs" style="display: none;">'+innerSpan+'</span></nav>';
+                    var nombre = '<nav class = "b-inicial p-inicial inactivo" id=' + id + '> <span class="atributs" style="display: none;">'+innerSpan+'</span></nav>';
 
                     break;
                 case "header":
-                    nombre = '<header class = "b-inicial inactivo" id=' + id + '><span class="atributs" style="display: none;">'+innerSpan+'</span></header>';
+                    var nombre = '<header class = "b-inicial p-inicial inactivo" id=' + id + '><span class="atributs" style="display: none;">'+innerSpan+'</span></header>';
 
                     break;
                 case "article":
-                    nombre = '<article class = "b-inicial  inactivo" id=' + id + '> <span class="atributs" style="display: none;">'+innerSpan+'</span></article>';
+                    var nombre = '<article class = "b-inicial p-inicial inactivo" id=' + id + '> <span class="atributs" style="display: none;">'+innerSpan+'</span></article>';
 
                     break;
                 case "iframe":
-                    nombre = '<iframe class = "b-inicial  inactivo" id=' + id + '> <span class="atributs" style="display: none;">' + innerSpan + '</span></iframe>';
+                    var nombre = '<iframe class = "b-inicial p-inicial inactivo" id=' + id + '> <span class="atributs" style="display: none;">' + innerSpan + '</span></iframe>';
 
                 case "video":
-                    nombre = '<video class = "b-inicial  inactivo" id=' + id + '> <span class="atributs" style="display: none;">' + innerSpan + '</span></video>';					  
+                    var nombre = '<video class = "b-inicial p-inicial inactivo" id=' + id + '> <span class="atributs" style="display: none;">' + innerSpan + '</span></video>';
+														  
 
                     break;
                 case "details":
-                    nombre = '<details class = "b-inicial  inactivo" id=' + id + ' > <span class="atributs" style="display: none;">'+innerSpan+'</span></details>';
+                    var nombre = '<details class = "b-inicial p-inicial inactivo" id=' + id + ' > <span class="atributs" style="display: none;">'+innerSpan+'</span></details>';
                     break;
                 case "footer":
-                    nombre = '<footer class = "b-inicial  inactivo" id=' + id + ' > <span class="atributs" style="display: none;">'+innerSpan+'</span></footer>';
+                    var nombre = '<footer class = "b-inicial p-inicial inactivo" id=' + id + ' > <span class="atributs" style="display: none;">'+innerSpan+'</span></footer>';
                     break;
                 case "main":
-                    nombre = '<main class = "b-inicial  inactivo" id=' + id + ' > <span class="atributs" style="display: none;">'+innerSpan+'</span></main>';
+                    var nombre = '<main class = "b-inicial p-inicial inactivo" id=' + id + ' > <span class="atributs" style="display: none;">'+innerSpan+'</span></main>';
                     break;
                 case "summary":
-                    nombre = '<summary class = "b-inicial  inactivo" id=' + id + '> <span class="atributs" style="display: none;">'+innerSpan+'</span></summary>';
-                    break;
-                case "hr":
-                    nombre = '<div class="hr-inicial inactivo" id=' + id + '><span class="atributs" style="display: none;">' + innerSpan + '</span></div>';
-                    break;	
-                case "p":
-                    var nombre = '<p class="b-inicial inactivo" id=' + id + '><span class="atributs" style="display: none;">' + innerSpan + '</span></p>';
-                    break;
-                case "h1":
-                    var nombre = '<h1 class="b-inicial inactivo" id=' + id + '><span class="atributs" style="display: none;">' + innerSpan + '</span></h1>';
-                    break;
-                case "h2":
-                    var nombre = '<h2 class="b-inicial inactivo" id=' + id + '><span class="atributs" style="display: none;">' + innerSpan + '</span></h2>';
-                    break;
-                case "h3":
-                    var nombre = '<h3 class="b-inicial inactivo" id=' + id + '><span class="atributs" style="display: none;">' + innerSpan + '</span></h3>';
-                    break;
-                case "h4":
-                    var nombre = '<h4 class="b-inicial inactivo" id=' + id + '><span class="atributs" style="display: none;">' + innerSpan + '</span></h4>';
-                    break;
-                case "h5":
-                    var nombre = '<h5 class="b-inicial inactivo" id=' + id + '><span class="atributs" style="display: none;">' + innerSpan + '</span></h5>';
-                    break;
-                case "h6":
-                    var nombre = '<h6 class="b-inicial inactivo" id=' + id + '><span class="atributs" style="display: none;">' + innerSpan + '</span></h6>';
+                    var nombre = '<summary class = "b-inicial p-inicial inactivo" id=' + id + '> <span class="atributs" style="display: none;">'+innerSpan+'</span></summary>';
                     break;
             };
             return nombre;
@@ -1638,7 +1355,7 @@ $(function () {
                         alert('primero inserte una fila');
                     }
                 }
-                $(element).removeClass('activo').addClass('inactivo');             
+                $(element).removeClass('activo').addClass('inactivo');
                 var IdValor = $(elementToInsert).attr('id');
                 $('#txtIdCel').removeAttr('value');
                 $('#txtIdCel').val(IdValor);
@@ -1663,7 +1380,8 @@ $(function () {
             if (!jQuery.isEmptyObject(element)) {
                 if ($(element).prop('tagName').toLowerCase() == 'span' && $(element).hasClass('text')) {
                     $(element).siblings('.divImg').remove();
-                    $(element).remove();			 
+                    $(element).remove();
+				 
                 } else {
 					  
                     $(element).remove();
@@ -1684,7 +1402,7 @@ $(function () {
             $("#divEst").find("span.atributs").remove();
             $("#divEst").find("span.text").remove();
                         
-            $("#divEst").find("*").not('span').removeClass(" b-inicial activo inactivo");
+            $("#divEst").find("*").not('span').removeClass("p-inicial b-inicial activo inactivo");
 
             $("#txtEstBD").val($("#divEst").html());
 
@@ -1708,6 +1426,7 @@ $(function () {
                     return null;
                 }
             });
+
             if (!jQuery.isEmptyObject(element)) {
                 //element.find("span.text").text($("#txtNomCel").val());
 
@@ -1737,6 +1456,7 @@ $(function () {
                 if ($("#ddlPLTDSIMG").val() != null) {
                     strAtr += $.trim($("#ddlPLTDSIMG").val()); //12
                 }
+
                 strAtr = ReadFromSelectDadesLlibrerias(strAtr);
 
                 strAtr += "#"
@@ -1800,6 +1520,34 @@ $(function () {
                 return true;                
             }
         });
+
+        function ModificarDadesContenidor() {
+
+            element.removeClass();
+            element.addClass("contenidor contenidorActiu border border-secondary p-2 pr-4 pl-4");
+            element.find("span.contenidorAtributs").text("");
+
+            var strAtr = ComposicionTextoAtributos();
+
+            element.find("span.contenidorAtributs").text(strAtr);
+            //guardo els canvis 
+            $("#txtEst").val($("#htmlEst").html());
+
+        };
+
+        function ModificarDadesRow() {
+            element.removeClass();
+            element.addClass("row rowActiva border border-secondary p-2");
+            element.find("span.rowAtributs").text("");
+
+            var strAtr = ComposicionTextoAtributos();
+
+            element.find("span.rowAtributs").text(strAtr);
+            //guardo els canvis 
+            $("#txtEst").val($("#htmlEst").html());
+
+        };
+
         function RemoveClassInElement(valor, patron) {
             $(valor).removeClass(function (index, classNames) {
                 var current_classes = classNames.split(" "), // change the list into an array
@@ -1815,6 +1563,16 @@ $(function () {
                 return classes_to_remove.join(" ");
             });
 
+        };
+
+        function ComposicionTextoAtributos() {
+            var strAtr = "#";
+            strAtr = ReadFromSelectDadesMides(strAtr, element);
+            strAtr += "#####";
+            strAtr = ReadFromSelectDadesLlibrerias(strAtr);
+            strAtr += "#########"
+            strAtr = ReadFromSelectDadesEstils(strAtr, element);
+            return strAtr;
         };
 
         function ReadFromSelectDadesLlibrerias(strAtr) {
@@ -1933,15 +1691,24 @@ $(function () {
 
         function ReadFromSelectDadesEstils(strAtr, element) {
 
-            //strAtr += "#";
-            //strAtr = getSelectedOptions(strAtr, 'ddlb_23', element);//30
+            strAtr += "#";
+            strAtr = getSelectedOptions(strAtr, 'ddlb_23', element);//30
 						  
+											  
+											  
+
             strAtr += "#";
             strAtr = getSelectedOptions(strAtr, 'ddlb_25', element);//31
-  
-            
-			strAtr += "#";
+						  
+											  
+											  
+
+            strAtr += "#";
             strAtr = getSelectedOptions(strAtr, 'ddlb_26', element);//32
+						  
+											  
+											  
+
             strAtr += "#";
             strAtr = getSelectedOptions(strAtr, 'ddlb_27', element);//33
 						  
@@ -2124,7 +1891,6 @@ $(function () {
 
             strAtr += "|"
             return strAtr;
-					
         };
 
         function getSelectedOptions(strAtr, id, element) {
@@ -2165,8 +1931,9 @@ $(function () {
                         break;
                 }
                 
-            };
-		}, true);
+            };         
+
+        }, true);
 
         document.addEventListener('change', function (event) {
             var elementInicial = event.target;            
@@ -2180,24 +1947,17 @@ $(function () {
                   GuardaValoresDeSelectCuandoCambien(elementInicial);    
             }
         });
-        
-
-        $('div.mydropdown').on('hidden.bs.dropdown', function (event) {
-            var elementInicial = event.target;
-            GuardaValoresDeSelectCuandoCambien($(elementInicial).siblings('select'));
-            
-        });
 
         function GuardaValoresDeSelectCuandoCambien(valor) {
             var thisSelect = $(valor).attr('id');
-            if ($(valor).attr('id') != 'selectContingut') {
+            if ($(valor).attr('id') != 'selectContingut' && (typeof $(valor).prop('title') == typeof undefined || $(valor).prop('title') == '')) {
                 $('#btnModificarDadesCel').click();              
             }
         }
 
         $('textarea').change(function () {           
                 $('#btnModificarDadesCel').click();
-                
+                $("#txtEst").val($("#htmlEst").html());
             return false;
         });
        
@@ -2220,7 +1980,8 @@ $(function () {
                             $(element).append('<span class="divImg" ></span>');
                             $(element).append('<span class="text" ></span>');
                             $(element).children('span.text').text(e);
-                           
+                            $(element).children('span.text').addClass('inactivo');
+                            $(element).children('span.divImg').addClass('inactivo');
                         } else {
                             $(element).children('span.text').text(e);
                         }
@@ -2268,7 +2029,7 @@ $(function () {
             var selectedElement = document.getElementById(id);
             $(selectedElement).multiselect({
                 disableIfEmpty: true,
-                maxHeight: 400,
+                maxHeight: 200,
                 onChange: function (option, checked) {
                     if (checked) {
                         $(selectedElement).multiselect('select', option.val());
@@ -2309,7 +2070,8 @@ $(function () {
             $('option[value="' + valores + '"]', $('#' + id)).attr('selected', 'selected').prop('selected', true);
             $('option[value="' + valores + '"]', $('#' + id)).attr('selected', 'selected').prop('defaultSelected', true);
             //  $('#' + id).children('option[value=' + valores + ']').attr("selected", "selected");
-        }	
+        }
+
         $('#' + id).multiselect('refresh');
         selectClick(id);
     };
@@ -2446,9 +2208,10 @@ $(function () {
         $("#gaiaPltSecTxt").val(arrAtr[18]);
         $("#gaiaPltSecNodes").val(arrAtr[19]);
     };
+
     function ReadFromSpanDadesEstils(arrAtr) {
         //estils
-        //$("#ddlb_23").val(arrAtr[29]);
+        $("#ddlb_23").val(arrAtr[29]);
         setSelectedOptions('ddlb_25', arrAtr[30], 'value');
         $("#ddlb_26").val(arrAtr[31]);
         $("#ddlb_27").val(arrAtr[32]);
@@ -2472,8 +2235,7 @@ $(function () {
         setSelectedOptions('ddlb_632', arrAtr[50], 'value');
         $("#ddlb_633").val(arrAtr[51]);
         setSelectedOptions('ddlb_634', arrAtr[52], 'value');
-        setSelectedOptions('ddlb_635', arrAtr[53], 'value');
-       
+        $("#ddlb_635").val(arrAtr[53]);
         setSelectedOptions('ddlb_636', arrAtr[54], 'value');
         setSelectedOptions('ddlb_637', arrAtr[55], 'value');
         $("#ddlb_638").val(arrAtr[56]);
@@ -2496,11 +2258,11 @@ $(function () {
 
     function activado(valor) {
 
-        $('#htmlEst').find('*').not('span').each(function () {
+        $('#htmlEst').find('*').each(function () {
             if ($(this).attr('id') == valor) {
                 if ($(this).hasClass('inactivo')) {
                     $(this).removeClass('inactivo').addClass('activo');
-                    $(this).find('*').not('span').each(function () { $(this).removeClass('activo').addClass('inactivo') });
+                    $(this).find('*').each(function () { $(this).removeClass('activo').addClass('inactivo') });
                     $('select#selectContingut').val(this.tagName.toLowerCase());
                 } 
             } else {
@@ -2519,23 +2281,17 @@ $(function () {
 		//ho tracto en divEst i ho envio a txtEst, que és el camp que arribar&agrave; a l'vb
         var elementos = $('#htmlEst').find('*').not('span').not('img');
         $(elementos).each(function (index, item) {
-            if ($(item).hasClass('hr-inicial')) {
-                $(item).children('span').remove();
-                $(item).removeClass('hr-inicial ').removeAttr('class');
-                $(item).replaceWith('<hr>');
+            activado($(item).attr('id'));
+            readValues(item);
+            
+            if (i < 10) {
+                $("#txtIdCel").val('d0' + i++);
+                
             } else {
-                activado($(item).attr('id'));
-                readValues(item);
-
-                if (i < 10) {
-                    $("#txtIdCel").val('d0' + i++);
-
-                } else {
-                    $("#txtIdCel").val('d' + i++);
-                }
-                $(item).attr('id', $("#txtIdCel").val());
-                $("#btnModificarDadesCel").click();
+                $("#txtIdCel").val('d' + i++);
             }
+            $(item).attr('id', $("#txtIdCel").val());
+            $("#btnModificarDadesCel").click();
         });
 
 		$("#divEst").html($("#htmlEst").html());	
@@ -2547,7 +2303,7 @@ $(function () {
 
 		$("#txtAtributs").val(atributs);
         $("#divEst").find("span").remove();
-        $('#divEst').find('*').removeClass('b-inicial activo inactivo');
+        $('#divEst').find('*').removeClass('b-inicial p-inicial activo inactivo');
 
 		$("#txtEstBD").val($("#txtEst").val()); 
 		$("#txtEst").val($("#divEst").html());	
