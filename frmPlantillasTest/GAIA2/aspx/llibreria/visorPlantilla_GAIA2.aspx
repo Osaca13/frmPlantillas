@@ -1,21 +1,18 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="frmplantilla.aspx.vb" ValidateRequest="true" Inherits="frmPlantillasTest.frmplantilla" Debug="true" EnableEventValidation="false" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="visorPlantilla_GAIA2.aspx.vb" Inherits="frmPlantillasTest.WebForm1" EnableEventValidation="false"  EnableViewState="false" ValidateRequest="false"%>
 
 <!DOCTYPE html>
 
-<html lang="ca">
-<head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ca">
+<head runat="server">
 <!-- Required meta tags -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <!-- Bootstrap CSS -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
-<%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">--%>
-<link rel="stylesheet" href="../../../Styles/formularisGaia.css"/>
-<link href="img/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet"/>
-   <%-- <link href="../../../Styles/bootstrap.min.css" rel="stylesheet" />--%>
-   
-    <link href="../../../Styles/bootstrap-multiselect.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+<link rel="stylesheet" href="../../css/formularisGaia.css"/>
+<link href="../web/img/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet"/>
+<link href="../../css/bootstrap-multiselect.css" rel="stylesheet" />
 <!--[if IE]>
       <link href="https://cdn.jsdelivr.net/gh/coliff/bootstrap-ie8/css/bootstrap-ie9.min.css" rel="stylesheet">
       <script src="https://cdn.jsdelivr.net/g/html5shiv@3.7.3"></script>
@@ -24,53 +21,13 @@
 	  <link href="https://cdn.jsdelivr.net/gh/coliff/bootstrap-ie8/css/bootstrap-ie8.min.css" rel="stylesheet">
 <![endif]-->
 <title>Manteniment web - GAIA2</title>
-   
 </head>
-
-
 <body>
-<!-- BARRA -->
-<nav class="navbar navbar-dark bg-info navbar-expand-lg">
- 
-  <a class="navbar-brand" href="/inici.aspx"><img src="/GAIA2/aspx/web/img/logo_hospinet.png"></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#desplegar" aria-controls="desplegar" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  
-  <div class="collapse navbar-collapse" id="desplegar">
-    <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-        <a class="nav-link" href="/inici.aspx"><span class="oi oi-home mr-1" title="oi-home" aria-hidden="true"></span>Inici</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="http://www.l-h.cat/" target="_blank"><span class="oi oi-globe mr-1" title="oi-globe" aria-hidden="true"></span>Ajuntament on-line
-          <span class="sr-only">(inici)</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/html/cgis/Llistitelefonic/Listintelefonico.aspx"><span class="oi oi-book mr-1" title="oi-book" aria-hidden="true"></span>Llist&iacute; telef&ograve;nic</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="https://www.l-h.cat/recullpremsa" target="_blank"><span class="oi oi-rss mr-1" title="oi-rss" aria-hidden="true"></span>Recull de premsa</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/asp/areapersonal.aspx"><span class="oi oi-person mr-1" title="oi-person" aria-hidden="true"></span>Espai personal</a> 
-        <% IF Session("login") THEN
-        Response.write("<img src=""/img/common/ico_desconnectar.png"">&nbsp;<a href=""/asp/areapersonal.aspx?desconectar=1""><span class='oi oi-power-standby' title='oi-power-standby' aria-hidden='true'></></span>Desconnectar</a>")
-        END IF%>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0" name="busqueda" action="/utils/cercador/cercador.aspx" method="post">
-    <div class="input-group">
-      <input class="form-control form-control-sm" type="text" placeholder="Cercar text...">
-      <button class="btn btn-dark btn-sm" type="submit" name="Cercar" id="Cercar" onClick="document.busqueda.submit()" onKeyPress="document.busqueda.submit()">Cercar</button>
-      </div>
-    </form>
-  </div>
-</nav>
- <!-- FI BARRA -->
- <!-- CONTAINER -->
-	<div class="container">        
+<div class="card h-100">      
+    <div class="card-body" style="overflow-y: auto; position:relative; height:90vh">
+    	<div class="p-2" style="position:absolute; top:0; bottom:0; left:0; right:0;">
+		<!-- CONTAINER -->
+		<div class="container-fluid">        
      
         <form runat="server" id="frm">
             <asp:textbox  runat="server" id="txtCodiNode" style="display: none;"/>
@@ -79,20 +36,12 @@
             <input type="text" runat="server" id="txtAtributs"  style="display: none;" />
             <input type="text" runat="server" id="nroId" style="display: none;" />
            
-          <div class="row no-gutters">
-              <div class="col-12">
-                  <div class="alert alert-danger mt-2 mb-2" id="divValidation" style="display:none" >
-                  <button type='button' class='close' data-dismiss='alert'>x</button>
-                       <span ID="spanValidator"></span>
-                 </div> 
-            <asp:Label ID="lblResultat" runat="server"/>          
-        </div>
-		</div>
+            <asp:Label ID="lblResultat" runat="server"/> 
+                
           
           <div id="divEst" style="visibility:hidden; position:absolute;"></div>
-          <div class="row mb-3 no-gutters">
-              <h1 class="col-6"><asp:literal runat="server" id="ltTitol"/></h1>
-              
+          <div style="visibility:hidden; position:absolute;">
+              <asp:literal runat="server" id="ltTitol"/>            
               <asp:Panel runat="server" ID="pnlcanviIdioma" CssClass="form-inline col-6 justify-content-end">
               <div class="input-group input-group-sm">
                 	<div class="input-group-prepend">
@@ -105,17 +54,12 @@
                           <asp:ListItem Value="4">Franc&egrave;s</asp:ListItem>
                       </asp:DropDownList>
                   </div>
-              </asp:Panel>             
-              
+              </asp:Panel>           
           </div>
-          <!-- TABS --><div class="position-relative">
-              <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <!-- TABS --><ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item"><a class="nav-link active" id="propietats" data-toggle="tab" href="#arbreProps" role="tab" aria-controls="arbreProps" aria-selected="true">Propietats</a></li>
                 <li class="nav-item"><a class="nav-link" id="disseny" data-toggle="tab" href="#dis" role="tab" aria-controls="dis" aria-selected="false">Disseny</a></li>                
-              </ul>  
-          <button style="top:0; right:0" type="button" class="btn btn-sm btn-success position-absolute" id="btnGuardar" runat="server" validationgroup="ArbreGroup" causesvalidation="true" onClick="guardar();" onserverclick="btnGuardar_ServerClick">Guardar <asp:literal runat="server" id="ltTitol2"/></button>
-              <asp:CheckBox ID="plantillaChecked" runat="server" style="display:none" Checked="false" />
-          </div><!-- FI TABS --> 
+              </ul><!-- FI TABS --> 
               
           <!-- TAB-CONTENT --><div class="tab-content" id="myTabContent">
             <!-- PROPIETATS --><div class="tab-pane fade show active p-3" id="arbreProps" role="tabpanel" aria-labelledby="propietats">             	           
@@ -123,9 +67,8 @@
               <div class="form-group">
                 <div class="form-row mb-3"> 
                     <label for="AWEDSTIT" class="col-lg-3 col-md-3 col-sm-5 col-form-label-sm text-lg-right text-md-right text-sm-left">* T&iacute;tol:</label>
-                  <asp:TextBox runat="server" ID="AWEDSTIT" MaxLength="60" class="form-control form-control-sm col-lg-7 col-md-7 col-sm-7" placeholder="T&iacute;tol" ValidationGroup="ArbreGroup"/>
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ValidationGroup="ArbreGroup" ErrorMessage="El camp 'T&iacute;tol' &eacute;s obligatori" ControlToValidate="AWEDSTIT" SetFocusOnError="True" Display="None"></asp:RequiredFieldValidator>           
-
+                    <asp:TextBox runat="server" ID="AWEDSTIT" MaxLength="60" class="form-control form-control-sm col-lg-7 col-md-7 col-sm-7" placeholder="T&iacute;tol"/>
+                    
                 </div>
                 <div class="form-row mb-3">
                 	<label for="AWEDSNOM" class="col-lg-3 col-md-3 col-sm-5 col-form-label-sm text-lg-right text-md-right text-sm-left">Nom de l'arbre:</label>
@@ -133,8 +76,8 @@
                 </div>
                 <div class="form-row mb-3">
                 	<label for="lstAWEDSSER" class="col-lg-3 col-md-3 col-sm-5 col-form-label-sm text-lg-right text-md-right text-sm-left">* Servidor FTP dest&iacute;:</label>
-                	<asp:DropDownList id="lstAWEDSSER" runat="server" class="form-control form-control-sm col-lg-7 col-md-7 col-sm-7" placeholder="Servidor FTP dest&iacute;" ValidationGroup="ArbreGroup"/>
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ValidationGroup="ArbreGroup" ErrorMessage="El camp 'Servidor FTP dest&iacute;' &eacute;s obligatori" ControlToValidate="lstAWEDSSER" SetFocusOnError="True" Display="None"></asp:RequiredFieldValidator>
+                	<asp:DropDownList id="lstAWEDSSER" runat="server" class="form-control form-control-sm col-lg-7 col-md-7 col-sm-7" placeholder="Servidor FTP dest&iacute;"/>
+                    
                 </div>
                 <div class="form-row mb-3">
                 	<label for="AWEDSROT" class="col-lg-3 col-md-3 col-sm-5 col-form-label-sm text-lg-right text-md-right text-sm-left">Cam&iacute; del disc:</label>
@@ -170,10 +113,8 @@
               <asp:placeholder runat="server" id="pnlPlantilla"  visible="false">
               <div class="form-group">
                   <div class="form-row mb-3"> 
-                    <label for="txtPLTDSTIT" class="col-lg-3 col-md-3 col-sm-5 col-form-label-sm text-lg-right text-md-right text-sm-left">*T&iacute;tol:</label>
-                    <asp:textbox runat="server" id="txtPLTDSTIT" class="form-control form-control-sm col-lg-7 col-md-7 col-sm-7" placeholder="T&iacute;tol" ValidationGroup="ArbreGroup"/>
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ValidationGroup="ArbreGroup" ErrorMessage="El camp 'T&iacute;tol' &eacute;s obligatori" ControlToValidate="txtPLTDSTIT" SetFocusOnError="True" Display="None"></asp:RequiredFieldValidator>           
-
+                    <label for="txtPLTDSTIT" class="col-lg-3 col-md-3 col-sm-5 col-form-label-sm text-lg-right text-md-right text-sm-left">T&iacute;tol:</label>
+                    <asp:textbox runat="server" id="txtPLTDSTIT" class="form-control form-control-sm col-lg-7 col-md-7 col-sm-7" placeholder="T&iacute;tol"/>
                   </div>
                   <div class="form-row mb-3">
                       <label for="txtPLTDSOBS" class="col-lg-3 col-md-3 col-sm-5 col-form-label-sm text-lg-right text-md-right text-sm-left">Breu Descripci&oacute;:</label>
@@ -189,10 +130,8 @@
               <asp:placeholder runat="server" id="pnlFullaWeb" visible="false">
               	<div class="form-group">
                     <div class="form-row mb-3"> 
-                       <label for="WEBDSTIT" class="col-lg-3 col-md-3 col-sm-5 col-form-label-sm text-lg-right text-md-right text-sm-left">* T&iacute;tol:</label>
-                  <asp:textbox runat="server" id="WEBDSTIT" class="form-control form-control-sm col-lg-7 col-md-7 col-sm-7" placeholder="T&iacute;tol" ValidationGroup="ArbreGroup"/>                      
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ValidationGroup="ArbreGroup" ErrorMessage="El camp 'T&iacute;tol' &eacute;s obligatori" ControlToValidate="WEBDSTIT" SetFocusOnError="True" Display="None"></asp:RequiredFieldValidator>           
-                     
+                      <label for="WEBDSTIT" class="col-lg-3 col-md-3 col-sm-5 col-form-label-sm text-lg-right text-md-right text-sm-left">T&iacute;tol:</label>
+                      <asp:textbox runat="server" id="WEBDSTIT" class="form-control form-control-sm col-lg-7 col-md-7 col-sm-7" placeholder="T&iacute;tol"/>
                     </div>
                     <div class="form-row mb-3">
                       <label for="WEBDSDES" class="col-lg-3 col-md-3 col-sm-5 col-form-label-sm text-lg-right text-md-right text-sm-left">Descripci&oacute;:</label>
@@ -253,10 +192,8 @@
               <asp:placeholder runat="server" id="pnlNodeWeb" visible="false">
               <div class="form-group">
                 <div class="form-row mb-3"> 
-                	 <label for="NWEDSTIT" class="col-lg-3 col-md-3 col-sm-5 col-form-label-sm text-lg-right text-md-right text-sm-left">* T&iacute;tol:</label>
-                <asp:textbox runat="server" id="NWEDSTIT" class="form-control form-control-sm col-lg-7 col-md-7 col-sm-7" placeholder="T&iacute;tol" ValidationGroup="ArbreGroup"/> 
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ValidationGroup="ArbreGroup" ErrorMessage="El camp 'T&iacute;tol' &eacute;s obligatori" ControlToValidate="NWEDSTIT" SetFocusOnError="True" Display="None"></asp:RequiredFieldValidator>           
-
+                	<label for="NWEDSTIT" class="col-lg-3 col-md-3 col-sm-5 col-form-label-sm text-lg-right text-md-right text-sm-left">T&iacute;tol:</label>
+                  	<asp:textbox runat="server" id="NWEDSTIT" class="form-control form-control-sm col-lg-7 col-md-7 col-sm-7" placeholder="T&iacute;tol"/>
                 </div>
                 <div class="form-row mb-3"> 
                   <label for="NWEDSCAR" class="col-lg-3 col-md-3 col-sm-5 col-form-label-sm text-lg-right text-md-right text-sm-left">Carpeta:</label>
@@ -293,25 +230,25 @@
                     	<div class="row no-gutters"> 
                         	<div class="col-auto text-nowrap mr-3">
                                 <h6 class="font-weight-bold">CONTENIDORS</h6>   
-                                <button type="button" class="btn btn-primary btn-sm" id="btnAfegirContenidorAbans"><img src="img/fila_abans.png" class="mr-1">Abans</button>
-                                <button type="button" class="btn btn-primary btn-sm" id="btnAfegirContenidorDespres"><img src="img/fila_despres.png" class="mr-1">Despr&eacute;s</button>    
-                                <button type="button" class="btn btn-primary btn-sm" id="btnAfegirContenidorAbansAdins"><img src="img/fila_abansdins.png" class="mr-1">Abans, a dins</button>
-                                <button type="button" class="btn btn-primary btn-sm" id="btnAfegirContenidorDespresAdins"><img src="img/fila_despresdins.png" class="mr-1">Despr&eacute;s, a dins</button>
+                                <button type="button" class="btn btn-primary btn-sm" id="btnAfegirContenidorAbans"><img src="/GAIA2/aspx/web/img/fila_abans.png" class="mr-1">Abans</button>
+                                <button type="button" class="btn btn-primary btn-sm" id="btnAfegirContenidorDespres"><img src="/GAIA2/aspx/web/img/fila_despres.png" class="mr-1">Despr&eacute;s</button>    
+                                <button type="button" class="btn btn-primary btn-sm" id="btnAfegirContenidorAbansAdins"><img src="/GAIA2/aspx/web/img/fila_abansdins.png" class="mr-1">Abans, a dins</button>
+                                <button type="button" class="btn btn-primary btn-sm" id="btnAfegirContenidorDespresAdins"><img src="/GAIA2/aspx/web/img/fila_despresdins.png" class="mr-1">Despr&eacute;s, a dins</button>
                             </div>
                             <div class="col-auto mr-3">
                                 <h6 class="font-weight-bold">ROWS</h6>
-                                <button type="button" class="btn btn-primary btn-sm" id="btnAfegirFilaDinsAbans"><img src="img/fila_abansdins.png" class="mr-1">Abans</button>
-                                <button type="button" class="btn btn-primary btn-sm" id="btnAfegirFilaDinsDespres"><img src="img/fila_despresdins.png" class="mr-1">Despr&eacute;s</button>
+                                <button type="button" class="btn btn-primary btn-sm" id="btnAfegirFilaDinsAbans"><img src="/GAIA2/aspx/web/img/fila_abansdins.png" class="mr-1">Abans</button>
+                                <button type="button" class="btn btn-primary btn-sm" id="btnAfegirFilaDinsDespres"><img src="/GAIA2/aspx/web/img/fila_despresdins.png" class="mr-1">Despr&eacute;s</button>
                             </div>
                             <div class="col-auto mr-3">
                                 <h6 class="font-weight-bold">COLS</h6>
-                                <button type="button" class="btn btn-primary btn-sm" id="btnAfegirColumnaDinsAbans"><img src="img/columna_abans.png" class="mr-1">Abans</button>
-                                <button type="button" class="btn btn-primary btn-sm" id="btnAfegirColumnaDinsDespres"><img src="img/columna_despres.png" class="mr-1">Despr&eacute;s</button>
+                                <button type="button" class="btn btn-primary btn-sm" id="btnAfegirColumnaDinsAbans"><img src="/GAIA2/aspx/web/img/columna_abans.png" class="mr-1">Abans</button>
+                                <button type="button" class="btn btn-primary btn-sm" id="btnAfegirColumnaDinsDespres"><img src="/GAIA2/aspx/web/img/columna_despres.png" class="mr-1">Despr&eacute;s</button>
                             </div>
                             
                             <asp:placeholder runat="server" id="pnlWebCamps1" visible="false">                        
                             <div class="col">                              
-                                   
+                                    
                                     <div class="form-check form-check-inline align-bottom">                                        
                                         <asp:checkbox runat="server" CssClass="form-check-input" id="chkWEBDSCND"/>
                                         <label for="chkWEBDSCND" class="form-check-label" data-toggle="tooltip" title="Mostrar text 'contingut no disponibe' si no hi ha contingut"><small>Contingut no disponible</small></label>
@@ -437,7 +374,7 @@
                             </div>
                             <div class="col-2">                            
                                 <div class="form-group mr-2">
-                                <h6 class="font-weight-bold"><label for="selectContingut" id="inputGroup-tipusCella">TIPUS CONTENIDOR</label></h6>
+                                	<h6 class="font-weight-bold"><label for="selectContingut" id="inputGroup-tipusCella">TIPUS CONTENIDOR</label></h6>
                                     <select class="custom-select custom-select-sm" id="selectContingut" aria-describedby="inputGroup-tipusCella">                                 
                                          <option></option>
                                          <option value="div">div</option>                            
@@ -450,9 +387,7 @@
                                          <option value="footer">footer</option>
                                          <option value="main">main</option>
                                          <option value="summary">summary</option>
-									    <option value="img">img</option>
                                          <option value="hr">hr</option>
-                                         <option value="br">br</option>						   
                                          <option value="p">p</option>
                                          <option value="h1">h1</option>
                                          <option value="h2">h2</option>
@@ -487,10 +422,14 @@
                                         <div class="card bg-light mr-2">
                                             <div class="card-header"><h6 class="font-weight-bold mb-0">ABANS DEL CONTINGUT</h6></div>
                                             <div class="card-body p-2">
-                                                <div class="form-group mb-0 text-center">
-                                                    <input type="button" data-toggle="modal" data-target="#visorArbres" id="inputIframeAbans" value="Seleccionar" class="btn btn-sm btn-primary mb-2">        
-                                                    <input type="button" onClick="document.getElementById('gaiaCodiWebNodesAbans').value = ''; document.getElementById('gaiaCodiWebTxtAbans').value = ''; return false;" id="eliminarCodiAbans" value="Esborrar"  class="btn btn-sm btn-danger mb-2">
-                                                    <input type="button" data-toggle="modal" data-target="#editarLlibreries" id="btnEditaCodisAbans" value="Edita Llibreria" class="btn btn-sm btn-success mb-2"> 
+                                                <div class="form-group mb-0">
+                                                    <div class="bs-component text-center">
+                                                    <input type="button" data-toggle="modal" data-target="#visorArbres" id="inputIframeAbans" value="Seleccionar" class="btn btn-sm btn-primary mb-2">
+        
+                                                    <input type="button" onClick="document.getElementById('gaiaCodiWebNodesAbans').value = ''; document.getElementById('gaiaCodiWebTxtAbans').value=''; return false;" id="eliminarCodiAbans" value="Esborrar"  class="btn btn-sm btn-danger mb-2">
+                                                    <input type="button" data-toggle="modal" data-target="#editarLlibreries" id="btnEditaCodisAbans" value="Edita Llibreria" class="btn btn-sm btn-success mb-2">                                                   
+                                                    
+                                                    </div>
                                                     <asp:TextBox ID="gaiaCodiWebTxtAbans" runat="server" AutoPostBack="False"  Rows="3" ContentEditable="false" TextMode="MultiLine"  CssClass="form-control form-control-sm mb-2"/>
                                                     <asp:TextBox ID="gaiaCodiWebNodesAbans" runat="server"  CssClass="form-control form-control-sm" placeholder="Codi node de la llibreria"/>
                                                 </div>
@@ -503,11 +442,13 @@
                                         <div class="card bg-light mx-2">
                                             <div class="card-header"><h6 class="font-weight-bold mb-0">DINS DEL CONTINGUT</h6></div>
                                             <div class="card-body p-2">
-                                                <div class="form-group mb-0 text-center">                                                    
+                                                <div class="form-group mb-0">
+                                                    <div class="bs-component text-center">
                                                      <input type="button" data-toggle="modal" data-target="#visorArbres" id="inputIframeDins" value="Seleccionar" class="btn btn-sm btn-primary mb-2">
+
                                                     <input type="button" id="eliminarCodiDins" value="Esborrar" onClick="document.getElementById('gaiaCodiWebNodesDins').value = ''; document.getElementById('gaiaCodiWebTxtDins').value = ''; return false;" class="btn btn-sm btn-danger mb-2">
-													<input type="button" data-toggle="modal" data-target="#editarLlibreries" id="btnEditaCodisDins" value="Edita Llibreria" class="btn btn-sm btn-success mb-2"> 
-                                                    
+                                                    <input type="button"  onClick="window.open('/GAIA/aspx/fulles/editaLCW.htm?nodesSeleccionats=' + document.getElementById('gaiaCodiWebNodesDins').value, '_blank', 'location=0,height=800,width=400,scrollbars=yes,resizable=yes'); return false;" value="Edita Llibreria" id="btnEditaCodisDins" class="btn btn-sm btn-success mb-2" >
+                                                    </div>
                                                     <asp:TextBox ID="gaiaCodiWebTxtDins" runat="server" AutoPostBack="False"  Rows="3" ContentEditable="false" TextMode="MultiLine"  CssClass="form-control form-control-sm mb-2"/>
                                                     <asp:TextBox ID="gaiaCodiWebNodesDins" runat="server"  CssClass="form-control form-control-sm" placeholder="Codi node de la llibreria"/>
                                                 </div>
@@ -520,10 +461,13 @@
                                         <div class="card bg-light ml-2">                
                                             <div class="card-header"><h6 class="font-weight-bold mb-0">DESPR&Eacute;S DEL CONTINGUT</h6></div>
                                             <div class="card-body p-2">
-                                                <div class="form-group mb-0 text-center">
+                                                <div class="form-group mb-0">
+                                                    <div class="bs-component text-center">
                                                     <input type="button" data-toggle="modal" data-target="#visorArbres" id="inputIframeDespres" value="Seleccionar" class="btn btn-sm btn-primary mb-2">
+
                                                     <input type="button" id="eliminarCodiDespres" value="Esborrar" onClick="document.getElementById('gaiaCodiWebNodesDespres').value = ''; document.getElementById('gaiaCodiWebTxtDespres').value = ''; return false;" class="btn btn-sm btn-danger mb-2">
-													<input type="button" data-toggle="modal" data-target="#editarLlibreries" id="btnEditaCodisDespres" value="Edita Llibreria" class="btn btn-sm btn-success mb-2">
+                                                    <input type="button"  onClick="window.open('/GAIA/aspx/fulles/editaLCW.htm?nodesSeleccionats=' + document.getElementById('gaiaCodiWebNodesDespres').value, '_blank', 'location=0,height=800,width=400,scrollbars=yes,resizable=yes'); return false;" value="Edita Llibreria" id="btnEditaCodis2" class="btn btn-sm btn-success mb-2">
+                                                    </div>
                                                     <asp:TextBox ID="gaiaCodiWebTxtDespres" runat="server" AutoPostBack="False" Rows="3" ContentEditable="false" TextMode="MultiLine" CssClass="form-control form-control-sm mb-2"/>
                                                     <asp:TextBox ID="gaiaCodiWebNodesDespres" runat="server" CssClass="form-control form-control-sm" placeholder="Codi node de la llibreria"/>
                                                 </div>
@@ -595,13 +539,15 @@
                                     <div class="card bg-light">
                                         <div class="card-header"><h6 class="font-weight-bold mb-0">PLANTILLA <asp:placeholder runat="server" id="pnlPltCamps2" visible="false">SECUND&Agrave;RIA</asp:placeholder></h6></div>
                                         <div class="card-body p-2">
-                                            <div class="form-group mb-0 text-center">
+                                            <div class="form-group mb-0">
+                                                <div class="bs-component text-center">
                                                 <input type="button" data-toggle="modal" data-target="#visorArbres" id="inputPlantilla" value="Seleccionar" class="btn btn-sm btn-primary mb-2">
-<%--                                                <input type="button"  onClick="window.open('/GAIA2/aspx/visorArbresLite_GAIA2.aspx?arbre1=plantillaWeb&c=gaiaPltSec&nodesSeleccionats=' + document.getElementById('gaiaPltSecNodes').value, '_blank', 'location=0,height=800,width=460,scrollbars=yes,resizable=yes'); return false;" value="Seleccionar" id="btnCodis3" class="btn btn-sm btn-primary mb-2" >--%>
+                                                <%--<input type="button"  onClick="window.open('/GAIA/aspx/visorArbresLite.aspx?arbre1=plantillaWeb&c=gaiaPltSec&nodesSeleccionats=' + document.getElementById('gaiaPltSecNodes').value, '_blank', 'location=0,height=800,width=460,scrollbars=yes,resizable=yes'); return false;" value="Seleccionar" id="btnCodis3" class="btn btn-sm btn-primary mb-2" >--%>
                                                 <input type="button" id="btnEliminarPltSec" value="Esborrar" onClick="document.getElementById('gaiaPltSecNodes').value = ''; document.getElementById('gaiaPltSecTxt').value = ''; return false;"  class="btn btn-sm btn-danger mb-2">
-                                                <input type="button" data-toggle="modal" data-target="#editarPlantilles" id="btnEditaPlantilla" value="Edita plantilla" class="btn btn-sm btn-success mb-2">
+                                                <input type="button" data-toggle="modal" data-target="#editarPlantilles" id="btnEditaPlantilla" value="Edita plantilla (Odalys)" class="btn btn-sm btn-success mb-2">
                                                 
-<%--                                                <input type="button"  onClick="window.open('/GAIA/aspx/web/editaPlantilla.htm?nodesSeleccionats=' + document.getElementById('gaiaPltSecNodes').value, '_blank', 'location=0,height=800,width=400,scrollbars=yes,resizable=yes'); return false;" value="Edita Plantilla" id="btnEditaPlt2"  class="btn btn-sm btn-success mb-2" >--%>
+                                                <input type="button"  onClick="window.open('/GAIA/aspx/web/editaPlantilla.htm?nodesSeleccionats=' + document.getElementById('gaiaPltSecNodes').value, '_blank', 'location=0,height=800,width=400,scrollbars=yes,resizable=yes'); return false;" value="Edita Plantilla" id="btnEditaPlt2"  class="btn btn-sm btn-success mb-2" >
+                                                </div>
                                                 <asp:TextBox ID="gaiaPltSecTxt" runat="server" AutoPostBack="False" Rows="3" ContentEditable="false" TextMode="MultiLine"  CssClass="form-control form-control-sm mb-2"/>
                                                 <asp:TextBox ID="gaiaPltSecNodes" runat="server" CssClass="form-control form-control-sm" placeholder="Codi node de la plantilla"/>
                                             </div>
@@ -617,7 +563,8 @@
                                         <div class="card-body">
                                             <div class="row no-gutters">      	
                                                 <div class="col-12">
-                                                    <div class="form-group mb-0"> 
+                                                    <div class="form-group mb-0">
+                    
                                                         <div class="input-group input-group-sm mb-2">
                                                             <div class="input-group-prepend"><label class="input-group-text">Adre&ccedil;a:</label></div>
                                                             <asp:TextBox runat="server" ID="txtPLTDSAAL" MaxLength="100" CssClass="form-control form-control-sm"/>
@@ -641,13 +588,15 @@
                                                             <h6 class="font-weight-bold mb-0">PLANTILLA AUTO-ENLLA&Ccedil;</h6>
                                                         </div>
                                                         <div class="card-body p-2">
-                                                            <div class="form-group mb-0 text-center">
-                                                                <input type="button" data-toggle="modal" data-target="#visorArbres" id="inputPlantillaAuto" value="Seleccionar" class="btn btn-sm btn-primary mb-2">
-<%--                                                                <input name="button" type="button" id="btnCodis5" onClick="window.open('/GAIA2/aspx/visorArbresLite_GAIA2.aspx?arbre1=plantillaWeb&c=gaiaPLTCDPAL&nodesSeleccionats='+document.getElementById('gaiaPLTCDPALNodes').value,'_blank', 'location=0,height=800,width=460,scrollbars=yes,resizable=yes');return false;" value="Seleccionar" class="btn btn-sm btn-primary">--%>
-                                                                <input name="button" type="button" id="btnEliminarPLTCDPAL" onClick="document.getElementById('gaiaPLTCDPALNodes').value = ''; document.getElementById('gaiaPLTCDPALTxt').value = ''; return false;" value="Esborrar" class="btn btn-sm btn-danger">
-<%--                                                                <input type="button" class="btn btn-sm btn-success" onClick="window.open('/GAIA/aspx/web/editaPlantilla.htm?nodesSeleccionats='+document.getElementById('gaiaPLTCDPALNodes').value+'','_blank','location=0,height=800,width=600,scrollbars=yes,resizable=yes');return false;" value="Editar Plantilla" id="btnEditaPlantillesAL" >--%>
-                                                                <input type="button" data-toggle="modal" data-target="#editarPlantilles" id="btnEditaPlantillaAuto" value="Edita plantilla" class="btn btn-sm btn-success mb-2">
+                                                            <div class="form-group mb-0">
+                                                                <div class="bs-component mb-2 text-center">
+                                                                <input name="button" type="button" id="btnCodis5" onClick="window.open('/GAIA/aspx/visorArbresLite.aspx?arbre1=plantillaWeb&c=gaiaPLTCDPAL&nodesSeleccionats='+document.getElementById('gaiaPLTCDPALNodes').value,'_blank', 'location=0,height=800,width=460,scrollbars=yes,resizable=yes');return false;" value="Seleccionar" class="btn btn-sm btn-primary">
+                                                                <input name="button" type="button" id="btnEliminarPLTCDPAL" onClick="document.getElementById('gaiaPLTCDPALNodes').value='';document.getElementById('gaiaPLTCDPALTxt').value=''; return false;" value="Esborrar" class="btn btn-sm btn-danger">
+                                                                <input type="button" class="btn btn-sm btn-success" onClick="window.open('/GAIA/aspx/web/editaPlantilla.htm?nodesSeleccionats='+document.getElementById('gaiaPLTCDPALNodes').value+'','_blank','location=0,height=800,width=600,scrollbars=yes,resizable=yes');return false;" value="Editar Plantilla" id="btnEditaPlantillesAL" >
+                                                                </div>
+                                        
                                                                 <asp:TextBox ID="gaiaPLTCDPALTxt" runat="server" AutoPostBack="False" Rows="3" ContentEditable="false" TextMode="MultiLine" CssClass="form-control form-control-sm mb-2"/>
+                                                                
                                                                 <asp:TextBox ID="gaiaPLTCDPALNodes" runat="server" CssClass="form-control form-control-sm" placeholder="Codi node de la plantilla"/>
                                                             </div>
                                                         </div>
@@ -821,14 +770,18 @@
                	</div>
                 </asp:placeholder><!-- FI ESTILS -->
              </div><!--FI DISSENY --> 
-    	</div><!--FI TAB-CONTENT --> 
-            </form>
-</div><!-- FI CONTAINER -->
 
-
-
-
-
+              </div><!--FI TAB-CONTENT -->          
+                <asp:CheckBox ID="plantillaChecked" runat="server" style="display:none" Checked="false"/>
+    		</form>
+		
+			</div><!-- FI CONTAINER -->
+		</div>
+	</div>
+    <div class="card-footer text-center"><button type="button" class="btn btn-sm btn-success" id="btnGuardar" runat="server" onClick="guardar();" onserverclick="btnGuardar_ServerClick">Guardar <asp:literal runat="server" id="ltTitol2"/></button>
+        
+    </div>
+</div>
 
 <!-- MODAL VISOR LLIBRERIES/PLANTILLES -->
 <div class="modal fade" id="visorArbres" tabindex="-1" role="dialog" aria-hidden="true">
@@ -860,7 +813,7 @@
       </div>
       <div class="modal-body" style="height:85vh; min-height:85vh;"> 
           
-        <iframe id="iframeEditarLlibreries" class="w-100 h-100 border-0" scrolling="no"></iframe>
+        <iframe id="iframeEditarLlibreries" class="w-100 h-100 border-0" src="/GAIA2/aspx/llibreria/visorLlibreriaCodiWeb_GAIA2.aspx" scrolling="no"></iframe>
       </div>      
     </div>
   </div>
@@ -892,27 +845,28 @@
  
 </body>
 </html>
-<asp:Label ID="lblCodi" runat="server"/> 
+
 <!-- Optional JavaScript -->    
 <!-- jQuery first, then Tether, then Bootstrap JS. -->   
+<asp:Label ID="lblCodi" runat="server"/> 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../../../js/bootstrap-multiselect.js"></script>			
+<script type="text/javascript" src="../../js/bootstrap-multiselect.js"></script>			
 <script>
-    $(function () {
-        var nua = navigator.userAgent
-        var isAndroid = (nua.indexOf('Mozilla/5.0') > -1 && nua.indexOf('Android ') > -1 && nua.indexOf('AppleWebKit') > -1 && nua.indexOf('Chrome') === -1)
-        if (isAndroid) {
-            $('select.form-control').removeClass('form-control').css('width', '100%')
-        }
-    })
+$(function () {
+  var nua = navigator.userAgent
+  var isAndroid = (nua.indexOf('Mozilla/5.0') > -1 && nua.indexOf('Android ') > -1 && nua.indexOf('AppleWebKit') > -1 && nua.indexOf('Chrome') === -1)
+  if (isAndroid) {
+    $('select.form-control').removeClass('form-control').css('width', '100%')
+  }
+})
 </script>
 <script>
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-    })
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
 </script>
 
 <!--[if IE]>
@@ -921,8 +875,8 @@
 <![endif]-->  
 
 <script type="text/javascript">
-
-    $(document).ready(function () {
+  
+	  $(document).ready(function () {
         var element;
         var nroId = parseInt($("#nroId").val());
        
@@ -944,233 +898,226 @@
         $('#ddlb_673').attr('title', 'multiselect').attr('multiple', 'multiple');
         $('#ddlb_674').attr('title', 'multiselect').attr('multiple', 'multiple');
         $('#ddlb_675').attr('title', 'multiselect').attr('multiple', 'multiple');
-
+        
         var primerFil = $('#htmlEst').children().first();
         activado($(primerFil).attr('id'));
-        readValues(primerFil);
-        var botonAccion;
+          readValues(primerFil);
+		  var botonAccion;
 
-        $('#inputIframeAbans').click(function (event) {
-            AbrirIFrameVisor(event);
-        });
-        $('#inputIframeDins').click(function (event) {
-            AbrirIFrameVisor(event);
-        });
-        $('#inputIframeDespres').click(function (event) {
-            AbrirIFrameVisor(event);
-        });
-        $('#inputPlantilla').click(function (event) {
-            AbrirIFrameVisor(event);
-        });
-        $('#inputPlantillaAuto').click(function (event) {
-            AbrirIFrameVisor(event);
-        });
-        $('#btnEditaCodisAbans').click(function (event) {
-            AbrirIFrameEditor(event);
-        });
-        $('#btnEditaCodisDins').click(function (event) {
-            AbrirIFrameEditor(event);
-        });
-        $('#btnEditaCodisDespres').click(function (event) {
-            AbrirIFrameEditor(event);
-        });
-        $('#btnEditaPlantilla').click(function (event) {
-            AbrirIFrameEditor(event);
-        });
-        $('#btnEditaPlantillaAuto').click(function (event) {
-            AbrirIFrameEditor(event);
-        });
+          $('#inputIframeAbans').click(function (event) {
+              AbrirIFrameVisor(event);
+          });
+          $('#inputIframeDins').click(function (event) {
+              AbrirIFrameVisor(event);
+          });
+          $('#inputIframeDespres').click(function (event) {
+              AbrirIFrameVisor(event);
+          });
+          $('#inputPlantilla').click(function (event) {
+              AbrirIFrameVisor(event);
+          });
+          $('#inputPlantillaAuto').click(function (event) {
+              AbrirIFrameVisor(event);
+          });
+          $('#btnEditaCodisAbans').click(function (event) {
+              AbrirIFrameEditor(event);
+          });
+          $('#btnEditaCodisDins').click(function (event) {
+              AbrirIFrameEditor(event);
+          });
+          $('#btnEditaCodisDespres').click(function (event) {
+              AbrirIFrameEditor(event);
+          });
+          $('#btnEditaPlantilla').click(function (event) {
+              AbrirIFrameEditor(event);
+          });
+          $('#btnEditaPlantillaAuto').click(function (event) {
+              AbrirIFrameEditor(event);
+          });
 
-        function AbrirIFrameEditor(event) {
-            botonAccion = event.target; //qué boton dió la orden de abrir modal           
+          function AbrirIFrameEditor(event) {
+              botonAccion = event.target; //qué boton dió la orden de abrir modal           
 
-            var LlibreriasTxt = "";
-            var LlibreriasNod = "";
-            $('select', 'div#editarLlibreries').find('option').remove();
+              var LlibreriasTxt = "";
+              var LlibreriasNod = "";
+              $('select', 'div#editarLlibreries').find('option').remove();
 
-            switch ($(botonAccion).attr('id')) {
-                case 'btnEditaCodisAbans':
-                    LlibreriasTxt += $('#gaiaCodiWebTxtAbans').val();
-                    LlibreriasNod += $('#gaiaCodiWebNodesAbans').val(); //id de la llibreria para editar
-                    OpenLlibreriaModal(LlibreriasTxt, LlibreriasNod);
-                    break;
-                case 'btnEditaCodisDins':
-                    LlibreriasTxt += $('#gaiaCodiWebTxtDins').val();
-                    LlibreriasNod += $('#gaiaCodiWebNodesDins').val(); //id de la llibreria para editar
-                    OpenLlibreriaModal(LlibreriasTxt, LlibreriasNod);
-                    break;
-                case 'btnEditaCodisDespres':
-                    LlibreriasTxt += $('#gaiaCodiWebTxtDespres').val();
-                    LlibreriasNod += $('#gaiaCodiWebNodesDespres').val(); //id de la llibreria para editar
-                    OpenLlibreriaModal(LlibreriasTxt, LlibreriasNod);
-                    break;
-                case 'btnEditaPlantilla':
-                    LlibreriasTxt += $('#gaiaPltSecTxt').val();
-                    LlibreriasNod += $('#gaiaPltSecNodes').val(); //id de la llibreria para editar
-                    OpenPlantillaModal(LlibreriasTxt, LlibreriasNod);
-                    break;
-                case 'btnEditaPlantillaAuto':
-                    LlibreriasTxt += $('#gaiaPLTCDPALTxt').val();
-                    LlibreriasNod += $('#gaiaPLTCDPALNodes').val(); //id de la llibreria para editar
-                    OpenPlantillaModal(LlibreriasTxt, LlibreriasNod);
-                    break;
-
-
-            }
-        };
-
-        $("#selectLlibreria").change(function () {
-            var sel = $("#selectLlibreria option:selected").val();
-            if (sel == "") { sel = 0 };
-            var idiArbre = 1; //parametro de idioma
-            var urlIFrame = $('#iframeEditarLlibreries'); //iframe
-            $(urlIFrame).attr('src', "/GAIA2/aspx/llibreria/visorLlibreriaCodiWeb_GAIA2.aspx" + "?id=" + sel + "&idiArbre=" + idiArbre);
-        });
-
-        function OpenLlibreriaModal(LlibreriasTxt, LlibreriasNod) {
-            var idiArbre = 1; //parametro de idioma
-            var arrayLlibreriasTxt = [];
-            var arrayLlibreriasNod = [];
-            if (!jQuery.isEmptyObject(LlibreriasNod)) {
-                if (LlibreriasNod.indexOf('|') >= 0) {
-                    arrayLlibreriasTxt = LlibreriasTxt.split(',');
-                    arrayLlibreriasNod = LlibreriasNod.split('|');
-                    $('select', 'div#editarLlibreries').css('display', '');
-                    $('select', 'div#editarLlibreries').append(new Option('Elige una llibreria', '', true, true));
-                    arrayLlibreriasTxt.forEach(function (item, index) {
-                        if (item != "") {
-                            $('select', 'div#editarLlibreries').append(new Option(item, arrayLlibreriasNod[index]));
-                        }
-                    });
-                    $('#iframeEditarLlibreries').attr('src', "/GAIA2/aspx/llibreria/visorLlibreriaCodiWeb_GAIA2.aspx" + "?id=" + 0 + "&idiArbre=" + idiArbre);
-                    $('#editarLlibreries').modal('show');
-                } else {
-
-                    $('select', 'div#editarLlibreries').css('display', 'none');
-                    $('#iframeEditarLlibreries').attr('src', "/GAIA2/aspx/llibreria/visorLlibreriaCodiWeb_GAIA2.aspx" + "?id=" + LlibreriasNod + "&idiArbre=" + idiArbre);
-                    $('#editarLlibreries').modal('show');
-                }
-            }
-        };
-
-        $("#selectPlantilla").change(function () {
-            var sel = $("#selectPlantilla option:selected").val();
-            if (sel == "") { sel = 0; };
-            var idiArbre = 1; //parametro de idioma
-            var urlIFrame = $('#iframeEditarPlantilles'); //iframe
-            $(urlIFrame).attr('src', "/GAIA2/aspx/web/visorPlantilla.aspx" + "?id=" + sel + "&idiArbre=" + idiArbre);
-        });
-
-        function OpenPlantillaModal(LlibreriasTxt, LlibreriasNod) {
-            var idiArbre = 1; //parametro de idioma
-            var arrayLlibreriasTxt = [];
-            var arrayLlibreriasNod = [];
-            if (!jQuery.isEmptyObject(LlibreriasNod)) {
-                if (LlibreriasNod.indexOf('|') >= 0) {
-                    arrayLlibreriasTxt = LlibreriasTxt.split(',');
-                    arrayLlibreriasNod = LlibreriasNod.split('|');
-                    $('select', 'div#editarPlantilles').css('display', '');
-                    $('select', 'div#editarPlantilles').append(new Option('Elige una plantilla', '', true, true));
-                    arrayLlibreriasTxt.forEach(function (item, index) {
-                        if (item != "") {
-                            $('select', 'div#editarPlantilles').append(new Option(item, arrayLlibreriasNod[index]));
-                        }
-                    });
-                    $('#iframeEditarPlantilles').attr('src', "/GAIA2/aspx/web/visorPlantilla.aspx" + "?id=" + 0 + "&idiArbre=" + idiArbre);
-                    $('#editarPlantilles').modal('show');
-                } else {
-
-                    $('select', 'div#editarPlantilles').css('display', 'none');
-                    $('#iframeEditarPlantilles').attr('src', "/GAIA2/aspx/web/visorPlantilla.aspx" + "?id=" + LlibreriasNod + "&idiArbre=" + idiArbre);
-                    $('#editarPlantilles').modal('show');
-                }
-            }
-        };
+              switch ($(botonAccion).attr('id')) {
+                  case 'btnEditaCodisAbans':
+                      LlibreriasTxt += $('#gaiaCodiWebTxtAbans').val();
+                      LlibreriasNod += $('#gaiaCodiWebNodesAbans').val(); //id de la llibreria para editar
+                      OpenLlibreriaModal(LlibreriasTxt, LlibreriasNod);
+                      break;
+                  case 'btnEditaCodisDins':
+                      LlibreriasTxt += $('#gaiaCodiWebTxtDins').val();
+                      LlibreriasNod += $('#gaiaCodiWebNodesDins').val(); //id de la llibreria para editar
+                      OpenLlibreriaModal(LlibreriasTxt, LlibreriasNod);
+                      break;
+                  case 'btnEditaCodisDespres':
+                      LlibreriasTxt += $('#gaiaCodiWebTxtDespres').val();
+                      LlibreriasNod += $('#gaiaCodiWebNodesDespres').val(); //id de la llibreria para editar
+                      OpenLlibreriaModal(LlibreriasTxt, LlibreriasNod);
+                      break;
+                  case 'btnEditaPlantilla':
+                      LlibreriasTxt += $('#gaiaPltSecTxt').val();
+                      LlibreriasNod += $('#gaiaPltSecNodes').val(); //id de la llibreria para editar
+                      OpenPlantillaModal(LlibreriasTxt, LlibreriasNod);
+                      break;
+                  case 'btnEditaPlantillaAuto':
+                      LlibreriasTxt += $('#gaiaPLTCDPALTxt').val();
+                      LlibreriasNod += $('#gaiaPLTCDPALNodes').val(); //id de la llibreria para editar
+                      OpenPlantillaModal(LlibreriasTxt, LlibreriasNod);
+                      break;
 
 
-        function AbrirIFrameVisor(event) {
-            botonAccion = event.target;
-            var urlIFrame = $('#iframeLlibreria');
-            var arbre1 = "codiWeb";
-            var c = "gaiaCodiWeb";
-            var separador = "|";
-            switch ($(botonAccion).attr('id')) {
-                case 'inputIframeAbans':
-                    var nodesSeleccionats = $('#gaiaCodiWebNodesAbans').val();
-                    break;
-                case 'inputIframeDins':
-                    var nodesSeleccionats = $('#gaiaCodiWebNodesDins').val();
-                    break;
-                case 'inputIframeDespres':
-                    var nodesSeleccionats = $('#gaiaCodiWebNodesDespres').val();
-                    break;
-                case 'inputPlantilla':
-                    arbre1 = "plantillaWeb";
-                    c = "gaiaPltSec";
-                    var nodesSeleccionats = $('#gaiaPltSecNodes').val();
-                    break;
-                case 'inputPlantillaAuto':
-                    arbre1 = "plantillaWeb";
-                    c = "gaiaPLTCDPAL";
-                    var nodesSeleccionats = $('gaiaPLTCDPALNodes').val();
-                    break;
-            }
-            var urlIFra = "/GAIA2/aspx/llibreria/visorArbresLite_GAIA2.aspx" + "?arbre1=" + arbre1 + "&c=" + c + "&separador=" + separador + "&nodesSeleccionats=" + nodesSeleccionats;
-            $(urlIFrame).attr('src', urlIFra);
-        };
+              }
+          };
 
-        $('#iframeLlibreria').on('load', function (event) {
-            var frame = this.contentDocument;
-            var doc = $(frame).find('body');
-            var formDocumentoVisor = $(doc).children('form');
-            var textNodes = $(formDocumentoVisor).find('#labelNodes').text();
-            var nroNodes = $(formDocumentoVisor).find('#labelNroNodes').text();
-            var retornarNodesButton = $(formDocumentoVisor).find('#retornarNodesChecked');
-            switch ($(botonAccion).attr('id')) {
-                case 'inputIframeAbans':
-                    $('#gaiaCodiWebTxtAbans').val(textNodes);
-                    $('#gaiaCodiWebNodesAbans').val(nroNodes);
-                    break;
-                case 'inputIframeDins':
-                    $('#gaiaCodiWebTxtDins').val(textNodes);
-                    $('#gaiaCodiWebNodesDins').val(nroNodes);
-                    break;
-                case 'inputIframeDespres':
-                    $('#gaiaCodiWebTxtDespres').val(textNodes);
-                    $('#gaiaCodiWebNodesDespres').val(nroNodes);
-                    break;
-                case 'inputPlantilla':
-                    $('#gaiaPltSecTxt').val(textNodes);
-                    $('#gaiaPltSecNodes').val(nroNodes);
-                    break;
-                case 'inputPlantillaAuto':
-                    $('#gaiaPLTCDPALTxt').val(textNodes);
-                    $('#gaiaPLTCDPALNodes').val(nroNodes);
-                    break;
-            }
-            if ($(retornarNodesButton).attr('Checked')) {
-                $('#closeButton').click();
-                $('textarea').change();
+          $("#selectLlibreria").change(function () {
+              var sel = $("#selectLlibreria option:selected").val();
+              if (sel == "") { sel = 0 };
+              var idiArbre = 1; //parametro de idioma
+              var urlIFrame = $('#iframeEditarLlibreries'); //iframe
+              $(urlIFrame).attr('src', "/GAIA2/aspx/llibreria/visorLlibreriaCodiWeb_GAIA2.aspx" + "?id=" + sel + "&idiArbre=" + idiArbre);
+          });
 
-            }
-        });
+          function OpenLlibreriaModal(LlibreriasTxt, LlibreriasNod) {
+              var idiArbre = 1; //parametro de idioma
+              var arrayLlibreriasTxt = [];
+              var arrayLlibreriasNod = [];
+              if (!jQuery.isEmptyObject(LlibreriasNod)) {
+                  if (LlibreriasNod.indexOf('|') >= 0) {
+                      arrayLlibreriasTxt = LlibreriasTxt.split(',');
+                      arrayLlibreriasNod = LlibreriasNod.split('|');
+                      $('select', 'div#editarLlibreries').css('display', '');
+                      $('select', 'div#editarLlibreries').append(new Option('Elige una llibreria', '', true, true));
+                      arrayLlibreriasTxt.forEach(function (item, index) {
+                          if (item != "") {
+                              $('select', 'div#editarLlibreries').append(new Option(item, arrayLlibreriasNod[index]));
+                          }
+                      });
+                      $('#iframeEditarLlibreries').attr('src', "/GAIA2/aspx/llibreria/visorLlibreriaCodiWeb_GAIA2.aspx" + "?id=" + 0 + "&idiArbre=" + idiArbre);
+                      $('#editarLlibreries').modal('show');
+                  } else {
 
-        $('#iframeEditarLlibreries').on('load', function (event) {
-            var frame = this.contentDocument;
-            var doc = $(frame).find('body').find('form');
-            if ($(doc).find('#checkedAfegirCodi').attr('checked')) {
-                $('button', 'div#editarLlibreries').click();
-                $('textarea').change();
-            }
-        });
-        $('#iframeEditarPlantilles').on('load', function (event) {
+                      $('select', 'div#editarLlibreries').css('display', 'none');
+                      $('#iframeEditarLlibreries').attr('src', "/GAIA2/aspx/llibreria/visorLlibreriaCodiWeb_GAIA2.aspx" + "?id=" + LlibreriasNod + "&idiArbre=" + idiArbre);
+                      $('#editarLlibreries').modal('show');
+                  }
+              }
+          };
+
+          $("#selectPlantilla").change(function () {
+              var sel = $("#selectPlantilla option:selected").val();
+              if (sel == "") { sel = 0 };
+              var idiArbre = 1; //parametro de idioma
+              var urlIFrame = $('#iframeEditarPlantilles'); //iframe
+              $(urlIFrame).attr('src', "/GAIA2/aspx/web/visorPlantilla_GAIA2.aspx" + "?id=" + sel + "&idiArbre=" + idiArbre);
+          });
+
+          function OpenPlantillaModal(LlibreriasTxt, LlibreriasNod) {
+              var idiArbre = 1; //parametro de idioma
+              var arrayLlibreriasTxt = [];
+              var arrayLlibreriasNod = [];
+              if (!jQuery.isEmptyObject(LlibreriasNod)) {
+                  if (LlibreriasNod.indexOf('|') >= 0) {
+                      arrayLlibreriasTxt = LlibreriasTxt.split(',');
+                      arrayLlibreriasNod = LlibreriasNod.split('|');
+                      $('select', 'div#editarPlantilles').css('display', '');
+                      $('select', 'div#editarPlantilles').append(new Option('Elige una plantilla', '', true, true));
+                      arrayLlibreriasTxt.forEach(function (item, index) {
+                          if (item != "") {
+                              $('select', 'div#editarPlantilles').append(new Option(item, arrayLlibreriasNod[index]));
+                          }
+                      });
+                      $('#iframeEditarPlantilles').attr('src', "/GAIA2/aspx/web/visorPlantilla_GAIA2.aspx" + "?id=" + 0 + "&idiArbre=" + idiArbre);
+                      $('#editarPlantilles').modal('show');
+                  } else {
+
+                      $('select', 'div#editarPlantilles').css('display', 'none');
+                      $('#iframeEditarPlantilles').attr('src', "/GAIA2/aspx/web/visorPlantilla_GAIA2.aspx" + "?id=" + LlibreriasNod + "&idiArbre=" + idiArbre);
+                      $('#editarPlantilles').modal('show');
+                  }
+              }
+          };
+
+
+          function AbrirIFrameVisor(event) {
+              botonAccion = event.target;
+              var urlIFrame = $('#iframeLlibreria');
+              var arbre1 = "codiWeb";
+              var c = "gaiaCodiWeb";
+              var separador = "|";
+              switch ($(botonAccion).attr('id')) {
+                  case 'inputIframeAbans':
+                      var nodesSeleccionats = $('#gaiaCodiWebNodesAbans').val();
+                      break;
+                  case 'inputIframeDins':
+                      var nodesSeleccionats = $('#gaiaCodiWebNodesDins').val();
+                      break;
+                  case 'inputIframeDespres':
+                      var nodesSeleccionats = $('#gaiaCodiWebNodesDespres').val();
+                      break;
+                  case 'inputPlantilla':
+                      arbre1 = "plantillaWeb";
+                      c = "gaiaPltSec";
+                      var nodesSeleccionats = $('#gaiaPltSecNodes').val();
+                      break;
+                  case 'inputPlantillaAuto':
+                      arbre1 = "plantillaWeb";
+                      c = "gaiaPLTCDPAL";
+                      var nodesSeleccionats = $('gaiaPLTCDPALNodes').val();
+                      break;
+              }
+              var urlIFra = "/GAIA2/aspx/llibreria/visorArbresLite_GAIA2.aspx" + "?arbre1=" + arbre1 + "&c=" + c + "&separador=" + separador + "&nodesSeleccionats=" + nodesSeleccionats;
+              $(urlIFrame).attr('src', urlIFra);
+          };
+
+          $('#iframeLlibreria').on('load', function (event) {
+              var frame = this.contentDocument;
+              var doc = $(frame).find('body');
+              var formDocumentoVisor = $(doc).children('form');
+              var textNodes = $(formDocumentoVisor).find('#labelNodes').text();
+              var nroNodes = $(formDocumentoVisor).find('#labelNroNodes').text();
+              var retornarNodesButton = $(formDocumentoVisor).find('#retornarNodesChecked');
+              switch ($(botonAccion).attr('id')) {
+                  case 'inputIframeAbans':
+                      $('#gaiaCodiWebTxtAbans').val(textNodes);
+                      $('#gaiaCodiWebNodesAbans').val(nroNodes);
+                      break;
+                  case 'inputIframeDins':
+                      $('#gaiaCodiWebTxtDins').val(textNodes);
+                      $('#gaiaCodiWebNodesDins').val(nroNodes);
+                      break;
+                  case 'inputIframeDespres':
+                      $('#gaiaCodiWebTxtDespres').val(textNodes);
+                      $('#gaiaCodiWebNodesDespres').val(nroNodes);
+                      break;
+                  case 'inputPlantilla':
+                      $('#gaiaPltSecTxt').val(textNodes);
+                      $('#gaiaPltSecNodes').val(nroNodes);
+                      break;
+                  case 'inputPlantillaAuto':
+                      $('#gaiaPLTCDPALTxt').val(textNodes);
+                      $('#gaiaPLTCDPALNodes').val(nroNodes);
+                      break;
+              }
+              if ($(retornarNodesButton).attr('Checked')) {
+                  $('#closeButton').click();
+                  $('textarea').change();
+
+              }
+          });
+
+          $('#iframeEditarLlibreries').on('load', function (event) {
               var frame = this.contentDocument;
               var doc = $(frame).find('body').find('form');
-              if ($(doc).find('#plantillaChecked').attr('checked')) {
-                  $('button', 'div#editarPlantilles').click();
+              if ($(doc).find('#checkedAfegirCodi').attr('checked')) {
+                  $('button', 'div#editarLlibreries').click();
                   $('textarea').change();
               }
           });
+          
 
         function RowsAndColumns(type) {
             var contenidor = "";
@@ -1178,10 +1125,10 @@
             // $('#htmlEst').find('.' + type).length; 
             switch (type) {
                 case "row":
-                    contenidor = '<div class= "row b-inicial inactivo" id="' + id + '"><span class="atributs" style="display: none;">' + id + '#' + type + '#####################################################################|</span></div>';
+                    contenidor = '<div class= "row b-inicial inactivo" id="' + id + '"><span class="atributs" style="display: none;">'+id+'#'+type+'#####################################################################|</span></div>';
                     break;
                 case "col":
-                    contenidor = '<div class= "col b-inicial inactivo" id="' + id + '"><span class="atributs" style="display: none;">' + id + '#' + type + '#####################################################################|</span></div>';
+                    contenidor = '<div class= "col b-inicial inactivo" id="' + id + '"><span class="atributs" style="display: none;">'+id+'#'+type+'#####################################################################|</span></div>';
                     break;
             };
             return contenidor;
@@ -1191,27 +1138,27 @@
             var nombre = "";
             var tipus = $('#selectContingut').children('option:selected').val();
             var id = 'd' + nroId.toString();
-            var innerSpan = id + '#' + tipus + '##########################false#false############################################|';
+            var innerSpan = id + '#' + tipus + '#######################################################################|';
             switch (tipus) {
                 case "":
                     alert("Seleccione un elemento");
                     break;
                 case "div":
-                    var nombre = '<div class = "b-inicial inactivo" id=' + id + '> <span class="atributs" style="display: none;">' + innerSpan + '</span></div>';
+                    var nombre = '<div class = "b-inicial inactivo" id=' + id + '> <span class="atributs" style="display: none;">'+innerSpan+'</span></div>';
                     break;
                 case "section":
-                    var nombre = '<section class = "b-inicial inactivo" id=' + id + '> <span class="atributs" style="display: none;">' + innerSpan + '</span></section>';
+                    var nombre = '<section class = "b-inicial inactivo" id=' + id + '> <span class="atributs" style="display: none;">'+innerSpan+'</span></section>';
                     break;
                 case "nav":
-                    var nombre = '<nav class = "b-inicial inactivo" id=' + id + '> <span class="atributs" style="display: none;">' + innerSpan + '</span></nav>';
+                    var nombre = '<nav class = "b-inicial inactivo" id=' + id + '> <span class="atributs" style="display: none;">'+innerSpan+'</span></nav>';
 
                     break;
                 case "header":
-                    var nombre = '<header class = "b-inicial inactivo" id=' + id + '><span class="atributs" style="display: none;">' + innerSpan + '</span></header>';
+                    var nombre = '<header class = "b-inicial inactivo" id=' + id + '><span class="atributs" style="display: none;">'+innerSpan+'</span></header>';
 
                     break;
                 case "article":
-                    var nombre = '<article class = "b-inicial inactivo" id=' + id + '> <span class="atributs" style="display: none;">' + innerSpan + '</span></article>';
+                    var nombre = '<article class = "b-inicial inactivo" id=' + id + '> <span class="atributs" style="display: none;">'+innerSpan+'</span></article>';
 
                     break;
                 case "iframe":
@@ -1219,28 +1166,24 @@
 
                 case "video":
                     var nombre = '<video class = "b-inicial  inactivo" id=' + id + '> <span class="atributs" style="display: none;">' + innerSpan + '</span></video>';
-                case "img":
-                    var nombre = '<div class = "img-inicial  inactivo" id=' + id + '> <span class="atributs" style="display: none;">' + innerSpan + '</span></div>';										  
+														  
 
                     break;
                 case "details":
-                    var nombre = '<details class = "b-inicial  inactivo" id=' + id + ' > <span class="atributs" style="display: none;">' + innerSpan + '</span></details>';
+                    var nombre = '<details class = "b-inicial  inactivo" id=' + id + ' > <span class="atributs" style="display: none;">'+innerSpan+'</span></details>';
                     break;
                 case "footer":
-                    var nombre = '<footer class = "b-inicial  inactivo" id=' + id + ' > <span class="atributs" style="display: none;">' + innerSpan + '</span></footer>';
+                    var nombre = '<footer class = "b-inicial  inactivo" id=' + id + ' > <span class="atributs" style="display: none;">'+innerSpan+'</span></footer>';
                     break;
                 case "main":
-                    var nombre = '<main class = "b-inicial  inactivo" id=' + id + ' > <span class="atributs" style="display: none;">' + innerSpan + '</span></main>';
+                    var nombre = '<main class = "b-inicial  inactivo" id=' + id + ' > <span class="atributs" style="display: none;">'+innerSpan+'</span></main>';
                     break;
                 case "summary":
-                    var nombre = '<summary class = "b-inicial  inactivo" id=' + id + '> <span class="atributs" style="display: none;">' + innerSpan + '</span></summary>';
+                    var nombre = '<summary class = "b-inicial  inactivo" id=' + id + '> <span class="atributs" style="display: none;">'+innerSpan+'</span></summary>';
                     break;
                 case "hr":
-                    var nombre = '<div class="hr-inicial inactivo" id=' + id + '><span class="atributs" style="display: none;">' + innerSpan + '</span></div>';
+                    var nombre = '<div class="hr-inicial inactivo" id=' + id + '><span class="atributs" style="display: none;">'+innerSpan+'</span></div>';
                     break;
-                case "br":
-                    var nombre = '<div class="br-inicial inactivo" id=' + id + '><span class="atributs" style="display: none;">' + innerSpan + '</span></div>';
-                    break;				  
                 case "p":
                     var nombre = '<p class="b-inicial inactivo" id=' + id + '><span class="atributs" style="display: none;">' + innerSpan + '</span></p>';
                     break;
@@ -1262,13 +1205,13 @@
                 case "h6":
                     var nombre = '<h6 class="b-inicial inactivo" id=' + id + '><span class="atributs" style="display: none;">' + innerSpan + '</span></h6>';
                     break;
-                case "address":
+			    case "address":
                     var nombre = '<address class="b-inicial inactivo" id=' + id + '><span class="atributs" style="display: none;">' + innerSpan + '</span></address>';
                     break;
-                case "mark":
+				case "mark":
                     var nombre = '<mark class="b-inicial inactivo" id=' + id + '><span class="atributs" style="display: none;">' + innerSpan + '</span></mark>';
                     break;
-                case "small":
+			    case "small":
                     var nombre = '<small class="b-inicial inactivo" id=' + id + '><span class="atributs" style="display: none;">' + innerSpan + '</span></small>';
                     break;
             };
@@ -1278,7 +1221,7 @@
         $("#btnAfegirContenidorAbans").click(function () {
             //gravo canvis en la cel·la actual
             //$("#btnModificarDades").click();
-            nroId++;
+		   nroId++;
             element = $('#htmlEst').find('*').filter(function () {
                 if ($(this).hasClass('activo')) {
                     return this;
@@ -1289,24 +1232,24 @@
             if (!jQuery.isEmptyObject(element)) {
                 var valor = Tipus(nroId);
                 $(element).before(valor);
-                $(element).removeClass('activo').addClass('inactivo');
+                $(element).removeClass('activo').addClass('inactivo');               
                 var IdValor = $(valor).attr('id');
                 $('#txtIdCel').removeAttr('value');
                 $('#txtIdCel').val(IdValor);
                 $('#' + IdValor).removeClass('inactivo').addClass('activo');
                 readValues(valor);
-                $('#btnModificarDadesCel').click();
+                $('#btnModificarDades').click();
             } else {
                 alert("Active un contenidor");
             };
             //guardo els canvis 
             $("#txtEst").val($("#htmlEst").html());
-        });
-
+        });			
+						
         $("#btnAfegirContenidorDespres").click(function () {
             //gravo canvis en la cel·la actual
             nroId++;
-
+							
 
             element = $('#htmlEst').find('*').filter(function () {
                 if ($(this).hasClass('activo')) {
@@ -1320,21 +1263,21 @@
                 var valor = Tipus(nroId);
                 $(element).after(valor);
                 $(element).removeClass('activo').addClass('inactivo');
-
+                
                 var IdValor = $(valor).attr('id');
                 $('#txtIdCel').removeAttr('value');
                 $('#txtIdCel').val(IdValor);
                 $('#' + IdValor).removeClass('inactivo').addClass('activo');
                 readValues(valor);
-                $('#btnModificarDadesCel').click();
+                $('#btnModificarDades').click();
             } else {
                 alert("Active un contenidor");
             };
-
+			 
             //guardo els canvis 
             $("#txtEst").val($("#htmlEst").html());
-        });
-        $("#btnAfegirContenidorAbansAdins").click(function () {
+        });		
+       $("#btnAfegirContenidorAbansAdins").click(function () {
             nroId++;
             //gravo canvis en la cel·la actual
             //$("#btnModificarDades").click();
@@ -1356,71 +1299,71 @@
                 $('#txtIdCel').val(IdValor);
                 $('#' + IdValor).removeClass('inactivo').addClass('activo');
                 readValues(document.getElementById(IdValor));
-                $('#btnModificarDadesCel').click();
+                $('#btnModificarDades').click();
 
             } else {
                 alert("Active un contenidor");
-            };
+            };			 
             //guardo els canvis 
             $("#txtEst").val($("#htmlEst").html());
         });
-
-        $("#btnAfegirContenidorDespresAdins").click(function () {
+		    
+			$("#btnAfegirContenidorDespresAdins").click(function () {												 
             nroId++;
-            element = $('#htmlEst').find('*').filter(function () {
+			element = $('#htmlEst').find('*').filter(function () {
                 if ($(this).hasClass('activo')) {
                     return this;
                 } else {
                     return null;
-                }
-            });
+                }											   
+            });	
             if (!jQuery.isEmptyObject(element)) {
                 var valor = Tipus(nroId);
                 $(element).append(valor);
                 $(element).removeClass('activo').addClass('inactivo');
-
+               
                 var IdValor = $(valor).attr('id');
                 $('#txtIdCel').removeAttr('value');
                 $('#txtIdCel').val(IdValor);
                 $('#' + IdValor).removeClass('inactivo').addClass('activo');
                 readValues(valor);
-                $('#btnModificarDadesCel').click();
+                $('#btnModificarDades').click();
             } else {
                 alert("Active un contenidor");
             };
             //guardo els canvis 		
             $("#txtEst").val($("#htmlEst").html());
         });
-
-        //afegir fila en el nivell adins
+		
+		//afegir fila en el nivell adins
         $("#btnAfegirFilaDinsDespres").click(function () {
             nroId++;
             //gravo canvis en la cel·la actual
-            element = $('#htmlEst').find('*').filter(function () {
+			element = $('#htmlEst').find('*').filter(function () {
                 if ($(this).hasClass('activo')) {
                     return this;
                 } else {
                     return null;
-                }
+                }												   
             });
 
             if (!jQuery.isEmptyObject(element)) {
                 var elementToInsert = RowsAndColumns('row');
                 $(element).append(elementToInsert);
-                $(element).removeClass('activo').addClass('inactivo');
-
+                $(element).removeClass('activo').addClass('inactivo');				 
+                
                 var IdValor = $(elementToInsert).attr('id');
                 $('#txtIdCel').removeAttr('value');
                 $('#txtIdCel').val(IdValor);
                 $('#' + IdValor).removeClass('inactivo').addClass('activo');
                 readValues(elementToInsert);
-                $('#btnModificarDadesCel').click();
+                $('#btnModificarDades').click();
             } else {
                 alert("Active un contenidor");
             };
             $("#txtEst").val($("#htmlEst").html());
-
-        });
+	 
+        });	
 
         //afegir fila en el nivell adins
         $("#btnAfegirFilaDinsAbans").click(function () {
@@ -1429,43 +1372,43 @@
 
             element = $('#htmlEst').find('*').filter(function () {
                 if ($(this).hasClass('activo')) {
-                    return this;
+                    return this;																																																																																																																													 
                 } else {
                     return null;
                 }
-            });
+			});
 
             if (!jQuery.isEmptyObject(element)) {
                 var elementToInsert = RowsAndColumns('row');
                 var lastSpan = $(element).children('span').last();
                 $(lastSpan).after(elementToInsert);
                 $(element).removeClass('activo').addClass('inactivo');
-
+                
                 var IdValor = $(elementToInsert).attr('id');
                 $('#txtIdCel').removeAttr('value');
                 $('#txtIdCel').val(IdValor);
                 $('#' + IdValor).removeClass('inactivo').addClass('activo');
                 readValues(elementToInsert);
-                $('#btnModificarDadesCel').click();
+                $('#btnModificarDades').click();
             } else {
                 alert("Active un contenidor");
             };
             $("#txtEst").val($("#htmlEst").html());
         });
-
-        $("#btnAfegirColumnaDinsAbans").click(function () {
+		
+		        $("#btnAfegirColumnaDinsAbans").click(function () {
             nroId++;
             //gravo canvis en la cel·la actual												 
 
             element = $('#htmlEst').find('*').filter(function () {
                 if ($(this).hasClass('activo')) {
-                    return this;
+                    return this;																																																																																																																													 
                 } else {
                     return null;
                 }
-            });
+			});
 
-            if (!jQuery.isEmptyObject(element)) {
+             if (!jQuery.isEmptyObject(element)) {
                 var elementToInsert = RowsAndColumns('col');
                 if ($(element).hasClass('col')) {
                     $(element).before(elementToInsert);
@@ -1478,30 +1421,30 @@
                     }
                 }
                 $(element).removeClass('activo').addClass('inactivo');
-
+               
                 var IdValor = $(elementToInsert).attr('id');
                 $('#txtIdCel').removeAttr('value');
                 $('#txtIdCel').val(IdValor);
                 $('#' + IdValor).removeClass('inactivo').addClass('activo');
                 readValues(elementToInsert);
-                $('#btnModificarDadesCel').click();
+                $('#btnModificarDades').click();
             } else {
                 alert("Active un contenidor");
             };
             $("#txtEst").val($("#htmlEst").html());
-        });
-
-        $("#btnAfegirColumnaDinsDespres").click(function () {
+      });
+	  
+	          $("#btnAfegirColumnaDinsDespres").click(function () {
             nroId++;
-            //gravo canvis en la cel·la actual											
+           //gravo canvis en la cel·la actual											
 
             element = $('#htmlEst').find('*').filter(function () {
                 if ($(this).hasClass('activo')) {
                     return this;
                 } else {
                     return null;
-                }
-            });
+                } 
+			});
             if (!jQuery.isEmptyObject(element)) {
                 var elementToInsert = RowsAndColumns('col');
                 if (element.hasClass('col')) {
@@ -1520,28 +1463,28 @@
                 $('#txtIdCel').val(IdValor);
                 $('#' + IdValor).removeClass('inactivo').addClass('activo');
                 readValues(elementToInsert);
-                $('#btnModificarDadesCel').click();
+                $('#btnModificarDades').click();
             } else {
                 alert("Active un contenidor");
             };
-            $("#txtEst").val($("#htmlEst").html());
+			$("#txtEst").val($("#htmlEst").html());
         });
-
-        $("#btnEsborrarCel").click(function () {
+		
+		 $("#btnEsborrarCel").click(function () {
             //buscar elemento activo para borrar																																																																																																																																																								  
             element = $('#htmlEst').find('*').filter(function () {
                 if ($(this).hasClass('activo')) {
                     return this;
                 } else {
                     return null;
-                }
+                }						 
             });
             if (!jQuery.isEmptyObject(element)) {
                 if ($(element).prop('tagName').toLowerCase() == 'span' && $(element).hasClass('text')) {
                     $(element).siblings('.divImg').remove();
                     $(element).remove();
-                } else {
-
+                } else {																			
+					  
                     $(element).remove();
                 }
             } else {
@@ -1551,7 +1494,7 @@
             $("#txtEst").val($("#htmlEst").html());
         });
 
-        $("#btnCopiar").click(function () {
+      $("#btnCopiar").click(function () {
 
             $("#divEst").html($("#htmlEst").html());
 
@@ -1559,9 +1502,9 @@
             $("#divEst").find("span.divImg").remove();
             $("#divEst").find("span.atributs").remove();
             $("#divEst").find("span.text").remove();
-
+                        
             $("#divEst").find("*").not('span').removeClass(" b-inicial activo inactivo");
-
+																																   
             $("#txtEstBD").val($("#divEst").html());
 
             var copyText = $("#txtEstBD");
@@ -1575,8 +1518,8 @@
 
         $("#btnModificarDadesCel").click(function () {
 
-            var strAtr = "";
-
+            var strAtr = "";        
+           
             element = $('#htmlEst').find('*').filter(function () {
                 if ($(this).hasClass('activo')) {
                     return this;
@@ -1612,7 +1555,7 @@
                 strAtr += "#";
                 if ($("#ddlPLTDSIMG").val() != null) {
                     strAtr += $.trim($("#ddlPLTDSIMG").val()); //12
-                }
+                }  
                 strAtr = ReadFromSelectDadesLlibrerias(strAtr);
 
                 strAtr += "#"
@@ -1650,7 +1593,7 @@
                     strAtr += $.trim($("#gaiaPLTCDPALNodes").val()); //27
                 }
 
-
+                
 
                 strAtr += "#";
                 strAtr += $("#chkWEBDSCND").is(":checked"); //28
@@ -1669,10 +1612,10 @@
         });
 
         $("#btnModificarDades").click(function () {
-
-            if (!jQuery.isEmptyObject(element)) {
+            
+            if (!jQuery.isEmptyObject(element)) {                
                 $("#btnModificarDadesCel").click();
-                return true;
+                return true;                
             }
         });
         function RemoveClassInElement(valor, patron) {
@@ -1690,7 +1633,7 @@
                 return classes_to_remove.join(" ");
             });
 
-        };
+        };	
 
         function ReadFromSelectDadesLlibrerias(strAtr) {
 
@@ -1809,82 +1752,80 @@
         function ReadFromSelectDadesEstils(strAtr, element) {
 
             strAtr += "#";
-            strAtr = getSelectedOptions(strAtr, 'ddlb_117', element);//45
+            strAtr = getSelectedOptions(strAtr, 'ddlb_117', element);//29
+            strAtr += "#";
+            strAtr = getSelectedOptions(strAtr, 'ddlb_630', element);//30
+            strAtr += "#";
+            strAtr = getSelectedOptions(strAtr, 'ddlb_631', element);//31
 
             strAtr += "#";
-            strAtr = getSelectedOptions(strAtr, 'ddlb_630', element);//49
+            strAtr = getSelectedOptions(strAtr, 'ddlb_632', element);//32
+            strAtr += "#";
+            strAtr = getSelectedOptions(strAtr, 'ddlb_633', element);//33
+			
+            strAtr += "#";
+            strAtr = getSelectedOptions(strAtr, 'ddlb_634', element);//34
 
             strAtr += "#";
-            strAtr = getSelectedOptions(strAtr, 'ddlb_631', element);//50
+            strAtr = getSelectedOptions(strAtr, 'ddlb_635', element);//35
 
             strAtr += "#";
-            strAtr = getSelectedOptions(strAtr, 'ddlb_632', element);//51
+            strAtr = getSelectedOptions(strAtr, 'ddlb_636', element);//36
 
             strAtr += "#";
-            strAtr = getSelectedOptions(strAtr, 'ddlb_633', element);//52
+            strAtr = getSelectedOptions(strAtr, 'ddlb_637', element);//37
 
             strAtr += "#";
-            strAtr = getSelectedOptions(strAtr, 'ddlb_634', element);//53
+            strAtr = getSelectedOptions(strAtr, 'ddlb_638', element);//38
 
             strAtr += "#";
-            strAtr = getSelectedOptions(strAtr, 'ddlb_635', element);//54
-            strAtr += "#";
-            strAtr = getSelectedOptions(strAtr, 'ddlb_636', element);//55
+            strAtr = getSelectedOptions(strAtr, 'ddlb_639', element);//39
 
             strAtr += "#";
-            strAtr = getSelectedOptions(strAtr, 'ddlb_637', element);//56
+            strAtr = getSelectedOptions(strAtr, 'ddlb_641', element);//40
 
             strAtr += "#";
-            strAtr = getSelectedOptions(strAtr, 'ddlb_638', element);//57
+            strAtr = getSelectedOptions(strAtr, 'ddlb_642', element);//41
 
             strAtr += "#";
-            strAtr = getSelectedOptions(strAtr, 'ddlb_639', element);//58
+            strAtr = getSelectedOptions(strAtr, 'ddlb_648', element);//42
 
             strAtr += "#";
-            strAtr = getSelectedOptions(strAtr, 'ddlb_641', element);//59
+            strAtr = getSelectedOptions(strAtr, 'ddlb_649', element);//43
 
             strAtr += "#";
-            strAtr = getSelectedOptions(strAtr, 'ddlb_642', element);//60
+            strAtr = getSelectedOptions(strAtr, 'ddlb_650', element);//44
 
             strAtr += "#";
-            strAtr = getSelectedOptions(strAtr, 'ddlb_648', element);//61
+            strAtr = getSelectedOptions(strAtr, 'ddlb_651', element);//45
 
             strAtr += "#";
-            strAtr = getSelectedOptions(strAtr, 'ddlb_649', element);//62
+            strAtr = getSelectedOptions(strAtr, 'ddlb_652', element);//46
 
             strAtr += "#";
-            strAtr = getSelectedOptions(strAtr, 'ddlb_650', element);//63
+            strAtr = getSelectedOptions(strAtr, 'ddlb_653', element);//47
 
             strAtr += "#";
-            strAtr = getSelectedOptions(strAtr, 'ddlb_651', element);//64
+            strAtr = getSelectedOptions(strAtr, 'ddlb_654', element);//48
 
             strAtr += "#";
-            strAtr = getSelectedOptions(strAtr, 'ddlb_652', element);//65
+            strAtr = getSelectedOptions(strAtr, 'ddlb_655', element);//49
 
             strAtr += "#";
-            strAtr = getSelectedOptions(strAtr, 'ddlb_653', element);//66
+            strAtr = getSelectedOptions(strAtr, 'ddlb_673', element);//50
 
             strAtr += "#";
-            strAtr = getSelectedOptions(strAtr, 'ddlb_654', element);//67
+            strAtr = getSelectedOptions(strAtr, 'ddlb_674', element);//51
 
             strAtr += "#";
-            strAtr = getSelectedOptions(strAtr, 'ddlb_655', element);//68
-
-            strAtr += "#";
-            strAtr = getSelectedOptions(strAtr, 'ddlb_673', element);//69
-
-            strAtr += "#";
-            strAtr = getSelectedOptions(strAtr, 'ddlb_674', element);//70
-
-            strAtr += "#";
-            strAtr = getSelectedOptions(strAtr, 'ddlb_675', element);//71
-
+            strAtr = getSelectedOptions(strAtr, 'ddlb_675', element);//52
+											  
             strAtr += "|"
             return strAtr;
+		
+		};
 
-        };
-
-        function getSelectedOptions(strAtr, id, element) {
+	       function getSelectedOptions(strAtr, id, element) {
             var clase = [];
             var valor = [];
             var IdSelect = '#' + id;
@@ -1902,10 +1843,10 @@
                 $.each(clase, function (i, item) { $(element).addClass(item); });
             }
             return strAtr;
-        };
-        document.addEventListener('click', function (event) {
+        };       
+        document.addEventListener('click', function (event) {           
             var elementInicial = event.target;
-
+            
             var tagNameElement = $(elementInicial).prop('tagName');
             var multiselect = $(elementInicial).attr('title') == 'multiselect' ? true : false;
             if ($(elementInicial).parents('#htmlEst').length > 0) {
@@ -1920,41 +1861,41 @@
                         event.stopPropagation();
                         break;
                 }
-
-            };
+                
+            };         
         }, true);
 
         document.addEventListener('change', function (event) {
-            var elementInicial = event.target;
-
+            var elementInicial = event.target;            
+            
             if ($(elementInicial).prop('tagName') == 'INPUT' && $(elementInicial).attr('id') == 'txtNomCel') {
                 UpdateInput($(elementInicial).val());
             } else {
                 if ($(elementInicial).attr('id') == 'lstTipusFulla') {
-                    canviCampsDB($(elementInicial).val());
+                    canviCampsDB($(elementInicial).val());                    
                 }
-                GuardaValoresDeSelectCuandoCambien(elementInicial);
+                  GuardaValoresDeSelectCuandoCambien(elementInicial);    
             }
         });
-
-        $('div.mydropdown').on('hidden.bs.dropdown', function (event) {
+		
+		$('div.mydropdown').on('hidden.bs.dropdown', function (event) {
             var elementInicial = event.target;
-            GuardaValoresDeSelectCuandoCambien($(elementInicial).siblings('select'));
+            GuardaValoresDeSelectCuandoCambien($(elementInicial).siblings('select'));            
         });
 
         function GuardaValoresDeSelectCuandoCambien(valor) {
             var thisSelect = $(valor).attr('id');
             if ($(valor).attr('id') != 'selectContingut') {
-                $('#btnModificarDadesCel').click();
+                $('#btnModificarDadesCel').click();              
             }
-        }
+        }																	 
 
-        $('textarea').change(function () {
-            $('#btnModificarDadesCel').click();
-
+        $('textarea').change(function () {           
+                $('#btnModificarDadesCel').click();
+                
             return false;
         });
-
+       
         function UpdateInput(e) {
             element = $('#htmlEst').find('*').filter(function () {
                 if ($(this).hasClass('activo')) {
@@ -1962,32 +1903,32 @@
                 } else {
                     return null;
                 }
-            });
-
+            });													 
+						 
             if (!jQuery.isEmptyObject(element)) {
-
-
-                if ($(element).is('span.text')) {
-                    $(element).text(e);
-                } else {
-                    if ($(element).children('span.text').length == 0) {
-                        $(element).append('<span class="divImg" ></span>');
-                        $(element).append('<span class="text" ></span>');
-                        $(element).children('span.text').text(e);
-
+                
+               
+                    if ($(element).is('span.text')) {
+                        $(element).text(e);
                     } else {
-                        $(element).children('span.text').text(e);
-                    }
-                }
-                $('#btnModificarDadesCel').click();
+                        if ($(element).children('span.text').length == 0) {
+                            $(element).append('<span class="divImg" ></span>');
+                            $(element).append('<span class="text" ></span>');
+                            $(element).children('span.text').text(e);
+                           
+                        } else {
+                            $(element).children('span.text').text(e);
+                        }
+                    }                
+                $('#btnModificarDades').click();
                 $("#txtEst").val($("#htmlEst").html());
-            }
+            }            
             return false;
         };
 
-
-    });
-
+      
+    }); 												 
+						  
     function setActiveLiToSelectedOption(id, valores) {
         $.map($('#' + id).children('option'), function (item) { $(item).removeAttr('selected').prop('selected', false) });
         var options = [];
@@ -2008,7 +1949,7 @@
             var textSelectedOption = $('#' + id).children('option').filter(function () { return $(this).text().toLowerCase() === $.trim(valores); });
             $(textSelectedOption).attr("selected", "selected").prop('selected', true);
         }
-
+		
     };
     function selectClick(id) {
         element = $('#htmlEst').find('*').filter(function () {
@@ -2038,7 +1979,7 @@
                     setActiveLiToSelectedOption(id, lista.join(','));
                     $('#btnModificarDades').click();
                 }
-            });
+            });	  
         };
     };
 
@@ -2088,7 +2029,7 @@
             $("#ddlPLTDSLNK").val(arrAtr[9]);
             $("#ddlPLTDSALT").val(arrAtr[10]);
             $("#ddlPLTDSIMG").val(arrAtr[11]);
-            ReadFromSpanDadesLlibrerias(arrAtr);
+            ReadFromSpanDadesLlibrerias(arrAtr);		  
 
             $("#txtPLTDSNUM").val(arrAtr[20]);
             $("#ddlPLTDSNIV").val(arrAtr[21]);
@@ -2097,8 +2038,9 @@
             $("#txtPLTDSALK").val(arrAtr[24]);
             $("#gaiaPLTCDPALTxt").val(arrAtr[25]);
             $("#gaiaPLTCDPALNodes").val(arrAtr[26]);
-
-            if (arrAtr[27] == "true") {
+			
+			
+            if (arrAtr[28] == "true") {
                 $("#chkWEBDSCND").attr("checked", true);
             }
             else {
@@ -2115,67 +2057,67 @@
     };
 
     function modificaIcona(element) {
-        var icona = ""
+        var icona = ""											
 
-        if ($("#lstTipusFulla").val() != null) {
-            switch ($("#lstTipusFulla").val().trim()) {
-                case "45":
-                    icona = 'ico_agenda.png';
-                    break;
-                case "49":
-                    icona = 'ico_link.png';
-                    break;
-                case "48":
-                    icona = '';
-                    break;
-                case "31":
-                    icona = 'ico_catalegserveis.png';
-                    break;
-                case "40":
-                    icona = 'ico_contractacio.png';
-                    break;
-                case "3":
-                    icona = 'ico_directori.png';
-                    break;
-                case "5":
-                    icona = 'ico_document.png';
-                    break;
-                case "56":
-                    icona = 'ico_info.png';
-                    break;
-                case "4":
-                    icona = 'ico_noticia.png';
-                    break;
-                case "13":
-                    icona = 'ico_organigrama.png';
-                    break;
-                case "55":
-                    icona = 'ico_projecte.png';
-                    break;
-                case "51":
-                    icona = 'ico_tramit.png';
-                    break;
-                case "10":
-                    icona = 'ico_web.png';
-                    break;
-                case "35":
-                    icona = 'folder.png';
-                    break;
-                case "9":
-                    icona = 'node_web.png';
-                    break;
-                default:
+            if ($("#lstTipusFulla").val() != null) {
+                switch ($("#lstTipusFulla").val().trim()) {
+                    case "45":
+                        icona = 'ico_agenda.png';
+                        break;
+                    case "49":
+                        icona = 'ico_link.png';
+                        break;
+                    case "48":
+                        icona = '';
+                        break;
+                    case "31":
+                        icona = 'ico_catalegserveis.png';
+                        break;
+                    case "40":
+                        icona = 'ico_contractacio.png';
+                        break;
+                    case "3":
+                        icona = 'ico_directori.png';
+                        break;
+                    case "5":
+                        icona = 'ico_document.png';
+                        break;
+                    case "56":
+                        icona = 'ico_info.png';
+                        break;
+                    case "4":
+                        icona = 'ico_noticia.png';
+                        break;
+                    case "13":
+                        icona = 'ico_organigrama.png';
+                        break;
+                    case "55":
+                        icona = 'ico_projecte.png';
+                        break;
+                    case "51":
+                        icona = 'ico_tramit.png';
+                        break;
+                    case "10":
+                        icona = 'ico_web.png';
+                        break;
+                    case "35":
+                        icona = 'folder.png';
+                        break;
+                    case "9":
+                        icona = 'node_web.png';
+                        break;
+                    default:
             }
-        } else {
+        } else {			
 
         }
         if (icona != "") {
             $(element).find("span.divImg").html("<img src='http://lhintranet/img/common/iconografia/" + icona + "' width='20px'/>");
-
+            
         }
     };
-
-    function ReadFromSpanDadesMides(arrAtr) {
+				
+   function ReadFromSpanDadesMides(arrAtr) {
         //mides 
         $("#ddlXs").val(arrAtr[2]);
         $("#ddlSm").val(arrAtr[3]);
@@ -2195,36 +2137,36 @@
         $("#gaiaPltSecNodes").val(arrAtr[19]);
     };
     function ReadFromSpanDadesEstils(arrAtr) {
-       
-        $("#ddlb_117").val(arrAtr[28]);
+        //estils
+        
+        $("#ddlb_117").val(arrAtr[44]);
+        $("#ddlb_630").val(arrAtr[48]);
+        setSelectedOptions('ddlb_631', arrAtr[49], 'value');
+        setSelectedOptions('ddlb_632', arrAtr[50], 'value');
+        $("#ddlb_633").val(arrAtr[51]);
+        setSelectedOptions('ddlb_634', arrAtr[52], 'value');
+        setSelectedOptions('ddlb_635', arrAtr[53], 'value');
+        setSelectedOptions('ddlb_636', arrAtr[54], 'value');
+        setSelectedOptions('ddlb_637', arrAtr[55], 'value');
+        $("#ddlb_638").val(arrAtr[56]);
+        setSelectedOptions('ddlb_639', arrAtr[57], 'value');
+        setSelectedOptions('ddlb_641', arrAtr[58], 'value');
+        setSelectedOptions('ddlb_642', arrAtr[59], 'value');
+        setSelectedOptions('ddlb_648', arrAtr[60], 'value');
+        setSelectedOptions('ddlb_649', arrAtr[61], 'value');
+        setSelectedOptions('ddlb_650', arrAtr[62], 'value');
+        setSelectedOptions('ddlb_651', arrAtr[63], 'value');
+        $("#ddlb_652").val(arrAtr[64]);
+        setSelectedOptions('ddlb_653', arrAtr[65], 'value');
+        $("#ddlb_654").val(arrAtr[66]);
+        $("#ddlb_655").val(arrAtr[67]);
+        setSelectedOptions('ddlb_673', arrAtr[68], 'value');
+        setSelectedOptions('ddlb_674', arrAtr[69], 'value');
+        setSelectedOptions('ddlb_675', arrAtr[70], 'value');
+      
+    };	
 
-        $("#ddlb_630").val(arrAtr[29]);
-        setSelectedOptions('ddlb_631', arrAtr[30], 'value');
-        setSelectedOptions('ddlb_632', arrAtr[31], 'value');
-        $("#ddlb_633").val(arrAtr[32]);
-        setSelectedOptions('ddlb_634', arrAtr[33], 'value');
-        setSelectedOptions('ddlb_635', arrAtr[34], 'value');
-        setSelectedOptions('ddlb_636', arrAtr[35], 'value');
-        setSelectedOptions('ddlb_637', arrAtr[36], 'value');
-        $("#ddlb_638").val(arrAtr[37]);
-        setSelectedOptions('ddlb_639', arrAtr[38], 'value');
-        setSelectedOptions('ddlb_641', arrAtr[39], 'value');
-        setSelectedOptions('ddlb_642', arrAtr[40], 'value');
-        setSelectedOptions('ddlb_648', arrAtr[41], 'value');
-        setSelectedOptions('ddlb_649', arrAtr[42], 'value');
-        setSelectedOptions('ddlb_650', arrAtr[43], 'value');
-        setSelectedOptions('ddlb_651', arrAtr[44], 'value');
-        $("#ddlb_652").val(arrAtr[45]);
-        setSelectedOptions('ddlb_653', arrAtr[46], 'value');
-        $("#ddlb_654").val(arrAtr[47]);
-        $("#ddlb_655").val(arrAtr[48]);
-        setSelectedOptions('ddlb_673', arrAtr[49], 'value');
-        setSelectedOptions('ddlb_674', arrAtr[50], 'value');
-        setSelectedOptions('ddlb_675', arrAtr[51], 'value');
-
-    };
-
-    function activado(valor) {
+   function activado(valor) {
 
         $('#htmlEst').find('*').not('span').each(function () {
             if ($(this).attr('id') == valor) {
@@ -2232,78 +2174,63 @@
                     $(this).removeClass('inactivo').addClass('activo');
                     $(this).find('*').not('span').each(function () { $(this).removeClass('activo').addClass('inactivo') });
                     $('select#selectContingut').val(this.tagName.toLowerCase());
-                }
+                } 
             } else {
-                $(this).removeClass('activo').addClass('inactivo');
+                $(this).removeClass('activo').addClass('inactivo');			 
             }
         });
-        $("#txtEst").val($("#htmlEst").html());
-        return false;
-    };
-
-    function guardar() {
-        if (ClientValidate()) {
-            var i = 0;
-            var atributs = "";
-            //poso i tracto en divEst l'estructura de la p&agrave;gina que guardaré en METLPLT.PLTDSEST
-            //ho tracto en divEst i ho envio a txtEst, que és el camp que arribar&agrave; a l'vb
-            var elementos = $('#htmlEst').find('*').not('span').not('img');
-            $(elementos).each(function (index, item) {
-                if ($(item).hasClass('hr-inicial')) {
-                    $(item).children('span').remove();
-                    $(item).removeClass('hr-inicial ').removeAttr('class');
-                    $(item).replaceWith('<hr>');
-                } else {
-                    activado($(item).attr('id'));
-                    readValues(item);
-
-                    if (i < 10) {
-                        $("#txtIdCel").val('d0' + i++);
-
-                    } else {
-                        $("#txtIdCel").val('d' + i++);
-                    }
-                    $(item).attr('id', $("#txtIdCel").val());
-                    $("#btnModificarDadesCel").click();
-                }
-            });
-
-            $("#divEst").html($("#htmlEst").html());
-
-            // guardo els atributs
-            $('#divEst').find('*').not('span').each(function () {
-                atributs += $(this).children('span.atributs').text();
-            });
-
-            $("#txtAtributs").val(atributs);
-            $("#divEst").find("span").remove();
-            $('#divEst').find('*').removeClass('b-inicial hr-inicial activo inactivo');
-
-            $("#txtEstBD").val($("#txtEst").val());
-            $("#txtEst").val($("#divEst").html());
-        } else {
-            
-        }
-    };
-
-    function ClientValidate() {
-        
-        Page_ClientValidate("ArbreGroup");
-        if (Page_IsValid) {
-           // $('#divValidation').css('display', '');
-           // $('#divValidation').removeClass('alert-danger').add('alert-success');
-           // $('#spanValidator').text("Pagina Válida");
-            return true;
-        }
-        else {
-            var valis = Page_Validators;
-            $('#divValidation').css('display', '');
-           
-            $('#spanValidator').text("Camps obligatoris sense omplir!");
-             
+            $("#txtEst").val($("#htmlEst").html());
             return false;
-        }
+    }; 
+					   
+    function guardar() {
+       
+        var i = 0;
+		var atributs="";
+		//poso i tracto en divEst l'estructura de la p&agrave;gina que guardaré en METLPLT.PLTDSEST
+		//ho tracto en divEst i ho envio a txtEst, que és el camp que arribar&agrave; a l'vb
+        var elementos = $('#htmlEst').find('*').not('span').not('img');
+        $(elementos).each(function (index, item) {
+            if ($(item).hasClass('hr-inicial')) {
+                $(item).children('span').remove();
+                $(item).removeClass('hr-inicial ').removeAttr('class');
+                $(item).replaceWith('<hr>');
+            } else {
+                activado($(item).attr('id'));
+                readValues(item);
+
+                if (i < 10) {
+                    $("#txtIdCel").val('d0' + i++);
+
+                } else {
+                    $("#txtIdCel").val('d' + i++);
+                }
+                $(item).attr('id', $("#txtIdCel").val());
+                $("#btnModificarDadesCel").click();
+            }
+        });
+
+		$("#divEst").html($("#htmlEst").html());	
+      
+        // guardo els atributs
+        $('#divEst').find('*').not('span').each(function () {
+            atributs += $(this).children('span.atributs').text();             
+        });
+
+		$("#txtAtributs").val(atributs);
+        $("#divEst").find("span").remove();
+        $('#divEst').find('*').removeClass('b-inicial hr-inicial activo inactivo');
+
+		$("#txtEstBD").val($("#txtEst").val()); 
+		$("#txtEst").val($("#divEst").html());	
+
     };
 
-      
+
 </script> 
+
+<%@ Import Namespace="System.Data" %>
+<%@ Import Namespace="System.Data.OleDb" %>
+<%@ Import Namespace="System.Web" %>
+<script runat="server" src="visorPlantilla_GAIA2.aspx.vb" ></script>
+

@@ -13134,8 +13134,8 @@ Public Class GAIA
             Case "arbre web"
                 crida = "/GAIA/aspx/web/frmArbreWeb.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString()
             Case "fulla plantillaWeb"
-                'crida = "/GAIA/aspx/web/frmPlantilla.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString()
-                crida = "frmPlantillas.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString()
+                crida = "/GAIA2/aspx/web/frmPlantilla.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString()
+                'crida = "frmPlantillas.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString()
 
             Case "fulla codiWeb"
                 crida = "/GAIA/aspx/fulles/frmLlibreriaCodiWeb.aspx?id=" + nodo.ToString() + "&idiArbre=" + idioma.ToString()

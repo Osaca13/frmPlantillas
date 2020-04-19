@@ -25,7 +25,7 @@ Public Class frmplantilla
 
 
     Private Sub Page_UnLoad(sender As Object, e As System.EventArgs) Handles MyBase.Unload
-        GAIA2.bdFi(objconn)
+        GAIA.bdFi(objconn)
     End Sub 'Page_UnLoad
     Private Sub Page_Load(sender As Object, e As System.EventArgs) Handles MyBase.Load
 
@@ -46,7 +46,7 @@ Public Class frmplantilla
 
 
         If Session("codiOrg") = 49730 Or Session("codiOrg") = 49727 Or Session("codiOrg") = 56935 Or Session("codiOrg") = 80879 Or Session("codiOrg") = 48729 Or Session("codiOrg") = 297650 Or Session("codiOrg") = 302362 Or Session("codiOrg") = 313486 Or Session("codiOrg") = 346231 Then
-            objconn = GAIA2.bdIni()
+            objconn = GAIA.bdIni()
             If Request("idioma") = 2 Then codiIdioma = 2
 
             If Not Page.IsPostBack Then
@@ -118,7 +118,7 @@ Public Class frmplantilla
 				pnlLCWA.Visible = True
                 pnlLCW2.Visible = True
                 pnlPlt.Visible = True
-                pnlEstils.Visible = True
+                'pnlEstils.Visible = True
             Case "W"
                 ltTitol.Text = "Fulla web"
                 pnlArbreWeb.Visible = False
@@ -133,7 +133,7 @@ Public Class frmplantilla
 				pnlLCWA.Visible = true
                 pnlLCW2.Visible = True
                 pnlPlt.Visible = True
-                pnlEstils.Visible = True
+                'pnlEstils.Visible = True
             Case Else
                 ltTitol.Text = "Plantilla web"
                 pnlArbreWeb.Visible = False
@@ -148,7 +148,7 @@ Public Class frmplantilla
 				pnlLCWA.Visible = true
                 pnlLCW2.Visible = True
                 pnlPlt.Visible = True
-                pnlEstils.Visible = True
+                'pnlEstils.Visible = True
                 'ltCanviCampsDb.Text = "if ($('#lstTipusFulla').val()!= null) {canviCampsDB($('#lstTipusFulla').val()) ;}"
         End Select
 
@@ -162,7 +162,7 @@ Public Class frmplantilla
 
                 Case "W" 'fulla web
                     qSQL = "select * FROM METLWEB2 WITH(NOLOCK) WHERE WEBINNOD=" & idPlantilla & " AND WEBINIDI=" & codiIdioma
-                    GAIA2.bdr(objconn, qSQL, ds)
+                    GAIA.bdr(objconn, qSQL, ds)
                     If ds.Tables(0).Rows.Count > 0 Then
                         dbRow = ds.Tables(0).Rows(0)
                         txtEst.Value = dbRow("WEBDSHTM").replace("''", "'")
@@ -202,7 +202,7 @@ Public Class frmplantilla
 
                     Else 'No he trobat l'idioma demanat i busco un altre
                         qSQL = "select * FROM METLWEB2 WITH(NOLOCK) WHERE WEBINNOD=" & idPlantilla & " ORDER BY WEBINIDI ASC "
-                        GAIA2.bdr(objconn, qSQL, ds)
+                        GAIA.bdr(objconn, qSQL, ds)
                         If ds.Tables(0).Rows.Count > 0 Then
                             carregaCamps(ds.Tables(0).Rows(0)("WEBINIDI"))
                         End If
@@ -210,7 +210,7 @@ Public Class frmplantilla
 
                 Case "N" 'node web
                     qSQL = "select * FROM METLNWE2 WITH(NOLOCK) WHERE NWEINNOD=" & idPlantilla & " AND NWEINIDI=" & codiIdioma
-                    GAIA2.bdr(objconn, qSQL, ds)
+                    GAIA.bdr(objconn, qSQL, ds)
                     If ds.Tables(0).Rows.Count > 0 Then
                         dbRow = ds.Tables(0).Rows(0)
                         txtEst.Value = dbRow("NWEDSHTM")
@@ -237,7 +237,7 @@ Public Class frmplantilla
 
                     Else 'No he trobat l'idioma demanat i busco un altre
                         qSQL = "select * FROM METLNWE2 WITH(NOLOCK) WHERE NWEINNOD=" & idPlantilla & " ORDER BY NWEINIDI ASC "
-                        GAIA2.bdr(objconn, qSQL, ds)
+                        GAIA.bdr(objconn, qSQL, ds)
                         If ds.Tables(0).Rows.Count > 0 Then
                             carregaCamps(ds.Tables(0).Rows(0)("NWEINIDI"))
                         End If
@@ -246,7 +246,7 @@ Public Class frmplantilla
                 Case "A" 'arbre web
 
                     qSQL = "select * FROM METLAWE2 WITH(NOLOCK) WHERE AWEINNOD=" & idPlantilla & " AND AWEINIDI=" & codiIdioma
-                    GAIA2.bdr(objconn, qSQL, ds)
+                    GAIA.bdr(objconn, qSQL, ds)
                     If ds.Tables(0).Rows.Count > 0 Then
                         dbRow = ds.Tables(0).Rows(0)
                         txtEst.Value = dbRow("AWEDSHTM")
@@ -277,7 +277,7 @@ Public Class frmplantilla
 
                     Else 'No he trobat l'idioma demanat i busco un altre
                         qSQL = "select * FROM METLAWE2 WITH(NOLOCK) WHERE AWEINNOD=" & idPlantilla & " ORDER BY AWEINIDI ASC "
-                        GAIA2.bdr(objconn, qSQL, ds)
+                        GAIA.bdr(objconn, qSQL, ds)
                         If ds.Tables(0).Rows.Count > 0 Then
                             carregaCamps(ds.Tables(0).Rows(0)("AWEINIDI"))
                         End If
@@ -285,7 +285,7 @@ Public Class frmplantilla
 
                 Case Else   'plantilla
                     qSQL = "select * FROM METLPLT2 WITH(NOLOCK) WHERE PLTINNOD=" & idPlantilla
-                    GAIA2.bdr(objconn, qSQL, ds)
+                    GAIA.bdr(objconn, qSQL, ds)
                     If ds.Tables(0).Rows.Count > 0 Then
                         dbRow = ds.Tables(0).Rows(0)
                         txtEst.Value = dbRow("PLTDSHTM")
@@ -316,134 +316,10 @@ Public Class frmplantilla
         Dim element As ListItem
         Dim item As DataRow
         qSQL = "select isnull(CSSDSCSS,'1') as CSSDSCSS,CSSINTIP,CSSINCOD,CSSDSTXT from METLCSS WITH(NOLOCK) ORDER BY CSSDSTXT"
-        GAIA2.bdr(objconn, qSQL, ds)
+        GAIA.bdr(objconn, qSQL, ds)
         'colors
 
         dv = ds.Tables(0).DefaultView
-
-
-        For Each item In dv.Table.Rows
-            If item("CSSINTIP") = 23 Then
-                element = New ListItem(item("CSSDSTXT"), item("CSSINCOD"))
-                If item("CSSDSCSS") <> "1" And item("CSSDSTXT") <> "blanc" Then
-                    element.Attributes.Add("style", item("CSSDSCSS"))
-                End If
-                ddlb_23.Items.Add(element)
-            End If
-        Next item
-        'ddlb_23.Items.Insert(0, new ListItem("",""))
-        ddlb_23.Items.Insert(0, New ListItem("", ""))
-        ' ddlb_23.Items(0).Selected = True
-
-
-        dv.RowFilter = "CSSINTIP=25"
-        ddlb_25.DataSource = dv
-        ddlb_25.DataTextField = "CSSDSTXT"
-        ddlb_25.DataValueField = "CSSINCOD"
-        ddlb_25.DataBind()
-        ddlb_25.Items.Insert(0, New ListItem("", 0))
-
-
-        'font
-        dv.RowFilter = "CSSINTIP=26"
-        ddlb_26.DataSource = dv
-        ddlb_26.DataTextField = "CSSDSTXT"
-        ddlb_26.DataValueField = "CSSINCOD"
-        ddlb_26.DataBind()
-        ddlb_26.Items.Insert(0, New ListItem("", 0))
-
-        dv.RowFilter = "CSSINTIP=27"
-        ddlb_27.DataSource = dv
-        ddlb_27.DataTextField = "CSSDSTXT"
-        ddlb_27.DataValueField = "CSSINCOD"
-        ddlb_27.DataBind()
-        ddlb_27.Items.Insert(0, New ListItem("", 0))
-
-        dv.RowFilter = "CSSINTIP=28"
-        ddlb_28.DataSource = dv
-        ddlb_28.DataTextField = "CSSDSTXT"
-        ddlb_28.DataValueField = "CSSINCOD"
-        ddlb_28.DataBind()
-        ddlb_28.Items.Insert(0, New ListItem("", 0))
-
-
-        dv.RowFilter = "CSSINTIP=103"
-        ddlb_103.DataSource = dv
-        ddlb_103.DataTextField = "CSSDSTXT"
-        ddlb_103.DataValueField = "CSSINCOD"
-        ddlb_103.DataBind()
-        ddlb_103.Items.Insert(0, New ListItem("", 0))
-
-        dv.RowFilter = "CSSINTIP=105"
-        ddlb_105.DataSource = dv
-        ddlb_105.DataTextField = "CSSDSTXT"
-        ddlb_105.DataValueField = "CSSINCOD"
-        ddlb_105.DataBind()
-        ddlb_105.Items.Insert(0, New ListItem("", 0))
-
-        dv.RowFilter = "CSSINTIP=108"
-        ddlb_108.DataSource = dv
-        ddlb_108.DataTextField = "CSSDSTXT"
-        ddlb_108.DataValueField = "CSSINCOD"
-        ddlb_108.DataBind()
-        ddlb_108.Items.Insert(0, New ListItem("", 0))
-
-        'dv.RowFilter="CSSINTIP=109"
-        'ddlb_109.datasource=dv
-        'ddlb_109.datatextfield="CSSDSTXT"
-        'ddlb_109.datavaluefield="CSSINCOD"
-        'ddlb_109.databind()
-        'ddlb_109.Items.Insert(0, new ListItem("",0))
-
-        dv.RowFilter = "CSSINTIP=110"
-        ddlb_110.DataSource = dv
-        ddlb_110.DataTextField = "CSSDSTXT"
-        ddlb_110.DataValueField = "CSSINCOD"
-        ddlb_110.DataBind()
-        ddlb_110.Items.Insert(0, New ListItem("", 0))
-		
-
-        dv.RowFilter = "CSSINTIP=111"
-        ddlb_111.DataSource = dv
-        ddlb_111.DataTextField = "CSSDSTXT"
-        ddlb_111.DataValueField = "CSSINCOD"
-        ddlb_111.DataBind()
-        ddlb_111.Items.Insert(0, New ListItem("", 0))
-
-        dv.RowFilter = "CSSINTIP=112"
-        ddlb_112.DataSource = dv
-        ddlb_112.DataTextField = "CSSDSTXT"
-        ddlb_112.DataValueField = "CSSINCOD"
-        ddlb_112.DataBind()
-        ddlb_112.Items.Insert(0, New ListItem("", 0))
-
-        dv.RowFilter = "CSSINTIP=122"
-        ddlb_122.DataSource = dv
-        ddlb_122.DataTextField = "CSSDSTXT"
-        ddlb_122.DataValueField = "CSSINCOD"
-        ddlb_122.DataBind()
-        ddlb_122.Items.Insert(0, New ListItem("", 0))
-
-        dv.RowFilter = "CSSINTIP=114"
-        ddlb_114.DataSource = dv
-        ddlb_114.DataTextField = "CSSDSTXT"
-        ddlb_114.DataValueField = "CSSINCOD"
-        ddlb_114.DataBind()
-        ddlb_114.Items.Insert(0, New ListItem("", 0))
-
-        dv.RowFilter = "CSSINTIP=115"
-        ddlb_115.DataSource = dv
-        ddlb_115.DataTextField = "CSSDSTXT"
-        ddlb_115.DataValueField = "CSSINCOD"
-        ddlb_115.DataBind()
-        ddlb_115.Items.Insert(0, New ListItem("", 0))
-
-        dv.RowFilter = "CSSINTIP=123"
-        ddlb_123.DataSource = dv
-        ddlb_123.DataTextField = "CSSDSTXT"
-        ddlb_123.DataValueField = "CSSINCOD"
-        ddlb_123.DataBind()
-        ddlb_123.Items.Insert(0, New ListItem("", 0))
 
         dv.RowFilter = "CSSINTIP=647"  'Nuevo grupo de estilos: G2-Estils definits
         ddlb_117.DataSource = dv
@@ -453,33 +329,6 @@ Public Class frmplantilla
         ddlb_117.Items.Insert(0, New ListItem("", 0))
 
         'fons
-
-        ddlb_118.Items.Insert(0, New ListItem("", 0))
-        For Each item In dv.Table.Rows
-            If item("CSSINTIP") = 118 Then
-                element = New ListItem(item("CSSDSTXT"), item("CSSINCOD"))
-                If item("CSSDSCSS") <> "1" And InStr(item("CSSDSCSS"), "000000") = 0 Then
-                    'element.Attributes.Add("style",item("CSSDSCSS"))
-                End If
-                ddlb_118.Items.Add(element)
-            End If
-        Next item
-
-
-
-        dv.RowFilter = "CSSINTIP=119"
-        ddlb_119.DataSource = dv
-        ddlb_119.DataTextField = "CSSDSTXT"
-        ddlb_119.DataValueField = "CSSINCOD"
-        ddlb_119.DataBind()
-        ddlb_119.Items.Insert(0, New ListItem("", 0))
-
-        dv.RowFilter = "CSSINTIP=124"
-        ddlb_124.DataSource = dv
-        ddlb_124.DataTextField = "CSSDSTXT"
-        ddlb_124.DataValueField = "CSSINCOD"
-        ddlb_124.DataBind()
-        ddlb_124.Items.Insert(0, New ListItem("", 0))
 
         dv.RowFilter = "CSSINTIP=630"
         ddlb_630.DataSource = dv
@@ -652,7 +501,7 @@ Public Class frmplantilla
         DS = New DataSet()
         Dim DV As DataView
 
-        GAIA2.bdr(objconn, "SELECT TIPINTIP,TIPDSDES,TBLDSTXT FROM  METLTIP WITH(NOLOCK), METLTBL WITH(NOLOCK) WHERE TIPINTIP=TBLINTFU", DS)
+        GAIA.bdr(objconn, "SELECT TIPINTIP,TIPDSDES,TBLDSTXT FROM  METLTIP WITH(NOLOCK), METLTBL WITH(NOLOCK) WHERE TIPINTIP=TBLINTFU", DS)
         DV = DS.Tables(0).DefaultView
 
         If tipodePlantilla = "P" Or tipodePlantilla = "" Then
@@ -720,7 +569,7 @@ Public Class frmplantilla
         strCamps = ""
         index2 = 0
 
-        GAIA2.bdr(objconn, "SELECT TOP 1 * FROM " & taula, DS)
+        GAIA.bdr(objconn, "SELECT TOP 1 * FROM " & taula, DS)
         For index2 = 0 To DS.Tables(0).Columns.Count - 1
             strCamps += "camps[" + index.ToString() + "][" + index2.ToString() + "]= new Option(""" + DS.Tables(0).Columns(index2).ColumnName.Trim() + """,""" + taula.Trim() + "." + DS.Tables(0).Columns(index2).ColumnName.Trim() + """);"
         Next index2
@@ -755,6 +604,8 @@ Public Class frmplantilla
         ' id cel(0)#nom cel·la(1)#mida xa[2]#mida sm[3]#mida md[4]#mida lg[5]#mida xl[6]#tipuscontingut[7]#camp[8]#enllaç[9]#Text Alt[10]#color[11]|
         '|0#Cel·la inicial########||1#cel########|
 
+        '***** Validar campos****
+
         '***************************************************************************************
         ' Faig el tractament dels camps comuns'
         '***************************************************************************************		
@@ -784,15 +635,15 @@ Public Class frmplantilla
 
 
                 If Not idPlantilla Is Nothing Then
-                    'txtCodiNode.Text = Request("id").ToString()
-                    txtCodiNode.Text = idPlantilla.ToString()
+                    txtCodiNode.Text = Request("id").ToString()
+                    'txtCodiNode.Text = idPlantilla.ToString()
 
                 Else
                     'Inserto el node fulla web
-                    txtCodiNode.Text = GAIA2.insertarNode(objconn, 10, WEBDSTIT.Text.Replace("<p>", "").Replace("</p>", ""), Session("codiOrg"))
+                    txtCodiNode.Text = GAIA.insertarNode(objconn, 10, WEBDSTIT.Text.Replace("<p>", "").Replace("</p>", ""), Session("codiOrg"))
 
                     'Inserto el node fulla web en l'arbre personal de l'usuari		
-                    GAIA2.insertaNodeArbrePersonal(objconn, 10, txtCodiNode.Text, Session("codiOrg"), "")
+                    GAIA.insertaNodeArbrePersonal(objconn, 10, txtCodiNode.Text, Session("codiOrg"), "")
                 End If
 
 
@@ -812,10 +663,10 @@ Public Class frmplantilla
                 lblResultat.Text = "<div class='alert alert-dismissible alert-success mt-2 mb-2'><button type='button' class='close' data-dismiss='alert'>x</button>P&agrave;gina Web modificada amb èxit.<br/><br/><a href=""GAIA2/aspx/web/frmplantilla.aspx?tipus=W"" class=""btn btn-sm btn-primary"">Nova p&agrave;gina web</a></div>"
                 'GAIA2.escriuResultat(objConn,lblResultat , "P&agrave;gina Web modificada amb èxit.","<a href=""http://lhintranet/GAIA2/aspx/web/frmplantilla.aspx?tipus=W"" class=""btn btn-sm btn-primary"">Nova p&agrave;gina web</a>")			
 
-                GAIA2.debug(Nothing, "est=" & PLTDSEST)
-                GAIA2.debug(Nothing, "htm=" & PLTDSHTM)
-                GAIA2.debug(Nothing, strSql)
-                GAIA2.bdSR(objconn, "BEGIN TRANSACTION " & strSql & "; COMMIT TRANSACTION")
+                GAIA.debug(Nothing, "est=" & PLTDSEST)
+                GAIA.debug(Nothing, "htm=" & PLTDSHTM)
+                GAIA.debug(Nothing, strSql)
+                GAIA.bdSR(objconn, "BEGIN TRANSACTION " & strSql & "; COMMIT TRANSACTION")
 
 
             Case "N"
@@ -824,9 +675,9 @@ Public Class frmplantilla
                     txtCodiNode.Text = idPlantilla.ToString()
                 Else ' No tengo id, inserto un nuevo nodo.
                     'Inserto el node web    '9 node web
-                    txtCodiNode.Text = GAIA2.insertarNode(objconn, 9, NWEDSTIT.Text.Replace("<p>", "").Replace("</p>", ""), Session("codiOrg"))
+                    txtCodiNode.Text = GAIA.insertarNode(objconn, 9, NWEDSTIT.Text.Replace("<p>", "").Replace("</p>", ""), Session("codiOrg"))
                     ' Creo la relación y los permisos. Coloco el nodo el el meu arbre personal, sense classificar.
-                    GAIA2.insertaNodeArbrePersonal(objconn, 9, txtCodiNode.Text, Session("codiOrg"), "")
+                    GAIA.insertaNodeArbrePersonal(objconn, 9, txtCodiNode.Text, Session("codiOrg"), "")
                 End If
 
 
@@ -846,9 +697,9 @@ Public Class frmplantilla
                 'strsql &= ";UPDATE METLNWE2  SET NWEDSTIT='" & NWEDSTIT.text.Replace("'", "''").replace("<p>", "").replace("</p>", "") & "',NWEDSCAR='" & NWEDSCAR.text.tostring().Replace("'", "''") & "', NWEDSTCO = '" & PLTDSTCO & "', NWEDSPLA='" & PLTDSPLT & "', NWEDSEST='" & PLTDSEST & "',NWEDSHTM=' " & PLTDSHTM & "', NWEDSLCW='" & PLTDSLCW & "', NWEDSCSS='" & PLTDSCSS & "',NWEDSEBO=" & NWEDSEBO.text.Replace("'", "''") & "', NWEDSMET= '" & NWEDSMET.text.Replace("'", "''") & "',NWEDSPEU='" & NWEDSPEU.text.Replace("'", "''") & "', NWEDSCSP='" & NWEDSCSP.text.Replace("'", "''") & "', NWEDSCSI='" & NWEDSCSI.text.Replace("'", "''") & "' WHERE NWEINIDI<>1 AND NWEINNOD=" & txtCodiNode.text
                 'End If
                 lblResultat.Text = "<div class='alert alert-dismissible alert-success mt-2 mb-2'><button type='button' class='close' data-dismiss='alert'>x</button>Node Web modificat amb èxit.<br/><br/><a href=""http://lhintranet/GAIA2/aspx/web/frmplantilla.aspx?tipus=N"">&nbsp;Nova p&agrave;gina web</a></div>"
-                'GAIA2.escriuResultat(objConn, lblResultat, "Node Web modificat amb èxit.", "<a href=""http://lhintranet/GAIA2/aspx/web/frmplantilla.aspx?tipus=N"">&nbsp;Nova p&agrave;gina web</a>")
+                'GAIA.escriuResultat(objConn, lblResultat, "Node Web modificat amb èxit.", "<a href=""http://lhintranet/GAIA2/aspx/web/frmplantilla.aspx?tipus=N"">&nbsp;Nova p&agrave;gina web</a>")
 
-                GAIA2.bdSR(objconn, "BEGIN TRANSACTION " & strSql & "; COMMIT TRANSACTION")
+                GAIA.bdSR(objconn, "BEGIN TRANSACTION " & strSql & "; COMMIT TRANSACTION")
 
             Case "A"
 
@@ -856,7 +707,7 @@ Public Class frmplantilla
                     txtCodiNode.Text = Request("id").ToString()
                 Else
                     'Inserto el node web    '8 arbre web
-                    txtCodiNode.Text = GAIA2.insertarNode(objconn, 8, AWEDSTIT.Text.Replace("<p>", "").Replace("</p>", ""), Session("codiOrg"))
+                    txtCodiNode.Text = GAIA.insertarNode(objconn, 8, AWEDSTIT.Text.Replace("<p>", "").Replace("</p>", ""), Session("codiOrg"))
                     'Creo una relació del node amb si mateix perque és el primer
                     Dim rel As New clsRelacio
                     ' La funcion creaRelacio, crea también los permisos
@@ -881,15 +732,15 @@ Public Class frmplantilla
                 'GAIA.escriuResultat(objConn,lblResultat , "Arbre Web modificat amb èxit.","<a href=""http://lhintranet/GAIA2/aspx/web/frmplantilla.aspx?tipus=A"" class=""txtRojo12Px"">&nbsp;Nou arbre web</a>")			
 
                 'MAX: falta crear relació, permisos... 
-                GAIA2.bdSR(objconn, "BEGIN TRANSACTION " & strSql & "; COMMIT TRANSACTION")
+                GAIA.bdSR(objconn, "BEGIN TRANSACTION " & strSql & "; COMMIT TRANSACTION")
 
             Case Else 'plantilla
                 If Not idPlantilla Is Nothing Then
                     txtCodiNode.Text = idPlantilla.ToString()
                 Else
                     'Inserto el node fulla web
-                    txtCodiNode.Text = GAIA2.insertarNode(objconn, 24, txtPLTDSTIT.Text.Replace("<p>", "").Replace("</p>", ""), Session("codiOrg"))
-                    GAIA2.insertaNodeArbrePersonal(objconn, 24, txtCodiNode.Text, Session("codiOrg"), "")
+                    txtCodiNode.Text = GAIA.insertarNode(objconn, 24, txtPLTDSTIT.Text.Replace("<p>", "").Replace("</p>", ""), Session("codiOrg"))
+                    GAIA.insertaNodeArbrePersonal(objconn, 24, txtCodiNode.Text, Session("codiOrg"), "")
                 End If
 
                 'PLTDSALT= PLTDSALT.replace(",","|")		
@@ -900,9 +751,9 @@ Public Class frmplantilla
 
 
                 lblResultat.Text = "<div class='alert alert-dismissible alert-success mt-2 mb-2'><button type='button' class='close' data-dismiss='alert'>x</button>Plantilla Web modificada amb èxit.<br/><br/><a href=""http://lhintranet/GAIA2/aspx/web/frmplantilla.aspx?tipus=P"" class=""txtRojo12Px"">&nbsp;Nova plantilla</a></div>"
-                'GAIA2.escriuResultat(objConn,lblResultat , "Plantilla modificada amb èxit.","<a href=""http://lhintranet/GAIA2/aspx/web/frmplantilla.aspx?tipus=P"" class=""btn btn-sm btn-primary"">Nova plantilla</a>")			
+                'GAIA.escriuResultat(objConn,lblResultat , "Plantilla modificada amb èxit.","<a href=""http://lhintranet/GAIA2/aspx/web/frmplantilla.aspx?tipus=P"" class=""btn btn-sm btn-primary"">Nova plantilla</a>")			
 
-                GAIA2.bdSR(objconn, "BEGIN TRANSACTION " & strSql & "; COMMIT TRANSACTION")
+                GAIA.bdSR(objconn, "BEGIN TRANSACTION " & strSql & "; COMMIT TRANSACTION")
         End Select
 
         txtEstBD.Value = txtEstBD.Value.Replace("''", """")
@@ -915,7 +766,7 @@ Public Class frmplantilla
         Dim arrCel As String()
         arrCel = txtAtributs.Value.Split("|")
         Array.Resize(arrCel, arrCel.Length - 1)
-        'GAIA2.debug(Nothing, "txtAtributs=" + txtAtributs.Value.ToString())
+        'GAIA.debug(Nothing, "txtAtributs=" + txtAtributs.Value.ToString())
         For Each cel As String In arrCel
             If Not String.IsNullOrEmpty(cel) Then
 
@@ -978,7 +829,7 @@ Public Class frmplantilla
 
         Dim DS As DataSet
         DS = New DataSet()
-        GAIA2.bdr(objconn, "SELECT SERINCOD, SERDSURL FROM METLSER WITH (NOLOCK)", DS)
+        GAIA.bdr(objconn, "SELECT SERINCOD, SERDSURL FROM METLSER WITH (NOLOCK)", DS)
         lstAWEDSSER.DataSource = DS.Tables(0).DefaultView
         lstAWEDSSER.DataTextField = "SERDSURL"
         lstAWEDSSER.DataValueField = "SERINCOD"
@@ -995,10 +846,22 @@ Public Class frmplantilla
 
     End Sub 'canviIdioma
 
+    Protected Sub CustomValidator1_ServerValidate(source As Object, args As ServerValidateEventArgs)
+        If AWEDSTIT.Text = "" And txtPLTDSTIT.Text = "" And
+           NWEDSTIT.Text = "" And WEBDSTIT.Text = "" Then
+
+            args.IsValid = False
+        Else
+            args.IsValid = True
+
+
+        End If
+    End Sub
+
     'Protected Sub lstTipusFulla_SelectedIndexChanged(sender As Object, e As EventArgs)
     '    Dim DS2 As New DataSet
     '    Dim valor As Integer = lstTipusFulla.SelectedItem.Value
-    '    GAIA2.bdr(objconn, "SELECT TBLDSTXT FROM (SELECT TIPINTIP,TIPDSDES,TBLDSTXT FROM  METLTIP WITH(NOLOCK), METLTBL WITH(NOLOCK) WHERE TIPINTIP=TBLINTFU) AS TMP WHERE TIPINTIP =" & valor, DS2)
+    '    GAIA.bdr(objconn, "SELECT TBLDSTXT FROM (SELECT TIPINTIP,TIPDSDES,TBLDSTXT FROM  METLTIP WITH(NOLOCK), METLTBL WITH(NOLOCK) WHERE TIPINTIP=TBLINTFU) AS TMP WHERE TIPINTIP =" & valor, DS2)
     '    carregaNomCamps(lstTipusFulla.SelectedIndex.ToString(), DS2.Tables(0).Rows(0).Item(0))
 
     'End Sub

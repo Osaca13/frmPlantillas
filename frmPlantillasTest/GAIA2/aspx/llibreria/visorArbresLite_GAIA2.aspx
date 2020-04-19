@@ -1,4 +1,4 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="visorArbresLite.aspx.vb" Inherits="frmPlantillasTest.visorArbresLite" ValidateRequest="false" Debug="true" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="visorArbresLite_GAIA2.aspx.vb" Inherits="frmPlantillasTest.visorArbresLite" ValidateRequest="false" Debug="true" %>
 
 <!DOCTYPE html>
 

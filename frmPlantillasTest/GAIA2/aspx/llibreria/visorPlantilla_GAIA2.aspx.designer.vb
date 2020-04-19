@@ -11,7 +11,7 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class frmplantilla
+Partial Public Class WebForm1
 
     '''<summary>
     '''frm control.
@@ -104,33 +104,6 @@ Partial Public Class frmplantilla
     Protected WithEvents lstCanviIdioma As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''btnGuardar control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnGuardar As Global.System.Web.UI.HtmlControls.HtmlButton
-
-    '''<summary>
-    '''ltTitol2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ltTitol2 As Global.System.Web.UI.WebControls.Literal
-
-    '''<summary>
-    '''plantillaChecked control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents plantillaChecked As Global.System.Web.UI.WebControls.CheckBox
-
-    '''<summary>
     '''pnlArbreWeb control.
     '''</summary>
     '''<remarks>
@@ -149,15 +122,6 @@ Partial Public Class frmplantilla
     Protected WithEvents AWEDSTIT As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''RequiredFieldValidator1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RequiredFieldValidator1 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-
-    '''<summary>
     '''AWEDSNOM control.
     '''</summary>
     '''<remarks>
@@ -174,15 +138,6 @@ Partial Public Class frmplantilla
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lstAWEDSSER As Global.System.Web.UI.WebControls.DropDownList
-
-    '''<summary>
-    '''RequiredFieldValidator2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RequiredFieldValidator2 As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
     '''<summary>
     '''AWEDSROT control.
@@ -266,15 +221,6 @@ Partial Public Class frmplantilla
     Protected WithEvents txtPLTDSTIT As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''RequiredFieldValidator3 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RequiredFieldValidator3 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-
-    '''<summary>
     '''txtPLTDSOBS control.
     '''</summary>
     '''<remarks>
@@ -309,15 +255,6 @@ Partial Public Class frmplantilla
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents WEBDSTIT As Global.System.Web.UI.WebControls.TextBox
-
-    '''<summary>
-    '''RequiredFieldValidator4 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RequiredFieldValidator4 As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
     '''<summary>
     '''WEBDSDES control.
@@ -453,15 +390,6 @@ Partial Public Class frmplantilla
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents NWEDSTIT As Global.System.Web.UI.WebControls.TextBox
-
-    '''<summary>
-    '''RequiredFieldValidator5 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RequiredFieldValidator5 As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
     '''<summary>
     '''NWEDSCAR control.
@@ -984,6 +912,33 @@ Partial Public Class frmplantilla
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ddlb_117 As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''plantillaChecked control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents plantillaChecked As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''btnGuardar control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnGuardar As Global.System.Web.UI.HtmlControls.HtmlButton
+
+    '''<summary>
+    '''ltTitol2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ltTitol2 As Global.System.Web.UI.WebControls.Literal
 
     '''<summary>
     '''lblCodi control.
